@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>泄漏电流与接触电流深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="泄漏电流、接触电流、患者漏电流的测量网络、人体反应与产品限值。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav"></nav>
+    </div>
+  </header>
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./knowledge.html">知识卡片库</a> / 泄漏电流深度页</p>
+      <h1>泄漏电流与接触电流（IEC 60990）</h1>
+      <p class="lead">泄漏电流不是“随便夹个电流表测”，测量网络、测量条件和单一故障状态共同决定结果。</p>
+    </div>
+<section>
+  <h2>1. 三个概念先分清</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>术语</th><th>定义（教学表述）</th><th>典型测量路径</th></tr></thead>
+    <tbody>
+      <tr><td>泄漏电流</td><td>正常工作时，经绝缘表面/寄生电容流向保护导体或地的电流</td><td>保护导体（PE）或设备金属外壳到地</td></tr>
+      <tr><td>接触电流</td><td>人体实际接触可触及部件时流过人体的电流</td><td>可触及部件 → IEC 60990 人体网络 → 地</td></tr>
+      <tr><td>患者漏电流</td><td>医疗设备中，经患者连接部分流经患者身体的电流</td><td>患者端（B/BF/CF）→ 患者网络 → 地</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>为什么重要：</b>I 类设备正常工作时泄漏电流沿接地路径分流，但接地失效时全部改经人体；II 类设备没有接地，只能靠绝缘把泄漏压到足够低。</p>
+</section>
+<section>
+  <h2>2. 为什么不能用普通电流表</h2>
+  <p>人体阻抗随频率、接触面积和皮肤状态变化，普通电流表的内阻和频响都不能代表人体。IEC 60990 定义了几种测量网络，用 R/C 组合模拟人体阻抗，结果才有可比性。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>网络（教学概括）</th><th>用途</th><th>特点</th></tr></thead>
+    <tbody>
+      <tr><td>图 3 网络（人体阻抗网络）</td><td>接触电流测量</td><td>模拟手-人体-脚阻抗，工频最常用</td></tr>
+      <tr><td>图 4 网络</td><td>高频/非正弦接触电流</td><td>频率特性更宽</td></tr>
+      <tr><td>图 5 网络</td><td>患者漏电流（B/BF/CF）</td><td>按医疗应用定义，CF 更严格</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout callout-warn"><strong>常见错误</strong><p>直接把万用表电流档串进回路测“泄漏”，读数和标准值没有可比性；必须用 IEC 60990 规定的测量网络和仪表。</p></div>
+</section>
+<section>
+  <h2>3. 人体反应与危险边界</h2>
+  <p>成人、手到手/手到脚、持续时间 >0.1s 的教学概括，正式依据见 IEC 60479-1。个体差异很大：儿童、老人、湿手、体内植入物都会显著降低阈值。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>电流范围（mA）</th><th>人体反应</th><th>危险程度</th></tr></thead>
+    <tbody>
+      <tr><td>0.1–0.5</td><td>感知阈值附近，轻微麻刺</td><td>通常无危害</td></tr>
+      <tr><td>0.5–1</td><td>轻微手麻、刺痛，能自主摆脱</td><td>一般安全</td></tr>
+      <tr><td>1–5</td><td>明显刺痛、肌肉收缩</td><td>开始不适</td></tr>
+      <tr><td>5–10</td><td>疼痛增强、肌肉僵直</td><td>摆脱开始困难</td></tr>
+      <tr><td>10–16</td><td>“不能放手”阈值区（成人男性约 10–16mA，女性约 6–10mA）</td><td>可能无法自主脱离</td></tr>
+      <tr><td>30–50</td><td>呼吸肌麻痹、意识可能丧失</td><td>严重危险</td></tr>
+      <tr><td>50–100</td><td>心室纤颤风险明显</td><td>可能致命</td></tr>
+      <tr><td>&gt;100</td><td>心室纤颤/心跳骤停高风险</td><td>极高致命风险</td></tr>
+    </tbody>
+  </table></div>
+</section>
+<section>
+  <h2>4. 产品限值量级（教学参考）</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>产品 / 标准</th><th>常见限值量级</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>IEC 60335-1 家电</td><td>II 类 0.25mA；I 类便携 0.5mA；I 类固定式 0.75 / 3.5mA 量级</td><td>按器具类别与便携/固定查表</td></tr>
+      <tr><td>IEC 62368-1 / GB 4943.1</td><td>正常条件 ≤0.5mA 量级；异常条件 3.5mA 量级</td><td>按设备类别与可触及性判定</td></tr>
+      <tr><td>IEC 60601-1 医疗</td><td>患者漏电流：正常 B/BF 100µA、CF 10µA；单一故障 B/BF 500µA、CF 50µA</td><td>远严于家电，CF 直接接触心脏</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout callout-info"><strong>怎么用</strong><p>先确定产品类别和测量网络，再在对应标准条款查限值表；不同版本标准、不同测量网络不能混用。</p></div>
+</section>
+<section>
+  <h2>5. 测量条件与常见坑</h2>
+  <ul>
+    <li><b>Y 电容总量</b>：对地 Y 电容是 II 类设备泄漏的主要来源，I = 2πfCV 只能做数量级估算，正式以测量网络实测为准；</li>
+    <li><b>I 类接地断开</b>：单一故障条件通常要模拟保护接地断开，此时泄漏全部经人体网络；</li>
+    <li><b>湿手/接触面积</b>：测量网络已固定人体阻抗，但实际使用中湿手会大幅降低阻抗，限值本身应留余量；</li>
+    <li><b>频率</b>：50/60Hz 工频最敏感，高频与直流要用对应的网络和限值逻辑；</li>
+    <li><b>正常 vs 单一故障</b>：两个条件都要测，报告必须写明测量网络与状态。</li>
+  </ul>
+</section>
+    <section>
+      <h2>相关学习</h2>
+      <p><a class="tag" href="./knowledge.html#leakage">知识卡：泄漏电流与接触电流</a>
+  <a class="tag" href="./tools.html#tool-leakage">工具：泄漏电流估算器</a>
+  <a class="tag" href="./sop-leakage.html">SOP：泄漏电流</a>
+  <a class="tag" href="./hipot.html">耐压测试深度页</a>
+  <a class="tag" href="./standards.html#std-60990">标准入口：IEC 60990</a></p>
+    </section>
+  </main>
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/standard-status.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

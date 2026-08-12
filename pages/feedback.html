@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>纠错反馈 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="发现内容错误或想提建议？填写表单，用邮件客户端发送给我们。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / 纠错反馈</p>
+      <h1>纠错反馈</h1>
+      <p class="lead">本站靠教学简化值支撑，最需要你们帮忙发现错误。填完点“生成反馈邮件”会调用你的邮件客户端。</p>
+    </div>
+
+    <div class="card">
+      <div class="form-grid">
+        <div class="field">
+          <label for="fbPage">所在页面</label>
+          <input type="text" id="fbPage" placeholder="例如：爬电距离 / 计算工具 / 标准对照" value="">
+        </div>
+        <div class="field">
+          <label for="fbType">反馈类型</label>
+          <select id="fbType">
+            <option value="错误">内容/数值错误</option>
+            <option value="建议">改进建议</option>
+            <option value="缺失">内容缺失</option>
+            <option value="体验">体验问题</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="fbBody">问题描述（尽量具体，最好附上你认为正确的依据）</label>
+        <textarea id="fbBody" rows="6" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--fg);font-family:inherit;font-size:14px;resize:vertical" placeholder="例如：间隙速查表中 2500V 的取值与 IEC 60664-1 某版本不一致，应为……"></textarea>
+      </div>
+      <p style="margin-top:12px"><button type="button" class="btn btn-primary" id="fbSend">生成反馈邮件</button></p>
+      <p class="peak-note">提交后会在你的邮件客户端打开一封已填好的邮件；如果你配置了默认邮件程序，直接发送即可。</p>
+    </div>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("fbSend").addEventListener("click", function () {
+      var page = document.getElementById("fbPage").value || "未填写";
+      var type = document.getElementById("fbType").value;
+      var body = document.getElementById("fbBody").value;
+      var subject = encodeURIComponent("[安规与可靠性知识课堂] " + type + "：" + page);
+      var text = encodeURIComponent("页面：" + page + "\n类型：" + type + "\n\n" + body);
+      location.href = "mailto:angui-feedback@example.com?subject=" + subject + "&body=" + text;
+    });
+  </script>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

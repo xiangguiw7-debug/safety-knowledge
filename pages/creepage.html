@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>爬电距离（Creepage）详解 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="爬电距离完整教程：表面放电机理、四大决定因素、查表全流程、多个完整示例、PCB 设计技巧与标准条款指引。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-chain-key="creepage">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="../pages/learn.html" class="active">学习地图</a>
+        <a href="../pages/tools.html">计算工具</a>
+        <a href="../pages/industries.html">行业筛选</a>
+        <a href="../pages/materials.html">材料库</a>
+        <a href="../pages/glossary.html">术语表</a>
+        <a href="../pages/resources.html">资源</a>
+        <a href="../pages/refs.html">参考中心</a>
+        <a href="../pages/quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./learn.html">学习地图</a> / 爬电距离</p>
+      <h1>爬电距离（Creepage）详解</h1>
+      <p class="lead">目标：学完这一章，你能独立完成“查表 → 算值 → 设计 → 复核”的完整闭环，而不只是记住几个数字。</p>
+    </div>
+
+    <section>
+      <h2>1. 定义：爬电距离到底是什么</h2>
+      <p>爬电距离（creepage distance）是<b>两个导电部件之间，沿绝缘体表面测得的最短距离</b>。它和电气间隙的根本区别在于路径介质：间隙走“空气直线”，爬电走“绝缘表面”。</p>
+      <div class="diagram">
+        <svg viewBox="0 0 640 250" role="img" aria-label="PCB 表面爬电路径示意图">
+          <rect x="70" y="55" width="150" height="90" rx="10" class="accent-fill"></rect>
+          <text x="145" y="107" text-anchor="middle">焊盘 A</text>
+          <rect x="430" y="55" width="150" height="90" rx="10" class="accent-fill"></rect>
+          <text x="505" y="107" text-anchor="middle">焊盘 B</text>
+          <rect x="70" y="145" width="510" height="18" fill="var(--card-2)" stroke="var(--border)" stroke-width="1.5"></rect>
+          <text x="145" y="160" text-anchor="middle" class="label">PCB 表面</text>
+          <path d="M220 100 H300 Q320 100 320 120 V145 Q320 165 340 165 H380 Q400 165 400 145 V120 Q400 100 420 100 H430" class="dashed"></path>
+          <polygon points="220,100 236,94 236,106" fill="var(--accent)"></polygon>
+          <polygon points="430,100 414,94 414,106" fill="var(--accent)"></polygon>
+          <text x="320" y="220" text-anchor="middle" class="label">爬电路径 L：沿绝缘表面，绕过开槽后更长</text>
+        </svg>
+      </div>
+      <p>注意：路径必须沿<b>实际绝缘表面</b>走，包括 PCB 板面、外壳内壁、灌封材料表面；跨越沟槽时按槽壁、槽底的最短连续路径计算，不能“抄近路”走直线。</p>
+    </section>
+
+    <section>
+      <h2>2. 为什么需要它：表面漏电起痕的机理</h2>
+      <p>绝缘表面不是理想绝缘体。在灰尘、潮气、盐雾等污染下，表面会形成一层薄薄的导电膜。爬电过程可以拆成五步：</p>
+      <ol>
+        <li><b>污染膜导通</b>：表面污物吸水后形成微弱导电层；</li>
+        <li><b>微电流流过</b>：两个带电部件之间出现表面漏电流；</li>
+        <li><b>局部发热</b>：电流在污染膜薄弱处（通常是靠近电极处）产生焦耳热，把水分蒸发；</li>
+        <li><b>干燥带放电</b>：水分蒸发后形成高阻干燥带，电压集中在干燥带上，产生火花放电；</li>
+        <li><b>碳化导通</b>：火花反复灼烧绝缘材料，碳化出导电轨迹，最终发展成漏电起痕（tracking），甚至闪络击穿。</li>
+      </ol>
+      <p>所以爬电距离的本质是：<b>把表面路径拉长，让同样电压下的表面电场强度降到不足以维持漏电起痕</b>。材料越不耐漏电起痕（CTI 越低）、环境越脏越潮（污染等级越高）、电压越高，需要的路径就越长。</p>
+    </section>
+
+    <section>
+      <h2>3. 电气间隙 vs 爬电距离：什么时候看哪个</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>对比项</th>
+              <th>电气间隙</th>
+              <th>爬电距离</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>路径</td><td>空气最短直线</td><td>沿绝缘表面</td></tr>
+            <tr><td>决定电压</td><td>冲击耐受电压（峰值/脉冲）</td><td>持续工作电压（有效值）</td></tr>
+            <tr><td>受污染影响</td><td>小（空气本身）</td><td>大（表面污染/凝结）</td></tr>
+            <tr><td>受材料影响</td><td>无</td><td>有（CTI 材料组）</td></tr>
+            <tr><td>受海拔影响</td><td>有（空气密度）</td><td>一般无直接修正</td></tr>
+            <tr><td>PCB 开槽</td><td>基本无帮助</td><td>有效增加路径</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-info">
+        <strong>工程结论</strong>
+        <p>设计时必须<b>同时满足</b>间隙和爬电两项。市电产品（230V）在污染等级 2 下，通常爬电距离更大，是“决定项”；但雷电冲击恶劣的场景（户外、工业配电），间隙可能反过来成为瓶颈。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 四大决定因素详解</h2>
+
+      <h3>4.1 工作电压（查表用 RMS 有效值）</h3>
+      <p>查爬电表用的是<b>持续工作电压的有效值</b>，不是系统标称电压的整数。规则：</p>
+      <ul>
+        <li>取产品在实际工作中可能出现的最不利持续电压；</li>
+        <li>宽压产品（100–240V）按 250V 档查，不按 240V 插值；</li>
+        <li>如果电压落在两档之间，标准表格按“不小于实际电压的档位”取，工程上建议直接向上取整档，留余量；</li>
+        <li>内部电压（如 DC-DC 后的 12V、48V）按实际值查，不是一律按市电。</li>
+      </ul>
+
+      <h3>4.2 污染等级（Pollution Degree）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>等级</th><th>定义</th><th>怎么判断自己的产品</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>无污染，或只有干燥、非导电污染</td>
+              <td>密封/灌封/气密外壳内部；如果开盖可触，通常不能按 1 级</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>一般只有非导电污染，但偶尔会因凝结成为导电</td>
+              <td>普通室内电子产品、有外壳但非密封（最常用）</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>存在导电污染，或干燥非导电污染但会凝结</td>
+              <td>工业现场、潮湿车间、户外无防护、粉尘环境</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>判断要点：污染等级看的是<b>绝缘表面所在的环境</b>，不是整台设备的“IP 等级”。外壳密封不等于内部自动是污染等级 1——还要看装配过程残留、灌封是否完整。</p>
+
+      <h3>4.3 材料组与 CTI</h3>
+      <p>CTI（相对漏电起痕指数）通过 IEC 60112 的滴液试验测得：在样品表面滴氯化铵溶液，逐步升高电压，记录 50 滴内不发生漏电起痕的最大电压。材料组按 CTI 划分：</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>材料组</th><th>CTI 范围</th><th>常见材料举例（仅示意，以实际报告为准）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ⅰ</td><td>CTI ≥ 600</td><td>陶瓷、云母、部分玻纤增强工程塑料</td></tr>
+            <tr><td>Ⅱ</td><td>400 ≤ CTI &lt; 600</td><td>部分 PBT/PA66 增强牌号</td></tr>
+            <tr><td>Ⅲa</td><td>175 ≤ CTI &lt; 400</td><td>普通 PC、ABS、酚醛等（最常见的低成本材料）</td></tr>
+            <tr><td>Ⅲb</td><td>100 ≤ CTI &lt; 175</td><td>部分填充/回收材料</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-warn">
+        <strong>材料组不要凭牌号猜</strong>
+        <p>同一树脂不同配方、不同玻纤含量、不同阻燃剂，CTI 可能差一个组别。设计定型前向材料供应商索取 CTI 报告（IEC 60112 / GB/T 4207），并确认是“材料实际厚度”下的值。</p>
+      </div>
+
+      <p class="lead">想查 PC / ABS / PA66 / PBT 等常见塑料的 CTI 典型区间，看<a href="./knowledge.html#cti">CTI 知识卡片</a>。</p>
+
+      <h3>4.4 绝缘类型</h3>
+      <ul>
+        <li><b>功能绝缘</b>：只保证设备正常工作，不防触电。标准允许单独的功能绝缘表，数值可能比基本绝缘小，但必须按失效后果评估（见 4.5）；</li>
+        <li><b>基本绝缘</b>：防触电的第一道屏障，查表基准；</li>
+        <li><b>附加绝缘</b>：基本绝缘失效后的第二道屏障，数值与基本绝缘相同；</li>
+        <li><b>加强绝缘</b>：相当于“基本 + 附加”的组合，工程上按 2 × 基本绝缘取值（标准另有专门表格时以专门表格为准，如 IEC 60664-1 附录 F 的加强绝缘表）。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. 查表完整流程（六步）</h2>
+      <ol>
+        <li><b>定工作电压</b>：取最不利持续 RMS 电压（宽压按 250V）；</li>
+        <li><b>定污染等级</b>：按产品使用环境与外壳结构选 1/2/3；</li>
+        <li><b>定材料组</b>：凭 CTI 报告定 Ⅰ/Ⅱ/Ⅲa/Ⅲb；</li>
+        <li><b>定绝缘类型</b>：功能/基本/附加/加强，决定乘数；</li>
+        <li><b>查表</b>：在标准表格中按“电压列 × 污染等级 × 材料组”读出基本绝缘值；</li>
+        <li><b>换算与复核</b>：加强 ×2（按标准表格）、附加同基本；再复核结构上是否还有“并联路径”没算到。</li>
+      </ol>
+
+      <h3>教学简化速查表（基本绝缘，mm）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>工作电压</th>
+              <th class="num">污染 1（全组）</th>
+              <th class="num">污染 2 · Ⅰ组</th>
+              <th class="num">污染 2 · Ⅱ组</th>
+              <th class="num">污染 2 · Ⅲa/Ⅲb</th>
+              <th class="num">污染 3 · Ⅰ组</th>
+              <th class="num">污染 3 · Ⅱ组</th>
+              <th class="num">污染 3 · Ⅲa/Ⅲb</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>50 V</td><td class="num">0.6</td><td class="num">0.8</td><td class="num">1.0</td><td class="num">1.2</td><td class="num">1.2</td><td class="num">1.4</td><td class="num">1.6</td></tr>
+            <tr><td>125 V</td><td class="num">0.8</td><td class="num">1.2</td><td class="num">1.5</td><td class="num">2.0</td><td class="num">2.0</td><td class="num">2.5</td><td class="num">3.2</td></tr>
+            <tr><td>250 V</td><td class="num">1.0</td><td class="num">2.0</td><td class="num">2.5</td><td class="num">3.2</td><td class="num">3.2</td><td class="num">4.0</td><td class="num">5.0</td></tr>
+            <tr><td>400 V</td><td class="num">1.4</td><td class="num">3.2</td><td class="num">4.0</td><td class="num">5.0</td><td class="num">5.0</td><td class="num">6.3</td><td class="num">8.0</td></tr>
+            <tr><td>600 V</td><td class="num">2.0</td><td class="num">5.0</td><td class="num">6.0</td><td class="num">8.0</td><td class="num">8.0</td><td class="num">10.0</td><td class="num">12.5</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-info">
+        <strong>这张表怎么用</strong>
+        <p>先读“基本绝缘”值：电压 250V、污染 2、材料组 Ⅲa → 3.2mm。再按绝缘类型换算：附加 = 3.2，加强 = 6.4，功能绝缘按标准单独确定（本站计算器按 0.8× 简化示意）。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. 完整示例</h2>
+
+      <h3>示例 A：230V 电源适配器初次级（加强绝缘）</h3>
+      <ol>
+        <li>工作电压：市电上限按 250V 档；</li>
+        <li>污染等级：室内带外壳，按 2；</li>
+        <li>材料组：假设 PCB/变压器骨架材料组 Ⅲa（无 CTI 报告时最保守）；</li>
+        <li>绝缘类型：初次级隔离为加强绝缘；</li>
+        <li>查表：250V · 污染 2 · Ⅲa → 基本 3.2mm；</li>
+        <li>换算：加强 = 6.4mm → 设计目标 ≥ 6.4mm。</li>
+      </ol>
+      <p>如果空间放不下：换材料组 Ⅰ（基本 2.0 → 加强 4.0mm）、开槽增加表面路径、或灌封/涂覆（需通过涂层试验）。</p>
+
+      <h3>示例 B：120V 消费电子充电口到内部电路</h3>
+      <ol>
+        <li>工作电压：产品为 120V 市场 → 查 125V 档；</li>
+        <li>污染等级：2；</li>
+        <li>材料组：Ⅲa；</li>
+        <li>绝缘类型：基本绝缘；</li>
+        <li>查表：125V · 污染 2 · Ⅲa → 2.0mm → 充电口到内部带电件 ≥ 2.0mm。</li>
+      </ol>
+
+      <h3>示例 C：400V 工业控制柜（污染等级 3）</h3>
+      <ol>
+        <li>工作电压：400V 档；</li>
+        <li>污染等级：现场粉尘潮湿 → 3；</li>
+        <li>材料组：接线端子常为 Ⅲa；</li>
+        <li>绝缘类型：基本绝缘；</li>
+        <li>查表：400V · 污染 3 · Ⅲa → 8.0mm；若为加强绝缘 → 16.0mm。</li>
+      </ol>
+      <p class="lead">三个例子都能在<a href="./tools.html">计算工具</a>里复现：示例 A 用“230V 电源初次级”预设，示例 C 用“工业现场 400V”预设。</p>
+    </section>
+
+    <section>
+      <h2>7. 结构设计技巧（PCB 与非 PCB）</h2>
+      <ul>
+        <li><b>开槽</b>：PCB 上在两个焊盘之间开槽，槽宽一般建议 ≥ 1mm，槽深（长度方向）要足够，路径按槽壁 + 槽底连续计算；窄而浅的槽对增加路径帮助有限；</li>
+        <li><b>挡墙 / 筋条</b>：外壳内壁加筋条，把表面路径“绕”过去，高度和宽度要按结构公差留余量；</li>
+        <li><b>灌封</b>：初次级之间灌封硅胶/环氧，绝缘表面从“PCB+空气”变成“灌封材料”，但灌封材料本身也要有 CTI 数据，且不能有气泡；</li>
+        <li><b>三防漆/涂层</b>：IEC 60664-3 规定涂层要经过耐压、耐热、附着力等试验后才能计入爬电距离，普通阻焊层不算；</li>
+        <li><b>变压器</b>：初次级绕组之间用三层绝缘线、挡墙胶带、加宽骨架挡板；</li>
+        <li><b>连接器/端子</b>：相邻引脚间距按最恶劣污染与材料组核对，必要时选“加高爬电”规格；</li>
+        <li><b>排布</b>：高压走线尽量不跨越低压敏感区，跨距不够时先开槽再考虑换材料。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>8. 常见误区</h2>
+      <ul>
+        <li>“阻焊层能算爬电距离”——普通阻焊层不能，只有通过 IEC 60664-3 涂层试验的涂覆才能计入；</li>
+        <li>“CTI 高就是绝缘强度高”——CTI 只衡量抗漏电起痕，与耐压强度、耐热等级是不同指标；</li>
+        <li>“按系统标称电压 230V 查表”——宽压产品要用 250V 档，内部电压按实际值；</li>
+        <li>“间隙够了爬电就够”——潮湿污染下表面比空气更容易出问题，爬电通常更严；</li>
+        <li>“加强绝缘就是 2 倍”——工程近似成立，但标准可能有专门表格与取整规则；</li>
+        <li>“污染等级选低一点省空间”——外壳密封不等于污染 1 级，认证工程师会看结构和工艺。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>9. 标准条款指引</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>标准</th><th>查哪里</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>IEC 60664-1（绝缘配合总则）</td><td>附录 F 的爬电距离表；正文对污染等级、材料组的定义</td></tr>
+            <tr><td>IEC 60335-1 / GB 4706.1（家电）</td><td>第 29 章：电气间隙与爬电距离；CTI 测试引用 IEC 60112</td></tr>
+            <tr><td>IEC 62368-1 / GB 4943.1（IT/AV）</td><td>第 5.4 节：电气间隙与爬电距离</td></tr>
+            <tr><td>IEC 60601-1 / GB 9706.1（医疗）</td><td>第 8.7 节：爬电距离与空气间隙（含 MOPP 要求）</td></tr>
+            <tr><td>IEC 61010-1（测量/控制）</td><td>按工作电压与污染等级查对应表格</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lead">查表前先看标准“范围”确认适用性，再看“术语”确认污染等级与工作电压的定义，最后看表格脚注（取整规则、电压上限）。</p>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./clearance.html">电气间隙</a>
+        <a class="tag" href="./knowledge.html#temperature">温升耐热</a>
+        <a class="tag" href="./knowledge.html#flame">防火阻燃</a>
+        <a class="tag" href="./tools.html">计算工具</a>
+      </p>
+    </section>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:26px 0">
+      <a class="btn" href="clearance.html">← 电气间隙</a>
+      <a class="btn btn-primary" href="surge.html">下一章：雷击浪涌 →</a>
+    </div>
+
+  </main>
+
+    <p style="margin:22px 0"><button type="button" class="btn" data-progress-key="creepage">标记已读</button></p>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/progress.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+  <script src="../assets/js/knowledge-chain.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>电压暂降与短时中断深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="电压暂降与短时中断（IEC 61000-4-11）：试验等级、机理、hold-up 设计与软件恢复。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./emc.html">EMC 系统课程</a> / 电压暂降深度页</p>
+      <h1>电压暂降与短时中断（IEC 61000-4-11）</h1>
+      <p class="lead">电网电压掉一下、断几毫秒，设备不能损坏、不能进入危险状态，还要能优雅恢复。</p>
+    </div>
+
+    <section>
+      <h2>1. 试验类型与等级</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>类型</th><th>剩余电压</th><th class="num">持续时间（典型）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>暂降</td><td>70% / 40% / 0%</td><td class="num">0.5 / 1 / 5 / 10 个周波</td></tr>
+            <tr><td>短时中断</td><td>0%</td><td class="num">0.5 / 1 / 5 / 10 / 25 / 250 个周波</td></tr>
+            <tr><td>电压变化</td><td>—</td><td class="num">按标准序列</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>单相/三相设备的注入方式和相位点由标准规定，通常在电压过零或峰值处切换。</p>
+    </section>
+
+    <section>
+      <h2>2. 失效机理</h2>
+      <ul>
+        <li>输入电压跌落后，母线电容放电，电源输出跌落；</li>
+        <li>MCU 欠压复位阈值触发，重启或丢失状态；</li>
+        <li>电机/继电器在电压恢复瞬间出现浪涌电流；</li>
+        <li>数据丢失、通信中断、安全输出误动作。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 硬件设计</h2>
+      <ul class="check-list">
+        <li>输入储能电容提供 hold-up 时间：按“输出功率 × 维持时间”算电容储能；</li>
+        <li>欠压检测（brown-out detection）在复位前保存关键状态；</li>
+        <li>电源监控芯片设置合理复位阈值与延时，避免临界抖动；</li>
+        <li>恢复瞬间做软启动/限流，防电容充电浪涌；</li>
+        <li>安全相关输出设计成“断电即安全”，恢复需人工确认。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 软件恢复策略</h2>
+      <ul>
+        <li>状态机区分“正常运行/欠压保持/恢复中”，禁止边沿抖动切换；</li>
+        <li>关键数据（配置、计数值）写入非易失存储并校验；</li>
+        <li>恢复后重新建立通信、复位外设、检查传感器有效性；</li>
+        <li>计时类功能考虑掉电期间的时间补偿或提示。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. 常见误区</h2>
+      <ul>
+        <li>“电容越大越好”——要算 hold-up 时间和恢复浪涌，过大反而伤前级；</li>
+        <li>“复位就行”——中断后直接复位可能导致数据丢失或安全状态错误；</li>
+        <li>“只测 0%”——70%/40% 的暂降更容易触发临界复位，比全断更麻烦。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./emc.html">EMC 系统课程</a>
+        <a class="tag" href="./emc-eft.html">EFT 深度页</a>
+        <a class="tag" href="./knowledge.html#functional">功能安全</a>
+        <a class="tag" href="./tools.html">计算工具</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

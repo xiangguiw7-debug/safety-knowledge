@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>耐压测试（Withstand Voltage）详解 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="耐压测试完整教程：绝缘体系、试验电压确定逻辑、5 步法、AC/DC 对比、完整示例、测试流程与失败排查。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-chain-key="hipot">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="../pages/learn.html" class="active">学习地图</a>
+        <a href="../pages/tools.html">计算工具</a>
+        <a href="../pages/industries.html">行业筛选</a>
+        <a href="../pages/materials.html">材料库</a>
+        <a href="../pages/glossary.html">术语表</a>
+        <a href="../pages/resources.html">资源</a>
+        <a href="../pages/refs.html">参考中心</a>
+        <a href="../pages/quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./learn.html">学习地图</a> / 耐压测试</p>
+      <h1>耐压测试（Withstand Voltage / Hipot）详解</h1>
+      <p class="lead">目标：学完这一章，你能回答“这个产品该打多少伏、打多久、怎么判、挂了怎么办”，而不是只会问别人。</p>
+    </div>
+
+    <section>
+      <h2>1. 耐压测试到底在测什么</h2>
+      <p>耐压测试（介电强度试验）是在绝缘两端施加<b>远高于正常工作电压</b>的试验电压，观察是否发生击穿或闪络。它有三个作用：</p>
+      <ul>
+        <li><b>验证设计余量</b>：确认按标准设计的绝缘距离、材料厚度在实际装配后仍成立；</li>
+        <li><b>发现工艺缺陷</b>：焊渣、金属屑、螺钉过孔、绝缘层破损、装配错位等，都会在耐压下暴露；</li>
+        <li><b>批量一致性</b>：产线抽检或全检，防止批量工艺漂移。</li>
+      </ul>
+      <div class="diagram">
+        <svg viewBox="0 0 640 240" role="img" aria-label="耐压测试原理示意图">
+          <rect x="55" y="70" width="150" height="100" rx="12" class="accent-fill"></rect>
+          <text x="130" y="128" text-anchor="middle">带电部件</text>
+          <rect x="205" y="70" width="110" height="100" fill="url(#hatch)"></rect>
+          <rect x="205" y="70" width="110" height="100" fill="none" stroke="var(--accent)" stroke-width="1.5"></rect>
+          <text x="260" y="128" text-anchor="middle">绝缘层</text>
+          <text x="260" y="148" text-anchor="middle" class="label">试验电压 U</text>
+          <rect x="315" y="70" width="150" height="100" rx="12" class="accent-fill"></rect>
+          <text x="390" y="128" text-anchor="middle">可触及金属</text>
+          <line x1="130" y1="45" x2="130" y2="170" stroke="var(--accent)" stroke-width="2"></line>
+          <line x1="390" y1="45" x2="390" y2="170" stroke="var(--accent)" stroke-width="2"></line>
+          <text x="260" y="35" text-anchor="middle" class="label">耐压测试仪</text>
+          <defs>
+            <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="10" stroke="var(--border)" stroke-width="2"></line>
+            </pattern>
+          </defs>
+        </svg>
+      </div>
+      <p>注意：耐压测的是“绝缘是否够强”，不是“爬电距离是否够长”。距离不足通常会在耐压下表现为表面闪络，但距离足够也不代表材料本身耐压合格——两者互相补充。</p>
+    </section>
+
+    <section>
+      <h2>2. 绝缘体系：先数清你有哪些“绝缘层”</h2>
+      <p>试验电压按被测绝缘的类型查表，所以第一步是数清楚结构里有几层绝缘、每层是什么类型。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>绝缘类型</th><th>作用</th><th>典型结构举例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>功能绝缘</td><td>保证正常工作，不防触电</td><td>初级绕组与次级绕组之间的“非隔离”隔层</td></tr>
+            <tr><td>基本绝缘</td><td>防触电第一道屏障</td><td>带电部件与可触及金属之间的一层绝缘</td></tr>
+            <tr><td>附加绝缘</td><td>基本绝缘失效后的第二道屏障</td><td>金属外壳内部的独立绝缘衬垫</td></tr>
+            <tr><td>加强绝缘</td><td>相当于基本 + 附加</td><td>双重绝缘产品的带电部件与外壳之间</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>“双重绝缘”是结构概念：基本绝缘 + 附加绝缘；产品类别 II 类通常用双重绝缘或加强绝缘，并且<b>不依赖保护接地</b>。某些标准还要求确认绝缘层数（一层/两层），例如两层绝缘之间不能有可导电的桥接物。</p>
+      <div class="callout callout-info">
+        <strong>怎么数绝缘</strong>
+        <p>从带电部件出发，往使用者可能接触的表面数：第一道是基本，第二道是附加；如果中间只有一层且同时承担两种保护，它必须按加强绝缘考核。外壳开孔、螺钉、缝隙可能“短路”掉某道绝缘，数完要再走查一遍装配图。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. 试验电压从哪来：完整决策链</h2>
+      <p>不要“别人打 3000 我也打 3000”。试验电压由下面这条链决定，每一步都有依据：</p>
+      <div class="path">
+        <div class="path-item"><h3>定标准</h3><p>产品类别 + 目标市场 → 家电 60335-1、IT/AV 62368-1、医疗 60601-1、测量控制 61010-1、机械 60204-1…</p></div>
+        <div class="path-item"><h3>定绝缘类型</h3><p>功能 / 基本 / 附加 / 加强，或按 MOPP/双重绝缘结构。</p></div>
+        <div class="path-item"><h3>定额定电压档</h3><p>标准表格按额定工作电压分档（如 ≤250V、251–1000V…）。</p></div>
+        <div class="path-item"><h3>查 AC 试验电压</h3><p>从标准表格读出对应档位的 AC 值。</p></div>
+        <div class="path-item"><h3>如需 DC</h3><p>按 ≈1.414 × AC 折算（对应交流峰值），并考虑绝缘充电与放电。</p></div>
+        <div class="path-item"><h3>定时长与判据</h3><p>型式试验常见 60s；产线缩短时通常按标准允许的程序提高电压；判据为无击穿/闪络、泄漏不超限。</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 常见取值参考（示例值，务必核对标准版本）</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>标准</th><th>基本/附加绝缘</th><th>加强/双重绝缘</th><th>备注</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>IEC 62368-1 / GB 4943.1（IT/AV，市电端口）</td>
+              <td>1500 V AC（2121 V DC）</td>
+              <td>3000 V AC（4242 V DC）</td>
+              <td>常用且稳定的教学参考值</td>
+            </tr>
+            <tr>
+              <td>IEC 60335-1 / GB 4706.1（家电，≤250V 示例）</td>
+              <td>基本绝缘示例 1250 V AC</td>
+              <td>按标准表格（常见 3000 V AC 量级）</td>
+              <td>不同版本与额定电压档不同，必须查表</td>
+            </tr>
+            <tr>
+              <td>IEC 60601-1 / GB 9706.1（医疗，市电端口示例）</td>
+              <td>1 MOPP 示例 1500 V AC</td>
+              <td>2 MOPP 示例 4000 V AC</td>
+              <td>还要区分 B/BF/CF 型与工作电压</td>
+            </tr>
+            <tr>
+              <td>IEC 60204-1（机械电气，示例公式）</td>
+              <td>2 × 额定电压 + 1000 V（不低于 1500 V 量级）</td>
+              <td>—</td>
+              <td>具体以标准条款为准</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-warn">
+        <strong>为什么这里写“示例”</strong>
+        <p>标准版本更新会改数值，且表格还分额定电压档、绝缘部位（带电件 vs 可触及件 vs 信号口）。查表时看三样：版本号、表格号、脚注。快速参考可用<a href="./tools.html">计算工具页的耐压速查器</a>，但最终以标准原文为准。</p>
+      </div>
+    </section>
+
+    <section>
+    <section>
+      <h2>4.5 耐压查表模板（边读标准边填）</h2>
+      <p class="lead">把标准表格的数值填进这张表，保存到本地，下次直接对照。已填的是教学示例值（62368 为常用参考，其余需核对标准版本）。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>标准</th>
+              <th>被测绝缘</th>
+              <th>条件</th>
+              <th>AC 试验电压 (V)</th>
+              <th>DC（可选）(V)</th>
+              <th>标准条款/备注（待核对）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="4">IEC 62368-1 / GB 4943.1</td><td>基本/附加</td><td>≤250V</td><td><input type="text" data-hipot-cell="62368-basic-250" data-default="1500" value="1500" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-basic-250-dc" data-default="2121" value="2121" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-basic-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++            <tr><td>加强/双重</td><td>≤250V</td><td><input type="text" data-hipot-cell="62368-reinf-250" data-default="3000" value="3000" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-reinf-250-dc" data-default="4242" value="4242" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-reinf-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++            <tr><td>基本/附加</td><td>&gt;250V</td><td><input type="text" data-hipot-cell="62368-basic-high" placeholder="查标准填写" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-basic-high-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-basic-high-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++            <tr><td>加强/双重</td><td>&gt;250V</td><td><input type="text" data-hipot-cell="62368-reinf-high" placeholder="查标准填写" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-reinf-high-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-reinf-high-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++            <tr><td rowspan="3">IEC 60335-1 / GB 4706.1</td><td>基本</td><td>≤250V</td><td><input type="text" data-hipot-cell="60335-basic-250" placeholder="示例 1250，以现行版本为准" style="width:130px"></td><td><input type="text" data-hipot-cell="60335-basic-250-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60335-basic-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++            <tr><td>附加</td><td>≤250V</td><td><input type="text" data-hipot-cell="60335-supp-250" placeholder="查标准填写" style="width:90px"></td><td><input type="text" data-hipot-cell="60335-supp-250-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60335-supp-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++            <tr><td>加强</td><td>≤250V</td><td><input type="text" data-hipot-cell="60335-reinf-250" placeholder="查标准填写" style="width:90px"></td><td><input type="text" data-hipot-cell="60335-reinf-250-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60335-reinf-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++            <tr><td rowspan="2">IEC 60601-1 / GB 9706.1</td><td>1 MOPP</td><td>市电端口</td><td><input type="text" data-hipot-cell="60601-1mopp" placeholder="示例 1500，以标准为准" style="width:130px"></td><td><input type="text" data-hipot-cell="60601-1mopp-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60601-1mopp-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++            <tr><td>2 MOPP</td><td>市电端口</td><td><input type="text" data-hipot-cell="60601-2mopp" placeholder="示例 4000，以标准为准" style="width:130px"></td><td><input type="text" data-hipot-cell="60601-2mopp-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60601-2mopp-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++            <tr><td>IEC 61010-1</td><td>基本/加强</td><td>≤250V</td><td><input type="text" data-hipot-cell="61010-250" placeholder="查标准填写" style="width:90px"></td><td><input type="text" data-hipot-cell="61010-250-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="61010-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++            <tr><td>IEC 60204-1</td><td>基本</td><td>按公式 2×Un+1000V</td><td><input type="text" data-hipot-cell="60204-formula" placeholder="按公式计算" style="width:110px"></td><td><input type="text" data-hipot-cell="60204-formula-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60204-formula-clause" placeholder="查标准条款" style="width:100%"></td></tr>
++          </tbody>
++        </table>
++      </div>
++      <div class="link-row">
++        <button type="button" class="btn" id="htSaveBtn">保存模板到本地</button>
++        <button type="button" class="btn" id="htResetBtn">清空重置</button>
+        <button type="button" class="btn" onclick="window.print()">打印模板</button>
++        <a class="btn" href="./standards.html">去标准文件入口核对</a>
++      </div>
++      <div class="callout callout-warn">
++        <strong>使用说明</strong>
++        <p>模板保存在浏览器本地，不会上传。填入每个数值时顺便把“标准条款”写进最后一列，下次评审直接有依据；版本更新后要重新核对。</p>
++      </div>
++    </section>
+      <h2>5. 交流 vs 直流：不是随便选一个</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>对比项</th><th>交流（AC）</th><th>直流（DC）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>与工况的接近程度</td><td>更接近电网实际应力</td><td>方向恒定，与实际交流有差异</td></tr>
+            <tr><td>容性电流</td><td>持续存在，Y 电容越大电流越大</td><td>只在充电瞬间出现</td></tr>
+            <tr><td>试验电压</td><td>按标准 AC 值</td><td>常用 ≈1.414 × AC 值（峰值等效）</td></tr>
+            <tr><td>绝缘电荷</td><td>每半周期反向，不易积累</td><td>会充电，测试后必须放电确认</td></tr>
+            <tr><td>设备要求</td><td>输出容量要大（容性负载）</td><td>设备较小，但需放电功能</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>选择原则：标准允许哪种用哪种；标准没写 DC 时不要自行替换。DC 耐压对“绝缘内部缺陷”可能更敏感，但泄漏判读方式与 AC 不同（AC 泄漏含容性分量，DC 主要是纯阻性）。</p>
+    </section>
+
+    <section>
+      <h2>6. 完整示例</h2>
+
+      <h3>示例 A：230V II 类电源适配器（IEC 62368-1）</h3>
+      <ol>
+        <li>标准：适配器 → 62368-1；</li>
+        <li>绝缘：初次级隔离为加强绝缘（II 类无接地）；</li>
+        <li>额定电压：≤250V 档；</li>
+        <li>查表：加强 → 3000 V AC；</li>
+        <li>判据：型式试验保持 60s，无击穿/闪络，泄漏不超限；产线可按标准程序缩短并提压。</li>
+      </ol>
+
+      <h3>示例 B：230V I 类电水壶（IEC 60335-1）</h3>
+      <ol>
+        <li>标准：家电 → 60335-1；</li>
+        <li>绝缘：带电部件对可触及金属为基本绝缘（I 类靠接地）；</li>
+        <li>额定电压：≤250V；</li>
+        <li>查表：基本绝缘示例 1250 V AC（以现行版本表格为准）；</li>
+        <li>补充：还要测接地连续性、泄漏电流，湿热处理后复测耐压。</li>
+      </ol>
+
+      <h3>示例 C：医用监护设备（IEC 60601-1）</h3>
+      <ol>
+        <li>标准：60601-1，先确认应用部分类型（BF/CF）；</li>
+        <li>绝缘：网电源部分到应用部分按 MOPP 数量；</li>
+        <li>查表：1 MOPP 示例 1500 V AC、2 MOPP 示例 4000 V AC（按工作电压与标准表格）；</li>
+        <li>附加：患者漏电流限值远严于家电，单一故障状态也要测。</li>
+      </ol>
+    </section>
+
+    <section>
+    <section>
+      <h2>7.1 测试流程步骤条（交互演示）</h2>
+      <div class="quiz-progress"><span id="hipotStepBar" style="width:16%"></span></div>
+      <div class="card">
+        <h3 id="hipotStepTitle">步骤 1 / 6：预检</h3>
+        <p class="lead" id="hipotStepDesc"></p>
+        <div class="link-row">
+          <button type="button" class="btn" id="hipotStepPrev">← 上一步</button>
+          <button type="button" class="btn btn-primary" id="hipotStepNext">下一步 →</button>
+        </div>
+      </div>
+    </section>
+      <h2>7. 测试流程与产线差异</h2>
+      <ol>
+        <li><b>预检</b>：外观、接地连续性、样品数量、环境条件（温度湿度）；</li>
+        <li><b>接线</b>：高压端接被测绝缘一端，另一端接地/机壳；确认没有接错极性；</li>
+        <li><b>升压</b>：从零平稳升到试验电压（常见建议不超过 500 V/s 量级，具体按标准）；</li>
+        <li><b>保持</b>：到规定时间，观察泄漏电流与是否击穿/闪络；</li>
+        <li><b>降压</b>：先降压到零再断开，直流测试后必须对被测部位放电确认；</li>
+        <li><b>记录</b>：电压、时间、泄漏电流、结果，保留到认证档案。</li>
+      </ol>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>对比项</th><th>型式试验</th><th>产线例行试验</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>目的</td><td>验证设计</td><td>发现工艺缺陷</td></tr>
+            <tr><td>时间</td><td>常见 60s</td><td>常见 1–2s（标准允许时）</td></tr>
+            <tr><td>电压</td><td>标准规定值</td><td>可按规定提高（如 1.2×）以弥补短时间</td></tr>
+            <tr><td>频率</td><td>样品/抽样</td><td>全检或按批次</td></tr>
+            <tr><td>设备</td><td>高精度仪器</td><td>快速产线耐压仪 + 互锁</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>8. 判据与失败排查</h2>
+      <p>三个常见结果：</p>
+      <ul>
+        <li><b>击穿</b>：绝缘材料内部导通，电流剧增，通常不可恢复 → 材料/厚度/工艺问题；</li>
+        <li><b>闪络</b>：沿表面或空气放电，距离不足、污染、尖端毛刺导致；</li>
+        <li><b>泄漏电流超限</b>：没击穿但电流超标准限值 → Y 电容过大、污染膜、绝缘阻抗不足。</li>
+      </ul>
+      <p>失败排查顺序：先看是不是试验方法问题（极性、湿度过高、升压太快），再看结构（间距、毛刺、螺钉、引线），再看材料（CTI/厚度/吸湿），最后看工艺（焊渣、助焊剂残留、外壳装配）。</p>
+    </section>
+
+    <div class="callout callout-danger">
+      <strong>安全要求（必须遵守）</strong>
+      <p>耐压电压足以致命：测试仪必须有互锁和防护罩；工作区设置警示标识；测试中人体不得接触被测件与夹具；直流测试后必须放电并确认；操作人员应培训合格，避免单人作业。</p>
+    </div>
+
+    <section>
+      <h2>9. 标准条款指引</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>标准</th><th>查哪里</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>IEC 62368-1 / GB 4943.1</td><td>电气强度试验条款 + 绝缘距离表；泄漏电流条款</td></tr>
+            <tr><td>IEC 60335-1 / GB 4706.1</td><td>第 13 章（工作温度下泄漏电流和电气强度）、第 16 章（湿热后）</td></tr>
+            <tr><td>IEC 60601-1 / GB 9706.1</td><td>第 8.7 节（爬电/间隙）、电气强度条款、漏电流条款</td></tr>
+            <tr><td>IEC 61010-1</td><td>介电强度试验条款与表格</td></tr>
+            <tr><td>IEC 60204-1 / GB 5226.1</td><td>电气设备试验条款（含试验电压公式）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lead">查标准时注意：表格可能分“带电部件与可触及导电部件”“带电部件与地”“功能绝缘”多行，别只看一行就定电压。</p>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./knowledge.html#leakage">泄漏电流</a>
+        <a class="tag" href="./knowledge.html#grounding">接地等电位</a>
+        <a class="tag" href="./tools.html">耐压速查器</a>
+        <a class="tag" href="./quiz.html">小测验</a>
+      </p>
+    </section>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:26px 0">
+      <a class="btn" href="surge.html">← 雷击浪涌</a>
+      <a class="btn btn-primary" href="quiz.html">下一站：小测验 →</a>
+    </div>
+
+  </main>
+
+    <p style="margin:22px 0"><button type="button" class="btn" data-progress-key="hipot">标记已读</button></p>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/progress.js"></script>
+  <script src="../assets/js/hipot-template.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+  <script src="../assets/js/knowledge-chain.js"></script>
+</body>
+</html>

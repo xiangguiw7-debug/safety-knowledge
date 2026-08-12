@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>安规速查海报 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="一页纸安规速查海报：七大因素、常用间距、认证标志、宽窄压，可打印。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .poster { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
+    .poster h1 { font-size: 30px; margin: 0 0 4px; }
+    .poster h2 { font-size: 17px; margin: 18px 0 8px; }
+    .poster .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .poster table { font-size: 13px; }
+    @media print {
+      .site-header, .site-footer, .btn { display: none !important; }
+      body { background: #fff; }
+      .poster { box-shadow: none; border: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 速查海报</p>
+      <h1>安规速查海报</h1>
+      <p class="lead">一页纸速查，适合打印贴墙。数值为教学简化参考。</p>
+    </div>
+
+    <div style="margin-bottom:16px"><button type="button" class="btn btn-primary" onclick="window.print()">打印 / 保存 PDF</button></div>
+
+    <div class="poster">
+      <h1>⚡ 安规速查海报</h1>
+      <p style="color:var(--muted)">七大安全因素 · 常用间距 · 认证标志 · 宽窄压 · 正式设计以标准原文为准</p>
+
+      <div class="cols">
+        <div>
+          <h2>七大安全因素</h2>
+          <table>
+            <tbody>
+              <tr><td>⚡ 防电击</td><td>间隙、爬电、绝缘、接地、SELV</td></tr>
+              <tr><td>💥 能量</td><td>限能、保险丝、电容放电、电弧</td></tr>
+              <tr><td>🔥 防火</td><td>V-0/5VA、灼热丝、防火外壳</td></tr>
+              <tr><td>🌡️ 热量</td><td>温升、可触及温度、热失控</td></tr>
+              <tr><td>⚙️ 机械</td><td>防护罩、联锁、急停、稳定性</td></tr>
+              <tr><td>☢️ 辐射</td><td>光生物、激光、SAR、电离</td></tr>
+              <tr><td>🧪 化学</td><td>RoHS、REACH、WEEE、无卤</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <h2>常用间距（教学简化）</h2>
+          <table>
+            <tbody>
+              <tr><td>爬电 250V · PD2 · Ⅲa</td><td>基本 3.2 / 加强 6.4mm</td></tr>
+              <tr><td>间隙 230V · OVC Ⅱ</td><td>基本 2.0 / 加强 4.0mm</td></tr>
+              <tr><td>间隙 400V · OVC Ⅲ</td><td>基本 5.5mm（海拔修正）</td></tr>
+              <tr><td>海拔 &gt;2000m</td><td>间隙 ×1.14~3.0</td></tr>
+              <tr><td>62368 耐压</td><td>基本 1500 / 加强 3000V AC</td></tr>
+              <tr><td>DC 耐压</td><td>≈ AC × 1.414，测后放电</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <h2>认证标志速查</h2>
+          <table>
+            <tbody>
+              <tr><td>中国</td><td>CCC（强制）/ CQC（自愿）</td></tr>
+              <tr><td>欧盟</td><td>CE（LVD+EMC+RED）</td></tr>
+              <tr><td>美国</td><td>FCC（强制）/ UL（渠道）</td></tr>
+              <tr><td>日本</td><td>PSE / TELEC</td></tr>
+              <tr><td>韩国</td><td>KC / RRA</td></tr>
+              <tr><td>德国</td><td>VDE / GS（渠道）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <h2>电压与插头</h2>
+          <table>
+            <tbody>
+              <tr><td>宽压</td><td>100–240V ~ 50/60Hz</td></tr>
+              <tr><td>窄压 220–240V</td><td>不适用美国/日本</td></tr>
+              <tr><td>窄压 110–120V</td><td>仅美国/日本/加拿大等</td></tr>
+              <tr><td>中国</td><td>220V / 50Hz / A·C·I</td></tr>
+              <tr><td>欧盟</td><td>230V / 50Hz / C·E·F</td></tr>
+              <tr><td>英国</td><td>230V / 50Hz / G</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

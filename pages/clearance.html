@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>电气间隙（Clearance）详解 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="电气间隙完整教程：空气击穿机理、过电压类别、查表全流程、海拔修正、多个完整示例与设计技巧。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./learn.html">学习地图</a> / 电气间隙</p>
+      <h1>电气间隙（Clearance）详解</h1>
+      <p class="lead">目标：学完这一章，你能独立完成“定过电压类别 → 查冲击耐受 → 查表 → 海拔修正”的完整闭环。</p>
+    </div>
+
+    <section>
+      <h2>1. 定义：间隙管的是“空气击穿”</h2>
+      <p>电气间隙（clearance）是两个导电部件之间<b>通过空气或其他气体介质的最短直线距离</b>，防止电压把空气击穿、发生闪络。</p>
+      <div class="diagram">
+        <svg viewBox="0 0 640 230" role="img" aria-label="两个导体之间的空气间隙示意图">
+          <rect x="90" y="55" width="150" height="110" rx="12" class="accent-fill"></rect>
+          <text x="165" y="118" text-anchor="middle">导体 A</text>
+          <rect x="400" y="55" width="150" height="110" rx="12" class="accent-fill"></rect>
+          <text x="475" y="118" text-anchor="middle">导体 B</text>
+          <line x1="245" y1="110" x2="395" y2="110" class="accent"></line>
+          <polygon points="245,110 261,103 261,117" fill="var(--accent)"></polygon>
+          <polygon points="395,110 379,103 379,117" fill="var(--accent)"></polygon>
+          <text x="320" y="96" text-anchor="middle" class="label">d：空气最短直线距离</text>
+          <line x1="165" y1="205" x2="165" y2="228" class="muted" stroke-dasharray="4 4"></line>
+          <line x1="475" y1="205" x2="475" y2="228" class="muted" stroke-dasharray="4 4"></line>
+          <text x="320" y="228" text-anchor="middle" class="label">中间开槽不会改变空气直线距离</text>
+        </svg>
+      </div>
+      <p>空气的击穿电压不是常数：它随<b>电极形状（尖端效应）、气压、湿度、海拔</b>变化。标准用“冲击耐受电压”和“海拔修正”把这些问题统一成可查表的形式。</p>
+    </section>
+
+    <section>
+      <h2>2. 为什么看“峰值 / 冲击电压”，而不是 220V</h2>
+      <p>空气击穿由<b>瞬时电压峰值</b>决定，不是有效值。220V 市电的峰值约 311V，但电网上的暂态过电压（雷击感应、开关操作）会在几个微秒内叠加出数千伏。标准用 1.2/50μs 冲击波模拟这种瞬态。</p>
+      <ul>
+        <li>有效值（RMS）描述持续发热，用于爬电距离和耐压；</li>
+        <li>峰值/冲击电压描述瞬时击穿风险，用于电气间隙；</li>
+        <li>设备安装位置越靠近电网进线，遭受的冲击越强，这就是过电压类别。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 过电压类别（Overvoltage Category）详解</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>类别</th><th>典型位置</th><th>230V 系统冲击耐受（教学参考）</th><th>120V 系统（教学参考）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ⅰ</td><td>受 SPD 等限压保护的设备</td><td>1500V</td><td>800V</td></tr>
+            <tr><td>Ⅱ</td><td>插头连接的设备（家电、办公设备）</td><td>2500V</td><td>1500V</td></tr>
+            <tr><td>Ⅲ</td><td>固定安装设备（配电箱、工业设备）</td><td>4000V</td><td>2500V</td></tr>
+            <tr><td>Ⅳ</td><td>电源进线处（电表、主配电）</td><td>6000V</td><td>4000V</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>判断方法：看产品<b>接到电网的位置</b>，而不是产品大小。同一个开关电源，装在插头后面是类别 Ⅱ，装在配电柜里就是类别 Ⅲ。</p>
+    </section>
+
+    <section>
+      <h2>4. 查表完整流程（六步）</h2>
+      <ol>
+        <li><b>定系统标称电压</b>：120V / 230V / 400V（三相取线电压）；</li>
+        <li><b>定过电压类别</b>：Ⅰ–Ⅳ，按安装位置；</li>
+        <li><b>得冲击耐受电压</b>：查类别表（或由标准给出）；</li>
+        <li><b>定绝缘类型</b>：基本/附加/加强（附加同基本，加强 ≈ 2×）；</li>
+        <li><b>查最小间隙</b>：按冲击耐受电压查表；</li>
+        <li><b>海拔修正</b>：海拔 &gt; 2000m 时乘以修正系数。</li>
+      </ol>
+
+      <h3>教学简化速查表（海拔 ≤ 2000m）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>冲击耐受电压</th><th class="num">基本绝缘 (mm)</th><th class="num">加强绝缘 (mm)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0.8 kV</td><td class="num">0.5</td><td class="num">1.0</td></tr>
+            <tr><td>1.5 kV</td><td class="num">1.0</td><td class="num">2.0</td></tr>
+            <tr><td>2.5 kV</td><td class="num">2.0</td><td class="num">4.0</td></tr>
+            <tr><td>4.0 kV</td><td class="num">3.0</td><td class="num">6.0</td></tr>
+            <tr><td>6.0 kV</td><td class="num">5.5</td><td class="num">11.0</td></tr>
+            <tr><td>8.0 kV</td><td class="num">8.0</td><td class="num">16.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>海拔修正系数</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>海拔 (m)</th><th class="num">2000</th><th class="num">3000</th><th class="num">4000</th><th class="num">5000</th><th class="num">6000</th><th class="num">8000</th><th class="num">10000</th></tr></thead>
+          <tbody><tr><td>系数</td><td class="num">1.00</td><td class="num">1.14</td><td class="num">1.29</td><td class="num">1.48</td><td class="num">1.70</td><td class="num">2.25</td><td class="num">3.00</td></tr></tbody>
+        </table>
+      </div>
+      <div class="callout callout-info">
+        <strong>怎么用</strong>
+        <p>修正后间隙 = 查表值 × 系数。例如 3000m 海拔下，2500V 冲击的基本绝缘 = 2.0 × 1.14 ≈ 2.3mm。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. 完整示例</h2>
+
+      <h3>示例 A：230V 插头连接的 II 类设备</h3>
+      <ol>
+        <li>系统 230V，插头连接 → 类别 Ⅱ → 冲击耐受 2500V；</li>
+        <li>基本绝缘查表 → 2.0mm；加强绝缘 → 4.0mm；</li>
+        <li>海拔 ≤2000m → 结论：加强绝缘间隙 ≥ 4.0mm。</li>
+      </ol>
+
+      <h3>示例 B：120V 美国市场产品</h3>
+      <ol>
+        <li>系统 120V，插头连接 → 类别 Ⅱ → 冲击耐受 1500V；</li>
+        <li>基本绝缘 → 1.0mm；加强绝缘 → 2.0mm；</li>
+        <li>结论：基本绝缘间隙 ≥ 1.0mm（比 230V 产品宽松约一半）。</li>
+      </ol>
+
+      <h3>示例 C：400V 工业柜，使用海拔 4000m</h3>
+      <ol>
+        <li>系统 400V，固定安装 → 类别 Ⅲ → 冲击耐受 6000V；</li>
+        <li>基本绝缘查表 → 5.5mm；</li>
+        <li>海拔 4000m 系数 1.29 → 5.5 × 1.29 ≈ 7.1mm → 设计按 ≥ 7.2mm。</li>
+      </ol>
+      <p class="lead">三个例子都能在<a href="./tools.html">计算工具</a>里复现（示例 C 记得把海拔滑块拉到 4000m）。</p>
+    </section>
+
+    <section>
+      <h2>6. 结构设计技巧</h2>
+      <ul>
+        <li><b>PCB 走线</b>：高压与低压区域拉开距离；焊盘、过孔、走线拐角都算导电部件，不能只量“直线走线”的间距；</li>
+        <li><b>开槽对间隙无效</b>：PCB 开槽只增加爬电路径，空气直线距离不变；</li>
+        <li><b>元件引脚</b>：立式元件引脚折弯后可能缩短与相邻元件的直线距离，装配图要复核；</li>
+        <li><b>变压器</b>：初次级绕组间用挡墙胶带增加实际空气路径，引脚间距也要查；</li>
+        <li><b>连接器</b>：端子排相邻脚距按冲击电压查表，必要时选高间距规格；</li>
+        <li><b>散热器</b>：散热器与带电件、机壳之间都要量间隙，注意螺丝和安装孔；</li>
+        <li><b>海拔与密封</b>：高原产品按系数放大；密封外壳内部气压变化同样影响击穿，不能默认“密封就安全”。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>7. 常见误区</h2>
+      <ul>
+        <li>“220V 产品间隙按 220V 算”——要看冲击耐受（峰值/瞬态），不是有效值；</li>
+        <li>“爬电够了间隙一定够”——间隙和爬电是两套表，雷电冲击场景下间隙可能更严；</li>
+        <li>“开槽能救间隙”——开槽只救爬电；</li>
+        <li>“阻焊层算绝缘距离”——阻焊层既不算间隙也不算爬电（除非涂层试验）；</li>
+        <li>“海拔只影响爬电”——恰恰相反，海拔修正是间隙的专属；</li>
+        <li>“类别按产品功率定”——按接入电网的位置定。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>8. 标准条款指引</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>标准</th><th>查哪里</th></tr></thead>
+          <tbody>
+            <tr><td>IEC 60664-1（绝缘配合总则）</td><td>过电压类别定义、最小间隙表、海拔修正系数</td></tr>
+            <tr><td>IEC 60335-1 / GB 4706.1（家电）</td><td>第 29 章：电气间隙与爬电距离</td></tr>
+            <tr><td>IEC 62368-1 / GB 4943.1（IT/AV）</td><td>第 5.4 节：电气间隙与爬电距离</td></tr>
+            <tr><td>IEC 60601-1 / GB 9706.1（医疗）</td><td>第 8.7 节：爬电距离与空气间隙</td></tr>
+            <tr><td>IEC 61010-1（测量/控制）</td><td>按过电压类别与海拔查对应表格</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./creepage.html">爬电距离详解</a>
+        <a class="tag" href="./surge.html">雷击浪涌</a>
+        <a class="tag" href="./hipot.html">耐压测试</a>
+        <a class="tag" href="./tools.html">计算工具</a>
+      </p>
+    </section>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:26px 0">
+      <a class="btn" href="learn.html">← 学习地图</a>
+      <a class="btn btn-primary" href="creepage.html">下一章：爬电距离 →</a>
+    </div>
+
+  </main>
+
+    <p style="margin:22px 0"><button type="button" class="btn" data-progress-key="clearance">标记已读</button></p>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/progress.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>辐射危险深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="辐射危险：光生物安全、激光分级、射频暴露 SAR 与电离辐射监管。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 辐射危险</p>
+      <h1>辐射危险深度页</h1>
+      <p class="lead">光、激光、射频、电离辐射四类，各自有标准、分级和监管路径。</p>
+    </div>
+
+    <section>
+      <h2>1. 光生物安全</h2>
+      <p>灯具的紫外/可见（蓝光）/红外辐射按 IEC 62471 分 RG0–RG3。蓝光危害针对视网膜，儿童灯具要求更严；驱动电流、光谱、光学设计共同决定等级，必要时加滤光、遮罩或标签。</p>
+      <p class="lead">详见<a href="./knowledge.html#optical">光生物安全知识卡</a>。</p>
+    </section>
+
+    <section>
+      <h2>2. 激光安全（IEC 60825-1）</h2>
+      <ul>
+        <li>按波长、功率/能量、可达性分 Class 1–4；</li>
+        <li>Class 1 正常使用安全；Class 2 可见光眨眼保护；Class 3/4 需要工程防护；</li>
+        <li>高等级要求：防护罩、联锁、钥匙开关、警告标签、光束终止器；</li>
+        <li>激光笔、投影、3D 打印、测距模组都适用。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 射频暴露（SAR）</h2>
+      <ul>
+        <li>无线设备（手机、穿戴、路由器）按 SAR 限值考核（IEC 62209 / 62479）；</li>
+        <li>SAR 与发射功率、天线位置、距离、占空比有关；</li>
+        <li>欧盟 RED、美国 FCC 都有射频暴露评估要求；</li>
+        <li>天线靠近人体部位的产品（耳戴、手环）尤其敏感。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 电离辐射（医疗 X 射线等）</h2>
+      <ul>
+        <li>X 射线设备按 IEC 60601-1-3 考核剂量、屏蔽与安全联锁；</li>
+        <li>监管路径：中国 NMPA、美国 FDA、欧盟 MDR，注册文件含辐射安全资料；</li>
+        <li>不是“有屏蔽就行”，还要验证泄漏剂量率和警示装置。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. 设计自查清单</h2>
+      <ul class="check-list">
+        <li>先确认产品是否有辐射源：光源、激光、射频发射器、X 射线；</li>
+        <li>选对应标准做分级或测量，而不是“感觉安全”；</li>
+        <li>标签、防护罩、联锁在结构设计阶段就预留；</li>
+        <li>医疗辐射设备尽早对接监管注册要求。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./knowledge.html#radhaz">辐射知识卡</a>
+        <a class="tag" href="./knowledge.html#optical">光生物安全</a>
+        <a class="tag" href="./emc.html">EMC 系统课程</a>
+        <a class="tag" href="./industries.html#medical">医疗行业</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

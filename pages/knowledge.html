@@ -1,0 +1,1343 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>知识卡片库 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="标准结构导读、防触电逻辑、泄漏电流、接地、温升、防火、电池、IP、光生物安全等安规补充知识。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dmcm.css">
+  <style>
+    a.tag { text-decoration: none; }
+    a.tag:hover { color: var(--accent-2); }
+    .knowledge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
+    .knowledge-grid section h2 { font-size: 19px; margin-bottom: 8px; }
+    .knowledge-grid section p { margin: 6px 0; font-size: 14.5px; }
+    .knowledge-grid section ul { margin: 6px 0 10px; padding-left: 20px; font-size: 14px; }
+    .knowledge-grid section .std { font-size: 12.5px; color: var(--muted); }
+    .knowledge-grid section .rel { margin-top: 10px; }
+    .knowledge-grid section .howto { font-size: 13px; color: var(--muted); background: var(--card-2); border-left: 3px solid var(--border); padding: 8px 12px; border-radius: 0 8px 8px 0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+            <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./industries.html">行业筛选</a> / 补充知识速览</p>
+      <h1>知识卡片库（按危害 / 主题）</h1>
+      <p class="lead">每个条目包含“是什么、为什么、关键要点、怎么查标准”四部分。先从“标准结构导读”和“防触电通用逻辑”建立框架，再按需深入。</p>
+    </div>
+
+    <p class="section-sub">
+      <a class="tag" href="#stdguide">标准结构导读</a>
+      <a class="tag" href="#protection">防触电逻辑</a>
+      <a class="tag" href="#cti">CTI 材料组</a>
+      <a class="tag" href="#energy">能量危险</a>
+      <a class="tag" href="#rohs">化学环保</a>
+      <a class="tag" href="#leakage">泄漏电流</a>
+      <a class="tag" href="#grounding">接地等电位</a>
+      <a class="tag" href="#temperature">温升耐热</a>
+      <a class="tag" href="#flame">防火阻燃</a>
+      <a class="tag" href="#battery">电池保护</a>
+      <a class="tag" href="#ip">IP 防护</a>
+      <a class="tag" href="#optical">光生物安全</a>
+      <a class="tag" href="#biocompat">生物相容性</a>
+      <a class="tag" href="#risk">风险管理</a>
+      <a class="tag" href="#functional">功能安全</a>
+      <a class="tag" href="#mechanical">机械防护</a>
+      <a class="tag" href="#explosion">防爆</a>
+      <a class="tag" href="#selv">SELV/TNV</a>
+      <a class="tag" href="#dmcm">共模差模</a>
+      <a class="tag" href="#emc">EMC</a>
+      <a class="tag" href="#harmonic">谐波</a>
+      <a class="tag" href="#transient">抛负载</a>
+      <a class="tag" href="#components">安规元件</a>
+      <a class="tag" href="#software">软件可用性</a>
+    </p>
+
+    <div class="knowledge-grid">
+      <section class="card" id="stdguide" data-hazard="general">
+        <h2>标准结构导读：IEC 标准怎么读</h2>
+        <p><b>是什么：</b>IEC 安全标准几乎都遵循同一套骨架。学会这个骨架，任何新标准都能快速定位条款。</p>
+        <p><b>典型结构：</b>① 范围（适用/不适用什么产品）→ ② 规范性引用文件 → ③ 术语和定义 → ④ 一般要求 → ⑤ 试验一般条件 → ⑥ 起逐项要求（防触电、发热、机械、材料、元器件）→ 末尾是试验条款与附录（表格、污染等级、材料组、试验电路）。</p>
+        <h3>标准层级与编号（教学速查）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>层级</th><th>作用</th><th>示例</th></tr></thead>
+          <tbody>
+            <tr><td>基础安全标准</td><td>跨产品通用的安全原则与试验方法</td><td>IEC 60664-1（绝缘配合）、IEC 61140（电击防护）、IEC 60695（防火试验）</td></tr>
+            <tr><td>组标准</td><td>一类产品的共性要求</td><td>IEC 60335 系列（家电）、IEC 62368-1（音视频/IT）</td></tr>
+            <tr><td>产品标准 / 特殊要求</td><td>具体产品的附加条款</td><td>IEC 60335-2-x（微波炉、电水壶…）、IEC 60598-2-x（灯具）</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>编号怎么读：</b>“60335-1”中“-1”是通用要求，“-2-x”是特殊要求；“GB/T 17626.2”对应 IEC 61000-4-2；GB 前言里的 IDT / MOD / NEQ 表示等同 / 修改 / 非等效采用。</p>
+        <ul>
+          <li>先看“范围”和“定义”，判断标准是否适用、名词是否对得上；</li>
+          <li>找“一般要求”里对绝缘、距离、材料的总体规定；</li>
+          <li>具体数值（爬电、间隙、耐压、泄漏）通常在正文条款 + 附录表格；</li>
+          <li>试验条件（电压容差、环境温度、样品数量）在“试验一般条件”；</li>
+          <li>GB 版本会在前言标注采标程度：IDT 等同、MOD 修改、NEQ 非等效。</li>
+        </ul>
+        <p class="howto">怎么查：先按“产品 → 标准 → 条款 → 表格”四步走；例如家电查 GB 4706.1 第 8 章防触电、第 13 章泄漏、第 16 章耐压、第 19 章异常、第 30 章耐热防火。</p>
+        <p class="std">相关标准：IEC 60335-1、IEC 62368-1、IEC 60601-1 的结构大同小异</p>
+        <p class="rel"><a href="./standards.html">关联：标准文件入口</a></p>
+      </section>
+
+      <section class="card" id="protection" data-hazard="electric">
+        <h2>防触电的通用逻辑</h2>
+        <p><b>是什么：</b>所有电气安规最终都在回答一个问题：人碰到危险部件时，会不会触电？</p>
+        <p><b>五道防线：</b>限制电压（SELV）→ 绝缘分级（I 类接地、II 类双重、III 类低压）→ 保持距离（间隙/爬电）→ 保护元件（保护阻抗、Y 电容、保险丝）→ 外壳与隔离（防火、防触及、联锁）。</p>
+        <h3>绝缘层级速查</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>层级</th><th>保护作用</th><th>典型理解</th></tr></thead>
+          <tbody>
+            <tr><td>基本绝缘</td><td>正常工作防触电</td><td>带电体与可触及件之间的基础绝缘，失效后需附加防护兜底</td></tr>
+            <tr><td>附加绝缘</td><td>基本绝缘失效后的第二道防护</td><td>II 类结构中可触及面与基本绝缘之间的绝缘</td></tr>
+            <tr><td>双重绝缘</td><td>基本 + 附加</td><td>两层分别承担一道防护</td></tr>
+            <tr><td>加强绝缘</td><td>单层达到双重绝缘同等安全水平</td><td>距离与耐压按标准加强要求，不能任意“加厚就算”</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>能限压就先限压：SELV 从源头消除危险；</li>
+          <li>I 类产品靠“接地 + 基本绝缘”，接地失效时基本绝缘兜底；</li>
+          <li>II 类产品靠“基本 + 附加”或加强绝缘，不依赖接地；</li>
+          <li>III 类产品由 SELV 供电，通常不按市电距离要求；</li>
+          <li>距离不足时靠开槽、挡墙、灌封、材料升级补救；</li>
+          <li>带电部件不可徒手触及：外壳、盖板、防护罩通常需要工具才能打开；需要工具拆卸的部件不作为“可触及部件”判定。</li>
+        </ul>
+        <p><b>常见误区：</b>“有塑料壳就是双重绝缘”——还要满足附加绝缘的爬电/间隙与耐压；“III 类就不用隔离”——SELV 源本身必须满足隔离与限压；“工具才能打开”不等于随便加个十字螺丝就合规——工具定义、可拆卸部件判定以产品标准为准。</p>
+        <p class="howto">怎么查：确定产品类别（I/II/III）→ 找到对应标准的防触电章节 → 用绝缘类型表查距离和耐压。</p>
+        <p class="std">相关标准：IEC 61140（电击防护总则）</p>
+        <p class="rel"><a href="#access">可触及性与工具防护</a> · <a href="./clearance.html">电气间隙</a> · <a href="./hipot.html">耐压测试</a> · <a href="./tools.html">计算工具（含产品类别）</a></p>
+      </section>
+
+      <section class="card" id="access" data-hazard="shock">
+        <h2>可触及性与工具防护（Access &amp; Tool）</h2>
+        <p><b>是什么：</b>标准用“可触及部件”判断人能不能碰到危险部件，用“工具”作为用户能否打开外壳的判定边界。带电部件不能徒手触及；外壳、盖板、防护罩通常需要工具才能打开。</p>
+        <p><b>为什么重要：</b>很多产品“看起来有外壳”就以为安全，但徒手能拆的卡扣、手拧螺丝、可撬开的缝隙都会让判定变成可触及。</p>
+
+        <h3>关键概念</h3>
+        <ul>
+          <li><b>带电部件（live part）</b>：正常使用时带有危险电压/能量的导体或部件；</li>
+          <li><b>可触及部件（accessible part）</b>：正常使用中能被标准试指/试具接触到的表面或部件；</li>
+          <li><b>工具（tool）</b>：螺丝刀、钥匙、硬币、专用工具等，用于“需要工具才能拆卸/打开”的判定；</li>
+          <li><b>用户操作 vs 服务操作</b>：用户正常使用中可拆的部件按用户场景评估；维修通道按服务人员场景单独确认；</li>
+          <li><b>正常使用 + 单一故障</b>：不仅正常状态，单一故障后也不得出现危险可触及。</li>
+        </ul>
+
+        <h3>主要标准要求</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>标准</th><th>章节 / 条款</th><th>核心要求</th></tr></thead>
+          <tbody>
+            <tr><td>IEC 61140</td><td>电击防护总则</td><td>带电部件不得可触及，防护靠绝缘、外壳、距离等</td></tr>
+            <tr><td>IEC 60335-1</td><td>第 8 章</td><td>家电带电部件不可触及；用户可拆部件不得暴露带电部件</td></tr>
+            <tr><td>IEC 62368-1</td><td>可触及性条款</td><td>音视频/IT 设备按能量源与可触及部件判定</td></tr>
+            <tr><td>IEC 60598-1</td><td>第 8 章</td><td>灯具带电部件不可触及；光源更换等场景有专门要求</td></tr>
+            <tr><td>IEC 61010-1</td><td>第 6 章</td><td>测量/实验室设备外壳与可触及性</td></tr>
+            <tr><td>IEC 60601-1</td><td>外壳/应用部分</td><td>医疗设备还有患者/操作者接触路径的额外要求</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>测试方法：试指与试具</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>试具</th><th>标准</th><th>模拟什么</th><th>典型尺寸</th><th>对应 IP 字母</th></tr></thead>
+          <tbody>
+            <tr><td>试指（Test Probe B）</td><td>IEC 61032</td><td>手指</td><td>铰接式，直径约 12mm</td><td>B</td></tr>
+            <tr><td>试具 C</td><td>IEC 61032</td><td>工具</td><td>直径 2.5mm</td><td>C</td></tr>
+            <tr><td>试具 D</td><td>IEC 61032</td><td>金属线</td><td>直径 1.0mm</td><td>D</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>试指/试具按标准规定的力值施加（如试指常见约 10N，以产品标准为准）；</li>
+          <li>开孔、缝隙、可拆卸部件、铰接盖板都要测；</li>
+          <li>IP 附加字母 A/B/C/D 与这些试具对应，但“IP 等级”不能替代产品标准的可触及性测试。</li>
+        </ul>
+
+        <h3>什么情况必须用工具</h3>
+        <ul>
+          <li>外壳内存在带电部件（非 SELV / 限能电路），用户徒手可打开 → 不合格；</li>
+          <li>盖板螺丝需工具、卡扣需专用工具 → 通常可接受；</li>
+          <li>手拧螺丝、徒手卡扣、可直接撬开的缝隙 → 视为可触及；</li>
+          <li>可更换光源/保险丝/电池：先看标准是否允许用户更换；若允许，更换过程中也不得触及带电部件；</li>
+          <li>高压或危险能量设备：打开外壳应触发联锁断电，且断电后还要放电。</li>
+        </ul>
+
+        <h3>设计清单</h3>
+        <ul>
+          <li>先问：用户不借助工具能否打开？打开后能否碰到带电部件？</li>
+          <li>用标准试指验证开孔、缝隙、可拆卸部件；</li>
+          <li>工具要“真的需要工具”：十字/内六角/专用工具，不能是手拧；</li>
+          <li>电池仓、保险丝座、光源仓单独评估；</li>
+          <li>联锁要失效安全：断电、断线、传感器失效时回到安全状态。</li>
+        </ul>
+
+        <h3>常见误区</h3>
+        <ul>
+          <li>“有螺丝就是工具打开”——手拧螺丝不算；</li>
+          <li>“卡扣扣得很紧”——徒手能拆就算可触及；</li>
+          <li>“维修人员才能开就行”——用户正常使用中可拆的部分仍要按用户场景评估；</li>
+          <li>“用胶封死就安全”——不是通用方案，还可能影响电池更换/维护要求；</li>
+          <li>“低压就安全”——只有 SELV/限能电路才可徒手；普通低压（如非 SELV 的 48V）仍可能危险。</li>
+        </ul>
+
+        <p class="howto">怎么查：先找产品标准的“可触及部件/防触电”条款，再用 IEC 61032 试具按标准力值测试，最后按“用户可拆 / 服务可拆”分类评估。</p>
+        <p class="std">相关标准：IEC 61140、IEC 60335-1、IEC 62368-1、IEC 60598-1、IEC 61010-1、IEC 60601-1、IEC 61032、IEC 60529</p>
+        <p class="rel"><a href="#protection">防触电逻辑</a> · <a href="#productclass">产品类别</a> · <a href="#ip">IP 附加字母</a> · <a href="./hipot.html">耐压测试</a></p>
+      </section>
+
+      <section class="card" id="productclass" data-hazard="electric">
+        <h2>产品类别（I / II / III 类）怎么分</h2>
+        <p><b>是什么：</b>I / II / III 类是<b>防触电结构类别</b>，不是家电、IT、灯具这类产品品类。类别决定防触电策略和测试重点：I 类靠“基本绝缘 + 保护接地”，II 类靠“双重或加强绝缘”，III 类靠 SELV 供电。</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>类别</th><th>保护方式</th><th>是否接地</th><th>核心测试</th><th>常见产品</th></tr></thead>
+          <tbody>
+            <tr><td>I 类</td><td>基本绝缘 + 保护接地</td><td>是</td><td>接地连续性、泄漏电流、基本绝缘耐压</td><td>电热水器、洗衣机、金属外壳电源</td></tr>
+            <tr><td>II 类</td><td>双重绝缘或加强绝缘</td><td>否</td><td>双重/加强绝缘耐压、泄漏电流</td><td>手机充电器、电吹风、塑料外壳家电</td></tr>
+            <tr><td>III 类</td><td>SELV 供电</td><td>否</td><td>SELV 源隔离/耐压、设备本体低压要求</td><td>低压玩具、LED 低压灯具、USB 设备（看供电）</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>类别怎么识别：</b>① 看铭牌/说明书（II 类常用“回”符号，III 类一般不标防触电符号）；② 看可触及金属是否接 PE；③ 看供电是否来自满足隔离限压的 SELV 源。</p>
+        <h3>类别与测试差异（教学简化）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>项目</th><th>I 类</th><th>II 类</th><th>III 类</th></tr></thead>
+          <tbody>
+            <tr><td>保护接地</td><td>有</td><td>无</td><td>无</td></tr>
+            <tr><td>泄漏电流考核</td><td>对地/接触电流</td><td>接触电流</td><td>通常不适用（看产品标准）</td></tr>
+            <tr><td>绝缘耐压重点</td><td>基本绝缘 + 接地可靠性</td><td>双重/加强绝缘</td><td>SELV 源隔离（在电源侧考核）</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>常见误区：</b>塑料外壳 ≠ II 类；三脚插头 ≠ I 类；III 类低压也不等于绝对安全，SELV 源必须满足隔离与限压。</p>
+        <p class="howto">怎么查：先看供电方式（市电还是 SELV）→ 看可触及金属是否接 PE → 看绝缘体系 → 再按产品标准条款确认类别。</p>
+        <p class="std">相关标准：IEC 61140；产品标准按品类引用 IEC 60335-1、IEC 62368-1、IEC 60598-1、IEC 60601-1 等</p>
+        <p class="rel"><a href="./product-classes.html">查看完整结构图、测试差异与设计清单</a> · <a href="#protection">防触电逻辑</a> · <a href="./hipot.html">耐压测试</a></p>
+      </section>
+
+      <section class="card" id="cti" data-hazard="shock">
+        <h2>CTI 与材料组（爬电距离的关键参数）</h2>
+        <p><b>CTI 是什么：</b>相对漏电起痕指数（Comparative Tracking Index），按 IEC 60112 / GB/T 4207 的滴液试验测得：在绝缘材料表面滴氯化铵溶液，电压逐步升高，记录“50 滴内不发生漏电起痕”的最高电压。CTI 越高，材料越抗表面漏电起痕，允许的爬电距离越短。</p>
+        <p><b>为什么重要：</b>爬电距离查表必须先知道材料组，而材料组由 CTI 决定：Ⅰ ≥ 600、Ⅱ 400–600、Ⅲa 175–400、Ⅲb 100–175。</p>
+        <p><b>常见塑料典型区间</b>（数据手册值，仅供选型参考；正式设计以材料 CTI 报告为准）：</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>材料</th><th>典型 CTI 区间</th><th>常见材料组</th><th>备注</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>PC（聚碳酸酯）</td><td>约 250–400V</td><td>Ⅱ～Ⅲa（常见 Ⅲa）</td><td>阻燃型常降到 175–250</td></tr>
+              <tr><td>ABS</td><td>约 400–600V</td><td>Ⅰ～Ⅱ</td><td>非阻燃牌号较高，FR 型明显下降</td></tr>
+              <tr><td>PC + ABS 合金</td><td>约 250–600V</td><td>Ⅱ～Ⅲa</td><td>取决于阻燃与配方</td></tr>
+              <tr><td>PMMA（亚克力）</td><td>约 400–600V</td><td>Ⅰ～Ⅱ</td><td>透明件常用</td></tr>
+              <tr><td>PA66（未增强）</td><td>约 500–600V</td><td>Ⅰ～Ⅱ</td><td>吸湿后表面特性会变化</td></tr>
+              <tr><td>PA66 + GF30</td><td>约 400–500V</td><td>Ⅰ～Ⅱ</td><td>玻纤配方差异大</td></tr>
+              <tr><td>PBT（未增强）</td><td>约 500–600V</td><td>Ⅰ～Ⅱ</td><td>—</td></tr>
+              <tr><td>PBT + GF30</td><td>约 400–500V</td><td>Ⅰ～Ⅱ</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><b>影响 CTI 的因素：</b>阻燃剂（多数会降低 CTI）、玻纤含量、填料、着色剂、厚度、表面状态。同一树脂不同牌号，CTI 可能差一个材料组。</p>
+        <p><b>怎么拿到可靠值：</b>① 供应商材料数据表（TDS）查 CTI；② UL 黄卡（Yellow Card）查 PLC 等级（PLC0 ≥ 600、PLC1 400–599、PLC2 250–399、PLC3 175–249、PLC4 100–174、PLC5 &lt; 100）；③ 送样做 IEC 60112 试验。</p>
+        <p class="howto">工程提醒：阻燃等级（V-0）和 CTI 经常互相打架——很多阻燃剂会拉低 CTI。选外壳/骨架材料时两个指标要一起看，不能只挑 V-0。</p>
+        <p class="std">相关标准：IEC 60112 / GB/T 4207（CTI 试验）、IEC 60664-1（材料组划分）</p>
+        <p class="rel"><a href="./creepage.html">关联：爬电距离详解</a> · <a href="./tools.html">计算工具</a> · <a href="./materials.html">材料数据库</a></p>
+      </section>
+      <section class="card" id="energy" data-hazard="energy">
+        <h2>能量危险：限能电路、电池与电弧</h2>
+        <p><b>是什么：</b>可触及部位的可用能量（电压 × 电流 × 持续时间）足以造成灼伤或点燃，即使电压不高。IEC 62368-1 用 ES1/ES2/ES3 对电气能源分级。</p>
+        <p><b>典型场景：</b>大电容放电、低压大电流电源、电池短路、电弧闪光（arc flash）。</p>
+        <h3>能量危险场景与对策（教学参考）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>场景</th><th>危险机制</th><th>典型对策</th></tr></thead>
+          <tbody>
+            <tr><td>大电容放电</td><td>断电后残余能量灼伤/电击</td><td>泄放电阻、放电时间常数验证、放电警告标志</td></tr>
+            <tr><td>低压大电流电源</td><td>可触及端子大电流灼伤/引燃</td><td>限流、限能电路、保护阻抗、标识</td></tr>
+            <tr><td>电池短路</td><td>短路电流大、热失控</td><td>保护板、PTC/保险丝、热失控隔离</td></tr>
+            <tr><td>电弧 / 电弧闪光</td><td>能量集中、温度极高</td><td>距离与隔板、快速断开、灭弧器件</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>限能电路：限制开路电压、短路电流和内阻，使可触及能量低于阈值；</li>
+          <li>保险丝/断路器：动作时间和分断能力要覆盖故障能量；</li>
+          <li>电池：短路电流大，保护板 + 热失控管理缺一不可；</li>
+          <li>电弧：能量集中、温度极高，需要距离、隔离和快速断开；</li>
+          <li>高压电容：断电后要有泄放电阻，避免残余能量伤人。</li>
+        </ul>
+        <p class="howto">怎么查：标准里找“能源/能量分级”条款（62368-1 对电气能源的分级），再按产品形态确认限能条件。</p>
+        <p><b>ES 分级怎么理解（教学简化）：</b>ES1 为低能量可触及源，一般无需额外防护；ES2 需要防护或警示；ES3 为高危险能量，必须可靠隔离。具体阈值以标准表格为准。</p>
+        <p><b>限能设计要点：</b>限制开路电压、短路电流与输出电容储能；保险丝位置要覆盖故障路径；泄放电阻按“断电后快速放电”设计（时间常数以标准/安全要求为准）。</p>
+        <p><b>电弧防护：</b>带电开合、连接器拔插、继电器触点都可能产生电弧；用距离、隔板、灭弧器件和快速断开控制。</p>
+        <p class="std">相关标准：IEC 62368-1（能源分级）、IEC 60127（保险丝）</p>
+        <p class="rel"><a href="./knowledge.html#components">关联：安规元件</a> · <a href="./knowledge.html#battery">电池保护</a> · <a href="./knowledge.html#flame">防火</a></p>
+      </section>
+
+      <section class="card" id="rohs" data-hazard="chemical">
+        <h2>化学危险与环保合规（RoHS / REACH / WEEE）</h2>
+        <p><b>是什么：</b>产品材料中的有害物质、废弃后的回收责任，属于“化学危险 + 环保认证”主线。</p>
+        <h3>RoHS 十项限值速查（均质材料）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>物质</th><th>限值</th><th>常见来源</th></tr></thead>
+          <tbody>
+            <tr><td>铅 Pb</td><td>1000 mg/kg（0.1%）</td><td>焊料、PVC 稳定剂</td></tr>
+            <tr><td>汞 Hg</td><td>1000 mg/kg（0.1%）</td><td>开关、灯管</td></tr>
+            <tr><td>镉 Cd</td><td>100 mg/kg（0.01%）</td><td>电镀、颜料</td></tr>
+            <tr><td>六价铬 Cr(VI)</td><td>1000 mg/kg（0.1%）</td><td>防腐镀层</td></tr>
+            <tr><td>PBB / PBDE</td><td>各 1000 mg/kg</td><td>阻燃剂</td></tr>
+            <tr><td>DEHP / DBP / BBP / DIBP</td><td>各 1000 mg/kg</td><td>增塑剂（线缆/软胶）</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>RoHS（EU 2011/65/EU）：限制铅、镉、汞、六价铬、PBB、PBDE 及 4 种邻苯二甲酸酯，共 10 类；豁免条款随指令更新，不能只看“有没有超标”；</li>
+          <li>REACH：SVHC 候选清单持续更新，高关注物质超阈值需要通报/声明；</li>
+          <li>WEEE：电子电气废弃物回收标志与登记；</li>
+          <li>无卤：IEC 61249-2-21 等定义卤素限值（PCB/线缆常用）；</li>
+          <li>电池指令：欧盟新电池法规（EU 2023/1542）覆盖电池回收、标签与碳足迹；</li>
+          <li>其他：加州 65、包装指令、能效标签（ErP）常与环保一并要求。</li>
+        </ul>
+        <p class="howto">怎么查：要求供应商提供 RoHS/REACH 符合性声明与检测报告（如 ICP-OES、GC-MS），并关注 SVHC 清单更新。</p>
+        <p><b>检测方法怎么读：</b>XRF 快速筛查（定性/半定量）→ ICP-OES 测金属（铅/镉/汞/六价铬），GC-MS 测有机（PBB/PBDE/邻苯）；报告看三样：检出限、单位（mg/kg）、限值对照（如铅 1000 mg/kg）。</p>
+        <p class="std">相关标准：EU RoHS、REACH、WEEE、EU 2023/1542、IEC 61249-2-21</p>
+        <p class="rel"><a href="./materials.html">关联：材料库</a> · <a href="./certification.html">全球认证</a></p>
+      </section>
+      <section class="card" id="certprocess" data-hazard="general">
+        <h2>认证流程：测试、技术文件、CB 转证与工厂检查</h2>
+        <p><b>是什么：</b>认证不是“测一次拿个标志”，而是一条从标准确定到获证后监督的完整流程。</p>
+        <p><b>五阶段：</b>① 确定标准与认证路径 → ② 样品与型式试验 → ③ 准备技术文件 → ④ 发证/注册 → ⑤ 获证后监督（工厂检查、变更管理）。</p>
+        <h3>常见认证路径对比（教学参考）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>市场</th><th>路径</th><th>关键点</th></tr></thead>
+          <tbody>
+            <tr><td>国际互认</td><td>CB 测试证书 + 各国转证</td><td>一份报告转多国，注意国家差异（National Differences）</td></tr>
+            <tr><td>中国 CCC</td><td>型式试验 + 工厂检查 + 监督</td><td>关键元器件一致性与变更控制</td></tr>
+            <tr><td>欧盟 CE</td><td>制造商声明 / 公告机构介入（按指令）</td><td>技术文件 + DoC + 标签</td></tr>
+            <tr><td>美国 FCC</td><td>SDoC 或认证（按设备类别）</td><td>FCC ID、授权代表</td></tr>
+            <tr><td>日本 PSE</td><td>特定用品认证 / 非特定自我符合</td><td>菱形/圆形 PSE 区分</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>CB 体系：IECEE 的 CB 测试证书（CBTC）可向各国转证（NCB 转证），减少重复测试；注意国家差异（National Differences）；</li>
+          <li>技术文件清单：产品描述、电路图、PCB 布局、关键元器件清单（CDF）及认证证书、测试报告、风险评估、标签与说明书、符合性声明（DoC）；</li>
+          <li>工厂检查：首次检查看产品一致性、生产线测试（如产线耐压）、质量体系；之后定期监督；</li>
+          <li>变更管理：关键元器件、结构、工艺变更可能触发重新评估，不能直接改；</li>
+          <li>各国差异：CCC 型式试验+工厂检查；CE 自我声明（特定指令需公告机构）；FCC 分 SDoC/认证；日本 PSE 需注册检验机构。</li>
+        </ul>
+        <p class="howto">怎么查：先在国家认证页确认路径，再按“标准 → 测试 → 文件 → 发证 → 监督”五阶段排计划。</p>
+        <p class="std">相关体系：IECEE CB、ISO/IEC 17025（实验室）、ISO 9001（体系参考）</p>
+        <p class="rel"><a href="./certification.html">关联：全球认证</a> · <a href="./wizard.html">认证向导</a> · <a href="./standards.html">标准文件</a></p>
+      </section>
+
+      <section class="card" id="radhaz" data-hazard="radiation">
+        <h2>辐射危险：激光、射频暴露与电离辐射</h2>
+        <p><b>是什么：</b>除光生物安全外，辐射危险还包括激光、射频能量吸收和电离辐射，各有独立标准。</p>
+        <h3>激光等级速查（IEC 60825-1，教学简化）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>等级</th><th>危险程度</th><th>典型措施</th></tr></thead>
+          <tbody>
+            <tr><td>1 / 1M</td><td>正常使用安全（1M 用光学仪器观察有风险）</td><td>一般无需防护；1M 标注“勿用光学仪器直视”</td></tr>
+            <tr><td>2 / 2M</td><td>可见光，人眼回避反应可保护</td><td>警告标签；2M 同样限制光学仪器</td></tr>
+            <tr><td>3R</td><td>直视有风险（常见 1–5mW 可见光）</td><td>避免直视、警告标签</td></tr>
+            <tr><td>3B</td><td>直视与镜面反射可伤眼</td><td>防护罩/联锁、护目镜、控制区</td></tr>
+            <tr><td>4</td><td>高功率，漫反射也可能伤眼/引燃</td><td>封闭光路、联锁、严格管理</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>激光：IEC 60825-1 按 Class 1–4 分级，依据波长、功率与可达性；高等级需要防护罩、联锁与警告标签；</li>
+          <li>射频暴露：无线设备按 SAR（比吸收率）考核，测试标准 IEC 62209 / 62479；功率、距离与天线位置决定限值；</li>
+          <li>电离辐射：医疗 X 射线设备按 IEC 60601-1-3，监管路径（如 NMPA/FDA）涉及剂量、屏蔽与质量管理；</li>
+          <li>其他：紫外/红外已由光生物卡覆盖；激光笔、3D 打印机等消费品也要分级。</li>
+        </ul>
+        <p class="howto">怎么查：先确认辐射类型（光/射频/激光/电离），再选对应标准；涉及医疗辐射的设备优先走监管注册。</p>
+        <p class="std">相关标准：IEC 60825-1、IEC 62209 / 62479、IEC 60601-1-3</p>
+        <p class="rel"><a href="./knowledge.html#optical">关联：光生物安全</a> · <a href="./industries.html#medical">医疗行业</a></p>
+      </section>
+      <section class="card" id="leakage" data-hazard="shock">
+        <h2>泄漏电流与接触电流：人体反应与限值</h2>
+        <p><b>是什么：</b>泄漏电流是正常工作和单一故障条件下，流过保护导体或人体接触路径的电流；接触电流是人体实际接触可触及部件时流过的电流。测试时用 IEC 60990 标准测量网络模拟人体阻抗，而不是直接用普通电流表。</p>
+        <p><b>为什么重要：</b>泄漏电流直接决定“摸到设备是否麻手/危险”。I 类设备的泄漏电流靠接地分流，接地不良时全部经过人体；II 类设备没有接地，只能靠绝缘把泄漏压到足够低。</p>
+
+        <h3>工频交流（50/60Hz）人体反应参考</h3>
+        <p class="note" style="color:var(--muted);font-size:13px">以下为成人、手到手或手到脚、持续时间 &gt;0.1s 的教学概括；个体差异很大，儿童、老人、湿手、体内植入物都会显著降低安全阈值。正式依据见 IEC 60479-1。</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>电流范围（mA）</th><th>人体反应</th><th>危险程度</th></tr></thead>
+          <tbody>
+            <tr><td>0.1–0.5</td><td>感知阈值附近，可能有轻微麻刺感</td><td>通常无危害</td></tr>
+            <tr><td>0.5–1</td><td>轻微手麻、刺痛，能自主摆脱</td><td>一般安全</td></tr>
+            <tr><td>1–5</td><td>明显刺痛、肌肉收缩，多数成人仍能摆脱</td><td>开始不适</td></tr>
+            <tr><td>5–10</td><td>疼痛增强、肌肉僵直，摆脱开始困难</td><td>危险上升；儿童/体弱者更低</td></tr>
+            <tr><td>10–15</td><td>“不能放手”阈值区：成人男性约 10–16mA，女性约 6–10mA</td><td>可能无法自主脱离电源</td></tr>
+            <tr><td>15–30</td><td>持续肌肉收缩、呼吸困难</td><td>长时间可造成伤害</td></tr>
+            <tr><td>30–50</td><td>呼吸肌麻痹、意识可能丧失，心律紊乱风险上升</td><td>严重危险</td></tr>
+            <tr><td>50–100</td><td>心室纤颤风险明显，尤其持续时间 &gt;0.1s</td><td>可能致命</td></tr>
+            <tr><td>&gt;100</td><td>心室纤颤/心跳骤停高风险，可伴严重灼伤</td><td>极高致命风险</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>影响危险程度的四个因素</h3>
+        <ul>
+          <li><b>频率：</b>50/60Hz 工频最敏感；直流和高频（&gt;1kHz）的感知/摆脱阈值更高，但高频有组织加热风险，直流有电解和灼伤风险；</li>
+          <li><b>路径：</b>手到手、手到脚经过心脏区域最危险；脚到脚风险较低；</li>
+          <li><b>皮肤状态：</b>干燥皮肤阻抗可达数千欧，湿手可能降到几百欧，同样电压下电流可能增大 10 倍；</li>
+          <li><b>持续时间：</b>电流持续时间越接近一个心动周期（约 0.1s 量级），心室纤颤概率越高。</li>
+        </ul>
+
+        <h3>产品标准限值量级（教学参考）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>产品 / 标准</th><th>常见限值量级</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>IEC 60335-1 家电</td><td>II 类常见 0.25mA；I 类便携 0.5mA；I 类固定式 0.75 / 3.5mA 量级</td><td>按器具类别与便携/固定查 Table 1</td></tr>
+            <tr><td>IEC 62368-1 / GB 4943.1</td><td>正常条件常见 ≤0.5mA 量级；异常条件 3.5mA 量级</td><td>以标准泄漏/接触电流条款为准</td></tr>
+            <tr><td>IEC 60601-1 医疗</td><td>患者漏电流：正常 B/BF 100µA、CF 10µA；单一故障 B/BF 500µA、CF 50µA</td><td>医疗限值远严于家电</td></tr>
+            <tr><td>IEC 60990</td><td>—</td><td>定义测量网络，模拟人体阻抗，不是“直接夹电流表”</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note" style="color:var(--muted);font-size:13px">以上为教学量级，不同版本标准、不同产品类别和测量网络可能不同，正式设计以最新版标准原文为准。</p>
+
+        <h3>常见误区</h3>
+        <ul>
+          <li>“0.5mA 以下绝对没感觉”不对：感知阈值因人而异，湿手和儿童可能更低；</li>
+          <li>“泄漏大一点没关系”不对：产品限值已经留了余量，超出意味着在接地失效或湿手时可能进入危险区；</li>
+          <li>“医疗 100µA 太苛刻”不是苛刻，而是患者可能有侵入性通路、更低体阻抗和无法自主摆脱；</li>
+          <li>“泄漏电流和短路电流一样”不对：泄漏是正常工作/单一故障下的稳态电流，短路是故障大电流，两者测法和目的都不同。</li>
+        </ul>
+
+        <p class="howto">怎么查：在标准里找“泄漏电流/接触电流”条款（如 60335-1 第 13 章、62368-1 泄漏电流条款、60601-1 漏电流条款），先确定测量网络与测量条件，再看限值表。</p>
+        <p class="std">相关标准：IEC 60990、IEC 60479-1、IEC 60335-1、IEC 62368-1、IEC 60601-1</p>
+        <p class="rel"><a href="./hipot.html">关联：耐压测试</a> · <a href="#grounding">接地等电位</a> · <a href="#productclass">产品类别</a></p>
+      </section>
+
+      <section class="card" id="grounding" data-hazard="electric">
+        <h2>接地与等电位连接</h2>
+        <p><b>是什么：</b>保护接地给故障电流一条低阻抗回路，让故障变成“跳闸”而不是“带电外壳”；等电位连接消除可触及部件之间的电位差。</p>
+        <p><b>为什么重要：</b>I 类产品的安全依赖接地。接地端子松动、生锈、接触电阻大，都等于“没有保护”。</p>
+        <ul>
+          <li>接地连续性试验：通过大电流（常见 10–25A 量级）测接触电阻，限值通常 0.1Ω 量级，以标准为准；</li>
+          <li>试验通常在样品正常使用状态进行，电流与持续时间按产品标准；</li>
+          <li>接地端子要防腐、防松，螺丝不能兼作他用；</li>
+          <li>医疗、工业设备要求等电位端子，供现场等电位连接；</li>
+          <li>浪涌泄放路径的接地阻抗越低，地电位抬升越小，SPD 才有效；</li>
+          <li>II 类产品没有保护接地，反而要确保“无接地”不影响安全。</li>
+        </ul>
+        <p><b>常见误区：</b>接地连续性只在“新品”测一次——振动、湿热、盐雾后端子会劣化，环境试验后要复测；Ⅱ类产品“没有地线”不等于没要求，而是“无接地也必须安全”。</p>
+        <p class="howto">怎么查：标准里找“保护接地/接地连续性”条款，注意试验电流、时间与限值表。</p>
+        <p class="std">相关标准：IEC 60364、IEC 60204-1、IEC 60601-1、IEC 60335-1</p>
+        <p class="rel"><a href="./grounding.html">深读：接地与等电位完整规则</a> · <a href="./sop-grounding.html">接地测试 SOP</a> · <a href="./surge.html">雷击浪涌（泄放路径）</a> · <a href="#leakage">泄漏电流</a></p>
+      </section>
+
+      <section class="card" id="temperature" data-hazard="thermal">
+        <h2>温升与材料耐热</h2>
+        <p><b>是什么：</b>温升 = 部件实测温度 − 基准环境温度。常见基准是 25°C，但<b>不是所有标准都用 25°C</b>：测量/控制/实验室设备、旋转电机、充电设施等体系明确以 40°C（或最高额定环境温度）为基准。基准搞错，限值判定会全错。</p>
+        <p><b>为什么重要：</b>温升是产品长期可靠性的核心指标，也是“为什么这外壳 80°C 不烫手但内部 120°C 是红线”的原因。</p>
+        <h3>基准环境温度对照表（教学参考，正式以标准原文为准）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>标准体系</th><th>适用产品</th><th>基准环境温度</th><th>典型用法</th></tr></thead>
+          <tbody>
+            <tr><td>IEC 60335-1 / GB 4706.1</td><td>家用及类似电器</td><td>25°C</td><td>温升限值按 25°C 基准；热带型条件减 7K</td></tr>
+            <tr><td>IEC 62368-1</td><td>音视频 / IT / 通信设备</td><td>25±5°C</td><td>试验环境温度范围，记录实际环境温度</td></tr>
+            <tr><td>IEC 60598-1</td><td>灯具</td><td>10–30°C，最好 25°C</td><td>正常使用环境温度范围</td></tr>
+            <tr><td>IEC 60601-1</td><td>医用电气设备</td><td>25°C</td><td>发热试验环境温度按 25°C 量级</td></tr>
+            <tr><td>IEC 61010-1 / GB 4793.1</td><td>测量、控制、实验室设备</td><td>40°C 或最高额定环境温度</td><td>部件最高温度 = 基准试验温升 + 40°C；可触及表面单一故障 105°C</td></tr>
+            <tr><td>IEC 60034-1 / GB 755</td><td>旋转电机</td><td>40°C（额定环境）</td><td>B 级绝缘 130°C → 温升 80K（含 10K 热点裕度）</td></tr>
+            <tr><td>GB 12350</td><td>小功率电动机</td><td>40°C</td><td>独立于家电 25°C 的基准体系</td></tr>
+            <tr><td>GB/T 18487.1-2015</td><td>充电桩 / 车辆传导充电系统</td><td>40°C 环境条件</td><td>温度要求以 40°C 环境为条件（约 11.6 节，以原文为准）</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>40°C 基准怎么换算：</b>先看标准给的是“允许温升（K）”还是“部件允许温度（°C）”。给温升：部件允许温度 = 基准环境温度 + 允许温升，如 61010 中允许 65K → 40 + 65 = 105°C；给绝对温度：允许温升 = 部件允许温度 − 基准环境温度，如 60034 B 级 130°C − 40°C = 80K。换算前必须确认条款给的是哪一个。</p>
+        <p><b>注意区分：</b>“40°C 基准温升”是限值体系；“40°C 高温工作/环境试验”（IEC 60068-2-2 等）是可靠性验证，两者不要混用——高温试验不替代温升限值判定。</p>
+        <ul>
+          <li>限值按部件类型给：绕组、半导体结温、外壳可触及面各不相同；</li>
+          <li>测量方法：热电偶法（贴表面）与电阻法（绕组，更准）；</li>
+          <li>要在最不利负载、最低/最高输入电压下测，不是“额定状态测一次”；</li>
+          <li>材料耐热配套验证：球压试验（热塑外壳）、灼热丝试验（耐燃）；</li>
+          <li>设计手段：降额、散热面积、风道、温度保护点，而不是只靠“换更贵材料”。</li>
+        </ul>
+        <p class="howto">怎么查：标准里找“发热/温升”条款的限值表，先确认该标准基准环境温度（25°C 还是 40°C 等），再对照限值；同时查“耐热耐燃”条款的试验温度。</p>
+        <p class="std">相关标准：IEC 60335-1（11 章发热、30 章耐热）、IEC 62368-1、IEC 60598-1、IEC 61010-1、IEC 60034-1、GB 12350、GB/T 18487.1</p>
+        <p class="rel"><a href="./sop-temperature-rise.html">温升测试 SOP</a> · <a href="./tools.html#tool-thermal">温升估算工具</a> · <a href="./environment-tests.html">环境试验</a> · <a href="./hipot.html">耐压测试（高温老化后）</a></p>
+      </section>
+
+                  <section class="card" id="firetests" data-hazard="fire">
+        <h2>防火试验三件套：灼热丝 / 针焰 / 球压（含 UL 要求）</h2>
+        <p><b>为什么做：</b>安规防火不是测“材料烧不着”，而是测“故障发热后烧不大、传不开、不变形”。三个试验分工：灼热丝模拟局部高温，针焰模拟小火焰引燃，球压验证高温不变形。</p>
+
+        <h3 id="glowwire-detail">1. 灼热丝试验（GWT）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>项目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>标准依据</td><td>IEC 60695-2-11 / GB/T 5169.13；产品标准引用如 IEC 60335-1 第 30 章、IEC 62368-1</td></tr>
+            <tr><td>测试目的</td><td>模拟接触不良、过载、局部高温引起的发热，验证材料自熄、不持续燃烧、不滴落引燃</td></tr>
+            <tr><td>测试设备</td><td>灼热丝试验仪：镍铬丝环、加热电源、热电偶测温、计时器、样品夹具、铺底层（绢纸/木板）</td></tr>
+            <tr><td>测试环境</td><td>标准实验室：常见 15–35°C、相对湿度 45–75%；样品按标准预处理（如 23°C / 50%RH）</td></tr>
+            <tr><td>测试方法</td><td>灼热丝顶端加热到目标温度（常见 550 / 650 / 750 / 850°C），以约 0.8–1.2N 力顶住样品 30s，然后移开并计时</td></tr>
+            <tr><td>判定要点</td><td>移开灼热丝后火焰应在规定时间（常见 30s）内熄灭；滴落物不得引燃铺底层；记录是否起燃、余焰时间、滴落情况</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>GWFI / GWIT：</b>GWFI（灼热丝可燃性指数）是样品通过 30s 判定判据的最高温度档；GWIT（灼热丝起燃温度）是材料起燃的判定温度。产品标准常写“GWFI 750 / GWIT 775”，选材时两个都要看。</p>
+
+                <h3 id="needleflame-detail">2. 针焰试验</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>项目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>标准依据</td><td>IEC 60695-2-2 / GB/T 5169.5（针焰试验）</td></tr>
+            <tr><td>测试目的</td><td>模拟小火焰、火花、打火机等引燃源，验证材料/部件不会持续燃烧并蔓延</td></tr>
+            <tr><td>气体与火焰规格</td><td>丁烷或丙烷气体；火焰总高约 12mm±1mm；针状燃烧器喷管内径约 0.5mm（以标准附图为准）</td></tr>
+            <tr><td>火焰校准</td><td>标准铜块法：从 100°C±2°C 升至 700°C±3°C 约需 23.5s±1.0s；每次试验前必须校准确认，不能凭火焰“看起来一样”</td></tr>
+            <tr><td>施加角度与距离</td><td>燃烧器轴线与水平面约 45°；火焰尖端接触样品表面或边缘——喷口到样品的距离由 12mm 火焰长度决定，不是固定毫米数；施加点按产品标准指定</td></tr>
+            <tr><td>铺底层</td><td>样品下方约 200mm±5mm 处放置白松木板（约 10mm 厚）+ 标准绢纸（约 12–30g/m²），随样品固定，每次更换</td></tr>
+            <tr><td>施加时间</td><td>常见 5s / 10s / 20s / 30s（部分产品标准用 60s），由适用产品标准规定</td></tr>
+            <tr><td>测试环境</td><td>标准实验室；通风柜内风速不能影响火焰形态；样品按正常使用方位固定</td></tr>
+            <tr><td>判定要点</td><td>移开火焰后，余焰/余灼应在规定时间（常见 30s）内结束；滴落物不得引燃铺底层；烧蚀长度不超过标准限值</td></tr>
+            <tr><td>记录项目</td><td>样品编号、材料、施加时间、余焰时间、余灼时间、烧蚀长度、滴落物是否引燃、结果</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note" style="color:var(--muted);font-size:13px">针焰是 IEC/EN 体系；UL 体系用 UL 94 + HWI/HAI 组合评估，没有直接对应针焰。</p>
+
+        <h3 id="ballpressure-detail">3. 球压试验</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>项目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>标准依据</td><td>IEC 60695-10-2 / GB/T 5169.21；产品标准常引用（如 IEC 60335-1 第 30 章、IEC 60598-1）</td></tr>
+            <tr><td>测试目的</td><td>验证非金属材料在高温下不会过度变形，防止带电件位移、爬电/间隙变小或短路</td></tr>
+            <tr><td>测试设备</td><td>球压装置：直径 5mm 钢球、约 20N 加载、加热箱、压痕测量工具</td></tr>
+            <tr><td>测试环境</td><td>加热箱温度按产品标准（常见 75°C / 125°C，严酷条件更高）；样品厚度常要求 ≥2.5mm 或叠加到该厚度</td></tr>
+            <tr><td>测试方法</td><td>钢球以约 20N 压在样品表面，放入设定温度箱中保持 1h，取出冷却后测量压痕直径</td></tr>
+            <tr><td>判定要点</td><td>压痕直径常见限值 ≤ 2mm（以产品标准/IEC 60695-10-2 为准）</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3 id="ul94-detail">UL 94：垂直 / 水平燃烧与 5V</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>项目</th><th>内容（教学参考）</th></tr></thead>
+          <tbody>
+            <tr><td>样品</td><td>常见 125mm × 13mm × 规定厚度（如 1.5mm / 3.0mm）；5V 还有板状样品</td></tr>
+            <tr><td>预处理</td><td>23°C / 50%RH 48h 一组；70°C 168h 一组（以 UL 94 原文为准）</td></tr>
+            <tr><td>试验火焰</td><td>约 20mm 蓝色火焰；垂直燃烧每次施加 10s、共 2 次；5V 每次 5s、共 5 次</td></tr>
+            <tr><td>V-0</td><td>每次余焰 ≤ 10s，5 条样品总余焰 ≤ 50s，无引燃棉花的滴落</td></tr>
+            <tr><td>V-1</td><td>每次余焰 ≤ 30s，总余焰 ≤ 250s，无引燃棉花的滴落</td></tr>
+            <tr><td>V-2</td><td>每次余焰 ≤ 30s，总余焰 ≤ 250s，允许滴落引燃棉花</td></tr>
+            <tr><td>HB</td><td>水平燃烧速率限制：厚度 &lt;3mm 常见 ≤40mm/min，≥3mm 常见 ≤75mm/min（教学参考）</td></tr>
+            <tr><td>5VA / 5VB</td><td>5 次 5s 火焰后，5VA 不得烧穿，5VB 允许烧穿但须在规定时间内自熄；滴落物不得引燃</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note" style="color:var(--muted);font-size:13px">UL 94 等级与材料厚度强相关，换厚度必须重新评估；V-0 不等于灼热丝通过，两者试验机理不同。</p>
+
+        <h3>UL 746 系列：外壳与材料综合要求</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>标准</th><th>内容</th><th>与防火的关系</th></tr></thead>
+          <tbody>
+            <tr><td>UL 746A</td><td>材料短时性能：HWI（热丝引燃）、HAI（高电流电弧引燃）、CTI/PTI（漏电起痕）、耐电弧等</td><td>配合 UL 94 给材料分级，HWI/HAI 是“抗引燃”指标</td></tr>
+            <tr><td>UL 746B</td><td>长期热老化性能：RTI（相对温度指数）</td><td>决定材料能长期承受的工作温度，防止热老化后失去阻燃性</td></tr>
+            <tr><td>UL 746C</td><td>聚合材料外壳在电气设备中的评价</td><td>综合 UL 94、746A、746B、机械/冲击/球压等，不是单独看 V-0</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>美标差异：</b>针焰是 IEC/EN 体系；UL 体系用 UL 94（垂直/水平）+ HWI/HAI + RTI 组合，没有直接对应针焰。做 UL 认证时不要只报一个 V-0，要看 UL 746C 对外壳材料的整体要求。</p>
+
+        <h3>设备与环境通用要点</h3>
+        <ul>
+          <li>灼热丝、针焰燃烧器、加热箱、热电偶都要在校准/计量有效期内；</li>
+          <li>火焰高度、施加角度、样品距离要用标准量规确认，不能凭感觉；</li>
+          <li>铺底层（脱脂棉、绢纸）每次更换，样品数量与预处理按标准；</li>
+          <li>试验在通风柜内进行，但风速不能影响火焰形态；</li>
+          <li>记录余焰时间、余灼时间、滴落物是否引燃、烧蚀长度、压痕直径。</li>
+        </ul>
+
+        <h3>常见误区</h3>
+        <ul>
+          <li>V-0 ≠ 灼热丝通过：一个是材料燃烧等级，一个是故障热源下的起燃/自熄行为；</li>
+          <li>针焰是 IEC/EN 体系，UL 体系没有直接对应项；</li>
+          <li>球压只测高温变形，不测燃烧，不能替代灼热丝/针焰；</li>
+          <li>材料等级与厚度有关，改厚度、改配方都要重新评估；</li>
+          <li>UL 94 V-0 不能替代 UL 746C 外壳整体评估。</li>
+        </ul>
+
+        <p class="howto">怎么用：先按产品标准确定起火风险与温度档（灼热丝 GWFI/GWIT）→ 针焰验证传播 → 球压验证耐热变形 → 做 UL 出口再核对 UL 94 + UL 746A/B/C。</p>
+        <p class="std">相关标准：IEC 60695-2-11 / 2-2 / 10-2（GB/T 5169.13 / 5169.5 / 5169.21）、UL 94、UL 746A / 746B / 746C</p>
+        <p class="rel"><a href="./tools.html">关联：防火试验手册（计算工具）</a> · <a href="#flame">防火知识卡</a> · <a href="#fire-design">设计与选材</a> · <a href="./materials.html">材料库</a></p>
+      </section>
+
+<section class="card" id="flame" data-hazard="fire">
+        <h2>防火与阻燃材料</h2>
+        <p><b>是什么：</b>内部故障着火时，外壳和内部材料要限制火焰蔓延、不滴落燃烧物引燃下方物体，给使用者逃生时间。</p>
+        <p><b>为什么重要：</b>很多火灾不是“电”直接点燃，而是材料燃烧传播。</p>
+        <h3>按风险场景怎么选（教学简化）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>场景</th><th>试验</th><th>常见要求示例</th></tr></thead>
+          <tbody>
+            <tr><td>故障接触热源（接线端子、发热元件附近）</td><td>灼热丝 GWT</td><td>550–850°C 分档，按部件位置选</td></tr>
+            <tr><td>外部小火焰引燃（外壳开孔、通风口）</td><td>针焰</td><td>施加 5–30s，按产品标准</td></tr>
+            <tr><td>高温变形导致带电件位移</td><td>球压</td><td>75°C / 125°C，压痕 ≤ 2mm</td></tr>
+            <tr><td>UL 出口材料分级</td><td>UL 94</td><td>V-0 / V-1 / V-2 / 5VA</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>UL 94 等级：V-0 &gt; V-1 &gt; V-2，还有 5VA/5VB 更严；</li>
+          <li>灼热丝试验（IEC 60695-2-11）：550/650/750/850°C 分档，看接触发热部件的位置；</li>
+          <li>外壳开孔、通风口的位置和尺寸影响火焰传播，开孔不是越小越安全；</li>
+          <li>阻燃等级与材料厚度有关，改厚度要重新评估；</li>
+          <li>防火挡板/防护罩可以把“内部起火”和“外壳”隔离。</li>
+        </ul>
+        <p class="howto">怎么查：标准里找“耐燃/防火外壳”条款，先确定内部点火源等级，再定外壳材料等级。</p>
+        <p class="std">相关标准：IEC 62368-1、IEC 60695 系列、UL 94</p>
+        <p class="rel"><a href="#firetests">防火试验三件套（含方法/设备/环境）</a> · <a href="#fire-design">防火设计与选材</a> · <a href="./standards.html#std-62368">标准速查</a> · <a href="#temperature">温升耐热</a></p>
+      </section>
+
+      <section class="card" id="fire-design" data-hazard="fire">
+        <h2>防火设计与选材：从起火链到结构落地</h2>
+        <p><b>是什么：</b>防火不是“选个 V-0 材料”就结束，而是沿着“起火源 → 可燃材料 → 传播路径 → 逃生时间”整条链做设计。每一步都要断链。</p>
+        <p><b>为什么重要：</b>很多火灾不是“电”直接点燃，而是内部故障产生点火源后，材料助燃、开孔/缝隙让火焰蔓延、滴落物引燃下方物体。</p>
+
+        <h3>起火链与断链策略</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>环节</th><th>典型来源</th><th>断链手段</th></tr></thead>
+          <tbody>
+            <tr><td>起火源</td><td>短路、过载、电弧、异常发热、电池热失控、元器件失效</td><td>保险丝/保护、限能、间距、SPD、BMS、热保护</td></tr>
+            <tr><td>可燃材料</td><td>外壳、线材、PCB、绝缘件、灌封料、包装残留</td><td>UL 94 / 灼热丝 / RTI 选材，内部线材阻燃</td></tr>
+            <tr><td>传播路径</td><td>开孔、缝隙、通风口、滴落物、线束</td><td>防火外壳、挡板、开孔位置/尺寸、防滴落</td></tr>
+            <tr><td>时间</td><td>从起火到蔓延的时间</td><td>材料自熄、结构阻隔、火灾报警/逃生时间</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>点火源分级：先判断“会不会起火”</h3>
+        <ul>
+          <li><b>IEC 62368-1</b>：用 PS1 / PS2 / PS3 给电源分类，用 PIS（潜在点火源）判断内部是否存在起火源；防火外壳要求随 PS 和 PIS 组合变化；</li>
+          <li><b>IEC 60335-1</b>：通过异常工作（堵转、短路、过载）判断部件是否可能被点着，再用灼热丝档位选择材料；</li>
+          <li><b>UL 体系</b>：UL 746C 把 UL 94、HWI/HAI、CTI、RTI 组合成外壳材料整体评价，不是单独看一个等级；</li>
+          <li><b>电池产品</b>：电池热失控本身就是强点火源，防火设计要和热扩散/隔热/泄压一起做。</li>
+        </ul>
+
+        <h3>防火外壳设计规则</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>设计要素</th><th>要求（教学参考）</th><th>为什么</th></tr></thead>
+          <tbody>
+            <tr><td>开孔尺寸</td><td>通风/散热孔尺寸和数量按产品标准，不能只图散热</td><td>孔太大等于给火焰留通道</td></tr>
+            <tr><td>开孔位置</td><td>避免位于潜在点火源正上方，朝下/侧向优先</td><td>火焰和热气流向上，滴落物向下</td></tr>
+            <tr><td>防火挡板</td><td>高功率区与外壳之间加 V-0/5VA 挡板，高度和长度要覆盖点火源投影</td><td>把内部起火和外壳隔开</td></tr>
+            <tr><td>缝隙与接缝</td><td>外壳拼缝、线孔、按钮孔要控制尺寸</td><td>缝隙也是火焰传播路径</td></tr>
+            <tr><td>滴落防护</td><td>材料燃烧时不滴落，或下方有承接/隔离</td><td>滴落物会引燃下方可燃物</td></tr>
+            <tr><td>材料厚度</td><td>UL 94 等级对应厚度，改薄要重测</td><td>同一材料不同厚度阻燃等级不同</td></tr>
+            <tr><td>电池仓</td><td>独立腔体、隔热、泄压、与主板隔离</td><td>热失控不能直接烧穿外壳</td></tr>
+            <tr><td>内部线材</td><td>选用阻燃线材（如 VW-1 类），远离发热点</td><td>线材是常见传播路径</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>阻燃等级选择速查（教学参考）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>使用位置</th><th>常见关注指标</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>非关键内部支撑/绝缘件</td><td>HB / V-2、灼热丝 550–650°C</td><td>远离点火源，按产品标准定</td></tr>
+            <tr><td>内部 PCB / 绝缘片</td><td>V-0、GWFI 750 等</td><td>靠近带电部件和发热元件</td></tr>
+            <tr><td>防火外壳</td><td>V-0 / 5VA、球压、RTI</td><td>还要看厚度、开孔、冲击</td></tr>
+            <tr><td>高功率挡板/电池仓隔板</td><td>5VA、RTI 高、热失控隔离</td><td>直接面对点火源</td></tr>
+            <tr><td>外部线材</td><td>VW-1 / FT 等级</td><td>线束阻燃，避免沿导线蔓延</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>试验选择流程</h3>
+        <ol>
+          <li>先识别潜在点火源（PIS / 异常工作 / 电池热失控）；</li>
+          <li>确定材料位置、厚度、到点火源的距离；</li>
+          <li>按产品标准选试验组合：UL 94 + 灼热丝 + 针焰 + 球压 + HWI/HAI/RTI；</li>
+          <li>按最终成品状态测试，开孔、挡板、线束都要是量产状态；</li>
+          <li>不过就改材料或结构，不能靠“加厚一点点”蒙混。</li>
+        </ol>
+
+        <h3>防火与其它模块的关系</h3>
+        <ul>
+          <li><b>温升 / RTI</b>：长期高温会让材料老化并失去阻燃性，选材要留温度余量；</li>
+          <li><b>电气间距</b>：爬电/间隙不足会产生电弧，电弧就是点火源；</li>
+          <li><b>EMC 与安规元件</b>：Y 电容、X 电容、保险丝失效也可能起火，元件要有认证；</li>
+          <li><b>电池</b>：热失控是最强点火源之一，防火和热管理必须一起设计；</li>
+          <li><b>IP / 环境</b>：粉尘、潮湿会改变起弧和老化行为，环境试验后要复核防火相关材料。</li>
+        </ul>
+
+        <h3>常见误区</h3>
+        <ul>
+          <li>V-0 不是万能：厚度、开孔、挡板、RTI 缺一不可；</li>
+          <li>“阻燃剂加越多越好”不对：CTI 会下降、环保受限、力学变差；</li>
+          <li>“外壳开孔散热优先”不对：开孔位置和尺寸先过防火逻辑；</li>
+          <li>“内部线材不用管”不对：线束是常见火焰传播路径；</li>
+          <li>“电池起火是电池厂的事”不对：整机必须做热失控隔离与泄压设计。</li>
+        </ul>
+
+        <p class="howto">怎么查：先按产品标准找防火条款（如 62368-1 防火外壳、60335-1 第 30 章、60598-1），再对照 IEC 60695 和 UL 94/UL 746 选材与验证。</p>
+        <p class="std">相关标准：IEC 62368-1、IEC 60335-1、IEC 60598-1、IEC 60695 系列、UL 94、UL 746A / 746B / 746C、UL 1581（线材）</p>
+        <p class="rel"><a href="#firetests">防火试验三件套</a> · <a href="#flame">防火与阻燃材料</a> · <a href="./hazard-fire.html">防火深度页</a> · <a href="./materials.html">材料库</a> · <a href="#battery">电池热失控</a></p>
+      </section>
+
+      <section class="card" id="battery" data-hazard="thermal">
+        <h2>电池保护与热失控</h2>
+        <p><b>是什么：</b>锂电池在过充、过放、短路、挤压、高温等滥用下可能起火爆炸；热失控还会从一颗电芯传播到整包。</p>
+        <p><b>为什么重要：</b>电池事故往往不可逆，防护必须“多级冗余”：电芯设计 + 保护板 + 系统散热/隔离。</p>
+        <h3>典型试验与考核点（教学参考，正式以标准为准）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>试验</th><th>标准依据</th><th>考核点</th></tr></thead>
+          <tbody>
+            <tr><td>高度模拟（低气压）</td><td>UN 38.3 T1</td><td>运输气压变化不泄漏、不破裂</td></tr>
+            <tr><td>热测试 / 温度冲击</td><td>UN 38.3 T2</td><td>快速温度变化后保持完整性</td></tr>
+            <tr><td>振动 / 冲击</td><td>UN 38.3 T3 / T4</td><td>机械应力后不短路、不泄漏</td></tr>
+            <tr><td>外部短路</td><td>UN 38.3 T5、IEC 62133</td><td>不起火、不爆炸</td></tr>
+            <tr><td>撞击 / 挤压</td><td>UN 38.3 T6、IEC 62133</td><td>机械滥用后不起火</td></tr>
+            <tr><td>过充 / 强制放电</td><td>UN 38.3 T7 / T8、IEC 62133</td><td>电滥用后热失控受控</td></tr>
+            <tr><td>热滥用（高温烘烤）</td><td>IEC 62133、GB 31241</td><td>高温下不起火</td></tr>
+            <tr><td>热失控传播</td><td>GB/T 36276、UL 9540A</td><td>单颗起火不蔓延到整包（储能）</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>保护板（BMS/PCM）至少覆盖：过充、过放、过流、过温；</li>
+          <li>UN 38.3 运输试验含 8 项（高度模拟、热冲击、振动、冲击、外部短路、撞击、过充、强制放电）；</li>
+          <li>便携电池按 IEC 62133 / GB 31241，储能电池按 GB/T 36276、UL 9540A 关注热扩散；</li>
+          <li>热失控传播测试看“一颗起火，多久烧到邻居”，需要隔热/泄压设计；</li>
+          <li>BMS 失效模式要安全可控：断电应回到安全状态，不能单点失效。</li>
+        </ul>
+        <p class="howto">怎么查：先定产品形态（便携/动力/储能）→ 找对应电池标准 → 看“安全要求”和“试验”两章。</p>
+        <p class="std">相关标准：IEC 62133、GB 31241、UN 38.3、GB/T 36276、UL 9540A</p>
+        <p class="rel"><a href="./reliability.html">可靠性测试计划中心</a> · <a href="./industries.html#battery">电池储能行业</a></p>
+      </section>
+
+            <section class="card" id="ip" data-hazard="general">
+        <h2>IP 防护等级：代码含义与试验规则</h2>
+        <p><b>是什么：</b>IP（Ingress Protection）用代码表示外壳对固体异物、水和人员接触危险部件的防护能力，按 <b>IEC 60529 / GB/T 4208</b> 评定。完整格式：<code>IP</code> + 第一位数字（防固体 0–6 或 X）+ 第二位数字（防水 0–8 或 X）+ 附加字母（A/B/C/D，可选）+ 补充字母（H/M/S/W，可选）。</p>
+        <p><b>为什么重要：</b>户外灯具、充电桩、电动工具、工业设备和储能系统都靠 IP 等级承诺“水尘进不来”。但 IP 只描述外壳密封能力，<b>不替代</b>电气间隙、爬电距离和污染等级。</p>
+
+        <h3>第一位数字：防固体异物（0–6）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>数字</th><th>防护对象</th><th>试验探头 / 条件（教学参考）</th><th>典型含义</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>无防护</td><td>—</td><td>不承诺任何固体防护</td></tr>
+            <tr><td>1</td><td>直径 ≥ 50mm</td><td>50mm 球体，约 50N</td><td>手背不能进入</td></tr>
+            <tr><td>2</td><td>直径 ≥ 12.5mm</td><td>12.5mm 球体 / 铰接试指，约 10N</td><td>手指不能进入</td></tr>
+            <tr><td>3</td><td>直径 ≥ 2.5mm</td><td>2.5mm 钢棒，约 3N</td><td>常用工具不能进入</td></tr>
+            <tr><td>4</td><td>直径 ≥ 1.0mm</td><td>1.0mm 钢线，约 1N</td><td>细线/金属丝不能进入</td></tr>
+            <tr><td>5</td><td>防尘</td><td>粉尘箱 8h + 负压；允许少量粉尘进入但不影响运行</td><td>防尘，非完全密封</td></tr>
+            <tr><td>6</td><td>尘密</td><td>粉尘箱 8h + 负压；试验后无粉尘进入</td><td>完全防尘</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note" style="color:var(--muted);font-size:13px">探头尺寸、推力与判定边界以 IEC 60529 原文为准，上表为教学概括。</p>
+
+        <h3>第二位数字：防水（0–8）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>数字</th><th>试验名称</th><th>常见试验条件（教学参考）</th><th>典型场景</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>无防护</td><td>—</td><td>不承诺任何防水</td></tr>
+            <tr><td>1</td><td>垂直滴水</td><td>垂直滴水约 10min，1mm/min 降雨当量</td><td>轻微凝露/垂直落水</td></tr>
+            <tr><td>2</td><td>15° 倾斜滴水</td><td>外壳倾斜 15°，滴水约 10min，3mm/min</td><td>雨滴斜落</td></tr>
+            <tr><td>3</td><td>淋水 / 喷水</td><td>60° 摆动管喷水约 10min</td><td>降雨/冲洗</td></tr>
+            <tr><td>4</td><td>溅水</td><td>360° 摆动管溅水约 10min</td><td>全方位溅水</td></tr>
+            <tr><td>5</td><td>喷水</td><td>6.3mm 喷嘴，12.5L/min，距离约 3m，≥15min</td><td>水枪冲洗</td></tr>
+            <tr><td>6</td><td>强力喷水</td><td>12.5mm 喷嘴，100L/min，距离约 3m，≥3min</td><td>强力水枪/暴雨</td></tr>
+            <tr><td>7</td><td>短时浸水</td><td>浸入 1m 水深，30min</td><td>落水/短时浸泡</td></tr>
+            <tr><td>8</td><td>连续浸水</td><td>深度与时间由制造商规定，通常 >1m</td><td>水下设备（必须写明条件）</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note" style="color:var(--muted);font-size:13px">IEC 60529 本身只定义到 IPX8；高压高温喷水（IPX9 / IP69K）通常按 ISO 20653 / DIN 40050-9 评定，标注时要写明依据标准。</p>
+
+                <h3>IP 代码完整结构：字母加在哪里</h3>
+        <div class="callout callout-info">
+          <strong>固定顺序（不能倒过来写）</strong>
+          <p><code>IP</code> → <b>第一位数字</b>（0–6 或 X）→ <b>第二位数字</b>（0–8 或 X）→ <b>附加字母</b>（A/B/C/D，可选）→ <b>补充字母</b>（H/M/S/W，可选）</p>
+          <p>例如：<code>IP23CH</code> = IP + 第一位 2 + 第二位 3 + 附加字母 C + 补充字母 H。</p>
+        </div>
+        <ul>
+          <li><b>X 是占位符</b>：某一项未做/未指定时用 X 代替，例如 IPX5（第一位未指定）、IP6X（第二位未指定）；</li>
+          <li><b>字母永远在数字后面</b>：先两位数字，再附加字母，最后补充字母；</li>
+          <li><b>附加字母在补充字母前面</b>：IP23CH 中 C 是附加字母、H 是补充字母；</li>
+          <li>没有附加/补充字母时直接省略，不需要补 X。</li>
+        </ul>
+
+        <h3>附加字母 A–D：人员接触危险部件防护</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>附加字母</th><th>防护对象</th><th>试验探头（教学参考）</th><th>示例</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>手背</td><td>直径 50mm 球体</td><td>IP20A</td></tr>
+            <tr><td>B</td><td>手指</td><td>铰接试指（约 12mm）</td><td>IP20B</td></tr>
+            <tr><td>C</td><td>工具</td><td>2.5mm 钢棒</td><td>IP20C / IP23C</td></tr>
+            <tr><td>D</td><td>金属线</td><td>1.0mm 钢线</td><td>IP20D / IP54D</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note" style="color:var(--muted);font-size:13px">A–D 表示“人员接触危险部件”的附加防护，不是把第一位数字“升级”；是否标注由产品标准和宣称决定。</p>
+
+        <h3>补充字母 H / M / S / W</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>补充字母</th><th>含义</th><th>使用位置</th><th>示例</th></tr></thead>
+          <tbody>
+            <tr><td>H</td><td>高压设备</td><td>数字和附加字母之后</td><td>IP23CH</td></tr>
+            <tr><td>M</td><td>防水试验时设备处于运动状态</td><td>数字和附加字母之后</td><td>IP44M</td></tr>
+            <tr><td>S</td><td>防水试验时设备处于静止状态</td><td>数字和附加字母之后</td><td>IP23S / IPX5S</td></tr>
+            <tr><td>W</td><td>适用于特定气候条件并带附加防护</td><td>数字和附加字母之后</td><td>IP65W</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>M 与 S 表示防水试验时的设备状态，通常二选一，不一起写；</li>
+          <li>W 是否与其它字母组合，以产品标准/制造商宣称和 IEC 60529 原文为准；</li>
+          <li>补充字母不是“随便加的装饰”，写了就要按对应条件测试和说明。</li>
+        </ul>
+
+        <h3>正确组合示例</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>写法</th><th>拆解</th><th>含义</th></tr></thead>
+          <tbody>
+            <tr><td>IP54</td><td>IP + 5 + 4</td><td>防尘 + 防溅水</td></tr>
+            <tr><td>IPX5</td><td>IP + X + 5</td><td>第一位未指定，防喷水</td></tr>
+            <tr><td>IP6X</td><td>IP + 6 + X</td><td>尘密，防水未指定</td></tr>
+            <tr><td>IP20C</td><td>IP + 2 + 0 + C</td><td>防 ≥12.5mm 固体 + 工具接触防护</td></tr>
+            <tr><td>IP23S</td><td>IP + 2 + 3 + S</td><td>防 ≥2.5mm 固体 + 淋水 + 静止状态测试</td></tr>
+            <tr><td>IP44M</td><td>IP + 4 + 4 + M</td><td>防 ≥1mm 固体 + 溅水 + 运动状态测试</td></tr>
+            <tr><td>IP65W</td><td>IP + 6 + 5 + W</td><td>尘密 + 防喷水 + 特定气候条件</td></tr>
+            <tr><td>IP23CH</td><td>IP + 2 + 3 + C + H</td><td>防 ≥2.5mm 固体 + 淋水 + 工具接触防护 + 高压设备</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>常见错误写法</h3>
+        <ul>
+          <li><b>IPW65</b>：错，W 写在数字前面了；</li>
+          <li><b>IP65WC</b>：错，补充字母 W 跑到附加字母 C 前面了；正确顺序是 IP65CW；</li>
+          <li><b>IP5X7</b>：错，出现两个第二位数字；</li>
+          <li><b>IPXX</b>：不建议，两位都未指定时等级没有意义；</li>
+          <li><b>IP68（1.5m/30min）</b>：代码本身是 IP68，深度/时间要写在产品文件或说明里，不能当成代码的一部分。</li>
+        </ul>
+
+<h3>常见误区</h3>
+        <ul>
+          <li><b>IPX7 通过 ≠ IPX6 通过</b>：浸水和喷水是不同试验，必须分别测试，不能从高等级倒推；</li>
+          <li><b>IP68 必须写深度和时间</b>：例如 IP68（1.5m / 30min），否则声明不完整；</li>
+          <li><b>IP 高 ≠ 爬电/间隙可以放松</b>：污染等级和材料组是另一个维度，潮湿环境仍需查表；</li>
+          <li><b>IP 不覆盖凝露、温循、UV 老化和密封圈老化</b>：这些需要环境试验与材料评估；</li>
+          <li><b>透气阀、排水孔会改变结果</b>：试验必须按最终成品、最终安装状态进行；</li>
+          <li><b>不能只写“防水”</b>：完整 IP 代码才可验证，如 IP44、IP66、IPX7。</li>
+        </ul>
+
+        <h3>怎么选（简化路径）</h3>
+        <ul>
+          <li>室内普通设备：IP20；</li>
+          <li>厨房、潮湿环境：IPX1–IPX4 视防水方向；</li>
+          <li>户外灯具、充电桩、路灯：通常 IP44–IP66；</li>
+          <li>可能短时浸水：IPX7；</li>
+          <li>水下连续运行：IPX8 + 制造商规定的深度/时间；</li>
+          <li>食品/洗车等高压高温冲洗：IP69K（按 ISO 20653）。</li>
+        </ul>
+
+        <p class="howto">怎么查：IEC 60529 分“代码含义表”和“试验方法”两大部分。先根据产品使用环境定出完整代码，再按代码查对应试验设备、水量、时间与判定。</p>
+        <p class="std">相关标准：IEC 60529 / GB/T 4208；汽车与工业冲洗可参考 ISO 20653（IP69K）。</p>
+        <p class="rel"><a href="#environment">环境知识卡</a> · <a href="./reliability.html">可靠性测试计划中心</a> · <a href="./creepage.html">爬电距离（潮湿环境）</a> · <a href="./environment-tests.html">环境试验页</a></p>
+      </section>
+
+      <section class="card" id="environment" data-hazard="general">
+        <h2>环境与可靠性试验：规则与用途</h2>
+        <p><b>是什么：</b>环境试验模拟产品在储存、运输和使用中遇到的温度、湿度、振动、冲击、盐雾、粉尘水分等条件；可靠性试验验证长期使用后的退化。安规中的环境试验通常作为“预处理”，之后还要复测耐压、泄漏、接地和功能。</p>
+        <p><b>为什么重要：</b>出厂合格的样品如果湿热后泄漏电流超标、振动后螺丝松动导致间距变小、盐雾后接地端子生锈，都等于安规失效。</p>
+
+        <h3>温湿度类试验：方法 / 设备 / 环境</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>试验</th><th>标准依据</th><th>测试设备</th><th>测试环境（典型）</th><th>测试方法要点</th><th>用途 / 安规关联</th></tr></thead>
+          <tbody>
+            <tr><td>低温</td><td>IEC 60068-2-1（Test A）</td><td>低温试验箱（程序控温）</td><td>常见 -20°C / -40°C，温度容差约 ±2K（以标准为准）</td><td>样品按安装方式固定 → 箱温降至目标并稳定 → 保持 2h / 16h 量级 → 恢复后检查外观与功能，必要时低温下带载测试</td><td>材料脆化、密封收缩、低温启动；复测绝缘与功能</td></tr>
+            <tr><td>高温</td><td>IEC 60068-2-2（Test B）</td><td>高温试验箱</td><td>常见 +55°C / +70°C / +85°C，容差约 ±2K</td><td>升温至目标并稳定 → 保持 2h / 16h 量级 → 恢复后检查；部分产品需高温下测保护动作与温升</td><td>热老化、膨胀、保护动作；复测温升与耐压</td></tr>
+            <tr><td>温度变化 / 温度循环</td><td>IEC 60068-2-14（Test N）</td><td>温度冲击箱（两箱式）或温循箱（单箱程序控温）</td><td>常见 -40°C ↔ +85°C；转换时间按标准（两箱式常 ≤30s，或按温变速率）</td><td>每循环高低温保持时间按标准；循环 5–100 次视产品；结束后检查外观、功能与结构</td><td>焊点、密封、PCB 应力；复测绝缘与间距</td></tr>
+            <tr><td>稳态湿热</td><td>IEC 60068-2-78（Test Cab）</td><td>恒温恒湿箱</td><td>常见 40°C / 93%RH，温度约 ±2K、湿度约 ±3%RH；4 / 10 / 21 / 56 天量级</td><td>箱内先达到稳定温湿度再放入样品；试验中避免凝露；结束后按标准恢复，再测耐压、泄漏、爬电</td><td>长期高湿对绝缘与腐蚀；复测耐压/泄漏</td></tr>
+            <tr><td>交变湿热</td><td>IEC 60068-2-30（Test Db）</td><td>可程序循环的恒温恒湿箱</td><td>常见 25°C ↔ 55°C、约 95%RH，24h 一个循环；6 / 12 / 21 循环量级</td><td>每循环含升温加湿、高温高湿保持、降温阶段；试验中允许凝露；恢复后测耐压、泄漏、接地</td><td>凝露与呼吸效应；最不利潮湿条件</td></tr>
+            <tr><td>高低温工作</td><td>产品标准规定</td><td>高低温试验箱 + 负载/测量装置</td><td>上下限温度按产品标准（如 -10°C / +40°C、-40°C / +85°C）</td><td>样品在目标温度下稳定后带载运行，检查功能、保护动作、温升与外观</td><td>极限温度下正常工作能力</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>机械与环境类试验：方法 / 设备 / 环境</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>试验</th><th>标准依据</th><th>测试设备</th><th>测试环境（典型）</th><th>测试方法要点</th><th>用途 / 安规关联</th></tr></thead>
+          <tbody>
+            <tr><td>正弦振动</td><td>IEC 60068-2-6（Test Fc）</td><td>电动振动台 + 正弦控制系统</td><td>标准实验室条件；样品按安装/运输状态固定</td><td>按标准设频率范围、振幅/加速度、扫频速率（如 1 oct/min 量级）与持续时间，3 轴分别施加</td><td>螺丝松动、元件共振；复测绝缘与连接</td></tr>
+            <tr><td>随机振动</td><td>IEC 60068-2-64（Test Fh）</td><td>随机振动控制系统 + 振动台</td><td>标准实验室条件；固定方式按运输/使用状态</td><td>按 ASD 谱型（g²/Hz）与时长（如 30min/轴）施加，3 轴分别进行</td><td>运输随机激励；复测结构与功能</td></tr>
+            <tr><td>机械冲击</td><td>IEC 60068-2-27（Test Ea）</td><td>冲击试验台（半正弦波）</td><td>标准实验室条件</td><td>常见 50g / 11ms 或 100g / 6ms 量级，3 轴 6 向，每向 3 次</td><td>搬运冲击；外壳不应开裂、带电部件不外露</td></tr>
+            <tr><td>自由跌落</td><td>IEC 60068-2-31（Test Ec）</td><td>跌落试验台（可调高度 + 释放机构）</td><td>标准实验室；地面为混凝土或钢板（按标准）</td><td>按标准高度（如 1000mm 量级）从面、边、角依次跌落；包装/不带包装按产品标准</td><td>搬运跌落；复测可触及性、绝缘与功能</td></tr>
+            <tr><td>IK 冲击防护</td><td>IEC 62262（IK 代码）</td><td>弹簧冲击锤（IK01–IK06）、摆锤冲击试验机（IK07–IK10）</td><td>标准实验室条件；样品按正常安装方式固定</td><td>按 IK 代码确定冲击能量，对最薄弱面/点施加 3 次冲击，试验后检查外观、结构、绝缘与可触及性</td><td>外壳抗外部机械冲击；不得导致带电部件外露、间距或防护等级降低</td></tr>
+            <tr><td>盐雾</td><td>IEC 60068-2-11 / 2-52</td><td>盐雾试验箱</td><td>常见 5% NaCl、35°C，pH 约 6.5–7.2（连续盐雾典型）</td><td>样品按角度摆放、不相互遮挡；连续喷雾 24 / 48 / 72h 或按 2-52 循环（喷雾+干燥）；结束后清洗并检查</td><td>沿海腐蚀；复测接地连续性、镀层与外观</td></tr>
+            <tr><td>外壳防护（IP）</td><td>IEC 60529 / GB/T 4208</td><td>防尘箱（粉尘箱）、滴水/淋水/喷水/浸水装置</td><td>防尘 8h + 负压；防水按代码定水量、距离、时间</td><td>按 IP 代码逐项执行；试验前确认样品为最终成品状态</td><td>水尘侵入；内部不应有有害水尘，绝缘不应受潮击穿</td></tr>
+            <tr><td>老化 / 耐久</td><td>产品标准规定</td><td>负载台、耐久试验机（电机/开关/线材弯折机）</td><td>室温或产品额定环境，按标准控制</td><td>按循环次数、负载、时间连续运行，定期记录功能与温升</td><td>长期退化；复测绝缘、接地与功能</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>IK 代码与冲击能量（IEC 62262）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>IK 代码</th><th>冲击能量</th><th>典型应用（教学参考）</th></tr></thead>
+          <tbody>
+            <tr><td>IK00</td><td>0 J（无防护）</td><td>不承诺抗冲击</td></tr>
+            <tr><td>IK01</td><td>0.14 J</td><td>一般室内外壳</td></tr>
+            <tr><td>IK02</td><td>0.2 J</td><td>普通室内设备</td></tr>
+            <tr><td>IK03</td><td>0.35 J</td><td>室内设备、灯具</td></tr>
+            <tr><td>IK04</td><td>0.5 J</td><td>室内/半户外设备</td></tr>
+            <tr><td>IK05</td><td>0.7 J</td><td>半户外、公共区域</td></tr>
+            <tr><td>IK06</td><td>1 J</td><td>公共区域、工业外壳</td></tr>
+            <tr><td>IK07</td><td>2 J</td><td>户外灯具、充电桩外壳</td></tr>
+            <tr><td>IK08</td><td>5 J</td><td>户外/防破坏灯具、公共设施</td></tr>
+            <tr><td>IK09</td><td>10 J</td><td>防破坏、工业重型外壳</td></tr>
+            <tr><td>IK10</td><td>20 J</td><td>极高抗冲击/防破坏应用</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>IK 与 IP 是两套独立等级：IP 管防尘防水，IK 管抗机械冲击，<b>高 IP 不代表高 IK</b>；</li>
+          <li>低能量（IK01–IK06）常用弹簧冲击锤，高能量（IK07–IK10）常用摆锤冲击试验机；</li>
+          <li>冲击点选择最薄弱位置（如透明件、接缝、开孔附近），一般每点 3 次；</li>
+          <li>试验后除外观检查外，还要复测：带电部件是否外露、爬电/间隙是否改变、IP 是否仍满足、功能是否正常；</li>
+          <li>具体冲击能量、锤头形状、样品固定与判定以 IEC 62262 原文为准。</li>
+        </ul>
+
+        <h3>通用测试环境与设备要求</h3>
+        <ul>
+          <li>测量基准环境常为 23±2°C、50±5%RH；一般试验环境在 15–35°C、25–75%RH、86–106kPa 范围内（以 IEC 60068-1 为准）；</li>
+          <li>温箱、恒温恒湿箱、振动台、冲击台、盐雾箱、IP 试验装置等设备应在校准/计量有效期内；</li>
+          <li>温度、湿度、加速度、力的传感器和记录仪要定期校准，数据可追溯；</li>
+          <li>样品放入箱体前应达到初始稳定，试验后按标准规定恢复，不能在冷凝水未干时直接打耐压；</li>
+          <li>试验顺序、样品数量、判定边界都来自产品标准或认证方案，不能只按“经验”选。</li>
+        </ul>
+
+        <h3>通用试验规则</h3>
+        <ul>
+          <li>样品应为最终成品或代表性状态，安装、接线、封盖方式按使用说明；</li>
+          <li>温度容差、恢复时间、测量时机、样品数量都要按标准，不能自己随意定；</li>
+          <li>顺序通常是：<b>环境预处理 → 外观/功能检查 → 安全复测（耐压、泄漏、接地）</b>；</li>
+          <li>环境试验后必须先做外观和功能检查，再做安规复测，避免“先测后坏”掩盖问题；</li>
+          <li>合格判据来自产品标准或认证方案，不是“还能开机就行”。</li>
+        </ul>
+
+        <h3>怎么选试验项目</h3>
+        <ol>
+          <li>先看产品标准的环境条款（如 60335-1 第 15 章湿热、62368-1 环境要求、60598-1、60601-1）；</li>
+          <li>再看运输与存储条件（整机运输、包装跌落、堆码）；</li>
+          <li>看使用环境：户外、沿海、高海拔、工业粉尘、车载；</li>
+          <li>最后用 IEC 60068 系列方法组合成试验计划，并明确复测项目。</li>
+        </ol>
+
+        <h3>常见误区</h3>
+        <ul>
+          <li>高温通过不等于低温通过，两套失效机理不同；</li>
+          <li>湿热试验后不测耐压/泄漏，等于没做；</li>
+          <li>条件越严越好是错的：必须与产品标准和目标市场匹配；</li>
+          <li>振动后只查功能不查绝缘，可能漏掉间距变化；</li>
+          <li>盐雾只做外观判定，忽略了接地连续性。</li>
+        </ul>
+
+        <p class="howto">怎么查：先找产品标准的环境条款，再查 IEC 60068 对应试验方法，最后看该方法的条件、容差、恢复与判定。</p>
+        <p class="std">相关标准：IEC 60068-2 系列、IEC 60529、IEC 60335-1、IEC 62368-1、IEC 60598-1、IEC 60601-1、ISO 16750（车载）、UN 38.3 / IEC 62133（电池）</p>
+        <p class="rel"><a href="./reliability.html">可靠性测试中心（按行业）</a> · <a href="./environment-tests.html">环境试验页</a> · <a href="#ip">IP 防护</a> · <a href="#temperature">温升</a> · <a href="#battery">电池试验</a> · <a href="#mechanical">机械防护</a></p>
+      </section>
+
+      <section class="card" id="optical" data-hazard="radiation">
+        <h2>光生物安全</h2>
+        <p><b>是什么：</b>灯具发出的紫外、可见（含蓝光）、红外辐射对眼睛和皮肤的风险分级，从 RG0（豁免）到 RG3（高危）。</p>
+        <p><b>为什么重要：</b>LED 蓝光危害是照明行业近年高频话题，儿童灯具、读写灯要求更严。</p>
+        <h3>RG 分级速查（IEC 62471，教学简化）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>等级</th><th>含义</th><th>要求</th></tr></thead>
+          <tbody>
+            <tr><td>RG0（豁免）</td><td>无危害</td><td>可无条件使用</td></tr>
+            <tr><td>RG1（低危）</td><td>正常使用无危害</td><td>通常无需标签，按产品标准</td></tr>
+            <tr><td>RG2（中危）</td><td>强光/长时间直视有危害</td><td>警示标签；儿童灯具等场景要求更严</td></tr>
+            <tr><td>RG3（高危）</td><td>短时直视即有危害</td><td>防护结构/警告，用途受限</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>分级由辐射限值和照射条件共同决定：光谱、亮度、暴露时间；</li>
+          <li>蓝光危害针对视网膜，紫外危害针对角膜/皮肤，红外危害针对热损伤；</li>
+          <li>LED 驱动电流、荧光粉配方、光学透镜都会影响等级；</li>
+          <li>RG2 及以上通常需要警示标签或防护结构；</li>
+          <li>不是“LED 一定有害”，而是“要按标准测过才知道”。</li>
+        </ul>
+        <p class="howto">怎么查：IEC 62471 先做测量与分类，IEC 62471-2 给制造商的豁免/标签要求。</p>
+        <p class="std">相关标准：IEC 62471 / GB/T 20145、IEC 62471-2</p>
+        <p class="rel"><a href="./industries.html#lighting">关联：灯具行业</a></p>
+      </section>
+
+      <section class="card" id="biocompat" data-hazard="chemical">
+        <h2>生物相容性</h2>
+        <p><b>是什么：</b>与人体组织、体液接触的材料，不能引起毒性、刺激、过敏等不良反应。接触时间越长、接触部位越深，要求越高。</p>
+        <p><b>为什么重要：</b>医疗设备不仅是“电气安全”，患者接触面的材料安全同样是一票否决项。</p>
+        <h3>评价矩阵怎么定（ISO 10993-1 思路，教学简化）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>接触类型</th><th>典型试验</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>表面接触（皮肤、黏膜）</td><td>细胞毒性、致敏、刺激/皮内反应</td><td>大多数医疗外壳、手柄、面罩</td></tr>
+            <tr><td>外部接入（血路、组织液）</td><td>以上 + 全身毒性、血液相容</td><td>管路、穿刺类器械</td></tr>
+            <tr><td>植入（&gt;30d）</td><td>以上 + 植入试验、遗传毒性、慢性毒性</td><td>长期植入物，试验最多</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>按接触分类：表面/外部接入/植入，再按时间分限值（≤24h、24h–30d、&gt;30d）；</li>
+          <li>典型试验：细胞毒性、致敏、刺激或皮内反应、全身毒性；</li>
+          <li>材料、配方、工艺（脱模剂、灭菌方式）变更都要重新评估；</li>
+          <li>化学物质释放分析（ISO 10993-18）用于确定毒理风险；</li>
+          <li>不是所有材料都要全套试验，先做生物学评价计划（10993-1）。</li>
+        </ul>
+        <p class="howto">怎么查：按 ISO 10993-1 表 1 确定评价矩阵，再选对应分标准做试验。</p>
+        <p class="std">相关标准：ISO 10993 / GB/T 16886 系列</p>
+        <p class="rel"><a href="./industries.html#medical">关联：医疗行业</a> · <a href="#risk">风险管理</a></p>
+      </section>
+
+      <section class="card" id="risk" data-hazard="general">
+        <h2>医疗器械风险管理</h2>
+        <p><b>是什么：</b>用系统化流程识别危害、估计风险、采取措施并验证，贯穿设计到上市后的整个生命周期。</p>
+        <p><b>为什么重要：</b>医疗安规不是“测过就行”，而是“证明你想过所有风险”。风险管理文件是注册/认证的核心证据。</p>
+        <h3>风险管理文档清单</h3>
+        <ul>
+          <li>风险管理计划（范围、职责、时间表、可接受准则）；</li>
+          <li>风险分析（预期用途、可预见误用、危害识别、风险估计）；</li>
+          <li>风险评价（风险矩阵：严重度 × 发生概率）；</li>
+          <li>风险控制措施与验证记录（设计安全 &gt; 保护措施 &gt; 警告/说明书）；</li>
+          <li>综合残余风险评价 + 风险管理报告；</li>
+          <li>生产后信息（投诉、不良事件、标准变更触发再评价）。</li>
+        </ul>
+        <ul>
+          <li>流程：风险分析 → 风险评价 → 风险控制 → 综合残余风险评价 → 风险管理报告；</li>
+          <li>用风险矩阵（严重度 × 发生概率）给风险定级；</li>
+          <li>控制优先级：设计本身安全 &gt; 保护措施 &gt; 警告/说明书；</li>
+          <li>残余风险必须与临床受益权衡，并写入文档；</li>
+          <li>与功能安全、可用性、软件安全联动，不能各写各的。</li>
+        </ul>
+        <p class="howto">怎么查：按 ISO 14971 建风险管理文档，输出风险分析表、控制措施表、残余风险汇总。</p>
+        <p class="std">相关标准：ISO 14971 / GB/T 42062</p>
+        <p class="rel"><a href="./industries.html#medical">关联：医疗行业</a> · <a href="#software">软件可用性</a></p>
+      </section>
+
+      <section class="card" id="functional" data-hazard="general">
+        <h2>功能安全</h2>
+        <p><b>是什么：</b>安全相关系统“该动作时可靠动作”的能力，用 PL（工业）、SIL（工业/过程）、ASIL（汽车）分级。</p>
+        <p><b>为什么重要：</b>急停、光栅、联锁不是“装了就安全”，而是“失效概率低到可接受”。</p>
+        <h3>安全完整性等级对照（教学参考）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>体系</th><th>等级</th><th>典型安全功能</th></tr></thead>
+          <tbody>
+            <tr><td>ISO 13849-1</td><td>PL a–e</td><td>急停、安全门联锁、光幕</td></tr>
+            <tr><td>IEC 62061</td><td>SIL 1–3</td><td>机器人、过程控制设备</td></tr>
+            <tr><td>ISO 26262</td><td>ASIL A–D</td><td>转向、制动、ADAS</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>工业：PL a–e（ISO 13849-1）或 SIL 1–3（IEC 62061）；</li>
+          <li>汽车：ASIL A–D（ISO 26262），D 最严；</li>
+          <li>等级由结构（单通道/冗余）、诊断覆盖率（DC）、MTTFd 共同决定；</li>
+          <li>常见安全功能：急停、安全门联锁、光幕、双手控制；</li>
+          <li>安全回路要防“旁路”，验证要覆盖失效模式（FMEA 思路）。</li>
+        </ul>
+        <p class="howto">怎么查：先定义安全功能 → 估算风险等级（PLr/SILr/ASIL）→ 设计架构 → 计算验证。</p>
+        <p class="std">相关标准：ISO 13849-1、IEC 62061、ISO 26262</p>
+        <p class="rel"><a href="./industries.html#machinery">关联：工业机械</a> · <a href="./industries.html#automotive">汽车电子</a></p>
+      </section>
+
+      <section class="card" id="mechanical" data-hazard="mechanical">
+        <h2>机械防护与安全联锁</h2>
+        <p><b>是什么：</b>用防护罩、安全距离和联锁装置，防止人体（尤其是手指）进入危险运动区域。</p>
+        <p><b>为什么重要：</b>电气安全之外，机械伤害占工业事故很大比例，安全距离是“算出来”的，不是“看着够”的。</p>
+        <h3>开口与安全距离速查（ISO 13857 思路，教学简化）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>开口尺寸 e（mm）</th><th>安全距离（mm）</th></tr></thead>
+          <tbody>
+            <tr><td>e ≤ 4</td><td>≥ 2</td></tr>
+            <tr><td>4 &lt; e ≤ 6</td><td>≥ 10</td></tr>
+            <tr><td>6 &lt; e ≤ 8</td><td>≥ 20</td></tr>
+            <tr><td>8 &lt; e ≤ 10</td><td>≥ 80</td></tr>
+            <tr><td>10 &lt; e ≤ 12</td><td>≥ 100</td></tr>
+            <tr><td>12 &lt; e ≤ 20</td><td>≥ 120</td></tr>
+            <tr><td>20 &lt; e ≤ 50</td><td>≥ 850</td></tr>
+            <tr><td>e &gt; 50</td><td>按手臂/身体接近距离另算</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note" style="color:var(--muted);font-size:13px">数值为教学简化；方形/圆孔与不同身体部位请查 ISO 13857 原文表。</p>
+        <ul>
+          <li>安全距离按 ISO 13857 计算：开口尺寸决定可伸入的手指/手臂类型；</li>
+          <li>防护罩优先“固定式”，需要频繁打开的才用联锁；</li>
+          <li>联锁要失效安全：断电、断线、传感器失效时回到安全状态；</li>
+          <li>急停复位后设备不得自动重新启动；</li>
+          <li>跌落、挤压等滥用试验考验结构可靠性，也是电动工具的常规项目。</li>
+        </ul>
+        <p class="howto">怎么查：先定危险源和可触及开口 → 查 ISO 13857 距离表 → 联锁按 ISO 13849 定 PL。</p>
+        <p class="std">相关标准：ISO 13857、ISO 13850、IEC 60204-1、ISO 13849-1</p>
+        <p class="rel"><a href="./industries.html#machinery">关联：工业机械</a> · <a href="./industries.html#tools">电动工具</a></p>
+      </section>
+
+      <section class="card" id="explosion" data-hazard="chemical">
+        <h2>防爆（危险区域）</h2>
+        <p><b>是什么：</b>在可燃气体或粉尘环境中，设备要么不产生点燃源，要么把爆炸限制在外壳内部。</p>
+        <p><b>为什么重要：</b>危险区域选错设备会直接引发爆炸，防爆认证不可替代。</p>
+        <h3>常用防爆型式速查（教学参考）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>型式</th><th>原理</th><th>适用区域（气体）</th></tr></thead>
+          <tbody>
+            <tr><td>Ex ia / ib 本安</td><td>限制能量，不足以点燃</td><td>ia：0 区；ib：1/2 区</td></tr>
+            <tr><td>Ex d 隔爆</td><td>外壳耐爆并阻止火焰传出</td><td>1/2 区</td></tr>
+            <tr><td>Ex e 增安</td><td>加强结构，正常运行无引燃源</td><td>1/2 区（按标准）</td></tr>
+            <tr><td>Ex p 正压</td><td>内部充压隔离可燃气体</td><td>1/2 区</td></tr>
+            <tr><td>Ex n</td><td>正常运行不引燃</td><td>2 区</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>区域划分：气体 0/1/2 区、粉尘 20/21/22 区，数字越小风险越高；</li>
+          <li>防爆型式：本安（Ex ia/ib，能量限制）、隔爆（Ex d，外壳耐爆）、增安（Ex e）、正压（Ex p）；</li>
+          <li>温度组别（T1–T6）表示设备最高表面温度，要与气体引燃温度匹配；</li>
+          <li>设备按 IEC 60079 系列认证，铭牌上的 Ex 标志不能自造；</li>
+          <li>现场配线、安装、维护也要遵守防爆规范，改装即失效。</li>
+        </ul>
+        <p class="howto">怎么查：先确认现场区域等级和气体/粉尘类型 → 再选防爆型式和温度组别。</p>
+        <p class="std">相关标准：IEC 60079 / GB 3836 系列</p>
+        <p class="rel"><a href="./industries.html#machinery">关联：工业机械</a></p>
+      </section>
+
+      <section class="card" id="selv" data-hazard="electric">
+        <h2>SELV / TNV 与隔离</h2>
+        <p><b>是什么：</b>SELV 是与危险电压可靠隔离、电压受限且可触摸的安全特低电压电路；TNV 是通信网络中的低电压电路。</p>
+        <p><b>为什么重要：</b>“低压”不等于“安全”，只有满足隔离、限压、限流条件的 SELV 才是可触摸的。</p>
+        <ul>
+          <li>限值：交流约 50V、直流约 120V 量级（无纹波），具体按标准定义；</li>
+          <li>供电必须来自隔离变压器或等效隔离，不能直接电阻分压；</li>
+          <li>SELV 电路与危险电路之间的爬电/间隙按标准要求，否则名不副实；</li>
+          <li>TNV 用于电话线、网络口，允许电压更高但不允许直接接触；</li>
+          <li>PoE 供电端口属于隔离要求场景，变压器、间距都要验证。</li>
+        </ul>
+        <p><b>常见误区：</b>“电压低就不会电击”是错的，SELV 必须同时满足限压、隔离、限流；用电阻分压“降压”不等于隔离；SELV 电路与危险电路共用连接器或线束时，间距不足会失去 SELV 属性。</p>
+        <p class="howto">怎么查：标准里找“安全特低电压”条款，确认电压限值、隔离方式和距离表。</p>
+        <p class="std">相关标准：IEC 61140、IEC 62368-1</p>
+        <p class="rel"><a href="./selv.html">深读：SELV/TNV 与隔离完整规则</a> · <a href="./insulation-coordination.html">绝缘配合</a> · <a href="./creepage.html">爬电距离</a> · <a href="./hipot.html">耐压测试</a> · <a href="./industries.html#ict">IT 通信行业</a></p>
+      </section>
+
+      <section class="card" id="dmcm" data-hazard="emc">
+        <h2>共模与差模（Common Mode / Differential Mode）</h2>
+        <p>差模是两根线之间“一来一回”的电流；共模是两根线同方向流动、经地回流。任何线间干扰都能拆成这两部分，抑制手段也不同。</p>
+        <div class="dmcm-mode" role="group" aria-label="切换共模差模模式">
+          <button type="button" class="active" data-mode="dm" aria-pressed="true">差模</button>
+          <button type="button" data-mode="cm" aria-pressed="false">共模</button>
+        </div>
+        <div class="dmcm-visual dm" id="dmcmVisual">
+          <svg viewBox="0 0 520 215" role="img" aria-label="共模差模电流走向示意图">
+            <line x1="46" y1="50" x2="480" y2="50" class="line"></line>
+            <text x="24" y="55" class="wire-label">L</text>
+            <line x1="46" y1="110" x2="480" y2="110" class="line"></line>
+            <text x="24" y="115" class="wire-label">N</text>
+            <g class="dm-only">
+              <polygon points="150,50 166,43 166,57" class="arrow"></polygon>
+              <polygon points="260,50 276,43 276,57" class="arrow"></polygon>
+              <polygon points="370,50 386,43 386,57" class="arrow"></polygon>
+              <polygon points="150,110 134,103 134,117" class="arrow"></polygon>
+              <polygon points="260,110 244,103 244,117" class="arrow"></polygon>
+              <polygon points="370,110 354,103 354,117" class="arrow"></polygon>
+              <text x="260" y="192" text-anchor="middle" class="label">差模：一来一回，干扰在 L-N 之间</text>
+            </g>
+            <g class="cm-only">
+              <polygon points="150,50 166,43 166,57" class="arrow"></polygon>
+              <polygon points="260,50 276,43 276,57" class="arrow"></polygon>
+              <polygon points="370,50 386,43 386,57" class="arrow"></polygon>
+              <polygon points="150,110 166,103 166,117" class="arrow"></polygon>
+              <polygon points="260,110 276,103 276,117" class="arrow"></polygon>
+              <polygon points="370,110 386,103 386,117" class="arrow"></polygon>
+              <line x1="260" y1="110" x2="260" y2="160" class="ground-line"></line>
+              <line x1="260" y1="160" x2="228" y2="160" class="ground-line"></line>
+              <line x1="260" y1="160" x2="292" y2="160" class="ground-line"></line>
+              <polygon points="260,134 253,150 267,150" class="arrow"></polygon>
+              <text x="302" y="165" class="label">地 / PE</text>
+              <text x="260" y="192" text-anchor="middle" class="label">共模：同方向，经地回流</text>
+            </g>
+          </svg>
+        </div>
+        <p class="dmcm-caption" id="dmcmCaption">差模：电流在 L-N 之间一来一回，干扰源在两根线之间；主要用 X 电容（跨 L-N）、差模电感抑制。</p>
+        <h3>共模 / 差模怎么区分（教学速查）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>项目</th><th>差模 DM</th><th>共模 CM</th></tr></thead>
+          <tbody>
+            <tr><td>电流路径</td><td>L→N 一来一回</td><td>L、N 同方向，经地回流</td></tr>
+            <tr><td>典型来源</td><td>开关电源脉动、负载突变</td><td>接地噪声、寄生电容、辐射耦合</td></tr>
+            <tr><td>主要抑制</td><td>X 电容、差模电感</td><td>Y 电容、共模电感、屏蔽</td></tr>
+            <tr><td>测试对应</td><td>浪涌线-线、传导发射差模分量</td><td>浪涌线-地、传导发射共模分量</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>怎么识别：</b>示波器看 L、N 电流方向——方向相反是差模，同向是共模；LISN 的 50Ω 相/地端口可分离传导发射中的共模/差模分量；共模问题通常同时影响两根线。</p>
+        <p><b>常见误区：</b>只加 X 电容滤不掉共模；只加共模电感滤不掉差模；把共模电流引到地之前，先确认接地路径低阻抗，否则“越滤越脏”。</p>
+        <p class="howto">怎么查：EMC 整改时先区分模式，再选器件：差模用 X 电容 + 差模电感，共模用 Y 电容 + 共模电感 + 屏蔽/接地。</p>
+        <p class="std">相关标准：IEC 61000-4-5（线-线=差模，线-地=共模）</p>
+        <p class="rel"><a href="./surge.html">关联：雷击浪涌</a> · <a href="./emc.html">EMC 系统课程</a> · <a href="./tools.html#tool-emcwave">EMC 波形工具</a></p>
+      </section>
+
+      <section class="card" id="emc" data-hazard="emc">
+        <h2>EMC 基础</h2>
+        <p><b>是什么：</b>电磁兼容 = 设备不向外过度发射骚扰（发射），也能在外界骚扰下正常工作（抗扰）。</p>
+        <p><b>为什么重要：</b>EMC 是认证必测项，而且和安规共享接地、滤波、布局这些物理手段。</p>
+        <ul>
+          <li>发射：传导发射（150kHz–30MHz）+ 辐射发射（30MHz–1GHz+）；</li>
+          <li>抗扰：ESD、浪涌、电快速瞬变（EFT）、工频磁场、电压暂降等；</li>
+          <li>浪涌只是抗扰中的一项，但最容易“设计时没留路径”；</li>
+          <li>共模/差模概念贯穿整个 EMC：滤波器、电感、Y 电容都围绕它们；</li>
+          <li>医疗、车载、工业限值通常更严，量产一致性差的产品会在认证阶段翻车。</li>
+        </ul>
+        <p><b>常见试验项目全景（教学速查）：</b></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>类别</th><th>试验项目</th><th>主要标准</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>发射</td><td>传导发射</td><td>CISPR 32 / GB/T 9254</td><td>150kHz–30MHz 电源口</td></tr>
+              <tr><td>发射</td><td>辐射发射</td><td>CISPR 32</td><td>30MHz 以上，含限值分级</td></tr>
+              <tr><td>发射</td><td>谐波 / 闪烁</td><td>IEC 61000-3-2 / -3-3</td><td>电源类产品必测</td></tr>
+              <tr><td>抗扰</td><td>ESD</td><td>IEC 61000-4-2</td><td>接触 / 空气放电</td></tr>
+              <tr><td>抗扰</td><td>浪涌</td><td>IEC 61000-4-5</td><td>1.2/50 组合波，线-线 / 线-地</td></tr>
+              <tr><td>抗扰</td><td>EFT</td><td>IEC 61000-4-4</td><td>快速瞬变脉冲群</td></tr>
+              <tr><td>抗扰</td><td>工频磁场</td><td>IEC 61000-4-8</td><td>磁场敏感产品</td></tr>
+              <tr><td>抗扰</td><td>电压暂降 / 短时中断</td><td>IEC 61000-4-11</td><td>电网波动</td></tr>
+            </tbody>
+          </table>
+        </div>                <p class="howto">怎么查：先定产品标准（如 62368-1 引用的 EN 55032 / 55035），再按试验项目逐项看限值。</p>
+        <p class="std">相关标准：IEC 61000-4 系列、CISPR 32 / EN 55032、CISPR 35</p>
+        <p class="rel"><a href="#dmcm">共模与差模</a> · <a href="./surge.html">雷击浪涌</a> · <a href="./emc.html">EMC 系统课程</a></p>
+      </section>
+
+      <section class="card" id="harmonic" data-hazard="emc">
+        <h2>谐波与电能质量</h2>
+        <p><b>是什么：</b>开关电源、LED 驱动等非线性负载会向电网注入谐波电流，污染电网、影响其他设备。</p>
+        <p><b>为什么重要：</b>谐波是 CE 认证必测项（IEC 61000-3-2），大功率产品不过 PFC 基本过不了。</p>
+        <h3>设备类别速查（IEC 61000-3-2）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>类别</th><th>典型设备</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>通用设备、三相平衡设备、非 D 类家电</td><td>通用限值表</td></tr>
+            <tr><td>B</td><td>便携式电动工具</td><td>限值约为 A 类 1.5 倍（以标准为准）</td></tr>
+            <tr><td>C</td><td>照明设备（含 LED）</td><td>功率因数与谐波双重要求；3 次谐波有额外限制</td></tr>
+            <tr><td>D</td><td>PC、显示器、电视等 ≤600W</td><td>按输入功率比例限值（特殊条款）</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>设备按类别分：A（通用）、B（电动工具）、C（照明）、D（PC/电视等）；</li>
+          <li>每类限值不同：C 类照明对三次谐波有额外要求；</li>
+          <li>有源 PFC（APFC）是主流手段，无源 PFC 只在低功率适用；</li>
+          <li>谐波测试在额定输入、最差负载点进行；</li>
+          <li>谐波与能效测试经常一起做，设计时要同时满足。</li>
+        </ul>
+        <p class="howto">怎么查：按 IEC 61000-3-2 先确定设备类别，再对照谐波限值表。</p>
+        <p class="std">相关标准：IEC 61000-3-2 / GB 17625.1</p>
+        <p class="rel"><a href="./industries.html#power">关联：电源充电器</a> · <a href="./industries.html#lighting">灯具照明</a></p>
+      </section>
+
+      <section class="card" id="transient" data-hazard="emc">
+        <h2>抛负载与车载瞬态</h2>
+        <p><b>是什么：</b>汽车电源在启动、断开电池等瞬间产生大幅电压脉冲，抛负载（Load Dump）是最严酷的一种：发电机仍在发电但电池断开。</p>
+        <p><b>为什么重要：</b>车载电子“打一下就没”大多是瞬态防护缺失，而不是器件本身质量差。</p>
+        <h3>车载瞬态波形速查（教学参考）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>脉冲</th><th>来源</th><th>极性</th><th>典型关注</th></tr></thead>
+          <tbody>
+            <tr><td>Pulse 1</td><td>感性负载断电</td><td>负</td><td>12V 系统可达 -100V 量级（以整车规范为准）</td></tr>
+            <tr><td>Pulse 2a</td><td>发电机电流突变</td><td>正</td><td>正向小过冲</td></tr>
+            <tr><td>Pulse 2b</td><td>电机停机反冲</td><td>正</td><td>持续时间较长</td></tr>
+            <tr><td>Pulse 3a / 3b</td><td>开关/继电器快速瞬态</td><td>负 / 正</td><td>高频群脉冲</td></tr>
+            <tr><td>Pulse 4</td><td>启动马达电压跌落</td><td>负</td><td>电压跌落与恢复</td></tr>
+            <tr><td>Pulse 5（抛负载）</td><td>发电机带载时电池断开</td><td>正</td><td>12V 系统可达 40V 以上，能量大</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>ISO 7637-2 定义脉冲 1–4（感性负载、电源断开等），ISO 16750-2 定义抛负载；</li>
+          <li>抛负载电压：12V 系统可达 40V 以上，24V 系统更高；</li>
+          <li>乘用车与商用车、不同制造商要求不同，测试严酷度可调；</li>
+          <li>常用防护：TVS 钳位、输入大电容、限流电阻；</li>
+          <li>TVS 功率选型要看脉冲能量，不是只看峰值电压。</li>
+        </ul>
+        <p class="howto">怎么查：先确认整车厂规范（如大众、丰田），再按 ISO 16750-2 选脉冲等级。</p>
+        <p class="std">相关标准：ISO 16750-2、ISO 7637-2</p>
+        <p class="rel"><a href="./industries.html#automotive">关联：汽车电子</a> · <a href="#components">安规元件</a></p>
+      </section>
+
+      <section class="card" id="components" data-hazard="electric">
+        <h2>安规元件：保险丝与 X/Y 电容</h2>
+        <p><b>是什么：</b>保险丝在过流时断开；X 电容跨 L-N 抑制差模，Y 电容跨 L/N-地抑制共模。它们都是有认证的安全相关元件。</p>
+        <p><b>为什么重要：</b>选错或替换非认证元件，是“型式试验过了、批量出事故”的常见原因。</p>
+        <h3>选型关键参数（教学参考）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>元件</th><th>关键参数</th><th>替换注意</th></tr></thead>
+          <tbody>
+            <tr><td>保险丝</td><td>额定电流、电压、分断能力、I²t、熔断特性</td><td>位置与回路阻抗要一起评估，不能只看电流</td></tr>
+            <tr><td>X 电容</td><td>容量、耐压（X1/X2）、跨 L-N</td><td>故障可能短路，必须配合保险丝</td></tr>
+            <tr><td>Y 电容</td><td>容量、耐压（Y1/Y2）、跨 L/N-地</td><td>容量受泄漏电流限制；失效模式要“开路”</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>保险丝：额定电流、分断能力、I²t、安装位置（应保护最薄弱器件）；</li>
+          <li>X 电容：跨 L-N，故障时可能短路，需配合保险丝；</li>
+          <li>Y 电容：对地，容量受泄漏电流限制，不能随意加大；</li>
+          <li>认证元件（UL/IEC/CCC 标志）不能“同类替换”，参数差一点都要重新评估；</li>
+          <li>Y 电容失效模式要“开路”，不能“短路”，这是认证要求的一部分。</li>
+        </ul>
+        <p class="howto">怎么查：元件库选型时核对认证标志和额定值，替换时回到标准条款确认。</p>
+        <p class="std">相关标准：IEC 60127（保险丝）、IEC 60384-14（X/Y 电容）</p>
+        <p class="rel"><a href="./industries.html#power">关联：电源充电器</a> · <a href="./surge.html">雷击浪涌</a></p>
+      </section>
+
+      <section class="card" id="software" data-hazard="general">
+        <h2>软件安全与可用性</h2>
+        <p><b>是什么：</b>软件缺陷可能导致安全功能失效；医疗器械软件按风险分级开发，可用性工程识别“人会怎么误用”。</p>
+        <p><b>为什么重要：</b>很多医疗不良事件是操作错误 + 界面误导造成的，不是硬件坏。</p>
+        <h3>软件安全等级速查（IEC 62304）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>等级</th><th>判定</th><th>开发要求</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>不会导致伤害</td><td>基本文档与测试</td></tr>
+            <tr><td>B</td><td>可能导致非严重伤害</td><td>更严格测试、可追溯性</td></tr>
+            <tr><td>C</td><td>可能导致死亡或严重伤害</td><td>最严格：完整追溯、单元/集成/系统验证、变更控制</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li>IEC 62304 按 A/B/C 安全等级分级：C 最严（可能直接伤害患者）；</li>
+          <li>需求 → 设计 → 单元测试 → 集成 → 验证 → 发布的追溯链要完整；</li>
+          <li>可用性工程（IEC 62366-1）识别使用错误，输出可用性规格和验证；</li>
+          <li>报警、提示、防误操作要经过设计验证，不能“说明书里写了就行”；</li>
+          <li>软件变更要走变更管理，风险评估随之更新。</li>
+        </ul>
+        <p class="howto">怎么查：先按 62304 定软件安全等级，再建软件开发计划、验证计划和文档清单。</p>
+        <p class="std">相关标准：IEC 62304、IEC 62366-1</p>
+        <p class="rel"><a href="./industries.html#medical">关联：医疗设备</a> · <a href="#risk">风险管理</a></p>
+      </section>
+    </div>
+  </main>
+
+    <p style="margin:22px 0"><button type="button" class="btn" data-progress-key="knowledge">标记已读</button></p>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/progress.js"></script>
+  <script src="../assets/js/dmcm.js"></script>
+  <script src="../assets/js/knowledge-group.js"></script>
+  <script src="../assets/js/knowledge-notes.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+  <script src="../assets/js/knowledge-chain.js"></script>
+  <script src="../assets/js/knowledge-tools-links.js"></script>
+  <script src="../assets/js/standard-status.js"></script>
+</body>
+</html>

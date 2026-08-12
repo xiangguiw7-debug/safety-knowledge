@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>全球电压与插头速查 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="各国电网电压、频率与插头类型速查，宽压与窄压产品判断。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .v-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0 10px;
+    }
+    .v-filter button {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13.5px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .v-filter button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .v-filter button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-ink);
+    }
+    .v-search {
+      width: 260px;
+      max-width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--card);
+      color: var(--fg);
+      font-size: 14px;
+    }
+    .v-search:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+      border-color: var(--accent);
+    }
+    .ok-mark { color: var(--ok-fg); font-weight: 600; }
+    .no-mark { color: var(--danger-fg); font-weight: 600; }
+    .v-note {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: 10px 0;
+    }
+    .legend b {
+      color: var(--accent);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+            <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html" class="active">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / 全球电压速查</p>
+      <h1>全球电压与插头速查</h1>
+      <p class="lead">做电源类产品前先回答：目标市场电压多少？频率多少？插头什么类型？产品是宽压还是窄压？</p>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="callout callout-ok" style="margin:0">
+        <strong>宽压（Universal / Wide Range）</strong>
+        <p>标称 <b>100–240V ~ 50/60Hz</b>：可覆盖全球绝大多数市场（美国 120V、日本 100V、中国/欧盟 230V 都能用）。实际设计常按 90–264V 的电网波动范围做输入。手机充电器、笔记本适配器多为宽压。</p>
+      </div>
+      <div class="callout callout-warn" style="margin:0">
+        <strong>窄压（Narrow Range）</strong>
+        <p>只标 <b>220–240V</b> 或 <b>110–120V</b>：只能覆盖部分市场。例如 120V 60Hz 只能卖到美国/加拿大/日本等；220–240V 不能用于美国、日本。家电、电机类产品常有窄压版本。</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info" style="margin-top:18px">
+      <strong>设计提示</strong>
+      <p>爬电距离与间隙按产品工作的最高电压查表：宽压产品按 250V 档；纯 120V 产品可按 125V 档。频率影响电机类产品（50Hz 与 60Hz 的温升不同），灯具闪烁和 EMC 也受频率影响。</p>
+    </div>
+
+    <div class="v-filter" role="group" aria-label="按地区筛选">
+      <button type="button" class="active" data-region="all" data-label="全部" aria-pressed="true">全部</button>
+      <button type="button" data-region="东亚" data-label="东亚" aria-pressed="false">东亚</button>
+      <button type="button" data-region="东南亚" data-label="东南亚" aria-pressed="false">东南亚</button>
+      <button type="button" data-region="南亚" data-label="南亚" aria-pressed="false">南亚</button>
+      <button type="button" data-region="中东" data-label="中东" aria-pressed="false">中东</button>
+      <button type="button" data-region="欧盟" data-label="欧盟" aria-pressed="false">欧盟</button>
+      <button type="button" data-region="北欧" data-label="北欧" aria-pressed="false">北欧</button>
+      <button type="button" data-region="欧洲其他" data-label="欧洲其他" aria-pressed="false">欧洲其他</button>
+      <button type="button" data-region="北美洲" data-label="北美洲" aria-pressed="false">北美洲</button>
+      <button type="button" data-region="南美洲" data-label="南美洲" aria-pressed="false">南美洲</button>
+      <button type="button" data-region="大洋洲" data-label="大洋洲" aria-pressed="false">大洋洲</button>
+      <button type="button" data-region="非洲" data-label="非洲" aria-pressed="false">非洲</button>
+    </div>
+    <div class="v-filter" role="group" aria-label="产品输入范围">
+      <span style="font-size:13px;color:var(--muted);align-self:center">我的产品输入范围：</span>
+      <button type="button" class="active" data-range="wide" aria-pressed="true">宽压 100–240V</button>
+      <button type="button" data-range="220" aria-pressed="false">窄压 220–240V</button>
+      <button type="button" data-range="110" aria-pressed="false">窄压 110–120V</button>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0">
+      <input type="search" id="vSearch" class="v-search" placeholder="搜索国家 / 电压 / 频率 / 插头，如 230、50Hz、G" aria-label="搜索国家">
+      <span id="vCount" style="font-size:13px;color:var(--muted)"></span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>国家 / 地区</th>
+            <th>地区</th>
+            <th class="num">标称电压</th>
+            <th class="num">频率</th>
+            <th>插头类型</th><th class="num">覆盖</th>
+          </tr>
+        </thead>
+        <tbody id="vBody"></tbody>
+      </table>
+    </div>
+
+    <div class="legend">
+      <span><b>A</b> 美式两扁</span><span><b>B</b> 美式三扁</span><span><b>C</b> 欧式两圆</span>
+      <span><b>D</b> 印式三圆</span><span><b>E</b> 法式</span><span><b>F</b> 德式</span>
+      <span><b>G</b> 英式三方</span><span><b>H</b> 以色列</span><span><b>I</b> 澳式三扁</span>
+      <span><b>J</b> 瑞士三圆</span><span><b>K</b> 丹麦</span><span><b>L</b> 意大利</span>
+      <span><b>M</b> 南非大圆</span><span><b>N</b> 巴西</span>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>提醒</strong>
+      <p>插头类型不代表认证要求：出口到该国还要满足<a href="./certification.html">当地安全认证（CCC、CE、UL、PSE、KC 等）</a>。本表为教学速查，具体以目标市场最新要求为准。</p>
+    </div>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/voltage.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

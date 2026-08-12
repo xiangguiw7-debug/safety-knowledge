@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>岗位化学习路径 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="硬件工程师、认证工程师、结构工程师、采购与设计师各自的安规学习路径。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 岗位化学习路径</p>
+      <h1>岗位化学习路径</h1>
+      <p class="lead">不同岗位用安规的方式完全不同：选一条适合你的路。</p>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>🔧 硬件工程师</h3>
+        <ol style="font-size:14px;padding-left:20px">
+          <li><a href="./clearance.html">电气间隙</a> + <a href="./creepage.html">爬电距离</a>（查表闭环）</li>
+          <li><a href="./pcb-guidelines.html">PCB 安规设计指南</a></li>
+          <li><a href="./components.html">元器件安全专题</a></li>
+          <li><a href="./hipot.html">耐压</a> + <a href="./surge.html">浪涌</a>（设计与试验）</li>
+          <li><a href="./tools.html">计算工具</a> + <a href="./quiz.html">测验</a></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>📋 认证 / 合规工程师</h3>
+        <ol style="font-size:14px;padding-left:20px">
+          <li><a href="./knowledge.html#certprocess">认证流程</a>（CB 转证/工厂检查）</li>
+          <li><a href="./standards-compare.html">标准差异矩阵</a></li>
+          <li><a href="./certification.html">全球认证</a> + <a href="./wizard.html">认证向导</a></li>
+          <li><a href="./labels.html">标签与说明书</a></li>
+          <li><a href="./standards-updates.html">标准更新追踪</a></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>🛠️ 结构 / 机械工程师</h3>
+        <ol style="font-size:14px;padding-left:20px">
+          <li><a href="./hazard-mechanical.html">机械危险深度页</a></li>
+          <li><a href="./knowledge.html#mechanical">防护与联锁</a> + <a href="./knowledge.html#functional">功能安全</a></li>
+          <li><a href="./materials.html">材料库</a>（CTI/阻燃/RTI）</li>
+          <li><a href="./environment-tests.html">环境与可靠性试验</a></li>
+          <li><a href="./designer-guide.html">设计阶段避坑</a></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>🎨 设计师 / 产品经理</h3>
+        <ol style="font-size:14px;padding-left:20px">
+          <li><a href="./designer-guide.html">设计师必须知道的安规</a></li>
+          <li><a href="./knowledge.html#protection">防触电五道防线</a>（概念）</li>
+          <li><a href="./labels.html">标签与标志规范</a></li>
+          <li><a href="./cases.html">案例库</a>（理解为什么这么设计）</li>
+          <li><a href="./faq.html">FAQ</a>（快速答疑）</li>
+        </ol>
+      </div>
+    </div>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

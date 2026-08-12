@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>产品品类安规知识库 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="家电、音视频/IT、灯具、电源充电器、电池、无线设备、医疗设备、工业机械、电动工具九大品类的安规标准、测试项目、设计重点与认证路径。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .cat-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 24px; }
+    .cat-nav a { background: var(--card); border: 1px solid var(--border); color: var(--fg); border-radius: 999px; padding: 6px 14px; font-size: 13px; text-decoration: none; }
+    .cat-nav a:hover { border-color: var(--accent); color: var(--accent); }
+    .cat-section { margin-top: 34px; }
+    .cat-section h2 { border-left: 4px solid var(--accent); padding-left: 12px; }
+    .cat-section h3 { margin: 20px 0 8px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./product-categories.html" class="active">品类知识</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / 产品品类安规知识库</p>
+      <h1>产品品类安规知识库</h1>
+      <p class="lead">九个核心品类的安规知识：先看公共地基（间隙、爬电、耐压、浪涌、IP、防火），再按品类看自己的标准、测试、设计重点和认证路径。</p>
+    </div>
+
+    <div class="callout callout-info">
+      <strong>先分清两个“类别”</strong>
+      <p>“产品品类”指家电、IT、灯具等产品门类；“防触电类别”指 I / II / III 类结构。两者不冲突：同一个品类里可以有 I 类、II 类或 III 类产品。结构类别见<a href="./product-classes.html">产品类别结构图</a>。</p>
+    </div>
+
+    <nav class="cat-nav" aria-label="品类快速跳转">
+      <a href="#appliance">🏠 家用电器</a>
+      <a href="#itav">💻 音视频/IT</a>
+      <a href="#lighting">💡 灯具照明</a>
+      <a href="#power">🔌 电源充电器</a>
+      <a href="#battery">🔋 电池储能</a>
+      <a href="#wireless">📡 无线设备</a>
+      <a href="#medical">🏥 医疗设备</a>
+      <a href="#machinery">🏭 工业机械</a>
+      <a href="#tools">🔧 电动工具</a>
+    </nav>
+
+    <section>
+      <h2>九大品类速查</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>品类</th><th>核心安全标准</th><th>最大风险</th><th>典型测试</th><th>常见认证</th></tr></thead>
+          <tbody>
+            <tr><td>家用电器</td><td>IEC 60335-1 + 60335-2</td><td>电击、发热、潮湿、电机堵转</td><td>耐压、泄漏、温升、异常运行、湿热</td><td>CCC、CE、UL、PSE、KC</td></tr>
+            <tr><td>音视频/IT</td><td>IEC 62368-1</td><td>能量源、防火、可触及部件</td><td>耐压、泄漏、温升、防火、ESD/浪涌</td><td>CCC、CE、FCC、UL</td></tr>
+            <tr><td>灯具照明</td><td>IEC 60598-1、IEC 61347</td><td>电击、蓝光、户外水尘</td><td>介电、温升、IP、浪涌、光生物</td><td>CCC/CQC、CE、UL/DLC、KC</td></tr>
+            <tr><td>电源充电器</td><td>IEC 62368-1</td><td>初次级隔离、Y 电容泄漏、防火</td><td>爬电/间隙、耐压、泄漏、浪涌、短路</td><td>CCC、CE、UL、PSE、KC</td></tr>
+            <tr><td>电池储能</td><td>IEC 62133、UN 38.3、IEC 62619</td><td>热失控、过充、运输</td><td>过充/短路/过温、跌落、热扩散、运输</td><td>CB、UN38.3、UL、PSE</td></tr>
+            <tr><td>无线设备</td><td>RED、FCC Part 15、IEC 62368-1</td><td>射频暴露、EMC、电池</td><td>RF、SAR、EMC、电池、跌落</td><td>CE-RED、FCC、ISED、TELEC</td></tr>
+            <tr><td>医疗设备</td><td>IEC 60601-1、ISO 14971</td><td>患者漏电流、单一故障、生物相容</td><td>患者/外壳漏电流、介电、EMC、风险文档</td><td>NMPA、CE-MDR、FDA</td></tr>
+            <tr><td>工业机械</td><td>IEC 60204-1、ISO 13849</td><td>机械伤害、功能安全、防爆</td><td>接地、EMC、急停、安全距离、IP</td><td>CE-MD、UKCA、防爆 Ex</td></tr>
+            <tr><td>电动工具</td><td>IEC 62841</td><td>双重绝缘破坏、电池热失控、火花</td><td>双重绝缘耐压、温升、耐久、跌落</td><td>CCC、CE、UL、GS</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="color:var(--muted);font-size:13px">“最大风险”是教学概括；正式设计以产品标准和风险评估为准。</p>
+    </section>
+
+    <section class="cat-section" id="appliance">
+      <h2>🏠 家用电器</h2>
+      <p class="section-sub">最经典的安规品类：电机、加热元件、潮湿环境，处处考验泄漏电流与异常工作保护。</p>
+      <h3>核心标准</h3>
+      <ul>
+        <li>IEC 60335-1 / GB 4706.1：家电通用安全要求；</li>
+        <li>IEC 60335-2 系列 / GB 4706.x：电饭煲、洗衣机、冰箱、吸尘器等各类器具特殊要求；</li>
+        <li>EMC：CISPR 14-1 / 14-2（骚扰与抗扰）、IEC 61000-3-2 / -3-3（谐波/闪烁）；</li>
+        <li>能效：各国能效标签与最低能效标准（MEPS）。</li>
+      </ul>
+      <h3>典型测试</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试</th><th>目的</th><th>常见关注点</th></tr></thead>
+        <tbody>
+          <tr><td>耐压（介电强度）</td><td>验证绝缘体系</td><td>I 类基本绝缘、II 类双重绝缘、III 类 SELV</td></tr>
+          <tr><td>泄漏 / 接触电流</td><td>验证摸到外壳是否安全</td><td>潮湿状态、最不利电源极性</td></tr>
+          <tr><td>温升</td><td>验证发热部件与可触及表面</td><td>电机、加热元件、端子、外壳</td></tr>
+          <tr><td>异常运行</td><td>堵转、短路、过载时仍安全</td><td>电机热保护、保险丝、PTC</td></tr>
+          <tr><td>湿热试验</td><td>验证潮湿环境下的绝缘</td><td>污染等级、爬电距离余量</td></tr>
+          <tr><td>接地连续性</td><td>I 类产品接地回路</td><td>端子防松、接触电阻</td></tr>
+        </tbody>
+      </table></div>
+      <h3>设计重点</h3>
+      <ul>
+        <li>先判定产品类别（I / II / III），再定绝缘和测试组合；</li>
+        <li>电机类必须有堵转/过载保护，不能只靠保险丝“碰运气”；</li>
+        <li>加热元件周围材料要耐热耐燃，球压和灼热丝按标准执行；</li>
+        <li>潮湿环境按污染等级 2/3 设计，不能按干燥环境查表；</li>
+        <li>接地端子、内部线、端子排都要有机械固定和防松措施。</li>
+      </ul>
+      <h3>认证路径</h3>
+      <p>中国 CCC（目录内）/ CQC（目录外）→ 欧盟 CE（LVD + EMC）→ 美国 UL/ETL → 日本 PSE → 韩国 KC → 澳洲 RCM。家电是 CB 体系最成熟的品类之一，可用 CB 报告转证。</p>
+      <h3>常见坑</h3>
+      <ul>
+        <li>按干燥环境设计，湿热试验后爬电不够；</li>
+        <li>电机堵转无热保护，温升超标甚至起火；</li>
+        <li>接地端子松动或接触电阻过大；</li>
+        <li>把“低功率”当成“不用做安规”。</li>
+      </ul>
+      <p class="rel"><a href="./clearance.html">电气间隙</a> · <a href="./creepage.html">爬电距离</a> · <a href="./hipot.html">耐压测试</a> · <a href="./knowledge.html#temperature">温升</a></p>
+    </section>
+
+    <section class="cat-section" id="itav">
+      <h2>💻 音视频 / IT 设备</h2>
+      <p class="section-sub">音箱、路由器、显示器、笔记本电源等，核心是 IEC 62368-1 的能量源分级思想。</p>
+      <h3>核心标准</h3>
+      <ul>
+        <li>IEC 62368-1 / GB 4943.1：音视频、信息技术与通信设备安全；</li>
+        <li>EMC：CISPR 32 / EN 55032（发射）、CISPR 35（抗扰）、IEC 61000-3-2 / -3-3；</li>
+        <li>无线功能：RED / FCC Part 15；</li>
+        <li>电池：IEC 62133 / GB 31241。</li>
+      </ul>
+      <h3>典型测试</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试</th><th>目的</th><th>常见关注点</th></tr></thead>
+        <tbody>
+          <tr><td>能量源分级</td><td>确定 ES1/ES2/ES3 与可触及要求</td><td>端口、内部电路、故障条件</td></tr>
+          <tr><td>耐压与泄漏</td><td>验证绝缘与接触电流</td><td>电源初次级、USB/PoE 口隔离</td></tr>
+          <tr><td>防火外壳</td><td>内部起火不烧穿外壳</td><td>V-0/5VA、开孔尺寸、挡板</td></tr>
+          <tr><td>温升</td><td>可触及表面与元件温度</td><td>充电口、外壳、电池仓</td></tr>
+          <tr><td>机械应力</td><td>跌落、推力、悬挂</td><td>外壳强度、连接器固定</td></tr>
+          <tr><td>EMC 抗扰</td><td>ESD、浪涌、EFT、电压暂降</td><td>接口防护、PCB 布局</td></tr>
+        </tbody>
+      </table></div>
+      <h3>设计重点</h3>
+      <ul>
+        <li>USB、HDMI、PoE 等端口与内部高压电路之间必须算间距；</li>
+        <li>金属螺钉、散热片不能桥接两层绝缘；</li>
+        <li>塑料外壳阻燃等级和开孔位置决定防火是否成立；</li>
+        <li>带电池产品要叠加电池保护与热失控管理；</li>
+        <li>通信端口要做浪涌/EFT 防护，不能只保护电源口。</li>
+      </ul>
+      <h3>认证路径</h3>
+      <p>中国 CCC（目录内）/ CQC → 欧盟 CE（LVD + EMC + RED）→ 美国 FCC + UL → 日本 PSE/TELEC → 韩国 KC → 台湾 BSMI → 澳洲 RCM。</p>
+      <h3>常见坑</h3>
+      <ul>
+        <li>USB 口与内部高压走线间距不足；</li>
+        <li>只做电源口浪涌，通信口雷击批量损坏；</li>
+        <li>防火外壳等级够但开孔过大，挡板失效；</li>
+        <li>软件更新后安全功能被绕过。</li>
+      </ul>
+      <p class="rel"><a href="./creepage.html">爬电距离</a> · <a href="./hipot.html">耐压测试</a> · <a href="./knowledge.html#flame">防火</a> · <a href="./surge.html">雷击浪涌</a></p>
+    </section>
+
+    <section class="cat-section" id="lighting">
+      <h2>💡 灯具照明</h2>
+      <p class="section-sub">从 LED 灯泡到户外路灯，核心是防触电、温升、防尘防水与光生物安全。</p>
+      <h3>核心标准</h3>
+      <ul>
+        <li>IEC 60598-1 / GB 7000.1：灯具通用安全；</li>
+        <li>IEC 61347 / GB 19510：灯控制装置（含 LED 驱动）；</li>
+        <li>IEC 62031：LED 模块；</li>
+        <li>IEC 62471 / GB/T 20145：光生物安全；</li>
+        <li>IEC 60529 / GB/T 4208：IP 防护等级。</li>
+      </ul>
+      <h3>典型测试</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试</th><th>目的</th><th>常见关注点</th></tr></thead>
+        <tbody>
+          <tr><td>介电强度</td><td>验证绝缘体系</td><td>隔离驱动初次级、可更换光源</td></tr>
+          <tr><td>泄漏电流</td><td>验证可触及金属</td><td>潮湿灯具、金属外壳</td></tr>
+          <tr><td>温升</td><td>LED 与驱动温升</td><td>散热、绝缘老化、外壳温度</td></tr>
+          <tr><td>IP 测试</td><td>验证户外防尘防水</td><td>IP44–IP66、密封圈老化</td></tr>
+          <tr><td>浪涌</td><td>户外雷击/电网浪涌</td><td>驱动 SPD、初次级间距</td></tr>
+          <tr><td>光生物</td><td>蓝光/紫外/红外危害</td><td>儿童灯具、高亮度 LED</td></tr>
+        </tbody>
+      </table></div>
+      <h3>设计重点</h3>
+      <ul>
+        <li>隔离驱动初次级间距不足是耐压/浪涌打火的第一原因；</li>
+        <li>户外灯具必须做 IP 与浪涌联合设计，不是“加个胶圈就行”；</li>
+        <li>蓝光危害等级随亮度、光学设计变化，样品阶段就要测；</li>
+        <li>可更换光源的防触电结构（防触电罩、工具要求）要单独验证；</li>
+        <li>LED 驱动温升直接影响寿命和绝缘，散热要留余量。</li>
+      </ul>
+      <h3>认证路径</h3>
+      <p>中国 CCC/CQC → 欧盟 CE（LVD + EMC + ErP 能效）→ 美国 UL/DLC → 韩国 KC → 沙特 SASO（IECEE CB 转证）→ 澳洲 RCM。</p>
+      <h3>常见坑</h3>
+      <ul>
+        <li>驱动初次级间距不足，浪涌后打火；</li>
+        <li>户外灯具没有 SPD，雷击损坏驱动；</li>
+        <li>儿童灯具忽视蓝光与可触及部件温升；</li>
+        <li>高 IP 等级但透气阀/排水孔破坏了密封。</li>
+      </ul>
+      <p class="rel"><a href="./surge.html">雷击浪涌</a> · <a href="./knowledge.html#ip">IP 防护</a> · <a href="./knowledge.html#optical">光生物安全</a> · <a href="./creepage.html">爬电距离</a></p>
+    </section>
+
+    <section class="cat-section" id="power">
+      <h2>🔌 电源与充电器</h2>
+      <p class="section-sub">开关电源是爬电、间隙、浪涌、安规电容和保险丝知识的综合考场。</p>
+      <h3>核心标准</h3>
+      <ul>
+        <li>IEC 62368-1 / GB 4943.1：电源安全；</li>
+        <li>IEC 60384-14：X/Y 安规电容；IEC 60127：保险丝；</li>
+        <li>IEC 61558：变压器/电源装置（部分产品）；</li>
+        <li>IEC 61000-3-2：谐波电流；GB/T 17626.5：浪涌；</li>
+        <li>能效：DOE VI / CoC / 中国能效等级。</li>
+      </ul>
+      <h3>典型测试</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试</th><th>目的</th><th>常见关注点</th></tr></thead>
+        <tbody>
+          <tr><td>爬电 / 间隙</td><td>初次级隔离</td><td>变压器、光耦、PCB 开槽</td></tr>
+          <tr><td>耐压</td><td>验证绝缘强度</td><td>基本/加强绝缘、打火位置</td></tr>
+          <tr><td>泄漏电流</td><td>验证 Y 电容与共模路径</td><td>Y 电容容量与泄漏的平衡</td></tr>
+          <tr><td>温升</td><td>磁性元件、MOS、外壳</td><td>满载/短路/异常状态</td></tr>
+          <tr><td>浪涌</td><td>雷击/电网瞬态</td><td>MOV、放电管、初次级间距</td></tr>
+          <tr><td>短路/过载</td><td>保护动作</td><td>保险丝、限流、恒功率</td></tr>
+        </tbody>
+      </table></div>
+      <h3>设计重点</h3>
+      <ul>
+        <li>初次级隔离间距要按加强绝缘查表，并用开槽/挡墙保证工艺余量；</li>
+        <li>Y 电容容量越大 EMI 越好、泄漏电流越大，要按标准限值平衡；</li>
+        <li>保险丝必须用认证元件，并放在能切断故障电流的位置；</li>
+        <li>X 电容放电电阻要满足插头拔出后的残余电压时间要求；</li>
+        <li>能效与待机功耗、安规元件选型一起规划，不要最后才改。</li>
+      </ul>
+      <h3>认证路径</h3>
+      <p>中国 CCC/CQC → 欧盟 CE（LVD + EMC + ErP）→ 美国 UL/ETL + DOE → 日本 PSE → 韩国 KC → 台湾 BSMI → 澳洲 RCM。</p>
+      <h3>常见坑</h3>
+      <ul>
+        <li>初次级间距只算 PCB 走线，忘了变压器飞线和光耦；</li>
+        <li>Y 电容过大导致泄漏电流超标；</li>
+        <li>保险丝没认证或位置不对，短路时不断开；</li>
+        <li>浪涌测试时 MOV 后面没有足够间距，打火短路。</li>
+      </ul>
+      <p class="rel"><a href="./creepage.html">爬电距离</a> · <a href="./clearance.html">电气间隙</a> · <a href="./hipot.html">耐压测试</a> · <a href="./surge.html">雷击浪涌</a></p>
+    </section>
+
+    <section class="cat-section" id="battery">
+      <h2>🔋 电池与储能</h2>
+      <p class="section-sub">从便携锂电池到储能柜，热失控、运输安全和高压绝缘是重点。</p>
+      <h3>核心标准</h3>
+      <ul>
+        <li>IEC 62133 / GB 31241：便携式电池安全；</li>
+        <li>UN 38.3：锂电池运输；</li>
+        <li>IEC 62619：工业电池；IEC 62620：储能电池；</li>
+        <li>UL 9540A / GB/T 36276：储能系统热失控与安全；</li>
+        <li>BMS 功能安全：IEC 61508 / ISO 13849 思路。</li>
+      </ul>
+      <h3>典型测试</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试</th><th>目的</th><th>常见关注点</th></tr></thead>
+        <tbody>
+          <tr><td>过充 / 过放</td><td>保护板动作</td><td>电芯电压、保护阈值、恢复逻辑</td></tr>
+          <tr><td>短路</td><td>切断短路电流</td><td>MOS、PTC、Fuse 配合</td></tr>
+          <tr><td>过温</td><td>热失控前切断</td><td>NTC 位置、充电温度范围</td></tr>
+          <tr><td>跌落 / 挤压 / 热冲击</td><td>滥用后不冒烟起火</td><td>结构强度、电芯固定</td></tr>
+          <tr><td>热失控扩散</td><td>单颗失效不烧穿整包</td><td>隔热、泄压、外壳防火</td></tr>
+          <tr><td>运输试验</td><td>UN 38.3 全套</td><td>包装、文件、标签</td></tr>
+        </tbody>
+      </table></div>
+      <h3>设计重点</h3>
+      <ul>
+        <li>保护板不是“有就行”，要验证单一保护失效时仍有第二道保护；</li>
+        <li>电芯一致性差比单颗电芯性能差更危险；</li>
+        <li>热失控要按“一颗失效 → 不扩散到整包”设计，隔热和泄压缺一不可；</li>
+        <li>连接器要防反接、防短路，电池仓要防震动脱落；</li>
+        <li>运输文件、MSDS、UN38.3 报告和包装要一起准备。</li>
+      </ul>
+      <h3>认证路径</h3>
+      <p>便携电池：CB（IEC 62133）、UN38.3、PSE、KC、UL；储能系统：UL 9540A / IEC 62619 / GB/T 36276，按市场分别注册。</p>
+      <h3>常见坑</h3>
+      <ul>
+        <li>只做保护板功能测试，没做单一故障；</li>
+        <li>热失控试验后外壳烧穿或相邻电芯连锁；</li>
+        <li>运输时把电池当普通货物，缺 UN38.3 文件；</li>
+        <li>储能柜高压侧爬电/间隙按低压产品设计。</li>
+      </ul>
+      <p class="rel"><a href="./knowledge.html#battery">电池知识卡片</a> · <a href="./hazard-energy.html">能量危险</a> · <a href="./creepage.html">爬电距离</a> · <a href="./hazard-fire.html">防火</a></p>
+    </section>
+
+    <section class="cat-section" id="wireless">
+      <h2>📡 无线设备</h2>
+      <p class="section-sub">蓝牙、Wi-Fi、5G、IoT 设备：射频、EMC、电池与网络安全叠加。</p>
+      <h3>核心标准</h3>
+      <ul>
+        <li>欧盟 RED 2014/53/EU；美国 FCC Part 15；加拿大 ISED；日本 MIC/TELEC；</li>
+        <li>安全：IEC 62368-1 / GB 4943.1；</li>
+        <li>EMC：CISPR 32 / 35；</li>
+        <li>射频暴露：IEC 62209 / EN 50566（SAR）；</li>
+        <li>电池：IEC 62133；网络安全：RED 附件 / ETSI EN 303 645。</li>
+      </ul>
+      <h3>典型测试</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试</th><th>目的</th><th>常见关注点</th></tr></thead>
+        <tbody>
+          <tr><td>RF 输出 / 频段</td><td>验证发射功率与占用带宽</td><td>天线设计、认证频段</td></tr>
+          <tr><td>EMC</td><td>发射与抗扰</td><td>天线与主板布局、屏蔽</td></tr>
+          <tr><td>SAR</td><td>人体射频暴露</td><td>贴近身体的设备必测</td></tr>
+          <tr><td>安全</td><td>充电口、电池、外壳</td><td>USB 隔离、电池热失控</td></tr>
+          <tr><td>电池</td><td>充放电保护</td><td>快充协议、过温</td></tr>
+          <tr><td>网络安全</td><td>固件、通信、隐私</td><td>默认密码、更新机制</td></tr>
+        </tbody>
+      </table></div>
+      <h3>设计重点</h3>
+      <ul>
+        <li>天线位置和外壳材料会改变 RF 与 SAR，结构定型后再测；</li>
+        <li>无线充电线圈周围要控温，金属异物会局部发热；</li>
+        <li>USB 口与电池、主板高压间距不能省；</li>
+        <li>固件更新不能关闭安全功能，也不能绕过认证状态；</li>
+        <li>多模设备（Wi-Fi+蓝牙+5G）要按每个无线模块分别看认证。</li>
+      </ul>
+      <h3>认证路径</h3>
+      <p>欧盟 CE-RED → 美国 FCC + UL → 加拿大 ISED + cUL → 日本 TELEC/PSE → 韩国 KC → 台湾 NCC/BSMI → 东南亚各国无线注册。</p>
+      <h3>常见坑</h3>
+      <ul>
+        <li>SAR 评估遗漏，产品贴近身体才被发现；</li>
+        <li>天线与金属件距离改变导致发射超标；</li>
+        <li>无线充电过热没有温度保护；</li>
+        <li>软件更新后射频参数漂移。</li>
+      </ul>
+      <p class="rel"><a href="./emc.html">EMC 课程</a> · <a href="./knowledge.html#battery">电池</a> · <a href="./hazard-radiation.html">辐射危险</a> · <a href="./knowledge.html#software">软件安全</a></p>
+    </section>
+
+    <section class="cat-section" id="medical">
+      <h2>🏥 医疗设备</h2>
+      <p class="section-sub">安规要求最严的品类：患者漏电流、MOPP/MOOP、风险管理与生物相容性缺一不可。</p>
+      <h3>核心标准</h3>
+      <ul>
+        <li>IEC 60601-1 / GB 9706.1：医用电气设备安全；</li>
+        <li>IEC 60601-1-2：医用 EMC；</li>
+        <li>ISO 14971 / GB/T 42062：风险管理；</li>
+        <li>IEC 62304：医疗器械软件；IEC 62366：可用性；</li>
+        <li>ISO 10993：生物相容性。</li>
+      </ul>
+      <h3>典型测试</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试</th><th>目的</th><th>常见关注点</th></tr></thead>
+        <tbody>
+          <tr><td>患者/外壳漏电流</td><td>接触患者与操作者的电流</td><td>正常与单一故障状态</td></tr>
+          <tr><td>介电强度</td><td>MOPP/MOOP 绝缘</td><td>应用部分、电源隔离</td></tr>
+          <tr><td>接地阻抗</td><td>保护接地有效性</td><td>I 类医疗设备</td></tr>
+          <tr><td>EMC</td><td>不能干扰其它医疗设备</td><td>抗扰等级更高</td></tr>
+          <tr><td>风险管理</td><td>危害分析与控制</td><td>ISO 14971 全流程文档</td></tr>
+          <tr><td>生物相容性</td><td>接触患者材料安全</td><td>细胞毒性、致敏、刺激</td></tr>
+        </tbody>
+      </table></div>
+      <h3>设计重点</h3>
+      <ul>
+        <li>患者漏电流限值远严于家电，设计余量至少留 50%；</li>
+        <li>应用部分（BF/CF）决定绝缘和漏电流要求，先定类型再设计；</li>
+        <li>所有安全功能都要做单一故障分析，不能只测正常状态；</li>
+        <li>软件按 IEC 62304 分级，安全相关功能要可追溯；</li>
+        <li>接触患者材料从选型就要查 ISO 10993，不能最后才送测。</li>
+      </ul>
+      <h3>认证路径</h3>
+      <p>中国 NMPA 注册 → 欧盟 CE-MDR（公告机构）→ 美国 FDA 510(k)/PMA → 其它国家按当地注册。医疗不是自我声明，认证周期和文档要求要提前规划。</p>
+      <h3>常见坑</h3>
+      <ul>
+        <li>漏电流按家电思维设计，测试才发现超限；</li>
+        <li>风险分析文档和测试报告对不上；</li>
+        <li>接触患者部件没做生物相容性；</li>
+        <li>软件更新后没走变更控制。</li>
+      </ul>
+      <p class="rel"><a href="./knowledge.html#leakage">泄漏电流</a> · <a href="./knowledge.html#risk">风险管理</a> · <a href="./knowledge.html#biocompat">生物相容性</a> · <a href="./knowledge.html#software">软件安全</a></p>
+    </section>
+
+    <section class="cat-section" id="machinery">
+      <h2>🏭 工业机械</h2>
+      <p class="section-sub">除了电气安全，还要懂机械防护、功能安全等级，现场污染等级通常按 3 设计。</p>
+      <h3>核心标准</h3>
+      <ul>
+        <li>IEC 60204-1 / GB 5226.1：机械电气设备；</li>
+        <li>ISO 13849-1 / IEC 62061：控制系统安全（PL/SIL）；</li>
+        <li>ISO 13850：急停；ISO 13857：安全距离；</li>
+        <li>IEC 60079 / GB 3836：防爆；</li>
+        <li>EMC：IEC 61000-6-2 / -6-4 或产品专用标准。</li>
+      </ul>
+      <h3>典型测试</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试</th><th>目的</th><th>常见关注点</th></tr></thead>
+        <tbody>
+          <tr><td>介电强度 / 接地</td><td>电气安全基础</td><td>控制柜、电机、现场接线</td></tr>
+          <tr><td>EMC</td><td>现场抗干扰与发射</td><td>变频器、伺服、通信线</td></tr>
+          <tr><td>急停响应</td><td>安全功能可靠</td><td>复位逻辑、旁路防护</td></tr>
+          <tr><td>安全距离 / 联锁</td><td>防止进入危险区</td><td>开口尺寸、传感器位置</td></tr>
+          <tr><td>IP 防护</td><td>粉尘、水、油污</td><td>控制柜、电机、接插件</td></tr>
+          <tr><td>功能安全验证</td><td>PL/SIL 达标</td><td>MTTFd、DC、结构类别</td></tr>
+        </tbody>
+      </table></div>
+      <h3>设计重点</h3>
+      <ul>
+        <li>安全距离是算出来的，不是“看着够”；</li>
+        <li>急停不能只做按钮，要验证断电、断线、复位都安全；</li>
+        <li>现场粉尘潮湿，污染等级按 3 设计，爬电/间隙要留余量；</li>
+        <li>变频器/伺服是 EMC 重灾区，屏蔽、接地、滤波一起规划；</li>
+        <li>危险区域设备要按防爆型式（本安、隔爆等）设计。</li>
+      </ul>
+      <h3>认证路径</h3>
+      <p>欧盟 CE-MD（机械指令）+ EMC + 低电压（如适用）→ UKCA → 中国 GB 认证/检验 → 防爆设备按 IECEx / ATEX / GB 3836。功能安全等级要由评估机构确认。</p>
+      <h3>常见坑</h3>
+      <ul>
+        <li>防护罩开口过大，手指/工具可伸入；</li>
+        <li>急停被旁路或复位逻辑不安全；</li>
+        <li>现场粉尘潮湿却按污染等级 2 设计；</li>
+        <li>安全回路没有失效模式分析。</li>
+      </ul>
+      <p class="rel"><a href="./knowledge.html#mechanical">机械防护</a> · <a href="./knowledge.html#functional">功能安全</a> · <a href="./knowledge.html#explosion">防爆</a> · <a href="./creepage.html">爬电距离</a></p>
+    </section>
+
+    <section class="cat-section" id="tools">
+      <h2>🔧 电动工具</h2>
+      <p class="section-sub">双重绝缘结构 + 电池保护 + 机械耐久，是电动工具的三座大山。</p>
+      <h3>核心标准</h3>
+      <ul>
+        <li>IEC 62841 / GB 3883：手持式、可移式电动工具安全；</li>
+        <li>IEC 62133：工具电池包；</li>
+        <li>EMC：CISPR 14-1 / 14-2；</li>
+        <li>功能安全：ISO 13849（部分工具的安全功能）。</li>
+      </ul>
+      <h3>典型测试</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试</th><th>目的</th><th>常见关注点</th></tr></thead>
+        <tbody>
+          <tr><td>双重绝缘耐压</td><td>基本 + 附加绝缘</td><td>外壳开孔、内部金属桥接</td></tr>
+          <tr><td>温升</td><td>电机、手柄、电池仓</td><td>堵转、连续负载</td></tr>
+          <tr><td>耐久</td><td>长期使用可靠性</td><td>开关、碳刷、齿轮</td></tr>
+          <tr><td>跌落 / 冲击</td><td>结构强度</td><td>外壳、电池仓、开关</td></tr>
+          <tr><td>IP 防护</td><td>粉尘与水分</td><td>换向器火花与粉尘隔离</td></tr>
+          <tr><td>电池充放电</td><td>过充/过流/过温</td><td>快充、低温充电</td></tr>
+        </tbody>
+      </table></div>
+      <h3>设计重点</h3>
+      <ul>
+        <li>双重绝缘的“两层”必须独立，螺钉、金属支架不能桥接；</li>
+        <li>换向器火花要远离可燃粉尘和外壳开孔；</li>
+        <li>电池包保护要覆盖过充、过放、过流、过温，不只做短路；</li>
+        <li>手柄握持区温升直接决定可用性和安全性；</li>
+        <li>跌落试验后开关、电池连接、绝缘都不能失效。</li>
+      </ul>
+      <h3>认证路径</h3>
+      <p>中国 CCC → 欧盟 CE + GS（渠道常见）→ 美国 UL/ETL → 日本 PSE → 韩国 KC → 澳洲 RCM。电动工具在 CB 体系下可转证多个市场。</p>
+      <h3>常见坑</h3>
+      <ul>
+        <li>外壳开孔破坏双重绝缘结构；</li>
+        <li>电池包只有过充保护，没有过温保护；</li>
+        <li>换向器火花引燃粉尘环境；</li>
+        <li>跌落试验后电池连接松动。</li>
+      </ul>
+      <p class="rel"><a href="./hipot.html">耐压测试</a> · <a href="./knowledge.html#battery">电池</a> · <a href="./knowledge.html#ip">IP 防护</a> · <a href="./hazard-mechanical.html">机械危险</a></p>
+    </section>
+
+    <section>
+      <h2>公共地基（所有品类都要会）</h2>
+      <p class="section-sub">不管做什么品类，下面这些模块都是先决条件：</p>
+      <div class="grid grid-4">
+        <article class="card"><h3>电气间隙</h3><p>空气直线距离，抗冲击击穿。</p><p><a class="btn" href="./clearance.html">进入详解</a></p></article>
+        <article class="card"><h3>爬电距离</h3><p>表面路径，抗漏电起痕。</p><p><a class="btn" href="./creepage.html">进入详解</a></p></article>
+        <article class="card"><h3>耐压测试</h3><p>绝缘体系 + 试验电压怎么定。</p><p><a class="btn" href="./hipot.html">进入详解</a></p></article>
+        <article class="card"><h3>雷击浪涌</h3><p>冲击电压分类 + SPD 防护。</p><p><a class="btn" href="./surge.html">进入详解</a></p></article>
+        <article class="card"><h3>泄漏电流与接地</h3><p>接触电流、接地连续性。</p><p><a class="btn" href="./knowledge.html#leakage">知识卡片</a></p></article>
+        <article class="card"><h3>IP 防护</h3><p>第一位防固体、第二位防水。</p><p><a class="btn" href="./knowledge.html#ip">详细规则</a></p></article>
+        <article class="card"><h3>防火与材料</h3><p>阻燃、灼热丝、CTI、RTI。</p><p><a class="btn" href="./materials.html">材料库</a></p></article>
+        <article class="card"><h3>产品类别</h3><p>I 类接地、II 类双重绝缘、III 类 SELV。</p><p><a class="btn" href="./product-classes.html">结构图</a></p></article>
+      </div>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文和各国监管要求为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./product-categories.html">📦<span>品类</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>环境试验概念页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="湿热、温循、振动、盐雾、老化试验，以及它们和安规试验的先后关系。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 环境与可靠性试验</p>
+      <h1>环境试验概念页</h1>
+      <p class="lead">安规不是“出厂那一刻合格”，而是“用了一段时间、经历各种环境后仍然安全”。</p>
+      <p style="margin-top:10px"><a class="btn" href="./knowledge.html#environment">📋 查看完整知识卡片（规则与用途）</a></p>
+    </div>
+
+    <section>
+      <h2>1. 常见环境试验</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>试验</th><th>模拟什么</th><th>和安规的关系</th></tr></thead>
+          <tbody>
+            <tr><td>湿热试验</td><td>高湿环境、凝露</td><td>湿热后测耐压/泄漏/爬电，是家电标准必备</td></tr>
+            <tr><td>温度循环</td><td>冷热交替</td><td>结构应力、焊点、密封失效导致间距变化</td></tr>
+            <tr><td>振动/冲击</td><td>运输、使用振动</td><td>螺丝松动、元件脱落可能短路</td></tr>
+            <tr><td>盐雾</td><td>沿海腐蚀</td><td>金属件腐蚀影响接地与间距</td></tr>
+            <tr><td>老化/耐久</td><td>长期使用</td><td>材料老化、绝缘性能下降</td></tr>
+            <tr><td>IK 冲击试验</td><td>外部机械冲击</td><td>外壳抗冲击能力；IK 等级决定冲击能量，试验后复核绝缘、间距与可触及性</td></tr>
+            <tr><td>高低温工作</td><td>极限温度</td><td>温升、保护动作点验证</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. 试验顺序：先环境后安规</h2>
+      <p>典型逻辑：<b>环境预处理 → 安规测试</b>。例如家电湿热试验后进行耐压和泄漏电流测试；车载先做温度循环/振动再做绝缘耐压。顺序错了，结果没有意义。</p>
+    </section>
+
+    <section>
+      <h2>3. 设计应对</h2>
+      <ul class="check-list">
+        <li>密封与透气阀：防止凝露和压差；</li>
+        <li>螺丝防松：垫圈、螺纹胶、防松结构；</li>
+        <li>金属件防腐：镀层、材料选择；</li>
+        <li>高温环境降额：元件和散热设计按上限温度；</li>
+        <li>老化试验后复核绝缘、接地和功能。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./hipot.html">耐压测试</a>
+        <a class="tag" href="./knowledge.html#ip">IP 防护</a>
+        <a class="tag" href="./hazard-thermal.html">热量危险</a>
+        <a class="tag" href="./knowledge.html#grounding">接地</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

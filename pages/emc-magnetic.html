@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>工频磁场抗扰深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="工频磁场（IEC 61000-4-8）：试验等级、失效机理、磁屏蔽与布局整改。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./emc.html">EMC 系统课程</a> / 工频磁场深度页</p>
+      <h1>工频磁场抗扰（IEC 61000-4-8）</h1>
+      <p class="lead">50/60Hz 交流磁场来自变压器、电机和电力线，专门考验含磁敏元件的设备。</p>
+    </div>
+
+    <section>
+      <h2>1. 试验等级</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>等级</th><th class="num">磁场强度</th><th>典型环境</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td class="num">1 A/m</td><td>远离电力设备的住宅</td></tr>
+            <tr><td>2</td><td class="num">3 A/m</td><td>普通商业/住宅</td></tr>
+            <tr><td>3</td><td class="num">10 A/m</td><td>工业区域</td></tr>
+            <tr><td>4</td><td class="num">30 A/m</td><td>靠近大电流母线</td></tr>
+            <tr><td>5</td><td class="num">100 A/m</td><td>极端环境（如电炉附近）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>试验用感应线圈产生均匀磁场，对被试设备在三个正交方向施加，连续场或短时场。</p>
+    </section>
+
+    <section>
+      <h2>2. 失效机理与受影响元件</h2>
+      <ul>
+        <li>霍尔传感器、磁阻传感器：磁场偏移导致读数错误；</li>
+        <li>CRT 显示器：画面抖动、色偏（老设备）；</li>
+        <li>开关电源的磁元件：可能进入饱和或产生噪声；</li>
+        <li>音频设备：工频哼声；</li>
+        <li>主要是“性能下降”，通常不会损坏硬件。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 整改措施</h2>
+      <ul class="check-list">
+        <li>磁敏元件远离变压器、电机、大电流走线，优先在布局阶段解决；</li>
+        <li>传感器方向与磁场正交摆放，使感应最小；</li>
+        <li>敏感区域加磁屏蔽（坡莫合金/高导磁材料），注意屏蔽层不能形成涡流短路；</li>
+        <li>大电流回路尽量短而宽，减小自身磁场；</li>
+        <li>软件：多次采样平均、剔除工频周期干扰（如 50Hz 同步采样）；</li>
+        <li>电源与信号分开布线，避免磁场耦合进高阻走线。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 常见误区</h2>
+      <ul>
+        <li>“磁场只影响老式 CRT”——霍尔传感器在现代产品里到处都是；</li>
+        <li>“外壳是金属就一定屏蔽磁场”——普通钢铝对低频磁场屏蔽有限，要高导磁材料；</li>
+        <li>“软件滤波万能”——信号已饱和时，软件救不回来。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./emc.html">EMC 系统课程</a>
+        <a class="tag" href="./emc-dips.html">电压暂降深度页</a>
+        <a class="tag" href="./knowledge.html#emc">EMC 基础</a>
+        <a class="tag" href="./knowledge.html#temperature">温升（磁元件）</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

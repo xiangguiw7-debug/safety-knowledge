@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>热量危险深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="热量危险：可触及表面温度、温升限值、热失控与散热设计。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 热量危险</p>
+      <h1>热量危险深度页</h1>
+      <p class="lead">三种后果：烫伤人、加速老化、引发热失控。三种都要靠温升与热设计管住。</p>
+    </div>
+
+    <section>
+      <h2>1. 三类热量问题</h2>
+      <ul>
+        <li><b>可触及表面温度</b>：金属和塑料限值不同，短时抓握与持续握持不同；</li>
+        <li><b>内部温升</b>：绕组、半导体、电容、线材各有限值，超了就是寿命和起火隐患；</li>
+        <li><b>热失控</b>：电池内部放热 > 散热时温度失控，可能起火爆炸。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. 关键要求与设计</h2>
+      <ul>
+        <li><b>温升测量</b>：热电偶法（表面）与电阻法（绕组更准）；在最低/最高输入电压、最不利负载下测；</li>
+        <li><b>可触及温度</b>：按标准表格查限值，必要时加防烫标识或隔热套；</li>
+        <li><b>材料耐温</b>：RTI 与球压试验，发热点附近材料要“顶得住”长期温度；</li>
+        <li><b>散热设计</b>：风道、散热片、热界面材料、降额；温度保护点要在危险前动作；</li>
+        <li><b>热失控管理</b>：电芯隔热、泄压阀、BMS 温度保护、热扩散阻断。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 试验项目</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>项目</th><th>验证什么</th></tr></thead>
+          <tbody>
+            <tr><td>温升试验</td><td>各部件在最不利工况下不超限</td></tr>
+            <tr><td>可触及温度</td><td>用户接触表面不烫伤</td></tr>
+            <tr><td>球压试验</td><td>热塑外壳在高温下不变形短路</td></tr>
+            <tr><td>热失控传播</td><td>单颗电池起火后不蔓延（GB 38031 / UL 9540A）</td></tr>
+            <tr><td>高温后耐压</td><td>热老化后绝缘仍合格（湿热/温循预处理）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 常见坑</h2>
+      <ul>
+        <li>“额定状态测一次就行”——最不利电压/负载才是红线；</li>
+        <li>“外壳不烫就行”——内部绕组和电解电容可能已经超限；</li>
+        <li>“散热片越大越好”——风道和热阻不解决，面积再大也没用；</li>
+        <li>“热保护点随便定”——要在最坏环境温度下仍有裕量。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./knowledge.html#temperature">温升知识卡</a>
+        <a class="tag" href="./materials.html">材料库（RTI）</a>
+        <a class="tag" href="./hazard-fire.html">防火深度页</a>
+        <a class="tag" href="./knowledge.html#battery">电池保护</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

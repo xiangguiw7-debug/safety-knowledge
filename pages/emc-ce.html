@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>传导发射（CE）深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="传导发射（Conducted Emission）：频段与限值、测量方法、差模/共模来源、滤波整改。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./emc.html">EMC 系统课程</a> / 传导发射深度页</p>
+      <h1>传导发射（Conducted Emission，CE）</h1>
+      <p class="lead">测的是设备“顺着电源线往外送”的骚扰电压，150kHz–30MHz。开关电源的谐波基本都藏在这里。</p>
+    </div>
+
+    <section>
+      <h2>1. 频段与限值（教学参考）</h2>
+      <p>用 LISN（线路阻抗稳定网络）在电源端口测量，检波方式为准峰值（QP）和平均值（AV），两个都要满足。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>频段</th><th class="num">CISPR 32 Class B 准峰值（示例）</th><th class="num">平均值（示例）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0.15 – 0.5 MHz</td><td class="num">66 – 56 dBµV（随频率递减）</td><td class="num">56 – 46 dBµV</td></tr>
+            <tr><td>0.5 – 5 MHz</td><td class="num">56 dBµV</td><td class="num">46 dBµV</td></tr>
+            <tr><td>5 – 30 MHz</td><td class="num">60 dBµV</td><td class="num">50 dBµV</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Class A（工业）限值更宽；具体以适用产品标准和版本为准。</p>
+    </section>
+
+    <section>
+      <h2>2. 噪声从哪来：差模 + 共模</h2>
+      <ul>
+        <li><b>差模</b>：开关电流纹波在输入环路（整流桥 → 电解电容 → 开关管）形成 L-N 之间的骚扰电压；</li>
+        <li><b>共模</b>：开关节点的高 dv/dt 经寄生电容（散热器、变压器初次级、PCB 对地）流到地，再沿电源线流出；</li>
+        <li>低频段（<1MHz）常以差模为主，高频段（>1MHz）常以共模为主——不是绝对，用“拔线/加共模电感”试验区分。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 硬件整改</h2>
+      <ul class="check-list">
+        <li>X 电容：跨 L-N，抑制差模；容量与耐压按认证元件选，故障时配合保险丝；</li>
+        <li>共模电感：抑制共模；注意饱和、漏感，以及 Y 电容的搭配；</li>
+        <li>Y 电容：提供共模回流路径，但容量受<a href="./knowledge.html#leakage">泄漏电流</a>限制；</li>
+        <li>输入 π 滤波：X 电容 + 共模电感 + X 电容，两级之间走线要短；</li>
+        <li>开关节点：加 RC 吸收、减小 di/dt、驱动缓坡；</li>
+        <li>散热器：接开关节点电位或接地要一致，避免“漂着”当天线；</li>
+        <li>布局：开关环路最小化，滤波元件靠近端口，输入地单点汇接。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 实战排查顺序</h2>
+      <ol>
+        <li>先看频谱图：超标是窄带尖峰（开关频率谐波）还是宽带包络（共模谐振）；</li>
+        <li>窄带 → 差模滤波/展频/开关频率调整；宽带 → 共模路径/屏蔽/接地；</li>
+        <li>一次只改一个元件，复测后记录，避免“改了一堆不知道谁起作用”；</li>
+        <li>关注温度：热机后滤波电感饱和或电容劣化，限值可能漂移。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>5. 常见误区</h2>
+      <ul>
+        <li>“滤波器越大越好”——电感会饱和、电容会谐振，要按电流与频段选；</li>
+        <li>“只看准峰值”——平均值超了同样不合格；</li>
+        <li>“传导发射是电源口的事”——信号线、负载线也会参与耦合。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./emc.html">EMC 系统课程</a>
+        <a class="tag" href="./emc-re.html">辐射发射深度页</a>
+        <a class="tag" href="./knowledge.html#dmcm">共模与差模</a>
+        <a class="tag" href="./knowledge.html#components">X/Y 电容</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

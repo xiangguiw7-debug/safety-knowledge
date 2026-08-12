@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>PCB 安规设计指南 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="PCB 安规设计：高压走线、开槽、挡墙、变压器布局、Y 电容位置与间距落地。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / PCB 安规设计指南</p>
+      <h1>PCB 安规设计指南</h1>
+      <p class="lead">把爬电/间隙从“查表数值”变成“图纸上的真实距离”。</p>
+    </div>
+
+    <section>
+      <h2>1. 间距落地规则</h2>
+      <ul>
+        <li>走线、焊盘、过孔、铜皮都算导电部件，距离要量“最近金属边缘”；</li>
+        <li>高压区与低压区先分区，再按查表值拉开（用<a href="./tools.html">计算工具</a>）；</li>
+        <li>过孔间距最容易被忽略：高压走线换层时，过孔与相邻铜皮都要查；</li>
+        <li>元件引脚、立式元件折弯后的实际距离要复核；</li>
+        <li>阻焊层不算爬电/间隙，但阻焊桥可以防止焊接桥连。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. 开槽与挡墙</h2>
+      <ul class="check-list">
+        <li>开槽只增加爬电距离，不影响电气间隙；</li>
+        <li>槽宽一般 ≥1mm，槽长方向要留够；两个槽之间留“筋”防板裂；</li>
+        <li>挡墙（结构件）可以把表面路径绕长，高度按爬电需求设计；</li>
+        <li>三防漆/涂覆需通过 IEC 60664-3 涂层试验才能计入距离。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 电源类关键布局</h2>
+      <ul>
+        <li><b>输入环路最小化</b>：整流桥 → 电容 → 开关管环路紧贴，减少 EMI；</li>
+        <li><b>Y 电容位置</b>：靠近开关节点或输入端口，路径短；容量受泄漏电流限制；</li>
+        <li><b>变压器</b>：初次级引脚间距查表，绕组间用挡墙胶带/三层绝缘线；</li>
+        <li><b>散热器</b>：与开关管连接方式（接高压节点还是地）要一致，避免悬浮当天线；</li>
+        <li><b>保险丝</b>：放在输入最前端，之后是 X 电容/MOV。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Layout 评审清单</h2>
+      <ul class="check-list">
+        <li>高压-低压分区清晰，跨区走线有隔离；</li>
+        <li>所有高压焊盘/过孔到邻近金属 ≥ 查表值；</li>
+        <li>开槽位置、宽度、长度与结构图一致；</li>
+        <li>Y/X 电容、保险丝、SPD 位置符合原理设计；</li>
+        <li>丝印标注“高压危险”与极性，方便装配/维修；</li>
+        <li>评审时用 DRC 规则设置间距并出图核对。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./clearance.html">电气间隙</a>
+        <a class="tag" href="./creepage.html">爬电距离</a>
+        <a class="tag" href="./tools.html">计算工具</a>
+        <a class="tag" href="./knowledge.html#components">X/Y 电容</a>
+        <a class="tag" href="./emc.html">EMC 课程</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

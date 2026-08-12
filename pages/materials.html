@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>材料数据库与选材指南 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="绝缘材料 CTI 数据库：PC、ABS、PC+ABS、PMMA、PA66、PBT 等；阻燃 vs CTI 权衡、UL 黄卡阅读指南、向供应商索取 CTI 报告清单。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .m-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 10px; }
+    .m-filter button {
+      background: var(--card); border: 1px solid var(--border); color: var(--fg);
+      border-radius: 999px; padding: 6px 13px; font-size: 13px; cursor: pointer; font-family: inherit;
+    }
+    .m-filter button:hover { border-color: var(--accent); color: var(--accent); }
+    .m-filter button.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .m-search {
+      width: 240px; max-width: 100%; padding: 8px 12px; border: 1px solid var(--border);
+      border-radius: 10px; background: var(--card); color: var(--fg); font-size: 14px;
+    }
+    .m-search:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+    .m-select {
+      padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px;
+      background: var(--card); color: var(--fg); font-size: 14px;
+    }
+    .check-list li { margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="../pages/learn.html">学习地图</a>
+        <a href="../pages/tools.html">计算工具</a>
+        <a href="../pages/industries.html">行业筛选</a>
+        <a href="../pages/materials.html" class="active">材料库</a>
+        <a href="../pages/glossary.html">术语表</a>
+        <a href="../pages/resources.html">资源</a>
+        <a href="../pages/refs.html">参考中心</a>
+        <a href="../pages/quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./materials.html">材料库</a>
+        <a href="./refs.html">参考中心</a> / 材料数据库</p>
+      <h1>材料数据库与选材指南</h1>
+      <p class="lead">查 CTI、材料组、阻燃等级、RTI，并学会读 UL 黄卡、向供应商要报告。所有 CTI 为典型区间（数据手册/行业经验），正式设计以供应商报告为准。</p>
+    </div>
+
+    <section>
+      <h2>材料数据库</h2>
+      <select id="mFamily" hidden><option value="all">全部</option><option value="PC">PC</option><option value="ABS">ABS</option><option value="PC+ABS">PC+ABS</option><option value="PMMA">PMMA</option><option value="PA66">PA66</option><option value="PBT">PBT</option><option value="PPS">PPS</option><option value="LCP">LCP</option><option value="陶瓷/云母">陶瓷/云母</option><option value="FR-4">FR-4</option></select>
+      <div class="m-filter" role="group" aria-label="按材料系列筛选">
+        <button type="button" class="active" data-mfamily="all" aria-pressed="true">全部</button>
+        <button type="button" data-mfamily="PC" aria-pressed="false">PC</button>
+        <button type="button" data-mfamily="ABS" aria-pressed="false">ABS</button>
+        <button type="button" data-mfamily="PC+ABS" aria-pressed="false">PC+ABS</button>
+        <button type="button" data-mfamily="PMMA" aria-pressed="false">PMMA</button>
+        <button type="button" data-mfamily="PA66" aria-pressed="false">PA66</button>
+        <button type="button" data-mfamily="PBT" aria-pressed="false">PBT</button>
+        <button type="button" data-mfamily="PPS" aria-pressed="false">PPS</button>
+        <button type="button" data-mfamily="LCP" aria-pressed="false">LCP</button>
+        <button type="button" data-mfamily="陶瓷/云母" aria-pressed="false">陶瓷/云母</button>
+        <button type="button" data-mfamily="FR-4" aria-pressed="false">FR-4</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0">
+        <input type="search" id="mSearch" class="m-search" placeholder="搜索材料名或备注，如 PC / V-0" aria-label="搜索材料">
+        <select id="mFr" class="m-select" aria-label="按阻燃等级筛选">
+          <option value="all">阻燃等级：全部</option>
+          <option value="V-0">V-0</option>
+          <option value="V-2">V-2</option>
+          <option value="HB">HB</option>
+          <option value="不燃">不燃</option>
+        </select>
+        <span id="mCount" style="font-size:13px;color:var(--muted)"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>系列</th>
+              <th>材料形态</th>
+              <th>阻燃</th>
+              <th class="num">典型 CTI</th>
+              <th>常见材料组</th>
+              <th class="num">RTI (°C)</th>
+              <th>备注</th>
+            </tr>
+          </thead>
+          <tbody id="mBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>阻燃 vs CTI：选材权衡表</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>材料</th><th>阻燃等级</th><th>对 CTI 的影响</th><th>选材建议</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>PC</td><td>V-0</td><td>CTI 明显下降（175–250）</td><td>按 Ⅲa 档设计；空间紧张时加挡墙/开槽</td></tr>
+            <tr><td>PC+ABS</td><td>V-0</td><td>CTI 约 200–300</td><td>外壳常用；与带电件保持足够爬电</td></tr>
+            <tr><td>ABS</td><td>V-0</td><td>CTI 约 200–350，波动大</td><td>先要报告再定档，不建议拍脑袋</td></tr>
+            <tr><td>PA66</td><td>V-0 / V-2</td><td>基材 CTI 较高（400–600）</td><td>电气性能好，但吸湿影响表面，湿热环境谨慎</td></tr>
+            <tr><td>PBT</td><td>V-0</td><td>CTI 约 400–500</td><td>连接器/骨架性价比高，优先于 PC 的地方很多</td></tr>
+            <tr><td>FR-4（PCB）</td><td>HB / V-0</td><td>CTI 约 175–300</td><td>按基材报告；阻焊层不能计入爬电</td></tr>
+            <tr><td>陶瓷 / 云母</td><td>不燃</td><td>CTI ≥ 600</td><td>高压隔离首选；注意脆性和装配应力</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-warn">
+        <strong>三条选材原则</strong>
+        <p>① 先满足阻燃等级，再核对 CTI——同一材料的 V-0 版和 HB 版，CTI 可能差 100–200V；② 空间不够时优先换材料、开槽、加挡墙，而不是降阻燃等级；③ 黄卡/TDS 上的 CTI 是“该牌号该颜色”的值，家族牌号的数据不能直接套用。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>UL 黄卡（Yellow Card）阅读指南</h2>
+      <p>UL 黄卡是材料阻燃与电气性能的权威证据，供应商几乎都能提供。核心栏位：</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>栏位</th><th>含义</th><th>怎么用</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>File Number（黄卡编号）</td><td>UL 档案号</td><td>可到 UL Product iQ 核对真伪与版本</td></tr>
+            <tr><td>CTI / PLC</td><td>相对漏电起痕指数及分级</td><td>PLC0 ≥600、PLC1 400–599、PLC2 250–399、PLC3 175–249、PLC4 100–174、PLC5 &lt;100</td></tr>
+            <tr><td>Flame Class（阻燃等级）</td><td>UL94 V-0/V-1/V-2/5VA/HB</td><td>注意等级对应的材料厚度，如 “V-0 @ 1.5mm”</td></tr>
+            <tr><td>HWI</td><td>热丝引燃（越低越好）</td><td>发热部件附近材料要关注</td></tr>
+            <tr><td>HAI</td><td>高电流电弧引燃（越低越好）</td><td>高压/电弧场景关注</td></tr>
+            <tr><td>RTI Elec / Mech</td><td>长期使用温度指数</td><td>电气与机械强度两个值，取低者用于评估</td></tr>
+            <tr><td>Color</td><td>颜色</td><td>同一牌号不同颜色，阻燃/CTI 可能不同</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>查询入口：<a href="https://iq.ulprospector.com/" target="_blank" rel="noopener">UL Product iQ</a>（需登录）或直接向供应商索取黄卡 PDF。拿到后先核对三件事：牌号与颜色、阻燃等级与厚度、CTI/PLC。</p>
+    </section>
+
+    <section>
+      <h2>向供应商索取 CTI 报告的清单</h2>
+      <ul class="check-list">
+        <li>要求提供 <b>IEC 60112 / GB/T 4207</b> 的 CTI 实测值，注明测试厚度与表面状态；</li>
+        <li>要求提供 <b>UL 黄卡编号</b>（File Number）与 PLC 等级；</li>
+        <li>确认 <b>UL94 阻燃等级</b>（V-0/V-1/V-2/HB/5VA）及其对应的材料厚度；</li>
+        <li>确认<b>增强/填充</b>：玻纤含量（GF%）、阻燃剂类型、是否无卤（Halogen-free）；</li>
+        <li>确认 <b>RTI</b>（电气/机械），评估长期使用温度；</li>
+        <li>要求供应商书面声明<b>材料组</b>（Ⅰ/Ⅱ/Ⅲa/Ⅲb）；</li>
+        <li>数据必须针对<b>你用的牌号和颜色</b>，不接受“同系列其他牌号”替代；</li>
+        <li>明确<b>变更通知</b>：配方、玻纤、阻燃剂变更时需重新提供数据；</li>
+        <li>保存证据：数据表版本号、报告编号、签发日期，留档备查。</li>
+      </ul>
+      <div class="callout callout-info">
+        <strong>最小可行要求</strong>
+        <p>如果只想要一个数：请对方在邮件里回复“该牌号 IEC 60112 CTI = ____ V（厚度 ____ mm），对应材料组 ____”，并附黄卡编号。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./knowledge.html#cti">CTI 知识卡片</a>
+        <a class="tag" href="./creepage.html">爬电距离详解</a>
+        <a class="tag" href="./tools.html">计算工具</a>
+        <a class="tag" href="./standards.html">标准文件</a>
+      </p>
+    </section>
+  </main>
+
+    <p style="margin:22px 0"><button type="button" class="btn" data-progress-key="materials">标记已读</button></p>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考（CTI 为典型区间，非保证值），正式产品设计、测试与认证请以最新版标准原文和供应商报告为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/progress.js"></script>
+  <script src="../assets/js/materials.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

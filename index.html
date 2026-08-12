@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>安规与可靠性知识课堂 - 七大安全因素 · 安全/EMC/环保认证 · 测试与可靠性</title>
+  <meta name="description" content="以防电击、能量危险、防火、热量、机械、辐射、化学七大安全因素为骨架的安规教学网站，覆盖安全、EMC、环保认证，并提供测试 SOP、可靠性测试计划与测试设备清单。">
+  <link rel="apple-touch-icon" href="./assets/icons/icon-192.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/icon-192.png">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/search.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "安规与可靠性知识课堂",
+    "description": "七大安全因素与安全/EMC/环保认证教学网站",
+    "inLanguage": "zh-CN",
+    "learningResourceType": "教学网站"
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="./index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="./index.html" class="active">首页</a>
+        <a href="./pages/learn.html">学习地图</a>
+        <a href="./pages/tools.html">计算工具</a>
+        <a href="./pages/industries.html">行业筛选</a>
+        <a href="./pages/materials.html">材料库</a>
+        <a href="./pages/glossary.html">术语表</a>
+        <a href="./pages/resources.html">资源</a>
+        <a href="./pages/refs.html">参考中心</a>
+        <a href="./pages/quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container" style="text-align:center">
+        <h1>按危害学安规，按标准做测试，按行业看可靠性</h1>
+        <p>七大安全因素 + 三类认证 + 测试与可靠性体系，把电气间隙、爬电距离、耐压、浪涌、可靠性试验这些“手段”放回它们该在的位置。</p>
+        <a class="btn" href="./pages/learn.html">打开学习地图</a>
+        <a class="btn" href="./pages/tools.html">打开计算工具</a>
+        <a class="btn" href="./pages/testing.html">打开测试中心</a>
+        <div class="site-search">
+          <input type="search" id="siteSearch" placeholder="搜索全站：爬电、浪涌、MOPP、CCC、污染等级…" aria-label="站内搜索">
+          <div id="searchResults" class="search-results" hidden></div>
+        </div>
+        <div class="hero-tags">
+          <span>防电击</span><span>能量危险</span><span>防火</span><span>热量危险</span>
+          <span>机械危险</span><span>辐射危险</span><span>化学危险</span><span>测试 SOP</span><span>可靠性测试</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <h2 class="section-title">七大安全因素</h2>
+      <p class="section-sub">每一个因素回答三件事：危险是什么、怎么防护、靠什么认证。</p>
+
+      <div class="grid grid-4">
+        <article class="card hazard-card">
+          <h3>⚡ 防电击</h3>
+          <p>人体接触危险电压/电流造成伤害。距离、绝缘、接地、限压都为了它。</p>
+          <p><a class="tag" href="./pages/clearance.html">电气间隙</a><a class="tag" href="./pages/creepage.html">爬电距离</a><a class="tag" href="./pages/hipot.html">绝缘与耐压</a><a class="tag" href="./pages/knowledge.html#leakage">泄漏电流</a><a class="tag" href="./pages/knowledge.html#selv">SELV</a><a class="tag" href="./pages/surge.html">过电压/浪涌</a></p>
+          <p><a class="btn" href="./pages/learn.html#shock">进入防电击模块</a></p>
+        </article>
+        <article class="card hazard-card">
+          <h3>💥 能量危险</h3>
+          <p>大电流、储能、电弧本身就能造成烧伤和点燃，即使电压不高。</p>
+          <p><a class="tag" href="./pages/knowledge.html#energy">限能电路</a><a class="tag" href="./pages/knowledge.html#components">保险丝</a><a class="tag" href="./pages/knowledge.html#battery">电池能量</a><a class="tag" href="./pages/knowledge.html#flame">电弧引燃</a></p>
+          <p><a class="btn" href="./pages/learn.html#energy">进入能量模块</a></p>
+        </article>
+        <article class="card hazard-card">
+          <h3>🔥 防火</h3>
+          <p>故障着火要限制在局部，外壳和材料必须“不助燃、不传播”。</p>
+          <p><a class="tag" href="./pages/knowledge.html#flame">阻燃等级</a><a class="tag" href="./pages/materials.html">材料库</a><a class="tag" href="./pages/knowledge.html#temperature">耐热</a><a class="tag" href="./pages/knowledge.html#components">保险丝配合</a></p>
+          <p><a class="btn" href="./pages/learn.html#fire">进入防火模块</a></p>
+        </article>
+        <article class="card hazard-card">
+          <h3>🌡️ 热量危险</h3>
+          <p>可触及表面烫伤、内部过热老化、电池热失控，靠温升与散热设计控制。</p>
+          <p><a class="tag" href="./pages/knowledge.html#temperature">温升限值</a><a class="tag" href="./pages/materials.html">RTI 耐温</a><a class="tag" href="./pages/knowledge.html#battery">热失控</a><a class="tag" href="./pages/hipot.html">高温后耐压</a></p>
+          <p><a class="btn" href="./pages/learn.html#thermal">进入热量模块</a></p>
+        </article>
+        <article class="card hazard-card">
+          <h3>⚙️ 机械危险</h3>
+          <p>运动部件、锐边、跌落、不稳定性，是工业设备和电动工具的常见考点。</p>
+          <p><a class="tag" href="./pages/knowledge.html#mechanical">防护与联锁</a><a class="tag" href="./pages/knowledge.html#functional">功能安全</a><a class="tag" href="./pages/industries.html#machinery">工业机械</a><a class="tag" href="./pages/industries.html#tools">电动工具</a></p>
+          <p><a class="btn" href="./pages/learn.html#mech">进入机械模块</a></p>
+        </article>
+        <article class="card hazard-card">
+          <h3>☢️ 辐射危险</h3>
+          <p>光辐射、射频暴露、激光、电离辐射，各有各的标准和分级。</p>
+          <p><a class="tag" href="./pages/knowledge.html#optical">光生物安全</a><a class="tag" href="./pages/knowledge.html#emc">射频/EMC</a><a class="tag" href="./pages/industries.html#lighting">灯具行业</a></p>
+          <p><a class="btn" href="./pages/learn.html#radiation">进入辐射模块</a></p>
+        </article>
+        <article class="card hazard-card">
+          <h3>🧪 化学危险</h3>
+          <p>有害物质、电解液、阻燃剂分解产物，靠材料管控与环保法规约束。</p>
+          <p><a class="tag" href="./pages/knowledge.html#rohs">RoHS/REACH</a><a class="tag" href="./pages/materials.html">材料库</a><a class="tag" href="./pages/knowledge.html#biocompat">生物相容性</a></p>
+          <p><a class="btn" href="./pages/learn.html#chemical">进入化学模块</a></p>
+        </article>
+      </div>
+
+      <h2 class="section-title">三类认证主线</h2>
+      <p class="section-sub">知识对不上认证，学了也不知道考什么。</p>
+      <div class="grid grid-4">
+        <article class="card">
+          <h3>🛡️ 安全认证</h3>
+          <p>CCC、CE-LVD、UL、PSE、KC、BIS、SASO、CB 等。</p>
+          <p><a class="btn" href="./pages/certification.html">查认证要求</a></p>
+        </article>
+        <article class="card">
+          <h3>📡 电磁兼容认证</h3>
+          <p>CE-EMC、FCC、CISPR、RED、车载 CISPR 25。</p>
+          <p><a class="btn" href="./pages/surge.html">学浪涌</a> <a class="btn" href="./pages/knowledge.html#emc">EMC 基础</a></p>
+        </article>
+        <article class="card">
+          <h3>🌱 环保认证</h3>
+          <p>RoHS、REACH、WEEE、能效/ErP、无卤、电池指令。</p>
+          <p><a class="btn" href="./pages/knowledge.html#rohs">环保知识</a> <a class="btn" href="./pages/standards.html">标准入口</a></p>
+        </article>
+        <article class="card">
+          <h3>🗺️ 怎么学</h3>
+          <p>先建框架，再按危害逐项学，最后用工具和测验自检。</p>
+          <p><a class="btn btn-primary" href="./pages/learn.html">打开学习地图</a></p>
+        </article>
+      </div>
+
+      <section>
+        <h2 class="section-title">测试与可靠性</h2>
+        <p class="section-sub">从执行到计划：SOP 告诉你怎么做，可靠性计划告诉你哪些行业做哪些。</p>
+        <div class="grid grid-4">
+          <article class="card"><h3>🔬 测试 SOP 中心</h3><p>62 份执行级 SOP：设备、环境、步骤、判定、记录表、检查表。</p><p><a class="btn" href="./pages/sop.html">打开 SOP</a></p></article>
+          <article class="card"><h3>📈 可靠性测试计划中心</h3><p>按行业和测试类别筛选，含标准、设备、条件、方法与判定。</p><p><a class="btn" href="./pages/reliability.html">打开可靠性</a></p></article>
+          <article class="card"><h3>🧰 测试设备与工具</h3><p>63 项测试对应的设备、辅助用品、环境与判定总表。</p><p><a class="btn" href="./pages/test-equipment.html">打开设备清单</a></p></article>
+          <article class="card"><h3>🗺️ 内容地图</h3><p>学习、测试、认证、资源四条线统一入口。</p><p><a class="btn" href="./pages/map.html">打开内容地图</a></p></article>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">学习资源</h2>
+        <div class="card">
+          <p>七大因素深度页、案例库、PCB 设计指南、设计师指南、项目工坊、FAQ、速查海报等资源已上线。</p>
+          <p><a class="btn btn-primary" href="./pages/resources.html">打开资源中心</a> <a class="btn" href="./pages/workshop.html">项目工坊</a> <a class="btn" href="./en/index.html">English</a></p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">学习进度</h2>
+        <div class="card" id="progressCard">加载中…</div>
+      </section>
+    </div>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./pages/verification.html">数值核对表</a>；发现错误欢迎<a href="./pages/feedback.html">反馈</a>。</p>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./pages/changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./pages/feedback.html">纠错反馈</a> · <a href="./pages/data.html">数据备份</a> · <a href="./en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <nav class="bottom-nav" aria-label="底部导航">
+    <a href="./index.html">🏠<span>首页</span></a>
+    <a href="./pages/learn.html">📚<span>学习</span></a>
+    <a href="./pages/testing.html">🧪<span>测试</span></a>
+    <a href="./pages/resources.html">🗂️<span>资源</span></a>
+    <a href="./pages/quiz.html">✅<span>测验</span></a>
+  </nav>
+
+  <script src="./assets/js/theme.js"></script>
+  <script src="./assets/js/main.js"></script>
+  <script src="./assets/js/glossary-tip.js"></script>
+  <script src="./assets/js/search.js"></script>
+  <script src="./assets/js/progress.js"></script>
+  <script src="./assets/js/ux.js"></script>
+  <script src="./assets/js/nav.js"></script>
+  <script src="./assets/js/breadcrumb.js"></script>
+</body>
+</html>

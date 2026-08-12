@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>机械危险深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="机械危险：防护罩、安全距离、联锁、急停、稳定性与跌落。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 机械危险</p>
+      <h1>机械危险深度页</h1>
+      <p class="lead">运动部件、锐边、跌落、不稳定性——机械安全靠“算出来的距离”和“失效安全的联锁”。</p>
+    </div>
+
+    <section>
+      <h2>1. 危害类型</h2>
+      <ul>
+        <li><b>运动部件</b>：旋转、往复、剪切、夹持点；</li>
+        <li><b>锐边尖角</b>：可触及边缘、毛刺、金属薄边；</li>
+        <li><b>不稳定/跌落</b>：倾倒、自由跌落、结构断裂；</li>
+        <li><b>抛射</b>：飞屑、断裂件飞出（电动工具/破壁机）。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. 防护设计</h2>
+      <ul class="check-list">
+        <li><b>安全距离</b>：按 ISO 13857 查开口尺寸与伸入距离的对应表，不是“看着够”；</li>
+        <li><b>防护罩</b>：优先固定式；需要频繁打开的地方用联锁；</li>
+        <li><b>联锁</b>：断电/断线/失效时回到安全状态，打开罩子立即停机；</li>
+        <li><b>急停</b>：位置可达、红色、复位后不得自动重启；</li>
+        <li><b>稳定性</b>：倾斜/推力试验，重心和支脚设计；</li>
+        <li><b>锐边处理</b>：倒角、包边、隐藏；金属件做去毛刺。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 与功能安全的关系</h2>
+      <p>防护不是“装个罩子”就完事：安全回路要按 PL（ISO 13849）或 SIL（IEC 62061）设计并验证，覆盖急停、光栅、联锁、双手控制等安全功能。汽车场景按 ISO 26262（ASIL）。</p>
+      <p class="lead">详见<a href="./knowledge.html#functional">功能安全知识卡</a>和<a href="./knowledge.html#mechanical">机械防护知识卡</a>。</p>
+    </section>
+
+    <section>
+      <h2>4. 试验项目</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>项目</th><th>验证什么</th></tr></thead>
+          <tbody>
+            <tr><td>防护距离测量</td><td>手指/手掌/手臂无法触及危险点</td></tr>
+            <tr><td>联锁功能验证</td><td>打开防护罩立即停机且安全</td></tr>
+            <tr><td>急停测试</td><td>任何状态下都能快速停止</td></tr>
+            <tr><td>稳定性/倾斜</td><td>不倾倒、不滚动</td></tr>
+            <tr><td>跌落/冲击</td><td>结构不破裂、带电件不可触及</td></tr>
+            <tr><td>锐边试验</td><td>不可触及或已处理</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. 常见坑</h2>
+      <ul>
+        <li>“防护罩开孔小就行”——要按开口尺寸查安全距离表；</li>
+        <li>“急停装了就安全”——回路可靠性、复位逻辑都要验证；</li>
+        <li>“联锁坏了最多停不了机”——必须失效安全；</li>
+        <li>“跌落测试过了就结实”——批次结构、螺丝松动都要覆盖。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./knowledge.html#mechanical">机械知识卡</a>
+        <a class="tag" href="./knowledge.html#functional">功能安全</a>
+        <a class="tag" href="./industries.html#machinery">工业机械</a>
+        <a class="tag" href="./industries.html#tools">电动工具</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

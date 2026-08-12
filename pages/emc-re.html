@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>辐射发射（RE）深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="辐射发射（Radiated Emission）：频段与限值、天线机理、环路与共模辐射、屏蔽整改。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./emc.html">EMC 系统课程</a> / 辐射发射深度页</p>
+      <h1>辐射发射（Radiated Emission，RE）</h1>
+      <p class="lead">测的是设备“向空间发射”的场强，30MHz–1GHz 甚至更高。所有高频电流环和线缆都可能成为天线。</p>
+    </div>
+
+    <section>
+      <h2>1. 频段与限值（教学参考）</h2>
+      <p>在电波暗室中用天线测量（水平/垂直极化），距离按标准为 3m 或 10m。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>频段</th><th class="num">CISPR 32 Class B（3m，示例）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>30 – 230 MHz</td><td class="num">40 dBµV/m（准峰值）</td></tr>
+            <tr><td>230 – 1000 MHz</td><td class="num">47 dBµV/m（准峰值）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Class A 在 10m 距离测量、限值不同；无线/车载还有各自频段。正式限值以适用标准为准。</p>
+    </section>
+
+    <section>
+      <h2>2. 天线机理：辐射不是“漏出来的”，是“长出来的”</h2>
+      <ul>
+        <li><b>差模环路辐射</b>：高频电流流经闭合环路（开关回路、晶振回路），环路面积越大辐射越强；</li>
+        <li><b>共模线缆辐射</b>：PCB 与线缆之间形成长“天线”，线缆上的共模电流辐射远大于差模环路；</li>
+        <li><b>谐振</b>：屏蔽罩、散热器、线缆长度在特定频率形成谐振峰；</li>
+        <li>开关节点、晶振、时钟、显示排线是常见源头。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 硬件整改</h2>
+      <ul class="check-list">
+        <li>环路面积最小化：电源回路、开关回路、晶振回路各自收紧，去耦电容就近；</li>
+        <li>地平面完整：不随意开槽，I/O 区预留回流路径；</li>
+        <li>线缆：加共模扼流圈/磁环，屏蔽层按信号类型单端或双端接地；</li>
+        <li>接口滤波：连接器处就近放共模电感、Y 电容、TVS；</li>
+        <li>展频/时钟抖动：把窄带尖峰摊平，注意系统抖动要求；</li>
+        <li>屏蔽罩：接地点密集、开口小于目标波长比例，内部吸收材料按需；</li>
+        <li>开关节点远离 I/O 与排线，必要时加金属屏蔽或缓坡驱动。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 实战排查顺序</h2>
+      <ol>
+        <li>先确认超标频率：是基频谐波（窄带）还是宽带包络；</li>
+        <li>用近场探头扫 PCB，定位辐射热点（开关管、电感、晶振、连接器）；</li>
+        <li>拔掉线缆/换线长判断共模贡献；</li>
+        <li>针对热点整改：环路、屏蔽、滤波、布局各试一步，逐项复测。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>5. 常见误区</h2>
+      <ul>
+        <li>“辐射是芯片内部来的”——多半是外部环路/线缆放大了它；</li>
+        <li>“金属外壳一定屏蔽”——接地点不足、缝隙过长照样漏；</li>
+        <li>“传导过了辐射就没问题”——两条路径，滤波器可能反而辐射；</li>
+        <li>“展频万能”——对窄带有效，对宽带包络无效。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./emc.html">EMC 系统课程</a>
+        <a class="tag" href="./emc-ce.html">传导发射深度页</a>
+        <a class="tag" href="./knowledge.html#dmcm">共模与差模</a>
+        <a class="tag" href="./emc-esd.html">ESD 深度页</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

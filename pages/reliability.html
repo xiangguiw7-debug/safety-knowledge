@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>可靠性测试计划中心 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="按行业和测试类别筛选可靠性测试：标准、目的、设备、条件、方法与判定，并提供行业测试计划。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .rel-card .meta { font-size: 12.5px; color: var(--muted); }
+    .rel-card .tag { font-size: 12px; }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .filter-bar button { background: var(--card); border: 1px solid var(--border); color: var(--fg); border-radius: 999px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-family: inherit; }
+    .filter-bar button.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .rel-search { width: 320px; max-width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); color: var(--fg); font-size: 14px; }
+    .plan-card { border-top: 3px solid var(--accent); }
+    .plan-card ol { padding-left: 20px; }
+    .rel-group-title { margin: 28px 0 10px; font-size: 18px; border-left: 4px solid var(--accent); padding-left: 10px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./product-categories.html">品类知识</a>
+        <a href="./sop.html">测试 SOP</a>
+        <a href="./reliability.html" class="active">可靠性</a>
+        <a href="./resources.html">资源</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / 可靠性测试中心</p>
+      <h1>可靠性测试计划中心</h1>
+      <p class="lead">先按行业筛选，再按测试类别归类；每项包含标准、目的、设备、条件、方法与判定，并可直达详细知识卡或 SOP。</p>
+    </div>
+
+    <div class="callout callout-info">
+      <strong>温度类里有什么</strong>
+      <p>环境温度试验（低温 / 高温 / 温循 / 温冲）之外，还收录 <b>温升测试（安规发热试验）</b>：它属于产品安全型式试验，不是 IEC 60068 环境可靠性试验，但常作为热设计验证和环境试验后的复测项，所以放在同一类方便对比。</p>
+    </div>
+
+    <div class="filter-bar" id="relFilter" role="group" aria-label="按行业筛选可靠性测试"></div>
+    <div class="filter-bar" id="relGroupFilter" role="group" aria-label="按测试类别筛选"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0">
+      <input type="search" id="relSearch" class="rel-search" placeholder="搜索：温循 / 盐雾 / 跌落 / UN38.3…" aria-label="搜索可靠性测试">
+    </div>
+    <p class="quiz-count" id="relCount"></p>
+    <div id="relSections"></div>
+
+    <section style="margin-top:36px" id="plans">
+      <h2>行业可靠性测试计划</h2>
+      <p class="section-sub">把行业常用测试串成推荐顺序，适合做研发验证和认证前自测。</p>
+      <div class="grid grid-4" id="planGrid"></div>
+    </section>
+
+    <section style="margin-top:36px">
+      <h2>怎么用</h2>
+      <ol>
+        <li>先选行业，例如“汽车电子”；</li>
+        <li>再看测试类别，例如“温度类”；</li>
+        <li>有详细知识卡或 SOP 链接的直接打开；</li>
+        <li>再到<a href="./test-equipment.html">测试设备清单</a>核对设备；</li>
+        <li>按产品标准确定样品数量、顺序和合格判据。</li>
+      </ol>
+      <p class="note" style="color:var(--muted);font-size:13px">行业推荐为教学参考，正式可靠性测试计划以产品标准、客户要求和认证方案为准。</p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/reliability-data.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script>
+    (function () {
+      var filterBox = document.getElementById("relFilter");
+      var groupBox = document.getElementById("relGroupFilter");
+      var sectionsBox = document.getElementById("relSections");
+      var planGrid = document.getElementById("planGrid");
+      var search = document.getElementById("relSearch");
+      var count = document.getElementById("relCount");
+      if (!filterBox || !sectionsBox || typeof RELIABILITY_INDUSTRIES === "undefined") return;
+      var currentIndustry = "all";
+      var currentGroup = "all";
+      var q = "";
+      var groupOrder = ["温度类","湿热类","机械类","防护/腐蚀类","环境专项类","老化/耐久类","电池专项类","包装运输类","加速寿命类"];
+
+      function esc(s) {
+        var d = document.createElement("div");
+        d.textContent = s == null ? "" : String(s);
+        return d.innerHTML;
+      }
+
+      function buildIndustryFilter() {
+        var html = '<button type="button" class="active" data-industry="all" aria-pressed="true">全部行业</button>';
+        RELIABILITY_INDUSTRIES.forEach(function (ind) {
+          html += '<button type="button" data-industry="' + esc(ind.id) + '" aria-pressed="false">' + esc(ind.name) + "</button>";
+        });
+        filterBox.innerHTML = html;
+        filterBox.querySelectorAll("button").forEach(function (b) {
+          b.addEventListener("click", function () {
+            currentIndustry = this.getAttribute("data-industry");
+            filterBox.querySelectorAll("button").forEach(function (x) {
+              var on = x === b;
+              x.classList.toggle("active", on);
+              x.setAttribute("aria-pressed", on ? "true" : "false");
+            });
+            render();
+          });
+        });
+      }
+
+      function buildGroupFilter() {
+        var html = '<button type="button" class="active" data-group="all" aria-pressed="true">全部类别</button>';
+        groupOrder.forEach(function (g) {
+          html += '<button type="button" data-group="' + esc(g) + '" aria-pressed="false">' + esc(g) + "</button>";
+        });
+        groupBox.innerHTML = html;
+        groupBox.querySelectorAll("button").forEach(function (b) {
+          b.addEventListener("click", function () {
+            currentGroup = this.getAttribute("data-group");
+            groupBox.querySelectorAll("button").forEach(function (x) {
+              var on = x === b;
+              x.classList.toggle("active", on);
+              x.setAttribute("aria-pressed", on ? "true" : "false");
+            });
+            render();
+          });
+        });
+      }
+
+      function filterTests() {
+        return RELIABILITY_TESTS.filter(function (t) {
+          if (currentIndustry !== "all" && t.industries.indexOf(currentIndustry) === -1) return false;
+          if (currentGroup !== "all" && t.group !== currentGroup) return false;
+          if (q) {
+            var hay = (t.name + " " + t.standards + " " + t.purpose + " " + t.equipment + " " + t.conditions).toLowerCase();
+            if (hay.indexOf(q) === -1) return false;
+          }
+          return true;
+        });
+      }
+
+      function cardHtml(t) {
+        var indNames = t.industries.map(function (id) {
+          var ind = RELIABILITY_INDUSTRIES.filter(function (x) { return x.id === id; })[0];
+          return ind ? '<span class="tag">' + esc(ind.name) + "</span>" : "";
+        }).join(" ");
+        var links = "";
+        if (t.detailed) links += '<a class="btn" href="' + esc(t.detailed) + '">详细知识卡</a> ';
+        if (t.sopId) links += '<a class="btn" href="./sop-' + esc(t.sopId) + '.html">打开 SOP</a>';
+        return '<article class="card rel-card">' +
+          "<h3>" + esc(t.name) + "</h3>" +
+          '<p class="meta"><b>标准：</b>' + esc(t.standards) + "</p>" +
+          "<p><b>目的：</b>" + esc(t.purpose) + "</p>" +
+          "<p><b>设备：</b>" + esc(t.equipment) + "</p>" +
+          "<p><b>条件：</b>" + esc(t.conditions) + "</p>" +
+          "<p><b>方法：</b>" + esc(t.method) + "</p>" +
+          "<p><b>判定：</b>" + esc(t.judgment) + "</p>" +
+          (links ? "<p>" + links + "</p>" : "") +
+          '<p class="meta">' + indNames + "</p>" +
+          "</article>";
+      }
+
+      function render() {
+        var list = filterTests();
+        var html = "";
+        if (currentGroup !== "all") {
+          html = '<div class="grid grid-4">' + list.map(cardHtml).join("") + "</div>";
+        } else {
+          groupOrder.forEach(function (g) {
+            var sub = list.filter(function (t) { return t.group === g; });
+            if (!sub.length) return;
+            html += '<h3 class="rel-group-title">' + esc(g) + "</h3>";
+            html += '<div class="grid grid-4">' + sub.map(cardHtml).join("") + "</div>";
+          });
+        }
+        sectionsBox.innerHTML = html;
+        if (count) count.textContent = "显示 " + list.length + " / " + RELIABILITY_TESTS.length + " 项可靠性测试";
+      }
+
+      function renderPlans() {
+        if (!planGrid || typeof RELIABILITY_PLANS === "undefined") return;
+        planGrid.innerHTML = RELIABILITY_PLANS.map(function (plan) {
+          var steps = plan.steps.map(function (s) {
+            var t = RELIABILITY_TESTS.filter(function (x) { return x.id === s.testId; })[0];
+            var name = t ? t.name : s.testId;
+            var link = t && t.sopId ? ' <a href="./sop-' + esc(t.sopId) + '.html">SOP</a>' : "";
+            return "<li><b>" + esc(name) + "</b>" + link + '<br><span class="note" style="font-size:12.5px">' + esc(s.note) + '</span></li>';
+          }).join("");
+          return '<article class="card plan-card">' +
+            "<h3>" + esc(plan.name) + "</h3>" +
+            "<p>" + esc(plan.summary) + "</p>" +
+            "<ol>" + steps + "</ol>" +
+            "<p><b>样品：</b>" + esc(plan.sample) + "</p>" +
+            "<p><b>注意：</b>" + esc(plan.notes) + "</p>" +
+            "</article>";
+        }).join("");
+      }
+
+      if (search) search.addEventListener("input", function () {
+        q = this.value.trim().toLowerCase();
+        render();
+      });
+
+      buildIndustryFilter();
+      buildGroupFilter();
+      render();
+      renderPlans();
+    })();
+  </script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./reliability.html">📈<span>可靠性</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

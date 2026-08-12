@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>雷击浪涌（Lightning Surge）详解 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="雷击浪涌完整教程：过电压来源、标准波形、试验等级、SPD 器件对比、多级防护设计与试验整改。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./learn.html">学习地图</a> / 雷击浪涌</p>
+      <h1>雷击浪涌（Lightning Surge）详解</h1>
+      <p class="lead">目标：学完这一章，你能读懂浪涌试验报告、看懂 SPD 选型、理解多级防护为什么必须这么排，并能自己排查“雷雨天打坏”的问题。</p>
+    </div>
+
+    <section>
+      <h2>1. 浪涌是什么：先分清来源和能量</h2>
+      <p>浪涌是电网线路上瞬间出现的<b>高电压、大电流脉冲</b>。它和 ESD、EFT 经常被混为一谈，但能量和防护完全不同：</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>事件</th><th>典型波形</th><th>能量</th><th>来源</th><th>主要防护</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>浪涌（Surge）</td><td>1.2/50μs、8/20μs</td><td>大（焦耳级）</td><td>雷击感应、电网操作</td><td>MOV/GDT/TVS + 泄放路径</td></tr>
+            <tr><td>电快速瞬变（EFT）</td><td>5/50ns 脉冲串</td><td>小</td><td>继电器、电机换向</td><td>滤波电容、共模电感</td></tr>
+            <tr><td>静电放电（ESD）</td><td>亚纳秒上升</td><td>极小</td><td>人体/设备接触放电</td><td>TVS、钳位、layout 防护</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>浪涌的三个来源：<b>直击雷</b>（能量最大，由建筑物防雷 IEC 62305 处理）、<b>感应雷</b>（雷击附近线路感应出脉冲，电子产品最常见）、<b>操作过电压</b>（大负载开关、电网故障）。</p>
+    </section>
+
+    <section>
+      <h2>2. 标准波形：学会读 1.2/50 和 8/20</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 640 240" role="img" aria-label="1.2/50 微秒浪涌电压波形示意图">
+          <line x1="45" y1="200" x2="610" y2="200" stroke="var(--border)" stroke-width="1.5"></line>
+          <line x1="45" y1="200" x2="45" y2="25" stroke="var(--border)" stroke-width="1.5"></line>
+          <path d="M45 200 C48 70 95 34 135 34 C175 34 205 60 245 102 C340 152 480 178 600 188" fill="none" stroke="var(--accent)" stroke-width="2.5"></path>
+          <line x1="45" y1="117" x2="245" y2="117" stroke="var(--muted)" stroke-width="1" stroke-dasharray="4 4"></line>
+          <text x="50" y="112" class="label">峰值（100%）</text>
+          <text x="245" y="112" class="label">半峰值（50%）</text>
+          <text x="110" y="222" class="label">波头：1.2μs</text>
+          <text x="270" y="222" class="label">波尾：50μs（从零到半峰值）</text>
+        </svg>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>波形</th><th>含义</th><th>典型场景</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1.2 / 50 μs</td><td>开路电压波：1.2μs 到峰值，50μs 衰减到半峰值</td><td>交流电源端口浪涌电压</td></tr>
+            <tr><td>8 / 20 μs</td><td>短路电流波：8μs 到峰值，20μs 到半峰值</td><td>SPD 放电电流能力测试</td></tr>
+            <tr><td>10 / 700 μs</td><td>较慢的电压波</td><td>电信/信号端口</td></tr>
+            <tr><td>组合波</td><td>1.2/50 电压波 + 8/20 电流波同源</td><td>IEC 61000-4-5 综合测试仪</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>读波形三要素：<b>波头</b>（上升快慢，决定器件响应速度要求）、<b>波尾</b>（持续时间，决定能量）、<b>开路/短路</b>（电压波还是电流波，决定测试耦合）。</p>
+    </section>
+
+    <section>
+      <h2>3. 试验怎么做：IEC 61000-4-5 / GB/T 17626.5</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>试验等级</th><th class="num">开路试验电压</th><th>典型环境</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td class="num">0.5 kV</td><td>保护良好的环境</td></tr>
+            <tr><td>2</td><td class="num">1.0 kV</td><td>一般环境</td></tr>
+            <tr><td>3</td><td class="num">2.0 kV</td><td>工业环境常见</td></tr>
+            <tr><td>4</td><td class="num">4.0 kV</td><td>严酷环境</td></tr>
+            <tr><td>X</td><td class="num">自定义</td><td>由产品标准或用户指定</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>关键细节：</p>
+      <ul>
+        <li><b>差模（线-线）</b>与<b>共模（线-地）</b>分别注入，耦合方式不同；常见源阻抗：线-线 2Ω、线-地 12Ω（以标准原文为准）；</li>
+        <li>电源端口、信号端口、直流端口分别有对应的耦合网络和等级；</li>
+        <li>试验要在最不利极性、相位（如 90°/270°）下各打若干次；</li>
+        <li>判据按性能等级 A–D：A 完全正常、B 允许自恢复、C 需要干预、D 损坏。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 保护器件：各自擅长什么</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>器件</th><th>响应速度</th><th>泄放能力</th><th>钳位特性</th><th>典型风险</th><th>适合位置</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>MOV（压敏电阻）</td><td>ns 级</td><td>大</td><td>有钳位电压</td><td>老化后漏流增大，最终短路着火</td><td>电源入口第一级</td></tr>
+            <tr><td>GDT（气体放电管）</td><td>μs 级</td><td>很大</td><td>导通后近似短路</td><td>续流问题，需配合限流</td><td>共模/户外第一级</td></tr>
+            <tr><td>TVS（瞬态二极管）</td><td>ps–ns 级</td><td>小</td><td>钳位精确</td><td>能量有限，易烧毁</td><td>电路末级精保护</td></tr>
+            <tr><td>TSS（半导体放电管）</td><td>快</td><td>中</td><td>导通后近似短路</td><td>多用于信号口</td><td>信号/通信端口</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>选型时看四个数：<b>工作电压</b>（不能误动作）、<b>钳位电压</b>（要低于后级耐压）、<b>能量/浪涌电流</b>（Imax、8/20μs）、<b>失效模式</b>（MOV 短路需过流保护，TVS 短路/开路按型号）。</p>
+    </section>
+
+    <section>
+      <h2>5. 多级防护：为什么不能只放一个 MOV</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 680 260" role="img" aria-label="多级浪涌防护示意图">
+          <rect x="25" y="95" width="95" height="60" rx="10" class="accent-fill"></rect>
+          <text x="72" y="118" text-anchor="middle">外部线路</text>
+          <text x="72" y="138" text-anchor="middle" class="label">入口</text>
+          <line x1="120" y1="125" x2="155" y2="125" class="accent flow"></line>
+          <rect x="155" y="95" width="95" height="60" rx="10" class="accent-fill"></rect>
+          <text x="202" y="118" text-anchor="middle">GDT/MOV</text>
+          <text x="202" y="138" text-anchor="middle" class="label">泄放大部分</text>
+          <line x1="250" y1="125" x2="280" y2="125" class="accent flow"></line>
+          <path d="M280 125 q10 -22 22 0 q12 -22 24 0" fill="none" stroke="var(--accent)" stroke-width="2"></path>
+          <text x="303" y="110" text-anchor="middle" class="label">退耦电感</text>
+          <line x1="328" y1="125" x2="360" y2="125" class="accent flow"></line>
+          <rect x="360" y="95" width="95" height="60" rx="10" class="accent-fill"></rect>
+          <text x="407" y="118" text-anchor="middle">TVS</text>
+          <text x="407" y="138" text-anchor="middle" class="label">精确钳位</text>
+          <line x1="455" y1="125" x2="490" y2="125" class="accent flow"></line>
+          <rect x="490" y="95" width="95" height="60" rx="10" class="accent-fill"></rect>
+          <text x="537" y="125" text-anchor="middle">负载电路</text>
+          <line x1="202" y1="155" x2="202" y2="215" class="muted flow"></line>
+          <line x1="407" y1="155" x2="407" y2="215" class="muted flow"></line>
+          <line x1="202" y1="215" x2="182" y2="215" class="muted flow"></line>
+          <line x1="202" y1="215" x2="222" y2="215" class="muted flow"></line>
+          <line x1="407" y1="215" x2="387" y2="215" class="muted flow"></line>
+          <line x1="407" y1="215" x2="427" y2="215" class="muted flow"></line>
+          <text x="205" y="238" text-anchor="middle" class="label">泄放路径要短、低阻抗</text>
+          <text x="410" y="238" text-anchor="middle" class="label">泄放路径要短、低阻抗</text>
+        </svg>
+      </div>
+      <p>原理：<b>前级泄放大能量，退耦元件隔离前后级，末级精确钳位</b>。如果没有退耦，两级器件会同时导通，末级 TVS 先烧。退耦可以是电感（电源口）或电阻/走线阻抗（信号口）。</p>
+      <ul>
+        <li>SPD 尽量靠近入口，连接线短而粗；</li>
+        <li>泄放回路与敏感信号线避免平行走线；</li>
+        <li>MOV 前要有保险丝/热保护，防老化短路着火；</li>
+        <li>接地阻抗要低，否则泄放电流会在地线上抬起高电位；</li>
+        <li>电源 SPD 分级参考 IEC 61643-11（Type 1/2/3）。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. 设计实例</h2>
+      <h3>电源端口两级防护（AC-DC 电源）</h3>
+      <ol>
+        <li>入口：MOV 跨 L-N（差模）+ MOV 对地（共模），或 GDT 对地；</li>
+        <li>退耦：共模电感或差模电感；</li>
+        <li>末级：TVS 或整机输入电容 + 芯片自身耐压；</li>
+        <li>接地：泄放点到 PE 的铜皮尽量宽短，远离控制信号。</li>
+      </ol>
+      <h3>信号端口（RS-485 / 网口）</h3>
+      <ol>
+        <li>共模用 TVS 对地，差模用双向 TVS 跨线；</li>
+        <li>必要时串 PTC/电阻限流；</li>
+        <li>通信口浪涌常按 10/700μs 或组合波考核，选型按信号速率和电容要求（高速口选低电容 TVS）。</li>
+      </ol>
+      <h3>户外灯具</h3>
+      <ol>
+        <li>按过电压类别 Ⅲ/Ⅳ 和污染等级 3 设计；</li>
+        <li>驱动电源内置 SPD，防雷器与灯具之间注意配合距离；</li>
+        <li>金属外壳可靠接地，泄放路径越短越好。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>7. 试验失败怎么排查</h2>
+      <p>常见现象与方向：</p>
+      <ul>
+        <li><b>打一次就坏 IC</b>：多为钳位不足或泄放路径过长，先查末级 TVS 是否在 IC 耐压内；</li>
+        <li><b>保险丝断</b>：MOV 短路或泄放电流走了保险丝路径，检查 SPD 位置是否在保险丝之后、MOV 是否老化；</li>
+        <li><b>设备复位/重启</b>：共模干扰经地线耦合进控制信号，查接地与信号隔离；</li>
+        <li><b>差模过共模不过</b>：对地泄放路径/接地阻抗问题；</li>
+        <li><b>共模过差模不过</b>：L-N 间缺差模保护或耦合路径异常。</li>
+      </ul>
+      <p>排查顺序：先确认波形与等级 → 逐级断开（先拆末级看前级是否扛住）→ 用示波器/电流探头看各级残压 → 改 layout/选型 → 复测。</p>
+    </section>
+
+    <section>
+      <h2>8. 常见误区</h2>
+      <ul>
+        <li>“装一个 MOV 就万事大吉”——单级要么泄放不够、要么钳位不够，正规是多级配合；</li>
+        <li>“SPD 越大越好”——动作电压选太高不动作，选太低正常电压误动作；</li>
+        <li>“地线阻抗可以忽略”——浪涌电流大，地线上几厘米的走线电感都会产生高压差；</li>
+        <li>“浪涌就是 ESD”——能量差几个数量级，防护器件完全不同；</li>
+        <li>“过了 4kV 就无敌”——等级按产品标准和安装环境定，不是越高越好。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>9. 标准条款指引</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>标准</th><th>查哪里</th></tr></thead>
+          <tbody>
+            <tr><td>IEC 61000-4-5 / GB/T 17626.5</td><td>试验等级、耦合/去耦网络、试验程序</td></tr>
+            <tr><td>IEC 61643-11</td><td>低压电源 SPD 分类（Type 1/2/3）与试验</td></tr>
+            <tr><td>IEC 62305 系列</td><td>建筑物防雷等级（LPL）、外部防雷</td></tr>
+            <tr><td>IEC 60664-1</td><td>过电压类别 → 冲击耐受 → 间隙查表</td></tr>
+            <tr><td>ITU-T K.21</td><td>通信端口耐浪涌要求</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./knowledge.html#dmcm">共模与差模</a>
+        <a class="tag" href="./knowledge.html#emc">EMC 基础</a>
+        <a class="tag" href="./voltage.html">全球电压</a>
+        <a class="tag" href="./tools.html">计算工具</a>
+      </p>
+    </section>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:26px 0">
+      <a class="btn" href="creepage.html">← 爬电距离</a>
+      <a class="btn btn-primary" href="hipot.html">下一章：耐压测试 →</a>
+    </div>
+
+  </main>
+
+    <p style="margin:22px 0"><button type="button" class="btn" data-progress-key="surge">标记已读</button></p>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/progress.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

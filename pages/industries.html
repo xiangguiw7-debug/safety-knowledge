@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>行业安规知识筛选 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="按灯具、消费电子、医疗、家电、工业机械等行业筛选适用的安规标准、必学模块与典型测试项目。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/industries.css">
+  <style>
+    .std-list a { color: var(--accent); text-decoration: none; }
+    .std-list a:hover { text-decoration: underline; }
+    .topic-list a::after { content: " ↗"; font-size: 11px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+            <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html" class="active">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / 行业筛选</p>
+      <h1>行业安规知识筛选</h1>
+      <p class="lead">选择行业，只看该行业适用的标准、必学模块和典型测试。电气间隙、爬电距离、雷击浪涌、耐压是所有行业的公共地基，先掌握它们再看行业差异。</p>
+      <p style="margin-top:10px"><a class="btn" href="./product-categories.html">📦 打开九大品类安规知识库</a></p>
+    </div>
+
+    <div class="filter-bar" role="group" aria-label="按行业筛选">
+      <button type="button" class="filter-chip active" data-filter="all" aria-pressed="true">全部</button>
+      <button type="button" class="filter-chip" data-filter="lighting" aria-pressed="false">💡 灯具照明</button>
+      <button type="button" class="filter-chip" data-filter="consumer" aria-pressed="false">📱 消费电子</button>
+      <button type="button" class="filter-chip" data-filter="appliance" aria-pressed="false">🏠 家用电器</button>
+      <button type="button" class="filter-chip" data-filter="medical" aria-pressed="false">🏥 医疗设备</button>
+      <button type="button" class="filter-chip" data-filter="machinery" aria-pressed="false">🏭 工业机械</button>
+      <button type="button" class="filter-chip" data-filter="tools" aria-pressed="false">🔧 电动工具</button>
+      <button type="button" class="filter-chip" data-filter="power" aria-pressed="false">🔌 电源充电器</button>
+      <button type="button" class="filter-chip" data-filter="battery" aria-pressed="false">🔋 电池储能</button>
+      <button type="button" class="filter-chip" data-filter="automotive" aria-pressed="false">🚗 汽车电子</button>
+      <button type="button" class="filter-chip" data-filter="ict" aria-pressed="false">🌐 IT 通信</button>
+      <button type="button" class="filter-chip" data-filter="iot" aria-pressed="false">🏠 IoT 智能家居</button>
+      <button type="button" class="filter-chip" data-filter="robotics" aria-pressed="false">🤖 机器人/AGV</button>
+      <button type="button" class="filter-chip" data-filter="charging" aria-pressed="false">🔋 充电桩</button>
+      <button type="button" class="filter-chip" data-filter="drone" aria-pressed="false">🚁 无人机/玩具</button>
+      <button type="button" class="filter-chip" data-filter="escooter" aria-pressed="false">🛴 电动车</button>
+      <button type="button" class="filter-chip" data-filter="lab" aria-pressed="false">🧪 测量仪器</button>
+      <button type="button" class="filter-chip" data-filter="solar" aria-pressed="false">☀️ 光伏储能</button>
+      <button type="button" class="filter-chip" data-filter="portable-power" aria-pressed="false">⛺ 便携储能</button>
+      <button type="button" class="filter-chip" data-filter="beauty" aria-pressed="false">✨ 美容护理</button>
+      <button type="button" class="filter-chip" data-filter="cleaning" aria-pressed="false">🧹 清洁电器</button>
+      <button type="button" class="filter-chip" data-filter="security" aria-pressed="false">📹 安防门锁</button>
+      <button type="button" class="filter-chip" data-filter="wearable" aria-pressed="false">⌚ 智能穿戴</button>
+      <button type="button" class="filter-chip" data-filter="server" aria-pressed="false">🖥️ 服务器</button>
+      <button type="button" class="filter-chip" data-filter="automation" aria-pressed="false">⚙️ 工业自动化</button>
+      <button type="button" class="filter-chip" data-filter="low-voltage" aria-pressed="false">🔌 低压电器</button>
+      <button type="button" class="filter-chip" data-filter="toy" aria-pressed="false">🧸 玩具</button>
+      <button type="button" class="filter-chip" data-filter="powerbank" aria-pressed="false">🔋 充电宝</button>
+    </div>
+    <p class="filter-count" id="filterCount"></p>
+
+    <div class="industry-grid" id="industryList"></div>
+
+    <section>
+      <h2>标准速查表</h2>
+      <p class="section-sub">GB 与 IEC 基本对应，正式认证时请以目标市场（CCC / CE / UL 等）的最新版本为准。共 66 条，支持搜索。</p>
+      <input type="search" id="stdQuickSearch" class="tool-search" placeholder="搜索标准编号或主题，如 61010 / 浪涌 / RoHS" aria-label="搜索标准">
+      <p class="quiz-count" id="stdQuickCount"></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>IEC / ISO 标准</th>
+              <th>国内对应</th>
+              <th>核心内容</th>
+              <th>主要行业</th>
+            </tr>
+          </thead>
+          <tbody id="stdQuickBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/industry-data.js"></script>
+  <script src="../assets/js/standards-data.js"></script>
+  <script src="../assets/js/std-quick.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

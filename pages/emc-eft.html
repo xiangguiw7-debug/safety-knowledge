@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>EFT 电快速瞬变深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="EFT 电快速瞬变脉冲群：波形、试验方法、失效机理、滤波与整改。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./emc.html">EMC 系统课程</a> / EFT 深度页</p>
+      <h1>EFT 电快速瞬变脉冲群（IEC 61000-4-4）</h1>
+      <p class="lead">继电器、接触器、电机换向产生的“一连串小浪涌”，专治各种复位和误动作。</p>
+    </div>
+
+    <section>
+      <h2>1. 波形：脉冲串而不是单个脉冲</h2>
+      <p>单个脉冲 5/50ns（上升 5ns、半宽 50ns），以 5kHz 或 100kHz 重复率组成脉冲串，持续 15ms、间隔 300ms。电压等级常见 0.5–4kV。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>试验等级</th><th class="num">电源端口（典型）</th><th class="num">I/O/信号端口</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td class="num">0.5 kV</td><td class="num">0.25 kV</td></tr>
+            <tr><td>2</td><td class="num">1.0 kV</td><td class="num">0.5 kV</td></tr>
+            <tr><td>3</td><td class="num">2.0 kV</td><td class="num">1.0 kV</td></tr>
+            <tr><td>4</td><td class="num">4.0 kV</td><td class="num">2.0 kV</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>耦合方式：电源口经耦合/去耦网络（CDN）注入，I/O 口用电容耦合夹注入。</p>
+    </section>
+
+    <section>
+      <h2>2. 失效机理</h2>
+      <ul>
+        <li>脉冲串的重复触发会让电源监控/复位电路误动作；</li>
+        <li>共模电流经寄生电容进控制板，干扰模拟采样和通信；</li>
+        <li>与 ESD 相比能量更大、持续时间更长，但单脉冲更“钝”；</li>
+        <li>常见现象：复位、通信掉线、继电器乱动、显示闪变。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 硬件整改</h2>
+      <ul class="check-list">
+        <li>电源入口：共模电感 + X/Y 电容组成 EMI 滤波器，兼抗 EFT；</li>
+        <li>控制板与功率板之间做单点接地/隔离（光耦、变压器、隔离电源）；</li>
+        <li>信号线屏蔽且屏蔽层良好接地；</li>
+        <li>复位与电源监控：加 RC 去抖、专用复位芯片；</li>
+        <li>I/O 口加 TVS/钳位和 RC 滤波，靠近连接器；</li>
+        <li>继电器/接触器线圈并联 RC 或二极管吸收。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 软件兜底</h2>
+      <ul>
+        <li>通信协议带校验与重试，超时判离线；</li>
+        <li>模拟采样多次平均并做合理性限幅；</li>
+        <li>输出状态定期刷新，防 EFT 毛刺触发误动作；</li>
+        <li>看门狗 + 上电初始化确保安全状态。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. 常见误区</h2>
+      <ul>
+        <li>“EFT 就是浪涌”——EFT 是低压脉冲串，浪涌是高能单脉冲，整改完全不同；</li>
+        <li>“滤波只在电源口”——信号口也要处理；</li>
+        <li>“软件重试就行”——硬件不稳，重试只是拖时间。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./emc.html">EMC 系统课程</a>
+        <a class="tag" href="./emc-esd.html">ESD 深度页</a>
+        <a class="tag" href="./surge.html">雷击浪涌</a>
+        <a class="tag" href="./knowledge.html#components">X/Y 电容</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

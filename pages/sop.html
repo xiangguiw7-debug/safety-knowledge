@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>测试 SOP 中心（全套） - 安规与可靠性知识课堂</title>
+  <meta name="description" content="全套测试 SOP：按行业和类别筛选，支持打印、记录表、检查表，并内置知识卡片库详细标准内容。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .filter-bar { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+    .filter-bar button { background:var(--card); border:1px solid var(--border); color:var(--fg); border-radius:999px; padding:6px 14px; font-size:13px; cursor:pointer; font-family:inherit; }
+    .filter-bar button.active { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+    .sop-search { width:320px; max-width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:10px; background:var(--card); color:var(--fg); font-size:14px; }
+    .sop-group-title { margin:26px 0 10px; font-size:18px; border-left:4px solid var(--accent); padding-left:10px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav"></nav>
+    </div>
+  </header>
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / 测试 SOP 中心</p>
+      <h1>测试 SOP 中心（全套）</h1>
+      <p class="lead">62 份 SOP：先按行业学习，再按类别找执行步骤；含详细标准知识、记录表和检查表。</p>
+    </div>
+
+    <div class="filter-bar" id="sopIndustryFilter" role="group" aria-label="按行业筛选 SOP"></div>
+    <div class="filter-bar" id="sopCategoryFilter" role="group" aria-label="按类别筛选 SOP"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0">
+      <input type="search" id="sopSearch" class="sop-search" placeholder="搜索：耐压 / 泄漏 / 灼热丝 / UL94 / 浪涌…" aria-label="搜索 SOP">
+    </div>
+    <p class="quiz-count" id="sopCount"></p>
+    <div id="sopSections"></div>
+
+    <section>
+      <h2>按产品品类（推荐测试组合）</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>产品品类</th><th>推荐核心 SOP（按顺序）</th></tr></thead>
+          <tbody>
+            <tr><td><b>电源充电器</b></td><td><a href="./sop-hipot.html">AG-SOP-EL-001</a> · <a href="./sop-insulation-resistance.html">AG-SOP-EL-002</a> · <a href="./sop-leakage.html">AG-SOP-EL-003</a> · <a href="./sop-grounding.html">AG-SOP-EL-004</a> · <a href="./sop-temperature-rise.html">AG-SOP-EL-005</a> · <a href="./sop-spacing.html">AG-SOP-EL-006</a> · <a href="./sop-residual-voltage.html">EL-007</a> · <a href="./sop-protective-impedance.html">EL-008</a> · <a href="./sop-glow-wire.html">AG-SOP-FR-001</a> · <a href="./sop-ball-pressure.html">AG-SOP-FR-003</a> · <a href="./sop-ul94.html">AG-SOP-FR-004</a> · <a href="./sop-ul94-5v.html">FR-005</a> · <a href="./sop-surge.html">AG-SOP-EMC-001</a> · <a href="./sop-esd.html">AG-SOP-EMC-002</a> · <a href="./sop-harmonic-flicker.html">EMC-005</a></td></tr>
+          <tr><td><b>灯具照明</b></td><td><a href="./sop-hipot.html">AG-SOP-EL-001</a> · <a href="./sop-leakage.html">AG-SOP-EL-003</a> · <a href="./sop-temperature-rise.html">AG-SOP-EL-005</a> · <a href="./sop-spacing.html">AG-SOP-EL-006</a> · <a href="./sop-glow-wire.html">AG-SOP-FR-001</a> · <a href="./sop-needle-flame.html">AG-SOP-FR-002</a> · <a href="./sop-ball-pressure.html">AG-SOP-FR-003</a> · <a href="./sop-ip.html">AG-SOP-EN-001</a> · <a href="./sop-ik.html">AG-SOP-EN-002</a> · <a href="./sop-salt-mist.html">EN-012</a> · <a href="./sop-surge.html">AG-SOP-EMC-001</a> · <a href="./sop-photobiological.html">OT-001</a></td></tr>
+          <tr><td><b>家用电器</b></td><td><a href="./sop-hipot.html">AG-SOP-EL-001</a> · <a href="./sop-insulation-resistance.html">AG-SOP-EL-002</a> · <a href="./sop-leakage.html">AG-SOP-EL-003</a> · <a href="./sop-grounding.html">AG-SOP-EL-004</a> · <a href="./sop-temperature-rise.html">AG-SOP-EL-005</a> · <a href="./sop-spacing.html">AG-SOP-EL-006</a> · <a href="./sop-glow-wire.html">AG-SOP-FR-001</a> · <a href="./sop-needle-flame.html">AG-SOP-FR-002</a> · <a href="./sop-ball-pressure.html">AG-SOP-FR-003</a> · <a href="./sop-ip.html">AG-SOP-EN-001</a> · <a href="./sop-damp-heat-steady.html">EN-006</a> · <a href="./sop-damp-heat-cyclic.html">EN-007</a> · <a href="./sop-post-env-safety.html">EN-015</a></td></tr>
+          <tr><td><b>IT / 音视频</b></td><td><a href="./sop-hipot.html">AG-SOP-EL-001</a> · <a href="./sop-leakage.html">AG-SOP-EL-003</a> · <a href="./sop-temperature-rise.html">AG-SOP-EL-005</a> · <a href="./sop-spacing.html">AG-SOP-EL-006</a> · <a href="./sop-ul94.html">AG-SOP-FR-004</a> · <a href="./sop-esd.html">AG-SOP-EMC-002</a> · <a href="./sop-surge.html">AG-SOP-EMC-001</a> · <a href="./sop-eft.html">EMC-006</a> · <a href="./sop-conducted-emission.html">EMC-003</a> · <a href="./sop-radiated-emission.html">EMC-004</a></td></tr>
+          <tr><td><b>电池 / 储能</b></td><td><a href="./sop-battery-short.html">AG-SOP-BT-001</a> · <a href="./sop-charge-discharge.html">BT-002</a> · <a href="./sop-high-temp-battery.html">BT-003</a> · <a href="./sop-battery-drop.html">BT-004</a> · <a href="./sop-crush.html">BT-005</a> · <a href="./sop-thermal-shock-battery.html">BT-006</a> · <a href="./sop-impact-puncture.html">BT-007</a> · <a href="./sop-thermal-runaway.html">BT-009</a> · <a href="./sop-un383.html">BT-010</a> · <a href="./sop-temperature-rise.html">AG-SOP-EL-005</a> · <a href="./sop-ik.html">AG-SOP-EN-002</a> · <a href="./sop-ul94.html">AG-SOP-FR-004</a></td></tr>
+          <tr><td><b>电动工具</b></td><td><a href="./sop-hipot.html">AG-SOP-EL-001</a> · <a href="./sop-temperature-rise.html">AG-SOP-EL-005</a> · <a href="./sop-spacing.html">AG-SOP-EL-006</a> · <a href="./sop-ip.html">AG-SOP-EN-001</a> · <a href="./sop-ik.html">AG-SOP-EN-002</a> · <a href="./sop-drop.html">EN-011</a> · <a href="./sop-vibration-sine.html">EN-008</a> · <a href="./sop-battery-short.html">AG-SOP-BT-001</a> · <a href="./sop-charge-discharge.html">BT-002</a> · <a href="./sop-glow-wire.html">AG-SOP-FR-001</a> · <a href="./sop-ul94.html">AG-SOP-FR-004</a></td></tr>
+          <tr><td><b>工业机械</b></td><td><a href="./sop-hipot.html">AG-SOP-EL-001</a> · <a href="./sop-grounding.html">AG-SOP-EL-004</a> · <a href="./sop-spacing.html">AG-SOP-EL-006</a> · <a href="./sop-functional-safety.html">OT-006</a> · <a href="./sop-vibration-sine.html">EN-008</a> · <a href="./sop-shock.html">EN-010</a> · <a href="./sop-ip.html">AG-SOP-EN-001</a> · <a href="./sop-ik.html">AG-SOP-EN-002</a> · <a href="./sop-surge.html">AG-SOP-EMC-001</a> · <a href="./sop-eft.html">EMC-006</a></td></tr>
+          <tr><td><b>无线设备</b></td><td><a href="./sop-hipot.html">AG-SOP-EL-001</a> · <a href="./sop-leakage.html">AG-SOP-EL-003</a> · <a href="./sop-temperature-rise.html">AG-SOP-EL-005</a> · <a href="./sop-spacing.html">AG-SOP-EL-006</a> · <a href="./sop-battery-short.html">AG-SOP-BT-001</a> · <a href="./sop-charge-discharge.html">BT-002</a> · <a href="./sop-sar.html">OT-002</a> · <a href="./sop-esd.html">AG-SOP-EMC-002</a> · <a href="./sop-surge.html">AG-SOP-EMC-001</a> · <a href="./sop-radiated-emission.html">EMC-004</a> · <a href="./sop-cybersecurity.html">OT-007</a></td></tr>
+          <tr><td><b>医疗设备</b></td><td><a href="./sop-hipot.html">AG-SOP-EL-001</a> · <a href="./sop-leakage.html">AG-SOP-EL-003</a> · <a href="./sop-grounding.html">AG-SOP-EL-004</a> · <a href="./sop-temperature-rise.html">AG-SOP-EL-005</a> · <a href="./sop-spacing.html">AG-SOP-EL-006</a> · <a href="./sop-photobiological.html">OT-001</a> · <a href="./sop-esd.html">AG-SOP-EMC-002</a> · <a href="./sop-surge.html">AG-SOP-EMC-001</a> · <a href="./sop-dips.html">EMC-008</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="color:var(--muted);font-size:13px">产品品类的 SOP 组合为教学推荐，正式测试计划以产品标准、认证方案和实验室要求为准。</p>
+    </section>
+  </main>
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+  <script src="../assets/js/reliability-data.js"></script>
+  <script src="../assets/js/sop-data.js"></script>
+  <script src="../assets/js/sop-render.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script>
+    (function () {
+      var industryBox=document.getElementById("sopIndustryFilter");
+      var categoryBox=document.getElementById("sopCategoryFilter");
+      var sectionsBox=document.getElementById("sopSections");
+      var search=document.getElementById("sopSearch");
+      var count=document.getElementById("sopCount");
+      if(!industryBox||!sectionsBox||typeof SOP_DATA==="undefined") return;
+      var ind='all', cat='all', q='';
+      var categories=['electrical','fire','environment','emc','battery','other'];
+      var catNames={'electrical':'电气安全','fire':'防火','environment':'环境','emc':'EMC','battery':'电池','other':'其它'};
+      function esc(s){var d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML;}
+      function buildIndustry(){
+        var h='<button type="button" class="active" data-v="all">全部行业</button>';
+        RELIABILITY_INDUSTRIES.forEach(function(x){h+='<button type="button" data-v="'+esc(x.id)+'">'+esc(x.name)+'</button>';});
+        industryBox.innerHTML=h;
+        industryBox.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){ind=this.getAttribute("data-v");setActive(industryBox,b);render();});});
+      }
+      function buildCategory(){
+        var h='<button type="button" class="active" data-v="all">全部类别</button>';
+        categories.forEach(function(c){h+='<button type="button" data-v="'+c+'">'+catNames[c]+'</button>';});
+        categoryBox.innerHTML=h;
+        categoryBox.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){cat=this.getAttribute("data-v");setActive(categoryBox,b);render();});});
+      }
+      function setActive(box,btn){box.querySelectorAll("button").forEach(function(x){x.classList.toggle("active",x===btn);});}
+      function filter(){
+        return SOP_DATA.filter(function(s){
+          if(ind!=='all'&&(!s.industries||s.industries.indexOf(ind)===-1)) return false;
+          if(cat!=='all'&&s.category!==cat) return false;
+          if(q){var hay=(s.code+' '+s.title+' '+s.standard+' '+(s.purpose||'')).toLowerCase();if(hay.indexOf(q)===-1)return false;}
+          return true;
+        });
+      }
+      function card(s){
+        var inds=(s.industries||[]).map(function(id){var x=RELIABILITY_INDUSTRIES.filter(function(y){return y.id===id;})[0];return x?'<span class="tag">'+esc(x.name)+'</span>':'';}).join(' ');
+        var badge=s.knowledgeDetail?' <span class="tag">📖 含详细标准知识</span>':'';
+        return '<article class="card">'+
+          '<h3>'+esc(s.code)+' '+esc(s.title)+badge+'</h3>'+
+          '<p class="meta">'+esc(catNames[s.category]||s.category)+' · 版本 '+esc(s.version)+'</p>'+
+          '<p class="note" style="font-size:13px">'+esc(s.standard)+'</p>'+
+          '<p><a class="btn" href="./sop-'+esc(s.id)+'.html">打开 SOP</a></p>'+
+          '<p class="meta">'+inds+'</p>'+
+          '</article>';
+      }
+      function render(){
+        var list=filter();var h='';
+        if(cat!=='all'){h='<div class="grid grid-4">'+list.map(card).join('')+'</div>';}
+        else{categories.forEach(function(c){var sub=list.filter(function(s){return s.category===c;});if(!sub.length)return;h+='<h3 class="sop-group-title">'+catNames[c]+'</h3>';h+='<div class="grid grid-4">'+sub.map(card).join('')+'</div>';});}
+        sectionsBox.innerHTML=h;
+        if(count)count.textContent='显示 '+list.length+' / '+SOP_DATA.length+' 份 SOP';
+      }
+      if(search)search.addEventListener("input",function(){q=this.value.trim().toLowerCase();render();});
+      buildIndustry();buildCategory();render();
+    })();
+  </script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./testing.html">🧪<span>测试</span></a>
+  <a href="./certification.html">📄<span>认证</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+</nav>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>防火深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="防火：起火源、阻燃材料、灼热丝档位、防火外壳设计与试验。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 防火</p>
+      <h1>防火深度页</h1>
+      <p class="lead">安规防火的目标不是“不烧”，而是“烧起来也被控制在局部、有时间逃生”。</p>
+    </div>
+
+    <section>
+      <h2>1. 起火链：源 → 材料 → 传播</h2>
+      <ol>
+        <li><b>起火源</b>：短路、过载、电弧、异常发热、电池热失控；</li>
+        <li><b>可燃材料</b>：外壳、线材、PCB、绝缘件、包装残留；</li>
+        <li><b>传播路径</b>：开孔、缝隙、通风口、滴落燃烧物。</li>
+      </ol>
+      <p>防火设计就是在每一环“断链”：限制点火源、材料不助燃、结构不传播。</p>
+    </section>
+
+    <section>
+      <h2>2. 材料要求</h2>
+      <ul>
+        <li><b>UL94</b>：V-0 &gt; V-1 &gt; V-2，还有 5VA/5VB；等级对应材料厚度；</li>
+        <li><b>灼热丝（IEC 60695-2-11）</b>：550/650/750/850°C 分档，按部件“可能被点着的概率”选择；</li>
+        <li><b>针焰试验</b>：验证部件起火后火焰不蔓延；</li>
+        <li><b>RTI</b>：材料长期耐温，高温部件附近材料要核对；</li>
+        <li>注意：阻燃等级和 CTI 经常互相打架，选材要一起看（见<a href="./materials.html">材料库</a>）。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 结构与外壳设计</h2>
+      <ul class="check-list">
+        <li>防火外壳：把内部起火源和外部可燃物隔开；</li>
+        <li>开孔限制：通风/散热孔要小于火焰传播尺寸，位置避开起火源正上方；</li>
+        <li>防火挡板/内衬：高功率区与外壳之间加 V-0 挡板；</li>
+        <li>内部线材：选用阻燃线材（如 VW-1），远离发热点；</li>
+        <li>滴落物：材料在燃烧时不滴落引燃下方物体（5VA 等要求）；</li>
+        <li>电池仓：独立腔体 + 隔热 + 泄压，防止热失控烧穿外壳。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 常见坑</h2>
+      <ul>
+        <li>“V-0 就万事大吉”——厚度不对、开孔过大照样不合格；</li>
+        <li>“阻燃剂加越多越好”——CTI 下降、环保受限、力学变差；</li>
+        <li>“外壳开孔散热优先”——开孔位置和尺寸要先过防火逻辑；</li>
+        <li>“电池起火是电池厂的事”——整机必须做热失控隔离设计。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./knowledge.html#fire-design">防火设计与选材</a>
+        <a class="tag" href="./knowledge.html#flame">防火知识卡</a>
+        <a class="tag" href="./materials.html">材料库</a>
+        <a class="tag" href="./hazard-thermal.html">热量危险</a>
+        <a class="tag" href="./knowledge.html#battery">电池保护</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

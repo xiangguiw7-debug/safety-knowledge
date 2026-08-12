@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>Core Topics (EN) - Safety & Reliability Knowledge Classroom</title>
+  <meta name="description" content="Condensed English summaries of clearance, creepage, surge and hipot.">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html"><span class="logo-mark">⚡</span>Safety Knowledge</a>
+      <a class="btn" href="../index.html">中文版</a>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="index.html">English Overview</a> / Core Topics</p>
+      <h1>Core Topics (Condensed English)</h1>
+    </div>
+
+    <section id="clearance">
+      <h2>Clearance</h2>
+      <p>Clearance is the shortest air distance between conductive parts, sized to prevent flashover under transient overvoltages. It depends on the impulse withstand voltage (from overvoltage category I–IV), the insulation type, and altitude.</p>
+      <ul>
+        <li>230 V system, overvoltage category II → 2500 V impulse (teaching reference);</li>
+        <li>Basic insulation ≈ 2.0 mm, reinforced ≈ 4.0 mm (simplified values);</li>
+        <li>Above 2000 m, multiply by an altitude factor.</li>
+      </ul>
+      <p class="lead">Full chapter (Chinese): <a href="../pages/clearance.html">电气间隙详解</a></p>
+    </section>
+
+    <section id="creepage">
+      <h2>Creepage</h2>
+      <p>Creepage is the shortest path along an insulating surface, preventing tracking under pollution. It depends on working voltage (RMS), pollution degree (1–3), CTI material group (I–IIIb) and insulation type.</p>
+      <ul>
+        <li>250 V, pollution degree 2, group IIIa → 3.2 mm basic (simplified);</li>
+        <li>Reinforced ≈ 2× basic; PCB slots help creepage but not clearance;</li>
+        <li>CTI must come from the supplier report, not the material name.</li>
+      </ul>
+      <p class="lead">Full chapter (Chinese): <a href="../pages/creepage.html">爬电距离详解</a></p>
+    </section>
+
+    <section id="surge">
+      <h2>Lightning Surge</h2>
+      <p>Surges are high-energy voltage/current impulses from lightning induction and switching. IEC 61000-4-5 defines 1.2/50 µs voltage and 8/20 µs current waves, injected line-to-line (differential) and line-to-earth (common mode).</p>
+      <ul>
+        <li>Protection chain: first stage (MOV/GDT) → decoupling → final stage (TVS);</li>
+        <li>Grounding path must be short and low impedance;</li>
+        <li>Test levels typically 0.5–4 kV (X = custom).</li>
+      </ul>
+      <p class="lead">Full chapter (Chinese): <a href="../pages/surge.html">雷击浪涌详解</a></p>
+    </section>
+
+    <section id="hipot">
+      <h2>Withstand Voltage (Hipot)</h2>
+      <p>The electric strength test verifies that insulation does not break down under a test voltage well above the working voltage. Select the voltage with five steps: standard → insulation type → rated voltage tier → table value → time/criteria.</p>
+      <ul>
+        <li>IEC 62368-1: basic 1500 V AC, reinforced 3000 V AC (common values);</li>
+        <li>DC ≈ 1.414 × AC; discharge the sample after DC testing;</li>
+        <li>Type test hold time commonly 60 s.</li>
+      </ul>
+      <p class="lead">Full chapter (Chinese): <a href="../pages/hipot.html">耐压测试详解</a></p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="../pages/verification.html">数值核对表</a>；发现错误欢迎<a href="../pages/feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>Safety & Reliability Knowledge Classroom · v1.1 · English overview</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="../pages/learn.html">📚<span>学习</span></a>
+  <a href="../pages/tools.html">🧮<span>工具</span></a>
+  <a href="../pages/resources.html">🗂️<span>资源</span></a>
+  <a href="../pages/quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

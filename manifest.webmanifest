@@ -1,0 +1,23 @@
+{
+  "name": "安规与可靠性知识课堂",
+  "short_name": "安规课堂",
+  "description": "爬电距离、电气间隙、雷击浪涌、耐压测试教学网站",
+  "lang": "zh-CN",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0e1520",
+  "theme_color": "#0b6bcb",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

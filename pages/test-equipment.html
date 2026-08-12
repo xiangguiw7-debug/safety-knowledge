@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>测试设备与工具清单 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="安规、防火、环境、EMC、电池等测试项目的设备、方法要点、典型判定与注意事项总表。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./product-categories.html">品类知识</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 测试工具与设备清单</p>
+      <h1>测试设备与工具清单</h1>
+      <p class="lead">在设备清单基础上增加测试方法要点和典型判定，适合做测试计划、设备采购和实验室能力核对。</p>
+    </div>
+
+    <section>
+      <h2>通用测量工具（多类测试共用）</h2>
+      <ul>
+        <li>数字万用表、钳形表、绝缘电阻表（兆欧表）</li>
+        <li>AC/DC 耐压测试仪、泄漏电流测试仪、接地电阻测试仪</li>
+        <li>温度记录仪、热电偶、热成像仪</li>
+        <li>游标卡尺、塞尺、测厚仪、标准试指 / 试具（IEC 61032）</li>
+        <li>示波器、差分探头、LCR 表、功率分析仪、稳压电源、调压器</li>
+        <li>计时器、风速计、湿度计、照度计、声级计</li>
+        <li>校准件、测试线、绝缘手套、放电棒</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>A. 电气安全测试</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试项目</th><th>主要标准</th><th>测试工具 / 设备</th><th>辅助 / 消耗品</th><th>环境 / 样品要求</th><th>测试方法要点</th><th>典型判定 / 注意事项</th></tr></thead>
+        <tbody>
+<tr><td>耐压 / 介电强度</td><td>IEC 60335-1、IEC 62368-1、IEC 60598-1、IEC 60601-1</td><td>AC/DC 耐压测试仪、绝缘耐压台、高压探头</td><td>放电棒、绝缘手套、测试夹</td><td>标准实验室 15–35°C；完整成品或绝缘件</td><td>按标准规定电压施加（常见 1min），升压平滑，试验中观察有无闪络/击穿</td><td>无击穿、无闪络、漏电流不超设定值；测后必须放电</td></tr>
+<tr><td>绝缘电阻</td><td>产品标准对应条款（如 IEC 60335-1 第 16 章）</td><td>绝缘电阻测试仪 / 兆欧表（500V、1000V DC）</td><td>测试线、湿布（湿热后）</td><td>标准大气或湿热恢复后</td><td>施加 DC 电压并保持约 1min，读取稳定电阻值</td><td>不低于标准限值（常见 0.5MΩ / 1MΩ 量级，以标准为准）</td></tr>
+<tr><td>泄漏 / 接触电流</td><td>IEC 60990、IEC 60335-1、IEC 62368-1、IEC 60601-1</td><td>泄漏电流测试仪、人体阻抗测量网络（A/B/C 网络）</td><td>隔离变压器、调压器</td><td>按标准最不利极性、开关位置</td><td>按测量网络连接，调至额定电压及容差，切换最不利极性和开关状态，分别测正常/故障</td><td>不超标准限值（家电 0.25/0.5/0.75/3.5mA 量级；医疗 µA 级）</td></tr>
+<tr><td>接地连续性 / 接地阻抗</td><td>IEC 60335-1、IEC 60204-1、IEC 60601-1</td><td>接地电阻测试仪、大电流发生器（10–25A 量级）、毫欧表</td><td>测试夹、标准接地端子</td><td>标准实验室；I 类产品</td><td>在 PE 端子与可触及金属间通大电流，测量电压降并换算电阻</td><td>电阻常见 ≤0.1Ω 量级（以标准为准）；端子不得松动</td></tr>
+<tr><td>爬电 / 电气间隙测量</td><td>IEC 60664-1、产品标准间距表</td><td>游标卡尺、塞尺、投影仪/影像测量仪、放大镜</td><td>PCB 图纸、样品剖面</td><td>不适用；按污染等级和材料组</td><td>沿绝缘表面或空气最短路径测量，记录工作电压、污染等级、材料组</td><td>不得小于标准查表值；注意槽宽、沟槽和浮空导体</td></tr>
+<tr><td>温升</td><td>IEC 60335-1 第 11 章、IEC 62368-1、IEC 60598-1</td><td>温度记录仪、热电偶、绕组电阻法装置（微欧计/电桥）</td><td>热电偶胶、负载、稳压电源</td><td>15–35°C；最不利负载和电压</td><td>热电偶贴最热点，绕组用电阻法；在 0.94–1.06 倍额定电压等条件下运行至稳定</td><td>绕组、外壳、端子等不超标准限值；环境温度修正按标准</td></tr>
+<tr><td>残余电压 / 插头放电</td><td>IEC 62368-1、IEC 60335-1 相关条款</td><td>示波器、高压差分探头、峰值电压表</td><td>计时器</td><td>断电后立即测量</td><td>拔出插头或断开电源瞬间开始计时，测插脚间电压</td><td>按标准规定时间（常见 1s）后电压或存储能量不超限</td></tr>
+<tr><td>保护阻抗 / 限流元件</td><td>IEC 62368-1</td><td>LCR 表、耐压测试仪、可调负载</td><td>元件规格书</td><td>标准实验室</td><td>测量元件阻抗、耐压与故障电流</td><td>单一故障后仍满足可触及能量/电压限值</td></tr>
+<tr><td>绝缘涂层验证</td><td>IEC 60664-3</td><td>涂层厚度仪（涡流/磁性）、耐压测试仪</td><td>划格器、放大镜</td><td>按涂层试验要求</td><td>测厚度、做划格附着力和涂层耐压</td><td>厚度与耐压满足 IEC 60664-3 要求</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section>
+      <h2>B. 防火与材料测试</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试项目</th><th>主要标准</th><th>测试工具 / 设备</th><th>辅助 / 消耗品</th><th>环境 / 样品要求</th><th>测试方法要点</th><th>典型判定 / 注意事项</th></tr></thead>
+        <tbody>
+<tr><td>灼热丝试验（GWT）</td><td>IEC 60695-2-11 / GB/T 5169.13</td><td>灼热丝试验仪（镍铬丝、加热电源、热电偶、计时器）</td><td>铺底层（绢纸/木板）</td><td>15–35°C；样品按标准预处理</td><td>灼热丝加热到目标温度（550/650/750/850°C），以约 0.8–1.2N 顶住样品 30s 后移开</td><td>移开后 30s 内熄灭，滴落物不引燃铺底层；GWFI/GWIT 按档记录</td></tr>
+<tr><td>针焰试验</td><td>IEC 60695-2-2 / GB/T 5169.5</td><td>针焰燃烧器（喷管内径约 0.5mm、火焰 12mm±1mm）、丁烷/丙烷气源、计时器、火焰校准装置</td><td>45° 量规、铺底层（白松木板+绢纸，样品下方约 200mm±5mm）</td><td>通风柜内，风速不影响火焰；样品按正常使用方位固定</td><td>燃烧器与水平面约 45°，火焰尖端接触样品，施加 5–30s（按标准）后移开计时；校准 100°C→700°C 约 23.5s±1.0s</td><td>规定时间（常见 30s）内熄灭，滴落物不引燃，烧蚀长度不超限</td></tr>
+<tr><td>球压试验</td><td>IEC 60695-10-2 / GB/T 5169.21</td><td>球压装置（5mm 钢球、约 20N）、加热箱</td><td>测厚仪、压痕测量工具</td><td>常见 75°C / 125°C</td><td>钢球以约 20N 压住样品，放入设定温度箱保持 1h，冷却后测压痕</td><td>压痕直径常见 ≤2mm（以标准为准）</td></tr>
+<tr><td>UL 94 垂直/水平燃烧</td><td>UL 94</td><td>UL94 燃烧箱、本生灯（20mm 火焰）、样品夹具、计时器</td><td>脱脂棉、量规</td><td>23°C/50%RH 48h；70°C 168h 预处理</td><td>垂直燃烧：20mm 火焰施加 10s 两次；水平按燃烧速率测量</td><td>V-0/V-1/V-2 余焰时间与滴落判定按 UL 94 表</td></tr>
+<tr><td>5VA / 5VB 燃烧</td><td>UL 94</td><td>UL94 燃烧箱、本生灯、棒/板夹具</td><td>脱脂棉、量规</td><td>同 UL 94 预处理</td><td>火焰每次施加 5s、共 5 次，观察烧穿与余焰</td><td>5VA 不烧穿；5VB 允许烧穿但规定时间内自熄，滴落不引燃</td></tr>
+<tr><td>HWI 热丝引燃</td><td>UL 746A</td><td>热丝引燃试验仪（镍铬丝绕制、电流控制）</td><td>计时器、温度记录</td><td>标准实验室</td><td>镍铬丝缠绕样品并通电，电流递增，记录引燃时间</td><td>按引燃时间/电流划分等级（HWI 0–4 等）</td></tr>
+<tr><td>HAI 高电流电弧引燃</td><td>UL 746A</td><td>高电流电弧引燃试验仪（可调电流、电极）</td><td>电极、计时器</td><td>标准实验室</td><td>电极间重复拉弧，记录引燃所需电弧次数</td><td>按次数划分等级（HAI 0–4 等）</td></tr>
+<tr><td>CTI / PTI 漏电起痕</td><td>IEC 60112 / GB/T 4207</td><td>漏电起痕试验仪（滴液系统、可调电压、电极）</td><td>氯化铵溶液、滤纸/滴管</td><td>标准实验室</td><td>电极间滴氯化铵溶液并逐步升压，记录 50 滴内是否起痕</td><td>CTI 值分级：Ⅰ ≥600、Ⅱ 400–600、Ⅲa 175–400、Ⅲb 100–175</td></tr>
+<tr><td>RTI 长期热老化</td><td>UL 746B</td><td>老化烘箱、拉伸/冲击试验机（性能保留验证）</td><td>温度记录、样品架</td><td>按材料 RTI 温度长期老化</td><td>在设定温度老化多个周期，测机械/电气性能保留</td><td>性能保留达到 UL 746B 要求，得到 RTI 等级</td></tr>
+<tr><td>线材 VW-1 / FT1</td><td>UL 1581、UL 2556</td><td>线材燃烧试验箱、本生灯、计时器</td><td>棉纸、量规</td><td>按线材标准预处理</td><td>火焰按标准施加多次（VW-1 常见 5 次、每次 15s），观察余焰/余灼</td><td>余焰/余灼时间与棉纸引燃符合 UL 1581 判据</td></tr>
+<tr><td>灼热丝起燃温度（GWIT）</td><td>IEC 60695-2-12</td><td>灼热丝试验仪（可调温度）</td><td>铺底层</td><td>标准实验室</td><td>逐步升高灼热丝温度，观察样品是否起燃</td><td>记录起燃温度，产品标准按 GWIT 档要求</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section>
+      <h2>C. 环境与机械测试</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试项目</th><th>主要标准</th><th>测试工具 / 设备</th><th>辅助 / 消耗品</th><th>环境 / 样品要求</th><th>测试方法要点</th><th>典型判定 / 注意事项</th></tr></thead>
+        <tbody>
+<tr><td>低温试验</td><td>IEC 60068-2-1</td><td>低温试验箱</td><td>温度记录仪、样品架</td><td>常见 -20°C / -40°C</td><td>降温至目标并稳定，保持 2h/16h 量级，恢复后检查</td><td>无开裂、密封正常，功能与绝缘复测通过</td></tr>
+<tr><td>高温试验</td><td>IEC 60068-2-2</td><td>高温试验箱</td><td>温度记录仪</td><td>常见 +55°C / +70°C / +85°C</td><td>升温稳定后保持 2h/16h 量级，恢复后检查</td><td>无变形、无滴落，温升/耐压复测通过</td></tr>
+<tr><td>温度循环 / 温度冲击</td><td>IEC 60068-2-14</td><td>温度冲击箱（两箱式）或程序温循箱</td><td>温度记录仪</td><td>-40°C ↔ +85°C 量级</td><td>按标准循环次数与转换时间执行，结束后恢复</td><td>无裂纹、无焊点失效，功能与绝缘通过</td></tr>
+<tr><td>稳态湿热</td><td>IEC 60068-2-78</td><td>恒温恒湿箱</td><td>湿度记录仪</td><td>40°C / 93%RH 量级</td><td>箱内稳定后放入样品，保持 4/10/21/56 天量级</td><td>恢复后耐压、泄漏、爬电检查通过</td></tr>
+<tr><td>交变湿热</td><td>IEC 60068-2-30</td><td>可程序恒温恒湿箱</td><td>湿度记录仪</td><td>25°C ↔ 55°C / 95%RH 量级</td><td>执行 24h 循环，含升温加湿、高温高湿、降温阶段</td><td>恢复后耐压、泄漏、接地复测通过</td></tr>
+<tr><td>正弦振动</td><td>IEC 60068-2-6</td><td>电动振动台、正弦控制器、加速度计</td><td>夹具、螺栓</td><td>标准实验室；3 轴</td><td>按频率范围、振幅/加速度和扫频速率施加，3 轴分别执行</td><td>无松动、无共振损坏，绝缘间距未改变</td></tr>
+<tr><td>随机振动</td><td>IEC 60068-2-64</td><td>随机振动控制系统、振动台、加速度计</td><td>夹具</td><td>按 ASD 谱型</td><td>按 ASD 谱型与时长（如 30min/轴）施加</td><td>结构与功能完好，连接器/焊点未失效</td></tr>
+<tr><td>机械冲击</td><td>IEC 60068-2-27</td><td>冲击试验台（半正弦波）</td><td>加速度计、波形采集</td><td>50g/11ms 或 100g/6ms 量级</td><td>3 轴 6 向、每向 3 次，记录冲击波形</td><td>外壳无开裂，带电部件不外露</td></tr>
+<tr><td>自由跌落</td><td>IEC 60068-2-31</td><td>跌落试验台（可调高度、释放机构）</td><td>混凝土/钢板地面</td><td>按产品高度要求</td><td>按面、边、角顺序从规定高度跌落</td><td>无危险外露，绝缘与功能正常</td></tr>
+<tr><td>IK 冲击</td><td>IEC 62262</td><td>弹簧冲击锤（IK01–IK06）、摆锤冲击试验机（IK07–IK10）</td><td>冲击点标记</td><td>标准实验室</td><td>按 IK 能量对最薄弱点施加 3 次冲击</td><td>带电部件不外露，间距/IP 未降低</td></tr>
+<tr><td>IP 防尘</td><td>IEC 60529 / GB/T 4208</td><td>防尘箱（粉尘箱）、真空泵</td><td>粉尘、负压表</td><td>8h + 负压</td><td>样品放入粉尘箱，按代码施加负压并保持 8h</td><td>尘密（6）无粉尘进入；防尘（5）少量进入但不影响</td></tr>
+<tr><td>IP 防水</td><td>IEC 60529 / GB/T 4208</td><td>滴水/淋水/喷水/浸水装置、喷嘴、流量计</td><td>水量计、计时器</td><td>按 IP 代码条件</td><td>按代码执行滴水、喷水、强力喷水或浸水</td><td>无有害进水，绝缘与功能正常</td></tr>
+<tr><td>盐雾</td><td>IEC 60068-2-11 / 2-52</td><td>盐雾试验箱</td><td>5% NaCl 溶液、pH 计</td><td>35°C；连续或循环</td><td>按标准时长喷雾或循环（喷雾+干燥），结束后清洗检查</td><td>腐蚀不超限，接地连续性仍合格</td></tr>
+<tr><td>老化 / 耐久</td><td>产品标准规定</td><td>负载台、耐久试验机（电机/开关/线材弯折机）</td><td>润滑剂、温度记录</td><td>按产品标准循环</td><td>按循环次数、负载、时间连续运行并定期检查</td><td>功能正常，绝缘/接地复测通过</td></tr>
+<tr><td>高低温工作</td><td>产品标准规定</td><td>高低温试验箱 + 负载/测量装置</td><td>负载、稳压电源</td><td>按产品上下限温度</td><td>样品在目标温度稳定后带载运行</td><td>功能正常，保护动作正确，温升不超限</td></tr>
+<tr><td>振动/冲击后安规复测</td><td>产品标准规定</td><td>耐压测试仪、泄漏电流测试仪、接地电阻测试仪</td><td>测试夹</td><td>环境试验后进行</td><td>环境试验结束后按顺序做外观、功能、绝缘、接地复测</td><td>所有安全指标仍满足标准</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section>
+      <h2>D. EMC 测试</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试项目</th><th>主要标准</th><th>测试工具 / 设备</th><th>辅助 / 消耗品</th><th>环境 / 样品要求</th><th>测试方法要点</th><th>典型判定 / 注意事项</th></tr></thead>
+        <tbody>
+<tr><td>传导发射</td><td>CISPR 32 / EN 55032、CISPR 14-1</td><td>EMI 接收机、LISN 人工电源网络、屏蔽室</td><td>测试线、限幅器</td><td>屏蔽室；150kHz–30MHz</td><td>通过 LISN 给 EUT 供电，接收机测骚扰电压，峰值/准峰值/平均值</td><td>低于标准限值并留余量</td></tr>
+<tr><td>辐射发射</td><td>CISPR 32 / EN 55032</td><td>电波暗室/开阔场、天线、EMI 接收机、转台</td><td>天线塔、高度扫描</td><td>30MHz–1GHz 以上</td><td>天线在 1–4m 扫描，EUT 转台 360°，记录最大发射</td><td>低于标准限值并留余量</td></tr>
+<tr><td>谐波 / 闪烁</td><td>IEC 61000-3-2 / -3-3</td><td>谐波/闪烁分析仪、纯净电源</td><td>负载</td><td>按产品额定条件</td><td>在额定条件下测谐波电流与闪烁参数</td><td>符合对应设备类别限值</td></tr>
+<tr><td>ESD 静电放电</td><td>IEC 61000-4-2</td><td>ESD 模拟器（接触/空气放电）、接地参考板</td><td>放电枪头</td><td>标准大气；按等级</td><td>对可触及面与耦合板做接触/空气放电，按等级施加正负极性</td><td>性能判据 A/B/C 按产品标准</td></tr>
+<tr><td>浪涌</td><td>IEC 61000-4-5</td><td>浪涌发生器（1.2/50μs–8/20μs 组合波）、耦合/去耦网络 CDN</td><td>示波器、差分探头</td><td>线-线 / 线-地</td><td>按等级对电源/通信口施加浪涌，正负极性各若干次</td><td>性能判据 A/B/C 按产品标准</td></tr>
+<tr><td>EFT / 电快速瞬变</td><td>IEC 61000-4-4</td><td>EFT/B 发生器、耦合夹、CDN</td><td>测试线</td><td>±0.5kV–±4kV 量级</td><td>对电源/信号口施加快速瞬变脉冲群，正负极性</td><td>性能判据 A/B/C 按产品标准</td></tr>
+<tr><td>工频磁场</td><td>IEC 61000-4-8</td><td>磁场线圈、电流源</td><td>磁场探头</td><td>50Hz 工频</td><td>线圈产生规定场强并施加于 EUT 三轴</td><td>性能判据 A/B/C 按产品标准</td></tr>
+<tr><td>电压暂降 / 短时中断</td><td>IEC 61000-4-11</td><td>电压暂降发生器</td><td>示波器</td><td>按标准百分比和时间</td><td>按标准组合施加暂降/中断并观察功能</td><td>性能判据 A/B/C 按产品标准</td></tr>
+<tr><td>射频辐射抗扰</td><td>IEC 61000-4-3</td><td>电波暗室、信号源、功率放大器、天线、场强探头</td><td>场强校准件</td><td>80MHz–6GHz 量级</td><td>按等级场强（如 3/10V/m）对 EUT 扫频施加</td><td>性能判据 A/B/C 按产品标准</td></tr>
+<tr><td>射频传导抗扰</td><td>IEC 61000-4-6</td><td>信号源、功率放大器、CDN、注入探头</td><td>校准件</td><td>150kHz–230MHz 量级</td><td>通过 CDN 向线缆注入射频干扰并扫频</td><td>性能判据 A/B/C 按产品标准</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section>
+      <h2>E. 电池测试</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试项目</th><th>主要标准</th><th>测试工具 / 设备</th><th>辅助 / 消耗品</th><th>环境 / 样品要求</th><th>测试方法要点</th><th>典型判定 / 注意事项</th></tr></thead>
+        <tbody>
+<tr><td>过充 / 过放</td><td>IEC 62133、GB 31241</td><td>电池充放电测试仪、恒温箱</td><td>电压/温度记录</td><td>按标准倍率与温度</td><td>按标准倍率充电至保护或截止，记录电压/温度</td><td>不起火、不爆炸、不泄漏；保护动作正常</td></tr>
+<tr><td>外部短路</td><td>IEC 62133、GB 31241</td><td>短路测试装置（大电流开关、低阻铜排）、防爆箱</td><td>电压/电流记录</td><td>按标准温度</td><td>电池在设定温度下短路，记录最高温度与电压</td><td>不起火、不爆炸；外壳温度不超限</td></tr>
+<tr><td>过温</td><td>IEC 62133、GB 31241</td><td>恒温箱、热电偶</td><td>温度记录</td><td>按标准温度点</td><td>将电池置于标准高温并保持，观察是否热失控</td><td>不起火、不爆炸</td></tr>
+<tr><td>电池跌落</td><td>IEC 62133、GB 31241</td><td>跌落台</td><td>混凝土/钢板地面</td><td>按标准高度</td><td>按标准高度和方向跌落</td><td>不起火、不爆炸、不泄漏</td></tr>
+<tr><td>挤压</td><td>IEC 62133、GB 31241</td><td>挤压试验机（液压/伺服、力控）</td><td>压力传感器</td><td>按标准力与速度</td><td>以标准力/速度挤压电池，保持规定时间</td><td>不起火、不爆炸</td></tr>
+<tr><td>热冲击</td><td>IEC 62133、UN 38.3</td><td>温度冲击箱</td><td>温度记录</td><td>按标准温度循环</td><td>高低温度快速循环多次</td><td>不起火、不爆炸、不泄漏</td></tr>
+<tr><td>撞击 / 针刺</td><td>IEC 62133、UN 38.3</td><td>重锤冲击装置 / 针刺机（钢针、速度控制）</td><td>防爆箱、高速摄像</td><td>按标准</td><td>重锤冲击或钢针刺穿电池，观察热失控</td><td>不起火、不爆炸</td></tr>
+<tr><td>强制放电</td><td>UN 38.3</td><td>强制放电测试装置（可调负载）</td><td>电压/电流记录</td><td>按标准</td><td>串联电源强制放电规定时间</td><td>不起火、不爆炸</td></tr>
+<tr><td>热失控扩散</td><td>UL 9540A、GB/T 36276</td><td>加热片/针刺触发、热电偶阵列、气体分析、高速摄像</td><td>隔热材料、泄压装置</td><td>整包/整柜级</td><td>触发单颗电芯热失控，记录温度传播与气体</td><td>不扩散到相邻模组/柜体，泄压正常</td></tr>
+<tr><td>UN 38.3 全套</td><td>UN 38.3</td><td>低气压箱、温度冲击箱、振动台、冲击台、短路装置、撞击机、充放电设备</td><td>包装、MSDS、记录仪</td><td>8 项试验</td><td>依次执行高度模拟、热冲击、振动、冲击、外部短路、撞击、过充、强制放电</td><td>每项质量损失与电压满足 UN 38.3 判据</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section>
+      <h2>F. 其它专项测试</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>测试项目</th><th>主要标准</th><th>测试工具 / 设备</th><th>辅助 / 消耗品</th><th>环境 / 样品要求</th><th>测试方法要点</th><th>典型判定 / 注意事项</th></tr></thead>
+        <tbody>
+<tr><td>光生物安全</td><td>IEC 62471 / GB/T 20145</td><td>光谱辐射计、积分球、测角台、辐照度探头</td><td>标准光源</td><td>暗室</td><td>测量辐亮度/辐照度并按波长加权评估</td><td>分为 RG0–RG3，按产品适用等级</td></tr>
+<tr><td>SAR 射频暴露</td><td>IEC 62209 / EN 50566</td><td>SAR 测量系统（人体模型、机械臂、电场探头）</td><td>组织模拟液</td><td>按频段与距离</td><td>在人体模型中测量电场并按 1g/10g 平均计算 SAR</td><td>常见限值：10g 平均 ≤2.0 W/kg，1g 平均 ≤1.6 W/kg（按市场）</td></tr>
+<tr><td>机械强度（推力/拉力）</td><td>产品标准规定</td><td>推拉力计、压力试验机</td><td>测试夹具</td><td>标准实验室</td><td>对可触及面板/部件施加标准力值</td><td>无危险变形、无带电外露</td></tr>
+<tr><td>稳定性 / 倾倒</td><td>产品标准规定</td><td>倾斜台、砝码</td><td>角度计</td><td>按标准使用状态</td><td>倾斜或施加水平力，观察是否倾倒</td><td>在规定角度/力下不倾倒</td></tr>
+<tr><td>噪声</td><td>产品标准规定</td><td>声级计、消声室</td><td>声学校准器</td><td>按标准距离</td><td>在标准距离和负载下测声压级</td><td>不超产品限值</td></tr>
+<tr><td>功能安全验证</td><td>ISO 13849、IEC 62061</td><td>安全继电器/PLC 测试台、故障注入装置、逻辑分析仪</td><td>示波器、计时器</td><td>按安全功能</td><td>注入断线、短路、传感器失效等故障，验证安全回路</td><td>PL/SIL 达到设计等级，复位逻辑安全</td></tr>
+<tr><td>网络安全</td><td>RED 附件、ETSI EN 303 645</td><td>网络抓包工具、漏洞扫描器、固件分析环境</td><td>测试账号、证书</td><td>实验室网络</td><td>对设备网络接口做抓包、漏洞扫描与固件分析</td><td>无高危漏洞，默认口令与更新机制符合要求</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./knowledge.html#firetests">防火试验三件套</a>
+        <a class="tag" href="./reliability.html">可靠性测试中心（按行业）</a>
+        <a class="tag" href="./knowledge.html#environment">环境与可靠性试验</a>
+        <a class="tag" href="./knowledge.html#ip">IP 防护</a>
+        <a class="tag" href="./knowledge.html#leakage">泄漏电流</a>
+        <a class="tag" href="./knowledge.html#emc">EMC 基础</a>
+        <a class="tag" href="./knowledge.html#battery">电池试验</a>
+        <a class="tag" href="./hipot.html">耐压测试</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文和实验室能力为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./test-equipment.html">🔬<span>设备</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

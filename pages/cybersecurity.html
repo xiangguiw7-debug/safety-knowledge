@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>IoT 网络安全与安规 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="联网设备的网络安全：威胁模型、EN 303 645、网络弹性法案与安全设计清单。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / IoT 网络安全</p>
+      <h1>IoT 网络安全与安规</h1>
+      <p class="lead">网络攻击可以造成物理伤害：远程关掉温度保护、篡改安全参数——网络安全正在变成安规的一部分。</p>
+    </div>
+
+    <section>
+      <h2>1. 为什么网络安全和安规绑在一起</h2>
+      <ul>
+        <li>设备联网后，“人误用”之外多了“攻击者故意滥用”；</li>
+        <li>安全功能（急停、温度保护、限流）被远程篡改，等于安规失效；</li>
+        <li>医疗、工业、汽车已经明确把网络安全纳入注册/认证要求。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. 威胁模型：IoT 最容易出问题的五个点</h2>
+      <ul class="check-list">
+        <li><b>默认口令</b>：出厂 admin/admin，被批量控制；</li>
+        <li><b>固件更新</b>：无签名校验，更新通道被劫持；</li>
+        <li><b>通信未加密</b>：明文传输可被窃听/篡改；</li>
+        <li><b>过度权限/开放端口</b>：攻击面过大；</li>
+        <li><b>供应链</b>：第三方组件漏洞（SBOM 缺失）。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 法规与标准</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>体系</th><th>要求</th></tr></thead>
+          <tbody>
+            <tr><td>EN 303 645</td><td>消费类 IoT 基线安全：口令、更新、通信、隐私等 13 项</td></tr>
+            <tr><td>欧盟网络弹性法案（CRA）</td><td>联网产品强制网络安全要求，分阶段实施</td></tr>
+            <tr><td>医疗（IEC 81001-5-1 / FDA）</td><td>医疗设备网络安全全生命周期</td></tr>
+            <tr><td>车载（ISO/SAE 21434）</td><td>道路车辆网络安全工程</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 安全设计清单</h2>
+      <ul class="check-list">
+        <li>出厂唯一随机口令，强制改密；</li>
+        <li>固件签名 + 安全更新通道 + 回滚保护；</li>
+        <li>通信加密（TLS/DTLS），密钥安全存储；</li>
+        <li>最小化攻击面：关闭无用端口/服务；</li>
+        <li>数据最小化 + 隐私合规；</li>
+        <li>发布 SBOM，跟踪组件漏洞；</li>
+        <li>安全功能参数不可远程篡改，篡改要失效安全。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./industries.html#iot">IoT 行业</a>
+        <a class="tag" href="./knowledge.html#software">软件安全</a>
+        <a class="tag" href="./knowledge.html#functional">功能安全</a>
+        <a class="tag" href="./hazard-radiation.html">辐射（无线）</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

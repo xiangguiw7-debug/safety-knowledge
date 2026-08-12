@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>元器件安全专题 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="元器件安全：保险丝、X/Y 电容、变压器绝缘、连接器、热保护器与认证元件管理。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 元器件安全专题</p>
+      <h1>元器件安全专题</h1>
+      <p class="lead">安全相关元件要“选对、放对、替换也要重新评估”。</p>
+    </div>
+
+    <section>
+      <h2>1. 保险丝</h2>
+      <ul>
+        <li>额定电流、额定电压、分断能力、I²t、时间-电流特性；</li>
+        <li>位置：输入最前端，保护最薄弱器件；</li>
+        <li>认证元件（IEC 60127 / UL 248）不能随意替换。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. X / Y 电容</h2>
+      <ul>
+        <li>X 电容跨 L-N（差模），故障可能短路，需要保险丝配合；</li>
+        <li>Y 电容跨 L/N-地（共模），容量受泄漏电流限制；</li>
+        <li>失效模式要求“开路”，认证按 IEC 60384-14；</li>
+        <li>放电要求：插头残留电压要在规定时间降到安全值。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 变压器与绝缘系统</h2>
+      <ul>
+        <li>初次级隔离：挡墙胶带、三层绝缘线、骨架挡板；</li>
+        <li>绕组温升限值与绝缘等级（Class A/E/B/F/H）；</li>
+        <li>绝缘系统认证（UL/IEC）覆盖材料组合，不能只换一种材料；</li>
+        <li>引脚间距按爬电/间隙查表。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 连接器、开关与热保护器</h2>
+      <ul>
+        <li>连接器：端子间距、带电拔插、接触电阻、认证等级；</li>
+        <li>开关/继电器：触点额定、电弧寿命、绝缘距离；</li>
+        <li>热保护器：动作温度、复位方式（自恢复/一次性）、认证；</li>
+        <li>电池保护 IC/MOS：过充/过放/过流/过温四重保护 + 冗余。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. 认证元件管理</h2>
+      <ul class="check-list">
+        <li>关键元件清单（CDF）记录型号、认证编号、供应商；</li>
+        <li>替换时必须评估：参数、认证、结构、爬电间隙是否一致；</li>
+        <li>供应商变更/停产换料要触发变更管理；</li>
+        <li>证书有效性（UL 档案、CCC 证书）定期核对。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./knowledge.html#components">安规元件知识卡</a>
+        <a class="tag" href="./pcb-guidelines.html">PCB 设计指南</a>
+        <a class="tag" href="./hazard-energy.html">能量危险</a>
+        <a class="tag" href="./knowledge.html#certprocess">认证流程</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

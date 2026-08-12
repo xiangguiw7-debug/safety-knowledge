@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>ESD 静电放电深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="ESD 静电放电：波形与等级、试验方法、失效机理、硬件与软件整改。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./emc.html">EMC 系统课程</a> / ESD 深度页</p>
+      <h1>ESD 静电放电（IEC 61000-4-2）</h1>
+      <p class="lead">ESD 是抗扰项目里“电压高但能量小”的代表：上升沿极快，最容易让数字电路复位、死机或接口损坏。</p>
+    </div>
+
+    <section>
+      <h2>1. 波形与模型</h2>
+      <p>标准用 150pF / 330Ω 的人体模型（HBM）模拟人体放电：上升时间 0.7–1ns，电流峰值可达几十安，持续约 30–60ns。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>放电方式</th><th class="num">等级（典型）</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>接触放电</td><td class="num">±2 / 4 / 6 / 8 kV</td><td>放电枪直接接触被测面，优先使用</td></tr>
+            <tr><td>空气放电</td><td class="num">±2 / 4 / 8 / 15 kV</td><td>枪头接近被测面放电，受湿度距离影响</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>接触放电比空气放电可重复性好，标准优先；具体等级和打点位置由产品标准规定。</p>
+    </section>
+
+    <section>
+      <h2>2. 失效机理：为什么“只是静电”也会坏</h2>
+      <ul>
+        <li><b>快</b>：亚纳秒上升沿，高频分量直达芯片，普通滤波电容来不及反应；</li>
+        <li><b>路径</b>：从缝隙、按键、连接器、散热孔进入，沿 PCB 走线找“最近的地”；</li>
+        <li><b>后果</b>：接口芯片闩锁/击穿、MCU 复位或死机、显示花屏、数据错误；</li>
+        <li><b>难复现</b>：与湿度、操作者、打点位置强相关，量产偶发。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 硬件整改</h2>
+      <ul class="check-list">
+        <li>TVS 靠近连接器/按键放置，引线越短越好（小于 5mm 量级）；</li>
+        <li>缝隙下方不要走敏感信号线，金属缝隙做导电搭接；</li>
+        <li>外壳接地（I 类）或金属件等电位，泄放路径短而宽；</li>
+        <li>I/O 与地之间加 Y 电容/高频电容，给共模电流回路；</li>
+        <li>复位、中断、时钟线远离放电点；地平面完整，不开槽切断回流；</li>
+        <li>USB/HDMI 等高速口选低电容 TVS，兼顾信号完整性。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 软件与系统兜底</h2>
+      <ul>
+        <li>看门狗：死机可恢复，但不能掩盖硬件问题；</li>
+        <li>关键状态定期保存，掉电/复位后安全恢复；</li>
+        <li>通信加 CRC/重试，传感器读数加滤波与合理性判断；</li>
+        <li>生产测试加 ESD 抽检，防止批次工艺漂移。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. 常见误区</h2>
+      <ul>
+        <li>“加个大电容就行”——ESD 太快，需要 TVS + 高频路径；</li>
+        <li>“软件能全兜住”——看门狗只能恢复，闩锁/损坏救不了；</li>
+        <li>“外壳是塑料就不管”——缝隙和连接器仍然会进；</li>
+        <li>“打了没坏就是过”——要按标准规定的位置、极性、次数全打。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./emc.html">EMC 系统课程</a>
+        <a class="tag" href="./emc-eft.html">EFT 深度页</a>
+        <a class="tag" href="./knowledge.html#dmcm">共模与差模</a>
+        <a class="tag" href="./knowledge.html#components">X/Y 电容</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

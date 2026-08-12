@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>数值核对表 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="全站教学数值的来源、可信度分级与建议核对的标准版本追踪表。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 数值核对表</p>
+      <h1>数值核对表</h1>
+      <p class="lead">全站每个教学数值的“来源、可信度、建议核对标准版本、上次核对日期”都记录在这里，方便定期复核。</p>
+    </div>
+
+    <div class="callout callout-info">
+      <strong>可信度三档</strong>
+      <p>🟢 教学参考值（理解数量级）· 🟡 示例值（常见做法，需核对版本）· 🔴 必须查标准原文（认证依据）。</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>数值 / 表格</th><th>来源逻辑</th><th>可信度</th><th>建议核对</th><th>上次核对</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>爬电距离简化表（50–600V）</td><td>IEC 60664-1 查表逻辑教学简化</td><td>🟢</td><td>IEC 60664-1 最新版</td><td>2026-08</td></tr>
+          <tr><td>电气间隙简化表</td><td>IEC 60664-1 逻辑</td><td>🟢</td><td>IEC 60664-1 最新版</td><td>2026-08</td></tr>
+          <tr><td>海拔修正系数</td><td>IEC 60664-1 附录</td><td>🟢</td><td>IEC 60664-1 最新版</td><td>2026-08</td></tr>
+          <tr><td>过电压类别 → 冲击耐受</td><td>IEC 60664-1</td><td>🟢</td><td>IEC 60664-1</td><td>2026-08</td></tr>
+          <tr><td>62368 耐压 1500 / 3000V</td><td>IEC 62368-1 常用值</td><td>🟡</td><td>IEC 62368-1 电气强度条款</td><td>2026-08</td></tr>
+          <tr><td>60335 耐压 1250 / 3000V</td><td>IEC 60335-1 教学示例</td><td>🟡</td><td>IEC 60335-1 第 16 章（现行版）</td><td>2026-08</td></tr>
+          <tr><td>60601 耐压 1500 / 4000V</td><td>IEC 60601-1 教学示例</td><td>🟡</td><td>IEC 60601-1 电气强度条款</td><td>2026-08</td></tr>
+          <tr><td>60204 公式 2×Un + 1000V</td><td>IEC 60204-1 教学示例</td><td>🟡</td><td>IEC 60204-1 试验条款</td><td>2026-08</td></tr>
+          <tr><td>SELV 限值 AC50 / DC120V</td><td>IEC 61140 思路</td><td>🟡</td><td>IEC 61140 / 产品标准</td><td>2026-08</td></tr>
+          <tr><td>泄漏电流测量网络与限值</td><td>IEC 60990 + 产品标准</td><td>🟡</td><td>IEC 60990 / 60335 / 62368 / 60601</td><td>2026-08</td></tr>
+          <tr><td>接地连续性 10–25A / 0.1Ω 量级</td><td>IEC 61140 + 产品标准</td><td>🟡</td><td>适用产品标准</td><td>2026-08</td></tr>
+          <tr><td>温升基准：家电 25°C / 灯具 10–30°C（最好 25°C）</td><td>IEC 60335-1 / 60598-1</td><td>🟡</td><td>适用产品标准发热条款</td><td>2026-08</td></tr>
+          <tr><td>温升基准：测量控制/实验室设备 40°C</td><td>IEC 61010-1</td><td>🟡</td><td>IEC 61010-1 发热条款</td><td>2026-08</td></tr>
+          <tr><td>温升基准：旋转电机 40°C（B 级 130°C → 80K）</td><td>IEC 60034-1</td><td>🟡</td><td>IEC 60034-1</td><td>2026-08</td></tr>
+          <tr><td>充电桩温度条件 40°C 环境</td><td>GB/T 18487.1-2015</td><td>🔴</td><td>GB/T 18487.1-2015 约 11.6 节</td><td>2026-08</td></tr>
+          <tr><td>绝缘配合参数链</td><td>IEC 60664-1 逻辑</td><td>🟢</td><td>IEC 60664-1 最新版</td><td>2026-08</td></tr>
+          <tr><td>CTI / 材料组典型区间</td><td>行业经验 + 数据手册</td><td>🔴</td><td>供应商 CTI 报告</td><td>持续核对</td></tr>
+          <tr><td>泄漏电流 I = 2πfCV</td><td>电路公式</td><td>🟢</td><td>公式本身 + IEC 60990 测量网络</td><td>2026-08</td></tr>
+          <tr><td>灼热丝 / 针焰 / 球压参数</td><td>IEC 60695 系列</td><td>🟡</td><td>IEC 60695 与产品标准条款</td><td>2026-08</td></tr>
+          <tr><td>保险丝 1.25–1.5×</td><td>工程经验</td><td>🟡</td><td>保险丝数据表 + 标准</td><td>2026-08</td></tr>
+          <tr><td>环境试验参数</td><td>行业示例</td><td>🔴</td><td>适用产品标准 / 客户规范</td><td>持续核对</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section>
+      <h2>核对节奏建议</h2>
+      <ul class="check-list">
+        <li>每个季度把“🟡 示例值”对应的标准版本查一遍；</li>
+        <li>供应商材料数据（CTI 等）随样品/批次变化，按项目核对；</li>
+        <li>标准更新时（见<a href="./standards-updates.html">标准更新追踪</a>）同步更新本表。</li>
+      </ul>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

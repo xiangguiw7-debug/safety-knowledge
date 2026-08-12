@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>全球认证速查 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="各国认证体系速查：CCC、CE、FCC、UL、PSE、KC、BIS、RCM 等，支持按国家和产品分类查看。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/globe.css">
+  <style>
+    .view-tabs { display: flex; gap: 8px; margin: 6px 0 18px; }
+    .view-tabs button {
+      background: var(--card); border: 1px solid var(--border); color: var(--fg);
+      border-radius: 10px; padding: 9px 18px; font-size: 14.5px; cursor: pointer; font-family: inherit;
+    }
+    .view-tabs button:hover { border-color: var(--accent); color: var(--accent); }
+    .view-tabs button.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .cert-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 10px; }
+    .cert-filter button {
+      background: var(--card); border: 1px solid var(--border); color: var(--fg);
+      border-radius: 999px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-family: inherit;
+    }
+    .cert-filter button:hover { border-color: var(--accent); color: var(--accent); }
+    .cert-filter button.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .cert-search { width: 260px; max-width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); color: var(--fg); font-size: 14px; }
+    .cert-search:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+    .cert-count { font-size: 13px; color: var(--muted); margin: 8px 0 14px; }
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+    .cert-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow); }
+    .cert-card h3 { margin: 0 0 8px; font-size: 17px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .cert-card .mark { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 2px 12px; font-size: 13px; font-weight: 600; }
+    .cert-card .meta { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
+    .cert-card p { font-size: 14px; margin: 6px 0; }
+    .cert-card .note { color: var(--muted); font-size: 13px; }
+    .cert-card.product { grid-column: 1 / -1; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+            <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html" class="active">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / 全球认证速查</p>
+      <h1>全球认证速查</h1>
+      <p class="lead">认证 = 监管强制 + 市场要求。推荐按“国家 → 产品分类”两个维度查：先看目标国家的监管体系，再看你的产品属于哪个目录、需要什么标志。</p>
+    </div>
+
+    <div class="view-tabs" role="group" aria-label="切换查看方式">
+      <button type="button" data-view="globe" aria-pressed="false">🌍 地球视图</button>
+      <button type="button" data-view="country" aria-pressed="true">按国家 / 地区</button>
+      <button type="button" data-view="product" aria-pressed="false">按产品分类</button>
+    </div>
+
+    <select id="cRegion" hidden><option value="all">全部</option><option value="亚洲">亚洲</option><option value="欧盟">欧盟</option><option value="北欧">北欧</option><option value="欧洲其他">欧洲其他</option><option value="北美洲">北美洲</option><option value="南美洲">南美洲</option><option value="大洋洲">大洋洲</option><option value="非洲">非洲</option><option value="中东">中东</option></select>
+    <select id="pCat" hidden><option value="all">全部</option><option value="appliance">家用电器</option><option value="itav">音视频/IT</option><option value="lighting">灯具</option><option value="power">电源充电器</option><option value="battery">电池</option><option value="wireless">无线设备</option><option value="medical">医疗设备</option><option value="machinery">工业机械</option><option value="tools">电动工具</option></select>
+    <div id="viewGlobe">
+      <div class="globe-wrap">
+        <div class="globe-box">
+          <svg id="globeSvg" viewBox="0 0 340 350" role="img" aria-label="全球认证地球视图"></svg>
+          <div id="globe3d" role="img" aria-label="3D 全球认证地球仪，可拖拽旋转并点击国家查看认证"></div>
+        </div>
+        <div class="globe-controls">
+          <button type="button" class="btn" id="globePlay">⏸ 暂停旋转</button>
+          <select id="globeRegion"><option value="all">区域：全部</option></select>
+          <input type="search" id="globeSearch" class="tool-search" style="width:200px" placeholder="搜索国家…" aria-label="搜索国家">
+        </div>
+        <p class="globe-hint">拖拽旋转 / 滚轮缩放 · 点击国家查看认证要求 · 支持 ?c=国家名 直达</p>
+      </div>
+      <div id="globeCard"></div>
+    </div>
+    <div id="viewCountry">
+      <div class="cert-filter" role="group" aria-label="按地区筛选">
+        <button type="button" class="active" data-region="all" aria-pressed="true">全部</button>
+        <button type="button" data-region="亚洲" aria-pressed="false">亚洲</button>
+        <button type="button" data-region="欧盟" aria-pressed="false">欧盟</button>
+        <button type="button" data-region="北欧" aria-pressed="false">北欧</button>
+        <button type="button" data-region="欧洲其他" aria-pressed="false">欧洲其他</button>
+        <button type="button" data-region="北美洲" aria-pressed="false">北美洲</button>
+        <button type="button" data-region="南美洲" aria-pressed="false">南美洲</button>
+        <button type="button" data-region="大洋洲" aria-pressed="false">大洋洲</button>
+        <button type="button" data-region="非洲" aria-pressed="false">非洲</button>
+        <button type="button" data-region="中东" aria-pressed="false">中东</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <input type="search" id="cSearch" class="cert-search" placeholder="搜索国家或体系，如 美国 / PSE" aria-label="搜索国家或认证体系">
+      </div>
+      <p class="cert-count" id="cCount"></p>
+      <div class="cert-grid" id="cList"></div>
+    </div>
+
+    <div id="viewProduct" hidden>
+      <div class="cert-filter" role="group" aria-label="按产品分类筛选">
+        <button type="button" class="active" data-pcat="all" aria-pressed="true">全部</button>
+        <button type="button" data-pcat="appliance" aria-pressed="false">家用电器</button>
+        <button type="button" data-pcat="itav" aria-pressed="false">音视频/IT</button>
+        <button type="button" data-pcat="lighting" aria-pressed="false">灯具</button>
+        <button type="button" data-pcat="power" aria-pressed="false">电源充电器</button>
+        <button type="button" data-pcat="battery" aria-pressed="false">电池</button>
+        <button type="button" data-pcat="wireless" aria-pressed="false">无线设备</button>
+        <button type="button" data-pcat="medical" aria-pressed="false">医疗设备</button>
+        <button type="button" data-pcat="machinery" aria-pressed="false">工业机械</button>
+        <button type="button" data-pcat="tools" aria-pressed="false">电动工具</button>
+      </div>
+      <p class="cert-count" id="pCount"></p>
+      <div class="cert-grid" id="pList"></div>
+    </div>
+
+    <section>
+      <h2>先分清：强制认证 vs 市场要求</h2>
+      <div class="grid grid-2">
+        <div class="callout callout-danger" style="margin:0">
+          <strong>强制（监管）</strong>
+          <p>没有就进不了海关/上不了架：中国 CCC、欧盟 CE、美国 FCC、日本 PSE、韩国 KC、印度 BIS、沙特 SASO 等。以各国法律法规和产品目录为准。</p>
+        </div>
+        <div class="callout callout-warn" style="margin:0">
+          <strong>市场要求（渠道）</strong>
+          <p>法律上“自愿”，但零售渠道、电商平台、采购商普遍要求：美国 UL/ETL、德国 VDE/GS、加拿大 cUL 等。不做可能卖不出去。</p>
+        </div>
+      </div>
+      <div class="callout callout-info" style="margin-top:18px">
+        <strong>欧盟内部：CE 是法律底线，本土标志是市场加分</strong>
+        <p>CE 覆盖整个欧盟/欧洲经济区；各国本土标志（德国 GS/VDE、法国 NF、荷兰 KEMA、比利时 CEBEC、意大利 IMQ、西班牙 AENOR、北欧 N 标志、奥地利 ÖVE、波兰 B 等）多为自愿，但零售、保险、公共采购常要求。英国脱欧后另有 UKCA 体系（过渡期内 GB 市场仍接受 CE），瑞士有 S+ 标志。</p>
+      </div>
+      <div class="callout callout-info" style="margin-top:18px">
+        <strong>通用落地流程</strong>
+        <p>确定目标国家 → 查该国产品目录是否强制 → 找对应的安全/EMC/无线标准 → 选择测试与认证路径（自我声明 / 转证 CB / 本地测试）→ 发证并维护。认证要求经常更新，正式出口前请向当地监管机构或认证机构确认。</p>
+      </div>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文和各国监管要求为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/certification.js"></script>
+  <script src="../assets/js/globe-data.js"></script>
+  <script src="../assets/lib/three.min.js"></script>
+  <script src="../assets/lib/topojson-client.min.js"></script>
+  <script src="../assets/lib/world-topo.js"></script>
+  <script src="../assets/js/globe3d.js"></script>
+  <script src="../assets/js/globe.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

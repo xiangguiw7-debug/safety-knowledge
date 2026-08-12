@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>标准差异矩阵 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="同一产品在 IEC 60335-1、62368-1、60601-1、61010-1、60204-1 下的条款与数值差异对照。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .cmp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; }
+    .cmp-chips button { background: var(--card); border: 1px solid var(--border); color: var(--fg); border-radius: 999px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-family: inherit; }
+    .cmp-chips button:hover { border-color: var(--accent); color: var(--accent); }
+    .cmp-chips button.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .cmp-hint { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html" class="active">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./refs.html">参考中心</a> / 标准差异矩阵</p>
+      <h1>标准差异矩阵</h1>
+      <p class="lead">同一台产品，按家电、IT、医疗、测量、机械去认证，条款和数值可能完全不同。这张表帮你快速定位“差异在哪”，数值以标准原文为准。</p>
+    </div>
+
+        <div class="table-wrap">
+      <div class="cmp-chips" id="cmpChips">
+        <button type="button" class="active" data-cmp="all" aria-pressed="true">全部对比</button>
+        <button type="button" data-cmp="60335" aria-pressed="false">家电 60335</button>
+        <button type="button" data-cmp="62368" aria-pressed="false">IT/AV 62368</button>
+        <button type="button" data-cmp="60601" aria-pressed="false">医疗 60601</button>
+        <button type="button" data-cmp="61010" aria-pressed="false">测量 61010</button>
+        <button type="button" data-cmp="60204" aria-pressed="false">机械 60204</button>
+      </div>
+      <p class="cmp-hint" id="cmpHint">全部：五列对照；选一个产品场景：只看该标准列 + 关键差异。</p>
+      <table id="cmpTable">
+        <thead id="cmpHead"></thead>
+        <tbody id="cmpBody"></tbody>
+      </table>
+    </div>
+
+    <section>
+      <h2>同一产品示例：230V 电源适配器</h2>
+      <p>同一个“230V 开关电源”如果按不同标准认证，耐压示例值差异明显：</p>
+          <div class="table-wrap">
+      <div class="cmp-chips" id="cmpChips">
+        <button type="button" class="active" data-cmp="all" aria-pressed="true">全部对比</button>
+        <button type="button" data-cmp="60335" aria-pressed="false">家电 60335</button>
+        <button type="button" data-cmp="62368" aria-pressed="false">IT/AV 62368</button>
+        <button type="button" data-cmp="60601" aria-pressed="false">医疗 60601</button>
+        <button type="button" data-cmp="61010" aria-pressed="false">测量 61010</button>
+        <button type="button" data-cmp="60204" aria-pressed="false">机械 60204</button>
+      </div>
+      <p class="cmp-hint" id="cmpHint">全部：五列对照；选一个产品场景：只看该标准列 + 关键差异。</p>
+      <table id="cmpTable">
+        <thead id="cmpHead"></thead>
+        <tbody id="cmpBody"></tbody>
+      </table>
+    </div>
+      <div class="callout callout-warn">
+        <strong>为什么差异这么大</strong>
+        <p>标准定位不同：家电按传统绝缘结构条款；IT/AV 按危害分级（能源、起火、机械）；医疗叠加患者风险与监管要求；测量设备按测量类别；机械按 IEC 60664 配合。选标准的第一步是确定产品在目标市场的“身份”。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>怎么用这张表</h2>
+      <ol>
+        <li>先定产品身份（家电/IT/医疗/测量/机械）；</li>
+        <li>按行找对应条款位置，去<a href="./standards.html">标准文件入口</a>核对原文；</li>
+        <li>数值全部以“最新版本标准表格”为准，本表只给方向和示例；</li>
+        <li>涉及多市场出口时，用<a href="./wizard.html">认证向导</a>生成国家清单。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./standards.html">标准文件入口</a>
+        <a class="tag" href="./wizard.html">认证向导</a>
+        <a class="tag" href="./certification.html">全球认证</a>
+        <a class="tag" href="./learn.html">学习地图</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/compare.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

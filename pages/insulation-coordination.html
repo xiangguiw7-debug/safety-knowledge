@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>绝缘配合总览深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="工作电压、系统电压、污染等级、材料组、海拔如何共同决定爬电距离与电气间隙。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav"></nav>
+    </div>
+  </header>
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./knowledge.html">知识卡片库</a> / 绝缘配合深度页</p>
+      <h1>绝缘配合总览（IEC 60664-1）</h1>
+      <p class="lead">爬电和间隙不是两张孤立表格，而是一条参数链：电压 → 环境 → 材料 → 绝缘类型 → 距离。</p>
+    </div>
+<section>
+  <h2>1. 绝缘配合是什么</h2>
+  <p>绝缘配合 = 在目标使用环境下，把绝缘系统设计得能承受预期电压（持续、暂态、冲击）和污染，保证寿命内不失效。查表只是最后一步。</p>
+</section>
+<section>
+  <h2>2. 两条查表路径</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>路径</th><th>输入参数</th><th>输出</th><th>去哪查</th></tr></thead>
+    <tbody>
+      <tr><td>电气间隙</td><td>系统电压 + 过电压类别 → 冲击耐受 → 海拔修正</td><td>空气最短距离</td><td><a href="./clearance.html">间隙深度页</a></td></tr>
+      <tr><td>爬电距离</td><td>工作电压 + 污染等级 + 材料组（CTI）+ 绝缘类型</td><td>沿绝缘表面距离</td><td><a href="./creepage.html">爬电深度页</a></td></tr>
+    </tbody>
+  </table></div>
+</section>
+<section>
+  <h2>3. 参数链</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>参数</th><th>影响什么</th><th>典型取值</th></tr></thead>
+    <tbody>
+      <tr><td>系统电压</td><td>过电压类别 → 冲击耐受 → 间隙</td><td>120 / 230 / 400V</td></tr>
+      <tr><td>工作电压</td><td>爬电距离查表电压</td><td>宽压产品按 250V 档</td></tr>
+      <tr><td>过电压类别</td><td>间隙的冲击耐受</td><td>I（SPD 后）/ II（插头）/ III（固定）/ IV（进线）</td></tr>
+      <tr><td>污染等级</td><td>爬电与间隙的环境系数</td><td>1 密封 / 2 室内 / 3 工业潮湿</td></tr>
+      <tr><td>材料组（CTI）</td><td>爬电距离列</td><td>I ≥600 / II 400–600 / IIIa 175–400 / IIIb 100–175</td></tr>
+      <tr><td>绝缘类型</td><td>距离倍率</td><td>基本 1× / 附加 1× / 加强 ≈2× / 功能按失效后果</td></tr>
+      <tr><td>海拔</td><td>间隙修正</td><td>2000m 以上放大</td></tr>
+    </tbody>
+  </table></div>
+</section>
+<section>
+  <h2>4. 五步查表流程</h2>
+  <ol>
+    <li>确定产品类别与供电方式（I/II/III）；</li>
+    <li>确定系统电压与过电压类别（间隙用）和工作电压（爬电用）；</li>
+    <li>判断污染等级与材料组（CTI，看供应商报告）；</li>
+    <li>确定绝缘类型（基本/附加/加强/功能）；</li>
+    <li>分别查间隙和爬电，取同时满足的最小值，再留工艺余量。</li>
+  </ol>
+</section>
+<section>
+  <h2>5. 距离不足的补救</h2>
+  <ul>
+    <li><b>开槽/挡墙</b>：把爬电路径拉长，槽宽/挡墙高度按标准要求；</li>
+    <li><b>灌封/涂覆</b>：改变污染条件或隔离路径，需验证工艺可靠性；</li>
+    <li><b>换高 CTI 材料</b>：降低爬电要求，但阻燃剂常拉低 CTI；</li>
+    <li><b>反查</b>：先定空间再反推可承受电压，评估是否够用。</li>
+  </ul>
+</section>
+<section>
+  <h2>6. 常见坑</h2>
+  <ul>
+    <li>宽压产品按 240V 插值，不按 250V 档——应直接按 250V 档查；</li>
+    <li>III 类设备“不用查距离”——SELV 不成立时仍要按危险电路处理；</li>
+    <li>海拔只改间隙不改爬电——爬电不随海拔修正（教学逻辑）；</li>
+    <li>功能绝缘按基本绝缘查——功能绝缘按失效后果单独定；</li>
+    <li>V-0 材料 CTI 可能很低——阻燃和抗起痕是两回事。</li>
+  </ul>
+</section>
+    <section>
+      <h2>相关学习</h2>
+      <p><a class="tag" href="./clearance.html">电气间隙深度页</a>
+  <a class="tag" href="./creepage.html">爬电距离深度页</a>
+  <a class="tag" href="./tools.html#tool-spacing">工具：爬电 / 间隙计算器</a>
+  <a class="tag" href="./materials.html">材料库（CTI / 黄卡）</a>
+  <a class="tag" href="./knowledge.html#cti">知识卡：CTI 与材料组</a>
+  <a class="tag" href="./standards.html#std-60664">标准入口：IEC 60664-1</a></p>
+    </section>
+  </main>
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/standard-status.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

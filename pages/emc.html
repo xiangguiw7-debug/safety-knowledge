@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>EMC 系统课程 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="EMC 系统课程：发射与抗扰项目原理、滤波接地设计、常见整改手段与试验标准对照。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <span class="logo-mark">⚡</span>
+        安规与可靠性知识课堂
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./learn.html">学习地图</a> / EMC 系统课程</p>
+      <h1>EMC 系统课程</h1>
+      <p class="lead">EMC = 发射（不干扰别人）+ 抗扰（不被别人干扰）。本课程讲清每个试验项目“测什么、从哪来、怎么改”。</p>
+    </div>
+
+    <section>
+      <h2>1. EMC 的底层逻辑</h2>
+      <p>任何干扰都有三要素：<b>源 → 耦合路径 → 受害对象</b>。整改也只有三条路：消灭源、切断耦合、加固受害对象。</p>
+      <ul>
+        <li>发射 = 我的设备是源，别人是受害对象；</li>
+        <li>抗扰 = 别人是源，我的设备是受害对象；</li>
+        <li>耦合路径：传导（走线/电源线/地线）和辐射（空间/线缆天线效应）；</li>
+        <li>标准只测“结果”，设计要管“机理”——所以先懂机理再整改。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. 发射类项目</h2>
+
+      <h3>2.1 传导发射（CE，150kHz–30MHz） <a class="tag" href="./emc-ce.html">深度页 →</a></h3>
+      <p><b>测什么：</b>电源端口的骚扰电压，用 LISN 测量，限值分准峰值/平均值。</p>
+      <p><b>从哪来：</b>开关频率及其谐波（差模），以及开关节点对地/散热器的共模电流。</p>
+      <p><b>怎么改：</b>X 电容抑制差模、共模电感抑制共模、Y 电容提供对地回路（注意泄漏电流限制）、输入 π 滤波、开关节点缓坡、屏蔽散热器。</p>
+
+      <h3>2.2 辐射发射（RE，30MHz–1GHz+） <a class="tag" href="./emc-re.html">深度页 →</a></h3>
+      <p><b>测什么：</b>设备向空间的辐射场强，含天线与线缆的贡献。</p>
+      <p><b>从哪来：</b>大电流环路（di/dt 环路）、开关节点对地电位、连接线缆作为“天线”辐射共模电流。</p>
+      <p><b>怎么改：</b>最小化环路面积、完整地平面、开关节点远离 I/O、线缆加共模扼流/屏蔽、晶振展频、接口滤波。</p>
+
+      <h3>2.3 谐波与闪烁（IEC 61000-3-2 / -3-3）</h3>
+      <p><b>测什么：</b>电源输入电流的谐波成分与电压闪烁。</p>
+      <p><b>从哪来：</b>整流桥 + 大电解电容的窄脉冲充电电流。</p>
+      <p><b>怎么改：</b>有源 PFC、无源填谷/电感滤波；大功率设备基本必须 APFC。</p>
+    </section>
+
+    <section>
+      <h2>3. 抗扰类项目</h2>
+
+      <h3>3.1 ESD（IEC 61000-4-2） <a class="tag" href="./emc-esd.html">深度页 →</a></h3>
+      <p><b>测什么：</b>接触放电 ±2/4/6/8kV、空气放电 ±2/4/8/15kV（等级视标准）。</p>
+      <p><b>机理：</b>亚纳秒上升沿，主要沿缝隙、连接器、按键进入；对数字电路复位/死机影响大。</p>
+      <p><b>怎么改：</b>接口加 TVS、缝隙下不放敏感走线、外壳接地、I/O 与地之间加 Y 电容、按键/触摸走线保护。</p>
+
+      <h3>3.2 浪涌（IEC 61000-4-5）</h3>
+      <p>能量最大的抗扰项目，详细内容见<a href="./surge.html">雷击浪涌详解</a>：MOV/GDT/TVS 多级防护、退耦、泄放路径。</p>
+
+      <h3>3.3 EFT（IEC 61000-4-4） <a class="tag" href="./emc-eft.html">深度页 →</a></h3>
+      <p><b>测什么：</b>5/50ns 脉冲串，叠加在电源/信号线上。</p>
+      <p><b>从哪来：</b>继电器、接触器、电机换向。</p>
+      <p><b>怎么改：</b>电源口共模电感 + X/Y 电容、信号线屏蔽与滤波、敏感芯片复位/看门狗、软件滤波。</p>
+
+      <h3>3.4 工频磁场（IEC 61000-4-8） <a class="tag" href="./emc-magnetic.html">深度页 →</a></h3>
+      <p><b>测什么：</b>50/60Hz 磁场对含磁敏元件（霍尔、CRT、传感器）设备的影响。</p>
+      <p><b>怎么改：</b>远离变压器/电机、磁屏蔽、传感器布局方向、软件数字滤波。</p>
+
+      <h3>3.5 电压暂降与短时中断（IEC 61000-4-11） <a class="tag" href="./emc-dips.html">深度页 →</a></h3>
+      <p><b>测什么：</b>输入电压跌落 0%/40%/70% 若干周期，设备不得损坏或危险。</p>
+      <p><b>怎么改：</b>输入储能电容 hold-up 时间、欠压复位阈值、掉电保存、状态机安全恢复。</p>
+    </section>
+
+    <section>
+      <h2>3.6 项目深度页（发射 + 抗扰）</h2>
+      <div class="grid grid-4">
+        <a class="card" href="./emc-ce.html"><h3>🔌 传导发射</h3><p>频段限值、差模/共模来源、滤波整改。</p></a>
+        <a class="card" href="./emc-re.html"><h3>📡 辐射发射</h3><p>天线机理、环路最小化、屏蔽与展频。</p></a>        <a class="card" href="./emc-esd.html"><h3>⚡ ESD 静电放电</h3><p>波形、等级、硬件与软件整改。</p></a>
+        <a class="card" href="./emc-eft.html"><h3>🔁 EFT 脉冲群</h3><p>脉冲串、滤波、复位与通信兜底。</p></a>
+        <a class="card" href="./emc-magnetic.html"><h3>🧲 工频磁场</h3><p>等级、磁敏元件、屏蔽与布局。</p></a>
+        <a class="card" href="./emc-dips.html"><h3>📉 电压暂降</h3><p>hold-up 设计、欠压检测与恢复。</p></a>
+      </div>
+    </section>
+    <section>
+      <h2>4. 滤波与接地设计（安规 × EMC 的交叉点）</h2>
+      <ul>
+        <li><b>X 电容</b>：跨 L-N 抑制差模；故障时可能短路，前面要有保险丝；</li>
+        <li><b>Y 电容</b>：跨 L/N-地抑制共模；容量受<a href="./knowledge.html#leakage">泄漏电流</a>限制——EMC 要的“越大越好”和安规的“越小越好”必须平衡；</li>
+        <li><b>共模电感</b>：对差模几乎无影响，专门对付共模；注意饱和与漏感；</li>
+        <li><b>地平面</b>：完整地平面减小回路电感；开槽会切断回流路径，等于“制造天线”；</li>
+        <li><b>I/O 滤波</b>：连接器处就近放滤波与 TVS，走线先滤波再进板；</li>
+        <li><b>开关节点</b>：减小 di/dt 环路、加吸收、缓坡驱动、远离敏感区。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. 实战整改清单</h2>
+      <ul class="check-list">
+        <li>先确认是差模还是共模（拔线/换线长/加共模电感判断）；</li>
+        <li>一次只改一个变量，逐项复测，避免“改一堆不知道谁起作用”；</li>
+        <li>滤波元件靠近源头/端口，而不是靠近芯片；</li>
+        <li>环路面积最小化：电源、开关、晶振、I/O 四类回路；</li>
+        <li>线缆处理：屏蔽层单端/双端接地按信号类型，加磁环/共模扼流；</li>
+        <li>软件兜底：看门狗、数字滤波、重试机制，但不能替代硬件设计；</li>
+        <li>记录整改前后频谱/波形，形成“问题-措施-验证”闭环。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. 试验与标准对照</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>类别</th><th>试验项目</th><th>主要标准</th><th>常见等级/范围</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>发射</td><td>传导发射</td><td>CISPR 32 / GB/T 9254</td><td>150kHz–30MHz</td></tr>
+            <tr><td>发射</td><td>辐射发射</td><td>CISPR 32</td><td>30MHz–1GHz+</td></tr>
+            <tr><td>发射</td><td>谐波 / 闪烁</td><td>IEC 61000-3-2 / -3-3</td><td>按设备类别</td></tr>
+            <tr><td>抗扰</td><td>ESD</td><td>IEC 61000-4-2</td><td>接触 2–8kV，空气 2–15kV</td></tr>
+            <tr><td>抗扰</td><td>浪涌</td><td>IEC 61000-4-5</td><td>0.5–4kV（X 自定义）</td></tr>
+            <tr><td>抗扰</td><td>EFT</td><td>IEC 61000-4-4</td><td>0.5–4kV 脉冲串</td></tr>
+            <tr><td>抗扰</td><td>工频磁场</td><td>IEC 61000-4-8</td><td>1–30 A/m 等</td></tr>
+            <tr><td>抗扰</td><td>电压暂降</td><td>IEC 61000-4-11</td><td>0/40/70% 若干周期</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lead">具体等级和判定由产品标准决定；正式测试前先看“适用标准”再定“试验计划”。</p>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./surge.html">雷击浪涌详解</a>
+        <a class="tag" href="./knowledge.html#dmcm">共模与差模</a>
+        <a class="tag" href="./knowledge.html#harmonic">谐波</a>
+        <a class="tag" href="./knowledge.html#components">X/Y 电容</a>
+        <a class="tag" href="./quiz.html">小测验</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

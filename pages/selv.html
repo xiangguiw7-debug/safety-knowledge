@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>SELV / TNV 与隔离深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="SELV 成立条件、限值、隔离来源、验证方法与常见坑。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav"></nav>
+    </div>
+  </header>
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./knowledge.html">知识卡片库</a> / SELV 深度页</p>
+      <h1>SELV / TNV 与隔离（IEC 61140）</h1>
+      <p class="lead">SELV 的核心不是“电压低”，而是“隔离成立”：限压、隔离、无危险路径三个条件缺一不可。</p>
+    </div>
+<section>
+  <h2>1. SELV 的定义不是“低压”</h2>
+  <p>SELV（安全特低电压）是指回路电压受到限制，且与危险电路之间有可靠隔离，任何单点故障都不会让安全电压变成危险电压的供电方式。</p>
+  <div class="callout callout-danger"><strong>最常犯的错</strong><p>“输出 5V 就是 SELV”——电压低但隔离不成立，故障时仍可能变成危险电压。</p></div>
+</section>
+<section>
+  <h2>2. 成立三条件</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>条件</th><th>教学参考</th><th>验证方式</th></tr></thead>
+    <tbody>
+      <tr><td>限压</td><td>AC ≤50V / DC ≤120V（无纹波，以 IEC 61140 与产品标准为准；部分产品标准用更低值）</td><td>正常 + 单一故障条件下测量</td></tr>
+      <tr><td>隔离</td><td>与危险电路之间有安全隔离（隔离变压器/等效隔离），基本+附加或加强绝缘</td><td>耐压、爬电/间隙、绕组结构</td></tr>
+      <tr><td>无危险路径</td><td>SELV 回路不能与危险电路、PE 或其它回路形成可触及路径</td><td>电路审查 + 绝缘距离</td></tr>
+    </tbody>
+  </table></div>
+</section>
+<section>
+  <h2>3. 与 PELV / FELV / TNV 的区别</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>类型</th><th>限压</th><th>是否可接地/参考</th><th>典型用途</th></tr></thead>
+    <tbody>
+      <tr><td>SELV</td><td>AC 50V / DC 120V 量级</td><td>不允许接地（隔离最严）</td><td>III 类设备、可触及低压电路</td></tr>
+      <tr><td>PELV</td><td>同上</td><td>允许保护性接地</td><td>工业控制回路</td></tr>
+      <tr><td>FELV</td><td>同上但隔离不完整</td><td>不满足 SELV 隔离</td><td>功能低压，仍需按危险电路防护</td></tr>
+      <tr><td>TNV（通信网络电压）</td><td>按通信电路限值</td><td>取决于 TNV-0/1/2/3</td><td>电话、PoE 等通信端口</td></tr>
+    </tbody>
+  </table></div>
+</section>
+<section>
+  <h2>4. 隔离从哪来</h2>
+  <ul>
+    <li><b>安全隔离变压器</b>：初次级加强绝缘，绕组间有屏蔽/挡墙；</li>
+    <li><b>开关电源初次级隔离</b>：变压器、光耦、Y 电容共同构成，隔离距离按标准验证；</li>
+    <li><b>PoE</b>：以太网供电的 PSE/PD 之间需要隔离，不是“低压就随便接”；</li>
+    <li><b>III 类设备</b>：设备本身不接市电，安全依赖适配器/电源的 SELV 成立。</li>
+  </ul>
+</section>
+<section>
+  <h2>5. 验证方法</h2>
+  <ol>
+    <li>确认产品类别和供电结构（I/II/III 类，SELV 电源来源）；</li>
+    <li>测 SELV 端正常 + 单一故障电压（含电源最高输入电压条件）；</li>
+    <li>做初次级耐压与爬电/间隙验证（对应加强绝缘要求）；</li>
+    <li>检查 SELV 端与 PE、危险电路、其它可触及回路的隔离路径；</li>
+    <li>有通信端口时再核对 TNV 分类与隔离。</li>
+  </ol>
+</section>
+<section>
+  <h2>6. 常见坑</h2>
+  <ul>
+    <li>5V/12V 输出 ≠ SELV，隔离不成立就要按危险电路防护；</li>
+    <li>III 类设备换了劣质适配器，SELV 就不再成立；</li>
+    <li>SELV 端接了 PE 或大地，分类可能变成 PELV，判定逻辑要重做；</li>
+    <li>PoE 只做功能隔离不做安全隔离，雷击/故障时可能出事。</li>
+  </ul>
+</section>
+    <section>
+      <h2>相关学习</h2>
+      <p><a class="tag" href="./knowledge.html#selv">知识卡：SELV / TNV 与隔离</a>
+  <a class="tag" href="./tools.html#tool-selv">工具：SELV 限值速查</a>
+  <a class="tag" href="./double-insulation.html">双重绝缘判定</a>
+  <a class="tag" href="./mopp-moop.html">MOPP / MOOP</a>
+  <a class="tag" href="./sop-hipot.html">SOP：耐压</a>
+  <a class="tag" href="./standards.html#std-61140">标准入口：IEC 61140</a></p>
+    </section>
+  </main>
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/standard-status.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

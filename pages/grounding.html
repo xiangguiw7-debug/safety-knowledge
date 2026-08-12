@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>接地与等电位连接深度页 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="保护接地、接地连续性试验、等电位连接与 SPD 泄放路径。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav"></nav>
+    </div>
+  </header>
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./knowledge.html">知识卡片库</a> / 接地深度页</p>
+      <h1>接地与等电位连接（IEC 61140）</h1>
+      <p class="lead">I 类设备的安全依赖“低阻抗接地回路”：接地不是接上就行，连续性、端子、路径都要验证。</p>
+    </div>
+<section>
+  <h2>1. 三种“地”别混</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>概念</th><th>作用</th><th>是否参与防触电</th></tr></thead>
+    <tbody>
+      <tr><td>保护接地（PE）</td><td>故障电流回路，触发保护器件动作</td><td>是（I 类设备）</td></tr>
+      <tr><td>功能接地</td><td>信号参考、EMC 泄放、SPD 泄放</td><td>通常不直接防触电</td></tr>
+      <tr><td>等电位连接</td><td>消除可触及导体间电位差</td><td>是（医疗/工业现场）</td></tr>
+    </tbody>
+  </table></div>
+</section>
+<section>
+  <h2>2. I 类设备为什么必须接地</h2>
+  <p>I 类设备的结构是“基本绝缘 + 保护接地”：基本绝缘失效时，故障电流应经 PE 回流，使保险丝/断路器动作，外壳不会长时间带电。</p>
+  <ul>
+    <li>接地回路阻抗越高，故障时外壳接触电压越高、动作越慢；</li>
+    <li>接地端子松动、生锈、接触电阻大，等于没有保护；</li>
+    <li>II 类设备没有 PE，反而要验证“无接地不影响安全”。</li>
+  </ul>
+</section>
+<section>
+  <h2>3. 接地连续性试验</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>项目</th><th>教学参考</th></tr></thead>
+    <tbody>
+      <tr><td>试验电流</td><td>常见 10–25A 量级（按标准），低压大电流源</td></tr>
+      <tr><td>判定限值</td><td>接触电阻常见 ≤0.1Ω 量级（电压降法），以标准条款为准</td></tr>
+      <tr><td>测量对象</td><td>电源插头 PE 脚 → 可触及金属外壳/接地端子</td></tr>
+      <tr><td>端子要求</td><td>防腐镀层、防松结构、不能兼作其它连接（如信号地）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout callout-warn"><strong>注意</strong><p>不要用万用表通断档代替接地连续性试验：通断只证明“接上”，测不出大电流下的接触电阻。</p></div>
+</section>
+<section>
+  <h2>4. 等电位连接</h2>
+  <ul>
+    <li>医疗场所、工业现场通过等电位端子把可触及金属、设备外壳、接地汇流排连到一起；</li>
+    <li>目的是消除电位差，防止“一手摸设备、一手摸水管”时电流经过人体；</li>
+    <li>医疗设备常要求等电位端子供现场连接，阻抗按标准验证。</li>
+  </ul>
+</section>
+<section>
+  <h2>5. 与浪涌 / EMC 的关系</h2>
+  <ul>
+    <li>SPD 泄放路径的接地阻抗越低，浪涌时地电位抬升越小，设备越安全；</li>
+    <li>共模骚扰需要低阻抗回流路径，接地不良会让骚扰沿线缆辐射；</li>
+    <li>雷电泄放走 PE 时，接地阻抗还会影响“反击”到信号口的电压。</li>
+  </ul>
+</section>
+<section>
+  <h2>6. 常见坑</h2>
+  <ul>
+    <li>“外壳是金属就自动接地”——没有连续性验证等于没接地；</li>
+    <li>接地螺丝同时固定其它金属件——可能松脱或串扰；</li>
+    <li>镀层防锈但接触电阻变大——选型要兼顾防腐与导电；</li>
+    <li>II 类设备偷偷接 PE——反而破坏双重绝缘判定。</li>
+  </ul>
+</section>
+    <section>
+      <h2>相关学习</h2>
+      <p><a class="tag" href="./knowledge.html#grounding">知识卡：接地与等电位连接</a>
+  <a class="tag" href="./tools.html#tool-grounding">工具：接地连续性估算器</a>
+  <a class="tag" href="./sop-grounding.html">SOP：接地连续性</a>
+  <a class="tag" href="./surge.html">雷击浪涌深度页</a>
+  <a class="tag" href="./standards.html#std-61140">标准入口：IEC 61140</a></p>
+    </section>
+  </main>
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/standard-status.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>产品类别结构图（I/II/III 类） - 安规与可靠性知识课堂</title>
+  <meta name="description" content="I 类、II 类、III 类设备的防触电结构剖面图与对应测试要点。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 产品类别结构图</p>
+      <h1>产品类别结构图（Class I / II / III）</h1>
+      <p class="lead">防触电结构决定了测什么：I 类靠接地、II 类靠双重绝缘、III 类靠 SELV 供电。</p>
+    </div>
+
+    <section>
+      <h2>I 类设备：保护接地 + 基本绝缘</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 760 370" role="img" aria-label="I 类设备结构示意图（含故障路径与测试点）">
+          <defs><pattern id="insI" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--border)" stroke-width="2"></line></pattern></defs>
+          <rect x="30" y="70" width="130" height="100" rx="10" class="accent-fill"></rect>
+          <text x="95" y="115" text-anchor="middle">L / N</text>
+          <text x="95" y="135" text-anchor="middle" class="label">危险电压</text>
+          <rect x="160" y="90" width="70" height="60" rx="8" fill="var(--card-2)" stroke="var(--border)"></rect>
+          <text x="195" y="120" text-anchor="middle">保险丝</text>
+          <text x="195" y="137" text-anchor="middle" class="label">/ 保护</text>
+          <rect x="230" y="70" width="80" height="100" fill="url(#insI)"></rect>
+          <text x="270" y="115" text-anchor="middle">基本绝缘</text>
+          <rect x="310" y="70" width="160" height="100" rx="10" fill="var(--card-2)" stroke="var(--border)"></rect>
+          <text x="390" y="115" text-anchor="middle">金属外壳</text>
+          <text x="390" y="135" text-anchor="middle" class="label">可触及表面</text>
+          <text x="440" y="105" text-anchor="middle" class="label">PE</text>
+          <path d="M 180 120 H 310 V 170" class="dashed"></path>
+          <text x="245" y="45" text-anchor="middle" class="label">故障电流路径</text>
+          <line x1="390" y1="170" x2="390" y2="280" stroke="var(--accent)" stroke-width="2.5"></line>
+          <line x1="390" y1="280" x2="350" y2="280" stroke="var(--accent)" stroke-width="2.5"></line>
+          <line x1="390" y1="280" x2="430" y2="280" stroke="var(--accent)" stroke-width="2.5"></line>
+          <text x="475" y="285" class="label">PE 保护接地</text>
+          <text x="80" y="320" class="label">① 接地连续性：PE → 外壳低阻</text>
+          <text x="300" y="320" class="label">② 泄漏电流：外壳对地</text>
+          <text x="520" y="320" class="label">③ 基本绝缘耐压</text>
+          <text x="390" y="350" text-anchor="middle" class="label">单一故障：基本绝缘失效 → 故障电流经 PE 回流触发保护；PE 断开则危险</text>
+        </svg>
+      </div>
+    </section>
+
+    <section>
+      <h2>II 类设备：基本 + 附加（或加强）绝缘，无接地</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 760 370" role="img" aria-label="II 类设备结构示意图（含双重绝缘与故障路径）">
+          <defs>
+            <pattern id="insIIa" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--accent)" stroke-width="2"></line></pattern>
+            <pattern id="insIIb" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="8" stroke="var(--accent-2)" stroke-width="2"></line></pattern>
+          </defs>
+          <rect x="30" y="70" width="130" height="100" rx="10" class="accent-fill"></rect>
+          <text x="95" y="115" text-anchor="middle">L / N</text>
+          <text x="95" y="135" text-anchor="middle" class="label">危险电压</text>
+          <rect x="160" y="70" width="70" height="100" fill="url(#insIIa)"></rect>
+          <text x="195" y="115" text-anchor="middle">基本绝缘</text>
+          <rect x="230" y="70" width="70" height="100" fill="url(#insIIb)"></rect>
+          <text x="265" y="115" text-anchor="middle">附加绝缘</text>
+          <rect x="300" y="70" width="170" height="100" rx="10" fill="var(--card-2)" stroke="var(--border)"></rect>
+          <text x="385" y="115" text-anchor="middle">塑料外壳</text>
+          <text x="385" y="135" text-anchor="middle" class="label">可触及表面</text>
+          <rect x="430" y="80" width="28" height="28" fill="none" stroke="var(--accent)" stroke-width="2"></rect>
+          <rect x="436" y="86" width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2"></rect>
+          <text x="470" y="100" class="label">回形符号</text>
+          <path d="M 180 120 H 230" class="dashed"></path>
+          <text x="205" y="45" text-anchor="middle" class="label">第一道失效 → 第二道兜底</text>
+          <text x="80" y="320" class="label">① 双重绝缘耐压：基本 + 附加</text>
+          <text x="300" y="320" class="label">② 泄漏电流：可触及表面</text>
+          <text x="520" y="320" class="label">③ 加强绝缘：一道承担两道</text>
+          <text x="385" y="350" text-anchor="middle" class="label">无保护接地：两层绝缘必须各自成立，不能只靠“塑料外壳”</text>
+        </svg>
+      </div>
+    </section>
+
+    <section>
+      <h2>III 类设备：SELV 供电，不按市电距离约束</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 760 370" role="img" aria-label="III 类设备结构示意图（含 SELV 隔离与测试点）">
+          <defs><pattern id="insIII" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--border)" stroke-width="2"></line></pattern></defs>
+          <rect x="30" y="100" width="140" height="100" rx="10" class="accent-fill"></rect>
+          <text x="100" y="145" text-anchor="middle">市电适配器</text>
+          <text x="100" y="165" text-anchor="middle" class="label">危险电压侧</text>
+          <rect x="170" y="100" width="80" height="100" fill="url(#insIII)"></rect>
+          <text x="210" y="145" text-anchor="middle">加强隔离</text>
+          <line x1="250" y1="150" x2="340" y2="150" stroke="var(--accent)" stroke-width="2.5"></line>
+          <text x="295" y="138" text-anchor="middle" class="label">SELV 输出</text>
+          <text x="295" y="172" text-anchor="middle" class="label">限压 + 隔离</text>
+          <rect x="340" y="100" width="170" height="100" rx="10" fill="var(--card-2)" stroke="var(--border)"></rect>
+          <text x="425" y="145" text-anchor="middle">III 类设备</text>
+          <text x="425" y="165" text-anchor="middle" class="label">低压可触及</text>
+          <path d="M 210 100 V 60 H 425" class="dashed"></path>
+          <text x="320" y="48" text-anchor="middle" class="label">隔离失效 → SELV 仍必须限压</text>
+          <text x="80" y="320" class="label">① 适配器隔离耐压</text>
+          <text x="300" y="320" class="label">② SELV 限压验证（正常 + 单一故障）</text>
+          <text x="560" y="320" class="label">③ 设备本体低压间距/发热/防火</text>
+          <text x="425" y="350" text-anchor="middle" class="label">“低压”不等于“随便设计”；SELV 源必须满足隔离与限压</text>
+        </svg>
+      </div>
+    </section>
+
+    <section>
+      <h2>图例</h2>
+      <ul>
+        <li><b>彩色填充框</b>：带电部件 / 危险电压侧；</li>
+        <li><b>斜纹层</b>：绝缘（基本绝缘、附加绝缘、加强隔离）；</li>
+        <li><b>灰框</b>：外壳或设备本体（金属 / 塑料 / 低压设备）；</li>
+        <li><b>蓝色实线</b>：保护接地 / SELV 输出路径；</li>
+        <li><b>虚线</b>：故障电流路径或单一故障后的保护路径。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>绝缘类型详解</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>类型</th><th>作用</th><th>数值关系</th><th>典型位置</th></tr></thead>
+          <tbody>
+            <tr><td>功能绝缘</td><td>保证正常工作，不防触电</td><td>按失效后果单独确定</td><td>非隔离电路的层间</td></tr>
+            <tr><td>基本绝缘</td><td>防触电第一道屏障</td><td>查表基准</td><td>带电部件与可触及金属之间</td></tr>
+            <tr><td>附加绝缘</td><td>第一道失效后的第二道</td><td>同基本绝缘</td><td>金属外壳内衬</td></tr>
+            <tr><td>加强绝缘</td><td>一道承担两道保护</td><td>≈ 2× 基本（以专门表格为准）</td><td>双重绝缘产品外壳</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lead">类别决定“用什么绝缘”，绝缘类型决定“查哪张表、打多少耐压”。两者配合使用，判定细节见<a href="./double-insulation.html">双重绝缘判定</a>。</p>
+    </section>
+
+    <section>
+      <h2>三类设备对比表</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>项目</th><th>I 类</th><th>II 类</th><th>III 类</th></tr></thead>
+          <tbody>
+            <tr><td>防触电策略</td><td>基本绝缘 + 保护接地</td><td>双重绝缘或加强绝缘</td><td>SELV 供电，危险电压在电源侧</td></tr>
+            <tr><td>是否依赖接地</td><td>是，接地是兜底保护</td><td>否，完全靠绝缘</td><td>否，靠 SELV 源隔离</td></tr>
+            <tr><td>可触及金属外壳</td><td>允许，但必须可靠接 PE</td><td>可触及表面不能只有单层绝缘</td><td>通常低压可触及</td></tr>
+            <tr><td>主要试验</td><td>接地连续性、泄漏电流、基本绝缘耐压</td><td>双重/加强绝缘耐压、泄漏电流</td><td>SELV 源隔离/耐压、设备本体低压要求</td></tr>
+            <tr><td>常见产品</td><td>电热水器、洗衣机、金属外壳电源</td><td>手机充电器、电吹风、塑料外壳家电</td><td>低压玩具、LED 低压灯具、USB 设备（看供电）</td></tr>
+            <tr><td>标识</td><td>一般无类别符号；PE 端子标接地符号</td><td>回形符号（IEC 60417-5172）</td><td>一般无类别符号；电源需满足 SELV</td></tr>
+            <tr><td>插头</td><td>通常三脚带接地脚</td><td>通常两脚无接地脚</td><td>由适配器供电，插头要求看适配器</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-info">
+        <strong>注意：类别 ≠ 品类</strong>
+        <p>I / II / III 类是“防触电结构类别”，不是家电、IT、灯具这类产品品类。同一个品类里可以有 I 类产品，也可以有 II 类、III 类产品，判定按结构而不是按行业。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>标识与符号</h2>
+      <ul>
+        <li><b>I 类</b>：铭牌上一般不需要标“Class I”；保护接地端子应标 IEC 60417-5019 接地符号，说明书通常说明“必须接入接地插座”；</li>
+        <li><b>II 类</b>：铭牌上应标“回”形符号（IEC 60417-5172，双重方框），表示设备采用双重或加强绝缘、不依赖接地；</li>
+        <li><b>III 类</b>：没有专门的安全类别符号，通常标 SELV、额定电压或“仅供 SELV 电源供电”；</li>
+        <li>不能因为“外壳是塑料”就随便印“回”形符号，II 类标识的前提是绝缘体系真正满足双重/加强要求。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>测试差异</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>试验项目</th><th>I 类</th><th>II 类</th><th>III 类</th></tr></thead>
+          <tbody>
+            <tr><td>接地连续性</td><td>必测：大电流、低电阻</td><td>不适用（无保护接地）</td><td>不适用</td></tr>
+            <tr><td>耐压</td><td>基本绝缘（带电 ↔ 可触及金属/PE）</td><td>基本、附加、加强绝缘分别按标准测</td><td>重点在适配器隔离；设备本体按 SELV 要求</td></tr>
+            <tr><td>泄漏 / 接触电流</td><td>按标准测量网络测</td><td>同样测，无接地分流更敏感</td><td>同样测，低压不等于零泄漏</td></tr>
+            <tr><td>爬电 / 间隙</td><td>基本绝缘 + 接地下查表</td><td>双重/加强绝缘查表，数值更高</td><td>设备本体要求通常低，电源侧仍按市电</td></tr>
+            <tr><td>故障条件</td><td>接地断开、绝缘短路等</td><td>附加绝缘短路、加强绝缘单一故障等</td><td>SELV 源单一故障后仍满足限压</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="color:var(--muted);font-size:13px">具体试验电压、电流、限值以产品标准（60335-1、62368-1、60598-1、60601-1 等）为准。</p>
+    </section>
+
+    <section>
+      <h2>怎么看这张图</h2>
+      <ul>
+        <li>I 类：绝缘失效靠接地兜底，所以接地连续性是核心测试；</li>
+        <li>II 类：没有接地，两道绝缘必须各自成立，加强绝缘按更高要求；</li>
+        <li>III 类：危险在“适配器”，设备本体的间距要求大幅降低，但 SELV 定义要满足。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>设计清单</h2>
+      <h3>I 类</h3>
+      <ul>
+        <li>保护接地路径完整：电源插头 PE → 内部接地线 → 可触及金属外壳；</li>
+        <li>接地端子防松、防腐，不能兼作其它用途；</li>
+        <li>基本绝缘的爬电、间隙、耐压满足要求；</li>
+        <li>接地故障时泄漏电流路径可控，不能经过人体。</li>
+      </ul>
+      <h3>II 类</h3>
+      <ul>
+        <li>基本与附加两层绝缘路径不重叠、不被金属件桥接；</li>
+        <li>采用加强绝缘时，间距和耐压按加强要求；</li>
+        <li>可触及部分不能只靠单层绝缘；</li>
+        <li>内部线、螺钉、金属支架不能破坏两层绝缘的独立性。</li>
+      </ul>
+      <h3>III 类</h3>
+      <ul>
+        <li>电源必须是真正的 SELV 源（隔离 + 限压），不是“低电压就行”；</li>
+        <li>设备内部不得出现市电电压；</li>
+        <li>连接器不能与普通市电插座混插，防止误接危险电压；</li>
+        <li>低压部件仍要考虑发热、防火、机械强度和可触及性。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>常见误区</h2>
+      <ul>
+        <li>“塑料外壳 = II 类”是错的：外壳材料只是结构的一部分，绝缘体系必须真正满足双重/加强要求；</li>
+        <li>“三脚插头 = I 类”不严谨：要看 PE 是否真正连接到可触及导电部件；</li>
+        <li>“II 类没有接地，所以不用测泄漏电流”是错的：泄漏/接触电流仍然要测；</li>
+        <li>“III 类 = 低压就绝对安全”是错的：SELV 源必须满足隔离与限压，故障后仍要安全；</li>
+        <li>“类别决定一切数值”不准确：类别决定测什么，具体数值仍要查产品标准。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>怎么确定产品类别</h2>
+      <ol>
+        <li>看供电方式：直接接市电 → 通常是 I 类或 II 类；由适配器/SELV 供电 → 可能是 III 类；</li>
+        <li>看可触及导电部件：金属外壳是否连接保护接地；</li>
+        <li>看绝缘体系：单层 + 接地（I）、双层或加强（II）、低压隔离（III）；</li>
+        <li>看产品标准定义：不同标准对类别有具体条款和判定流程，最终以标准原文为准。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./knowledge.html#protection">防触电逻辑</a>
+        <a class="tag" href="./hipot.html">耐压测试</a>
+        <a class="tag" href="./knowledge.html#selv">SELV</a>
+        <a class="tag" href="./tools.html">计算工具（产品类别）</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

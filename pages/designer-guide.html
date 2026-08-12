@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <title>设计师必须知道的安规 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="面向设计师的安规：外观与结构、CMF 材料、标签视觉、交互设计与渲染阶段检查清单。">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html" class="active">资源</a>
+        <a href="./refs.html">参考中心</a>
+        <a href="./quiz.html">小测验</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 设计师必知安规</p>
+      <h1>设计师必须知道的安规</h1>
+      <p class="lead">很多安规问题在设计渲染图阶段就能避免——只要你提前知道边界在哪。</p>
+    </div>
+
+    <section>
+      <h2>1. 外观与结构：开孔、缝隙、锐边</h2>
+      <ul>
+        <li><b>开孔</b>：尺寸和位置决定手指/探针能否触及内部带电件；散热孔不能正对起火源；</li>
+        <li><b>缝隙</b>：按键、拼接缝、通风槽都可能成为 ESD 和探针入口；</li>
+        <li><b>锐边尖角</b>：可触及边缘要倒角/包边，金属装饰件尤其注意；</li>
+        <li><b>金属装饰</b>：外露金属件若可能带电，需要接地或可靠绝缘；</li>
+        <li><b>稳定性</b>：重心高、底座小的造型要过倾斜试验。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. CMF：颜色、材质、表面处理都影响安规</h2>
+      <ul>
+        <li><b>阻燃与 CTI 打架</b>：V-0 阻燃常拉低 CTI；选了“高级磨砂外壳”可能材料组下降，爬电距离要求变严；</li>
+        <li><b>厚度</b>：阻燃等级与材料厚度绑定，壁厚 1mm 和 2mm 的 V-0 不一定是同一等级；</li>
+        <li><b>金属质感</b>：电镀/金属漆可能导电或影响绝缘，外露金属件要单独评估；</li>
+        <li><b>透光件</b>：导光条、透光窗要考虑光生物安全和内部带电件隔离；</li>
+        <li>选材时向材料库要：CTI、UL94、RTI、耐温四项。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 标签与视觉：黄、红、黑不是随便用的</h2>
+      <ul>
+        <li>警告标签的<b>颜色、符号、最小尺寸</b>由标准规定（如高压闪电符号、高温符号）；</li>
+        <li>CE/CCC 等标志有严格排版，不能为了美观缩小或改造；</li>
+        <li>铭牌信息（型号、额定值、制造商）是强制项；</li>
+        <li>能效标签、WEEE 标志有官方模板。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 交互设计：防误操作也是安规</h2>
+      <ul>
+        <li>危险功能（急停、复位、高温启动）要防误触；</li>
+        <li>报警提示要清晰，颜色/闪烁/声音符合可用性工程（IEC 62366，医疗）；</li>
+        <li>儿童可及产品：避免小零件、锐边、可拆卸电池风险；</li>
+        <li>说明书图标化：安全警告不能只靠文字。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. 渲染/原型阶段检查清单</h2>
+      <ul class="check-list">
+        <li>可触及性：模拟手指（Ø12mm 探针）能否碰到内部；</li>
+        <li>开孔：直径、位置、数量是否符合防火与防触及；</li>
+        <li>材料：记录每个零件的材料牌号，去向材料库核对四项指标；</li>
+        <li>标签：预留标志位和最小尺寸，不与结构冲突；</li>
+        <li>金属件：是否外露、是否可带电、是否需要接地。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p>
+        <a class="tag" href="./materials.html">材料库</a>
+        <a class="tag" href="./knowledge.html#protection">防触电逻辑</a>
+        <a class="tag" href="./labels.html">标签规范</a>
+        <a class="tag" href="./cases.html">案例库</a>
+        <a class="tag" href="./faq.html">FAQ</a>
+      </p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>
