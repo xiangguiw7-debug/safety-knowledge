@@ -1,4 +1,4 @@
-var CACHE_NAME = "safety-reliability-v102";
+var CACHE_NAME = "safety-reliability-v1.1";
 var CORE_ASSETS = [
   "./", "./index.html", "./manifest.webmanifest",
   "./assets/icons/logo.png",
