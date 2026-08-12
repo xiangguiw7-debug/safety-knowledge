@@ -73,3 +73,9 @@
 
 .site-search input { border-radius: 14px; }
 .search-results { border-radius: 14px; }
+/* 首页 hero 搜索下拉不被裁剪 */
+body.search-active { overflow-x: hidden; }
+body.search-active .hero { overflow: visible; }
+body.search-active .hero::before,
+body.search-active .hero::after { display: none; }
+.search-results { z-index: 999; }

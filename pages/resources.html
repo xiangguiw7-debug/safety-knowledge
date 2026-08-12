@@ -2,19 +2,19 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
   <title>学习资源中心 - 安规与可靠性知识课堂</title>
   <meta name="description" content="安规学习资源中心：七大因素深度页、工程专题、案例与问答、工具速查。">
-  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
       <nav class="nav" id="nav">
@@ -24,9 +24,9 @@
         <a href="./industries.html">行业筛选</a>
         <a href="./materials.html">材料库</a>
         <a href="./glossary.html">术语表</a>
-        <a href="./resources.html" class="active">资源</a>
+        <a href="./resources.html" class="active">资源</a><a href="./quiz.html">答题测验</a>
         <a href="./refs.html">参考中心</a>
-        <a href="./quiz.html">小测验</a>
+        
       </nav>
     </div>
   </header>
@@ -36,18 +36,18 @@
       <p class="crumb"><a href="../index.html">首页</a> / 学习资源中心</p>
       <h1>学习资源中心</h1>
       <p class="lead">深度页、工程专题、案例、问答与速查工具都在这里。</p>
+    </div>
 
     <section>
-      <h2>全站地图（搜索直达）</h2>
+      <h2>🧭 全站地图（搜索直达）</h2>
       <p class="section-sub">搜索任意模块，点击直达；最近访问记录在本地浏览器。</p>
       <input type="search" id="siteMapSearch" class="tool-search" placeholder="搜索全站：间隙、案例、EMC、认证…" aria-label="搜索全站">
       <p class="peak-note">最近访问：<span id="siteRecent"></span></p>
       <div id="siteMap"></div>
     </section>
-    </div>
 
     <section>
-      <h2>七大安全因素深度页</h2>
+      <h2>🛡️ 七大安全因素深度页</h2>
       <div class="grid grid-4">
         <a class="card" href="./hazard-energy.html"><h3>💥 能量危险</h3><p>ES 分级、限能、泄放、电弧。</p></a>
         <a class="card" href="./hazard-fire.html"><h3>🔥 防火</h3><p>起火链、灼热丝档位、防火结构。</p></a>
@@ -59,7 +59,7 @@
     </section>
 
     <section>
-      <h2>工程专题</h2>
+      <h2>🛠️ 工程专题</h2>
       <div class="grid grid-4">
         <a class="card" href="./pcb-guidelines.html"><h3>🖥️ PCB 安规设计</h3><p>间距落地、开槽、布局评审。</p></a>
         <a class="card" href="./components.html"><h3>🔩 元器件安全</h3><p>保险丝、X/Y、变压器、连接器。</p></a>
@@ -79,7 +79,7 @@
     </section>
 
     <section>
-      <h2>案例与问答</h2>
+      <h2>📂 案例与问答</h2>
       <div class="grid grid-4">
         <a class="card" href="./cases.html"><h3>📂 案例库</h3><p>25 个整改案例，可筛选。</p></a>
         <a class="card" href="./faq.html"><h3>❓ 常见问题</h3><p>10 个高频疑问。</p></a>
@@ -87,8 +87,7 @@
     </section>
 
     <section>
-    <section>
-      <h2>站点功能</h2>
+      <h2>⚙️ 站点功能</h2>
       <div class="grid grid-4">
         <a class="card" href="./workshop.html"><h3>🏭 项目工坊</h3><p>虚拟产品走完整安规流程并出报告。</p></a>
         <a class="card" href="./feedback.html"><h3>💬 纠错反馈</h3><p>发现错误？告诉我们。</p></a>
@@ -96,7 +95,9 @@
         <a class="card" href="../en/index.html"><h3>🌐 English</h3><p>核心概念英文速览。</p></a>
       </div>
     </section>
-      <h2>工具与速查</h2>
+
+    <section>
+      <h2>🧮 工具与速查</h2>
       <div class="grid grid-4">
         <a class="card" href="./standard-picker.html"><h3>🧮 标准选择器</h3><p>产品+市场 → 标准清单。</p></a>
         <a class="card" href="./poster.html"><h3>🖨️ 速查海报</h3><p>一页纸，可打印。</p></a>
@@ -110,7 +111,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -124,7 +125,7 @@
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
   <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

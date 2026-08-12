@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>知识卡片详情 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="知识卡片详情页：完整规则、标准依据、测试方法、常见误区与前后张导航。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .kd-nav { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin: 28px 0; }
+    .kd-nav .btn { max-width: 42%; white-space: normal; }
+    #kdContent section.card { font-size: 16px; line-height: 1.85; }
+    #kdContent section.card h2 { font-size: 24px; margin-bottom: 10px; }
+    #kdContent section.card h3 { font-size: 19px; margin-top: 24px; }
+    #kdContent section.card table { font-size: 14.5px; }
+    #kdContent .howto { font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习地图</a>
+        <a href="./tools.html">计算工具</a>
+        <a href="./industries.html">行业筛选</a>
+        <a href="./materials.html">材料库</a>
+        <a href="./glossary.html">术语表</a>
+        <a href="./resources.html">资源</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./knowledge.html" class="active">知识卡片</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./knowledge.html">知识卡片库</a> / <span id="kdCrumbName"></span></p>
+      <h1 id="kdTitle"></h1>
+      <p class="lead" id="kdMeta"></p>
+    </div>
+
+    <div id="kdContent"></div>
+
+    <div class="kd-nav">
+      <a class="btn" id="kdPrev" href="./knowledge.html">← 上一张</a>
+      <a class="btn btn-primary" href="./knowledge.html">返回知识卡片库</a>
+      <a class="btn" id="kdNext" href="./knowledge.html">下一张 →</a>
+    </div>
+
+    <div class="callout callout-danger" id="kdError" hidden>
+      <strong>未找到该知识卡片</strong>
+      <p>请返回知识卡片库重新选择，或检查链接参数是否正确。</p>
+    </div>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文和实验室能力为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/progress.js"></script>
+  <script src="../assets/js/dmcm.js"></script>
+  <script src="../assets/js/knowledge-detail-data.js"></script>
+  <script src="../assets/js/knowledge-notes.js"></script>
+  <script src="../assets/js/knowledge-tools-links.js"></script>
+  <script src="../assets/js/standard-status.js"></script>
+  <script src="../assets/js/knowledge-chain.js"></script>
+  <script>
+    (function () {
+      var id = new URLSearchParams(location.search).get("id");
+      var box = document.getElementById("kdContent");
+      var err = document.getElementById("kdError");
+      if (!id || !window.KNOWLEDGE_DETAILS || !KNOWLEDGE_DETAILS[id]) {
+        if (err) err.hidden = false;
+        if (box) box.innerHTML = '<p style="margin-top:16px">未找到该知识卡片，请返回列表重新选择。</p>';
+        return;
+      }
+      var d = KNOWLEDGE_DETAILS[id];
+      var idx = KNOWLEDGE_ORDER.indexOf(id);
+      document.title = d.title + " - 知识卡片 - 安规与可靠性知识课堂";
+      document.getElementById("kdTitle").textContent = d.title;
+      document.getElementById("kdCrumbName").textContent = d.title;
+      document.getElementById("kdMeta").textContent = "第 " + (idx + 1) + " / " + KNOWLEDGE_ORDER.length + " 张 · 本页含完整规则、标准依据与常见误区，底部可上一张 / 下一张";
+      var sec = document.createElement("section");
+      sec.className = "card";
+      sec.id = id;
+      sec.setAttribute("data-hazard", d.hazard);
+      sec.innerHTML = d.html;
+      box.appendChild(sec);
+      function setNav(el, targetId, prefix) {
+        var a = document.getElementById(el);
+        if (!a) return;
+        if (targetId) {
+          a.href = "knowledge-detail.html?id=" + encodeURIComponent(targetId);
+          a.textContent = prefix + "：" + KNOWLEDGE_DETAILS[targetId].title;
+        } else {
+          a.hidden = true;
+        }
+      }
+      setNav("kdPrev", idx > 0 ? KNOWLEDGE_ORDER[idx - 1] : null, "← 上一张");
+      setNav("kdNext", idx < KNOWLEDGE_ORDER.length - 1 ? KNOWLEDGE_ORDER[idx + 1] : null, "下一张 →");
+    })();
+  </script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

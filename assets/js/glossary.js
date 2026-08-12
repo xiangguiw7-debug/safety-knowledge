@@ -6,7 +6,7 @@ var GLOSSARY = [
   { t: "PELV", f: "保护特低电压", d: "类似 SELV，但电路一点接地或可触及导体接地。", u: "pages/knowledge.html#selv" },
   { t: "ES1 / ES2 / ES3", f: "电气能源分级", d: "IEC 62368-1 按可触及能量对电气源分级，决定防护要求。", u: "pages/knowledge.html#energy" },
   { t: "OVC", f: "过电压类别（Ⅰ–Ⅳ）", d: "按安装位置划分的暂态过电压等级，决定电气间隙。", u: "pages/clearance.html" },
-  { t: "污染等级（PD）", f: "Pollution Degree 1–3", d: "绝缘表面环境脏污程度，决定爬电距离。", u: "pages/creepage.html" },
+  { t: "污染等级（PD）", f: "Pollution Degree 1–4", d: "绝缘表面环境脏污程度（定义 1–4 级；标准表格通常只覆盖 1–3 级），决定爬电距离。", u: "pages/creepage.html" },
   { t: "SPD", f: "浪涌保护器", d: "限制浪涌电压的器件或组合，如 MOV、GDT。", u: "pages/surge.html" },
   { t: "MOV", f: "压敏电阻", d: "电源口常用第一级浪涌保护，老化后可能短路着火。", u: "pages/surge.html" },
   { t: "GDT", f: "气体放电管", d: "泄放能力大、响应较慢，适合第一级，注意续流。", u: "pages/surge.html" },

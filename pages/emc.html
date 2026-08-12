@@ -2,20 +2,20 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
-  <title>EMC 系统课程 - 安规与可靠性知识课堂</title>
-  <meta name="description" content="EMC 系统课程：发射与抗扰项目原理、滤波接地设计、常见整改手段与试验标准对照。">
-  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>EMC 系统课程（EMI / EMS） - 安规与可靠性知识课堂</title>
+  <meta name="description" content="EMC 系统课程：按 EMI（电磁干扰）与 EMS（电磁敏感度）两大分支讲解发射/抗扰项目原理、滤波接地设计与试验标准对照。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="../index.html">
-        <span class="logo-mark">⚡</span>
+        <img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">
         安规与可靠性知识课堂
       </a>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
@@ -27,9 +27,9 @@
         <a href="./industries.html">行业筛选</a>
         <a href="./materials.html">材料库</a>
         <a href="./glossary.html">术语表</a>
-        <a href="./resources.html">资源</a>
+        <a href="./resources.html">资源</a><a href="./quiz.html">答题测验</a>
         <a href="./refs.html">参考中心</a>
-        <a href="./quiz.html">小测验</a>
+        
       </nav>
     </div>
   </header>
@@ -38,22 +38,31 @@
     <div class="page-head">
       <p class="crumb"><a href="../index.html">首页</a> / <a href="./learn.html">学习地图</a> / EMC 系统课程</p>
       <h1>EMC 系统课程</h1>
-      <p class="lead">EMC = 发射（不干扰别人）+ 抗扰（不被别人干扰）。本课程讲清每个试验项目“测什么、从哪来、怎么改”。</p>
+      <p class="lead">EMC = <b>EMI</b>（电磁干扰，管“别打扰别人”）+ <b>EMS</b>（电磁敏感度，管“别被别人打扰”）。本课程按 EMI / EMS 两大分支组织。</p>
     </div>
 
     <section>
-      <h2>1. EMC 的底层逻辑</h2>
+      <h2>1. EMC 的底层逻辑：先分 EMI 与 EMS</h2>
       <p>任何干扰都有三要素：<b>源 → 耦合路径 → 受害对象</b>。整改也只有三条路：消灭源、切断耦合、加固受害对象。</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>分支</th><th>全称</th><th>中文</th><th>考什么</th><th>代表项目</th></tr></thead>
+        <tbody>
+          <tr><td><b>EMI</b></td><td>Electromagnetic Interference</td><td>电磁干扰</td><td>我的设备是“源”，考核对外发射是否超限</td><td>传导发射 CE、辐射发射 RE、谐波/闪烁</td></tr>
+          <tr><td><b>EMS</b></td><td>Electromagnetic Susceptibility</td><td>电磁敏感度（抗扰）</td><td>我的设备是“受害对象”，考核在外界骚扰下是否正常工作</td><td>ESD、EFT、浪涌、辐射抗扰 RS、传导抗扰 CS、工频磁场、电压暂降</td></tr>
+        </tbody>
+      </table></div>
       <ul>
-        <li>发射 = 我的设备是源，别人是受害对象；</li>
-        <li>抗扰 = 别人是源，我的设备是受害对象；</li>
+        <li>EMI = 我不干扰别人（发射限值，测的是“往外冒多少”）；</li>
+        <li>EMS = 我不被别人干扰（抗扰等级，测的是“能扛多少”）；</li>
         <li>耦合路径：传导（走线/电源线/地线）和辐射（空间/线缆天线效应）；</li>
+        <li>EMI 与 EMS 共用一个“源-路径-受害对象”模型，只是把“我”放在不同位置；</li>
         <li>标准只测“结果”，设计要管“机理”——所以先懂机理再整改。</li>
       </ul>
     </section>
 
     <section>
-      <h2>2. 发射类项目</h2>
+      <h2>2. EMI 电磁干扰（发射）</h2>
+      <p class="section-sub">考核我的设备向电网和空间发出的骚扰：传导走线、辐射走空间。</p>
 
       <h3>2.1 传导发射（CE，150kHz–30MHz） <a class="tag" href="./emc-ce.html">深度页 →</a></h3>
       <p><b>测什么：</b>电源端口的骚扰电压，用 LISN 测量，限值分准峰值/平均值。</p>
@@ -72,42 +81,62 @@
     </section>
 
     <section>
-      <h2>3. 抗扰类项目</h2>
+      <h2>3. EMS 电磁敏感度（抗扰）</h2>
+      <p class="section-sub">考核我的设备在静电、瞬变、浪涌、射频、磁场、电压跌落等外界骚扰下是否正常、是否安全。</p>
 
       <h3>3.1 ESD（IEC 61000-4-2） <a class="tag" href="./emc-esd.html">深度页 →</a></h3>
       <p><b>测什么：</b>接触放电 ±2/4/6/8kV、空气放电 ±2/4/8/15kV（等级视标准）。</p>
       <p><b>机理：</b>亚纳秒上升沿，主要沿缝隙、连接器、按键进入；对数字电路复位/死机影响大。</p>
       <p><b>怎么改：</b>接口加 TVS、缝隙下不放敏感走线、外壳接地、I/O 与地之间加 Y 电容、按键/触摸走线保护。</p>
 
-      <h3>3.2 浪涌（IEC 61000-4-5）</h3>
-      <p>能量最大的抗扰项目，详细内容见<a href="./surge.html">雷击浪涌详解</a>：MOV/GDT/TVS 多级防护、退耦、泄放路径。</p>
-
-      <h3>3.3 EFT（IEC 61000-4-4） <a class="tag" href="./emc-eft.html">深度页 →</a></h3>
+      <h3>3.2 EFT（IEC 61000-4-4） <a class="tag" href="./emc-eft.html">深度页 →</a></h3>
       <p><b>测什么：</b>5/50ns 脉冲串，叠加在电源/信号线上。</p>
       <p><b>从哪来：</b>继电器、接触器、电机换向。</p>
       <p><b>怎么改：</b>电源口共模电感 + X/Y 电容、信号线屏蔽与滤波、敏感芯片复位/看门狗、软件滤波。</p>
 
-      <h3>3.4 工频磁场（IEC 61000-4-8） <a class="tag" href="./emc-magnetic.html">深度页 →</a></h3>
+      <h3>3.3 浪涌（IEC 61000-4-5）</h3>
+      <p>能量最大的抗扰项目，详细内容见<a href="./surge.html">雷击浪涌详解</a>：MOV/GDT/TVS 多级防护、退耦、泄放路径。</p>
+
+      <h3 id="rs">3.4 辐射抗扰 RS（IEC 61000-4-3） <a class="tag" href="./sop-radiated-immunity.html">测试 SOP →</a></h3>
+      <p><b>测什么：</b>在电波暗室中用天线对 EUT 施加 80MHz–6GHz 射频场（老版本常用 80–1000MHz，扩展频段以产品标准为准），常见等级 3V/m、10V/m，1kHz、80% 调幅。</p>
+      <p><b>从哪来：</b>基站、手机、对讲机等射频能量经空间耦合进机壳缝隙、线缆和 PCB 走线。</p>
+      <p><b>怎么改：</b>机壳缝隙/屏蔽、线缆屏蔽与端接、端口共模滤波、敏感电路远离天线谐振点、复位/看门狗与软件容错。</p>
+
+      <h3 id="cs">3.5 传导抗扰 CS（IEC 61000-4-6） <a class="tag" href="./sop-conducted-immunity.html">测试 SOP →</a></h3>
+      <p><b>测什么：</b>通过 CDN（耦合/去耦网络）或注入探头把 150kHz–80MHz（部分扩展到 230MHz）射频骚扰注入电源/信号线，常见等级 3V、10V（rms）。</p>
+      <p><b>从哪来：</b>射频能量耦合到线缆后沿导体进入设备，低频段主要靠传导路径。</p>
+      <p><b>怎么改：</b>电源口共模电感与滤波、线缆磁环、屏蔽层接地处理、I/O 滤波、PCB 布线分离与接地。</p>
+
+      <h3>3.6 工频磁场（IEC 61000-4-8） <a class="tag" href="./emc-magnetic.html">深度页 →</a></h3>
       <p><b>测什么：</b>50/60Hz 磁场对含磁敏元件（霍尔、CRT、传感器）设备的影响。</p>
       <p><b>怎么改：</b>远离变压器/电机、磁屏蔽、传感器布局方向、软件数字滤波。</p>
 
-      <h3>3.5 电压暂降与短时中断（IEC 61000-4-11） <a class="tag" href="./emc-dips.html">深度页 →</a></h3>
+      <h3>3.7 电压暂降与短时中断（IEC 61000-4-11） <a class="tag" href="./emc-dips.html">深度页 →</a></h3>
       <p><b>测什么：</b>输入电压跌落 0%/40%/70% 若干周期，设备不得损坏或危险。</p>
       <p><b>怎么改：</b>输入储能电容 hold-up 时间、欠压复位阈值、掉电保存、状态机安全恢复。</p>
     </section>
 
     <section>
-      <h2>3.6 项目深度页（发射 + 抗扰）</h2>
+      <h2>4. 项目深度页（按 EMI / EMS 分组）</h2>
+      <h3>EMI 电磁干扰（发射）</h3>
       <div class="grid grid-4">
         <a class="card" href="./emc-ce.html"><h3>🔌 传导发射</h3><p>频段限值、差模/共模来源、滤波整改。</p></a>
-        <a class="card" href="./emc-re.html"><h3>📡 辐射发射</h3><p>天线机理、环路最小化、屏蔽与展频。</p></a>        <a class="card" href="./emc-esd.html"><h3>⚡ ESD 静电放电</h3><p>波形、等级、硬件与软件整改。</p></a>
+        <a class="card" href="./emc-re.html"><h3>📡 辐射发射</h3><p>天线机理、环路最小化、屏蔽与展频。</p></a>
+      </div>
+      <h3>EMS 电磁敏感度（抗扰）</h3>
+      <div class="grid grid-4">
+        <a class="card" href="./emc-esd.html"><h3>⚡ ESD 静电放电</h3><p>波形、等级、硬件与软件整改。</p></a>
         <a class="card" href="./emc-eft.html"><h3>🔁 EFT 脉冲群</h3><p>脉冲串、滤波、复位与通信兜底。</p></a>
+        <a class="card" href="./surge.html"><h3>🌊 浪涌</h3><p>组合波、多级防护与泄放路径。</p></a>
+        <a class="card" href="./sop-radiated-immunity.html"><h3>📻 辐射抗扰 RS</h3><p>暗室扫频、场强等级与屏蔽整改。</p></a>
+        <a class="card" href="./sop-conducted-immunity.html"><h3>🔊 传导抗扰 CS</h3><p>CDN 注入、共模扼流与滤波。</p></a>
         <a class="card" href="./emc-magnetic.html"><h3>🧲 工频磁场</h3><p>等级、磁敏元件、屏蔽与布局。</p></a>
         <a class="card" href="./emc-dips.html"><h3>📉 电压暂降</h3><p>hold-up 设计、欠压检测与恢复。</p></a>
       </div>
     </section>
+
     <section>
-      <h2>4. 滤波与接地设计（安规 × EMC 的交叉点）</h2>
+      <h2>5. 滤波与接地设计（安规 × EMC 的交叉点）</h2>
       <ul>
         <li><b>X 电容</b>：跨 L-N 抑制差模；故障时可能短路，前面要有保险丝；</li>
         <li><b>Y 电容</b>：跨 L/N-地抑制共模；容量受<a href="./knowledge.html#leakage">泄漏电流</a>限制——EMC 要的“越大越好”和安规的“越小越好”必须平衡；</li>
@@ -119,9 +148,10 @@
     </section>
 
     <section>
-      <h2>5. 实战整改清单</h2>
+      <h2>6. 实战整改清单</h2>
       <ul class="check-list">
-        <li>先确认是差模还是共模（拔线/换线长/加共模电感判断）；</li>
+        <li>先分清是 EMI 还是 EMS：EMI 查发射频谱超哪个限值，EMS 查哪个抗扰项目失效；</li>
+        <li>再确认是差模还是共模（拔线/换线长/加共模电感判断）；</li>
         <li>一次只改一个变量，逐项复测，避免“改一堆不知道谁起作用”；</li>
         <li>滤波元件靠近源头/端口，而不是靠近芯片；</li>
         <li>环路面积最小化：电源、开关、晶振、I/O 四类回路；</li>
@@ -132,25 +162,27 @@
     </section>
 
     <section>
-      <h2>6. 试验与标准对照</h2>
+      <h2>7. 试验与标准对照（EMI / EMS）</h2>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>类别</th><th>试验项目</th><th>主要标准</th><th>常见等级/范围</th></tr>
+            <tr><th>分支</th><th>试验项目</th><th>主要标准</th><th>常见等级/范围</th></tr>
           </thead>
           <tbody>
-            <tr><td>发射</td><td>传导发射</td><td>CISPR 32 / GB/T 9254</td><td>150kHz–30MHz</td></tr>
-            <tr><td>发射</td><td>辐射发射</td><td>CISPR 32</td><td>30MHz–1GHz+</td></tr>
-            <tr><td>发射</td><td>谐波 / 闪烁</td><td>IEC 61000-3-2 / -3-3</td><td>按设备类别</td></tr>
-            <tr><td>抗扰</td><td>ESD</td><td>IEC 61000-4-2</td><td>接触 2–8kV，空气 2–15kV</td></tr>
-            <tr><td>抗扰</td><td>浪涌</td><td>IEC 61000-4-5</td><td>0.5–4kV（X 自定义）</td></tr>
-            <tr><td>抗扰</td><td>EFT</td><td>IEC 61000-4-4</td><td>0.5–4kV 脉冲串</td></tr>
-            <tr><td>抗扰</td><td>工频磁场</td><td>IEC 61000-4-8</td><td>1–30 A/m 等</td></tr>
-            <tr><td>抗扰</td><td>电压暂降</td><td>IEC 61000-4-11</td><td>0/40/70% 若干周期</td></tr>
+            <tr><td>EMI 发射</td><td>传导发射</td><td>CISPR 32 / GB/T 9254</td><td>150kHz–30MHz</td></tr>
+            <tr><td>EMI 发射</td><td>辐射发射</td><td>CISPR 32</td><td>30MHz–1GHz+</td></tr>
+            <tr><td>EMI 发射</td><td>谐波 / 闪烁</td><td>IEC 61000-3-2 / -3-3</td><td>按设备类别</td></tr>
+            <tr><td>EMS 抗扰</td><td>ESD</td><td>IEC 61000-4-2</td><td>接触 2–8kV，空气 2–15kV</td></tr>
+            <tr><td>EMS 抗扰</td><td>浪涌</td><td>IEC 61000-4-5</td><td>0.5–4kV（X 自定义）</td></tr>
+            <tr><td>EMS 抗扰</td><td>EFT</td><td>IEC 61000-4-4</td><td>0.5–4kV 脉冲串</td></tr>
+            <tr><td>EMS 抗扰</td><td>辐射抗扰 RS</td><td>IEC 61000-4-3</td><td>3–10V/m（80MHz–6GHz）</td></tr>
+            <tr><td>EMS 抗扰</td><td>传导抗扰 CS</td><td>IEC 61000-4-6</td><td>3–10V rms（150kHz–80MHz+）</td></tr>
+            <tr><td>EMS 抗扰</td><td>工频磁场</td><td>IEC 61000-4-8</td><td>1–30 A/m 等</td></tr>
+            <tr><td>EMS 抗扰</td><td>电压暂降</td><td>IEC 61000-4-11</td><td>0/40/70% 若干周期</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="lead">具体等级和判定由产品标准决定；正式测试前先看“适用标准”再定“试验计划”。</p>
+      <p class="lead">具体等级和判定由产品标准决定（如多媒体设备 EMS 常引用 CISPR 35 / EN 55035）；正式测试前先看“适用标准”再定“试验计划”。</p>
     </section>
 
     <section>
@@ -160,7 +192,7 @@
         <a class="tag" href="./knowledge.html#dmcm">共模与差模</a>
         <a class="tag" href="./knowledge.html#harmonic">谐波</a>
         <a class="tag" href="./knowledge.html#components">X/Y 电容</a>
-        <a class="tag" href="./quiz.html">小测验</a>
+        <a class="tag" href="./quiz.html">答题测验</a>
       </p>
     </section>
   </main>
@@ -168,7 +200,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -180,7 +212,7 @@
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
   <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

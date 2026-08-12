@@ -2,20 +2,20 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
   <title>爬电距离（Creepage）详解 - 安规与可靠性知识课堂</title>
   <meta name="description" content="爬电距离完整教程：表面放电机理、四大决定因素、查表全流程、多个完整示例、PCB 设计技巧与标准条款指引。">
-  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body data-chain-key="creepage">
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="../index.html">
-        <span class="logo-mark">⚡</span>
+        <img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">
         安规与可靠性知识课堂
       </a>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
@@ -27,9 +27,9 @@
         <a href="../pages/industries.html">行业筛选</a>
         <a href="../pages/materials.html">材料库</a>
         <a href="../pages/glossary.html">术语表</a>
-        <a href="../pages/resources.html">资源</a>
+        <a href="../pages/resources.html">资源</a><a href="../pages/quiz.html">答题测验</a>
         <a href="../pages/refs.html">参考中心</a>
-        <a href="../pages/quiz.html">小测验</a>
+        
       </nav>
     </div>
   </header>
@@ -59,6 +59,7 @@
         </svg>
       </div>
       <p>注意：路径必须沿<b>实际绝缘表面</b>走，包括 PCB 板面、外壳内壁、灌封材料表面；跨越沟槽时按槽壁、槽底的最短连续路径计算，不能“抄近路”走直线。</p>
+      <p>安全距离实际有三类：<b>电气间隙</b>（空气最短距离）、<b>爬电距离</b>（绝缘表面最短距离）、<b>绝缘穿透距离</b>（穿过固体绝缘的厚度，由耐压试验验证）。变压器初次级之间、双重绝缘中的固体层，都要单独确认“穿透距离”是否满足耐压与厚度要求，不能只用表面距离替代。</p>
     </section>
 
     <section>
@@ -135,10 +136,19 @@
               <td>存在导电污染，或干燥非导电污染但会凝结</td>
               <td>工业现场、潮湿车间、户外无防护、粉尘环境</td>
             </tr>
+            <tr>
+              <td>4</td>
+              <td>造成持久的导电污染，例如导电尘埃、雨或其他潮湿条件</td>
+              <td>长期户外裸露、导电粉尘严重的工业环境；设计上通常用外壳/密封/IP 防护来避开，而不是靠拉大距离硬扛</td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <p>判断要点：污染等级看的是<b>绝缘表面所在的环境</b>，不是整台设备的“IP 等级”。外壳密封不等于内部自动是污染等级 1——还要看装配过程残留、灌封是否完整。</p>
+      <p>判断要点：污染等级看的是<b>绝缘表面所在的环境</b>，不是整台设备的“IP 等级”。外壳密封不等于内部自动是污染等级 1——还要看装配过程残留、灌封是否完整。污染等级 4 一般只出现在长期户外裸露或导电粉尘环境，产品设计上应通过外壳、密封和 IP 防护来降低微观环境，而不是直接按 4 级拉距离。</p>
+      <div class="callout callout-warn">
+        <strong>污染等级 4 的查表边界</strong>
+        <p>IEC 60664-1 / GB/T 16935.1 定义了污染等级 1–4，但标准爬电距离表只给出 1–3 级的数值；对持久导电污染（污染等级 4），标准不规定具体的爬电距离值。因此第 4 级环境通常应通过外壳、密封、IP 防护等手段降低到 3 级及以下，或按产品标准进行特殊评估。</p>
+      </div>
 
       <h3>4.3 材料组与 CTI</h3>
       <p>CTI（相对漏电起痕指数）通过 IEC 60112 的滴液试验测得：在样品表面滴氯化铵溶液，逐步升高电压，记录 50 滴内不发生漏电起痕的最大电压。材料组按 CTI 划分：</p>
@@ -175,7 +185,7 @@
       <h2>5. 查表完整流程（六步）</h2>
       <ol>
         <li><b>定工作电压</b>：取最不利持续 RMS 电压（宽压按 250V）；</li>
-        <li><b>定污染等级</b>：按产品使用环境与外壳结构选 1/2/3；</li>
+        <li><b>定污染等级</b>：按产品使用环境与外壳结构通常选 1/2/3。标准定义有第 4 级（持久导电污染），但爬电距离表只提供 1–3 级数值；遇到 4 级环境应先用外壳/密封/IP 防护降低微观环境，或按产品标准特殊评估，不能直接按 4 级查表。</li>
         <li><b>定材料组</b>：凭 CTI 报告定 Ⅰ/Ⅱ/Ⅲa/Ⅲb；</li>
         <li><b>定绝缘类型</b>：功能/基本/附加/加强，决定乘数；</li>
         <li><b>查表</b>：在标准表格中按“电压列 × 污染等级 × 材料组”读出基本绝缘值；</li>
@@ -209,6 +219,10 @@
       <div class="callout callout-info">
         <strong>这张表怎么用</strong>
         <p>先读“基本绝缘”值：电压 250V、污染 2、材料组 Ⅲa → 3.2mm。再按绝缘类型换算：附加 = 3.2，加强 = 6.4，功能绝缘按标准单独确定（本站计算器按 0.8× 简化示意）。</p>
+      </div>
+      <div class="callout callout-info">
+        <strong>220V 家电快速参考（最常用的心算法）</strong>
+        <p>220V 市电、过电压类别 Ⅱ 的产品，额定冲击电压 2500V：<b>基本绝缘的电气间隙 ≥ 2.0mm</b>（空气距离）。爬电距离按“工作电压 250V 档 + 材料组 + 污染等级”查表：污染 2 + Ⅲa 时基本绝缘 ≥ 3.2mm；若按污染 3 + Ⅲa/Ⅲb 保守取值 ≥ 4.0mm。PCB 上强弱电间距不够时，可在中间开槽增加表面路径——打样厂常见要求槽宽 ≥ 0.8mm，本站设计建议 ≥ 1mm。</p>
       </div>
     </section>
 
@@ -280,6 +294,7 @@
           </thead>
           <tbody>
             <tr><td>IEC 60664-1（绝缘配合总则）</td><td>附录 F 的爬电距离表；正文对污染等级、材料组的定义</td></tr>
+            <tr><td>GB/T 16935.1（绝缘配合 第 1 部分）</td><td>IEC 60664-1 的国内等同采用标准（IDT），术语与查表结构一致</td></tr>
             <tr><td>IEC 60335-1 / GB 4706.1（家电）</td><td>第 29 章：电气间隙与爬电距离；CTI 测试引用 IEC 60112</td></tr>
             <tr><td>IEC 62368-1 / GB 4943.1（IT/AV）</td><td>第 5.4 节：电气间隙与爬电距离</td></tr>
             <tr><td>IEC 60601-1 / GB 9706.1（医疗）</td><td>第 8.7 节：爬电距离与空气间隙（含 MOPP 要求）</td></tr>
@@ -311,7 +326,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -325,7 +340,7 @@
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
   <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

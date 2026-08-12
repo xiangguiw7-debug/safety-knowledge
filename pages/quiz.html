@@ -2,13 +2,13 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
-  <title>小测验 - 安规与可靠性知识课堂</title>
-  <meta name="description" content="覆盖电气间隙、爬电距离、雷击浪涌与耐压测试的 44 道自测题。">
-  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
+  <title>答题测验 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="覆盖四大核心模块、七大安全因素、可靠性测试、IP/IK、材料/CTI 与认证流程的答题测验。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
     .quiz-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 8px; }
@@ -16,13 +16,14 @@
     .quiz-chips button:hover { border-color: var(--accent); color: var(--accent); }
     .quiz-chips button.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
     .quiz-count { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+    .quiz-auto-tag { display: inline-block; font-size: 12px; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; }
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="../index.html">
-        <span class="logo-mark">⚡</span>
+        <img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">
         安规与可靠性知识课堂
       </a>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
@@ -34,18 +35,23 @@
         <a href="./industries.html">行业筛选</a>
         <a href="./materials.html">材料库</a>
         <a href="./glossary.html">术语表</a>
-        <a href="./resources.html">资源</a>
+        <a href="./resources.html">资源</a><a href="./quiz.html" class="active">答题测验</a>
         <a href="./refs.html">参考中心</a>
-        <a href="./quiz.html" class="active">小测验</a>
+        
       </nav>
     </div>
   </header>
 
   <main class="container page">
     <div class="page-head">
-      <p class="crumb"><a href="../index.html">首页</a> / 小测验</p>
-      <h1>安规知识小测验</h1>
-      <p class="lead">44 道题，覆盖电气间隙、爬电距离、雷击浪涌与耐压测试。答完立即看解析。</p>
+      <p class="crumb"><a href="../index.html">首页</a> / 答题测验</p>
+      <h1>安规知识答题测验</h1>
+      <p class="lead">答题测验：覆盖四大核心模块、七大安全因素、可靠性测试，以及 IP/IK、材料/CTI、认证流程等知识卡主题。答完立即看解析，错题自动进错题本。</p>
+    </div>
+
+    <div class="callout callout-info">
+      <strong>答题测验 · 检验是否真的懂了</strong>
+      <p>题库覆盖四大核心模块 + 七大安全因素（防电击 / 能量 / 防火 / 热量 / 机械 / 辐射 / 化学）+ 可靠性测试 + IP/IK、材料/CTI、认证流程等知识卡主题。答完立即看解析，答错的题自动进错题本。</p>
     </div>
 
     <div class="quiz-chips" role="group" aria-label="按模块筛选题库">
@@ -54,18 +60,38 @@
       <button type="button" data-qmodule="creepage" aria-pressed="false">爬电距离</button>
       <button type="button" data-qmodule="surge" aria-pressed="false">雷击浪涌</button>
       <button type="button" data-qmodule="hipot" aria-pressed="false">耐压测试</button>
+      <button type="button" data-qmodule="electric" aria-pressed="false">防电击</button>
+      <button type="button" data-qmodule="energy" aria-pressed="false">能量危险</button>
+      <button type="button" data-qmodule="fire" aria-pressed="false">防火</button>
+      <button type="button" data-qmodule="thermal" aria-pressed="false">热量/温升</button>
+      <button type="button" data-qmodule="mechanical" aria-pressed="false">机械</button>
+      <button type="button" data-qmodule="radiation" aria-pressed="false">辐射</button>
+      <button type="button" data-qmodule="chemical" aria-pressed="false">化学</button>
+      <button type="button" data-qmodule="reliability" aria-pressed="false">可靠性</button>
+      <button type="button" data-qmodule="ip" aria-pressed="false">IP 防护</button>
+      <button type="button" data-qmodule="ik" aria-pressed="false">IK 冲击</button>
+      <button type="button" data-qmodule="leakage" aria-pressed="false">泄漏电流</button>
+      <button type="button" data-qmodule="grounding" aria-pressed="false">接地</button>
+      <button type="button" data-qmodule="selv" aria-pressed="false">SELV</button>
+      <button type="button" data-qmodule="emc" aria-pressed="false">EMC</button>
+      <button type="button" data-qmodule="battery" aria-pressed="false">电池</button>
+      <button type="button" data-qmodule="materials" aria-pressed="false">材料/CTI</button>
+      <button type="button" data-qmodule="certification" aria-pressed="false">认证流程</button>
+      <button type="button" data-qmodule="framework" aria-pressed="false">标准结构</button>
+      <button type="button" data-qmodule="auto" aria-pressed="false">⚙ 自动生成</button>
     </div>
     <p class="quiz-count" id="quizCount"></p>
     <div id="quizApp">
       <div id="quizIntro" class="card">
         <h2>准备开始</h2>
-        <p>题目来自四个核心模块的常见易错点，适合在学习完章节后自检。</p>
+        <p>题目来自知识卡片库各主题的常见易错点，适合学习后检验是否真的掌握。</p>
         <button type="button" class="btn btn-primary" id="quizStart">开始答题</button>
       </div>
 
       <div id="quizBox" hidden>
         <div class="quiz-progress"><span id="quizBar" style="width:0%"></span></div>
         <p class="crumb">第 <span id="quizCurrent">1</span> / <span id="quizTotal">0</span> 题</p>
+        <p style="margin:2px 0 8px"><span id="quizAutoTag" class="quiz-auto-tag" hidden>⚙ 自动生成题（由知识卡/标准/可靠性数据生成）</span></p>
         <h2 id="quizQuestion"></h2>
         <div id="quizOptions"></div>
         <div id="quizExplain" class="quiz-explanation" hidden></div>
@@ -96,7 +122,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -107,12 +133,16 @@
   <script src="../assets/js/ux.js"></script>
   <script src="../assets/js/progress.js"></script>
   <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/knowledge-detail-data.js"></script>
+  <script src="../assets/js/standards-data.js"></script>
+  <script src="../assets/js/reliability-data.js"></script>
+  <script src="../assets/js/quiz-auto.js"></script>
   <script src="../assets/js/quiz-v2.js"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
   <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

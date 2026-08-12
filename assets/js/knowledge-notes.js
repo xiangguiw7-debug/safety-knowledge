@@ -8,7 +8,8 @@ function saveNotes(n) {
   try { localStorage.setItem(KNOW_NOTES_KEY, JSON.stringify(n)); } catch (e) { /* ignore */ }
 }
 
-document.querySelectorAll(".knowledge-grid .card[id]").forEach(function (card) {
+function initKnowledgeNotes() {
+  document.querySelectorAll(".card[id]").forEach(function (card) {
   var id = card.id;
   var st = getNotes()[id] || { done: false, note: "" };
 
@@ -44,5 +45,8 @@ document.querySelectorAll(".knowledge-grid .card[id]").forEach(function (card) {
     persist();
   });
 
-  card.appendChild(bar);
-});
+    card.appendChild(bar);
+  });
+}
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initKnowledgeNotes);
+else initKnowledgeNotes();

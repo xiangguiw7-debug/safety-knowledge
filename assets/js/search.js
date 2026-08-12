@@ -22,8 +22,8 @@ var SEARCH_INDEX = [
   { t: "防火试验三件套", d: "灼热丝/针焰/球压的原理与分工", u: "pages/knowledge.html#firetests", k: "防火 试验 灼热丝 针焰 球压 GWFI GWIT" },
   { t: "电池能量计算", d: "Wh=V×Ah 与运输/法规提示", u: "pages/tools.html", k: "电池 能量 Wh 容量 电压" },
   { t: "环境试验参数速查", d: "湿热/温循/高温/盐雾典型值", u: "pages/tools.html", k: "环境 试验 湿热 温循 盐雾 参数" },
-  { t: "工具地图", d: "14 个计算工具分组导航与最近使用", u: "pages/tools.html", k: "工具 地图 分组 最近 使用 导航" },
-  { t: "小测验", d: "8 题自测，覆盖四大模块", u: "pages/quiz.html", k: "测验 quiz 自测 题目" },
+  { t: "工具地图", d: "17 个计算工具分组导航与最近使用", u: "pages/tools.html", k: "工具 地图 分组 最近 使用 导航" },
+  { t: "答题测验", d: "95 题精选 + 自动生成题库，按模块即时切换", u: "pages/quiz.html", k: "测验 quiz 自测 题目" },
   { t: "标准结构导读", d: "IEC 标准怎么读：范围、定义、条款、附录", u: "pages/knowledge.html#stdguide", k: "标准 结构 导读 IEC 条款 附录" },
   { t: "防触电的通用逻辑", d: "SELV、绝缘分级、距离、保护元件、外壳五道防线", u: "pages/knowledge.html#protection", k: "防触电 电击 防线 SELV I类 II类 III类" },
   { t: "泄漏电流与接触电流", d: "概念、测量网络、Y 电容影响、限值差异", u: "pages/knowledge.html#leakage", k: "泄漏电流 接触电流 患者漏电流 60990 Y电容" },
@@ -52,7 +52,7 @@ var SEARCH_INDEX = [
   { t: "行业筛选", d: "灯具、消费电子、医疗、汽车等 27 个行业", u: "pages/industries.html", k: "行业 灯具 医疗 家电 汽车 工业 筛选" },
   { t: "标准文件入口", d: "66 个标准清单与官方渠道", u: "pages/standards.html", k: "标准文件 IEC ISO GB 官方 下载 原文" },
   { t: "全球电压速查", d: "各国电压/频率/插头，宽压窄压判断", u: "pages/voltage.html", k: "电压 频率 插头 宽压 窄压 100-240 120 230" },
-  { t: "全球认证速查", d: "CCC、CE、FCC、UL、PSE、KC、VDE 等", u: "pages/certification.html", k: "认证 CCC CE FCC UL PSE KC VDE EAC 出口" },
+  { t: "全球认证速查", d: "真实地图 + 国家/产品视图：CCC、CE、FCC、UL、PSE、KC、VDE 等", u: "pages/certification.html", k: "认证 CCC CE FCC UL PSE KC VDE EAC 出口 真实地图 地图 标记 OpenStreetMap" },
   { t: "学习地图", d: "按角色选择学习入口", u: "pages/learn.html", k: "学习 路径 地图 新人 工程师 出口" },
   { t: "参考中心", d: "行业/标准/电压/认证统一入口", u: "pages/refs.html", k: "参考 中心 出口合规 链路" },
   { t: "CTI 与材料组", d: "漏电起痕指数、PC/ABS/PA66/PBT 典型值、UL 黄卡", u: "pages/knowledge.html#cti", k: "CTI 材料组 漏电起痕 60112 PC ABS PA66 PBT PMMA 黄卡" },
@@ -62,11 +62,13 @@ var SEARCH_INDEX = [
   { t: "认证流程", d: "五阶段、CB 转证、技术文件、工厂检查", u: "pages/knowledge.html#certprocess", k: "认证 流程 CB 转证 技术文件 工厂检查 CDF 符合性声明" },
   { t: "辐射危险", d: "激光分级、射频暴露 SAR、电离辐射", u: "pages/knowledge.html#radhaz", k: "辐射 激光 60825 SAR 射频 电离 60601-1-3" },
   { t: "标准差异矩阵", d: "60335/62368/60601/61010/60204 条款与数值对照", u: "pages/standards-compare.html", k: "标准 差异 矩阵 对照 60335 62368 60601 61010 60204" },
-  { t: "EMC 系统课程", d: "发射/抗扰项目原理、滤波接地、整改清单", u: "pages/emc.html", k: "EMC 课程 发射 抗扰 ESD EFT 传导 辐射 滤波 整改" },
+  { t: "EMC 系统课程", d: "EMI（电磁干扰）/ EMS（电磁敏感度）两大分支、发射与抗扰项目、滤波接地、整改清单", u: "pages/emc.html", k: "EMC 课程 EMI EMS 发射 抗扰 ESD EFT 浪涌 RS CS 传导 辐射 滤波 整改 61000-4" },
   { t: "传导发射（CE）", d: "频段限值、差模共模来源、滤波整改", u: "pages/emc-ce.html", k: "传导 发射 CE LISN 差模 共模 滤波 CISPR" },
   { t: "辐射发射（RE）", d: "天线机理、环路最小化、屏蔽展频", u: "pages/emc-re.html", k: "辐射 发射 RE 暗室 环路 共模 屏蔽 展频" },
   { t: "ESD 静电放电", d: "波形等级、失效机理、硬件软件整改", u: "pages/emc-esd.html", k: "ESD 静电 61000-4-2 TVS 放电 整改" },
   { t: "EFT 电快速瞬变", d: "脉冲群、等级、滤波与复位兜底", u: "pages/emc-eft.html", k: "EFT 瞬变 脉冲群 61000-4-4 滤波 整改" },
+  { t: "射频辐射抗扰（RS）", d: "暗室扫频 80MHz–6GHz、3–10V/m、屏蔽与线缆整改", u: "pages/emc.html#rs", k: "RS 辐射抗扰 61000-4-3 暗室 场强 射频" },
+  { t: "射频传导抗扰（CS）", d: "CDN 注入 150kHz–80MHz、3–10V、共模扼流与滤波", u: "pages/emc.html#cs", k: "CS 传导抗扰 61000-4-6 CDN 注入 射频" },
   { t: "工频磁场抗扰", d: "等级、磁敏元件、屏蔽与布局", u: "pages/emc-magnetic.html", k: "工频 磁场 61000-4-8 霍尔 屏蔽" },
   { t: "电压暂降与中断", d: "hold-up、欠压检测与软件恢复", u: "pages/emc-dips.html", k: "电压暂降 中断 61000-4-11 hold-up 复位" },
   { t: "能量危险", d: "限能电路、电池能量、电弧闪光", u: "pages/knowledge.html#energy", k: "能量 限能 电弧 电池 保险丝 ES1 ES2 ES3" },
@@ -105,6 +107,11 @@ var SEARCH_INDEX = [
   { t: "新行业：IoT/机器人/充电桩/无人机/电动车", d: "智能家居、AGV、充电桩、无人机、电动自行车", u: "pages/industries.html", k: "IoT 机器人 AGV 充电桩 无人机 电动车 滑板车" }
 ];
 
+function syncSearchActive() {
+  var b = document.getElementById("searchResults");
+  if (b) document.body.classList.toggle("search-active", !b.hidden);
+}
+
 function runSearch() {
   var input = document.getElementById("siteSearch");
   var box = document.getElementById("searchResults");
@@ -131,10 +138,10 @@ var searchBox = document.getElementById("searchResults");
 if (searchInput && searchBox) {
   searchInput.addEventListener("input", runSearch);
   searchInput.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") searchBox.hidden = true;
+    if (e.key === "Escape") { searchBox.hidden = true; syncSearchActive(); }
   });
   document.addEventListener("click", function (e) {
-    if (!e.target.closest(".site-search")) searchBox.hidden = true;
+    if (!e.target.closest(".site-search")) { searchBox.hidden = true; syncSearchActive(); }
   });
 }
 
@@ -165,11 +172,12 @@ function renderHistory() {
   if (!box || !input) return;
   if (input.value.trim()) return;
   var arr = searchHistory();
-  if (!arr.length) { box.hidden = true; return; }
+  if (!arr.length) { box.hidden = true; syncSearchActive(); return; }
   box.innerHTML = '<div class="empty">最近搜索：' + arr.map(function (q) {
     return '<button type="button" class="history-chip" data-q="' + q + '">' + q + "</button>";
   }).join("") + "</div>";
   box.hidden = false;
+  syncSearchActive();
 }
 function runSearch() {
   var input = document.getElementById("siteSearch");
@@ -179,7 +187,7 @@ function runSearch() {
   if (!q) { renderHistory(); return; }
   var hits = SEARCH_INDEX.filter(function (item) {
     return (item.t + " " + item.d + " " + (item.k || "")).toLowerCase().indexOf(q) !== -1;
-  }).slice(0, 12);
+  }).slice(0, 20);
   var groups = {};
   hits.forEach(function (h) {
     var g = searchGroup(h.u);
@@ -194,6 +202,7 @@ function runSearch() {
       }).join("")
     : '<div class="empty">没有匹配结果，换个关键词试试（如 爬电、CCC、UN 38.3）。</div>';
   box.hidden = false;
+  syncSearchActive();
   saveHistory(q);
 }
 var si2 = document.getElementById("siteSearch");
@@ -229,7 +238,7 @@ function runSearch() {
     return { h: item, score: score };
   }).filter(Boolean)
     .sort(function (a, b) { return a.score - b.score; })
-    .slice(0, 12)
+    .slice(0, 20)
     .map(function (x) { return x.h; });
   var groups = {};
   hits.forEach(function (h) {
@@ -245,5 +254,6 @@ function runSearch() {
       }).join("")
     : '<div class="empty">没有匹配结果，换个关键词试试（如 爬电、CCC、UN 38.3）。</div>';
   box.hidden = false;
+  syncSearchActive();
   saveHistory(q);
 }

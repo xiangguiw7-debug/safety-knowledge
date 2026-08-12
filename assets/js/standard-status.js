@@ -102,7 +102,7 @@
   }
   function run() {
     style();
-    if (document.querySelector(".knowledge-grid")) injectCards();
+    if (document.querySelector(".knowledge-grid") || document.getElementById("kdContent")) injectCards();
     if (document.querySelector("[data-tool-panel]")) injectTools();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);

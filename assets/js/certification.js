@@ -613,10 +613,13 @@ function renderProducts() {
 }
 
 function switchView(view) {
-  var g = document.getElementById("viewGlobe");
+  var m = document.getElementById("viewMap");
   $("viewCountry").hidden = view !== "country";
   $("viewProduct").hidden = view !== "product";
-  if (g) g.hidden = view !== "globe";
+  if (m) m.hidden = view !== "map";
+  if (view === "map" && window.certMap) {
+    setTimeout(function () { window.certMap.invalidateSize(); }, 60);
+  }
   document.querySelectorAll("[data-view]").forEach(function (b) {
     var on = b.getAttribute("data-view") === view;
     b.classList.toggle("active", on);
@@ -654,7 +657,23 @@ document.querySelectorAll("[data-pcat]").forEach(function (b) {
   });
 });
 
-$("cSearch").addEventListener("input", renderCountries);
-switchView("globe");
-renderCountries();
-renderProducts();
+if ($("cSearch")) $("cSearch").addEventListener("input", renderCountries);
+if (document.getElementById("cSearch")) {
+  switchView("map");
+  renderCountries();
+  renderProducts();
+  var qc = (location.search.match(/[?&]c=([^&]+)/) || [])[1];
+  if (qc) {
+    var cs = document.getElementById("cSearch");
+    if (cs) { cs.value = decodeURIComponent(qc); switchView("country"); renderCountries(); }
+  }
+  var hsh = location.hash || "";
+  if (hsh === "#country") switchView("country");
+  else if (hsh === "#product") switchView("product");
+  window.addEventListener("hashchange", function () {
+    var h = location.hash;
+    if (h === "#map") switchView("map");
+    else if (h === "#country") switchView("country");
+    else if (h === "#product") switchView("product");
+  });
+}

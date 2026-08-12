@@ -2,13 +2,13 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
   <title>学习地图（按危害） - 安规与可靠性知识课堂</title>
   <meta name="description" content="按防电击、能量、防火、热量、机械、辐射、化学七大安全因素组织的安规学习地图。">
-  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/search.css">
 </head>
@@ -16,7 +16,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="../index.html">
-        <span class="logo-mark">⚡</span>
+        <img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">
         安规与可靠性知识课堂
       </a>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
@@ -28,9 +28,9 @@
         <a href="./industries.html">行业筛选</a>
         <a href="./materials.html">材料库</a>
         <a href="./glossary.html">术语表</a>
-        <a href="./resources.html">资源</a>
+        <a href="./resources.html">资源</a><a href="./quiz.html">答题测验</a>
         <a href="./refs.html">参考中心</a>
-        <a href="./quiz.html">小测验</a>
+        
       </nav>
     </div>
   </header>
@@ -86,7 +86,7 @@
             <li><a href="./knowledge.html#stdguide">标准导读</a>+<a href="./knowledge.html#protection">防触电逻辑</a></li>
             <li>按<a href="#path">路径</a>过七大危害</li>
             <li><a href="./knowledge.html">补充知识</a>补概念</li>
-            <li><a href="./quiz.html">小测验</a>自检</li>
+            <li><a href="./quiz.html">答题测验</a>自检</li>
             <li><a href="./tools.html">计算工具</a>练手算</li>
           </ol>
         </div>
@@ -174,8 +174,8 @@
       <div class="grid grid-4">
         <article class="card"><h3>光生物安全</h3><p>蓝光/紫外/红外，RG 分级。</p><p><a class="btn" href="./knowledge.html#optical">知识卡片</a></p></article>
         <article class="card"><h3>射频暴露</h3><p>无线设备 SAR 与 RED 要求。</p><p><a class="btn" href="./knowledge.html#emc">EMC 基础</a></p></article>
-        <article class="card"><h3>激光安全</h3><p>激光分级（待补充章节）。</p><p><a class="btn" href="./standards.html">标准入口</a></p></article>
-        <article class="card"><h3>医疗辐射</h3><p>X 射线设备监管（待补充章节）。</p><p><a class="btn" href="./industries.html#medical">医疗行业</a></p></article>
+        <article class="card"><h3>激光安全</h3><p>激光分级 Class 1–4、AEL 与防护措施。</p><p><a class="btn" href="./knowledge.html#radhaz">知识卡片</a> <a class="btn" href="./hazard-radiation.html">深度页</a></p></article>
+        <article class="card"><h3>医疗辐射</h3><p>X 射线设备按 IEC 60601-1-3 与监管注册管理。</p><p><a class="btn" href="./knowledge.html#radhaz">知识卡片</a> <a class="btn" href="./industries.html#medical">医疗行业</a></p></article>
       </div>
     </section>
 
@@ -233,7 +233,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -246,7 +246,7 @@
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
   <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

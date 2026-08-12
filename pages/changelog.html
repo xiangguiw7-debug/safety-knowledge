@@ -2,19 +2,19 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-  <meta name="theme-color" content="#0071e3"> content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0071e3">
   <title>更新日志 - 安规与可靠性知识课堂</title>
   <meta name="description" content="安规与可靠性知识课堂更新日志：v1.1 内容扩充与体验升级记录。">
-  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
       <nav class="nav" id="nav">
@@ -24,9 +24,9 @@
         <a href="./industries.html">行业筛选</a>
         <a href="./materials.html">材料库</a>
         <a href="./glossary.html">术语表</a>
-        <a href="./resources.html" class="active">资源</a>
+        <a href="./resources.html" class="active">资源</a><a href="./quiz.html">答题测验</a>
         <a href="./refs.html">参考中心</a>
-        <a href="./quiz.html">小测验</a>
+        
       </nav>
     </div>
   </header>
@@ -37,63 +37,68 @@
       <h1>更新日志</h1>
     </div>
 
-    <div class="card">
-      <h2>v1.2.1（2026-08-12）</h2>
-      <p class="section-sub">温升基准与知识卡缺漏补强</p>
+                            <div class="card">
+      <h2>v1.1（2026-08-12）</h2>
+      <p class="section-sub">自 v1.0 以来的全部内容、工具、交互与体验更新</p>
+
+      <h3>📚 内容体系</h3>
       <ul>
-        <li><b>40°C 环境温度基准落地</b>：温升知识卡新增“基准环境温度对照表”（60335 25°C / 61010 40°C / 60034 40°C / 60598 10–30°C / 18487 40°C 等），含 40°C 与 25°C 换算方法；</li>
-        <li><b>温升 SOP 同步</b>：试验步骤增加“先确认基准环境温度”，备注区分 40°C 基准温升与 40°C 高温试验；</li>
-        <li><b>计算工具升级</b>：温升估算器新增基准环境温度选择（25/30/35/40°C），自动给出部件温度教学换算；</li>
-        <li><b>知识卡全量审计补强</b>：22 张卡补齐规则表/误区/深读入口（RoHS 十项限值、激光等级、ISO 13857 开口距离、车载瞬态波形、RG 分级、Ex 型式、SELV/接地深读链接等）；</li>
-        <li><b>SOP 副本同步</b>：接地、防火材料、电池 3 张知识卡内容同步到全部对应 SOP 副本；</li>
-        <li><b>核对表</b>：新增温升基准温度核对条目；</li>
-        <li><b>可靠性测试中心补温升</b>：温度类新增“温升测试（安规发热试验）”，并修复户外计划中防尘/防水的失效引用；</li>
-        <li><b>体验</b>：PWA 缓存升级 v74。</li>
+        <li><b>七大安全因素深度页补齐</b>：新增能量、防火、热量、机械、辐射、化学 6 个深度页，加上防电击体系形成完整学习线；</li>
+        <li><b>工程专题</b>：PCB 安规设计指南、元器件安全、环境与可靠性试验、标签与说明书、产品类别结构图、设计师必知安规、岗位化学习路径、MOPP/MOOP、双重绝缘判定、IoT 网络安全；</li>
+        <li><b>深度页</b>：泄漏电流、接地与等电位、SELV/TNV、绝缘配合总览、雷击浪涌等；</li>
+        <li><b>案例与问答</b>：25 个可筛选整改案例 + 10 个常见问题，案例全部关联标准条款 / SOP / 工具 / 知识卡；</li>
+        <li><b>行业扩充</b>：行业筛选达 27 个，新增智能家居/IoT、机器人/AGV、充电桩/电动车、无人机/玩具、电动自行车/滑板车等；</li>
+        <li><b>术语表</b>：49 条术语，新增英文对照列并链到对应知识；</li>
+        <li><b>导航与资源中心</b>：统一入口页 + 全站地图，顶部与底部导航统一为“首页 / 导航 / 学习 / 测试 / 认证 / 答题测验”；</li>
+        <li><b>全球认证真实地图</b>：OpenStreetMap 全球底图（免 Key）集成到认证页默认视图，89 个国家/地区标记，移除 3D 地球仪；</li>
+        <li><b>四步学习路径</b>：首页“学 → 测 → 考 → 查”流程卡重设计。</li>
+      </ul>
+
+      <h3>🧠 知识卡与学习</h3>
+      <ul>
+        <li><b>知识卡改版</b>：主题目录 + 独立详情页（大字号、完整规则、标准徽章、工具/深读链接、知识链路、上一张/下一张导航），旧锚点自动跳转；</li>
+        <li><b>知识卡全量审计补强</b>：31 张卡补齐规则表 / 误区 / 深读入口，覆盖 RoHS 十项限值、激光等级、ISO 13857 开口距离、车载瞬态波形、RG 分级、Ex 型式、CTI 材料组、SELV/接地等；</li>
+        <li><b>温升基准对照表</b>：60335 25°C / 61010 40°C / 60034 40°C / 60598 10–30°C / 18487 40°C，含换算方法；</li>
+        <li><b>EMC 课程重构</b>：按 EMI（电磁干扰/发射）与 EMS（电磁敏感度/抗扰）两大分支组织，补齐辐射抗扰 RS（IEC 61000-4-3）与传导抗扰 CS（IEC 61000-4-6）；</li>
+        <li><b>知识卡索引手风琴</b>：内容地图按分类展开、搜索联动，区分知识卡片与深度页直达；</li>
+        <li><b>修复分组缺卡</b>：防电击 5 张卡、框架/认证流程/医疗专项空分组；激光安全与医疗辐射“待补充”卡片补全。</li>
+      </ul>
+
+      <h3>🧪 测试与 SOP</h3>
+      <ul>
+        <li><b>测试中心重设计</b>：分类卡片容器 + 图标/类型徽标项目小卡（SOP / 知识 / 课程 / 工具 / 设备），分类筛选保留；</li>
+        <li><b>测试中心分类整合</b>：电气安全 / 环境可靠性 / EMC / 防火 / 防护等级 / 电池 / 工具；</li>
+        <li><b>SOP 中心</b>：62 份执行级 SOP，支持按行业与类别筛选；</li>
+        <li><b>针焰参数补全</b>：火焰 12mm±1mm、45° 施加、铺底层约 200mm±5mm、校准 100→700°C 约 23.5s，知识卡/SOP/设备页同步；</li>
+        <li><b>温升 SOP 同步</b>：先确认基准环境温度；接地、防火材料、电池知识卡内容同步到对应 SOP；</li>
+        <li><b>可靠性测试中心</b>：温度类新增“温升测试（安规发热试验）”，支持按行业筛选，修复户外计划防尘/防水失效引用。</li>
+      </ul>
+
+      <h3>🧮 工具</h3>
+      <ul>
+        <li><b>17 个计算/速查工具</b>：间距、耐压、泄漏、放电、对照、接地、SELV、温升、单位换算、测试清单、保险丝、灼热丝、电池、试验参数、EMC 波形、机械距离、ES 判定；</li>
+        <li><b>工具 ↔ 知识卡双向互链</b>：一键跳转，深链自动打开工具面板并滚动定位；</li>
+        <li><b>温升估算器</b>：新增基准环境温度选择（25/30/35/40°C）与部件温度换算；</li>
+        <li><b>工具边界提示</b>：泄漏、温升、接地、放电、电池、SELV 接近或超限时警告；</li>
+        <li><b>标准版本与核对状态</b>：知识卡与工具显示“依据标准 + 核对日期 + 标准入口”。</li>
+      </ul>
+
+      <h3>✅ 答题与搜索</h3>
+      <ul>
+        <li><b>答题测验升级</b>：95 题精选 + 自动生成题库（主题-分组 / 卡片-标准 / 标准-主题 / 试验-标准），24 个模块即时切换，错题本修复，醒目答题入口；</li>
+        <li><b>搜索升级</b>：标题优先排序、结果分组、关键词高亮、工具带锚点直达、EMI/EMS/RS/CS 与真实地图关键词同步。</li>
+      </ul>
+
+      <h3>🔧 修复与体验</h3>
+      <ul>
+        <li><b>修复</b>：耐压页 7.1 步骤条、Service Worker 注册、Access &amp; Tool 重复转义、#tool-spacing 深链、viewport meta 损坏（52 页）、全站数字口径（95 题 / 62 份 SOP / 17 个工具）；</li>
+        <li><b>链接审计</b>：新增 scripts/check-links.js 一键检查全站链接、锚点与可达性；</li>
+        <li><b>视觉</b>：Apple 风格字体、大圆角、毛玻璃导航、深色渐变 Hero、七大危害识别色、筛选卡迷你知识卡、卡片紧凑化、首页新 logo；</li>
+        <li><b>体验</b>：浮现动画、返回顶部、Toast、PWA 缓存持续升级。</li>
       </ul>
     </div>
 
-    <div class="card">
-      <h2>v1.2（2026-08-12）</h2>
-      <p class="section-sub">内容深度与工程化更新</p>
-      <ul>
-        <li><b>标准版本与核对状态下沉</b>：知识卡与 30 个计算工具自动显示“依据标准 + 核对日期 + 标准入口”；</li>
-        <li><b>新增 4 个深度页</b>：泄漏电流、接地与等电位、SELV/TNV、绝缘配合总览；</li>
-        <li><b>案例库闭环</b>：25 个案例全部关联标准条款 / SOP / 工具 / 知识卡；</li>
-        <li><b>工具边界提示</b>：泄漏、温升、接地、放电、电池、SELV 接近或超限时给出警告；</li>
-        <li><b>链接审计脚本</b>：新增 scripts/check-links.js，一键检查全站链接、锚点与可达性；</li>
-        <li><b>体验</b>：PWA 缓存升级 v73。</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>v1.1.1（2026-08-12）</h2>
-      <p class="section-sub">互链、搜索与测试参数补齐</p>
-      <ul>
-        <li><b>工具 ↔ 知识卡双向互链</b>：30 个计算工具可一键跳知识卡，17 张知识卡可跳回对应工具，深链会自动打开工具面板并滚动定位；</li>
-        <li><b>搜索精准跳转</b>：针焰/灼热丝/球压直达知识卡对应小节，工具结果带锚点直达，标题优先排序；</li>
-        <li><b>针焰参数补全</b>：火焰 12mm±1mm、45° 施加、火焰尖端接触样品、铺底层约 200mm±5mm、火焰校准 100→700°C 约 23.5s、丁烷/丙烷气体，知识卡/SOP/设备页三处同步；</li>
-        <li><b>链接修复</b>：补上工具页 #tool-spacing 深链锚点；将根目录旧首页副本移入 backup/ 备份目录。</li>
-        <li><b>性能</b>：PWA 缓存升级 v72。</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>v1.1</h2>
-      <p class="section-sub">内容与体验大版本更新</p>
-      <ul>
-        <li><b>七大因素深度补齐</b>：新增能量、防火、热量、机械、辐射、化学 6 个深度页；</li>
-        <li><b>工程专题</b>：PCB 安规设计指南、元器件安全、环境与可靠性试验、标签与说明书、产品类别结构图、设计师必知安规、岗位化学习路径；</li>
-        <li><b>案例与问答</b>：25 个可筛选整改案例 + 10 个常见问题；</li>
-        <li><b>工具与速查</b>：标准选择器、可打印速查海报、标准更新追踪；</li>
-        <li><b>行业扩充</b>：新增智能家居/IoT、机器人/AGV、充电桩/电动车、无人机/玩具、电动自行车/滑板车 5 个行业；</li>
-        <li><b>术语表</b>：新增英文对照列；</li>
-        <li><b>可视化</b>：浪涌防护路径动画、产品类别剖面图；</li>
-        <li><b>资源中心</b>：统一入口页，导航新增“资源”；</li>
-        <li><b>体验</b>：Apple 风格配色升级、深色渐变 Hero、七大危害识别色、浮现动画、返回顶部、Toast。</li>
-      </ul>
-    </div>
-
-    <div class="card">
+<div class="card">
       <h2>v1.0</h2>
       <p class="section-sub">初始版本</p>
       <ul>
@@ -122,7 +127,7 @@
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
   <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

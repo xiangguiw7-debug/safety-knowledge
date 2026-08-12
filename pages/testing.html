@@ -6,15 +6,15 @@
   <meta name="theme-color" content="#0071e3">
   <title>测试中心 - 安规与可靠性知识课堂</title>
   <meta name="description" content="测试中心：SOP、可靠性测试计划、测试设备与工具、环境试验入口。">
-  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
       <nav class="nav" id="nav"></nav>
@@ -27,21 +27,177 @@
       <p class="lead">测试相关入口统一放在这里：执行用 SOP，计划用可靠性中心，设备用设备清单。</p>
     </div>
 
+    <style>
+      .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+      .filter-bar button { background: var(--card); border: 1px solid var(--border); color: var(--fg); border-radius: 999px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-family: inherit; }
+      .filter-bar button.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .tcat { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 16px; margin-bottom: 16px; }
+      .tcat-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+      .tcat-ico { flex: 0 0 44px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: rgba(0, 113, 227, 0.09); border-radius: 14px; }
+      .tcat h3 { font-size: 17px; font-weight: 600; margin: 0; }
+      .tcat-count { margin-left: auto; font-size: 12px; color: var(--muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+      .t-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+      .t-link { display: flex; align-items: center; gap: 9px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); text-decoration: none; color: var(--fg); transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+      .t-link:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06); }
+      .t-ico { flex: 0 0 32px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 16px; background: rgba(0, 113, 227, 0.08); border-radius: 10px; }
+      .t-name { font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+      .t-type { margin-left: auto; font-size: 10.5px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+      @media (max-width: 640px) { .t-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); } }
+    </style>
     <section>
-      <h2>测试入口</h2>
-      <div class="grid grid-4">
-        <article class="card"><h3>测试 SOP 中心</h3><p>62 份 SOP：耐压、泄漏、防火、环境、EMC、电池等，支持打印和记录表。</p><p><a class="btn" href="./sop.html">打开 SOP</a></p></article>
-        <article class="card"><h3>可靠性测试计划中心</h3><p>按行业和测试类别筛选，含标准、设备、条件、方法、判定与行业计划。</p><p><a class="btn" href="./reliability.html">打开可靠性</a></p></article>
-        <article class="card"><h3>测试设备与工具</h3><p>63 项测试对应的设备、辅助用品、环境与判定总表。</p><p><a class="btn" href="./test-equipment.html">打开设备清单</a></p></article>
-        <article class="card"><h3>环境试验概念页</h3><p>环境与可靠性概念、试验顺序、设计应对。</p><p><a class="btn" href="./environment-tests.html">打开概念页</a></p></article>
-        <article class="card"><h3>计算工具</h3><p>爬电、间隙、耐压、浪涌等设计估算工具。</p><p><a class="btn" href="./tools.html">打开工具</a></p></article>
+      <h2>测试入口（按类别）</h2>
+      <p class="section-sub">先按类别定位测试，再进入对应 SOP / 可靠性计划 / 设备清单 / 计算工具。执行用 SOP，计划用可靠性中心，设备用设备清单。</p>
+      <div class="filter-bar" id="testChips" role="group" aria-label="按测试类别筛选">
+        <button type="button" class="active" data-tcat="all">全部</button>
+        <button type="button" data-tcat="electric">电气安全</button>
+        <button type="button" data-tcat="env">环境与可靠性</button>
+        <button type="button" data-tcat="emc">EMC</button>
+        <button type="button" data-tcat="fire">防火材料</button>
+        <button type="button" data-tcat="ip">防护等级</button>
+        <button type="button" data-tcat="battery">电池</button>
+        <button type="button" data-tcat="tools">通用工具</button>
       </div>
+      <div id="testHub">
+        <section class="tcat" data-tcat="electric">
+          <div class="tcat-head"><span class="tcat-ico">⚡</span><h3>电气安全测试</h3><span class="tcat-count">14 项</span></div>
+          <div class="t-grid">
+            <a class="t-link" href="./sop-hipot.html"><span class="t-ico">⚡</span><span class="t-name">耐压 SOP</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./hipot.html"><span class="t-ico">📖</span><span class="t-name">耐压知识</span><span class="t-type">知识</span></a>
+            <a class="t-link" href="./sop-leakage.html"><span class="t-ico">💧</span><span class="t-name">泄漏 SOP</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./leakage.html"><span class="t-ico">📖</span><span class="t-name">泄漏知识</span><span class="t-type">知识</span></a>
+            <a class="t-link" href="./sop-grounding.html"><span class="t-ico">🔗</span><span class="t-name">接地 SOP</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./grounding.html"><span class="t-ico">📖</span><span class="t-name">接地知识</span><span class="t-type">知识</span></a>
+            <a class="t-link" href="./sop-spacing.html"><span class="t-ico">📏</span><span class="t-name">爬电/间隙 SOP</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./creepage.html"><span class="t-ico">📖</span><span class="t-name">爬电知识</span><span class="t-type">知识</span></a>
+            <a class="t-link" href="./sop-insulation-resistance.html"><span class="t-ico">🧪</span><span class="t-name">绝缘电阻</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-insulation-coating.html"><span class="t-ico">🖌️</span><span class="t-name">绝缘涂覆</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-residual-voltage.html"><span class="t-ico">⏳</span><span class="t-name">残余电压</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-protective-impedance.html"><span class="t-ico">🛡️</span><span class="t-name">保护阻抗</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./double-insulation.html"><span class="t-ico">🧱</span><span class="t-name">双重绝缘</span><span class="t-type">知识</span></a>
+            <a class="t-link" href="./selv.html"><span class="t-ico">🔌</span><span class="t-name">SELV</span><span class="t-type">知识</span></a>
+          </div>
+        </section>
+
+        <section class="tcat" data-tcat="env">
+          <div class="tcat-head"><span class="tcat-ico">🌡️</span><h3>环境与可靠性测试</h3><span class="tcat-count">17 项</span></div>
+          <div class="t-grid">
+            <a class="t-link" href="./reliability.html"><span class="t-ico">🗓️</span><span class="t-name">可靠性计划中心</span><span class="t-type">计划</span></a>
+            <a class="t-link" href="./environment-tests.html"><span class="t-ico">🌦️</span><span class="t-name">环境试验概念</span><span class="t-type">知识</span></a>
+            <a class="t-link" href="./sop-temperature-rise.html"><span class="t-ico">🌡️</span><span class="t-name">温升 SOP</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-temp-cycling.html"><span class="t-ico">🔁</span><span class="t-name">温度循环</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-dry-heat.html"><span class="t-ico">🌞</span><span class="t-name">高温</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-cold.html"><span class="t-ico">❄️</span><span class="t-name">低温</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-temperature-operation.html"><span class="t-ico">🌗</span><span class="t-name">高低温工作</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-damp-heat-steady.html"><span class="t-ico">💦</span><span class="t-name">稳态湿热</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-damp-heat-cyclic.html"><span class="t-ico">🌧️</span><span class="t-name">交变湿热</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-vibration-sine.html"><span class="t-ico">📳</span><span class="t-name">正弦振动</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-vibration-random.html"><span class="t-ico">🔀</span><span class="t-name">随机振动</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-shock.html"><span class="t-ico">💥</span><span class="t-name">机械冲击</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-drop.html"><span class="t-ico">📉</span><span class="t-name">自由跌落</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-salt-mist.html"><span class="t-ico">🧂</span><span class="t-name">盐雾</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-endurance.html"><span class="t-ico">⏳</span><span class="t-name">老化/耐久</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-rti.html"><span class="t-ico">🧪</span><span class="t-name">RTI 热老化</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-post-env-safety.html"><span class="t-ico">🔁</span><span class="t-name">环境后安规复测</span><span class="t-type">SOP</span></a>
+          </div>
+        </section>
+
+        <section class="tcat" data-tcat="emc">
+          <div class="tcat-head"><span class="tcat-ico">📡</span><h3>EMC 测试</h3><span class="tcat-count">11 项</span></div>
+          <div class="t-grid">
+            <a class="t-link" href="./emc.html"><span class="t-ico">📡</span><span class="t-name">EMC 系统课程</span><span class="t-type">课程</span></a>
+            <a class="t-link" href="./sop-conducted-emission.html"><span class="t-ico">🔌</span><span class="t-name">传导发射</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-radiated-emission.html"><span class="t-ico">📻</span><span class="t-name">辐射发射</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-conducted-immunity.html"><span class="t-ico">🔊</span><span class="t-name">传导抗扰</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-radiated-immunity.html"><span class="t-ico">📡</span><span class="t-name">辐射抗扰</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-esd.html"><span class="t-ico">⚡</span><span class="t-name">ESD</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-eft.html"><span class="t-ico">🔁</span><span class="t-name">EFT</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-surge.html"><span class="t-ico">🌊</span><span class="t-name">浪涌</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-power-frequency-field.html"><span class="t-ico">🧲</span><span class="t-name">工频磁场</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-dips.html"><span class="t-ico">📉</span><span class="t-name">电压暂降</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-harmonic-flicker.html"><span class="t-ico">📊</span><span class="t-name">谐波/闪烁</span><span class="t-type">SOP</span></a>
+          </div>
+        </section>
+
+        <section class="tcat" data-tcat="fire">
+          <div class="tcat-head"><span class="tcat-ico">🔥</span><h3>防火材料测试</h3><span class="tcat-count">10 项</span></div>
+          <div class="t-grid">
+            <a class="t-link" href="./sop-glow-wire.html"><span class="t-ico">🔥</span><span class="t-name">灼热丝</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-gwit.html"><span class="t-ico">🌡️</span><span class="t-name">GWIT</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-needle-flame.html"><span class="t-ico">🪡</span><span class="t-name">针焰</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-ball-pressure.html"><span class="t-ico">⚪</span><span class="t-name">球压</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-ul94.html"><span class="t-ico">🧯</span><span class="t-name">UL 94</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-ul94-5v.html"><span class="t-ico">🛡️</span><span class="t-name">UL 94 5V</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-hwi.html"><span class="t-ico">🔥</span><span class="t-name">HWI</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-hai.html"><span class="t-ico">⚡</span><span class="t-name">HAI</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./knowledge.html#fire-design"><span class="t-ico">🏗️</span><span class="t-name">防火设计</span><span class="t-type">知识</span></a>
+            <a class="t-link" href="./materials.html"><span class="t-ico">🧱</span><span class="t-name">材料库</span><span class="t-type">工具</span></a>
+          </div>
+        </section>
+
+        <section class="tcat" data-tcat="ip">
+          <div class="tcat-head"><span class="tcat-ico">🛡️</span><h3>防护等级测试</h3><span class="tcat-count">5 项</span></div>
+          <div class="t-grid">
+            <a class="t-link" href="./sop-ip.html"><span class="t-ico">🌊</span><span class="t-name">IP SOP</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./knowledge.html#ip"><span class="t-ico">📖</span><span class="t-name">IP 知识卡</span><span class="t-type">知识</span></a>
+            <a class="t-link" href="./sop-ik.html"><span class="t-ico">🛡️</span><span class="t-name">IK SOP</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-mechanical-strength.html"><span class="t-ico">⚙️</span><span class="t-name">机械强度</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-impact-puncture.html"><span class="t-ico">💥</span><span class="t-name">冲击/穿刺</span><span class="t-type">SOP</span></a>
+          </div>
+        </section>
+
+        <section class="tcat" data-tcat="battery">
+          <div class="tcat-head"><span class="tcat-ico">🔋</span><h3>电池测试</h3><span class="tcat-count">10 项</span></div>
+          <div class="t-grid">
+            <a class="t-link" href="./sop-un383.html"><span class="t-ico">📦</span><span class="t-name">UN 38.3</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-battery-short.html"><span class="t-ico">🔋</span><span class="t-name">外部短路</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-crush.html"><span class="t-ico">🗜️</span><span class="t-name">挤压</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-charge-discharge.html"><span class="t-ico">🔄</span><span class="t-name">充放电</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-battery-drop.html"><span class="t-ico">📉</span><span class="t-name">电池跌落</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-forced-discharge.html"><span class="t-ico">⚡</span><span class="t-name">强制放电</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-thermal-runaway.html"><span class="t-ico">🔥</span><span class="t-name">热失控</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-high-temp-battery.html"><span class="t-ico">🌡️</span><span class="t-name">高温电池</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./sop-thermal-shock-battery.html"><span class="t-ico">💥</span><span class="t-name">电池热冲击</span><span class="t-type">SOP</span></a>
+            <a class="t-link" href="./knowledge.html#battery"><span class="t-ico">📖</span><span class="t-name">电池知识卡</span><span class="t-type">知识</span></a>
+          </div>
+        </section>
+
+        <section class="tcat" data-tcat="tools">
+          <div class="tcat-head"><span class="tcat-ico">🧰</span><h3>通用工具</h3><span class="tcat-count">6 项</span></div>
+          <div class="t-grid">
+            <a class="t-link" href="./sop.html"><span class="t-ico">📚</span><span class="t-name">SOP 中心</span><span class="t-type">工具</span></a>
+            <a class="t-link" href="./reliability.html"><span class="t-ico">🗓️</span><span class="t-name">可靠性中心</span><span class="t-type">工具</span></a>
+            <a class="t-link" href="./test-equipment.html"><span class="t-ico">🧰</span><span class="t-name">测试设备清单</span><span class="t-type">设备</span></a>
+            <a class="t-link" href="./environment-tests.html"><span class="t-ico">🌦️</span><span class="t-name">环境试验概念</span><span class="t-type">知识</span></a>
+            <a class="t-link" href="./tools.html"><span class="t-ico">🧮</span><span class="t-name">计算工具</span><span class="t-type">工具</span></a>
+            <a class="t-link" href="./quiz.html"><span class="t-ico">✅</span><span class="t-name">答题测验</span><span class="t-type">工具</span></a>
+          </div>
+        </section>
+      </div></div>
+      <script>
+        (function () {
+          var chips = document.querySelectorAll("#testChips button");
+          if (!chips.length) return;
+          function apply(v) {
+            document.querySelectorAll("#testHub .tcat").forEach(function (sec) {
+              sec.style.display = (v === "all" || sec.getAttribute("data-tcat") === v) ? "" : "none";
+            });
+            chips.forEach(function (b) {
+              var on = b.getAttribute("data-tcat") === v;
+              b.classList.toggle("active", on);
+              b.setAttribute("aria-pressed", on ? "true" : "false");
+            });
+          }
+          chips.forEach(function (b) {
+            b.addEventListener("click", function () { apply(b.getAttribute("data-tcat")); });
+          });
+        })();
+      </script>
     </section>
   </main>
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -56,7 +212,7 @@
   <a href="./learn.html">📚<span>学习</span></a>
   <a href="./testing.html">🧪<span>测试</span></a>
   <a href="./certification.html">📄<span>认证</span></a>
-  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
 </nav>
 </body>
 </html>

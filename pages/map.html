@@ -6,15 +6,15 @@
   <meta name="theme-color" content="#0071e3">
   <title>内容地图 - 安规与可靠性知识课堂</title>
   <meta name="description" content="安规与可靠性知识课堂内容地图：学习、测试、认证、资源四线入口与全部知识卡片索引。">
-  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <link rel="icon" href="../assets/icons/icon-192.png">
+  <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="../index.html"><span class="logo-mark">⚡</span>安规与可靠性知识课堂</a>
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
       <nav class="nav" id="nav"></nav>
@@ -25,6 +25,10 @@
       <p class="crumb"><a href="../index.html">首页</a> / 内容地图</p>
       <h1>内容地图</h1>
       <p class="lead">按“学习 / 测试 / 认证 / 资源”四条线组织，快速找到你要的内容。</p>
+    </div>
+
+    <div style="margin:0 0 18px">
+      <input type="search" id="mapSearch" class="rel-search" placeholder="搜索内容地图：爬电 / SOP / 认证 / IP / 可靠性…" aria-label="搜索内容地图">
     </div>
 
     <section>
@@ -41,7 +45,7 @@
       <h2>🧪 测试</h2>
       <div class="grid grid-4">
         <article class="card"><h3>测试中心</h3><p>测试统一入口。</p><p><a class="btn" href="./testing.html">打开</a></p></article>
-        <article class="card"><h3>SOP 中心</h3><p>70+ 份执行级 SOP。</p><p><a class="btn" href="./sop.html">打开</a></p></article>
+        <article class="card"><h3>SOP 中心</h3><p>62 份执行级 SOP。</p><p><a class="btn" href="./sop.html">打开</a></p></article>
         <article class="card"><h3>可靠性测试计划中心</h3><p>按行业筛选与行业计划。</p><p><a class="btn" href="./reliability.html">打开</a></p></article>
         <article class="card"><h3>测试设备与工具</h3><p>63 项测试设备总表。</p><p><a class="btn" href="./test-equipment.html">打开</a></p></article>
       </div>
@@ -63,32 +67,154 @@
         <article class="card"><h3>资源中心</h3><p>案例、海报、设计师指南、FAQ。</p><p><a class="btn" href="./resources.html">打开</a></p></article>
         <article class="card"><h3>计算工具</h3><p>爬电、间隙、耐压、浪涌等。</p><p><a class="btn" href="./tools.html">打开</a></p></article>
         <article class="card"><h3>材料库</h3><p>CTI、RTI、阻燃、UL 黄卡。</p><p><a class="btn" href="./materials.html">打开</a></p></article>
-        <article class="card"><h3>小测验</h3><p>分模块自检。</p><p><a class="btn" href="./quiz.html">打开</a></p></article>
+        <article class="card" style="border-top:3px solid var(--accent)"><h3>答题测验</h3><p>95 道精选 + 自动生成题库，按模块即时切换。</p><p><a class="btn btn-primary" href="./quiz.html">开始答题</a></p></article>
       </div>
     </section>
 
-    <section id="knowledge">
+        <section id="knowledge">
       <h2>📇 全部知识卡片索引（31 张）</h2>
-      <div class="grid grid-4">
-        <article class="card"><h3>📋 框架与通用</h3><p><a class="tag" href="./knowledge.html#stdguide">标准结构导读：IEC 标准怎么读</a> <a class="tag" href="./knowledge.html#protection">防触电的通用逻辑</a></p></article>
-        <article class="card"><h3>⚡ 防电击</h3><p><a class="tag" href="./knowledge.html#access">可触及性与工具防护（Access &amp;amp; Tool）</a> <a class="tag" href="./knowledge.html#productclass">产品类别（I / II / III 类）怎么分</a> <a class="tag" href="./knowledge.html#cti">CTI 与材料组（爬电距离的关键参数）</a> <a class="tag" href="./knowledge.html#leakage">泄漏电流与接触电流：人体反应与限值</a> <a class="tag" href="./knowledge.html#grounding">接地与等电位连接</a> <a class="tag" href="./knowledge.html#selv">SELV / TNV 与隔离</a> <a class="tag" href="./leakage.html">泄漏电流深度页</a> <a class="tag" href="./grounding.html">接地深度页</a> <a class="tag" href="./selv.html">SELV 深度页</a> <a class="tag" href="./insulation-coordination.html">绝缘配合深度页</a></p></article>
-        <article class="card"><h3>💥 能量危险</h3><p><a class="tag" href="./knowledge.html#energy">能量危险：限能电路、电池与电弧</a> <a class="tag" href="./knowledge.html#battery">电池保护与热失控</a> <a class="tag" href="./knowledge.html#components">安规元件：保险丝与 X/Y 电容</a></p></article>
-        <article class="card"><h3>🔥 防火</h3><p><a class="tag" href="./knowledge.html#firetests">防火试验三件套：灼热丝 / 针焰 / 球压（含 UL 要求）</a> <a class="tag" href="./knowledge.html#flame">防火与阻燃材料</a> <a class="tag" href="./knowledge.html#fire-design">防火设计与选材：从起火链到结构落地</a></p></article>
-        <article class="card"><h3>🌡️ 热量危险</h3><p><a class="tag" href="./knowledge.html#temperature">温升与材料耐热</a></p></article>
-        <article class="card"><h3>⚙️ 机械危险</h3><p><a class="tag" href="./knowledge.html#functional">功能安全</a> <a class="tag" href="./knowledge.html#mechanical">机械防护与安全联锁</a> <a class="tag" href="./knowledge.html#explosion">防爆（危险区域）</a></p></article>
-        <article class="card"><h3>☢️ 辐射危险</h3><p><a class="tag" href="./knowledge.html#radhaz">辐射危险：激光、射频暴露与电离辐射</a> <a class="tag" href="./knowledge.html#optical">光生物安全</a></p></article>
-        <article class="card"><h3>🧪 化学危险</h3><p><a class="tag" href="./knowledge.html#rohs">化学危险与环保合规（RoHS / REACH / WEEE）</a> <a class="tag" href="./knowledge.html#biocompat">生物相容性</a></p></article>
-        <article class="card"><h3>📡 EMC 与认证</h3><p><a class="tag" href="./knowledge.html#dmcm">共模与差模（Common Mode / Differential Mode）</a> <a class="tag" href="./knowledge.html#emc">EMC 基础</a> <a class="tag" href="./knowledge.html#harmonic">谐波与电能质量</a> <a class="tag" href="./knowledge.html#transient">抛负载与车载瞬态</a></p></article>
-        <article class="card"><h3>🏥 医疗专项</h3><p><a class="tag" href="./knowledge.html#risk">医疗器械风险管理</a> <a class="tag" href="./knowledge.html#software">软件安全与可用性</a></p></article>
-        <article class="card"><h3>📄 认证流程</h3><p><a class="tag" href="./knowledge.html#certprocess">认证流程：测试、技术文件、CB 转证与工厂检查</a></p></article>
-        <article class="card"><h3>📦 通用环境</h3><p><a class="tag" href="./knowledge.html#ip">IP 防护等级：代码含义与试验规则</a> <a class="tag" href="./knowledge.html#environment">环境与可靠性试验：规则与用途</a></p></article>
+      <p class="section-sub">点击分类展开对应的知识卡片，再点卡片标题进入详情页。</p>
+      <div class="kcat-grid">
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">📋</span><b>框架与通用</b></span><span class="kcat-count">2 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#stdguide"><span>📋</span>标准结构导读：IEC 标准怎么读</a>
+              <a class="kcat-link" href="./knowledge.html#protection"><span>⚡</span>防触电的通用逻辑</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">⚡</span><b>防电击</b></span><span class="kcat-count">6 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#access"><span>🔧</span>可触及性与工具防护（Access &amp; Tool）</a>
+              <a class="kcat-link" href="./knowledge.html#productclass"><span>📐</span>产品类别（I / II / III 类）怎么分</a>
+              <a class="kcat-link" href="./knowledge.html#cti"><span>🧱</span>CTI 与材料组（爬电距离的关键参数）</a>
+              <a class="kcat-link" href="./knowledge.html#leakage"><span>💧</span>泄漏电流与接触电流：人体反应与限值</a>
+              <a class="kcat-link" href="./knowledge.html#grounding"><span>🔗</span>接地与等电位连接</a>
+              <a class="kcat-link" href="./knowledge.html#selv"><span>🔌</span>SELV / TNV 与隔离</a>
+            </div>
+            <p class="kcat-sub">深度页直达</p>
+            <div class="kcat-list">
+              <a class="kcat-link" href="./leakage.html"><span>📄</span>泄漏电流深度页</a>
+              <a class="kcat-link" href="./grounding.html"><span>📄</span>接地深度页</a>
+              <a class="kcat-link" href="./selv.html"><span>📄</span>SELV 深度页</a>
+              <a class="kcat-link" href="./insulation-coordination.html"><span>📄</span>绝缘配合深度页</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">💥</span><b>能量危险</b></span><span class="kcat-count">3 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#energy"><span>💥</span>能量危险：限能电路、电池与电弧</a>
+              <a class="kcat-link" href="./knowledge.html#battery"><span>🔋</span>电池保护与热失控</a>
+              <a class="kcat-link" href="./knowledge.html#components"><span>🔩</span>安规元件：保险丝与 X/Y 电容</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">🔥</span><b>防火</b></span><span class="kcat-count">3 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#firetests"><span>🔥</span>防火试验三件套：灼热丝 / 针焰 / 球压（含 UL 要求）</a>
+              <a class="kcat-link" href="./knowledge.html#flame"><span>🧯</span>防火与阻燃材料</a>
+              <a class="kcat-link" href="./knowledge.html#fire-design"><span>🛡️</span>防火设计与选材：从起火链到结构落地</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">🌡️</span><b>热量危险</b></span><span class="kcat-count">1 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#temperature"><span>🌡️</span>温升与材料耐热</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">⚙️</span><b>机械危险</b></span><span class="kcat-count">3 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#functional"><span>🧩</span>功能安全</a>
+              <a class="kcat-link" href="./knowledge.html#mechanical"><span>⚙️</span>机械防护与安全联锁</a>
+              <a class="kcat-link" href="./knowledge.html#explosion"><span>💣</span>防爆（危险区域）</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">☢️</span><b>辐射危险</b></span><span class="kcat-count">2 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#radhaz"><span>☢️</span>辐射危险：激光、射频暴露与电离辐射</a>
+              <a class="kcat-link" href="./knowledge.html#optical"><span>💡</span>光生物安全</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">🧪</span><b>化学危险</b></span><span class="kcat-count">2 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#rohs"><span>♻️</span>化学危险与环保合规（RoHS / REACH / WEEE）</a>
+              <a class="kcat-link" href="./knowledge.html#biocompat"><span>🧫</span>生物相容性</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">📡</span><b>EMC 与认证</b></span><span class="kcat-count">4 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#dmcm"><span>🔀</span>共模与差模（Common Mode / Differential Mode）</a>
+              <a class="kcat-link" href="./knowledge.html#emc"><span>📡</span>EMC 基础</a>
+              <a class="kcat-link" href="./knowledge.html#harmonic"><span>📊</span>谐波与电能质量</a>
+              <a class="kcat-link" href="./knowledge.html#transient"><span>🌩️</span>抛负载与车载瞬态</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">🏥</span><b>医疗专项</b></span><span class="kcat-count">2 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#risk"><span>⚕️</span>医疗器械风险管理</a>
+              <a class="kcat-link" href="./knowledge.html#software"><span>💻</span>软件安全与可用性</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">📄</span><b>认证流程</b></span><span class="kcat-count">1 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#certprocess"><span>📄</span>认证流程：测试、技术文件、CB 转证与工厂检查</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="kcat">
+          <summary><span class="kcat-head"><span class="kcat-emoji">📦</span><b>通用环境</b></span><span class="kcat-count">2 张</span><span class="kcat-chev">▾</span></summary>
+          <div class="kcat-body">
+            <div class="kcat-list">
+              <a class="kcat-link" href="./knowledge.html#ip"><span>🌊</span>IP 防护等级：代码含义与试验规则</a>
+              <a class="kcat-link" href="./knowledge.html#environment"><span>🌦️</span>环境与可靠性试验：规则与用途</a>
+            </div>
+          </div>
+        </details>
       </div>
     </section>
   </main>
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.2.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -98,12 +224,28 @@
   <script src="../assets/js/nav.js"></script>
   <script src="../assets/js/breadcrumb.js"></script>
   <script src="../assets/js/ux.js"></script>
+  <script>
+    (function () {
+      var box = document.getElementById("mapSearch");
+      if (!box) return;
+      box.addEventListener("input", function () {
+        var q = this.value.trim().toLowerCase();
+        document.querySelectorAll("main article.card, .kcat").forEach(function (el) {
+          var hit = el.textContent.toLowerCase().indexOf(q) !== -1;
+          el.style.display = (hit || !q) ? "" : "none";
+          if (q && hit && el.classList && el.classList.contains("kcat")) {
+            el.open = true;
+          }
+        });
+      });
+    })();
+  </script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
   <a href="./testing.html">🧪<span>测试</span></a>
   <a href="./certification.html">📄<span>认证</span></a>
-  <a href="./resources.html">🗂️<span>资源</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
 </nav>
 </body>
 </html>

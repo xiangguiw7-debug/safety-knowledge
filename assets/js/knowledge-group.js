@@ -22,6 +22,7 @@ if (source) {
   HAZARD_GROUPS.forEach(function (g) { byGroup[g.id] = []; });
   cards.forEach(function (card) {
     var h = card.getAttribute("data-hazard");
+    if (h === "electric") h = "shock";
     if (byGroup[h]) byGroup[h].push(card);
   });
 
@@ -32,17 +33,19 @@ if (source) {
   chips.className = "hazard-chips";
   chips.setAttribute("role", "group");
   chips.setAttribute("aria-label", "按安全因素筛选");
+  var totalCards = cards.length;
   var allBtn = document.createElement("button");
   allBtn.type = "button";
   allBtn.className = "active";
-  allBtn.textContent = "全部";
   allBtn.setAttribute("data-hgroup", "all");
+  allBtn.innerHTML = "<span class=\"hchip-emoji\">🗂️</span><span class=\"hchip-label\">全部</span><span class=\"hchip-count\">" + totalCards + "</span>";
   chips.appendChild(allBtn);
   HAZARD_GROUPS.forEach(function (g) {
+    var parts = g.title.split(/\s+/);
     var b = document.createElement("button");
     b.type = "button";
-    b.textContent = g.title;
     b.setAttribute("data-hgroup", g.id);
+    b.innerHTML = "<span class=\"hchip-emoji\">" + (parts[0] || "📄") + "</span><span class=\"hchip-label\">" + (parts.slice(1).join(" ") || g.title) + "</span><span class=\"hchip-count\">" + (byGroup[g.id] ? byGroup[g.id].length : 0) + "</span>";
     chips.appendChild(b);
   });
   wrap.appendChild(chips);
@@ -54,7 +57,13 @@ if (source) {
     sec.id = "hazard-" + g.id;
     sec.setAttribute("data-hgroup", g.id);
     var h2 = document.createElement("h2");
-    h2.textContent = g.title;
+    var parts = g.title.split(/\s+/);
+    h2.setAttribute("data-emoji", parts[0] || "📄");
+    h2.textContent = parts.slice(1).join(" ") || g.title;
+    var cnt = document.createElement("span");
+    cnt.className = "hazard-count";
+    cnt.textContent = byGroup[g.id].length;
+    h2.appendChild(cnt);
     sec.appendChild(h2);
     var hint = document.createElement("p");
     hint.className = "section-sub";
