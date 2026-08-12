@@ -5,48 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0071e3">
   <title>全球认证真实地图 - 安规与可靠性知识课堂</title>
-  <meta name="description" content="用真实世界地图查看全球认证：点击标记查看 CCC、CE、UL、VDE、PSE、KC 等认证体系。">
+  <meta name="description" content="跳转至全球认证速查真实地图。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <style>
-    #map { height: 68vh; min-height: 420px; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
-    .map-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0; font-size: 13px; color: var(--muted); }
-    .map-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
-    .leaflet-popup-content { font-size: 13px; line-height: 1.6; }
-    .leaflet-popup-content b { font-size: 14px; }
-  </style>
   <meta http-equiv="refresh" content="0;url=./certification.html#map">
   <script>location.replace("./certification.html#map");</script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
-      <nav class="nav" id="nav">
-        <a href="../index.html">首页</a>
-        <a href="./learn.html">学习地图</a>
-        <a href="./tools.html">计算工具</a>
-        <a href="./industries.html">行业筛选</a>
-        <a href="./materials.html">材料库</a>
-        <a href="./glossary.html">术语表</a>
-        <a href="./resources.html">资源</a>
-        <a href="./quiz.html">答题测验</a>
-        <a href="./certification.html" class="active">认证</a>
-      </nav>
-    </div>
-  </header>
-
-    <main class="container page" style="text-align:center;padding-top:80px">
-    <p style="font-size:20px">🗺️ 正在跳转到<a href="./certification.html#map">全球认证速查 · 真实地图</a>…</p>
+  <main class="container page" style="text-align:center;padding-top:80px">
+    <p style="font-size:20px">🗺️ 正在跳转到 <a href="./certification.html#map">全球认证速查 · 真实地图</a>…</p>
     <p class="note" style="color:var(--muted)">如果未自动跳转，请点击上方链接。</p>
   </main>
 
-  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
       <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
@@ -56,66 +28,5 @@
 
   <script src="../assets/js/theme.js"></script>
   <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/glossary-tip.js"></script>
-  <script src="../assets/js/certification.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    (function () {
-      if (typeof L === "undefined" || typeof CERT_COUNTRIES === "undefined") {
-        document.getElementById("map").innerHTML = '<p style="padding:30px;text-align:center">地图组件加载失败（需要联网加载 Leaflet 底图），请返回<a href="./certification.html">认证速查</a>使用 3D 地球仪。</p>';
-        return;
-      }
-      var COORDS = {
-        "中国":[35.86,104.19],"欧盟":[50.85,4.35],"德国":[51.16,10.45],"英国":[55.38,-3.44],"法国":[46.6,2.2],
-        "荷兰":[52.13,5.29],"比利时":[50.5,4.47],"意大利":[42.8,12.8],"西班牙":[40.4,-3.7],
-        "北欧四国（瑞典/挪威/丹麦/芬兰）":[63.0,16.0],"奥地利":[47.5,14.5],"瑞士":[46.8,8.2],"波兰":[52.0,19.0],
-        "捷克":[49.8,15.5],"匈牙利":[47.2,19.5],"葡萄牙":[39.5,-8.0],"爱尔兰":[53.4,-8.0],
-        "美国":[39.8,-98.5],"加拿大":[56.0,-106.0],"日本":[36.2,138.2],"韩国":[36.5,127.8],"印度":[22.0,79.0],
-        "澳大利亚 / 新西兰":[-26.0,134.0],"欧亚经济联盟（俄/白俄/哈）":[60.0,80.0],"巴西":[-10.0,-53.0],"墨西哥":[23.6,-102.5],
-        "沙特阿拉伯":[24.0,45.0],"阿联酋":[24.0,54.0],"新加坡":[1.35,103.8],"马来西亚":[3.8,109.7],"泰国":[15.0,101.0],
-        "印度尼西亚":[-2.0,118.0],"越南":[16.0,108.0],"台湾":[23.7,121.0],"菲律宾":[12.0,122.0],
-        "南非":[-29.0,25.0],"尼日利亚":[9.0,8.0],"肯尼亚":[0.0,38.0],"埃及":[26.8,30.8],"以色列":[31.0,34.8],
-        "阿根廷":[-34.0,-64.0],"土耳其":[39.0,35.0],"希腊":[39.0,22.0],"罗马尼亚":[46.0,25.0],"保加利亚":[42.7,25.5],
-        "克罗地亚":[45.1,15.5],"斯洛文尼亚":[46.1,14.8],"斯洛伐克":[48.7,19.5],"拉脱维亚":[56.9,24.6],
-        "立陶宛":[55.2,24.0],"爱沙尼亚":[58.6,25.0],"卢森堡":[49.8,6.1],"塞浦路斯":[35.1,33.2],"马耳他":[35.9,14.4],
-        "冰岛":[64.9,-19.0],"乌克兰":[49.0,31.0],"卡塔尔":[25.3,51.2],"科威特":[29.3,47.5],"阿曼":[21.5,55.9],
-        "约旦":[31.2,36.5],"黎巴嫩":[33.9,35.9],"伊拉克":[33.0,43.0],"伊朗":[32.0,53.0],"巴林":[26.0,50.5],
-        "巴基斯坦":[30.0,69.0],"孟加拉":[23.7,90.4],"斯里兰卡":[7.9,80.8],"摩洛哥":[31.8,-7.1],
-        "阿尔及利亚":[28.0,1.6],"突尼斯":[34.0,9.0],"埃塞俄比亚":[9.0,40.0],"坦桑尼亚":[-6.0,35.0],
-        "乌干达":[1.0,32.0],"加纳":[7.9,-1.0],"科特迪瓦":[7.5,-5.5],"喀麦隆":[5.0,12.0],
-        "哥伦比亚":[4.0,-73.0],"秘鲁":[-9.0,-75.0],"智利":[-30.0,-71.0],"厄瓜多尔":[-1.5,-78.0],
-        "乌拉圭":[-32.8,-56.0],"巴拉圭":[-23.4,-58.0],"玻利维亚":[-16.7,-64.7],"多米尼加":[18.7,-70.3],
-        "巴拿马":[8.5,-80.0],"哥斯达黎加":[10.0,-84.0],"危地马拉":[15.5,-90.3],"洪都拉斯":[14.8,-86.5],
-        "萨尔瓦多":[13.8,-88.9]
-      };
-      var REGION_COLOR = { "欧盟":"#0a84ff", "欧洲其他":"#0a84ff", "北欧":"#0a84ff", "亚洲":"#ff9f0a", "北美":"#34c759", "南美":"#bf5af2", "大洋洲":"#5ac8fa", "非洲":"#ff3b30" };
-      var map = L.map("map").setView([25, 10], 2);
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap contributors" }).addTo(map);
-      var count = 0;
-      CERT_COUNTRIES.forEach(function (c) {
-        if (!COORDS[c.name] || !c.mark) return;
-        count++;
-        var col = REGION_COLOR[c.region] || "#98989d";
-        var scope = (c.scope || "").slice(0, 90);
-        L.circleMarker(COORDS[c.name], { radius: 6, color: "#ffffff", weight: 1.5, fillColor: col, fillOpacity: 0.9 })
-          .addTo(map)
-          .bindPopup("<b>" + c.name + "</b><br>标志：" + c.mark + "<br>体系：" + c.system + "<br>机构：" + c.regulator + (scope ? "<br>" + scope + "…" : "") + '<br><a href="./certification.html" target="_blank">查看认证速查 →</a>');
-      });
-      var note = document.createElement("p");
-      note.style.cssText = "font-size:12.5px;color:var(--muted);margin-top:8px";
-      note.textContent = "已标注 " + count + " 个国家/地区的认证标记。";
-      document.querySelector(".map-legend").appendChild(note);
-    })();
-  </script>
-<nav class="bottom-nav" aria-label="底部导航">
-  <a href="../index.html">🏠<span>首页</span></a>
-  <a href="./learn.html">📚<span>学习</span></a>
-  <a href="./testing.html">🧪<span>测试</span></a>
-  <a href="./certification.html">📄<span>认证</span></a>
-  <a href="./resources.html">🗂️<span>导航</span></a>
-</nav>
-  <script src="../assets/js/nav.js"></script>
-  <script src="../assets/js/breadcrumb.js"></script>
-  <script src="../assets/js/ux.js"></script>
 </body>
 </html>

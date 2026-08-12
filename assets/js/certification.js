@@ -618,7 +618,7 @@ function switchView(view) {
   $("viewProduct").hidden = view !== "product";
   if (m) m.hidden = view !== "map";
   if (view === "map" && window.certMap) {
-    setTimeout(function () { window.certMap.invalidateSize(); }, 60);
+    setTimeout(function () { (typeof window.certMap.resize === "function" ? window.certMap.resize : window.certMap.invalidateSize)(); }, 60);
   }
   document.querySelectorAll("[data-view]").forEach(function (b) {
     var on = b.getAttribute("data-view") === view;
