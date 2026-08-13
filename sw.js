@@ -1,4 +1,4 @@
-var CACHE_NAME = "safety-reliability-v1.1";
+var CACHE_NAME = "safety-reliability-v1.1.1";
 var CORE_ASSETS = [
   "./", "./index.html", "./manifest.webmanifest",
   "./assets/icons/logo.png",
@@ -62,18 +62,45 @@ self.addEventListener("fetch", function (event) {
   var url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
 
+  // 页面导航：优先使用网络上的最新内容，网络不可用时再用缓存（保证内容更新能及时看到）
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request)
+        .then(function (response) {
+          if (response && response.status === 200) {
+            var copy = response.clone();
+            caches.open(CACHE_NAME).then(function (cache) {
+              cache.put(event.request, copy);
+            });
+          }
+          return response;
+        })
+        .catch(function () {
+          return caches.match(event.request).then(function (cached) {
+            return cached || caches.match("./index.html");
+          });
+        })
+    );
+    return;
+  }
+
+  // 其他资源：先用缓存快速显示，同时后台拉取最新版本并更新缓存
   event.respondWith(
     caches.match(event.request).then(function (cached) {
-      if (cached) return cached;
-      return fetch(event.request).then(function (response) {
-        if (response && response.status === 200 && response.type === "basic") {
-          var copy = response.clone();
-          caches.open(CACHE_NAME).then(function (cache) {
-            cache.put(event.request, copy);
-          });
-        }
-        return response;
-      });
+      var fetchPromise = fetch(event.request)
+        .then(function (response) {
+          if (response && response.status === 200 && response.type === "basic") {
+            var copy = response.clone();
+            caches.open(CACHE_NAME).then(function (cache) {
+              cache.put(event.request, copy);
+            });
+          }
+          return response;
+        })
+        .catch(function () {
+          return cached;
+        });
+      return cached || fetchPromise;
     })
   );
 });

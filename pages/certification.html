@@ -169,42 +169,24 @@
   <script src="../assets/js/certification.js"></script>
 
   <script>
+    window._AMapSecurityConfig = { securityJsCode: "9a55bfcffd312f98a561a0e0714911c7" };
+  </script>
+  <script src="https://webapi.amap.com/maps?v=2.0&key=592a3d7b92b78a02e1e12548cd1cea32"></script>
+  <script>
     (function () {
-      // ===== 高德地图配置 =====
-      // 在高德开放平台注册并创建「Web端(JS API)」类型的 Key 后填入
-      var AMAP_KEY = "592a3d7b92b78a02e1e12548cd1cea32";
-      // 新申请的 Key 一般需要安全密钥（高德控制台里开启后可见）
-      var AMAP_SECURITY_CODE = "9a55bfcffd312f98a561a0e0714911c7";
       var box = document.getElementById("map");
       if (!box) return;
       if (typeof CERT_COUNTRIES === "undefined") {
         box.innerHTML = '<p style="padding:30px;text-align:center">认证数据加载失败，请使用下方“按国家 / 地区”列表。</p>';
         return;
       }
-      if (!AMAP_KEY) {
-        box.innerHTML = '<p style="padding:30px;text-align:center">🗺️ 地图 Key 尚未配置：请在高德开放平台申请「Web端(JS API)」Key，配置后即可显示全球认证地图。</p>';
+      if (typeof AMap === "undefined") {
+        box.innerHTML = '<p style="padding:30px;text-align:center">高德地图组件加载失败（无法连接高德服务器），请使用下方“按国家 / 地区”列表。</p>';
         return;
       }
-      if (AMAP_SECURITY_CODE) {
-        window._AMapSecurityConfig = { securityJsCode: AMAP_SECURITY_CODE };
-      }
-      var script = document.createElement("script");
-      script.src = "https://webapi.amap.com/maps?v=2.0&key=" + encodeURIComponent(AMAP_KEY);
-      script.async = true;
-      script.onerror = function () {
-        box.innerHTML = '<p style="padding:30px;text-align:center">高德地图加载失败（请检查 Key 或网络），请使用下方“按国家 / 地区”列表。</p>';
-      };
-      script.onload = function () {
-        if (typeof AMap === "undefined") {
-          box.innerHTML = '<p style="padding:30px;text-align:center">高德地图组件加载失败，请使用下方“按国家 / 地区”列表。</p>';
-          return;
-        }
-        initAmap();
-      };
-      document.head.appendChild(script);
-
+      initAmap();
       function initAmap() {
-        var COORDS = {
+var COORDS = {
           "中国":[35.86,104.19],"欧盟":[50.85,4.35],"德国":[51.16,10.45],"英国":[55.38,-3.44],"法国":[46.6,2.2],
           "荷兰":[52.13,5.29],"比利时":[50.5,4.47],"意大利":[42.8,12.8],"西班牙":[40.4,-3.7],
           "北欧四国（瑞典/挪威/丹麦/芬兰）":[63.0,16.0],"奥地利":[47.5,14.5],"瑞士":[46.8,8.2],"波兰":[52.0,19.0],
@@ -227,15 +209,25 @@
           "巴拿马":[8.5,-80.0],"哥斯达黎加":[10.0,-84.0],"危地马拉":[15.5,-90.3],"洪都拉斯":[14.8,-86.5],
           "萨尔瓦多":[13.8,-88.9]
         };
-        var REGION_COLOR = { "欧盟":"#0a84ff", "欧洲其他":"#0a84ff", "北欧":"#0a84ff", "亚洲":"#ff9f0a", "北美":"#34c759", "南美":"#bf5af2", "大洋洲":"#5ac8fa", "非洲":"#ff3b30" };
-        var map = new AMap.Map("map", {
-          zoom: 3,
-          center: [10, 25],
-          viewMode: "2D",
-          resizeEnable: true,
-          mapStyle: "amap://styles/light"
-        });
-        window.certMap = map;
+var REGION_COLOR = { "欧盟":"#0a84ff", "欧洲其他":"#0a84ff", "北欧":"#0a84ff", "亚洲":"#ff9f0a", "北美":"#34c759", "南美":"#bf5af2", "大洋洲":"#5ac8fa", "非洲":"#ff3b30" };
+        var map = null;
+        setTimeout(function () {
+          if (!window.certMap) {
+            box.innerHTML = '<p style="padding:30px;text-align:center">地图加载失败：请检查高德 Key 类型（需选「Web端(JS API)」）、安全密钥和域名白名单。</p>';
+          }
+        }, 6000);
+        try {
+          map = new AMap.Map("map", {
+            zoom: 3,
+            center: [10, 25],
+            viewMode: "2D",
+            resizeEnable: true
+          });
+          window.certMap = map;
+        } catch (err) {
+          box.innerHTML = '<p style="padding:30px;text-align:center">地图授权失败：' + (err && err.message ? err.message : "请检查高德 Key 与白名单配置") + '</p>';
+          return;
+        }
         var info = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -28), autoMove: true });
         var markers = [];
         var count = 0;
