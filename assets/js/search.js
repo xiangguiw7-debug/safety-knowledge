@@ -52,7 +52,7 @@ var SEARCH_INDEX = [
   { t: "行业筛选", d: "灯具、消费电子、医疗、汽车等 27 个行业", u: "pages/industries.html", k: "行业 灯具 医疗 家电 汽车 工业 筛选" },
   { t: "标准文件入口", d: "66 个标准清单与官方渠道", u: "pages/standards.html", k: "标准文件 IEC ISO GB 官方 下载 原文" },
   { t: "全球电压速查", d: "各国电压/频率/插头，宽压窄压判断", u: "pages/voltage.html", k: "电压 频率 插头 宽压 窄压 100-240 120 230" },
-  { t: "全球认证速查", d: "真实地图 + 国家/产品视图：CCC、CE、FCC、UL、PSE、KC、VDE 等", u: "pages/certification.html", k: "认证 CCC CE FCC UL PSE KC VDE EAC 出口 真实地图 地图 标记 OpenStreetMap" },
+  { t: "全球认证速查", d: "真实地图 + 国家/产品视图：CCC、CE、FCC、UL、PSE、KC、VDE 等", u: "pages/certification.html", k: "认证 CCC CE FCC UL PSE KC VDE EAC 出口 真实地图 地图 标记 离线世界地图" },
   { t: "学习地图", d: "按角色选择学习入口", u: "pages/learn.html", k: "学习 路径 地图 新人 工程师 出口" },
   { t: "参考中心", d: "行业/标准/电压/认证统一入口", u: "pages/refs.html", k: "参考 中心 出口合规 链路" },
   { t: "CTI 与材料组", d: "漏电起痕指数、PC/ABS/PA66/PBT 典型值、UL 黄卡", u: "pages/knowledge.html#cti", k: "CTI 材料组 漏电起痕 60112 PC ABS PA66 PBT PMMA 黄卡" },

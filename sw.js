@@ -21,7 +21,9 @@ var CORE_ASSETS = [
   "./assets/js/cases.js", "./assets/js/picker.js", "./assets/js/sitemap.js", "./assets/js/workshop.js", "./assets/js/data-backup.js",
   "./assets/js/tools-knowledge-links.js",
   "./assets/js/knowledge-tools-links.js",
-  "./assets/icons/icon-192.png", "./assets/icons/icon-512.png"
+  "./assets/icons/icon-192.png", "./assets/icons/icon-512.png",
+  "./assets/lib/topojson-client.min.js",
+  "./assets/lib/countries-110m.json"
 ];
 
 self.addEventListener("install", function (event) {
