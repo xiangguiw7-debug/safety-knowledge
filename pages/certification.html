@@ -169,6 +169,7 @@
   <script src="../assets/js/certification.js"></script>
 
   <script src="../assets/lib/topojson-client.min.js"></script>
+  <script src="../assets/lib/world-topo-110.js"></script>
   <script>
     (function () {
       var box = document.getElementById("map");
@@ -346,18 +347,15 @@ var REGION_COLOR = { "欧盟":"#0a84ff", "欧洲其他":"#0a84ff", "北欧":"#0a
       viewport.appendChild(addZoomButton("+", 1.4, 10));
       viewport.appendChild(addZoomButton("−", 1 / 1.4, 50));
 
-      if (typeof topojson === "undefined") {
+      if (typeof topojson === "undefined" || typeof WORLD_TOPO === "undefined") {
         svgWrap.innerHTML = '<p style="padding:20px;text-align:center">地图组件加载失败，请使用下方“按国家 / 地区”列表。</p>';
       } else {
-        fetch("../assets/lib/countries-110m.json")
-          .then(function (r) { return r.json(); })
-          .then(function (topo) {
-            var geo = topojson.feature(topo, topo.objects.countries);
-            drawCountries(geo);
-          })
-          .catch(function () {
-            svgWrap.innerHTML = '<p style="padding:20px;text-align:center">世界地图边界加载失败，标记点仍可查看。</p>';
-          });
+        try {
+          var geo = topojson.feature(WORLD_TOPO, WORLD_TOPO.objects.countries);
+          drawCountries(geo);
+        } catch (err) {
+          svgWrap.innerHTML = '<p style="padding:20px;text-align:center">世界地图边界解析失败，标记点仍可查看。</p>';
+        }
       }
 
       var count = drawMarkers();
