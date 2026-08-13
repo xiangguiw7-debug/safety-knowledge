@@ -610,7 +610,7 @@ function exportReport() {
   var actual = $("actualInput") ? $("actualInput").value : "";
   var html = "<!doctype html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><title>安规计算报告</title><style>body{font-family:-apple-system,'PingFang SC',sans-serif;padding:36px;color:#1d1d1f}h1{font-size:22px}.muted{color:#86868b}table{border-collapse:collapse;width:100%;margin-top:12px}td,th{border:1px solid #d9d9d9;padding:8px 10px;text-align:left;font-size:14px}</style></head><body>" +
     "<h1>安规计算报告（教学参考）</h1>" +
-    "<p class=\"muted\">生成时间：" + new Date().toLocaleString() + " · 安规知识课堂 v1.1</p>" +
+    "<p class=\"muted\">生成时间：" + new Date().toLocaleString() + " · 安规知识课堂 v1.1.2</p>" +
     "<table><tr><th>条件</th><td>工作电压 " + s.v + "V · 污染 " + s.pd + " · 材料组 " + s.gp + " · 绝缘 " + s.ins + " · 系统 " + s.sys + "V · OVC " + s.ovc + " · 海拔 " + s.alt + "m</td></tr>" +
     "<tr><th>爬电距离</th><td>≥ " + $("crValue").textContent + " mm</td></tr>" +
     "<tr><th>电气间隙</th><td>≥ " + $("clValue").textContent + " mm</td></tr>" +

@@ -103,7 +103,7 @@ var SEARCH_INDEX = [
   { t: "MOPP / MOOP", d: "医疗患者/操作者防护方式判定", u: "pages/mopp-moop.html", k: "MOPP MOOP 医疗 防护 患者 操作者" },
   { t: "双重绝缘判定", d: "一层/两层、桥接与加强绝缘", u: "pages/double-insulation.html", k: "双重绝缘 层数 桥接 加强绝缘" },
   { t: "IoT 网络安全", d: "EN 303 645、CRA 与安全设计", u: "pages/cybersecurity.html", k: "IoT 网络安全 EN303645 CRA SBOM 固件" },
-  { t: "更新日志", d: "版本记录 v1.0/v1.1", u: "pages/changelog.html", k: "更新 日志 版本 记录 changelog" },
+  { t: "更新日志", d: "版本记录 v1.0/v1.1/v1.1.2", u: "pages/changelog.html", k: "更新 日志 版本 记录 changelog" },
   { t: "新行业：IoT/机器人/充电桩/无人机/电动车", d: "智能家居、AGV、充电桩、无人机、电动自行车", u: "pages/industries.html", k: "IoT 机器人 AGV 充电桩 无人机 电动车 滑板车" }
 ];
 
