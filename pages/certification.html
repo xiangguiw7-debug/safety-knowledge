@@ -10,6 +10,7 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/lib/leaflet/leaflet.css">
 
   <style>
     .view-tabs { display: flex; gap: 8px; margin: 6px 0 18px; }
@@ -69,7 +70,7 @@
     <div class="page-head">
       <p class="crumb"><a href="../index.html">首页</a> / 全球认证速查</p>
       <h1>全球认证速查</h1>
-      <p style="margin-top:12px"><span class="tag">🗺️ 离线世界地图：无需 Key、无需联网，国内可直接显示</span> <span class="tag">支持拖动与缩放</span></p>
+      <p style="margin-top:12px"><span class="tag">🗺️ Leaflet 离线地图：无需联网/Key，手机电脑都能显示</span> <span class="tag">支持拖动与缩放</span></p>
       <p class="lead">认证 = 监管强制 + 市场要求。推荐按“国家 → 产品分类”两个维度查：先看目标国家的监管体系，再看你的产品属于哪个目录、需要什么标志。</p>
     </div>
 
@@ -92,7 +93,7 @@
         <span><i style="background:#ff3b30"></i>非洲</span>
         <span><i style="background:#98989d"></i>其他</span>
       </div>
-      <p class="note" style="color:var(--muted);font-size:13px">坐标为教学用近似值；认证体系以<a href="#country">按国家 / 地区</a>列表和最新法规为准。离线世界地图：无需任何地图服务与 Key，手机、电脑和本地预览都能直接显示；支持拖动、滚轮/双指缩放；支持 ?c=国家名 直达。<a class="tag" href="./cert-map.html" style="margin-left:8px">旧地图页地址（自动跳转）</a></p>
+      <p class="note" style="color:var(--muted);font-size:13px">坐标为教学用近似值；认证体系以<a href="#country">按国家 / 地区</a>列表和最新法规为准。Leaflet 离线地图：底图与数据全部内置在网站里，无需联网和 Key，手机、电脑、本地预览都能直接显示；支持拖动、滚轮/双指缩放；支持 ?c=国家名 直达。<a class="tag" href="./cert-map.html" style="margin-left:8px">旧地图页地址（自动跳转）</a></p>
     </div>
     </div>
     <div id="viewCountry">
@@ -168,14 +169,17 @@
   <script src="../assets/js/glossary-tip.js"></script>
   <script src="../assets/js/certification.js"></script>
 
-  <script src="../assets/lib/topojson-client.min.js"></script>
-  <script src="../assets/lib/world-topo-110.js"></script>
+  <script src="../assets/lib/leaflet/leaflet.js"></script>
   <script>
     (function () {
       var box = document.getElementById("map");
       if (!box) return;
       if (typeof CERT_COUNTRIES === "undefined") {
         box.innerHTML = '<p style="padding:30px;text-align:center">认证数据加载失败，请使用下方“按国家 / 地区”列表。</p>';
+        return;
+      }
+      if (typeof L === "undefined") {
+        box.innerHTML = '<p style="padding:30px;text-align:center">地图组件加载失败，请使用下方“按国家 / 地区”列表。</p>';
         return;
       }
 var COORDS = {
@@ -202,169 +206,36 @@ var COORDS = {
           "萨尔瓦多":[13.8,-88.9]
         };
 var REGION_COLOR = { "欧盟":"#0a84ff", "欧洲其他":"#0a84ff", "北欧":"#0a84ff", "亚洲":"#ff9f0a", "北美":"#34c759", "南美":"#bf5af2", "大洋洲":"#5ac8fa", "非洲":"#ff3b30" };
-      var W = 2000, H = 1000;
-      var viewport = document.createElement("div");
-      viewport.style.cssText = "position:relative;width:100%;height:100%;overflow:hidden;cursor:grab;touch-action:none;background:#eef2f6;";
-      box.innerHTML = "";
-      box.appendChild(viewport);
-
-      var world = document.createElement("div");
-      world.style.cssText = "position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:0 0;";
-      viewport.appendChild(world);
-
-      var svgWrap = document.createElement("div");
-      svgWrap.style.cssText = "position:absolute;left:0;top:0;width:100%;height:100%;";
-      world.appendChild(svgWrap);
-
-      var svgNS = "http://www.w3.org/2000/svg";
-      var svg = document.createElementNS(svgNS, "svg");
-      svg.setAttribute("viewBox", "0 0 " + W + " " + H);
-      svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-      svg.style.cssText = "width:100%;height:100%;display:block;";
-      svgWrap.appendChild(svg);
-
-      var markerLayer = document.createElement("div");
-      markerLayer.style.cssText = "position:absolute;left:0;top:0;width:100%;height:100%;";
-      world.appendChild(markerLayer);
-
-      var popup = document.createElement("div");
-      popup.style.cssText = "display:none;position:absolute;z-index:10;min-width:180px;max-width:260px;background:#fff;border:1px solid #d9dee5;border-radius:12px;padding:10px 12px;font-size:12.5px;line-height:1.55;box-shadow:0 6px 20px rgba(0,0,0,.12);";
-      viewport.appendChild(popup);
-
-      var scale = 1, tx = 0, ty = 0;
-      function apply() {
-        world.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + scale + ")";
-      }
-      function project(lat, lng) {
-        return [(lng + 180) / 360 * W, (90 - lat) / 180 * H];
-      }
-      function ringPath(ring) {
-        var d = "";
-        for (var i = 0; i < ring.length; i++) {
-          var xy = project(ring[i][1], ring[i][0]);
-          d += (i ? "L" : "M") + xy[0].toFixed(1) + " " + xy[1].toFixed(1);
-        }
-        return d + "Z";
-      }
-      function geometryPath(geom) {
-        if (!geom) return "";
-        var d = "";
-        if (geom.type === "Polygon") {
-          geom.coordinates.forEach(function (ring) { d += ringPath(ring); });
-        } else if (geom.type === "MultiPolygon") {
-          geom.coordinates.forEach(function (poly) {
-            poly.forEach(function (ring) { d += ringPath(ring); });
-          });
-        }
-        return d;
-      }
-      function drawCountries(geo) {
-        geo.features.forEach(function (f) {
-          var d = geometryPath(f.geometry);
-          if (!d) return;
-          var p = document.createElementNS(svgNS, "path");
-          p.setAttribute("d", d);
-          p.setAttribute("fill", "#dfe5ec");
-          p.setAttribute("stroke", "#ffffff");
-          p.setAttribute("stroke-width", "0.6");
-          p.setAttribute("vector-effect", "non-scaling-stroke");
-          svg.appendChild(p);
-        });
-      }
-      function drawMarkers() {
-        var count = 0;
-        CERT_COUNTRIES.forEach(function (c) {
-          if (!COORDS[c.name] || !c.mark) return;
-          count++;
-          var xy = project(COORDS[c.name][0], COORDS[c.name][1]);
-          var col = REGION_COLOR[c.region] || "#98989d";
-          var dot = document.createElement("div");
-          dot.style.cssText = "position:absolute;width:12px;height:12px;border-radius:50%;background:" + col + ";border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.35);cursor:pointer;transform:translate(-50%,-50%);";
-          dot.style.left = (xy[0] / W * 100) + "%";
-          dot.style.top = (xy[1] / H * 100) + "%";
-          dot.title = c.name + " · " + c.mark;
-          dot.addEventListener("click", function (ev) {
-            ev.stopPropagation();
-            showPopup(c, dot);
-          });
-          markerLayer.appendChild(dot);
-        });
-        return count;
-      }
-      function showPopup(c, dot) {
+      var map = L.map("map", {
+        crs: L.CRS.EPSG4326,
+        zoomSnap: 0,
+        minZoom: 1,
+        maxZoom: 6,
+        maxBounds: [[-90, -180], [90, 180]],
+        maxBoundsViscosity: 0.8,
+        zoomControl: true
+      });
+      window.certMap = map;
+      L.imageOverlay("../assets/images/world-map.svg", [[-90, -180], [90, 180]], {
+        opacity: 1,
+        attribution: "教学演示 · 离线矢量底图"
+      }).addTo(map);
+      var count = 0;
+      CERT_COUNTRIES.forEach(function (c) {
+        if (!COORDS[c.name] || !c.mark) return;
+        count++;
+        var col = REGION_COLOR[c.region] || "#98989d";
         var scope = (c.scope || "").slice(0, 90);
-        popup.innerHTML = "<b>" + c.name + "</b><br>标志：" + c.mark + "<br>体系：" + c.system + "<br>机构：" + c.regulator + (scope ? "<br>" + scope + "…" : "") + '<br><a href="#country">查看该国认证速查 →</a>';
-        var r = dot.getBoundingClientRect();
-        var vr = viewport.getBoundingClientRect();
-        popup.style.left = (r.left - vr.left + r.width / 2) + "px";
-        popup.style.top = (r.top - vr.top - 8) + "px";
-        popup.style.transform = "translate(-50%,-100%)";
-        popup.style.display = "block";
-      }
-      viewport.addEventListener("click", function () { popup.style.display = "none"; });
-
-      var dragging = false, sx = 0, sy = 0, stx = 0, sty = 0;
-      viewport.addEventListener("pointerdown", function (e) {
-        dragging = true; sx = e.clientX; sy = e.clientY; stx = tx; sty = ty;
-        viewport.style.cursor = "grabbing";
-        try { viewport.setPointerCapture(e.pointerId); } catch (err) {}
+        L.circleMarker(COORDS[c.name], { radius: 6, color: "#ffffff", weight: 1.5, fillColor: col, fillOpacity: 0.9 })
+          .addTo(map)
+          .bindPopup("<b>" + c.name + "</b><br>标志：" + c.mark + "<br>体系：" + c.system + "<br>机构：" + c.regulator + (scope ? "<br>" + scope + "…" : "") + '<br><a href="#country">查看该国认证速查 →</a>');
       });
-      viewport.addEventListener("pointermove", function (e) {
-        if (!dragging) return;
-        tx = stx + (e.clientX - sx);
-        ty = sty + (e.clientY - sy);
-        apply();
-      });
-      viewport.addEventListener("pointerup", function () { dragging = false; viewport.style.cursor = "grab"; });
-      viewport.addEventListener("pointercancel", function () { dragging = false; viewport.style.cursor = "grab"; });
-      viewport.addEventListener("wheel", function (e) {
-        e.preventDefault();
-        var rect = viewport.getBoundingClientRect();
-        var px = e.clientX - rect.left, py = e.clientY - rect.top;
-        var ns = Math.max(1, Math.min(8, scale * (e.deltaY < 0 ? 1.2 : 1 / 1.2)));
-        tx = px - (px - tx) * ns / scale;
-        ty = py - (py - ty) * ns / scale;
-        scale = ns;
-        apply();
-      }, { passive: false });
-
-      function addZoomButton(label, factor, top) {
-        var b = document.createElement("button");
-        b.textContent = label;
-        b.style.cssText = "position:absolute;right:10px;top:" + top + "px;width:34px;height:34px;border:1px solid #d9dee5;background:#fff;border-radius:10px;font-size:18px;line-height:1;cursor:pointer;z-index:5;box-shadow:0 2px 6px rgba(0,0,0,.12);";
-        b.addEventListener("click", function (e) {
-          e.stopPropagation();
-          var rect = viewport.getBoundingClientRect();
-          var px = rect.width / 2, py = rect.height / 2;
-          var ns = Math.max(1, Math.min(8, scale * factor));
-          tx = px - (px - tx) * ns / scale;
-          ty = py - (py - ty) * ns / scale;
-          scale = ns;
-          apply();
-        });
-        return b;
-      }
-      viewport.appendChild(addZoomButton("+", 1.4, 10));
-      viewport.appendChild(addZoomButton("−", 1 / 1.4, 50));
-
-      if (typeof topojson === "undefined" || typeof WORLD_TOPO === "undefined") {
-        svgWrap.innerHTML = '<p style="padding:20px;text-align:center">地图组件加载失败，请使用下方“按国家 / 地区”列表。</p>';
-      } else {
-        try {
-          var geo = topojson.feature(WORLD_TOPO, WORLD_TOPO.objects.countries);
-          drawCountries(geo);
-        } catch (err) {
-          svgWrap.innerHTML = '<p style="padding:20px;text-align:center">世界地图边界解析失败，标记点仍可查看。</p>';
-        }
-      }
-
-      var count = drawMarkers();
+      map.fitBounds([[-90, -180], [90, 180]]);
       var note = document.createElement("p");
       note.style.cssText = "font-size:12.5px;color:var(--muted);margin-top:8px";
-      note.textContent = "已标注 " + count + " 个国家/地区的认证标记（离线世界地图，无需联网/Key）。拖动可平移，滚轮或双指可缩放。";
+      note.textContent = "已标注 " + count + " 个国家/地区的认证标记（Leaflet 离线地图，无需联网/Key）。拖动可平移，滚轮或双指可缩放。";
       var legend = document.querySelector(".map-legend");
       if (legend) legend.appendChild(note);
-      apply();
     })();
   </script>
 <nav class="bottom-nav" aria-label="底部导航">

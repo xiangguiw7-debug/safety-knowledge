@@ -22,8 +22,14 @@ var CORE_ASSETS = [
   "./assets/js/tools-knowledge-links.js",
   "./assets/js/knowledge-tools-links.js",
   "./assets/icons/icon-192.png", "./assets/icons/icon-512.png",
-  "./assets/lib/topojson-client.min.js",
-  "./assets/lib/world-topo-110.js"
+  "./assets/lib/leaflet/leaflet.js",
+  "./assets/lib/leaflet/leaflet.css",
+  "./assets/lib/leaflet/images/marker-icon.png",
+  "./assets/lib/leaflet/images/marker-icon-2x.png",
+  "./assets/lib/leaflet/images/marker-shadow.png",
+  "./assets/lib/leaflet/images/layers.png",
+  "./assets/lib/leaflet/images/layers-2x.png",
+  "./assets/images/world-map.svg"
 ];
 
 self.addEventListener("install", function (event) {
