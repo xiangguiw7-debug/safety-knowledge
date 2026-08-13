@@ -38,7 +38,7 @@
     .cert-card p { font-size: 14px; margin: 6px 0; }
     .cert-card .note { color: var(--muted); font-size: 13px; }
     .cert-card.product { grid-column: 1 / -1; }
-    #map { aspect-ratio: 2 / 1; width: 100%; height: auto; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
+    #map { height: 68vh; min-height: 420px; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
     .map-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0; font-size: 13px; color: var(--muted); }
     .map-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
   </style>
@@ -70,7 +70,7 @@
     <div class="page-head">
       <p class="crumb"><a href="../index.html">首页</a> / 全球认证速查</p>
       <h1>全球认证速查</h1>
-      <p style="margin-top:12px"><span class="tag">🗺️ Leaflet 离线地图：无需联网/Key，手机电脑都能显示</span> <span class="tag">支持拖动与缩放</span></p>
+      <p style="margin-top:12px"><span class="tag">🗺️ OpenStreetMap 真实地图（与 Leaflet 官网示例一致）</span> <span class="tag">标记数据离线可用</span></p>
       <p class="lead">认证 = 监管强制 + 市场要求。推荐按“国家 → 产品分类”两个维度查：先看目标国家的监管体系，再看你的产品属于哪个目录、需要什么标志。</p>
     </div>
 
@@ -93,7 +93,7 @@
         <span><i style="background:#ff3b30"></i>非洲</span>
         <span><i style="background:#98989d"></i>其他</span>
       </div>
-      <p class="note" style="color:var(--muted);font-size:13px">坐标为教学用近似值；认证体系以<a href="#country">按国家 / 地区</a>列表和最新法规为准。Leaflet 离线地图：底图与数据全部内置在网站里，无需联网和 Key，手机、电脑、本地预览都能直接显示；支持拖动、滚轮/双指缩放；支持 ?c=国家名 直达。<a class="tag" href="./cert-map.html" style="margin-left:8px">旧地图页地址（自动跳转）</a></p>
+      <p class="note" style="color:var(--muted);font-size:13px">坐标为教学用近似值；认证体系以<a href="#country">按国家 / 地区</a>列表和最新法规为准。底图与 Leaflet 官网示例一致，使用 OpenStreetMap 全球地图；底图需联网加载，国内网络可能需要代理才能显示，认证标记与数据始终可用；支持拖动、滚轮/双指缩放；支持 ?c=国家名 直达。<a class="tag" href="./cert-map.html" style="margin-left:8px">旧地图页地址（自动跳转）</a></p>
     </div>
     </div>
     <div id="viewCountry">
@@ -206,20 +206,11 @@ var COORDS = {
           "萨尔瓦多":[13.8,-88.9]
         };
 var REGION_COLOR = { "欧盟":"#0a84ff", "欧洲其他":"#0a84ff", "北欧":"#0a84ff", "亚洲":"#ff9f0a", "北美":"#34c759", "南美":"#bf5af2", "大洋洲":"#5ac8fa", "非洲":"#ff3b30" };
-      var map = L.map("map", {
-        crs: L.CRS.EPSG4326,
-        zoomSnap: 0,
-        minZoom: 1,
-        maxZoom: 6,
-        maxBounds: [[-90, -180], [90, 180]],
-        maxBoundsViscosity: 0.8,
-        zoomControl: true
-      });
-      window.certMap = map;
-      L.imageOverlay("../assets/images/world-map.svg", [[-90, -180], [90, 180]], {
-        opacity: 1,
-        attribution: "教学演示 · 离线矢量底图"
-      }).addTo(map);
+      window.certMap = L.map("map").setView([25, 10], 2);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(window.certMap);
       var count = 0;
       CERT_COUNTRIES.forEach(function (c) {
         if (!COORDS[c.name] || !c.mark) return;
@@ -227,13 +218,12 @@ var REGION_COLOR = { "欧盟":"#0a84ff", "欧洲其他":"#0a84ff", "北欧":"#0a
         var col = REGION_COLOR[c.region] || "#98989d";
         var scope = (c.scope || "").slice(0, 90);
         L.circleMarker(COORDS[c.name], { radius: 6, color: "#ffffff", weight: 1.5, fillColor: col, fillOpacity: 0.9 })
-          .addTo(map)
+          .addTo(window.certMap)
           .bindPopup("<b>" + c.name + "</b><br>标志：" + c.mark + "<br>体系：" + c.system + "<br>机构：" + c.regulator + (scope ? "<br>" + scope + "…" : "") + '<br><a href="#country">查看该国认证速查 →</a>');
       });
-      map.fitBounds([[-90, -180], [90, 180]]);
       var note = document.createElement("p");
       note.style.cssText = "font-size:12.5px;color:var(--muted);margin-top:8px";
-      note.textContent = "已标注 " + count + " 个国家/地区的认证标记（Leaflet 离线地图，无需联网/Key）。拖动可平移，滚轮或双指可缩放。";
+      note.textContent = "已标注 " + count + " 个国家/地区的认证标记（底图：OpenStreetMap）。";
       var legend = document.querySelector(".map-legend");
       if (legend) legend.appendChild(note);
     })();

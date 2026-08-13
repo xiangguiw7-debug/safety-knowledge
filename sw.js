@@ -29,7 +29,6 @@ var CORE_ASSETS = [
   "./assets/lib/leaflet/images/marker-shadow.png",
   "./assets/lib/leaflet/images/layers.png",
   "./assets/lib/leaflet/images/layers-2x.png",
-  "./assets/images/world-map.svg"
 ];
 
 self.addEventListener("install", function (event) {
