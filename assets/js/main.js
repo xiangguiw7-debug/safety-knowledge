@@ -25,7 +25,7 @@ document.querySelectorAll("[data-year]").forEach(function (el) {
 if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener("load", function () {
     var swPath = location.pathname.indexOf("/pages/") !== -1 || location.pathname.indexOf("/en/") !== -1 ? "../sw.js" : "./sw.js";
-    navigator.serviceWorker.register(swPath).catch(function () {
+    navigator.serviceWorker.register(swPath, { updateViaCache: "none" }).catch(function () {
       /* 注册失败不影响浏览 */
     });
   });
