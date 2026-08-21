@@ -42,6 +42,47 @@ function esc(s) { var d = document.createElement("div"); d.textContent = s; retu
 var wsState = { product: "charger", market: "cn", step: 0, custom: false };
 var WS_STEPS = ["选型与市场", "标准确定", "间距设计", "耐压与绝缘", "测试清单", "认证要求", "项目报告"];
 
+// ---- 返回/刷新后恢复工坊进度（sessionStorage，本标签页内有效） ----
+var WS_STATE_KEY = "angui-workshop-state-v1";
+function saveWorkshopState() {
+  try {
+    var fields = {};
+    ["wsName", "wsV", "wsPd", "wsGp", "wsIns", "wsSys", "wsOvc"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) fields[id] = el.value;
+    });
+    var indSel = document.getElementById("wsIndustry");
+    sessionStorage.setItem(WS_STATE_KEY, JSON.stringify({
+      state: wsState,
+      industry: indSel ? indSel.value : "",
+      fields: fields
+    }));
+  } catch (e) { /* ignore */ }
+}
+function restoreWorkshopState() {
+  try {
+    var s = JSON.parse(sessionStorage.getItem(WS_STATE_KEY));
+    if (!s || !s.state) return;
+    wsState = s.state;
+    var p = document.getElementById("wsProduct");
+    if (p && wsState.product && p.querySelector('option[value="' + wsState.product + '"]')) p.value = wsState.product;
+    var m = document.getElementById("wsMarket");
+    if (m && wsState.market && m.querySelector('option[value="' + wsState.market + '"]')) m.value = wsState.market;
+    var c = document.getElementById("wsCustom");
+    if (c) c.checked = !!wsState.custom;
+    var f = document.getElementById("wsCustomFields");
+    if (f) f.hidden = !wsState.custom;
+    var ind = document.getElementById("wsIndustry");
+    if (ind && s.industry && ind.querySelector('option[value="' + s.industry + '"]')) ind.value = s.industry;
+    if (s.fields) {
+      Object.keys(s.fields).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.value = s.fields[id];
+      });
+    }
+  } catch (e) { /* ignore */ }
+}
+
 function customCreep() {
   var v = Number($("wsV").value) || 250;
   var pd = Number($("wsPd").value) || 2;
@@ -119,14 +160,14 @@ function wsRender() {
     html = '<div class="grid grid-2">' +
       '<div class="card"><h3>📏 爬电距离</h3><p>' + cond + '</p><p class="value" style="font-size:30px;color:var(--accent)">≥ ' + info.creep.toFixed(1) + ' mm</p></div>' +
       '<div class="card"><h3>📏 电气间隙</h3><p>含过电压类别与海拔修正（教学值）</p><p class="value" style="font-size:30px;color:var(--accent)">≥ ' + info.clear.toFixed(1) + ' mm</p></div>' +
-      '<div class="card"><h3>🧮 自己算一遍</h3><p>在<a href="./tools.html">计算工具</a>输入同样条件复现，并用反查模式验证。</p></div>' +
+      '<div class="card"><h3>🧮 自己算一遍</h3><p>在<a href="./tools.html#tool-spacing">计算工具</a>输入同样条件复现，并用反查模式验证。</p></div>' +
       '<div class="card"><h3>📐 结构落地</h3><p>参考<a href="./pcb-guidelines.html">PCB 安规设计指南</a>与<a href="./product-classes.html">类别结构图</a>。</p></div></div>';
   } else if (wsState.step === 3) {
     html = '<div class="grid grid-2">' +
       '<div class="card"><h3>⚡ 试验电压</h3><p>' + info.hipot + '</p><p>判据：无击穿/闪络，泄漏不超限；用<a href="./hipot.html">5 步法</a>核对。</p></div>' +
       '<div class="card"><h3>🧱 绝缘体系</h3><p>确认' + (info.ins === "reinforced" ? "加强/双重绝缘" : "基本绝缘") + '结构，检查层数与桥接（<a href="./double-insulation.html">判定页</a>）。</p></div></div>';
   } else if (wsState.step === 4) {
-    html = '<div class="card"><h3>✅ 建议测试清单（' + info.name + "）</h3><p>" + info.tests.map(esc).join(" · ") + '</p><p class="peak-note">正式清单用<a href="./tools.html">测试清单生成器</a>按产品分类生成。</p></div>';
+    html = '<div class="card"><h3>✅ 建议测试清单（' + info.name + "）</h3><p>" + info.tests.map(esc).join(" · ") + '</p><p class="peak-note">正式清单用<a href="./tools.html#tool-testlist">测试清单生成器</a>按产品分类生成。</p></div>';
   } else if (wsState.step === 5) {
     html = '<div class="grid grid-2">' +
       '<div class="card"><h3>🌍 目标市场：' + m.name + "</h3><p>认证：<b>" + m.cert + "</b></p><p>" + m.note + '</p></div>' +
@@ -145,6 +186,7 @@ function wsRender() {
   $("wsBar").style.width = ((wsState.step + 1) / WS_STEPS.length * 100) + "%";
   $("wsPrev").disabled = wsState.step === 0;
   $("wsNext").textContent = wsState.step === WS_STEPS.length - 1 ? "完成" : "下一步 →";
+  saveWorkshopState();
 }
 
 function wsGo(delta) {
@@ -190,6 +232,7 @@ if (wsIndSel && typeof INDUSTRIES !== "undefined") {
     wsState.step = 0;
     wsRender();
   });
+  restoreWorkshopState(); // 返回/刷新后恢复上次进度（?ind= 深链优先覆盖）
   var qs = new URLSearchParams(location.search);
   var ind = qs.get("ind");
   if (ind && INDUSTRY_TO_WS[ind]) {
@@ -199,3 +242,4 @@ if (wsIndSel && typeof INDUSTRIES !== "undefined") {
   }
 }
 wsRender();
+window.addEventListener("pagehide", saveWorkshopState);

@@ -9,7 +9,7 @@
       location.replace("knowledge-detail.html?id=" + encodeURIComponent(hid));
     }
   }
-  var EMOJI = { framework: "📋", shock: "⚡", electric: "⚡", energy: "💥", fire: "🔥", thermal: "🌡️", mechanical: "⚙️", radiation: "☢️", chemical: "🧪", emc: "📡", medical: "🏥", cert: "📄", general: "📦" };
+  var EMOJI = { framework: "📋", shock: "⚡", energy: "💥", fire: "🔥", thermal: "🌡️", mechanical: "⚙️", radiation: "☢️", chemical: "🧪", emc: "📡", medical: "🏥", cert: "📄", general: "📦" };
   var DIFF = (typeof DIFF_LABEL !== "undefined") ? DIFF_LABEL : { 1: "入门", 2: "进阶", 3: "拔高" };
   function preview(html) {
     var t = String(html || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();

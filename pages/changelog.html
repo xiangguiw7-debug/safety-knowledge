@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
   <title>更新日志 - 安规与可靠性知识课堂</title>
-  <meta name="description" content="安规与可靠性知识课堂更新日志：v1.1.2 地图升级、图标更新与缓存优化。">
+  <meta name="description" content="安规与可靠性知识课堂更新日志：v1.4.0 地图升级、图标更新与缓存优化。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
+
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
 <body>
   <header class="site-header">
@@ -19,14 +21,12 @@
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
       <nav class="nav" id="nav">
         <a href="../index.html">首页</a>
-        <a href="./learn.html">学习地图</a>
-        <a href="./tools.html">计算工具</a>
-        <a href="./industries.html">行业筛选</a>
-        <a href="./materials.html">材料库</a>
-        <a href="./glossary.html">术语表</a>
-        <a href="./resources.html" class="active">资源</a><a href="./quiz.html">答题测验</a>
-        <a href="./refs.html">参考中心</a>
-        
+        <a href="./learn.html">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html" class="active">资源</a>
       </nav>
     </div>
   </header>
@@ -36,6 +36,19 @@
       <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 更新日志</p>
       <h1>更新日志</h1>
     </div>
+
+                            <div class="card">
+      <h2>v1.4.0（2026-08-14）</h2>
+      <p class="section-sub">费曼学习法、导航重构、返回与状态恢复、手机同步与开源准备</p>
+      <ul>
+        <li><b>🧠 费曼学习法</b>：答题测验新增「自测 | 费曼学习法」双模式——抽一张知识卡，用自己的话讲给小白听，对照参考讲解自动标出「卡壳点」，复盘保存并支持复习对比（已攻克 / 仍卡住 / 本次新增），返回页面自动恢复模式、卡片与草稿；</li>
+        <li><b>🧭 导航重构</b>：顶部导航统一为「首页 / 学习 / 测试 / 认证 / 行业 / 答题测验 / 资源」，行业筛选晋升一级入口，产品品类知识归入行业；移动端底部导航全站统一；</li>
+        <li><b>🔙 返回与状态恢复</b>：新增全局「← 返回上一页」按钮；认证向导、项目工坊、标准对比、计算工具在跳转后自动恢复上次进度/参数；知识卡与章节页的「计算工具」链接直达对应计算器（#tool-xxx 精准定位）；</li>
+        <li><b>📲 手机 / 电脑同步</b>：数据备份页新增「复制同步文本 + 合并导入」，按类型合并去重，学习进度、笔记、错题、费曼记录可在两台设备间转移；</li>
+        <li><b>🔧 全站修复</b>：防电击分组 electric/shock 词汇统一；语义错链修复（电弧引燃、射频暴露/SAR、HAI/HWI/RTI 等指向错误卡片）；修复导航栏切换闪烁、深色主题首帧闪烁、卡片淡入闪烁；3 处页面 HTML 结构不平衡；题库与案例计数口径修正；答题页重复脚本移除；</li>
+        <li><b>🚀 开源上线准备</b>：MIT + CC BY 4.0 双许可、README 重写、CI 检查工作流（链接/结构自动校验）、sitemap/robots 更新、旧版备份移出版本控制。</li>
+      </ul>
+      </div>
 
                             <div class="card">
       <h2>v1.1.2（2026-08-13）</h2>
@@ -122,7 +135,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.0 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -134,8 +147,9 @@
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
-  <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>导航</span></a>
+  <a href="./testing.html">🧪<span>测试</span></a>
+  <a href="./certification.html">📄<span>认证</span></a>
+  <a href="./industries.html">🏭<span>行业</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

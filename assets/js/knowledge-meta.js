@@ -5,9 +5,10 @@ var DIFF_LABEL = { 1: "入门", 2: "进阶", 3: "拔高" };
 // 推荐学习顺序（随主线学习）：框架 → 防电击主线 → 能量/防火/热量 → 机械/辐射/化学 → EMC → 通用/医疗 → 认证
 var RECOMMENDED_ORDER = [
   "stdguide", "protection", "productclass", "access", "cti", "leakage", "grounding", "selv",
-  "energy", "components", "temperature", "firetests", "flame", "fire-design", "battery",
-  "mechanical", "functional", "optical", "radhaz", "emc", "dmcm", "harmonic", "transient",
-  "ip", "ik", "environment", "rohs", "explosion", "biocompat", "risk", "software", "certprocess"
+  "energy", "components", "fire-design", "flame", "firetests", "temperature", "battery",
+  "mechanical", "functional", "optical", "radhaz", "rohs", "explosion",
+  "emc", "dmcm", "harmonic", "transient",
+  "ip", "ik", "environment", "biocompat", "risk", "software", "certprocess"
 ];
 
 // 每张卡：难度（1 入门 / 2 进阶 / 3 拔高）、用时（分钟）

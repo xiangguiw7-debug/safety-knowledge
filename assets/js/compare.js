@@ -59,6 +59,18 @@ function esc(s) {
 
 var cmpScenario = "all";
 
+// ---- 返回/刷新后恢复对比场景（sessionStorage，本标签页内有效） ----
+var CMP_STATE_KEY = "angui-compare-state-v1";
+function saveCompareState() {
+  try { sessionStorage.setItem(CMP_STATE_KEY, JSON.stringify({ scenario: cmpScenario })); } catch (e) { /* ignore */ }
+}
+function restoreCompareState() {
+  try {
+    var s = JSON.parse(sessionStorage.getItem(CMP_STATE_KEY));
+    if (s && s.scenario) cmpScenario = s.scenario;
+  } catch (e) { /* ignore */ }
+}
+
 function renderCompare() {
   var head = $("cmpHead");
   var body = $("cmpBody");
@@ -83,7 +95,17 @@ document.querySelectorAll("[data-cmp]").forEach(function (btn) {
       b.setAttribute("aria-pressed", on ? "true" : "false");
     });
     renderCompare();
+    saveCompareState();
   });
 });
+
+// 恢复上次对比场景（返回/刷新后保持筛选）
+restoreCompareState();
+document.querySelectorAll("[data-cmp]").forEach(function (btn) {
+  var on = btn.getAttribute("data-cmp") === cmpScenario;
+  btn.classList.toggle("active", on);
+  btn.setAttribute("aria-pressed", on ? "true" : "false");
+});
+window.addEventListener("pagehide", saveCompareState);
 
 renderCompare();

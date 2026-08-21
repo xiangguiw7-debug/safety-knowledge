@@ -14,7 +14,7 @@
       function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; var t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
       function pick(arr, n, r) { var a = arr.slice(); var res = []; while (res.length < n && a.length) { res.push(a.splice(Math.floor(r() * a.length), 1)[0]); } return res; }
       function shuffle(arr, r) { for (var i = arr.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)); var t = arr[i]; arr[i] = arr[j]; arr[j] = t; } return arr; }
-      var groupNames = { shock: "防电击", electric: "防电击", energy: "能量危险", fire: "防火", thermal: "热量危险", mechanical: "机械危险", radiation: "辐射危险", chemical: "化学危险", emc: "EMC 与认证", medical: "医疗专项", cert: "认证流程", general: "通用环境" };
+      var groupNames = { shock: "防电击", energy: "能量危险", fire: "防火", thermal: "热量危险", mechanical: "机械危险", radiation: "辐射危险", chemical: "化学危险", emc: "EMC 与认证", medical: "医疗专项", cert: "认证流程", general: "通用环境" };
       var groupIds = Object.keys(groupNames);
       var titles = order.map(function (id) { return cards[id] ? cards[id].title : id; });
 
@@ -22,7 +22,7 @@
         var c = cards[id];
         if (!c) return;
         var r = rng(hash(id));
-        var hazard = c.hazard === "electric" ? "shock" : c.hazard;
+        var hazard = c.hazard;
         // 主题 -> 分组
         var gOthers = groupIds.filter(function (g) { return g !== hazard && groupNames[g]; });
         var gOpts = pick(gOthers, 3, r);

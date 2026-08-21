@@ -22,7 +22,6 @@ if (source) {
   HAZARD_GROUPS.forEach(function (g) { byGroup[g.id] = []; });
   cards.forEach(function (card) {
     var h = card.getAttribute("data-hazard");
-    if (h === "electric") h = "shock";
     if (byGroup[h]) byGroup[h].push(card);
   });
 

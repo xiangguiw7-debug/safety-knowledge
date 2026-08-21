@@ -32,7 +32,7 @@ var GLOSSARY = [
   { t: "CE-LVD", f: "欧盟低压指令", d: "欧盟电子电气产品安全指令，配合 EMC/RED 等。", u: "pages/certification.html" },
   { t: "RED", f: "欧盟无线电设备指令", d: "无线设备的射频、EMC 与安全要求。", u: "pages/certification.html" },
   { t: "EMC", f: "电磁兼容", d: "发射不超标、抗扰不失效。", u: "pages/knowledge.html#emc" },
-  { t: "SAR", f: "比吸收率", d: "人体吸收射频能量的速率，无线设备限值要求。", u: "pages/knowledge.html#emc" },
+  { t: "SAR", f: "比吸收率", d: "人体吸收射频能量的速率，无线设备限值要求。", u: "pages/knowledge.html#radhaz" },
   { t: "LPL", f: "雷电防护等级（Ⅰ–Ⅳ）", d: "建筑物防雷等级，决定外部防雷参数。", u: "pages/surge.html" },
   { t: "UN 38.3", f: "锂电池运输试验", d: "锂电池空运/海运前的 8 项运输试验。", u: "pages/knowledge.html#battery" },
   { t: "IEC 60664-1", f: "绝缘配合总则", d: "间隙、爬电、污染、海拔、过电压的母标准。", u: "pages/standards.html" },

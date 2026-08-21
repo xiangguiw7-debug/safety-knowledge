@@ -10,6 +10,8 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
+
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
 <body data-chain-key="hipot">
   <header class="site-header">
@@ -22,14 +24,12 @@
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
       <nav class="nav" id="nav">
         <a href="../index.html">首页</a>
-        <a href="../pages/learn.html" class="active">学习地图</a>
-        <a href="../pages/tools.html">计算工具</a>
-        <a href="../pages/industries.html">行业筛选</a>
-        <a href="../pages/materials.html">材料库</a>
-        <a href="../pages/glossary.html">术语表</a>
-        <a href="../pages/resources.html">资源</a><a href="../pages/quiz.html">答题测验</a>
-        <a href="../pages/refs.html">参考中心</a>
-        
+        <a href="./learn.html" class="active">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
       </nav>
     </div>
   </header>
@@ -145,52 +145,58 @@
       </div>
       <div class="callout callout-warn">
         <strong>为什么这里写“示例”</strong>
-        <p>标准版本更新会改数值，且表格还分额定电压档、绝缘部位（带电件 vs 可触及件 vs 信号口）。查表时看三样：版本号、表格号、脚注。快速参考可用<a href="./tools.html">计算工具页的耐压速查器</a>，但最终以标准原文为准。</p>
+        <p>标准版本更新会改数值，且表格还分额定电压档、绝缘部位（带电件 vs 可触及件 vs 信号口）。查表时看三样：版本号、表格号、脚注。快速参考可用<a href="./tools.html#tool-hipot">计算工具页的耐压速查器</a>，但最终以标准原文为准。</p>
       </div>
     </section>
 
     <section>
-    <section>
       <h2>4.5 耐压查表模板（边读标准边填）</h2>
-      <p class="lead">把标准表格的数值填进这张表，保存到本地，下次直接对照。已填的是教学示例值（62368 为常用参考，其余需核对标准版本）。</p>
+      <p class="lead">把标准表格的数值填进这张表，保存到本地，下次直接对照。示例值为教学参考（62368 常用），其余需按标准版本核对。</p>
+      <style>
+        .ht-cell { width: 88px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--fg); font-size: 13.5px; font-family: inherit; }
+        .ht-cell.has-default { background: var(--accent-soft); border-color: rgba(158,43,37,.3); }
+        .ht-cell:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+        .ht-cell-clause { width: 100%; min-width: 160px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--fg); font-size: 13px; font-family: inherit; }
+        .ht-note { font-size: 12px; color: var(--muted); }
+      </style>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>标准</th>
+              <th style="min-width:150px">标准</th>
               <th>被测绝缘</th>
-              <th>条件</th>
-              <th>AC 试验电压 (V)</th>
-              <th>DC（可选）(V)</th>
-              <th>标准条款/备注（待核对）</th>
+              <th style="min-width:110px">条件</th>
+              <th style="min-width:110px">AC 试验电压 (V)</th>
+              <th style="min-width:110px">DC（可选）(V)</th>
+              <th style="min-width:200px">标准条款 / 备注</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td rowspan="4">IEC 62368-1 / GB 4943.1</td><td>基本/附加</td><td>≤250V</td><td><input type="text" data-hipot-cell="62368-basic-250" data-default="1500" value="1500" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-basic-250-dc" data-default="2121" value="2121" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-basic-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+            <tr><td>加强/双重</td><td>≤250V</td><td><input type="text" data-hipot-cell="62368-reinf-250" data-default="3000" value="3000" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-reinf-250-dc" data-default="4242" value="4242" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-reinf-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+            <tr><td>基本/附加</td><td>&gt;250V</td><td><input type="text" data-hipot-cell="62368-basic-high" placeholder="查标准填写" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-basic-high-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-basic-high-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+            <tr><td>加强/双重</td><td>&gt;250V</td><td><input type="text" data-hipot-cell="62368-reinf-high" placeholder="查标准填写" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-reinf-high-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="62368-reinf-high-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+            <tr><td rowspan="3">IEC 60335-1 / GB 4706.1</td><td>基本</td><td>≤250V</td><td><input type="text" data-hipot-cell="60335-basic-250" placeholder="示例 1250，以现行版本为准" style="width:130px"></td><td><input type="text" data-hipot-cell="60335-basic-250-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60335-basic-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+            <tr><td>附加</td><td>≤250V</td><td><input type="text" data-hipot-cell="60335-supp-250" placeholder="查标准填写" style="width:90px"></td><td><input type="text" data-hipot-cell="60335-supp-250-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60335-supp-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+            <tr><td>加强</td><td>≤250V</td><td><input type="text" data-hipot-cell="60335-reinf-250" placeholder="查标准填写" style="width:90px"></td><td><input type="text" data-hipot-cell="60335-reinf-250-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60335-reinf-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+            <tr><td rowspan="2">IEC 60601-1 / GB 9706.1</td><td>1 MOPP</td><td>市电端口</td><td><input type="text" data-hipot-cell="60601-1mopp" placeholder="示例 1500，以标准为准" style="width:130px"></td><td><input type="text" data-hipot-cell="60601-1mopp-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60601-1mopp-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+            <tr><td>2 MOPP</td><td>市电端口</td><td><input type="text" data-hipot-cell="60601-2mopp" placeholder="示例 4000，以标准为准" style="width:130px"></td><td><input type="text" data-hipot-cell="60601-2mopp-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60601-2mopp-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+            <tr><td>IEC 61010-1</td><td>基本/加强</td><td>≤250V</td><td><input type="text" data-hipot-cell="61010-250" placeholder="查标准填写" style="width:90px"></td><td><input type="text" data-hipot-cell="61010-250-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="61010-250-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+            <tr><td>IEC 60204-1</td><td>基本</td><td>按公式 2×Un+1000V</td><td><input type="text" data-hipot-cell="60204-formula" placeholder="按公式计算" style="width:110px"></td><td><input type="text" data-hipot-cell="60204-formula-dc" placeholder="可选" style="width:90px"></td><td><input type="text" data-hipot-cell="60204-formula-clause" placeholder="查标准条款" style="width:100%"></td></tr>
-+          </tbody>
-+        </table>
-+      </div>
-+      <div class="link-row">
-+        <button type="button" class="btn" id="htSaveBtn">保存模板到本地</button>
-+        <button type="button" class="btn" id="htResetBtn">清空重置</button>
+            <tr><td rowspan="4"><b>IEC 62368-1</b><br><span class="ht-note">GB 4943.1</span></td><td>基本 / 附加</td><td>≤250V</td><td><input type="text" class="ht-cell has-default" data-hipot-cell="62368-basic-250" data-default="1500" value="1500"></td><td><input type="text" class="ht-cell has-default" data-hipot-cell="62368-basic-250-dc" data-default="2121" value="2121"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="62368-basic-250-clause" placeholder="查标准条款填写"></td></tr>
+            <tr><td>加强 / 双重</td><td>≤250V</td><td><input type="text" class="ht-cell has-default" data-hipot-cell="62368-reinf-250" data-default="3000" value="3000"></td><td><input type="text" class="ht-cell has-default" data-hipot-cell="62368-reinf-250-dc" data-default="4242" value="4242"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="62368-reinf-250-clause" placeholder="查标准条款填写"></td></tr>
+            <tr><td>基本 / 附加</td><td>&gt;250V</td><td><input type="text" class="ht-cell" data-hipot-cell="62368-basic-high" placeholder="查标准填写"></td><td><input type="text" class="ht-cell" data-hipot-cell="62368-basic-high-dc" placeholder="可选"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="62368-basic-high-clause" placeholder="查标准条款填写"></td></tr>
+            <tr><td>加强 / 双重</td><td>&gt;250V</td><td><input type="text" class="ht-cell" data-hipot-cell="62368-reinf-high" placeholder="查标准填写"></td><td><input type="text" class="ht-cell" data-hipot-cell="62368-reinf-high-dc" placeholder="可选"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="62368-reinf-high-clause" placeholder="查标准条款填写"></td></tr>
+            <tr><td rowspan="3"><b>IEC 60335-1</b><br><span class="ht-note">GB 4706.1</span></td><td>基本</td><td>≤250V</td><td><input type="text" class="ht-cell" data-hipot-cell="60335-basic-250" placeholder="示例 1250"></td><td><input type="text" class="ht-cell" data-hipot-cell="60335-basic-250-dc" placeholder="可选"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="60335-basic-250-clause" placeholder="查标准条款填写"></td></tr>
+            <tr><td>附加</td><td>≤250V</td><td><input type="text" class="ht-cell" data-hipot-cell="60335-supp-250" placeholder="查标准填写"></td><td><input type="text" class="ht-cell" data-hipot-cell="60335-supp-250-dc" placeholder="可选"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="60335-supp-250-clause" placeholder="查标准条款填写"></td></tr>
+            <tr><td>加强</td><td>≤250V</td><td><input type="text" class="ht-cell" data-hipot-cell="60335-reinf-250" placeholder="查标准填写"></td><td><input type="text" class="ht-cell" data-hipot-cell="60335-reinf-250-dc" placeholder="可选"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="60335-reinf-250-clause" placeholder="查标准条款填写"></td></tr>
+            <tr><td rowspan="2"><b>IEC 60601-1</b><br><span class="ht-note">GB 9706.1</span></td><td>1 MOPP</td><td>市电端口</td><td><input type="text" class="ht-cell" data-hipot-cell="60601-1mopp" placeholder="示例 1500"></td><td><input type="text" class="ht-cell" data-hipot-cell="60601-1mopp-dc" placeholder="可选"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="60601-1mopp-clause" placeholder="查标准条款填写"></td></tr>
+            <tr><td>2 MOPP</td><td>市电端口</td><td><input type="text" class="ht-cell" data-hipot-cell="60601-2mopp" placeholder="示例 4000"></td><td><input type="text" class="ht-cell" data-hipot-cell="60601-2mopp-dc" placeholder="可选"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="60601-2mopp-clause" placeholder="查标准条款填写"></td></tr>
+            <tr><td><b>IEC 61010-1</b><br><span class="ht-note">GB 4793.1</span></td><td>基本 / 加强</td><td>≤250V</td><td><input type="text" class="ht-cell" data-hipot-cell="61010-250" placeholder="查标准填写"></td><td><input type="text" class="ht-cell" data-hipot-cell="61010-250-dc" placeholder="可选"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="61010-250-clause" placeholder="查标准条款填写"></td></tr>
+            <tr><td><b>IEC 60204-1</b><br><span class="ht-note">GB 5226.1</span></td><td>基本</td><td>2×Un + 1000V</td><td><input type="text" class="ht-cell" data-hipot-cell="60204-formula" placeholder="按公式计算"></td><td><input type="text" class="ht-cell" data-hipot-cell="60204-formula-dc" placeholder="可选"></td><td><input type="text" class="ht-cell-clause" data-hipot-cell="60204-formula-clause" placeholder="查标准条款填写"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="link-row" style="margin-top:12px">
+        <button type="button" class="btn" id="htSaveBtn">保存模板到本地</button>
+        <button type="button" class="btn" id="htResetBtn">清空重置</button>
         <button type="button" class="btn" onclick="window.print()">打印模板</button>
-+        <a class="btn" href="./standards.html">去标准文件入口核对</a>
-+      </div>
-+      <div class="callout callout-warn">
-+        <strong>使用说明</strong>
-+        <p>模板保存在浏览器本地，不会上传。填入每个数值时顺便把“标准条款”写进最后一列，下次评审直接有依据；版本更新后要重新核对。</p>
-+      </div>
-+    </section>
+        <a class="btn" href="./standards.html">去标准文件入口核对</a>
+      </div>
+      <div class="callout callout-warn">
+        <strong>使用说明</strong>
+        <p>模板保存在浏览器本地，不会上传。填入数值时把“标准条款”写进最后一列，下次评审直接有依据；版本更新后要重新核对。底色标黄的是内置示例值，可随时改。</p>
+      </div>
+</section>
       <h2>5. 交流 vs 直流：不是随便选一个</h2>
       <div class="table-wrap">
         <table>
@@ -207,7 +213,6 @@
         </table>
       </div>
       <p>选择原则：标准允许哪种用哪种；标准没写 DC 时不要自行替换。DC 耐压对“绝缘内部缺陷”可能更敏感，但泄漏判读方式与 AC 不同（AC 泄漏含容性分量，DC 主要是纯阻性）。</p>
-    </section>
 
     <section>
       <h2>6. 完整示例</h2>
@@ -315,7 +320,7 @@
       <p>
         <a class="tag" href="./knowledge.html#leakage">泄漏电流</a>
         <a class="tag" href="./knowledge.html#grounding">接地等电位</a>
-        <a class="tag" href="./tools.html">耐压速查器</a>
+        <a class="tag" href="./tools.html#tool-hipot">耐压速查器</a>
         <a class="tag" href="./quiz.html">答题测验</a>
       </p>
     </section>
@@ -331,7 +336,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.0 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -345,8 +350,9 @@
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
-  <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>导航</span></a>
+  <a href="./testing.html">🧪<span>测试</span></a>
+  <a href="./certification.html">📄<span>认证</span></a>
+  <a href="./industries.html">🏭<span>行业</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

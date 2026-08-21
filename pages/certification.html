@@ -42,6 +42,8 @@
     .map-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0; font-size: 13px; color: var(--muted); }
     .map-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
   </style>
+
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
 <body>
   <header class="site-header">
@@ -54,14 +56,12 @@
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
             <nav class="nav" id="nav">
         <a href="../index.html">首页</a>
-        <a href="./learn.html">学习地图</a>
-        <a href="./tools.html">计算工具</a>
-        <a href="./industries.html">行业筛选</a>
-        <a href="./materials.html">材料库</a>
-        <a href="./glossary.html">术语表</a>
-        <a href="./resources.html">资源</a><a href="./quiz.html">答题测验</a>
-        <a href="./refs.html" class="active">参考中心</a>
-        
+        <a href="./learn.html">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html" class="active">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
       </nav>
     </div>
   </header>
@@ -95,7 +95,7 @@
       </div>
       <p class="note" style="color:var(--muted);font-size:13px">坐标为教学用近似值；认证体系以<a href="#country">按国家 / 地区</a>列表和最新法规为准。底图与 Leaflet 官网示例一致，使用 OpenStreetMap 全球地图；底图需联网加载，国内网络可能需要代理才能显示，认证标记与数据始终可用；支持拖动、滚轮/双指缩放；支持 ?c=国家名 直达。<a class="tag" href="./cert-map.html" style="margin-left:8px">旧地图页地址（自动跳转）</a></p>
     </div>
-    </div>
+    
     <div id="viewCountry">
       <div class="cert-filter" role="group" aria-label="按地区筛选">
         <button type="button" class="active" data-region="all" aria-pressed="true">全部</button>
@@ -159,7 +159,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.0 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文和各国监管要求为准。</p>
     </div>
   </footer>
@@ -231,8 +231,9 @@ var REGION_COLOR = { "欧盟":"#0a84ff", "欧洲其他":"#0a84ff", "北欧":"#0a
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
-  <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>导航</span></a>
+  <a href="./testing.html">🧪<span>测试</span></a>
+  <a href="./certification.html">📄<span>认证</span></a>
+  <a href="./industries.html">🏭<span>行业</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

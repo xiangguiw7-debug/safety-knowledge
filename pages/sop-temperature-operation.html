@@ -20,6 +20,8 @@
       .sop-checklist input { margin-right: 6px; }
     }
   </style>
+
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
 <body data-sop-id="temperature-operation">
   <header class="site-header">
@@ -29,14 +31,12 @@
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
       <nav class="nav" id="nav">
         <a href="../index.html">首页</a>
-        <a href="./learn.html">学习地图</a>
-        <a href="./tools.html">计算工具</a>
-        <a href="./industries.html">行业筛选</a>
-        <a href="./product-categories.html">品类知识</a>
-        <a href="./sop.html" class="active">测试 SOP</a>
-        <a href="./materials.html">材料库</a>
-        <a href="./resources.html">资源</a><a href="./quiz.html">答题测验</a>
-        
+        <a href="./learn.html">学习</a>
+        <a href="./testing.html" class="active">测试</a>
+        <a href="./certification.html">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
       </nav>
     </div>
   </header>
@@ -51,7 +51,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.0 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文和实验室能力为准。</p>
     </div>
   </footer>
@@ -64,8 +64,9 @@
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
-  <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./sop.html">🔬<span>SOP</span></a>
+  <a href="./testing.html">🧪<span>测试</span></a>
+  <a href="./certification.html">📄<span>认证</span></a>
+  <a href="./industries.html">🏭<span>行业</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

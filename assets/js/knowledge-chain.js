@@ -134,12 +134,8 @@
     "fire-design": "sop-glow-wire.html"
   };
 
-  var PRE = {
-    framework: "knowledge.html#stdguide", shock: "knowledge.html#protection", energy: "knowledge.html#protection",
-    fire: "knowledge.html#flame", thermal: "knowledge.html#temperature", mechanical: "knowledge.html#mechanical",
-    radiation: "knowledge.html#optical", chemical: "knowledge.html#rohs", emc: "knowledge.html#emc",
-    medical: "knowledge.html#risk", cert: "knowledge.html#certprocess", general: "knowledge.html#ip"
-  };
+  var LEARN_ANCHOR = { framework: "", mechanical: "mech", general: "general" };
+  function detailHref(id) { return "knowledge-detail.html?id=" + encodeURIComponent(id); }
 
   function esc(s) {
     var d = document.createElement("div");
@@ -166,20 +162,23 @@
 
   function genericChain(id, title, hazard) {
     var sop = SOP_LINK[id] || "sop.html";
-    var pre = PRE[hazard] || "knowledge.html#stdguide";
-    var nextCard = null;
-    var cards = document.querySelectorAll("section.card[data-hazard='" + hazard + "']");
-    for (var i = 0; i < cards.length; i++) {
-      if (cards[i].id === id) {
-        nextCard = cards[i + 1] || null;
-        break;
-      }
+    var order = window.KNOWLEDGE_ORDER || [];
+    var idx = order.indexOf(id);
+    // 前置：主线上一张（跨组前置，避免自引用）；下一步：主线下一张（对齐学习主线）
+    var preId = idx > 0 ? order[idx - 1] : null;
+    var nextId = (idx >= 0 && idx < order.length - 1) ? order[idx + 1] : null;
+    var preText, preHref;
+    if (preId) {
+      preText = (window.KNOWLEDGE_DETAILS && KNOWLEDGE_DETAILS[preId] && KNOWLEDGE_DETAILS[preId].title) || preId;
+      preHref = detailHref(preId);
+    } else {
+      preText = "知识卡片库（主线起点）";
+      preHref = "knowledge.html";
     }
-    var nextText = "本组下一张知识卡";
-    var nextHref = "learn.html";
-    if (nextCard) {
-      nextText = (nextCard.querySelector("h2") || {}).textContent || nextCard.id;
-      nextHref = "knowledge.html#" + nextCard.id;
+    var nextText, nextHref;
+    if (nextId) {
+      nextText = (window.KNOWLEDGE_DETAILS && KNOWLEDGE_DETAILS[nextId] && KNOWLEDGE_DETAILS[nextId].title) || nextId;
+      nextHref = detailHref(nextId);
     } else if (hazard === "general") {
       nextText = "通用环境学习入口";
       nextHref = "learn.html#general";
@@ -194,15 +193,15 @@
       nextHref = "certification.html";
     } else {
       nextText = "回到本危害学习入口";
-      nextHref = "learn.html#" + hazard;
+      nextHref = "learn.html" + (LEARN_ANCHOR[hazard] ? "#" + LEARN_ANCHOR[hazard] : "");
     }
     return {
       title: title + " · 知识链路",
       why: GROUP_WHY[hazard] || GROUP_WHY.framework,
       pitfalls: GROUP_PITFALLS[hazard] || GROUP_PITFALLS.framework,
       steps: [
-        { label: "前置", text: "先看本组基础", href: pre },
-        { label: "当前", text: title, href: "knowledge.html#" + id },
+        { label: "前置", text: preText, href: preHref },
+        { label: "当前", text: title, href: detailHref(id) },
         { label: "标准", text: "标准文件入口", href: "standards.html" },
         { label: "测试", text: "对应测试项目", href: "test-equipment.html" },
         { label: "SOP", text: "打开 SOP", href: sop },

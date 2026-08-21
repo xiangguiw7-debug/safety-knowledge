@@ -32,6 +32,8 @@
     .flag-item { border-top: 1px solid var(--border); padding: 10px 0; }
     .flag-item:first-child { border-top: none; }
   </style>
+
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
 <body>
   <header class="site-header">
@@ -44,14 +46,12 @@
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
             <nav class="nav" id="nav">
         <a href="../index.html">首页</a>
-        <a href="./learn.html">学习地图</a>
-        <a href="./tools.html">计算工具</a>
-        <a href="./industries.html">行业筛选</a>
-        <a href="./materials.html">材料库</a>
-        <a href="./glossary.html">术语表</a>
-        <a href="./resources.html">资源</a><a href="./quiz.html" class="active">答题测验</a>
-        <a href="./refs.html">参考中心</a>
-        
+        <a href="./learn.html">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html" class="active">答题测验</a>
+        <a href="./resources.html">资源</a>
       </nav>
     </div>
   </header>
@@ -60,12 +60,17 @@
     <div class="page-head">
       <p class="crumb"><a href="../index.html">首页</a> / 答题测验</p>
       <h1>安规知识答题测验</h1>
-      <p class="lead">答题测验：覆盖四大核心模块、七大安全因素、可靠性测试，以及 IP/IK、材料/CTI、认证流程等知识卡主题。答完立即看解析，错题自动进错题本。</p>
+      <p class="lead">答题测验：覆盖四大核心模块、七大安全因素、可靠性测试，以及 IP/IK、材料/CTI、认证流程等知识卡主题。答完立即看解析，错题自动进错题本。支持「✅ 自测」与「🧠 费曼学习法」两种模式。</p>
     </div>
 
     <div class="callout callout-info">
       <strong>答题测验 · 检验是否真的懂了</strong>
       <p>题库覆盖四大核心模块 + 七大安全因素（防电击 / 能量 / 防火 / 热量 / 机械 / 辐射 / 化学）+ 可靠性测试 + IP/IK、材料/CTI、认证流程等知识卡主题。答完立即看解析，答错的题自动进错题本。</p>
+    </div>
+
+    <div class="quiz-mode" role="tablist" aria-label="测验模式">
+      <button type="button" class="active" data-qmode="quiz" aria-selected="true">✅ 自测</button>
+      <button type="button" data-qmode="feynman" aria-selected="false">🧠 费曼学习法</button>
     </div>
 
     <div class="quiz-chips" role="group" aria-label="按模块筛选题库">
@@ -74,7 +79,7 @@
       <button type="button" data-qmodule="creepage" aria-pressed="false">爬电距离</button>
       <button type="button" data-qmodule="surge" aria-pressed="false">雷击浪涌</button>
       <button type="button" data-qmodule="hipot" aria-pressed="false">耐压测试</button>
-      <button type="button" data-qmodule="electric" aria-pressed="false">防电击</button>
+      <button type="button" data-qmodule="shock" aria-pressed="false">防电击</button>
       <button type="button" data-qmodule="energy" aria-pressed="false">能量危险</button>
       <button type="button" data-qmodule="fire" aria-pressed="false">防火</button>
       <button type="button" data-qmodule="thermal" aria-pressed="false">热量/温升</button>
@@ -119,6 +124,46 @@
         <button type="button" class="btn btn-primary" id="quizRestart">再来一次</button>
       </div>
     </div>
+
+    <section id="feynmanApp" hidden>
+      <h2>🧠 费曼学习法 · 讲给小白听</h2>
+      <p class="section-sub">四步：① 抽一张知识卡 ② 不看内容、用自己的话讲 ③ 对照参考讲解找"卡壳点" ④ 复盘保存。<b>参考对照只做关键词提示，不评判对错——真正的判断标准是：你能不能把它讲给自己听。</b></p>
+      <div class="card">
+        <div class="link-row">
+          <button type="button" class="btn btn-primary" id="feynPick">🎲 随机抽一张</button>
+          <select id="feynGroup" aria-label="按分组抽取" style="padding:6px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--fg);font-family:inherit"></select>
+          <button type="button" class="btn" id="feynPickGroup">按分组抽一张</button>
+        </div>
+        <div id="feynWork" hidden>
+          <h3 id="feynTitle" style="margin-top:14px"></h3>
+          <p style="color:var(--muted);font-size:13px">先别打开参考，试着用你的话讲清楚。<a id="feynDetailLink">查看知识卡详情 →</a></p>
+          <textarea id="feynExplain" rows="5" placeholder="用你的话给小白讲这个概念（不看卡片内容）…" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);font-family:inherit;font-size:14px;line-height:1.6"></textarea>
+          <p style="margin-top:10px">
+            <button type="button" class="btn btn-primary" id="feynCompare" disabled>对照参考，找卡壳点</button>
+            <button type="button" class="btn" id="feynAgain">换一张</button>
+          </p>
+          <div id="feynResult" hidden></div>
+          <div id="feynSaveArea" hidden>
+            <p><label for="feynAnalog" style="font-weight:600">一句话类比（加深记忆，选填）：</label></p>
+            <input type="text" id="feynAnalog" placeholder="例：爬电距离 = 水要绕过的路径，间隙 = 直线游过去" style="width:100%;box-sizing:border-box;padding:9px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--fg);font-family:inherit">
+            <p style="margin-top:10px"><button type="button" class="btn btn-primary" id="feynSave">保存这次复盘</button></p>
+          </div>
+          <div id="feynProgress" hidden></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>📒 费曼记录</h3>
+        <p class="section-sub">保存在本地浏览器，可在「数据备份」页一并导出。</p>
+        <div class="link-row">
+          <button type="button" class="btn" id="feynExport">导出文本</button>
+          <button type="button" class="btn" id="feynClear">清空记录</button>
+        </div>
+        <p class="quiz-count">共 <span id="feynCount">0</span> 条记录</p>
+        <div id="feynRecords"></div>
+      </div>
+    </section>
+
+    <div id="quizExtras">
     <section>
       <h2>掌握度统计</h2>
       <p class="section-sub">各模块正确率与最薄弱环节，保存在本地，答完题自动更新。</p>
@@ -147,6 +192,7 @@
       <p class="quiz-count">共 <span id="flagCount">0</span> 道标记</p>
       <div class="card" id="flagBook"></div>
     </section>
+    </div>
   </main>
 
     <p style="margin:22px 0"><button type="button" class="btn" data-progress-key="quiz">标记已读</button></p>
@@ -154,7 +200,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.0 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -164,7 +210,6 @@
   <script src="../assets/js/glossary-tip.js"></script>
   <script src="../assets/js/ux.js"></script>
   <script src="../assets/js/progress.js"></script>
-  <script src="../assets/js/ux.js"></script>
   <script src="../assets/js/knowledge-detail-data.js"></script>
   <script src="../assets/js/standards-data.js"></script>
   <script src="../assets/js/reliability-data.js"></script>
@@ -172,11 +217,13 @@
   <script src="../assets/js/quiz-v2.js"></script>
   <script src="../assets/js/quiz-extra.js"></script>
   <script src="../assets/js/quiz-engine.js"></script>
+  <script src="../assets/js/feynman.js"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
-  <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>导航</span></a>
+  <a href="./testing.html">🧪<span>测试</span></a>
+  <a href="./certification.html">📄<span>认证</span></a>
+  <a href="./industries.html">🏭<span>行业</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

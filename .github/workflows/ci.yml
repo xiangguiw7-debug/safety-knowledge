@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: 链接/锚点检查
+        run: node scripts/check-links.js
+      - name: 结构完整性检查（标签平衡 + 知识卡一致性）
+        run: node scripts/check-structure.js

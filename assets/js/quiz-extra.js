@@ -37,11 +37,11 @@ var QUIZ_BANK_EXTRA = [
   { module: "hipot", type: "multi", difficulty: 2, q: "耐压测试合格的判据通常包括？（多选）", options: ["无击穿", "无闪络", "泄漏电流不超过限值", "温升低于 50K"], answer: [0, 1, 2], explain: "判据是无击穿、无闪络、泄漏电流不超限；温升不是耐压测试的判据。" },
   { module: "hipot", type: "scenario", difficulty: 2, q: "产线例行耐压测试为了节拍，通常怎么处理？", options: ["保持 60s 不变", "缩短到 1–2s 并按标准提高电压", "不测泄漏只测击穿", "改用直流、不加压"], answer: 1, explain: "产线为节拍常缩短时间，并按规定提高电压（如 1.2×）补偿；具体以产品标准为准。" },
 
-  /* ============ 防电击 electric ============ */
-  { module: "electric", type: "scenario", difficulty: 2, q: "某 II 类手机充电器外壳用卡扣固定，用户徒手即可拆开后盖并触及一次侧焊点。这主要违反了什么？", options: ["功能绝缘要求", "可触及部件判定（带电部件不可徒手触及）", "EMC 限值", "环保要求"], answer: 1, explain: "带电部件不得被徒手触及；徒手可拆的卡扣后盖会让人触及一次侧危险部件，不符合可触及性要求。" },
-  { module: "electric", type: "multi", difficulty: 1, q: "II 类设备的防触电防护可以依赖？（多选）", options: ["双重绝缘", "加强绝缘", "保护接地", "基本绝缘+附加绝缘"], answer: [0, 1, 3], explain: "II 类不依赖保护接地，靠双重绝缘（基本+附加）或加强绝缘。" },
-  { module: "electric", type: "judge", difficulty: 1, q: "塑料外壳的产品一定属于 II 类。", options: ["正确", "错误"], answer: 1, explain: "错误。塑料外壳≠II 类，还要满足附加绝缘的爬电/间隙与耐压；II 类看绝缘体系、不看外壳材质。" },
-  { module: "electric", type: "single", difficulty: 3, q: "需要螺丝刀才能打开的设备盖板，其内部带电部件通常如何判定？", options: ["仍属可触及部件", "不作为可触及部件判定", "一定绝对安全", "必须再加一层绝缘"], answer: 1, explain: "需要工具拆卸的部件一般不作可触及部件；但“工具”定义与可拆卸部件判定以产品标准为准。" },
+  /* ============ 防电击 shock ============ */
+  { module: "shock", type: "scenario", difficulty: 2, q: "某 II 类手机充电器外壳用卡扣固定，用户徒手即可拆开后盖并触及一次侧焊点。这主要违反了什么？", options: ["功能绝缘要求", "可触及部件判定（带电部件不可徒手触及）", "EMC 限值", "环保要求"], answer: 1, explain: "带电部件不得被徒手触及；徒手可拆的卡扣后盖会让人触及一次侧危险部件，不符合可触及性要求。" },
+  { module: "shock", type: "multi", difficulty: 1, q: "II 类设备的防触电防护可以依赖？（多选）", options: ["双重绝缘", "加强绝缘", "保护接地", "基本绝缘+附加绝缘"], answer: [0, 1, 3], explain: "II 类不依赖保护接地，靠双重绝缘（基本+附加）或加强绝缘。" },
+  { module: "shock", type: "judge", difficulty: 1, q: "塑料外壳的产品一定属于 II 类。", options: ["正确", "错误"], answer: 1, explain: "错误。塑料外壳≠II 类，还要满足附加绝缘的爬电/间隙与耐压；II 类看绝缘体系、不看外壳材质。" },
+  { module: "shock", type: "single", difficulty: 3, q: "需要螺丝刀才能打开的设备盖板，其内部带电部件通常如何判定？", options: ["仍属可触及部件", "不作为可触及部件判定", "一定绝对安全", "必须再加一层绝缘"], answer: 1, explain: "需要工具拆卸的部件一般不作可触及部件；但“工具”定义与可拆卸部件判定以产品标准为准。" },
 
   /* ============ 能量危险 energy ============ */
   { module: "energy", type: "judge", difficulty: 1, q: "大电容断电后，只要断开电源就绝对安全。", options: ["正确", "错误"], answer: 1, explain: "错误。断电后电容仍储有能量，需泄放电阻/放电电路快速泄放，否则可触及端子仍有电击与灼伤风险。" },

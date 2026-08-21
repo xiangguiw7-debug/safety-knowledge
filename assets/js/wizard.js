@@ -26,6 +26,27 @@ var INDUSTRY_PRODUCT = {
 
 function $(id) { return document.getElementById(id); }
 
+// ---- 返回/刷新后恢复向导状态（sessionStorage，本标签页内有效） ----
+var WZ_STATE_KEY = "angui-wizard-state-v1";
+function saveWizardState() {
+  try {
+    sessionStorage.setItem(WZ_STATE_KEY, JSON.stringify({
+      country: $("wCountry") ? $("wCountry").value : "",
+      product: $("wProduct") ? $("wProduct").value : "",
+      industry: $("wIndustry") ? $("wIndustry").value : ""
+    }));
+  } catch (e) { /* ignore */ }
+}
+function restoreWizardState() {
+  try {
+    var s = JSON.parse(sessionStorage.getItem(WZ_STATE_KEY));
+    if (!s) return;
+    if (s.country && $("wCountry").querySelector('option[value="' + s.country + '"]')) $("wCountry").value = s.country;
+    if (s.product && $("wProduct").querySelector('option[value="' + s.product + '"]')) $("wProduct").value = s.product;
+    if ($("wIndustry") && s.industry && $("wIndustry").querySelector('option[value="' + s.industry + '"]')) $("wIndustry").value = s.industry;
+  } catch (e) { /* ignore */ }
+}
+
 function findVoltage(countryName) {
   var c = COUNTRIES.filter(function (x) { return x.name === countryName; })[0];
   if (c) return c;
@@ -72,6 +93,7 @@ function initWizard() {
   countrySel.addEventListener("change", renderWizard);
   prodSel.addEventListener("change", renderWizard);
   if (indSel) indSel.addEventListener("change", onIndustryChange);
+  restoreWizardState();
   renderWizard();
 }
 
@@ -147,6 +169,8 @@ function renderWizard() {
         "<li>按<a href=\"./learn.html\">学习地图</a>补对应危害知识。</li></ol></div>" +
     "</div>";
   renderStandards();
+  saveWizardState();
 }
 
 initWizard();
+window.addEventListener("pagehide", saveWizardState);

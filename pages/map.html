@@ -10,6 +10,8 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
+
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
 <body>
   <header class="site-header">
@@ -17,7 +19,15 @@
       <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
-      <nav class="nav" id="nav"></nav>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html" class="active">资源</a>
+      </nav>
     </div>
   </header>
   <main class="container page">
@@ -72,7 +82,7 @@
     </section>
 
         <section id="knowledge">
-      <h2>📇 全部知识卡片索引（31 张）</h2>
+      <h2>📇 全部知识卡片索引（32 张）</h2>
       <p class="section-sub">点击分类展开对应的知识卡片，再点卡片标题进入详情页。</p>
       <div class="kcat-grid">
         <details class="kcat">
@@ -214,7 +224,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.0 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -245,7 +255,8 @@
   <a href="./learn.html">📚<span>学习</span></a>
   <a href="./testing.html">🧪<span>测试</span></a>
   <a href="./certification.html">📄<span>认证</span></a>
-  <a href="./resources.html">🗂️<span>导航</span></a>
+  <a href="./industries.html">🏭<span>行业</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
 </body>
 </html>

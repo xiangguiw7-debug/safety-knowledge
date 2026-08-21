@@ -11,6 +11,8 @@
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/search.css">
+
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
 <body>
   <header class="site-header">
@@ -23,14 +25,12 @@
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
       <nav class="nav" id="nav">
         <a href="../index.html">首页</a>
-        <a href="./learn.html" class="active">学习地图</a>
-        <a href="./tools.html">计算工具</a>
-        <a href="./industries.html">行业筛选</a>
-        <a href="./materials.html">材料库</a>
-        <a href="./glossary.html">术语表</a>
-        <a href="./resources.html">资源</a><a href="./quiz.html">答题测验</a>
-        <a href="./refs.html">参考中心</a>
-        
+        <a href="./learn.html" class="active">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
       </nav>
     </div>
   </header>
@@ -56,7 +56,7 @@
             <li><a href="#shock">防电击</a>（四模块）是地基</li>
             <li><a href="./industries.html">行业筛选</a>找产品类目</li>
             <li><a href="./standards.html">标准文件</a>核对 GB 原文</li>
-            <li><a href="./tools.html">计算工具</a>估算间距耐压</li>
+            <li><a href="./tools.html#tool-spacing">计算工具</a>估算间距耐压</li>
             <li><a href="./certification.html">全球认证</a>看 CCC 要求</li>
           </ol>
         </div>
@@ -67,7 +67,7 @@
             <li><a href="./certification.html">全球认证</a>定体系</li>
             <li><a href="./standards.html">标准文件</a>找 IEC/EN</li>
             <li><a href="#emc-cert">EMC/环保认证</a>一起规划</li>
-            <li><a href="./tools.html">计算工具</a>做设计估算</li>
+            <li><a href="./tools.html#tool-spacing">计算工具</a>做设计估算</li>
           </ol>
         </div>
         <div class="card">
@@ -77,7 +77,7 @@
             <li><a href="./hipot.html">耐压</a>与<a href="./surge.html">浪涌</a>；<a href="./leakage.html">泄漏</a>、<a href="./grounding.html">接地</a>、<a href="./selv.html">SELV</a>、<a href="./insulation-coordination.html">绝缘配合</a></li>
             <li><a href="#energy">能量与限能</a>、<a href="#fire">防火</a></li>
             <li><a href="./materials.html">材料库</a>选外壳骨架</li>
-            <li><a href="./tools.html">计算工具</a>（电源预设）</li>
+            <li><a href="./tools.html#tool-spacing">计算工具</a>（电源预设）</li>
           </ol>
         </div>
         <div class="card">
@@ -131,7 +131,7 @@
         <article class="card"><h3>限能电路</h3><p>ES 分级思想：限制可触及能量。</p><p><a class="btn" href="./knowledge.html#energy">知识卡片</a></p></article>
         <article class="card"><h3>保险丝与安规元件</h3><p>过流保护与认证元件选型。</p><p><a class="btn" href="./knowledge.html#components">知识卡片</a></p></article>
         <article class="card"><h3>电池能量</h3><p>能量释放与热失控管理。</p><p><a class="btn" href="./knowledge.html#battery">知识卡片</a></p></article>
-        <article class="card"><h3>电弧引燃</h3><p>电弧能量与防火配合。</p><p><a class="btn" href="./knowledge.html#flame">知识卡片</a></p></article>
+        <article class="card"><h3>电弧引燃</h3><p>电弧能量与防火配合，电弧是典型点火源。</p><p><a class="btn" href="./knowledge.html#fire-design">知识卡片</a></p></article>
       </div>
     </section>
 
@@ -174,7 +174,7 @@
       <p class="section-sub">光、射频、激光、电离辐射各有各的标准。</p>
       <div class="grid grid-4">
         <article class="card"><h3>光生物安全</h3><p>蓝光/紫外/红外，RG 分级。</p><p><a class="btn" href="./knowledge.html#optical">知识卡片</a></p></article>
-        <article class="card"><h3>射频暴露</h3><p>无线设备 SAR 与 RED 要求。</p><p><a class="btn" href="./knowledge.html#emc">EMC 基础</a></p></article>
+        <article class="card"><h3>射频暴露</h3><p>无线设备 SAR 与 RED 要求。</p><p><a class="btn" href="./knowledge.html#radhaz">知识卡片</a></p></article>
         <article class="card"><h3>激光安全</h3><p>激光分级 Class 1–4、AEL 与防护措施。</p><p><a class="btn" href="./knowledge.html#radhaz">知识卡片</a> <a class="btn" href="./hazard-radiation.html">深度页</a></p></article>
         <article class="card"><h3>医疗辐射</h3><p>X 射线设备按 IEC 60601-1-3 与监管注册管理。</p><p><a class="btn" href="./knowledge.html#radhaz">知识卡片</a> <a class="btn" href="./industries.html#medical">医疗行业</a></p></article>
       </div>
@@ -187,7 +187,16 @@
         <article class="card"><h3>RoHS / REACH</h3><p>有害物质限制与 SVHC。</p><p><a class="btn" href="./knowledge.html#rohs">知识卡片</a></p></article>
         <article class="card"><h3>WEEE 与回收</h3><p>电子废弃物与回收标志。</p><p><a class="btn" href="./knowledge.html#rohs">知识卡片</a></p></article>
         <article class="card"><h3>无卤与电池指令</h3><p>无卤材料、电池回收与运输。</p><p><a class="btn" href="./knowledge.html#battery">电池卡片</a></p></article>
-        <article class="card"><h3>生物相容性</h3><p>医疗接触材料的化学安全。</p><p><a class="btn" href="./knowledge.html#biocompat">知识卡片</a></p></article>
+      </div>
+    </section>
+
+    <section id="medical">
+      <h2>🏥 医疗专项</h2>
+      <p class="section-sub">医疗设备按风险管理走：接触路径决定漏电流与绝缘等级，软件按 IEC 62304 分级管控。</p>
+      <div class="grid grid-4">
+        <article class="card"><h3>风险管理</h3><p>ISO 14971 流程：风险分析、评价、控制与残余风险。</p><p><a class="btn" href="./knowledge.html#risk">知识卡片</a></p></article>
+        <article class="card"><h3>生物相容性</h3><p>医疗接触材料的化学安全，按 ISO 10993 分级评估。</p><p><a class="btn" href="./knowledge.html#biocompat">知识卡片</a></p></article>
+        <article class="card"><h3>软件安全与可用性</h3><p>IEC 62304 软件等级与追溯、IEC 62366 可用性工程。</p><p><a class="btn" href="./knowledge.html#software">知识卡片</a></p></article>
       </div>
     </section>
 
@@ -197,7 +206,6 @@
       <div class="grid grid-4">
         <article class="card"><h3>IP 防护等级</h3><p>第一位防固体、第二位防水；IP65 ≠ 可浸水，IP68 必须写深度和时间。</p><p><a class="btn" href="./knowledge.html#ip">查看详细规则</a></p></article>
         <article class="card"><h3>环境与可靠性试验</h3><p>湿热、温循、振动、盐雾、老化与安规试验的先后关系。</p><p><a class="btn" href="./knowledge.html#environment">知识卡片</a> <a class="btn" href="./environment-tests.html">试验页</a></p></article>
-        <article class="card"><h3>污染等级与材料组</h3><p>潮湿环境如何影响爬电距离与材料选择。</p><p><a class="btn" href="./knowledge.html#cti">知识卡片</a> <a class="btn" href="./materials.html">材料库</a></p></article>
         <article class="card"><h3>测试工具与设备清单</h3><p>电气、防火、环境、EMC、电池等测试项目对应的设备、辅助用品与测试环境。</p><p><a class="btn" href="./test-equipment.html">查看总表</a></p></article>
         <article class="card"><h3>测试 SOP（执行级）</h3><p>62 份 SOP：设备、环境、步骤、判定、记录表、检查表，支持打印。</p><p><a class="btn" href="./sop.html">打开 SOP 中心</a></p></article>
         <article class="card"><h3>可靠性测试计划中心</h3><p>按行业筛选可靠性测试：标准、目的、设备、条件与判定。</p><p><a class="btn" href="./reliability.html">按行业筛选</a></p></article>
@@ -216,7 +224,7 @@
 
         <section id="knowledge-index">
       <h2>📚 全部知识卡片</h2>
-      <p>全部 31 张知识卡已移到<a href="./map.html#knowledge">内容地图</a>统一索引，也可直接进入<a href="./knowledge.html">知识卡片库</a>。</p>
+      <p>全部 32 张知识卡已移到<a href="./map.html#knowledge">内容地图</a>统一索引，也可直接进入<a href="./knowledge.html">知识卡片库</a>。</p>
     </section>
     <section id="emc-cert">
       <h2>📡 认证类型：安全 / EMC / 环保</h2>
@@ -234,7 +242,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.0 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -246,8 +254,9 @@
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
-  <a href="./tools.html">🧮<span>工具</span></a>
-  <a href="./resources.html">🗂️<span>导航</span></a>
+  <a href="./testing.html">🧪<span>测试</span></a>
+  <a href="./certification.html">📄<span>认证</span></a>
+  <a href="./industries.html">🏭<span>行业</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>

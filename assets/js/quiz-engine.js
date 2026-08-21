@@ -9,7 +9,7 @@
 
   var MODULE_LABELS = {
     clearance: "电气间隙", creepage: "爬电距离", surge: "雷击浪涌", hipot: "耐压测试",
-    electric: "防电击", energy: "能量危险", fire: "防火", thermal: "热量/温升",
+    shock: "防电击", energy: "能量危险", fire: "防火", thermal: "热量/温升",
     mechanical: "机械", radiation: "辐射", chemical: "化学", reliability: "可靠性",
     ip: "IP 防护", ik: "IK 冲击", leakage: "泄漏电流", grounding: "接地", selv: "SELV",
     emc: "EMC", battery: "电池", materials: "材料/CTI", certification: "认证", framework: "标准结构"

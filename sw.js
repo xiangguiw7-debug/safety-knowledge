@@ -1,4 +1,4 @@
-var CACHE_NAME = "safety-reliability-v1.3.0";
+var CACHE_NAME = "safety-reliability-v1.4.0";
 var CORE_ASSETS = [
   "./", "./index.html", "./manifest.webmanifest",
   "./assets/icons/logo.png",
@@ -13,6 +13,7 @@ var CORE_ASSETS = [
   "./assets/js/theme.js", "./assets/js/glossary-tip.js", "./assets/js/main.js", "./assets/js/calculator-v3.js", "./assets/js/hipot.js", "./assets/js/calculator-extra.js", "./assets/js/industry-data.js", "./assets/js/standards-data.js", "./assets/js/std-quick.js",
   "./assets/js/quiz-v2.js",
   "./assets/js/quiz-auto.js",
+  "./assets/js/feynman.js",
   "./assets/js/knowledge-detail-data.js",
   "./assets/js/standards-data.js",
   "./assets/js/reliability-data.js", "./assets/js/hipot-template.js", "./assets/js/dmcm.js", "./assets/js/voltage.js", "./assets/js/certification.js", "./assets/js/search.js", "./assets/js/materials.js", "./assets/js/glossary.js", "./assets/js/wizard.js", "./assets/js/progress.js", "./assets/js/knowledge-group.js",

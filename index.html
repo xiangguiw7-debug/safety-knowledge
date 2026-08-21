@@ -60,6 +60,8 @@
     "learningResourceType": "教学网站"
   }
   </script>
+
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
 <body>
   <header class="site-header">
@@ -69,11 +71,12 @@
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
       <nav class="nav" id="nav">
         <a href="./index.html" class="active">首页</a>
-        <a href="./pages/resources.html">导航</a>
         <a href="./pages/learn.html">学习</a>
         <a href="./pages/testing.html">测试</a>
         <a href="./pages/certification.html">认证</a>
+        <a href="./pages/industries.html">行业</a>
         <a href="./pages/quiz.html">答题测验</a>
+        <a href="./pages/resources.html">资源</a>
       </nav>
     </div>
   </header>
@@ -222,6 +225,7 @@
             <article class="card"><h3>🛡️ 安全认证</h3><p>CCC、CE-LVD、UL、PSE、KC、BIS、SASO、CB 等。</p><p><a class="btn" href="./pages/certification.html">查认证要求</a></p></article>
             <article class="card"><h3>📡 EMC 认证</h3><p>CE-EMC、FCC、CISPR、RED、车载 CISPR 25。</p><p><a class="btn" href="./pages/emc.html">学 EMC</a> <a class="btn" href="./pages/knowledge.html#emc">EMC 基础</a></p></article>
             <article class="card"><h3>🌱 环保认证</h3><p>RoHS、REACH、WEEE、能效/ErP、电池指令。</p><p><a class="btn" href="./pages/knowledge.html#rohs">环保知识</a></p></article>
+            <article class="card"><h3>🏥 医疗专项</h3><p>风险管理、生物相容性、软件安全与可用性。</p><p><a class="btn" href="./pages/learn.html#medical">进入医疗专项</a></p></article>
             <article class="card"><h3>🔬 测试 SOP</h3><p>62 份执行级 SOP：设备、环境、步骤、判定。</p><p><a class="btn" href="./pages/sop.html">打开 SOP</a></p></article>
             <article class="card"><h3>📈 可靠性计划</h3><p>按行业和测试类别筛选。</p><p><a class="btn" href="./pages/reliability.html">打开可靠性</a></p></article>
             <article class="card"><h3>🧰 测试设备</h3><p>63 项测试设备与判定总表。</p><p><a class="btn" href="./pages/test-equipment.html">设备清单</a></p></article>
@@ -237,18 +241,19 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1.2 · <a href="./pages/changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./pages/feedback.html">纠错反馈</a> · <a href="./pages/data.html">数据备份</a> · <a href="./en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.0 · <a href="./pages/changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./pages/feedback.html">纠错反馈</a> · <a href="./pages/data.html">数据备份</a> · <a href="./en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
   <nav class="bottom-nav" aria-label="底部导航">
-    <a href="./index.html">🏠<span>首页</span></a>
-    <a href="./pages/learn.html">📚<span>学习</span></a>
-    <a href="./pages/testing.html">🧪<span>测试</span></a>
-    <a href="./pages/resources.html">🗂️<span>导航</span></a>
-    <a href="./pages/quiz.html">✅<span>测验</span></a>
-  </nav>
+  <a href="./index.html">🏠<span>首页</span></a>
+  <a href="./pages/learn.html">📚<span>学习</span></a>
+  <a href="./pages/testing.html">🧪<span>测试</span></a>
+  <a href="./pages/certification.html">📄<span>认证</span></a>
+  <a href="./pages/industries.html">🏭<span>行业</span></a>
+  <a href="./pages/quiz.html">✅<span>测验</span></a>
+</nav>
 
   <script src="./assets/js/theme.js"></script>
   <script src="./assets/js/main.js"></script>
