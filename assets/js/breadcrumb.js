@@ -44,7 +44,7 @@
   if (!entry) entry = { group: "资源", hub: link("pages/resources.html") };
 
   var crumb = page.querySelector(".crumb");
-  var html = '<a href=home()>首页</a> / <a href="' + entry.hub + '">' + entry.group + "</a>";
+  var html = '<a href="' + home() + '">首页</a> / <a href="' + entry.hub + '">' + entry.group + "</a>";
   if (entry.label) html += ' / ' + entry.label;
   html += ' / ' + name;
   if (crumb) {

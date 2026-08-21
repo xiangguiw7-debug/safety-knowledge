@@ -1,31 +1,59 @@
-// ===== 工具 Tab 切换（记忆上次选择） =====
+// ===== 工具 Tab 切换（分组手风琴 + 最近使用 + 搜索） =====
 var TOOL_TAB_KEY = "angui-tool-tab";
-var TOOL_TABS = ["spacing", "hipot", "leakage", "discharge", "compare", "grounding", "selv", "thermal", "units", "testlist", "fuse", "glowwire", "battery", "envparams", "emcwave", "mech", "es", "toolmap"];
-var TOOL_META = [
-  { id: "spacing", name: "爬电 / 间隙", g: "防电击与绝缘", d: "正向、反查与双曲线图表" },
-  { id: "hipot", name: "耐压速查", g: "防电击与绝缘", d: "多标准试验电压" },
-  { id: "selv", name: "SELV / 绝缘", g: "防电击与绝缘", d: "限值判定与层数清单" },
-  { id: "grounding", name: "接地连续性", g: "防电击与绝缘", d: "R=V/I 目标电阻" },
-  { id: "discharge", name: "放电时间", g: "能量·热量·防火", d: "RC 泄放与插头预设" },
-  { id: "thermal", name: "温升估算", g: "能量·热量·防火", d: "热阻 / 散热面积" },
-  { id: "fuse", name: "保险丝选型", g: "能量·热量·防火", d: "1.25–1.5× 建议" },
-  { id: "glowwire", name: "灼热丝档位", g: "能量·热量·防火", d: "550–850°C 向导" },
-  { id: "battery", name: "电池能量", g: "能量·热量·防火", d: "Wh 计算" },
-  { id: "leakage", name: "泄漏电流", g: "EMC · 环保 · 认证", d: "Y 电容正算与反算" },
-  { id: "compare", name: "标准对照", g: "EMC · 环保 · 认证", d: "五标准一键对比" },
-  { id: "testlist", name: "测试清单", g: "EMC · 环保 · 认证", d: "安全/EMC/环保项目" },
-  { id: "units", name: "单位换算", g: "工程与试验", d: "mm/mil、dBµV、温度" },
-  { id: "envparams", name: "试验参数", g: "工程与试验", d: "湿热/温循/盐雾" }
-];
 var RECENT_KEY = "angui-tool-recent";
 
+var TOOL_GROUPS = [
+  { id: "shock", label: "⚡ 防电击与绝缘", tools: ["spacing", "hipot", "selv", "grounding", "ovc", "altcorr", "pesize"] },
+  { id: "energy", label: "🔥 能量 · 热量 · 防火", tools: ["discharge", "thermal", "fuse", "glowwire", "battery"] },
+  { id: "emc", label: "📡 EMC · 环保 · 认证", tools: ["leakage", "compare", "testlist"] },
+  { id: "enclosure", label: "🛡️ 外壳防护", tools: ["ip", "ik"] },
+  { id: "mech_env", label: "⚙️ 机械 · 环境 · 可靠性", tools: ["mech", "es", "drop", "envparams"] },
+  { id: "eng", label: "📐 工程速查", tools: ["units", "emcwave", "acdc"] }
+];
+
+var TOOL_META = {
+  spacing: { name: "爬电 / 间隙", d: "正向、反查与双曲线图表" },
+  hipot: { name: "耐压速查", d: "多标准试验电压" },
+  selv: { name: "SELV / 绝缘", d: "限值判定与层数清单" },
+  grounding: { name: "接地连续性", d: "R=V/I 目标电阻" },
+  discharge: { name: "放电时间", d: "RC 泄放与插头预设" },
+  thermal: { name: "温升估算", d: "热阻 / 散热面积" },
+  fuse: { name: "保险丝选型", d: "1.25–1.5× 建议" },
+  glowwire: { name: "灼热丝档位", d: "550–850°C 向导" },
+  battery: { name: "电池能量", d: "Wh 计算" },
+  leakage: { name: "泄漏电流", d: "Y 电容正算与反算" },
+  compare: { name: "标准对照", d: "五标准一键对比" },
+  testlist: { name: "测试清单", d: "安全/EMC/环保项目" },
+  ip: { name: "IP 判定", d: "防尘防水等级" },
+  ik: { name: "IK 判定", d: "抗冲击等级" },
+  mech: { name: "机械距离", d: "ISO 13857 安全距离" },
+  es: { name: "ES 判定", d: "能量分级" },
+  drop: { name: "跌落判定", d: "高度/方向/次数" },
+  envparams: { name: "试验参数", d: "湿热/温循/盐雾" },
+  units: { name: "单位换算", d: "电学/长度/温度" },
+  emcwave: { name: "EMC 波形", d: "波形对比生成" },
+  ovc: { name: "过电压类别", d: "OVC → 冲击耐受" },
+  altcorr: { name: "海拔修正", d: "2000m 以上间隙系数" },
+  pesize: { name: "PE 线径", d: "保护导体截面速查" },
+  acdc: { name: "AC/DC 耐压", d: "峰值等效换算" }
+};
+
+var TOOL_TABS = [];
+TOOL_GROUPS.forEach(function (g) { g.tools.forEach(function (t) { TOOL_TABS.push(t); }); });
+
+function groupOf(tab) {
+  for (var i = 0; i < TOOL_GROUPS.length; i++) {
+    if (TOOL_GROUPS[i].tools.indexOf(tab) !== -1) return TOOL_GROUPS[i];
+  }
+  return null;
+}
+
 function recordTab(tab) {
-  if (tab === "toolmap") return;
   try {
     var arr = JSON.parse(localStorage.getItem(RECENT_KEY)) || [];
     arr = arr.filter(function (x) { return x !== tab; });
     arr.unshift(tab);
-    arr = arr.slice(0, 3);
+    arr = arr.slice(0, 4);
     localStorage.setItem(RECENT_KEY, JSON.stringify(arr));
     renderRecent();
   } catch (e) { /* ignore */ }
@@ -44,47 +72,131 @@ function renderRecent() {
   if (!box) return;
   var arr = [];
   try { arr = JSON.parse(localStorage.getItem(RECENT_KEY)) || []; } catch (e) { /* ignore */ }
+  arr = arr.filter(function (id) { return TOOL_META[id]; });
   box.innerHTML = arr.length
     ? arr.map(function (id) {
-        var m = TOOL_META.filter(function (x) { return x.id === id; })[0];
-        return m ? '<button type="button" class="btn" data-open-tool="' + id + '">' + m.name + "</button>" : "";
+        return '<button type="button" class="btn" data-open-tool="' + id + '">' + TOOL_META[id].name + "</button>";
       }).join("")
-    : '<span class="peak-note">还没有使用记录，点几个工具试试。</span>';
+    : "";
   bindMap();
 }
 
 function renderToolMap() {
-  var box = document.getElementById("toolMap");
+  var box = document.getElementById("toolMapGrid");
   if (!box) return;
-  var q = (document.getElementById("toolSearch") || { value: "" }).value.trim().toLowerCase();
-  var list = TOOL_META.filter(function (m) {
-    return !q || (m.name + m.d + m.g).toLowerCase().indexOf(q) !== -1;
-  });
-  box.innerHTML = list.map(function (m) {
-    return '<button type="button" class="map-card" data-open-tool="' + m.id + '">' +
-      "<b>" + m.name + '</b><span>' + m.g + "</span><small>" + m.d + "</small></button>";
+  box.innerHTML = TOOL_GROUPS.map(function (g) {
+    var btns = g.tools.map(function (id) {
+      return '<button type="button" class="btn" data-open-tool="' + id + '" style="margin:2px 4px 2px 0">' + TOOL_META[id].name + "</button>";
+    }).join("");
+    return '<div style="flex:1 1 100%;margin-bottom:2px"><b style="font-size:12.5px;color:var(--muted)">' + g.label + "</b><br>" + btns + "</div>";
   }).join("");
   bindMap();
+}
+var toolMapToggle = document.getElementById("toolMapToggle");
+if (toolMapToggle) toolMapToggle.addEventListener("click", function () {
+  var box = document.getElementById("toolMapGrid");
+  if (!box) return;
+  box.hidden = !box.hidden;
+  this.textContent = box.hidden ? "🗺️ 全部工具一览" : "🗺️ 收起工具一览";
+});
+
+function renderToolTabs() {
+  var box = document.getElementById("toolTabs");
+  if (!box) return;
+  box.innerHTML = TOOL_GROUPS.map(function (g) {
+    var btns = g.tools.map(function (id) {
+      var cred = TOOL_CRED[id];
+      var mark = cred === "y" ? "🟡 " : (cred === "r" ? "🔴 " : "");
+      return '<button type="button" class="tool-tab-btn" data-tool-tab="' + id + '">' + mark + TOOL_META[id].name + "</button>";
+    }).join("");
+    return '<div class="tool-group-acc" data-tgroup="' + g.id + '">' +
+      '<button type="button" class="tool-group-head" data-tgroup-head="' + g.id + '">' + g.label + '<span class="chev">▾</span></button>' +
+      '<div class="tool-group-body">' + btns + "</div></div>";
+  }).join("");
+  box.querySelectorAll("[data-tgroup-head]").forEach(function (h) {
+    h.addEventListener("click", function () {
+      var gid = h.getAttribute("data-tgroup-head");
+      var el = box.querySelector('[data-tgroup="' + gid + '"]');
+      var open = el.classList.contains("open");
+      box.querySelectorAll(".tool-group-acc").forEach(function (g) { g.classList.remove("open"); });
+      if (!open) el.classList.add("open");
+    });
+  });
+  box.querySelectorAll("[data-tool-tab]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      switchTool(b.getAttribute("data-tool-tab"));
+    });
+  });
 }
 
 function switchTool(tab) {
   document.querySelectorAll("[data-tool-panel]").forEach(function (p) {
     p.hidden = p.getAttribute("data-tool-panel") !== tab;
   });
-  document.querySelectorAll("[data-tool-tab]").forEach(function (b) {
-    var on = b.getAttribute("data-tool-tab") === tab;
-    b.classList.toggle("active", on);
-    b.setAttribute("aria-pressed", on ? "true" : "false");
+  document.querySelectorAll("#toolTabs [data-tool-tab]").forEach(function (b) {
+    b.classList.toggle("active", b.getAttribute("data-tool-tab") === tab);
   });
+  var g = groupOf(tab);
+  if (g) {
+    document.querySelectorAll(".tool-group-acc").forEach(function (el) {
+      el.classList.toggle("open", el.getAttribute("data-tgroup") === g.id);
+    });
+  }
   recordTab(tab);
   try { localStorage.setItem(TOOL_TAB_KEY, tab); } catch (e) { /* ignore */ }
+  var panel = document.querySelector('[data-tool-panel="' + tab + '"]');
+  if (panel && panel.scrollIntoView) {
+    setTimeout(function () { panel.scrollIntoView({ block: "start", behavior: "smooth" }); }, 30);
+  }
 }
 
-document.querySelectorAll("[data-tool-tab]").forEach(function (b) {
-  b.addEventListener("click", function () {
-    switchTool(b.getAttribute("data-tool-tab"));
+function applyToolSearch() {
+  var q = (document.getElementById("toolSearchTop") || { value: "" }).value.trim().toLowerCase();
+  document.querySelectorAll("#toolTabs .tool-group-acc").forEach(function (g) {
+    var any = false;
+    g.querySelectorAll("[data-tool-tab]").forEach(function (b) {
+      var id = b.getAttribute("data-tool-tab");
+      var m = TOOL_META[id] || {};
+      var hit = !q || (m.name + " " + (m.d || "")).toLowerCase().indexOf(q) !== -1;
+      b.classList.toggle("dim", !hit);
+      if (hit) any = true;
+    });
+    if (q) g.classList.toggle("open", any);
   });
-});
+}
+
+// ===== 可信度三档（落实到每个工具结果） =====
+var TOOL_CRED = {
+  spacing: "g", hipot: "y", selv: "g", grounding: "g",
+  discharge: "g", thermal: "y", fuse: "g", glowwire: "g", battery: "g",
+  leakage: "g", compare: "y", testlist: "g",
+  ip: "g", ik: "g", mech: "g", es: "y", drop: "y", envparams: "g",
+  units: "g", emcwave: "g",
+  ovc: "g", altcorr: "g", pesize: "y", acdc: "g"
+};
+var CRED_LABELS = { g: "🟢 教学参考", y: "🟡 需核对", r: "🔴 查标准" };
+function injectCred() {
+  Object.keys(TOOL_CRED).forEach(function (id) {
+    var panel = document.querySelector('[data-tool-panel="' + id + '"]');
+    if (!panel) return;
+    panel.querySelectorAll(".result").forEach(function (el) {
+      if (el.querySelector(".cred-tag")) return;
+      var tag = document.createElement("span");
+      tag.className = "cred-tag " + TOOL_CRED[id];
+      tag.textContent = CRED_LABELS[TOOL_CRED[id]];
+      el.appendChild(tag);
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "btn cred-copy";
+      btn.textContent = "复制结果";
+      btn.addEventListener("click", function () {
+        var text = (TOOL_META[id] ? TOOL_META[id].name + "\n" : "") + el.textContent.replace(/\s+/g, " ").trim();
+        copyText(text, btn);
+      });
+      el.appendChild(btn);
+    });
+  });
+}
 
 // ===== 正向 / 反查模式 =====
 function switchCalcMode(mode) {
@@ -248,8 +360,41 @@ function updateReverse() {
     "（" + cr.msg + "）　·　间隙：最大冲击耐受 " + (imp === null ? "不满足" : imp + " V") +
     "（含海拔 ×" + fmt(factorOf(alt)) + "、绝缘 ×" + fmt(mult) + "）" +
     (ovc ? "　·　" + sys + "V 系统下最多允许 " + ovc + "。" : "");
+  var mktEl = $("rvMarket");
+  if (mktEl) {
+    if (imp === null) {
+      mktEl.textContent = "";
+    } else {
+      mktEl.textContent = "覆盖市场（按间隙）：" + [120, 230, 400].map(function (sv) {
+        var o = null;
+        ["IV", "III", "II", "I"].forEach(function (c) {
+          if (IMPULSE_DATA[sv][c] <= imp && o === null) o = c;
+        });
+        return sv + "V→" + (o ? "类别 " + o : "不满足");
+      }).join("　·　");
+    }
+  }
   buildReverseChart(d, pd, gp, ins, alt, cr);
   renderScenarios(d, pd, gp, ins);
+}
+
+// 统一复制：结果文本进剪贴板，并给按钮短暂反馈
+function copyText(text, btn) {
+  function done() {
+    if (btn) { var old = btn.textContent; btn.textContent = "已复制"; setTimeout(function () { btn.textContent = old; }, 1600); }
+    if (window.AnGuiUX) window.AnGuiUX.toast("已复制到剪贴板");
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done).catch(done); }
+  else { var ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done(); }
+}
+
+function copyReverse() {
+  var text = "反查结果（安规计算工具）\n" +
+    "实际间距：" + $("rvDist").value + " mm\n" +
+    "最大工作电压（爬电）：" + $("rvCreep").textContent + "\n" +
+    "最大冲击耐受（间隙）：" + $("rvClear").textContent + " · " + $("rvOvc").textContent + "\n" +
+    $("rvNote").textContent + "\n" + $("rvMarket").textContent;
+  copyText(text, $("rvCopyBtn"));
 }
 
 // ===== 标准对照 =====
@@ -364,18 +509,71 @@ function updateThermal() {
 
 // ===== 工程单位换算 =====
 var uLock = false;
+function uFmt(v) {
+  if (!isFinite(v)) return "";
+  return parseFloat(v.toFixed(6)).toString();
+}
+// 线性单位组：每个单位「1 单位 = factor × 基准单位」，基准系数为 1
+var LINEAR_GROUPS = {
+  len: { units: { uKm: 1e3, uM: 1, uCm: 1e-2, uMm: 1e-3, uUm: 1e-6, uMil: 2.54e-5, uInch: 2.54e-2 } },
+  cur: { units: { uA: 1, uAm: 1e-3, uAu: 1e-6, uAn: 1e-9 } },
+  vol: { units: { uVk: 1e3, uV: 1, uVm: 1e-3 } },
+  frq: { units: { uGHz: 1e9, uMHz: 1e6, uKHz: 1e3, uHz: 1 } },
+  tim: { units: { uSec: 1, uMs: 1e-3, uUs: 1e-6, uNs: 1e-9 } }
+};
+var GROUP_INDEX = {};
+Object.keys(LINEAR_GROUPS).forEach(function (g) {
+  Object.keys(LINEAR_GROUPS[g].units).forEach(function (f) { GROUP_INDEX[f] = g; });
+});
+
+function linearConvert(srcId) {
+  var g = LINEAR_GROUPS[GROUP_INDEX[srcId]];
+  if (!g) return;
+  var v = Number($(srcId).value);
+  if (isNaN(v)) v = 0;
+  var base = v * g.units[srcId];
+  Object.keys(g.units).forEach(function (f) {
+    if (f !== srcId) $(f).value = uFmt(base / g.units[f]);
+  });
+}
+
 function unitFrom(id) {
   if (uLock) return;
   uLock = true;
   try {
     var v = Number($(id).value);
-    if (id === "uMm") $("uMil").value = (v * 39.3701).toFixed(2);
-    if (id === "uMil") $("uMm").value = (v / 39.3701).toFixed(3);
-    if (id === "uUv") $("uDb").value = v > 0 ? (20 * Math.log10(v)).toFixed(1) : "";
-    if (id === "uDb") $("uUv").value = (Math.pow(10, v / 20)).toFixed(1);
-    if (id === "uC") $("uF").value = (v * 9 / 5 + 32).toFixed(1);
-    if (id === "uF") $("uC").value = ((v - 32) * 5 / 9).toFixed(1);
+    if (isNaN(v)) v = 0;
+    if (GROUP_INDEX[id]) linearConvert(id);
+    else if (id === "uUv") $("uDb").value = v > 0 ? (20 * Math.log10(v)).toFixed(1) : "";
+    else if (id === "uDb") $("uUv").value = (Math.pow(10, v / 20)).toFixed(1);
+    else if (id === "uC") $("uF").value = (v * 9 / 5 + 32).toFixed(1);
+    else if (id === "uF") $("uC").value = ((v - 32) * 5 / 9).toFixed(1);
+    else if (id === "uJ") $("uWh").value = uFmt(v / 3600);
+    else if (id === "uWh") $("uJ").value = uFmt(v * 3600);
   } finally { uLock = false; }
+}
+
+// ===== 电学换算：欧姆定律 V = I·R，功率 P = V·I =====
+var ohmSrc = []; // 最近编辑的两个字段作为“已知”
+function ohmSet(id) {
+  var v = parseFloat($(id).value);
+  ohmSrc = ohmSrc.filter(function (x) { return x !== id; });
+  if (isFinite(v)) { ohmSrc.push(id); if (ohmSrc.length > 2) ohmSrc.shift(); }
+  computeOhm();
+}
+function ohmVal(id) { var v = parseFloat($(id).value); return isFinite(v) ? v : NaN; }
+function computeOhm() {
+  if (ohmSrc.length < 2) return;
+  var V = ohmVal("uOhmV"), I = ohmVal("uOhmI"), R = ohmVal("uOhmR"), P = ohmVal("uOhmP");
+  var kn = {}; ohmSrc.forEach(function (f) { kn[f] = true; });
+  function set(id, val) { if (!kn[id]) $(id).value = uFmt(val); }
+  var hv = kn.uOhmV, hi = kn.uOhmI, hr = kn.uOhmR, hp = kn.uOhmP;
+  if (hv && hi) { set("uOhmR", V / I); set("uOhmP", V * I); }
+  else if (hv && hr) { set("uOhmI", V / R); set("uOhmP", V * V / R); }
+  else if (hv && hp) { set("uOhmI", P / V); set("uOhmR", V * V / P); }
+  else if (hi && hr) { set("uOhmV", I * R); set("uOhmP", I * I * R); }
+  else if (hi && hp) { set("uOhmV", P / I); set("uOhmR", P / (I * I)); }
+  else if (hr && hp) { set("uOhmV", Math.sqrt(P * R)); set("uOhmI", Math.sqrt(P / R)); }
 }
 
 // ===== 测试项目清单生成器 =====
@@ -528,6 +726,76 @@ function applyDischargePreset(key) {
   if (window.AnGuiUX) window.AnGuiUX.toast("已载入：" + p.label);
 }
 
+// ===== 新增：过电压类别 / 海拔修正 / PE 线径 / AC-DC 换算 =====
+function updateOvc() {
+  var sys = Number($("ovcSys").value);
+  var cls = $("ovcClass").value;
+  var imp = (IMPULSE_DATA[sys] && IMPULSE_DATA[sys][cls]) || null;
+  if (!imp) { $("ovcResult").textContent = "--"; $("ovcNote").textContent = ""; return; }
+  $("ovcResult").textContent = imp;
+  $("ovcNote").textContent = sys + "V 系统、" + cls + " 类（" + (cls === "I" ? "SPD 后" : cls === "II" ? "插头连接" : cls === "III" ? "固定安装" : "进线") + "）的额定冲击耐受 " + imp + "V。电气间隙查表以该冲击值 + 海拔修正为准。";
+}
+function updateAltCorr() {
+  var alt = Number($("altcAlt").value);
+  var gap = parseFloat($("altcGap").value);
+  var f = ALTITUDE_DATA[alt] || 1;
+  $("altcFactor").textContent = f;
+  $("altcResult").textContent = isNaN(gap) || gap <= 0 ? "--" : uFmt(gap * f);
+  $("altcNote").textContent = alt + "m 修正系数 " + f + "；修正后间隙 = " + (isNaN(gap) || gap <= 0 ? "--" : uFmt(gap * f) + "mm") + "（仅修正电气间隙，爬电距离不随海拔修正）。";
+}
+function updatePeSize() {
+  var s = parseFloat($("peS").value);
+  if (isNaN(s) || s <= 0) { $("peResult").textContent = "--"; $("peNote").textContent = "请输入有效的相线截面（mm²）。"; return; }
+  var pe, rule;
+  if (s <= 16) { pe = s; rule = "S ≤ 16mm² → PE = S（同截面）"; }
+  else if (s <= 35) { pe = 16; rule = "16 < S ≤ 35mm² → PE = 16mm²"; }
+  else { pe = s / 2; rule = "S > 35mm² → PE = S/2"; }
+  $("peResult").textContent = (Math.round(pe * 10) / 10);
+  $("peNote").textContent = "规则（IEC 60364-5-54 表 54.2 教学简化）：" + rule + "。正式设计还需按 54.2.4 校核故障电流与断开时间。";
+}
+function updateAcDc(id) {
+  if (id === "acdcAc") {
+    var ac = parseFloat($("acdcAc").value);
+    if (isNaN(ac)) { $("acdcDc").value = ""; $("acdcNote").textContent = ""; return; }
+    $("acdcDc").value = Math.round(ac * Math.SQRT2);
+    $("acdcNote").textContent = "DC ≈ AC × √2 = " + ac + " × 1.414 = " + Math.round(ac * Math.SQRT2) + "V（峰值等效）";
+  } else {
+    var dc = parseFloat($("acdcDc").value);
+    if (isNaN(dc)) { $("acdcAc").value = ""; $("acdcNote").textContent = ""; return; }
+    $("acdcAc").value = Math.round(dc / Math.SQRT2);
+    $("acdcNote").textContent = "AC ≈ DC ÷ √2 = " + dc + " ÷ 1.414 = " + Math.round(dc / Math.SQRT2) + "V";
+  }
+}
+
+// ===== 新工具复制 =====
+// ===== 示例填充（预设） =====
+var TOOL_PRESETS = {
+  thermal_adapter: { set: { thMode: "rth", thBase: "40", thP: "5", thRth: "15" }, fn: updateThermal, label: "电源适配器（5W / 热阻 15K/W / 40°C）" },
+  thermal_led: { set: { thMode: "rth", thBase: "40", thP: "10", thRth: "8" }, fn: updateThermal, label: "LED 驱动（10W / 热阻 8K/W / 40°C）" },
+  fuse_power: { set: { fuseI: "2" }, fn: updateFuse, label: "电源（2A 稳态电流）" },
+  fuse_charger: { set: { fuseI: "1" }, fn: updateFuse, label: "充电器（1A 稳态电流）" },
+  ycap_charger: { set: { lkCap: "1000", lkV: "230", lkF: "50" }, fn: updateLeakage, label: "充电器（Y 电容 1000pF）" },
+  ycap_common: { set: { lkCap: "4700", lkV: "230", lkF: "50" }, fn: updateLeakage, label: "通用电源（Y 电容 4700pF）" },
+  battery_18650: { set: { batV: "3.7", batAh: "3" }, fn: updateBattery, label: "18650 电池（3.7V / 3000mAh）" },
+  battery_tool: { set: { batV: "20", batAh: "2" }, fn: updateBattery, label: "电动工具电池（20V / 2Ah）" },
+  gnd_25a: { set: { gndI: "25", gndV: "2.5" }, fn: updateGrounding, label: "I 类 25A 测试（目标 0.1Ω）" },
+  gnd_10a: { set: { gndI: "10", gndV: "1" }, fn: updateGrounding, label: "便携 10A 测试（目标 0.1Ω）" }
+};
+function applyToolPreset(key) {
+  var p = TOOL_PRESETS[key];
+  if (!p) return;
+  Object.keys(p.set).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.value = p.set[id];
+  });
+  if (p.fn) p.fn();
+  if (window.AnGuiUX) window.AnGuiUX.toast("已载入：" + p.label);
+}
+function copyOvc() { copyText("过电压类别速查（安规计算工具）\n冲击耐受：" + $("ovcResult").textContent + "V\n" + $("ovcNote").textContent, $("ovcCopyBtn")); }
+function copyAltCorr() { copyText("海拔修正（安规计算工具）\n海拔 " + $("altcAlt").value + "m → 系数 " + $("altcFactor").textContent + "\n修正后间隙：" + $("altcResult").textContent + "mm", $("altcCopyBtn")); }
+function copyPeSize() { copyText("PE 线径速查（安规计算工具）\n相线 " + $("peS").value + "mm² → PE " + $("peResult").textContent + "mm²\n" + $("peNote").textContent, $("peCopyBtn")); }
+function copyAcDc() { copyText("AC/DC 耐压换算（安规计算工具）\n" + $("acdcNote").textContent, $("acdcCopyBtn")); }
+
 
 
 // ===== EMC 波形对比生成器 =====
@@ -637,11 +905,237 @@ function resetSpacing() {
   if (window.AnGuiUX) window.AnGuiUX.toast("参数已重置");
 }
 
+// ===== IP 等级判定（完整版） =====
+var IP_SOLID = {
+  0: { n: "无防护", d: "不承诺任何固体防护" },
+  1: { n: "直径 ≥ 50mm", d: "50mm 球体、约 50N，手背不能进入" },
+  2: { n: "直径 ≥ 12.5mm", d: "铰接试指、约 10N，手指不能进入" },
+  3: { n: "直径 ≥ 2.5mm", d: "2.5mm 钢棒、约 3N，常用工具不能进入" },
+  4: { n: "直径 ≥ 1.0mm", d: "1.0mm 钢线、约 1N，细线不能进入" },
+  5: { n: "防尘", d: "粉尘箱 8h + 负压，允许少量粉尘进入但不影响运行" },
+  6: { n: "尘密", d: "粉尘箱 8h + 负压，试验后无粉尘进入" }
+};
+var IP_WATER = {
+  0: { n: "无防护", d: "不承诺防水" },
+  1: { n: "垂直滴水", d: "垂直落下的水滴无有害影响" },
+  2: { n: "15° 倾斜滴水", d: "外壳倾斜 15° 时滴水无有害影响" },
+  3: { n: "淋水", d: "与垂直成 ±60° 淋水无有害影响" },
+  4: { n: "溅水", d: "任意方向溅水无有害影响" },
+  5: { n: "喷水", d: "任意方向喷水无有害影响" },
+  6: { n: "强力喷水", d: "任意方向强力喷水无有害影响" },
+  7: { n: "短时浸水", d: "1m 深浸水 30min 无有害影响" },
+  8: { n: "持续浸水", d: "按约定更深/更久浸水无有害影响" }
+};
+var IP_SCENES = [
+  { id: "internal", label: "内部模块", s: 0, w: 0, note: "封装在设备/机柜内部，外壳不直接暴露。" },
+  { id: "hand", label: "大件防护", s: 1, w: 0, note: "大型设备，只需防手背（≥50mm）进入。" },
+  { id: "tool", label: "工具防护", s: 3, w: 0, note: "工业控制柜/配电箱，防工具（≥2.5mm）进入。" },
+  { id: "indoor_dry", label: "室内干燥", s: 2, w: 0, note: "办公室/卧室：防手指接触即可，无需防水。" },
+  { id: "condense", label: "冷凝滴水", s: 2, w: 1, note: "室内偶有冷凝水滴落（冷藏设备/管道附近）。" },
+  { id: "tilt", label: "倾斜滴水", s: 2, w: 2, note: "倾斜安装，15° 滴水无有害影响。" },
+  { id: "rain_light", label: "户外小雨", s: 5, w: 3, note: "户外轻微淋雨（60° 淋水）。" },
+  { id: "indoor_wet", label: "室内潮湿", s: 4, w: 4, note: "厨房/卫浴：防细线 + 防溅水。" },
+  { id: "outdoor", label: "户外一般", s: 5, w: 4, note: "路灯/庭院：防尘 + 防溅水。" },
+  { id: "rain", label: "户外淋雨", s: 6, w: 5, note: "直接淋雨：尘密 + 防喷水。" },
+  { id: "dust", label: "工业粉尘", s: 6, w: 0, note: "粉尘环境：尘密，防水按现场再定。" },
+  { id: "wash", label: "喷淋冲洗", s: 6, w: 6, note: "洗车/喷水：尘密 + 强力喷水。" },
+  { id: "dip", label: "短时浸水", s: 5, w: 7, note: "可能短时浸水：防尘 + 短时浸水。" },
+  { id: "sub", label: "持续浸水", s: 6, w: 8, note: "水下使用：尘密 + 持续浸水（更深更久按约定）。" }
+];
+var IP_AUX = { "": "无", A: "A · 手背", B: "B · 手指", C: "C · 工具", D: "D · 金属线" };
+var IP_SUPP = { "": "无", H: "H · 高压设备", M: "M · 防水试验时运动", S: "S · 防水试验时静止", W: "W · 特定气候" };
+function updateIp() {
+  var s = Number($("ipSolid").value);
+  var w = Number($("ipWater").value);
+  var aux = $("ipAux") ? $("ipAux").value : "";
+  var supp = $("ipSupp") ? $("ipSupp").value : "";
+  $("ipResult").textContent = "IP" + s + w + aux + supp;
+  $("ipSolidNote").textContent = "第一位（防固体）：" + IP_SOLID[s].n + "：" + IP_SOLID[s].d;
+  $("ipWaterNote").textContent = "第二位（防水）：" + IP_WATER[w].n + "：" + IP_WATER[w].d;
+  var an = $("ipAuxNote"); if (an) an.textContent = "附加字母：" + IP_AUX[aux || ""] + "（可选）";
+  var sn = $("ipSuppNote"); if (sn) sn.textContent = "补充字母：" + IP_SUPP[supp || ""] + "（可选）";
+  var matched = IP_SCENES.filter(function (x) { return x.s === s && x.w === w; });
+  var sceneNote = matched.length ? "对应典型场景：" + matched.map(function (x) { return x.label; }).join("、") : "自定义组合：两位数字的含义已在上方分别说明，可直接对照选用。";
+  $("ipNote").innerHTML = sceneNote + "<br>注意：IP 只描述外壳密封，不替代电气间隙、爬电距离与污染等级。" +
+    '　<a href="./knowledge-detail.html?id=ip">IP 知识卡 →</a>　<a href="./sop-ip.html">IP 试验 SOP →</a>' +
+    '<br>相关行业：<a href="./industries.html#lighting">灯具</a> · <a href="./industries.html#charging">充电桩</a> · <a href="./industries.html#tools">电动工具</a> · <a href="./industries.html#appliance">家电</a>';
+}
+function copyIp() {
+  var text = "IP 判定（安规计算工具）\n" +
+    "建议等级：" + $("ipResult").textContent + "\n" +
+    $("ipSolidNote").textContent + "\n" +
+    $("ipWaterNote").textContent + "\n" +
+    ($("ipAuxNote") ? $("ipAuxNote").textContent + "\n" : "") +
+    ($("ipSuppNote") ? $("ipSuppNote").textContent + "\n" : "");
+  copyText(text, $("ipCopyBtn"));
+}
+function applyIpScene(id) {
+  var m = IP_SCENES.filter(function (x) { return x.id === id; })[0];
+  if (!m) return;
+  $("ipSolid").value = m.s;
+  $("ipWater").value = m.w;
+  document.querySelectorAll("[data-ip-scene]").forEach(function (b) {
+    b.classList.toggle("active", b.getAttribute("data-ip-scene") === id);
+  });
+  updateIp();
+}
+
+// ===== IK 等级判定（完整版） =====
+var IK_LEVELS = [
+  { ik: "IK00", e: "无防护", env: "完全受保护：装在柜内/面板后/不可触及，基本无冲击风险" },
+  { ik: "IK01", e: "0.14 J", env: "嵌入式/高处：天花板凹槽、高处固定，基本碰不到" },
+  { ik: "IK02", e: "0.2 J", env: "室内高处固定：高挂灯具、贴墙高处" },
+  { ik: "IK03", e: "0.35 J", env: "室内一般固定：普通灯具、探测器" },
+  { ik: "IK04", e: "0.5 J", env: "室内固定：墙面开关、插座、普通设备" },
+  { ik: "IK05", e: "0.7 J", env: "半户外/公共：走廊、大堂" },
+  { ik: "IK06", e: "1 J", env: "公共区域：商店、学校" },
+  { ik: "IK07", e: "2 J", env: "户外灯具、充电桩外壳" },
+  { ik: "IK08", e: "5 J", env: "户外公共设施：灯杆、配电箱、防破坏灯具" },
+  { ik: "IK09", e: "10 J", env: "防破坏/工业重型外壳" },
+  { ik: "IK10", e: "20 J", env: "极高防破坏：地铁、户外终端" }
+];
+var IK_SCENES = [
+  { id: "protected", lv: 0, label: "完全保护" },
+  { id: "recessed", lv: 1, label: "嵌入/高处" },
+  { id: "highwall", lv: 2, label: "高处固定" },
+  { id: "indoor", lv: 3, label: "室内一般" },
+  { id: "indoor_fixed", lv: 4, label: "室内固定" },
+  { id: "semi_public", lv: 5, label: "半户外" },
+  { id: "public", lv: 6, label: "公共区域" },
+  { id: "outdoor", lv: 7, label: "户外灯具" },
+  { id: "outdoor_public", lv: 8, label: "户外公共" },
+  { id: "vandal", lv: 9, label: "防破坏" },
+  { id: "high_vandal", lv: 10, label: "极高防破坏" }
+];
+function updateIk() {
+  var lv = Number($("ikLevel").value);
+  var m = IK_LEVELS[lv];
+  $("ikResult").textContent = m.ik;
+  $("ikEnergy").textContent = m.e;
+  $("ikMethod").textContent = lv === 0 ? "—" : (lv <= 6 ? "弹簧冲击锤" : "摆锤冲击（或等效垂直落锤）");
+  var envEl = $("ikEnv");
+  if (envEl) envEl.textContent = m.env;
+  $("ikNote").innerHTML = "IK 只考核外壳抗冲击，不替代内部结构强度与防触电距离；冲击后要复测外观、功能与安规。" +
+    '　<a href="./knowledge-detail.html?id=ik">IK 知识卡 →</a>　<a href="./sop-ik.html">IK 试验 SOP →</a>' +
+    '<br>相关行业：<a href="./industries.html#charging">充电桩</a> · <a href="./industries.html#machinery">工业机械</a> · <a href="./industries.html#tools">电动工具</a> · <a href="./industries.html#security">安防</a>';
+}
+function copyIk() {
+  var text = "IK 判定（安规计算工具）\n" +
+    "建议等级：" + $("ikResult").textContent + "\n" +
+    "冲击能量：" + $("ikEnergy").textContent + "\n" +
+    "试验方法：" + $("ikMethod").textContent;
+  copyText(text, $("ikCopyBtn"));
+}
+function applyIkScene(id) {
+  var m = IK_SCENES.filter(function (x) { return x.id === id; })[0];
+  if (!m) return;
+  $("ikLevel").value = m.lv;
+  document.querySelectorAll("[data-ik-scene]").forEach(function (b) {
+    b.classList.toggle("active", b.getAttribute("data-ik-scene") === id);
+  });
+  updateIk();
+}
+
+// ===== 跌落判定（标准版） =====
+var DROP_RULES = {
+  "60068_general": { std: "IEC 60068-2-31", clause: "自由跌落（Ec）", dir: "最不利姿态（姿态/次数/高度由产品标准规定）", times: "通常 1–3 次", surface: "混凝土或硬木地板", weightBased: true, stdId: "60068", judge: "外观/功能正常，带电件不可触及，绝缘与间距不受损" },
+  "60335_handheld": { std: "IEC 60335-1", clause: "第 20 章", dir: "最不利方向", times: "3 次", surface: "硬木地板（≥13mm，铺于水泥地）", weightBased: false, fixedH: "1.0 m", stdId: "60335", judge: "外壳不得破损到可触及带电件，绝缘与间距不得受损" },
+  "60335_portable": { std: "IEC 60335-1", clause: "第 20 章", dir: "正常使用姿态", times: "按标准", surface: "硬木地板", weightBased: true, stdId: "60335", judge: "复测外观、功能与安规" },
+  "62368_handheld": { std: "IEC 62368-1", clause: "机械强度", dir: "最不利方向", times: "按标准", surface: "硬木地板", weightBased: false, fixedH: "1.0 m", stdId: "62368", judge: "外壳不得破裂到可触及危险部件" },
+  "62368_portable": { std: "IEC 62368-1", clause: "机械强度", dir: "最不利方向", times: "按标准", surface: "硬木地板", weightBased: true, stdId: "62368", judge: "外壳不得破裂到可触及危险部件" },
+  "60601_handheld": { std: "IEC 60601-1", clause: "机械强度", dir: "最不利方向", times: "按标准", surface: "硬木地板", weightBased: false, fixedH: "1.0 m", stdId: "60601", judge: "外壳不得破损到可触及危险部件，绝缘与间距不受损" },
+  "60601_portable": { std: "IEC 60601-1", clause: "机械强度", dir: "最不利方向", times: "按标准", surface: "硬木地板", weightBased: true, stdId: "60601", judge: "复测外观、功能、耐压、泄漏" },
+  "62133_battery": { std: "IEC 62133", clause: "跌落（1m 自由跌落）", dir: "最不利方向", times: "按标准（常见 3 次）", surface: "混凝土或钢面", weightBased: false, fixedH: "1.0 m", stdId: "62133", judge: "不起火、不泄漏、不爆炸，电压/内阻正常" },
+  "ista_package": { std: "ISTA 1A", clause: "跌落试验", dir: "一角三棱六面（最脆弱角→3条棱→6个面）", times: "10 次（角1+棱3+面6）", surface: "混凝土或钢板", weightBased: true, stdId: "ista", judge: "包装与产品完好，产品功能正常" },
+  "ista2a_package": { std: "ISTA 2A", clause: "跌落（部分模拟运输）", dir: "一角三棱六面（同 1A）", times: "10 次（角1+棱3+面6）", surface: "混凝土或钢板", weightBased: true, stdId: "ista", judge: "包装与产品完好，产品功能正常" },
+  "ista3a_package": { std: "ISTA 3A", clause: "跌落（小包裹，分4类形态）", dir: "标准件一角三棱六面；小/扁平/长件按形态", times: "标准 10 次，其余 8–9 次", surface: "混凝土或钢板", weightBased: true, stdId: "ista", judge: "包装与产品完好，产品功能正常" },
+  "gb4857_road": { std: "GB/T 4857.5", clause: "包装跌落 · 公路运输", dir: "面/棱/角", times: "按标准", surface: "混凝土或钢板", weightBased: true, stdId: "gb4857_road", judge: "包装与产品完好" },
+  "gb4857_rail": { std: "GB/T 4857.5", clause: "包装跌落 · 铁路运输", dir: "面/棱/角", times: "按标准", surface: "混凝土或钢板", weightBased: true, stdId: "gb4857_rail", judge: "包装与产品完好" },
+  "gb4857_air": { std: "GB/T 4857.5", clause: "包装跌落 · 航空运输", dir: "面/棱/角", times: "按标准", surface: "混凝土或钢板", weightBased: true, stdId: "gb4857_air", judge: "包装与产品完好" },
+  "gb2423_drop": { std: "GB/T 2423.7", clause: "自由跌落（等效 IEC 60068-2-31）", dir: "最不利姿态（同 60068-2-31）", times: "通常 1–3 次", surface: "混凝土或硬木地板", weightBased: true, stdId: "gb2423", judge: "外观/功能正常，带电件不可触及" }
+};
+function dropHeightByWeight(w, stdId) {
+  if (isNaN(w) || w < 0) return null;
+  if (stdId === "ista") {
+    if (w < 9.5) return "0.76 m";
+    if (w < 18.6) return "0.61 m";
+    if (w < 27.7) return "0.46 m";
+    if (w < 45.4) return "0.31 m";
+    if (w <= 68) return "0.20 m";
+    return "超出 68kg（按标准）";
+  }
+  if (stdId === "gb4857_road" || stdId === "gb4857_rail" || stdId === "gb4857_air") {
+    var air = stdId === "gb4857_air";
+    var t = air
+      ? [[10, "1.0"], [20, "0.8"], [30, "0.6"], [40, "0.5"], [50, "0.4"], [Infinity, "0.3"]]
+      : [[10, "0.8"], [20, "0.6"], [30, "0.5"], [40, "0.4"], [50, "0.3"], [Infinity, "0.2"]];
+    for (var i = 0; i < t.length; i++) { if (w < t[i][0]) return t[i][1] + " m"; }
+    return t[t.length - 1][1] + " m";
+  }
+  if (w < 1) return "1.0 m";
+  if (w < 5) return "0.8 m";
+  if (w < 10) return "0.5 m";
+  return "0.25 m";
+}
+var DROP_SURFACES = {
+  default: "按标准默认",
+  concrete: "混凝土",
+  hardwood: "硬木地板（≥13mm 铺水泥地）",
+  steel: "钢板",
+  marble: "大理石"
+};
+function updateDrop() {
+  var key = $("dropType").value;
+  var m = DROP_RULES[key];
+  if (!m) return;
+  var w = parseFloat($("dropWeight").value);
+  var h = m.weightBased ? (dropHeightByWeight(w, m.stdId) || "输入重量") : m.fixedH;
+  $("dropResult").textContent = h;
+  $("dropStdLabel").textContent = m.std + " · " + m.clause;
+  var surfEl = $("dropSurfaceSel");
+  var surf = surfEl && surfEl.value !== "default" ? DROP_SURFACES[surfEl.value] : m.surface;
+  $("dropSurface").textContent = surf;
+  $("dropDir").textContent = m.dir;
+  $("dropTimes").textContent = m.times;
+  $("dropJudge").textContent = m.judge;
+  var wNote;
+  if (m.weightBased) {
+    if (m.stdId === "ista") {
+      wNote = "　·　ISTA 分档：≤9.5kg→0.76m、≤18.6kg→0.61m、≤27.7kg→0.46m、≤45.4kg→0.31m、≤68kg→0.20m";
+    } else if (m.stdId === "gb4857_air") {
+      wNote = "　·　GB/T 4857.5 航空分档：≤10kg→1.0m、≤20kg→0.8m、≤30kg→0.6m、≤40kg→0.5m、≤50kg→0.4m、&gt;50kg→0.3m";
+    } else if (m.stdId === "gb4857_road" || m.stdId === "gb4857_rail") {
+      wNote = "　·　GB/T 4857.5 公路/铁路分档：≤10kg→0.8m、≤20kg→0.6m、≤30kg→0.5m、≤40kg→0.4m、≤50kg→0.3m、&gt;50kg→0.2m";
+    } else {
+      wNote = "　·　重量分档：&lt;1kg→1.0m、1–5kg→0.8m、5–10kg→0.5m、&gt;10kg→0.25m";
+    }
+  } else {
+    wNote = "　·　固定高度，不按重量";
+  }
+  $("dropNote").innerHTML = wNote +
+    '　<a href="./sop-drop.html">跌落 SOP →</a>　<a href="./knowledge-detail.html?id=environment">环境可靠性知识卡 →</a>' +
+    '<br>相关行业：<a href="./industries.html#battery">电池</a> · <a href="./industries.html#appliance">家电</a> · <a href="./industries.html#ict">IT/通信</a> · <a href="./industries.html#medical">医疗</a>';
+}
+function copyDrop() {
+  var text = "跌落判定（安规计算工具）\n" +
+    $("dropStdLabel").textContent + "\n" +
+    "建议跌落高度：" + $("dropResult").textContent + "\n" +
+    "跌落表面：" + $("dropSurface").textContent + "\n" +
+    "方向：" + $("dropDir").textContent + "\n" +
+    "次数：" + $("dropTimes").textContent + "\n" +
+    "判定：" + $("dropJudge").textContent;
+  copyText(text, $("dropCopyBtn"));
+}
+
 // ===== 事件绑定 =====
 [["lkCap", updateLeakage], ["lkV", updateLeakage], ["lkF", updateLeakage],
  ["ycLimit", updateYCap], ["ycV", updateYCap], ["ycF", updateYCap],
  ["thMode", updateThermal], ["thBase", updateThermal], ["thP", updateThermal], ["thRth", updateThermal], ["thArea", updateThermal],
- ["uMm", unitFrom], ["uMil", unitFrom], ["uUv", unitFrom], ["uDb", unitFrom], ["uC", unitFrom], ["uF", unitFrom],
+ ["uKm", unitFrom], ["uM", unitFrom], ["uCm", unitFrom], ["uMm", unitFrom], ["uUm", unitFrom], ["uMil", unitFrom], ["uInch", unitFrom],
+ ["uUv", unitFrom], ["uDb", unitFrom], ["uC", unitFrom], ["uF", unitFrom],
+ ["uA", unitFrom], ["uAm", unitFrom], ["uAu", unitFrom], ["uAn", unitFrom], ["uV", unitFrom], ["uVm", unitFrom], ["uVk", unitFrom],
+ ["uGHz", unitFrom], ["uHz", unitFrom], ["uKHz", unitFrom], ["uMHz", unitFrom], ["uSec", unitFrom], ["uMs", unitFrom], ["uUs", unitFrom], ["uNs", unitFrom], ["uJ", unitFrom], ["uWh", unitFrom],
+ ["uOhmV", ohmSet], ["uOhmI", ohmSet], ["uOhmR", ohmSet], ["uOhmP", ohmSet],
  ["dcV0", updateDischarge], ["dcC", updateDischarge], ["dcR", updateDischarge],
  ["rvDist", updateReverse], ["rvPd", updateReverse], ["rvGp", updateReverse], ["rvIns", updateReverse], ["rvAlt", updateReverse], ["rvSys", updateReverse],
  ["cmpVolt", updateCompare], ["cmpPd", updateCompare], ["cmpGp", updateCompare], ["cmpIns", updateCompare], ["cmpSys", updateCompare], ["cmpOvc", updateCompare],
@@ -650,16 +1144,27 @@ function resetSpacing() {
  ["fuseI", updateFuse], ["gwPos", updateGlowwire], ["nfPos", updateNeedleFlame], ["bpPos", updateBallPressure], ["ftProduct", updateFireDecision], ["batV", updateBattery], ["batAh", updateBattery],
  ["tlProduct", renderTestList], ["tlMarket", renderTestList],
 ["emcWaveType", renderEmcWave],
-["mechOpen", renderMech], ["esU", renderEs], ["esI", renderEs], ["esC", renderEs]
+["mechOpen", renderMech], ["esU", renderEs], ["esI", renderEs], ["esC", renderEs],
+["ipSolid", updateIp], ["ipWater", updateIp], ["ipAux", updateIp], ["ipSupp", updateIp], ["ikLevel", updateIk], ["dropType", updateDrop], ["dropWeight", updateDrop], ["dropSurfaceSel", updateDrop],
+["ovcSys", updateOvc], ["ovcClass", updateOvc], ["altcAlt", updateAltCorr], ["altcGap", updateAltCorr], ["peS", updatePeSize], ["acdcAc", updateAcDc], ["acdcDc", updateAcDc]
 ].forEach(function (pair) {
   var el = $(pair[0]);
-  if (el) el.addEventListener("input", pair[1]);
+  if (el) el.addEventListener("input", function () { pair[1](pair[0]); });
+});
+document.querySelectorAll("[data-ip-scene]").forEach(function (b) {
+  b.addEventListener("click", function () { applyIpScene(b.getAttribute("data-ip-scene")); });
+});
+document.querySelectorAll("[data-ik-scene]").forEach(function (b) {
+  b.addEventListener("click", function () { applyIkScene(b.getAttribute("data-ik-scene")); });
 });
 document.querySelectorAll("#tlBody").forEach(function (b) {
   b.addEventListener("change", updateTestCount);
 });
 document.querySelectorAll("[data-discharge-preset]").forEach(function (b) {
   b.addEventListener("click", function () { applyDischargePreset(b.getAttribute("data-discharge-preset")); });
+});
+document.querySelectorAll("[data-tool-preset]").forEach(function (b) {
+  b.addEventListener("click", function () { applyToolPreset(b.getAttribute("data-tool-preset")); });
 });
 for (var i = 1; i <= INSUL_ITEMS; i++) {
   var chk = document.getElementById("chk" + i);
@@ -673,16 +1178,41 @@ var exportBtn = document.getElementById("exportReportBtn");
 if (exportBtn) exportBtn.addEventListener("click", exportReport);
 var tlCopy = document.getElementById("tlCopyBtn");
 if (tlCopy) tlCopy.addEventListener("click", copyTestList);
+var rvCopy = document.getElementById("rvCopyBtn");
+if (rvCopy) rvCopy.addEventListener("click", copyReverse);
+var dropCopy = document.getElementById("dropCopyBtn");
+if (dropCopy) dropCopy.addEventListener("click", copyDrop);
+var ipCopy = document.getElementById("ipCopyBtn");
+if (ipCopy) ipCopy.addEventListener("click", copyIp);
+var ikCopy = document.getElementById("ikCopyBtn");
+if (ikCopy) ikCopy.addEventListener("click", copyIk);
+var ovcCopy = document.getElementById("ovcCopyBtn");
+if (ovcCopy) ovcCopy.addEventListener("click", copyOvc);
+var altcCopy = document.getElementById("altcCopyBtn");
+if (altcCopy) altcCopy.addEventListener("click", copyAltCorr);
+var peCopy = document.getElementById("peCopyBtn");
+if (peCopy) peCopy.addEventListener("click", copyPeSize);
+var acdcCopy = document.getElementById("acdcCopyBtn");
+if (acdcCopy) acdcCopy.addEventListener("click", copyAcDc);
+var gotoHipot = document.getElementById("gotoHipotBtn");
+if (gotoHipot) gotoHipot.addEventListener("click", function () { switchTool("hipot"); });
 
 // 初始化
 var savedTab = "";
 try { savedTab = localStorage.getItem(TOOL_TAB_KEY) || ""; } catch (e) { /* ignore */ }
+renderToolTabs();
+renderToolMap();
 switchTool(TOOL_TABS.indexOf(savedTab) !== -1 ? savedTab : "spacing");
 switchCalcMode("forward");
 updateLeakage(); updateYCap(); updateThermal(); updateDischarge();
 updateReverse(); updateCompare(); updateGrounding(); updateSelv(); updateInsulChecklist();
 updateFuse(); updateGlowwire(); updateNeedleFlame(); updateBallPressure(); updateFireDecision(); updateBattery(); renderTestList();
-renderToolMap(); renderRecent(); renderEmcWave(); renderMech(); renderEs();
+renderRecent(); renderEmcWave(); renderMech(); renderEs();
+updateIp(); updateIk(); updateDrop();
+updateOvc(); updateAltCorr(); updatePeSize(); updateAcDc("acdcAc");
+injectCred();
+var toolSearchTop = document.getElementById("toolSearchTop");
+if (toolSearchTop) toolSearchTop.addEventListener("input", applyToolSearch);
 
 // ===== 深链：从搜索/知识卡直达工具（自动打开所在面板并滚动） =====
 function openToolFromHash() {

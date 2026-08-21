@@ -162,6 +162,5 @@ document.querySelectorAll("[data-range]").forEach(function (btn) {
   });
 });
 
-$("vSearch").addEventListener("input", renderVoltage);
-updateChipCounts();
-renderVoltage();
+if ($("vSearch")) $("vSearch").addEventListener("input", renderVoltage);
+if ($("vSearch")) { updateChipCounts(); renderVoltage(); }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0071e3">
+  <meta name="theme-color" content="#9e2b25">
   <title>答题测验 - 安规与可靠性知识课堂</title>
   <meta name="description" content="覆盖四大核心模块、七大安全因素、可靠性测试、IP/IK、材料/CTI 与认证流程的答题测验。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
@@ -17,6 +17,20 @@
     .quiz-chips button.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
     .quiz-count { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
     .quiz-auto-tag { display: inline-block; font-size: 12px; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; }
+    .stat-row { display: flex; align-items: center; gap: 12px; padding: 7px 0; }
+    .stat-label { flex: 0 0 92px; font-size: 13px; }
+    .stat-bar { flex: 1; height: 8px; background: var(--card-2); border: 1px solid var(--hairline); border-radius: 999px; overflow: hidden; }
+    .stat-fill { display: block; height: 100%; border-radius: 999px; transition: width 0.4s; }
+    .stat-fill.good { background: var(--ok-fg); }
+    .stat-fill.mid { background: var(--grad-b); }
+    .stat-fill.weak { background: var(--danger-fg); }
+    .stat-num { flex: 0 0 auto; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .stat-weak { font-size: 13.5px; margin: 14px 0 8px; }
+    .quiz-type-tag, .quiz-diff { display: inline-block; font-size: 12px; font-weight: 500; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 2px 10px; margin: 0 6px 4px 0; }
+    .quiz-flag-btn { background: var(--card); border: 1px solid var(--border); color: var(--muted); border-radius: 999px; padding: 4px 14px; font-size: 13px; cursor: pointer; font-family: inherit; margin-left: 10px; }
+    .quiz-flag-btn.on { color: #b0651c; border-color: rgba(176, 101, 28, 0.4); background: rgba(176, 101, 28, 0.1); }
+    .flag-item { border-top: 1px solid var(--border); padding: 10px 0; }
+    .flag-item:first-child { border-top: none; }
   </style>
 </head>
 <body>
@@ -90,12 +104,13 @@
 
       <div id="quizBox" hidden>
         <div class="quiz-progress"><span id="quizBar" style="width:0%"></span></div>
-        <p class="crumb">第 <span id="quizCurrent">1</span> / <span id="quizTotal">0</span> 题</p>
-        <p style="margin:2px 0 8px"><span id="quizAutoTag" class="quiz-auto-tag" hidden>⚙ 自动生成题（由知识卡/标准/可靠性数据生成）</span></p>
+        <p class="crumb">第 <span id="quizCurrent">1</span> / <span id="quizTotal">0</span> 题<button type="button" class="quiz-flag-btn" id="quizFlag" title="标记此题，稍后重练">☆ 标记</button></p>
+        <p style="margin:2px 0 8px"><span id="quizAutoTag" class="quiz-auto-tag" hidden>⚙ 自动生成题（由知识卡/标准/可靠性数据生成）</span><span id="quizTags"></span></p>
+        <p id="quizScenario" class="quiz-scenario" hidden></p>
         <h2 id="quizQuestion"></h2>
         <div id="quizOptions"></div>
         <div id="quizExplain" class="quiz-explanation" hidden></div>
-        <p style="margin-top:18px"><button type="button" class="btn btn-primary" id="quizNext" style="display:none">下一题</button></p>
+        <p style="margin-top:18px"><button type="button" class="btn" id="quizConfirm" style="display:none">确认答案（多选）</button> <button type="button" class="btn btn-primary" id="quizNext" style="display:none">下一题</button></p>
       </div>
 
       <div id="quizScore" class="card score-box" hidden>
@@ -104,6 +119,13 @@
         <button type="button" class="btn btn-primary" id="quizRestart">再来一次</button>
       </div>
     </div>
+    <section>
+      <h2>掌握度统计</h2>
+      <p class="section-sub">各模块正确率与最薄弱环节，保存在本地，答完题自动更新。</p>
+      <div class="card" id="statsPanel">
+        <p style="color:var(--muted);margin:0">还没有答题记录，做完题后这里会显示各模块掌握度与最薄弱环节。</p>
+      </div>
+    </section>
     <section>
       <h2>错题本</h2>
       <p class="section-sub">答错的题自动收录（保存在本地），可随时回看或重练。</p>
@@ -114,6 +136,16 @@
       </div>
       <p class="quiz-count">共 <span id="wrongCount">0</span> 道错题</p>
       <div class="card" id="wrongBook"></div>
+    </section>
+    <section>
+      <h2>标记收藏</h2>
+      <p class="section-sub">答题时点「☆ 标记」收藏的题目，可重练或清空（保存在本地）。</p>
+      <div class="link-row">
+        <button type="button" class="btn" id="flagRetryBtn">重练标记</button>
+        <button type="button" class="btn" id="flagClearBtn">清空标记</button>
+      </div>
+      <p class="quiz-count">共 <span id="flagCount">0</span> 道标记</p>
+      <div class="card" id="flagBook"></div>
     </section>
   </main>
 
@@ -138,6 +170,8 @@
   <script src="../assets/js/reliability-data.js"></script>
   <script src="../assets/js/quiz-auto.js"></script>
   <script src="../assets/js/quiz-v2.js"></script>
+  <script src="../assets/js/quiz-extra.js"></script>
+  <script src="../assets/js/quiz-engine.js"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>

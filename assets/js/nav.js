@@ -15,9 +15,9 @@
   var groups = [
     { name: "首页", href: homeHref, active: ["index.html"] },
     { name: "导航", href: link("pages/resources.html"), active: ["resources.html", "map.html", "glossary.html", "materials.html", "cases.html", "roles.html", "designer-guide.html", "poster.html", "faq.html", "feedback.html", "changelog.html", "data.html", "workshop.html"] },
-    { name: "学习", href: link("pages/learn.html"), active: ["learn.html", "knowledge.html", "hazard-", "clearance.html", "creepage.html", "hipot.html", "surge.html", "emc", "leakage.html", "grounding.html", "selv.html", "insulation-coordination.html", "mopp-moop.html", "double-insulation.html", "cybersecurity.html", "product-classes.html"] },
+    { name: "学习", href: link("pages/learn.html"), active: ["learn.html", "knowledge.html", "hazard-", "clearance.html", "creepage.html", "hipot.html", "surge.html", "emc", "leakage.html", "grounding.html", "selv.html", "insulation-coordination.html", "mopp-moop.html", "double-insulation.html", "cybersecurity.html", "product-classes.html", "insulation-guide.html"] },
     { name: "测试", href: link("pages/testing.html"), active: ["testing.html", "sop", "reliability.html", "test-equipment.html", "environment-tests.html", "tools.html"] },
-    { name: "认证", href: link("pages/certification.html"), active: ["certification.html", "standards", "industries.html", "product-categories.html", "voltage.html", "wizard.html", "refs.html", "verification.html", "labels.html"] },
+    { name: "认证", href: link("pages/certification.html"), active: ["certification.html", "standards", "industries.html", "product-categories.html", "voltage.html", "wizard.html", "refs.html", "verification.html", "labels.html", "standard-diffs.html"] },
     { name: "答题测验", href: link("pages/quiz.html"), active: ["quiz.html"] }
   ];
 
@@ -32,4 +32,13 @@
     var on = g.name === active;
     return '<a href="' + g.href + '"' + (on ? ' class="active"' : "") + ">" + g.name + "</a>";
   }).join("");
+
+  // nav 由 JS 重写后，重新绑定"点击关闭移动端菜单"
+  nav.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      nav.classList.remove("open");
+      var t = document.getElementById("navToggle");
+      if (t) t.setAttribute("aria-expanded", "false");
+    });
+  });
 })();

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0071e3">
+  <meta name="theme-color" content="#9e2b25">
   <title>知识卡片库 - 安规与可靠性知识课堂</title>
   <meta name="description" content="标准结构导读、防触电逻辑、泄漏电流、接地、温升、防火、电池、IP、光生物安全等安规补充知识。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
@@ -49,56 +49,81 @@
     .hchip-count { position: absolute; top: 7px; right: 7px; font-size: 10.5px; font-weight: 600; color: var(--muted); background: var(--card-2); border-radius: 999px; padding: 0 7px; }
     .hazard-chips button.active .hchip-count { color: var(--accent-ink); background: var(--accent); }
     /* ===== 危害分组专属色 ===== */
-    .hazard-chips button[data-hgroup="all"] { --hc: #0071e3; --hc-soft: rgba(0,113,227,.12); }
-    .hazard-chips button[data-hgroup="framework"] { --hc: #8e8e93; --hc-soft: rgba(142,142,147,.16); }
-    .hazard-chips button[data-hgroup="shock"] { --hc: #0a84ff; --hc-soft: rgba(10,132,255,.14); }
-    .hazard-chips button[data-hgroup="energy"] { --hc: #ff9f0a; --hc-soft: rgba(255,159,10,.16); }
-    .hazard-chips button[data-hgroup="fire"] { --hc: #ff3b30; --hc-soft: rgba(255,59,48,.14); }
-    .hazard-chips button[data-hgroup="thermal"] { --hc: #d6a400; --hc-soft: rgba(214,164,0,.18); }
-    .hazard-chips button[data-hgroup="mechanical"] { --hc: #4fb8e8; --hc-soft: rgba(79,184,232,.16); }
-    .hazard-chips button[data-hgroup="radiation"] { --hc: #bf5af2; --hc-soft: rgba(191,90,242,.16); }
-    .hazard-chips button[data-hgroup="chemical"] { --hc: #34c759; --hc-soft: rgba(52,199,89,.16); }
-    .hazard-chips button[data-hgroup="emc"] { --hc: #00b8ae; --hc-soft: rgba(0,184,174,.16); }
-    .hazard-chips button[data-hgroup="medical"] { --hc: #ff375f; --hc-soft: rgba(255,55,95,.16); }
-    .hazard-chips button[data-hgroup="cert"] { --hc: #af52de; --hc-soft: rgba(175,82,222,.16); }
-    .hazard-chips button[data-hgroup="general"] { --hc: #98989d; --hc-soft: rgba(152,152,157,.18); }
+    .hazard-chips button[data-hgroup="all"] { --hc: #9e2b25; --hc-soft: rgba(158,43,37,.12); }
+    .hazard-chips button[data-hgroup="framework"] { --hc: #7d7a72; --hc-soft: rgba(125,122,114,.16); }
+    .hazard-chips button[data-hgroup="shock"] { --hc: #7a4e2d; --hc-soft: rgba(122,78,45,.16); }
+    .hazard-chips button[data-hgroup="energy"] { --hc: #9a6a1e; --hc-soft: rgba(154,106,30,.18); }
+    .hazard-chips button[data-hgroup="fire"] { --hc: #9e2b25; --hc-soft: rgba(158,43,37,.14); }
+    .hazard-chips button[data-hgroup="thermal"] { --hc: #b0651c; --hc-soft: rgba(176,101,28,.18); }
+    .hazard-chips button[data-hgroup="mechanical"] { --hc: #4a5f7a; --hc-soft: rgba(74,95,122,.16); }
+    .hazard-chips button[data-hgroup="radiation"] { --hc: #6b4a72; --hc-soft: rgba(107,74,114,.16); }
+    .hazard-chips button[data-hgroup="chemical"] { --hc: #3f6e4d; --hc-soft: rgba(63,110,77,.16); }
+    .hazard-chips button[data-hgroup="emc"] { --hc: #2f6e8a; --hc-soft: rgba(47,110,138,.16); }
+    .hazard-chips button[data-hgroup="medical"] { --hc: #8a4a5a; --hc-soft: rgba(138,74,90,.16); }
+    .hazard-chips button[data-hgroup="cert"] { --hc: #6d5a8a; --hc-soft: rgba(109,90,138,.16); }
+    .hazard-chips button[data-hgroup="general"] { --hc: #8f8b83; --hc-soft: rgba(143,139,131,.18); }
     .hazard-chips button .hchip-emoji { background: var(--hc-soft); color: var(--hc); }
     .hazard-chips button.active { border-color: var(--hc); background: var(--hc-soft); box-shadow: 0 0 0 1px var(--hc); }
     .hazard-chips button.active .hchip-emoji { background: var(--hc); color: #fff; }
     .hchip-count { background: var(--hc-soft); color: var(--hc); }
     .hazard-chips button.active .hchip-count { background: var(--hc); color: #fff; }
     /* 知识卡分组标题 */
-    .hazard-group { --hc: #8e8e93; --hc-soft: rgba(142,142,147,.16); }
-    .hazard-group[data-hgroup="shock"] { --hc: #0a84ff; --hc-soft: rgba(10,132,255,.14); }
-    .hazard-group[data-hgroup="energy"] { --hc: #ff9f0a; --hc-soft: rgba(255,159,10,.16); }
-    .hazard-group[data-hgroup="fire"] { --hc: #ff3b30; --hc-soft: rgba(255,59,48,.14); }
-    .hazard-group[data-hgroup="thermal"] { --hc: #d6a400; --hc-soft: rgba(214,164,0,.18); }
-    .hazard-group[data-hgroup="mechanical"] { --hc: #4fb8e8; --hc-soft: rgba(79,184,232,.16); }
-    .hazard-group[data-hgroup="radiation"] { --hc: #bf5af2; --hc-soft: rgba(191,90,242,.16); }
-    .hazard-group[data-hgroup="chemical"] { --hc: #34c759; --hc-soft: rgba(52,199,89,.16); }
-    .hazard-group[data-hgroup="emc"] { --hc: #00b8ae; --hc-soft: rgba(0,184,174,.16); }
-    .hazard-group[data-hgroup="medical"] { --hc: #ff375f; --hc-soft: rgba(255,55,95,.16); }
-    .hazard-group[data-hgroup="cert"] { --hc: #af52de; --hc-soft: rgba(175,82,222,.16); }
-    .hazard-group[data-hgroup="general"] { --hc: #98989d; --hc-soft: rgba(152,152,157,.18); }
+    .hazard-group { --hc: #7d7a72; --hc-soft: rgba(125,122,114,.16); }
+    .hazard-group[data-hgroup="shock"] { --hc: #7a4e2d; --hc-soft: rgba(122,78,45,.16); }
+    .hazard-group[data-hgroup="energy"] { --hc: #9a6a1e; --hc-soft: rgba(154,106,30,.18); }
+    .hazard-group[data-hgroup="fire"] { --hc: #9e2b25; --hc-soft: rgba(158,43,37,.14); }
+    .hazard-group[data-hgroup="thermal"] { --hc: #b0651c; --hc-soft: rgba(176,101,28,.18); }
+    .hazard-group[data-hgroup="mechanical"] { --hc: #4a5f7a; --hc-soft: rgba(74,95,122,.16); }
+    .hazard-group[data-hgroup="radiation"] { --hc: #6b4a72; --hc-soft: rgba(107,74,114,.16); }
+    .hazard-group[data-hgroup="chemical"] { --hc: #3f6e4d; --hc-soft: rgba(63,110,77,.16); }
+    .hazard-group[data-hgroup="emc"] { --hc: #2f6e8a; --hc-soft: rgba(47,110,138,.16); }
+    .hazard-group[data-hgroup="medical"] { --hc: #8a4a5a; --hc-soft: rgba(138,74,90,.16); }
+    .hazard-group[data-hgroup="cert"] { --hc: #6d5a8a; --hc-soft: rgba(109,90,138,.16); }
+    .hazard-group[data-hgroup="general"] { --hc: #8f8b83; --hc-soft: rgba(143,139,131,.18); }
     .hazard-group h2::before { background: var(--hc-soft); color: var(--hc); }
     .hazard-count { background: var(--hc-soft); color: var(--hc); }
     /* 知识卡顶部色条 + 图标底色 */
-    .knowledge-grid section.card { --hc: #8e8e93; --hc-soft: rgba(142,142,147,.16); border-top: 3px solid var(--hc); }
-    .knowledge-grid section.card[data-hazard="shock"], .knowledge-grid section.card[data-hazard="electric"] { --hc: #0a84ff; --hc-soft: rgba(10,132,255,.14); }
-    .knowledge-grid section.card[data-hazard="energy"] { --hc: #ff9f0a; --hc-soft: rgba(255,159,10,.16); }
-    .knowledge-grid section.card[data-hazard="fire"] { --hc: #ff3b30; --hc-soft: rgba(255,59,48,.14); }
-    .knowledge-grid section.card[data-hazard="thermal"] { --hc: #d6a400; --hc-soft: rgba(214,164,0,.18); }
-    .knowledge-grid section.card[data-hazard="mechanical"] { --hc: #4fb8e8; --hc-soft: rgba(79,184,232,.16); }
-    .knowledge-grid section.card[data-hazard="radiation"] { --hc: #bf5af2; --hc-soft: rgba(191,90,242,.16); }
-    .knowledge-grid section.card[data-hazard="chemical"] { --hc: #34c759; --hc-soft: rgba(52,199,89,.16); }
-    .knowledge-grid section.card[data-hazard="emc"] { --hc: #00b8ae; --hc-soft: rgba(0,184,174,.16); }
-    .knowledge-grid section.card[data-hazard="medical"] { --hc: #ff375f; --hc-soft: rgba(255,55,95,.16); }
-    .knowledge-grid section.card[data-hazard="cert"] { --hc: #af52de; --hc-soft: rgba(175,82,222,.16); }
-    .knowledge-grid section.card[data-hazard="framework"] { --hc: #8e8e93; --hc-soft: rgba(142,142,147,.16); }
+    .knowledge-grid section.card { --hc: #7d7a72; --hc-soft: rgba(125,122,114,.16); border-top: 3px solid var(--hc); }
+    .knowledge-grid section.card[data-hazard="shock"], .knowledge-grid section.card[data-hazard="electric"] { --hc: #7a4e2d; --hc-soft: rgba(122,78,45,.16); }
+    .knowledge-grid section.card[data-hazard="energy"] { --hc: #9a6a1e; --hc-soft: rgba(154,106,30,.18); }
+    .knowledge-grid section.card[data-hazard="fire"] { --hc: #9e2b25; --hc-soft: rgba(158,43,37,.14); }
+    .knowledge-grid section.card[data-hazard="thermal"] { --hc: #b0651c; --hc-soft: rgba(176,101,28,.18); }
+    .knowledge-grid section.card[data-hazard="mechanical"] { --hc: #4a5f7a; --hc-soft: rgba(74,95,122,.16); }
+    .knowledge-grid section.card[data-hazard="radiation"] { --hc: #6b4a72; --hc-soft: rgba(107,74,114,.16); }
+    .knowledge-grid section.card[data-hazard="chemical"] { --hc: #3f6e4d; --hc-soft: rgba(63,110,77,.16); }
+    .knowledge-grid section.card[data-hazard="emc"] { --hc: #2f6e8a; --hc-soft: rgba(47,110,138,.16); }
+    .knowledge-grid section.card[data-hazard="medical"] { --hc: #8a4a5a; --hc-soft: rgba(138,74,90,.16); }
+    .knowledge-grid section.card[data-hazard="cert"] { --hc: #6d5a8a; --hc-soft: rgba(109,90,138,.16); }
+    .knowledge-grid section.card[data-hazard="framework"] { --hc: #7d7a72; --hc-soft: rgba(125,122,114,.16); }
     .kc-emoji { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 9px; background: var(--hc-soft); font-size: 16px; }
 
     .knowledge-grid section .kc-title { font-size: 15.5px; font-weight: 700; }
     .knowledge-grid section .howto { font-size: 13px; color: var(--muted); background: var(--card-2); border-left: 3px solid var(--border); padding: 8px 12px; border-radius: 0 8px 8px 0; }
+    /* ===== 学习主线（顶部可切换标签） + 随主线学习 ===== */
+    .ml-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 14px; }
+    .ml-tab { background: var(--card); border: 1px solid var(--border); color: var(--fg); border-radius: 980px; padding: 8px 16px; font-size: 13.5px; font-weight: 500; cursor: pointer; font-family: inherit; transition: border-color .15s, background .15s, color .15s; }
+    .ml-tab:hover { border-color: var(--accent); }
+    .ml-tab.active { background: var(--hc, var(--accent)); border-color: var(--hc, var(--accent)); color: #fff; }
+    .ml-panel { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin: 0 0 22px; box-shadow: var(--shadow); }
+    .ml-question { font-size: 14.5px; margin: 0 0 14px; }
+    .ml-flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+    .ml-step { display: flex; flex-direction: column; gap: 4px; flex: 1 1 150px; min-width: 130px; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--fg); transition: border-color .15s, transform .15s; }
+    .ml-step:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .ml-num { font-size: 12px; font-weight: 700; color: var(--accent); }
+    .ml-step h3 { font-size: 14px; margin: 0; }
+    .ml-step p { font-size: 12.5px; color: var(--muted); margin: 0; }
+    .ml-arrow { align-self: center; color: var(--muted); font-size: 16px; }
+    .ml-memo { font-size: 13px; color: var(--muted); margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed var(--border); }
+    .ml-progress { margin-left: 10px; font-size: 12.5px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 3px 12px; vertical-align: middle; }
+    .mainline-box { display: grid; gap: 6px; margin: 10px 0 22px; }
+    .ml-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; cursor: pointer; }
+    .ml-item:hover { border-color: var(--accent); }
+    .ml-item input { accent-color: var(--accent); }
+    .ml-item.done { opacity: 0.55; }
+    .ml-item.done a { text-decoration: line-through; }
+    .ml-idx { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; text-align: right; }
+    .ml-item a { color: var(--fg); text-decoration: none; }
+    .ml-item a:hover { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -132,6 +157,19 @@
     </div>
 
     <div><input type="search" id="knowledgeSearch" class="knowledge-search" placeholder="搜索知识卡片：温升 / IP / CTI / 认证 / SELV…" aria-label="搜索知识卡片"></div>
+
+    <section id="sec-mainline-tabs">
+      <h2 class="section-title">七大安全因素 · 学习主线</h2>
+      <p class="section-sub">每条主线回答三件事：核心问题 → 步骤 → 一句话记住。切换标签查看不同危害的学习路径。</p>
+      <div id="mlTabs" class="ml-tabs" role="tablist" aria-label="七大安全因素学习主线"></div>
+      <div id="mlPanel" class="ml-panel" role="tabpanel"></div>
+    </section>
+
+    <section id="sec-mainline">
+      <h2 class="section-title">随主线学习<span id="mlProgress" class="ml-progress"></span></h2>
+      <p class="section-sub">按推荐顺序逐张学习，勾选标记已读（保存在本地浏览器）。</p>
+      <div id="mainlineStudy" class="mainline-box"></div>
+    </section>
 
     <p class="section-sub">
       <a class="tag" href="#stdguide">标准结构导读</a>
@@ -1004,6 +1042,32 @@
         <p class="rel"><a href="#environment">环境知识卡</a> · <a href="./reliability.html">可靠性测试计划中心</a> · <a href="./creepage.html">爬电距离（潮湿环境）</a> · <a href="./environment-tests.html">环境试验页</a></p>
       </section>
 
+      <section class="card" id="ik" data-hazard="general">
+        <h2>IK 抗冲击等级：代码含义与试验规则</h2>
+        <p><b>是什么：</b>IK（Impact Protection）按 <b>IEC 62262 / GB/T 20138</b> 表示外壳抵抗外部机械冲击的能力，用 IK 代码 + 两位数字（00–10）表示，对应不同冲击能量。与 IP（防尘防水）互补：IP 管水尘，IK 管碰撞冲击。</p>
+        <h3>IK 等级速查（冲击能量）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>等级</th><th>冲击能量</th><th>等级</th><th>冲击能量</th></tr></thead>
+          <tbody>
+            <tr><td>IK00</td><td>无防护</td><td>IK06</td><td>1 J</td></tr>
+            <tr><td>IK01</td><td>0.14 J</td><td>IK07</td><td>2 J</td></tr>
+            <tr><td>IK02</td><td>0.2 J</td><td>IK08</td><td>5 J</td></tr>
+            <tr><td>IK03</td><td>0.35 J</td><td>IK09</td><td>10 J</td></tr>
+            <tr><td>IK04</td><td>0.5 J</td><td>IK10</td><td>20 J</td></tr>
+            <tr><td>IK05</td><td>0.7 J</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table></div>
+        <h3>试验方法与典型选择</h3>
+        <ul>
+          <li>低能量（IK01–IK06）常用<b>弹簧冲击锤</b>；高能量（IK07–IK10）用<b>摆锤冲击</b>（或等效垂直落锤）。</li>
+          <li>典型选择：室内固定 IK02–IK04；可能碰撞 IK06–IK07；户外公共 IK08；易遭破坏 IK10。</li>
+          <li>IK 只考核外壳抗冲击，不替代内部结构强度与防触电距离；冲击后还要检查带电部件是否可触及、绝缘是否受损。</li>
+        </ul>
+        <p class="howto">怎么查：先按使用环境选 IK 档位 → 用对应冲击能量做试验 → 冲击后复测外观、功能与安规。</p>
+        <p class="std">相关标准：IEC 62262 / GB/T 20138</p>
+        <p class="rel"><a href="./sop-ik.html">IK 试验 SOP</a> · <a href="knowledge-detail.html?id=ip">IP 防护等级</a> · <a href="./tools.html">IP/IK 判定工具</a></p>
+      </section>
+
       <section class="card" id="environment" data-hazard="general">
         <h2>环境与可靠性试验：规则与用途</h2>
         <p><b>是什么：</b>环境试验模拟产品在储存、运输和使用中遇到的温度、湿度、振动、冲击、盐雾、粉尘水分等条件；可靠性试验验证长期使用后的退化。安规中的环境试验通常作为“预处理”，之后还要复测耐压、泄漏、接地和功能。</p>
@@ -1608,6 +1672,7 @@
   <script src="../assets/js/nav.js"></script>
   <script src="../assets/js/breadcrumb.js"></script>
   <script src="../assets/js/knowledge-tools-links.js"></script>
+  <script src="../assets/js/knowledge-meta.js"></script>
   <script src="../assets/js/knowledge-detail-data.js"></script>
   <script src="../assets/js/knowledge-index.js"></script>
 </body>

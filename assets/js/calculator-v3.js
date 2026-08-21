@@ -93,7 +93,7 @@ var CLS_INFO = {
 };
 
 var INSUL_INFO = {
-  functional: "功能绝缘：只保证设备正常工作，不提供防触电保护。数值可按失效后果单独确定（本站教学简化按 0.8×）。",
+  functional: "功能绝缘：只保证设备正常工作，不提供防触电保护。教学简化按 0.8×；若功能绝缘失效会导致触电（如隔离作用），应提高到基本绝缘要求查表。",
   basic: "基本绝缘：防触电的第一道屏障，直接与带电部件接触，是查表的基准。",
   supplementary: "附加绝缘：基本绝缘失效后的第二道屏障，数值与基本绝缘相同。",
   reinforced: "加强绝缘：单层结构同时承担基本 + 附加的保护，工程上按 2× 基本绝缘；标准有专门表格时以专门表格为准。"
@@ -209,8 +209,10 @@ function updateAll() {
   var isIII = s.cls === "III";
 
   $("vValue").textContent = s.v + " V";
+  var vInputEl = $("vInput"); if (vInputEl) vInputEl.value = s.v;
   $("vPeak").textContent = "峰值 ≈ " + Math.round(s.v * Math.SQRT2) + " V（间隙按峰值/冲击查表）";
   $("altValue").textContent = s.alt + " m";
+  var altInputEl = $("altInput"); if (altInputEl) altInputEl.value = s.alt;
   var pNoteEl = $("pNote"); if (pNoteEl) pNoteEl.textContent = PD_INFO[s.pd] || "";
   var sysNoteEl = $("sysNote"); if (sysNoteEl) sysNoteEl.textContent = SYS_INFO[s.sys] || "";
   var vInfoEl = $("vInfo"); if (vInfoEl) vInfoEl.textContent = VOLT_INFO;
@@ -231,11 +233,23 @@ function updateAll() {
   var crBase = creepageValue(s.v, s.pd, s.gp);
   var cr = crBase * mult;
   $("crValue").textContent = fmt(cr);
+  var milEl = document.getElementById("crMil");
+  if (milEl) milEl.textContent = "≈ " + Math.round(cr * 39.3701) + " mil";
+  var voltSeg = s.v + "V";
+  if (!exact) {
+    for (var vi = 0; vi < VOLT_POINTS.length - 1; vi++) {
+      if (s.v >= VOLT_POINTS[vi] && s.v <= VOLT_POINTS[vi + 1]) {
+        voltSeg = s.v + "V（" + VOLT_POINTS[vi] + "–" + VOLT_POINTS[vi + 1] + "V 档线性插值）";
+        break;
+      }
+    }
+  } else {
+    voltSeg = s.v + "V（查表档）";
+  }
   $("crNote").textContent =
-    (exact ? "查表值" : "相邻档位线性插值估算") +
-    "：" + fmt(crBase) + " mm × " + fmt(mult) + "（" + INSUL_LABEL[s.ins] + "）" +
-    " · 污染等级 " + s.pd + " · 材料组 " + s.gp +
-    (isIII ? "；III 类设备此值仅作参考" : "");
+    "查表路径：" + voltSeg + " → 污染等级 " + s.pd + " → 材料组 " + s.gp +
+    " → 基准 " + fmt(crBase) + " mm × " + fmt(mult) + "（" + INSUL_LABEL[s.ins] + "）" +
+    (isIII ? "；III 类由 SELV 供电：SELV 内部电路豁免，此为到危险电路侧的参考距离" : "");
 
   var impulse = IMPULSE_DATA[s.sys][s.ovc];
   var clBase = CLEARANCE_DATA[impulse];
@@ -243,10 +257,12 @@ function updateAll() {
   var cl = clBase * mult * factor;
   $("clImpulse").textContent = impulse;
   $("clValue").textContent = fmt(cl);
+  var clMil = document.getElementById("clMil");
+  if (clMil) clMil.textContent = "≈ " + Math.round(cl * 39.3701) + " mil";
   $("clNote").textContent =
-    s.sys + " V 系统 · 过电压类别 " + s.ovc + " → 冲击耐受 " + impulse + " V；" +
-    "海拔 " + s.alt + " m 系数 " + fmt(factor) + "，基准 " + fmt(clBase) + " mm × " + fmt(mult) +
-    (isIII ? "；III 类设备此值仅作参考" : "");
+    "查表路径：" + s.sys + "V 系统 → 过电压类别 " + s.ovc + " → 冲击耐受 " + impulse + " V → 基准 " + fmt(clBase) + " mm × " + fmt(mult) +
+    " × 海拔 " + s.alt + "m（系数 " + fmt(factor) + "）" +
+    (isIII ? "；III 类由 SELV 供电：SELV 内部电路豁免，此为到危险电路侧的参考距离" : "");
 
   var req = Math.max(cr, cl);
   $("crBar").style.width = Math.min(100, (cr / req) * 100) + "%";
@@ -254,6 +270,17 @@ function updateAll() {
   $("crBarLabel").textContent = "爬电距离 " + fmt(cr) + " mm";
   $("clBarLabel").textContent = "电气间隙 " + fmt(cl) + " mm";
   $("governLabel").textContent = "设计必须同时满足，当前由" + (cr >= cl ? "爬电距离" : "电气间隙") + "决定";
+
+  // 绝缘类型三列对比（基本 = 附加 = 1×，加强 ≈ 2×）
+  var elB = document.getElementById("crInsBasic");
+  if (elB) {
+    $("crInsBasic").textContent = fmt(crBase) + " mm";
+    $("crInsSup").textContent = fmt(crBase) + " mm";
+    $("crInsRein").textContent = fmt(crBase * 2) + " mm";
+    $("clInsBasic").textContent = fmt(clBase * factor) + " mm";
+    $("clInsSup").textContent = fmt(clBase * factor) + " mm";
+    $("clInsRein").textContent = fmt(clBase * 2 * factor) + " mm";
+  }
 
   renderPcb(cr, cl);
   updateStatus();
@@ -395,7 +422,21 @@ function initFromUrl() {
 
 // 事件绑定
 $("vSlider").addEventListener("input", function () { updateAll(); });
+var vInputEl2 = $("vInput");
+if (vInputEl2) vInputEl2.addEventListener("input", function () {
+  var v = Number(this.value);
+  if (isNaN(v)) return;
+  $("vSlider").value = Math.min(600, Math.max(50, v));
+  updateAll();
+});
 $("altSlider").addEventListener("input", function () { updateAll(); });
+var altInputEl2 = $("altInput");
+if (altInputEl2) altInputEl2.addEventListener("input", function () {
+  var a = Number(this.value);
+  if (isNaN(a)) return;
+  $("altSlider").value = Math.min(10000, Math.max(2000, a));
+  updateAll();
+});
 $("actualInput").addEventListener("input", function () {
   var s = currentState();
   var mult = INSUL_MULT[s.ins] || 1;
@@ -457,5 +498,51 @@ $("materialQuick").addEventListener("change", function () {
 });
 
 $("copyBtn").addEventListener("click", copyLink);
+
+// ===== 输入悬浮说明 + GB 对照 =====
+var HELP = {
+  "tool-product-class": "I 类：接地 + 基本绝缘；II 类：双重/加强绝缘；III 类：SELV 供电",
+  "tool-working-voltage": "产品实际承受的持续电压（RMS），爬电距离按它查表；宽压产品按 250V 档",
+  "tool-market-voltage": "系统电压决定过电压类别与冲击耐受电压 → 电气间隙",
+  "tool-pollution": "污染等级 1 密封 / 2 室内 / 3 工业潮湿（常见电子产品为 2 级）",
+  "tool-cti": "材料组按 CTI：Ⅰ ≥600 / Ⅱ 400–600 / Ⅲa 175–400 / Ⅲb 100–175",
+  "tool-insulation": "基本 = 附加 = 1×，加强 ≈ 2×，功能按失效后果",
+  "tool-altitude": "2000m 以上电气间隙乘修正系数；爬电距离不随海拔修正"
+};
+document.querySelectorAll(".param-block").forEach(function (sec) {
+  var tip = HELP[sec.id];
+  if (!tip) return;
+  var h2 = sec.querySelector("h2");
+  if (h2) h2.setAttribute("title", tip + "（GB/T 16935.1 等同采用 IEC 60664-1）");
+});
+
+// ===== 设计选型历史对比 =====
+var spacingHistory = [];
+function addCompare() {
+  var s = currentState();
+  var mult = INSUL_MULT[s.ins] || 1;
+  var cr = creepageValue(s.v, s.pd, s.gp) * mult;
+  var cl = CLEARANCE_DATA[IMPULSE_DATA[s.sys][s.ovc]] * mult * ALTITUDE_DATA[s.alt];
+  spacingHistory.push({
+    params: s.v + "V · 污染" + s.pd + " · " + s.gp + " · " + s.ins + " · " + s.alt + "m · " + s.ovc,
+    cr: cr, cl: cl
+  });
+  renderCompare();
+}
+function renderCompare() {
+  var wrap = document.getElementById("compareWrap");
+  var body = document.getElementById("compareBody");
+  if (!wrap || !body) return;
+  if (!spacingHistory.length) { wrap.hidden = true; return; }
+  wrap.hidden = false;
+  body.innerHTML = spacingHistory.map(function (h, i) {
+    return "<tr><td>" + (i + 1) + "</td><td>" + h.params + "</td><td>" + fmt(h.cr) + " mm</td><td>" + fmt(h.cl) + " mm</td></tr>";
+  }).join("");
+}
+function clearCompare() { spacingHistory = []; renderCompare(); }
+var cmpAdd = document.getElementById("compareAddBtn");
+if (cmpAdd) cmpAdd.addEventListener("click", addCompare);
+var cmpClear = document.getElementById("compareClearBtn");
+if (cmpClear) cmpClear.addEventListener("click", clearCompare);
 
 initFromUrl();

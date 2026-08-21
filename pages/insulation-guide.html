@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <title>产品绝缘判定与设计 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="把一个产品的防电击拆成五个动作：判断类别 → 逐处定绝缘 → 查距离 → 定耐压 → 测泄漏。逆向分析和正向设计同一套逻辑。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .step-row { display: grid; grid-template-columns: 54px 1fr; gap: 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+    .step-row:last-child { border-bottom: none; }
+    .step-no { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; font-weight: 700; font-family: Georgia, "Noto Serif SC", serif; font-size: 18px; border-radius: 4px; }
+    .step-row b { display: block; margin-bottom: 4px; }
+    @media (max-width: 640px) { .step-row { grid-template-columns: 44px 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav"></nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./learn.html">学习地图</a> / 产品绝缘判定与设计</p>
+      <h1>产品绝缘判定与设计</h1>
+      <p class="lead">把一个产品的防电击拆成五个动作：判断类别 → 逐处定绝缘 → 查距离 → 定耐压 → 测泄漏。逆向分析（对着样品判断）和正向设计（对着图纸定方案）用的是同一套逻辑。</p>
+    </div>
+
+    <div class="callout callout-warn"><strong>⚠️ 本页为重建版本</strong> 原页面在文件编码事故中损坏且无备份，本页内容依据站内 knowledge/learn 等页面的同主题素材整理，核心逻辑与原文一致，个别表述可能有出入，请以标准原文为准。</div>
+
+    <section>
+      <h2>1. 五步法总览</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>步骤</th><th>做什么</th><th>关键输出</th><th>关联页</th></tr></thead>
+        <tbody>
+          <tr><td>① 判断类别</td><td>确定产品防护类别（I / II / III 类）与供电方式</td><td>防护策略、距离与耐压的查表前提</td><td><a href="./product-classes.html">产品类别</a></td></tr>
+          <tr><td>② 逐处定绝缘</td><td>对每一处带电体到可触及件的路径判定绝缘层级</td><td>基本 / 附加 / 双重 / 加强绝缘清单</td><td><a href="./double-insulation.html">双重绝缘判定</a></td></tr>
+          <tr><td>③ 查距离</td><td>按工作电压、污染等级、材料组查爬电与间隙</td><td>最小间距要求</td><td><a href="./creepage.html">爬电</a> / <a href="./clearance.html">间隙</a></td></tr>
+          <tr><td>④ 定耐压</td><td>按绝缘类型与工作电压确定试验电压并验证</td><td>耐压测试方案</td><td><a href="./hipot.html">耐压测试</a></td></tr>
+          <tr><td>⑤ 测泄漏</td><td>测量接触电流 / 泄漏电流，确认不超限值</td><td>泄漏合规结论</td><td><a href="./leakage.html">泄漏电流</a></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section>
+      <h2>2. 第 1 步：判断产品类别</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>类别</th><th>防护思路</th><th>典型判定</th></tr></thead>
+        <tbody>
+          <tr><td>I 类</td><td>接地 + 基本绝缘，接地失效时基本绝缘兜底</td><td>有保护接地端子 / 三芯电源线</td></tr>
+          <tr><td>II 类</td><td>基本 + 附加（双重）或加强绝缘，不依赖接地</td><td>无接地、外壳为双重/加强绝缘结构</td></tr>
+          <tr><td>III 类</td><td>由 SELV 供电，通常不按市电距离要求</td><td>由安全特低电压源供电</td></tr>
+        </tbody>
+      </table></div>
+      <p>先定类别再谈绝缘：类别的判断决定了后面所有距离、耐压、泄漏的查表前提。</p>
+    </section>
+
+    <section>
+      <h2>3. 第 2 步：逐处定绝缘</h2>
+      <p>对每一处"带电体 → 可触及件"的路径，判定它需要承担几道防护：</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>层级</th><th>保护作用</th><th>典型理解</th></tr></thead>
+        <tbody>
+          <tr><td>基本绝缘</td><td>正常工作防触电</td><td>带电体与可触及件之间的基础绝缘，失效后需附加防护兜底</td></tr>
+          <tr><td>附加绝缘</td><td>基本绝缘失效后的第二道防护</td><td>II 类结构中可触及面与基本绝缘之间的绝缘</td></tr>
+          <tr><td>双重绝缘</td><td>基本 + 附加</td><td>两层分别承担一道防护</td></tr>
+          <tr><td>加强绝缘</td><td>单层达到双重绝缘同等安全水平</td><td>距离与耐压按标准加强要求，不能任意"加厚就算"</td></tr>
+        </tbody>
+      </table></div>
+      <ul>
+        <li>能限压就先限压：SELV 从源头消除危险；</li>
+        <li>距离不足时靠开槽、挡墙、灌封、材料升级补救；</li>
+        <li>带电部件不可徒手触及：外壳、盖板、防护罩通常需要工具才能打开。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. 第 3 步：查距离</h2>
+      <div class="step-row"><span class="step-no">A</span><div><b>电气间隙（clearance）</b>按系统电压 + 过电压类别 → 冲击耐受 → 海拔修正查空气最短距离。详见 <a href="./clearance.html">电气间隙深度页</a>。</div></div>
+      <div class="step-row"><span class="step-no">B</span><div><b>爬电距离（creepage）</b>按工作电压 + 污染等级 + 材料组（CTI）+ 绝缘类型查沿面距离。详见 <a href="./creepage.html">爬电距离深度页</a>。</div></div>
+      <p>查表时同时满足间隙与爬电，取较大者，再留工艺余量。</p>
+    </section>
+
+    <section>
+      <h2>5. 第 4 步：定耐压</h2>
+      <p>按绝缘类型与工作电压确定试验电压：AC/DC 选择、试验时间、判定标准参见 <a href="./hipot.html">耐压测试深度页</a> 的"5 步法"。</p>
+      <p class="howto">教学速记：基本绝缘示例 1500V AC，加强绝缘示例 3000V AC（以具体产品标准为准）。</p>
+    </section>
+
+    <section>
+      <h2>6. 第 5 步：测泄漏</h2>
+      <p>测量接触电流 / 泄漏电流，确认不超产品标准限值；Y 电容对地泄漏电流可用 I=2πfCV 估算。详见 <a href="./leakage.html">泄漏电流深度页</a> 与 <a href="./tools.html">泄漏电流估算器</a>。</p>
+    </section>
+
+    <section>
+      <h2>7. 常见误区</h2>
+      <ul>
+        <li>"有塑料壳就是双重绝缘"——还要满足附加绝缘的爬电/间隙与耐压；</li>
+        <li>"III 类就不用隔离"——SELV 源本身必须满足隔离与限压；</li>
+        <li>"工具才能打开"不等于随便加个十字螺丝就合规——工具定义、可拆卸部件判定以产品标准为准；</li>
+        <li>先定距离再定耐压、先定类别再定距离——顺序反了容易漏项。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p><a class="tag" href="./product-classes.html">产品类别结构图</a>
+      <a class="tag" href="./double-insulation.html">双重绝缘判定</a>
+      <a class="tag" href="./insulation-coordination.html">绝缘配合总览</a>
+      <a class="tag" href="./hipot.html">耐压测试</a>
+      <a class="tag" href="./leakage.html">泄漏电流</a>
+      <a class="tag" href="./tools.html#tool-spacing">工具：爬电 / 间隙计算器</a></p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <title>标准差异深度解读 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="同一台产品按家电、IT/AV、医疗、测量、机械标准认证，为什么耐压、泄漏电流、温升、间隙爬电的数值不同：接触者、环境与故障假设三因素解读。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .why-box { border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 4px; padding: 14px 16px; margin: 14px 0; }
+    .why-box b { display: block; margin-bottom: 4px; }
+    .key-num { font-weight: 700; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav"></nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./refs.html">参考中心</a> / 标准差异深度解读</p>
+      <h1>标准差异深度解读</h1>
+      <p class="lead">同一台产品，按家电、IT/AV、医疗、测量、机械去认证，耐压、泄漏电流、温升、间隙爬电的条款和数值可能完全不同。本文解释"为什么不同"，并给出常用对照。</p>
+    </div>
+
+    <div class="callout callout-warn"><strong>⚠️ 本页为重建版本</strong> 原页面在文件编码事故中损坏且无备份，本页内容依据站内 standards-compare / knowledge 等页面的同主题素材整理，核心逻辑与原文一致，数值请以标准原文为准。</div>
+
+    <section>
+      <h2>1. 为什么同一台产品数值不同</h2>
+      <p>标准是"对人、对环境、对故障"的假设集合，三组假设不同，数值就不同：</p>
+      <div class="why-box"><b>① 接触者不同</b>普通用户（家电、IT）的耐受能力假设，弱于经过培训的操作者（测量 61010），更弱于患者（医疗 60601）——医疗最严。</div>
+      <div class="why-box"><b>② 使用环境不同</b>固定安装 vs 便携、室内 vs 工业、污染等级差异，改变距离与防护要求；机械标准（60204）按 IEC 60664 绝缘配合，环境假设面向工业现场。</div>
+      <div class="why-box"><b>③ 故障假设不同</b>医疗要求单一故障仍安全（MOPP/MOOP 体系）；IT/AV（62368）按能源分级（ES1–ES3）与防护；家电（60335）按绝缘类型 + 距离 + 接地的传统结构条款。</div>
+    </section>
+
+    <section>
+      <h2>2. 五大标准速览</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>标准</th><th>定位</th><th>防触电总思路</th></tr></thead>
+        <tbody>
+          <tr><td><b>IEC 60335-1</b> 家电</td><td>家用电器，传统结构条款</td><td>绝缘类型 + 距离 + 接地</td></tr>
+          <tr><td><b>IEC 62368-1</b> IT/AV</td><td>音视频/ICT，基于危害（HBSE）</td><td>能源分级（ES1–ES3）+ 防护</td></tr>
+          <tr><td><b>IEC 60601-1</b> 医疗</td><td>医用电气，安全 + 基本性能 + 监管</td><td>MOPP / MOOP，单一故障仍安全</td></tr>
+          <tr><td><b>IEC 61010-1</b> 测量控制</td><td>测量、控制、实验室设备</td><td>按测量类别 + 污染等级</td></tr>
+          <tr><td><b>IEC 60204-1</b> 机械</td><td>机械电气设备</td><td>按 IEC 60664 绝缘配合</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section>
+      <h2>3. 关键差异对照</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>主题</th><th>家电 60335</th><th>IT/AV 62368</th><th>医疗 60601</th><th>测量 61010</th><th>机械 60204</th></tr></thead>
+        <tbody>
+          <tr><td><b>耐压示例（市电 ≤250V）</b></td><td>基本示例 <span class="key-num">1250V AC</span></td><td>基本 <span class="key-num">1500V</span>、加强 <span class="key-num">3000V AC</span></td><td>1 MOPP 示例 <span class="key-num">1500V</span>、2 MOPP 示例 <span class="key-num">4000V</span></td><td>按表格</td><td>2×Un + 1000V（最低约 <span class="key-num">1500V</span>）</td></tr>
+          <tr><td><b>泄漏电流</b></td><td>第 13/16 章，按器具类型</td><td>泄漏电流条款</td><td>患者漏电流，含单一故障，最严</td><td>按等级</td><td>—</td></tr>
+          <tr><td><b>电气间隙条款</b></td><td>第 29 章</td><td>第 5.4 节</td><td>第 8.7 节</td><td>对应表格</td><td>引用 IEC 60664-1</td></tr>
+          <tr><td><b>爬电距离条款</b></td><td>第 29 章（含污染/材料组）</td><td>第 5.4 节</td><td>第 8.7 节</td><td>对应表格</td><td>引用 IEC 60664-1</td></tr>
+          <tr><td><b>温升</b></td><td>第 11 章</td><td>热安全章节</td><td>温度与超温条款</td><td>温升条款</td><td>温升条款</td></tr>
+          <tr><td><b>防火</b></td><td>第 30 章耐热耐燃</td><td>防火章节（PS 分级）</td><td>外壳防火要求</td><td>阻燃要求</td><td>—</td></tr>
+          <tr><td><b>EMC 引用</b></td><td>CISPR 14-1/-2</td><td>CISPR 32/35</td><td>IEC 60601-1-2</td><td>CISPR 11/32</td><td>IEC 61000-6 系列</td></tr>
+        </tbody>
+      </table></div>
+      <p>更完整的逐条对照见 <a href="./standards-compare.html">标准差异矩阵</a>（支持按产品场景筛选）。</p>
+    </section>
+
+    <section>
+      <h2>4. 同一产品示例：230V 电源适配器</h2>
+      <p>同一个"230V 开关电源"如果按不同标准认证，耐压示例值差异明显：</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>认证场景</th><th>耐压示例（市电 ≤250V）</th></tr></thead>
+        <tbody>
+          <tr><td>家电 60335</td><td>基本示例 1250V AC</td></tr>
+          <tr><td>IT/AV 62368</td><td>基本 1500V、加强 3000V AC</td></tr>
+          <tr><td>医疗 60601</td><td>1 MOPP 示例 1500V、2 MOPP 示例 4000V</td></tr>
+          <tr><td>机械 60204</td><td>2×Un + 1000V（最低约 1500V）</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note" style="color:var(--muted);font-size:13.5px">示例值用于理解"差异存在"这件事，正式设计请以所执行标准的最新版原文查表。</p>
+    </section>
+
+    <section>
+      <h2>5. 使用建议</h2>
+      <ul>
+        <li>先确定产品在哪个标准族下认证，再找对应章节查表——不要拿 60335 的数值套 60601；</li>
+        <li>医疗类优先看 MOPP/MOOP 与患者漏电流条款，这两处与其它标准差异最大；</li>
+        <li>机械类很多条款引用 IEC 60664-1，需联动 <a href="./insulation-coordination.html">绝缘配合</a> 阅读；</li>
+        <li>出口多市场时，用 <a href="./standard-picker.html">标准选择器</a> 先定标准清单，再逐项查差异。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>相关学习</h2>
+      <p><a class="tag" href="./standards-compare.html">标准差异矩阵</a>
+      <a class="tag" href="./standard-picker.html">标准选择器</a>
+      <a class="tag" href="./insulation-coordination.html">绝缘配合总览</a>
+      <a class="tag" href="./hipot.html">耐压测试</a>
+      <a class="tag" href="./leakage.html">泄漏电流</a>
+      <a class="tag" href="./knowledge.html#protection">防触电逻辑</a></p>
+    </section>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.1.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./tools.html">🧮<span>工具</span></a>
+  <a href="./resources.html">🗂️<span>导航</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+</nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

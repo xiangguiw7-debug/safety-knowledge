@@ -251,7 +251,11 @@ document.querySelectorAll("[data-qmodule]").forEach(function (btn) {
 function exportWrong() {
   var list = getWrong();
   var text = "错题本（共 " + list.length + " 题）\n\n" + list.map(function (w, i) {
-    return (i + 1) + ". " + w.q + "\n正确答案：" + w.options[w.answer] + "\n解析：" + w.explain;
+    var a;
+    if (w.type === "multi") a = (w.answer || []).map(function (x) { return w.options[x]; }).join("、");
+    else if (w.type === "judge") a = (w.answer === 0 ? "正确" : "错误");
+    else a = w.options[w.answer];
+    return (i + 1) + ". " + w.q + "\n正确答案：" + a + "\n解析：" + (w.explain || "");
   }).join("\n\n");
   function done() { if (window.AnGuiUX) window.AnGuiUX.toast("错题已复制"); }
   if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done).catch(done); }
@@ -260,12 +264,15 @@ function exportWrong() {
 var wc = document.getElementById("wrongClearBtn");
 if (wc) wc.addEventListener("click", clearWrong);
 var wr = document.getElementById("wrongRetryBtn");
-if (wr) wr.addEventListener("click", function () { if (getWrong().length) startQuiz(getWrong()); });
+if (wr) wr.addEventListener("click", function () {
+  if (getWrong().length) { startQuiz(getWrong()); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  else if (window.AnGuiUX) window.AnGuiUX.toast("还没有错题");
+});
 var we = document.getElementById("wrongExportBtn");
 if (we) we.addEventListener("click", exportWrong);
 
 $("quizStart").addEventListener("click", function () { startQuiz(); });
-$("quizNext").addEventListener("click", nextQuestion);
+$("quizNext").addEventListener("click", function () { nextQuestion(); });
 $("quizRestart").addEventListener("click", function () { startQuiz(); });
 updateQuizCount();
 renderWrongBook();

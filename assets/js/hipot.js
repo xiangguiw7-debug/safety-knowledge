@@ -45,7 +45,7 @@ function updateHipot() {
   note.textContent =
     d.label + "；" +
     (ins === "reinforced" ? "加强/双重绝缘" : "基本/附加绝缘") +
-    " → " + ac + " V AC（" + dc + " V DC），保持时间常见 60s。" +
+    " → " + ac + " V AC（" + dc + " V DC）。保持时间常见 60s，升压速率建议不超过 500 V/s 量级（以标准为准）。" +
     " 教学示例值，正式数值以标准原文为准。";
 }
 

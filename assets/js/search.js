@@ -112,35 +112,17 @@ function syncSearchActive() {
   if (b) document.body.classList.toggle("search-active", !b.hidden);
 }
 
-function runSearch() {
-  var input = document.getElementById("siteSearch");
-  var box = document.getElementById("searchResults");
-  if (!input || !box) return;
-  var q = input.value.trim().toLowerCase();
-  if (!q) {
-    box.hidden = true;
-    return;
-  }
-  var hits = SEARCH_INDEX.filter(function (item) {
-    return (item.t + " " + item.d + " " + item.k).toLowerCase().indexOf(q) !== -1;
-  }).slice(0, 8);
-
-  box.innerHTML = hits.length
-    ? hits.map(function (h) {
-        return '<a href="' + h.u + '"><span class="t">' + h.t + '</span><span class="d">' + h.d + "</span></a>";
-      }).join("")
-    : '<div class="empty">没有匹配结果，换个关键词试试（如 爬电、CCC、UN 38.3）。</div>';
-  box.hidden = false;
-}
-
 var searchInput = document.getElementById("siteSearch");
 var searchBox = document.getElementById("searchResults");
 if (searchInput && searchBox) {
   searchInput.addEventListener("input", runSearch);
   searchInput.addEventListener("keydown", function (e) {
     if (e.key === "Escape") { searchBox.hidden = true; syncSearchActive(); }
+    if (e.key === "Enter") { var v = searchInput.value.trim(); if (v) saveHistory(v); }
   });
   document.addEventListener("click", function (e) {
+    var hit = e.target.closest ? e.target.closest(".search-results a") : null;
+    if (hit) { var v = searchInput.value.trim(); if (v) saveHistory(v); }
     if (!e.target.closest(".site-search")) { searchBox.hidden = true; syncSearchActive(); }
   });
 }
@@ -178,32 +160,6 @@ function renderHistory() {
   }).join("") + "</div>";
   box.hidden = false;
   syncSearchActive();
-}
-function runSearch() {
-  var input = document.getElementById("siteSearch");
-  var box = document.getElementById("searchResults");
-  if (!input || !box) return;
-  var q = input.value.trim().toLowerCase();
-  if (!q) { renderHistory(); return; }
-  var hits = SEARCH_INDEX.filter(function (item) {
-    return (item.t + " " + item.d + " " + (item.k || "")).toLowerCase().indexOf(q) !== -1;
-  }).slice(0, 20);
-  var groups = {};
-  hits.forEach(function (h) {
-    var g = searchGroup(h.u);
-    if (!groups[g]) groups[g] = [];
-    groups[g].push(h);
-  });
-  box.innerHTML = hits.length
-    ? Object.keys(groups).map(function (g) {
-        return '<div class="search-group-title">' + g + "</div>" + groups[g].map(function (h) {
-          return '<a href="' + h.u + '"><span class="t">' + highlight(h.t, q) + '</span><span class="d">' + highlight(h.d, q) + "</span></a>";
-        }).join("");
-      }).join("")
-    : '<div class="empty">没有匹配结果，换个关键词试试（如 爬电、CCC、UN 38.3）。</div>';
-  box.hidden = false;
-  syncSearchActive();
-  saveHistory(q);
 }
 var si2 = document.getElementById("siteSearch");
 if (si2) {
@@ -255,5 +211,4 @@ function runSearch() {
     : '<div class="empty">没有匹配结果，换个关键词试试（如 爬电、CCC、UN 38.3）。</div>';
   box.hidden = false;
   syncSearchActive();
-  saveHistory(q);
 }

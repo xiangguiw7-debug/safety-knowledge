@@ -128,7 +128,12 @@ while (queue.length) {
   }
 }
 const orphans = htmlFiles.filter(f => f !== "index.html" && !seen.has(f));
-const noNav = htmlFiles.filter(f => !/(class="nav"|class="bottom-nav")/.test(get(f) || ""));
+// 瞬态跳转页（meta refresh / location.replace）加载即跳走，无需导航
+const noNav = htmlFiles.filter(f => {
+  const c = get(f) || "";
+  if (/http-equiv=["']refresh/i.test(c) || /location\.replace/i.test(c)) return false;
+  return !/(class="nav"|class="bottom-nav")/.test(c);
+});
 
 const ok = broken.length === 0 && anchorMiss.length === 0 && jsBroken.length === 0 && jsAnchorMiss.length === 0 && orphans.length === 0 && noNav.length === 0;
 console.log("check-links: " + (ok ? "PASS" : "FAIL"));

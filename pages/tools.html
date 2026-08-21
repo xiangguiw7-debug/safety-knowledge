@@ -3,19 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0071e3">
-  <title>计算工具 - 安规与可靠性知识课堂</title>
-  <meta name="description" content="安规计算工具：爬电/间隙（含反查）、耐压速查、泄漏电流、放电时间、标准对照、接地连续性。">
+  <meta name="theme-color" content="#9e2b25">
+  <title>计算与速查工具 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="计算与速查工具：爬电/间隙（含反查）、耐压速查、泄漏电流、放电时间、标准对照、接地、IP/IK、跌落、EMC 波形等 20 个工具。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/calculator.css">
   <style>
-    .tool-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 22px; }
-    .tool-tabs button { background: var(--card); border: 1px solid var(--border); color: var(--fg); border-radius: 980px; padding: 9px 18px; font-size: 14.5px; font-weight: 500; cursor: pointer; font-family: inherit; }
-    .tool-tabs button:hover { border-color: var(--accent); color: var(--accent); }
-    .tool-tabs button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .tool-search-top { width: 100%; max-width: 460px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--card); color: var(--fg); font-size: 14px; margin: 0 0 12px; }
+    .tool-search-top:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+    .recent-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+    .recent-row .btn { margin: 0; padding: 6px 14px; font-size: 13px; }
+    #toolTabs { display: grid; gap: 8px; margin: 0 0 22px; }
+    .tool-group-acc { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--card); }
+    .tool-group-head { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--card); border: 0; color: var(--fg); font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; }
+    .tool-group-head:hover { background: var(--card-2); }
+    .tool-group-head .chev { transition: transform 0.2s; color: var(--muted); }
+    .tool-group-acc.open .chev { transform: rotate(180deg); }
+    .tool-group-body { display: none; flex-wrap: wrap; gap: 8px; padding: 0 16px 14px; }
+    .tool-group-acc.open .tool-group-body { display: flex; }
+    .tool-tab-btn { background: var(--card-2); border: 1px solid var(--border); color: var(--fg); border-radius: 980px; padding: 8px 15px; font-size: 13.5px; font-weight:500; cursor: pointer; font-family: inherit; }
+    .tool-tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .tool-tab-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .tool-tab-btn.dim { opacity: 0.35; }
     .mode-toggle { display: flex; gap: 8px; margin: 0 0 18px; }
     .mode-toggle button { background: var(--card); border: 1px solid var(--border); color: var(--fg); border-radius: 980px; padding: 8px 16px; font-size: 13.5px; font-weight: 500; cursor: pointer; font-family: inherit; }
     .mode-toggle button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
@@ -44,9 +56,9 @@
 
   <main class="container page">
     <div class="page-head">
-      <p class="crumb"><a href="../index.html">首页</a> / 计算工具</p>
-      <h1>安规计算工具</h1>
-      <p class="lead">17 个工具按四组分类：间距、耐压、防火、泄漏、放电、对照、清单与工程速查等。计算逻辑基于 IEC 标准体系的教学简化值。</p>
+      <p class="crumb"><a href="../index.html">首页</a> / 计算与速查工具</p>
+      <h1>计算与速查工具</h1>
+      <p class="lead">20 个工具按六组折叠分类（防电击 / 能量热量防火 / EMC 环保认证 / 外壳防护 / 机械环境可靠性 / 工程速查），支持搜索与最近使用。计算逻辑基于 IEC 标准体系的教学简化值。</p>
     </div>
 
     <div class="callout callout-info">
@@ -54,30 +66,15 @@
       <p>爬电/间隙按 <b>IEC 60664-1</b> 绝缘配合逻辑（教学简化表）；耐压按 <b>IEC 62368-1 / 60335-1 / 60601-1 / 60204-1</b> 常见值；泄漏电流按 <b>I = 2πfCV</b> 估算。🟢 教学参考值 / 🟡 示例值需核对版本 / 🔴 正式设计与认证必须查标准原文。</p>
     </div>
 
-        <div class="tool-tabs" role="group" aria-label="切换计算工具">
-      <span class="tool-group">防电击与绝缘</span>
-      <button type="button" data-tool-tab="spacing" aria-pressed="true">📏 爬电 / 间隙</button>
-      <button type="button" data-tool-tab="hipot" aria-pressed="false">⚡ 耐压速查</button>
-      <button type="button" data-tool-tab="selv" aria-pressed="false">🛡️ SELV / 绝缘</button>
-      <button type="button" data-tool-tab="grounding" aria-pressed="false">🔗 接地连续性</button>
-      <span class="tool-group">能量·热量·防火</span>
-      <button type="button" data-tool-tab="discharge" aria-pressed="false">⏱️ 放电时间</button>
-      <button type="button" data-tool-tab="thermal" aria-pressed="false">🌡️ 温升</button>
-      <button type="button" data-tool-tab="fuse" aria-pressed="false">🧯 保险丝</button>
-      <button type="button" data-tool-tab="glowwire" aria-pressed="false">🔥 防火试验</button>
-      <button type="button" data-tool-tab="battery" aria-pressed="false">🔋 电池能量</button>
-      <span class="tool-group">EMC · 环保 · 认证</span>
-      <button type="button" data-tool-tab="leakage" aria-pressed="false">🔌 泄漏电流</button>
-      <button type="button" data-tool-tab="compare" aria-pressed="false">📊 标准对照</button>
-      <button type="button" data-tool-tab="testlist" aria-pressed="false">✅ 测试清单</button>
-      <span class="tool-group">工程与试验</span>
-      <button type="button" data-tool-tab="units" aria-pressed="false">📐 单位换算</button>
-      <button type="button" data-tool-tab="envparams" aria-pressed="false">🌦️ 试验参数</button>
-      <button type="button" data-tool-tab="emcwave" aria-pressed="false">📈 EMC 波形</button>
-      <button type="button" data-tool-tab="mech" aria-pressed="false">🛡️ 机械距离</button>
-      <button type="button" data-tool-tab="es" aria-pressed="false">⚡ ES 判定</button>
-      <button type="button" data-tool-tab="toolmap" aria-pressed="false">🗺️ 工具地图</button>
+    <div role="search">
+      <input type="search" id="toolSearchTop" class="tool-search-top" placeholder="搜索 20 个工具，如 温升 / 保险丝 / IP / 跌落" aria-label="搜索工具">
     </div>
+    <div id="recentTools" class="recent-row" aria-label="最近使用"></div>
+    <div style="margin:4px 0 8px">
+      <button type="button" class="btn" id="toolMapToggle">🗺️ 全部工具一览</button>
+    </div>
+    <div id="toolMapGrid" hidden class="tool-map-grid" style="display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:12px;background:var(--card);border:1px solid var(--hairline);border-radius:6px"></div>
+    <div id="toolTabs" role="group" aria-label="工具分类"></div>
 
     <div data-tool-panel="spacing" id="tool-spacing">
       <div class="mode-toggle" role="group" aria-label="计算模式">
@@ -252,17 +249,42 @@
             <div class="result-grid">
               <div class="result-card">
                 <h3>爬电距离 <span class="badge-iec">IEC 60664-1 教学值</span></h3>
-                <span class="value" id="crValue">--</span><span class="unit">mm</span>
+                <span class="value" id="crValue">--</span><span class="unit">mm</span> <span class="unit" id="crMil"></span>
                 <p class="note" id="crNote"></p>
               </div>
               <div class="result-card">
                 <h3>电气间隙 <span class="badge-iec">IEC 60664-1 教学值</span></h3>
-                <span class="value" id="clValue">--</span><span class="unit">mm</span>
+                <span class="value" id="clValue">--</span><span class="unit">mm</span> <span class="unit" id="clMil"></span>
                 <p class="note">冲击耐受 <b id="clImpulse">--</b> V，含海拔修正。<span id="clNote"></span></p>
               </div>
             </div>
 
+            <div class="link-row" style="margin-top:12px">
+              <button type="button" class="btn" id="compareAddBtn">➕ 加入对比</button>
+              <button type="button" class="btn" id="compareClearBtn">清空对比</button>
+              <span class="note" style="font-size:12.5px;color:var(--muted)">改参数后点「加入对比」积累设计选型方案</span>
+            </div>
+            <div class="table-wrap" id="compareWrap" hidden>
+              <table>
+                <thead><tr><th>#</th><th>参数组合</th><th>爬电距离</th><th>电气间隙</th></tr></thead>
+                <tbody id="compareBody"></tbody>
+              </table>
+            </div>
+
+            <div class="table-wrap" style="margin-top:16px">
+              <table>
+                <thead><tr><th>绝缘类型</th><th>爬电距离</th><th>电气间隙</th><th>说明</th></tr></thead>
+                <tbody>
+                  <tr><td><b>基本绝缘</b></td><td id="crInsBasic">--</td><td id="clInsBasic">--</td><td>第一道防触电</td></tr>
+                  <tr><td><b>附加绝缘</b></td><td id="crInsSup">--</td><td id="clInsSup">--</td><td>数值与基本相同</td></tr>
+                  <tr><td><b>加强绝缘</b></td><td id="crInsRein">--</td><td id="clInsRein">--</td><td>≈ 基本 × 2</td></tr>
+                </tbody>
+              </table>
+              <p class="note" style="font-size:12.5px;color:var(--muted)">同屏对比三种绝缘类型的教学距离，正式设计以标准查表为准。</p>
+            </div>
+
             <div class="bars">
+              <p style="margin:0 0 8px;font-size:12.5px;color:var(--muted)">📊 <a href="./standards-compare.html">在标准差异矩阵中对比 60335 / 62368 / 60601 / 61010 / 60204 的条款差异</a> · <a href="./clearance.html">电气间隙深度页</a></p>
               <p id="governLabel" style="margin:0 0 6px;font-size:13.5px;color:var(--muted)"></p>
               <div class="bar-row">
                 <div class="bar-label"><span>爬电距离</span><b id="crBarLabel"></b></div>
@@ -282,6 +304,9 @@
                 <input type="number" id="actualInput" min="0" step="0.1" placeholder="例如 4">
               </div>
               <div class="status-box" id="statusBox">在下方输入你的实际间距，自动判断是否达标。</div>
+              <p class="note" style="font-size:12.5px;color:var(--muted);margin-top:10px">
+                💡 <b>涂覆 / 灌封提示（IEC 60664-3）</b>：PCB 表面涂覆（conformal coating）或灌封后爬电条件改变，距离可显著缩短（按涂层类型 Ⅰ/Ⅱ/Ⅲ 简化 0.2–0.5×）。本站教学值不含涂覆豁免，正式设计按 IEC 60664-3 评估。
+              </p>
             </div>
 
             <div class="link-row">
@@ -294,6 +319,7 @@
             <p style="font-size:12.5px;color:var(--muted);word-break:break-all" id="shareUrl"></p>
           </div>
         </div>
+      </div>
       </div>
 
       <div id="reversePanel" hidden>
@@ -312,8 +338,13 @@
             最大工作电压 <span class="value" id="rvCreep">--</span>
             <p class="desc">最大冲击耐受 <b id="rvClear">--</b> · <b id="rvOvc">--</b></p>
             <p class="desc" id="rvNote"></p>
+            <p class="desc" id="rvMarket"></p>
           <div class="diagram" id="rvChartWrap"><svg id="rvChart" viewBox="0 0 520 260" role="img" aria-label="距离-电压曲线图"></svg></div>
           <div class="scenario-list" id="rvScenarios"></div>
+          <p style="margin-top:14px">
+            <button type="button" class="btn" id="rvCopyBtn">📋 复制结果</button>
+            <button type="button" class="btn" id="gotoHipotBtn">⚡ 去耐压速查</button>
+          </p>
           </div>
         </section>
       </div>
@@ -355,6 +386,14 @@
           <p class="desc" id="htNote"></p>
         </div>
         <p class="peak-note"><a href="./hipot.html">耐压页：5 步法 + 查表模板</a></p>
+        <h3 style="margin-top:22px">耐压测试 5 步法向导</h3>
+        <div class="quiz-progress" style="margin-bottom:10px"><span id="hipotStepBar" style="width:20%"></span></div>
+        <p id="hipotStepTitle" style="font-weight:600;margin:0 0 4px"></p>
+        <p id="hipotStepDesc" style="color:var(--muted);font-size:13.5px;margin:0 0 12px"></p>
+        <p style="margin:0">
+          <button type="button" class="btn" id="hipotStepPrev">← 上一步</button>
+          <button type="button" class="btn btn-primary" id="hipotStepNext">下一步 →</button>
+        </p>
       </section>
     </div>
 
@@ -362,6 +401,10 @@
       <section class="param-block" id="tool-leakage">
         <h2>泄漏电流估算器（Y 电容贡献） <span class="badge-iec">I = 2πfCV</span></h2>
         <p class="hint">Y 电容跨 L/N-地，容量越大泄漏电流越大——EMC 想要大、安规想要小。</p>
+                <div class="link-row" style="margin:4px 0 12px">
+          <button type="button" class="btn" data-tool-preset="ycap_charger">📱 充电器 1000pF</button>
+          <button type="button" class="btn" data-tool-preset="ycap_common">🔌 通用电源 4700pF</button>
+        </div>
         <div class="form-grid">
           <div class="field"><label for="lkCap">Y 电容总容量 (pF)</label><input type="number" id="lkCap" value="4700" min="0" step="100"></div>
           <div class="field"><label for="lkV">系统电压 (V，RMS)</label><input type="number" id="lkV" value="230" min="0" step="1"></div>
@@ -379,7 +422,19 @@
           <div class="result">最大 Y 电容 <span class="value" id="ycResult">--</span><p class="desc" id="ycNote"></p></div>
         </div>
         <p class="peak-note"><a href="./knowledge.html#leakage">泄漏电流知识卡</a></p>
-      </section>
+              <h3 style="margin-top:22px">IEC 60990 测量网络（教学参考）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>网络</th><th>模拟对象</th><th>典型用途</th></tr></thead>
+            <tbody>
+              <tr><td><b>U1</b></td><td>人体阻抗（体电流）</td><td>接触电流测量，频率加权，最常用</td></tr>
+              <tr><td><b>U2 / U3</b></td><td>皮肤 / 患者接触</td><td>高频加权、医用患者漏电流场景</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="peak-note">测量网络与限值：正式测试按 IEC 60990 与产品标准；Y 电容估算只是快速预判，不替代实测。</p>
+
+</section>
     </div>
 
     <div data-tool-panel="discharge" hidden>
@@ -432,6 +487,10 @@
       <section class="param-block" id="tool-grounding">
         <h2>接地连续性估算器 <span class="badge-iec">R = V / I</span></h2>
         <p class="hint">I 类产品的保护接地回路阻抗：目标电阻 = 允许电压降 / 测试电流。</p>
+                <div class="link-row" style="margin:4px 0 12px">
+          <button type="button" class="btn" data-tool-preset="gnd_25a">🏭 I 类 25A</button>
+          <button type="button" class="btn" data-tool-preset="gnd_10a">📱 便携 10A</button>
+        </div>
         <div class="form-grid">
           <div class="field"><label for="gndI">测试电流 (A)</label><input type="number" id="gndI" value="25" min="0" step="1"></div>
           <div class="field"><label for="gndV">允许电压降 (V)</label><input type="number" id="gndV" value="2.5" min="0" step="0.1"></div>
@@ -444,7 +503,73 @@
       </section>
     </div>
 
-    <div data-tool-panel="selv" hidden>
+        <div data-tool-panel="ovc" hidden>
+      <section class="param-block" id="tool-ovc">
+        <h2>过电压类别 → 冲击耐受速查 <span class="badge-iec">IEC 60664-1 教学参考</span></h2>
+        <p class="hint">选系统电压与过电压类别，得到额定冲击耐受电压——电气间隙查表以它为准。</p>
+        <div class="form-grid">
+          <div class="field"><label for="ovcSys">系统电压 (V)</label><select id="ovcSys">
+            <option value="120">120</option><option value="230" selected>230</option><option value="400">400</option>
+          </select></div>
+          <div class="field"><label for="ovcClass">过电压类别</label><select id="ovcClass">
+            <option value="I">Ⅰ（SPD 后）</option><option value="II" selected>Ⅱ（插头连接）</option>
+            <option value="III">Ⅲ（固定安装）</option><option value="IV">Ⅳ（进线）</option>
+          </select></div>
+        </div>
+        <div class="result">额定冲击耐受 <span class="value" id="ovcResult" style="font-size:26px">--</span><span class="unit">V</span>
+          <p class="desc" id="ovcNote"></p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>系统电压</th><th>Ⅰ (SPD 后)</th><th>Ⅱ (插头连接)</th><th>Ⅲ (固定安装)</th><th>Ⅳ (进线)</th></tr></thead>
+            <tbody>
+              <tr><td><b>120V</b></td><td>800V</td><td>1500V</td><td>2500V</td><td>4000V</td></tr>
+              <tr><td><b>230V</b></td><td>1500V</td><td>2500V</td><td>4000V</td><td>6000V</td></tr>
+              <tr><td><b>400V</b></td><td>2500V</td><td>4000V</td><td>6000V</td><td>8000V</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><button type="button" class="btn" id="ovcCopyBtn">📋 复制结果</button></p>
+        <p class="peak-note"><a href="./clearance.html">电气间隙深度页</a> · <a href="./surge.html">雷击浪涌</a></p>
+      </section>
+    </div>
+
+    <div data-tool-panel="altcorr" hidden>
+      <section class="param-block" id="tool-altcorr">
+        <h2>海拔修正系数 <span class="badge-iec">IEC 60664-1 教学参考</span></h2>
+        <p class="hint">2000m 以上空气的击穿电压下降，电气间隙要乘修正系数；爬电距离不随海拔修正。</p>
+        <div class="form-grid">
+          <div class="field"><label for="altcAlt">海拔 (m)</label><select id="altcAlt">
+            <option value="2000" selected>2000（基准）</option><option value="3000">3000</option><option value="4000">4000</option>
+            <option value="5000">5000</option><option value="6000">6000</option><option value="7000">7000</option>
+            <option value="8000">8000</option><option value="9000">9000</option><option value="10000">10000</option>
+          </select></div>
+          <div class="field"><label for="altcGap">原电气间隙 (mm)</label><input type="number" id="altcGap" value="1.5" min="0" step="0.1"></div>
+        </div>
+        <div class="result">修正系数 <span class="value" id="altcFactor">--</span> · 修正后间隙 <span class="value" id="altcResult" style="font-size:24px">--</span><span class="unit">mm</span>
+          <p class="desc" id="altcNote"></p>
+        </div>
+        <p><button type="button" class="btn" id="altcCopyBtn">📋 复制结果</button></p>
+        <p class="peak-note"><a href="./clearance.html">电气间隙深度页</a></p>
+      </section>
+    </div>
+
+    <div data-tool-panel="pesize" hidden>
+      <section class="param-block" id="tool-pesize">
+        <h2>保护导体（PE）截面速查 <span class="badge-iec">IEC 60364-5-54 教学简化</span></h2>
+        <p class="hint">I 类产品的保护接地导体最小截面按相线截面确定（表 54.2 简化规则）。</p>
+        <div class="form-grid">
+          <div class="field"><label for="peS">相线截面 S (mm²)</label><input type="number" id="peS" value="4" min="0" step="0.5"></div>
+        </div>
+        <div class="result">保护导体最小截面 <span class="value" id="peResult" style="font-size:24px">--</span><span class="unit">mm²</span>
+          <p class="desc" id="peNote"></p>
+        </div>
+        <p><button type="button" class="btn" id="peCopyBtn">📋 复制结果</button></p>
+        <p class="peak-note"><a href="./grounding.html">接地深度页</a> · 正式计算还要校核故障电流与断开时间（54.2.4 法）</p>
+      </section>
+    </div>
+
+<div data-tool-panel="selv" hidden>
       <section class="param-block" id="tool-selv">
         <h2>SELV 限值速查 <span class="badge-iec">IEC 61140 教学参考</span></h2>
         <p class="hint">SELV = 安全特低电压：限压 + 隔离 + 可触及。电压限值只是必要条件，隔离才是关键。</p>
@@ -480,6 +605,10 @@
       <section class="param-block" id="tool-thermal">
         <h2>温升估算器 <span class="badge-iec">ΔT = P×Rth / P÷(h·A)</span></h2>
         <p class="hint">两种模式：已知热阻 Rth，或按自然对流表面积估算。正式以温升试验为准。</p>
+                <div class="link-row" style="margin:4px 0 12px">
+          <button type="button" class="btn" data-tool-preset="thermal_adapter">🔌 适配器 5W</button>
+          <button type="button" class="btn" data-tool-preset="thermal_led">💡 LED 驱动 10W</button>
+        </div>
         <div class="form-grid">
           <div class="field"><label for="thMode">估算模式</label><select id="thMode"><option value="rth" selected>热阻 Rth</option><option value="area">散热面积</option></select></div>
           <div class="field"><label for="thBase">基准环境温度</label><select id="thBase"><option value="25" selected>25°C（家电/IT/医疗/灯具）</option><option value="30">30°C</option><option value="35">35°C</option><option value="40">40°C（测量控制/电机/充电设施）</option></select></div>
@@ -488,25 +617,100 @@
           <div class="field"><label for="thArea">散热面积 (cm²)</label><input type="number" id="thArea" value="100" min="0" step="1"></div>
         </div>
         <div class="result">估算温升 ΔT <span class="value" id="thResult">--</span><span class="unit">K</span><p class="desc" id="thNote"></p></div>
-      </section>
+              <h3 style="margin-top:22px">温升限值速查（教学参考）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>部件</th><th>限值（教学参考）</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>绕组（B 级绝缘）</td><td>温升 ≤ 50K</td><td>40°C 环境 → 绕组温度 ≤ 90°C</td></tr>
+              <tr><td>绕组（F 级绝缘）</td><td>温升 ≤ 75K</td><td>40°C 环境 → 绕组温度 ≤ 115°C</td></tr>
+              <tr><td>可触及外壳（金属）</td><td>表面 ≤ 55°C</td><td>手持设备/把手限值更低</td></tr>
+              <tr><td>可触及外壳（塑料）</td><td>表面 ≤ 70°C</td><td>还要结合材料 RTI 与球压试验</td></tr>
+              <tr><td>电源端子 / 连接器</td><td>≤ 85°C</td><td>接线端子温升影响触点寿命</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="peak-note">限值因产品标准（60335/62368/60601…）与部件位置差异很大，正式判定以适用标准第 11 章等温升条款为准。</p>
+
+</section>
     </div>
 
-    <div data-tool-panel="units" hidden>
+        <div data-tool-panel="units" hidden>
       <section class="param-block" id="tool-units">
-        <h2>工程单位换算</h2>
+        <h2>工程单位换算 <span class="badge-iec">任意输入自动双向换算</span></h2>
+        <h3 style="margin-top:6px">长度</h3>
         <div class="form-grid">
-          <div class="field"><label for="uMm">mm</label><input type="number" id="uMm" value="3.2" min="0" step="0.1"></div>
-          <div class="field"><label for="uMil">mil</label><input type="number" id="uMil" value="126.0" min="0" step="0.1"></div>
-          <div class="field"><label for="uUv">µV</label><input type="number" id="uUv" value="1000" min="0" step="1"></div>
-          <div class="field"><label for="uDb">dBµV</label><input type="number" id="uDb" value="60" step="0.1"></div>
+          <div class="field"><label for="uKm">km</label><input type="number" id="uKm" value placeholder="千米"></div>
+          <div class="field"><label for="uM">m</label><input type="number" id="uM" value placeholder="米"></div>
+          <div class="field"><label for="uCm">cm</label><input type="number" id="uCm" value placeholder="厘米"></div>
+          <div class="field"><label for="uMm">mm</label><input type="number" id="uMm" value placeholder="毫米"></div>
+          <div class="field"><label for="uUm">µm</label><input type="number" id="uUm" value placeholder="微米"></div>
+          <div class="field"><label for="uMil">mil</label><input type="number" id="uMil" value placeholder="密耳"></div>
+          <div class="field"><label for="uInch">in</label><input type="number" id="uInch" value placeholder="英寸"></div>
+        </div>
+        <h3>电流</h3>
+        <div class="form-grid">
+          <div class="field"><label for="uA">A</label><input type="number" id="uA" value placeholder="安培"></div>
+          <div class="field"><label for="uAm">mA</label><input type="number" id="uAm" value placeholder="毫安"></div>
+          <div class="field"><label for="uAu">µA</label><input type="number" id="uAu" value placeholder="微安"></div>
+          <div class="field"><label for="uAn">nA</label><input type="number" id="uAn" value placeholder="纳安"></div>
+        </div>
+        <h3>电压</h3>
+        <div class="form-grid">
+          <div class="field"><label for="uVk">kV</label><input type="number" id="uVk" value placeholder="千伏"></div>
+          <div class="field"><label for="uV">V</label><input type="number" id="uV" value placeholder="伏特"></div>
+          <div class="field"><label for="uVm">mV</label><input type="number" id="uVm" value placeholder="毫伏"></div>
+        </div>
+        <h3>频率</h3>
+        <div class="form-grid">
+          <div class="field"><label for="uGHz">GHz</label><input type="number" id="uGHz" value placeholder="吉赫"></div>
+          <div class="field"><label for="uMHz">MHz</label><input type="number" id="uMHz" value placeholder="兆赫"></div>
+          <div class="field"><label for="uKHz">kHz</label><input type="number" id="uKHz" value placeholder="千赫"></div>
+          <div class="field"><label for="uHz">Hz</label><input type="number" id="uHz" value placeholder="赫兹"></div>
+        </div>
+        <h3>时间</h3>
+        <div class="form-grid">
+          <div class="field"><label for="uSec">s</label><input type="number" id="uSec" value placeholder="秒"></div>
+          <div class="field"><label for="uMs">ms</label><input type="number" id="uMs" value placeholder="毫秒"></div>
+          <div class="field"><label for="uUs">µs</label><input type="number" id="uUs" value placeholder="微秒"></div>
+          <div class="field"><label for="uNs">ns</label><input type="number" id="uNs" value placeholder="纳秒"></div>
+        </div>
+        <h3>欧姆定律（V = I·R，功率 P = V·I）</h3>
+        <p class="hint">填任意两个，自动算出另外两个。</p>
+        <div class="form-grid">
+          <div class="field"><label for="uOhmV">电压 V</label><input type="number" id="uOhmV" value placeholder="伏特"></div>
+          <div class="field"><label for="uOhmI">电流 I (A)</label><input type="number" id="uOhmI" value placeholder="安培"></div>
+          <div class="field"><label for="uOhmR">电阻 R (Ω)</label><input type="number" id="uOhmR" value placeholder="欧姆"></div>
+          <div class="field"><label for="uOhmP">功率 P (W)</label><input type="number" id="uOhmP" value placeholder="瓦特"></div>
+        </div>
+        <h3>信号 / 温度 / 能量</h3>
+        <div class="form-grid">
+          <div class="field"><label for="uUv">µV</label><input type="number" id="uUv" value placeholder="微伏"></div>
+          <div class="field"><label for="uDb">dBµV</label><input type="number" id="uDb" value placeholder="分贝微伏"></div>
           <div class="field"><label for="uC">℃</label><input type="number" id="uC" value="25" step="0.1"></div>
           <div class="field"><label for="uF">℉</label><input type="number" id="uF" value="77" step="0.1"></div>
+          <div class="field"><label for="uJ">J</label><input type="number" id="uJ" value placeholder="焦耳" step="0.001"></div>
+          <div class="field"><label for="uWh">Wh</label><input type="number" id="uWh" value placeholder="瓦时" step="0.001"></div>
         </div>
-        <p class="peak-note">任意输入自动双向换算：mm ↔ mil（1mm=39.37mil）、µV ↔ dBµV、℃ ↔ ℉。</p>
+        <p class="peak-note">任意输入自动双向换算：长度（km/m/cm/mm/µm/mil/in）、电流（A/mA/µA/nA）、电压（kV/V/mV）、频率（GHz/MHz/kHz/Hz）、时间（s/ms/µs/ns）、欧姆定律（V/I/R/P）、µV ↔ dBµV、℃ ↔ ℉、J ↔ Wh（1Wh=3600J）。</p>
       </section>
     </div>
 
-    <div data-tool-panel="testlist" hidden>
+        <div data-tool-panel="acdc" hidden>
+      <section class="param-block" id="tool-acdc">
+        <h2>AC ↔ DC 耐压换算 <span class="badge-iec">峰值等效 √2</span></h2>
+        <p class="hint">直流试验电压按交流的峰值等效：DC ≈ AC × √2；输入任一方向自动换算。</p>
+        <div class="form-grid">
+          <div class="field"><label for="acdcAc">AC 试验电压 (V)</label><input type="number" id="acdcAc" value="1500" min="0" step="100"></div>
+          <div class="field"><label for="acdcDc">DC 试验电压 (V)</label><input type="number" id="acdcDc" value="2121" min="0" step="100"></div>
+        </div>
+        <div class="result">换算说明 <span class="desc" id="acdcNote"></span></div>
+        <p><button type="button" class="btn" id="acdcCopyBtn">📋 复制结果</button></p>
+        <p class="peak-note">教学换算：DC = AC × 1.414（峰值等效）。正式 DC 测试的电压、时间、升压速率以产品标准为准。</p>
+      </section>
+    </div>
+
+<div data-tool-panel="testlist" hidden>
       <section class="param-block" id="tool-testlist">
         <h2>测试项目清单生成器</h2>
         <p class="hint">选产品分类生成安全 / EMC / 环保测试清单，可勾选、可复制。</p>
@@ -523,6 +727,10 @@
     <div data-tool-panel="fuse" hidden>
       <section class="param-block" id="tool-fuse">
         <h2>保险丝选型速查 <span class="badge-iec">教学建议</span></h2>
+                <div class="link-row" style="margin:4px 0 12px">
+          <button type="button" class="btn" data-tool-preset="fuse_power">🔌 电源 2A</button>
+          <button type="button" class="btn" data-tool-preset="fuse_charger">📱 充电器 1A</button>
+        </div>
         <div class="form-grid">
           <div class="field"><label for="fuseI">稳态电流 (A)</label><input type="number" id="fuseI" value="2" min="0" step="0.1"></div>
         </div>
@@ -571,7 +779,21 @@
         <p><b>方法：</b>直径 5mm 钢球压在样品上，约 20N 力，试验温度按部件位置（常见 125°C，内部支撑件 75°C），保持 1h。</p>
         <p><b>判据：</b>撤压冷却后测量压痕直径，≤ 2mm 为合格。2mm 的意义：防止外壳/支撑件受热变形后，带电件位移、爬电距离缩小到危险程度。</p>
         <p><b>常见坑：</b>压痕要等样品冷却后再测（热态回弹会误判）；薄壁样品和嵌件位置影响结果；材料数据表上的“耐温”不能替代球压实测。</p>
-      </section>
+              <h3 style="margin-top:22px">UL94 阻燃等级与灼热丝对照（教学参考）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>场景</th><th>UL94 常见要求</th><th>灼热丝常见档位</th></tr></thead>
+            <tbody>
+              <tr><td>非承重外壳（普通消费电子）</td><td>V-0 / V-1</td><td>GWFI 750°C（部件测试）</td></tr>
+              <tr><td>承重/结构件</td><td>V-0（更严）</td><td>GWIT 750°C 起</td></tr>
+              <tr><td>内部电源板安装面</td><td>V-0</td><td>550–650°C（靠近热源更低）</td></tr>
+              <tr><td>远离热源的内部件</td><td>V-2 常见</td><td>550°C 或按标准</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="peak-note">UL94 是材料等级（垂直/水平燃烧），灼热丝是部件级试验（模拟故障热源引燃），两者考察点不同、不能直接互推，正式要求以产品标准防火章节为准。</p>
+
+</section>
 
       <section class="param-block" id="tool-glow-wire">
         <h2>灼热丝档位向导</h2>
@@ -613,6 +835,10 @@
     <div data-tool-panel="battery" hidden>
       <section class="param-block" id="tool-battery">
         <h2>电池能量计算</h2>
+                <div class="link-row" style="margin:4px 0 12px">
+          <button type="button" class="btn" data-tool-preset="battery_18650">🔋 18650（3.7V/3000mAh）</button>
+          <button type="button" class="btn" data-tool-preset="battery_tool">🪛 工具电池（20V/2Ah）</button>
+        </div>
         <div class="form-grid">
           <div class="field"><label for="batV">电压 (V)</label><input type="number" id="batV" value="3.7" min="0" step="0.1"></div>
           <div class="field"><label for="batAh">容量 (Ah)</label><input type="number" id="batAh" value="2" min="0" step="0.1"></div>
@@ -628,24 +854,21 @@
           <table>
             <thead><tr><th>试验</th><th>典型参数（教学示例）</th><th>说明</th></tr></thead>
             <tbody>
-              <tr><td>湿热（稳态）</td><td>40°C / 93%RH，48h（家电示例）</td><td>湿热后测耐压 / 泄漏</td></tr>
-              <tr><td>湿热（严酷）</td><td>85°C / 85%RH（可靠性）</td><td>加速老化</td></tr>
-              <tr><td>温度循环</td><td>-40°C ~ +85°C，100 循环（示例）</td><td>按产品规范</td></tr>
-              <tr><td>高温工作</td><td>+70°C（示例）</td><td>温升与保护验证</td></tr>
-              <tr><td>盐雾</td><td>5% NaCl，35°C，24–48h（示例）</td><td>金属腐蚀</td></tr>
+              <tr><td>低温（储存）</td><td>-40°C / -20°C，保持 2–16h（示例）</td><td>材料脆化、密封收缩</td></tr>
+              <tr><td>高温（储存）</td><td>+70°C / +85°C，保持 2–16h（示例）</td><td>热老化、变形</td></tr>
+              <tr><td>低温 / 高温工作</td><td>-10°C ~ +40°C（示例），带载运行</td><td>极限温度下功能正常</td></tr>
+              <tr><td>温度变化（冲击）</td><td>-40°C ↔ +85°C，转换 ≤30s（示例）</td><td>焊点、密封、PCB 应力</td></tr>
+              <tr><td>温度循环</td><td>-40°C ~ +85°C，温变速率受控，5–100 循环</td><td>按产品规范</td></tr>
+              <tr><td>湿热（稳态）</td><td>40°C / 93%RH，48h–21 天（示例）</td><td>湿热后测耐压 / 泄漏 / 爬电</td></tr>
+              <tr><td>湿热（交变）</td><td>25°C ↔ 55°C / 95%RH，6–21 循环</td><td>凝露与呼吸效应</td></tr>
+              <tr><td>盐雾</td><td>5% NaCl，35°C，24–48h（示例）</td><td>金属腐蚀、接地端子</td></tr>
+              <tr><td>振动（正弦）</td><td>扫频 10–500Hz，加速度按产品（示例）</td><td>松动、共振、焊点</td></tr>
+              <tr><td>振动（随机）</td><td>PSD 谱型按运输/安装环境</td><td>运输与车载场景</td></tr>
+              <tr><td>自由跌落</td><td>按重量定高度（见「跌落判定」工具）</td><td>运输与误操作</td></tr>
             </tbody>
           </table>
         </div>
         <p class="peak-note">参数因产品标准与客户规范差异很大，正式试验以适用标准为准。</p>
-      </section>
-    </div>
-    <div data-tool-panel="toolmap" hidden>
-      <section class="param-block" id="tool-map">
-        <h2>工具地图</h2>
-        <p class="hint">按类查找全部工具；最近使用保存在本地浏览器。</p>
-        <input type="search" id="toolSearch" class="tool-search" placeholder="搜索工具，如 温升 / 保险丝 / 清单" aria-label="搜索工具">
-        <p class="peak-note" style="margin-top:10px">最近使用：<span id="recentTools"></span></p>
-        <div class="map-grid" id="toolMap"></div>
       </section>
     </div>
     <div data-tool-panel="emcwave" hidden>
@@ -701,6 +924,127 @@
         </div>
         <div class="result">判定 <span class="value" id="esResult" style="font-size:24px">--</span><p class="desc" id="esNote"></p></div>
         <p class="peak-note"><a href="./hazard-energy.html">能量危险深度页</a></p>
+      </section>
+    </div>
+
+    <div data-tool-panel="ip" hidden>
+      <section class="param-block" id="tool-ip">
+        <h2>IP 防护等级判定 <span class="badge-iec">IEC 60529 教学参考</span></h2>
+        <p class="hint">选典型场景快速定位，或手动组合防尘防水两位数字。IP 只描述外壳密封能力，不替代间隙/爬电与污染等级。</p>
+        <div class="mode-toggle" role="group" aria-label="IP 场景">
+          <button type="button" data-ip-scene="internal">内部模块</button>
+          <button type="button" data-ip-scene="hand">大件防护</button>
+          <button type="button" data-ip-scene="tool">工具防护</button>
+          <button type="button" data-ip-scene="indoor_dry">室内干燥</button>
+          <button type="button" data-ip-scene="condense">冷凝滴水</button>
+          <button type="button" data-ip-scene="tilt">倾斜滴水</button>
+          <button type="button" data-ip-scene="rain_light">户外小雨</button>
+          <button type="button" data-ip-scene="indoor_wet">室内潮湿</button>
+          <button type="button" data-ip-scene="outdoor">户外一般</button>
+          <button type="button" data-ip-scene="rain">户外淋雨</button>
+          <button type="button" data-ip-scene="dust">工业粉尘</button>
+          <button type="button" data-ip-scene="wash">喷淋冲洗</button>
+          <button type="button" data-ip-scene="dip">短时浸水</button>
+          <button type="button" data-ip-scene="sub">持续浸水</button>
+        </div>
+        <div class="form-grid">
+          <div class="field"><label for="ipSolid">第一位 · 防固体</label><select id="ipSolid">
+            <option value="0">0 无防护</option><option value="1">1 ≥50mm</option><option value="2" selected>2 ≥12.5mm</option>
+            <option value="3">3 ≥2.5mm</option><option value="4">4 ≥1.0mm</option><option value="5">5 防尘</option><option value="6">6 尘密</option>
+          </select></div>
+          <div class="field"><label for="ipWater">第二位 · 防水</label><select id="ipWater">
+            <option value="0" selected>0 无防护</option><option value="1">1 垂直滴水</option><option value="2">2 15° 滴水</option>
+            <option value="3">3 淋水</option><option value="4">4 溅水</option><option value="5">5 喷水</option>
+            <option value="6">6 强力喷水</option><option value="7">7 短时浸水</option><option value="8">8 持续浸水</option>
+          </select></div>
+          <div class="field"><label for="ipAux">附加字母（可选）</label><select id="ipAux">
+            <option value="">无</option><option value="A">A 手背</option><option value="B">B 手指</option>
+            <option value="C">C 工具</option><option value="D">D 金属线</option>
+          </select></div>
+          <div class="field"><label for="ipSupp">补充字母（可选）</label><select id="ipSupp">
+            <option value="">无</option><option value="H">H 高压设备</option><option value="M">M 防水时运动</option>
+            <option value="S">S 防水时静止</option><option value="W">W 特定气候</option>
+          </select></div>
+        </div>
+        <div class="result">建议等级 <span class="value" id="ipResult" style="font-size:26px">IP--</span>
+          <p class="desc" id="ipSolidNote"></p>
+          <p class="desc" id="ipWaterNote"></p>
+          <p class="desc" id="ipAuxNote"></p>
+          <p class="desc" id="ipSuppNote"></p>
+        </div>
+        <p class="peak-note" id="ipNote"></p>
+        <p><button type="button" class="btn" id="ipCopyBtn">📋 复制结果</button></p>
+      </section>
+    </div>
+
+    <div data-tool-panel="ik" hidden>
+      <section class="param-block" id="tool-ik">
+        <h2>IK 抗冲击等级判定 <span class="badge-iec">IEC 62262 教学参考</span></h2>
+        <p class="hint">按安装环境选等级，或手动选 IK 代码；冲击后需复测外观、功能与安规。</p>
+        <div class="mode-toggle" role="group" aria-label="IK 场景">
+          <button type="button" data-ik-scene="protected">完全保护</button>
+          <button type="button" data-ik-scene="recessed">嵌入/高处</button>
+          <button type="button" data-ik-scene="highwall">高处固定</button>
+          <button type="button" data-ik-scene="indoor">室内一般</button>
+          <button type="button" data-ik-scene="indoor_fixed">室内固定</button>
+          <button type="button" data-ik-scene="semi_public">半户外</button>
+          <button type="button" data-ik-scene="public">公共区域</button>
+          <button type="button" data-ik-scene="outdoor">户外灯具</button>
+          <button type="button" data-ik-scene="outdoor_public">户外公共</button>
+          <button type="button" data-ik-scene="vandal">防破坏</button>
+          <button type="button" data-ik-scene="high_vandal">极高防破坏</button>
+        </div>
+        <div class="form-grid">
+          <div class="field"><label for="ikLevel">IK 代码</label><select id="ikLevel">
+            <option value="0">IK00</option><option value="1">IK01</option><option value="2">IK02</option><option value="3">IK03</option>
+            <option value="4">IK04</option><option value="5">IK05</option><option value="6">IK06</option><option value="7">IK07</option>
+            <option value="8">IK08</option><option value="9">IK09</option><option value="10">IK10</option>
+          </select></div>
+        </div>
+        <div class="result">建议等级 <span class="value" id="ikResult" style="font-size:26px">--</span>
+          <p class="desc">冲击能量 <b id="ikEnergy">--</b> · 试验方法 <b id="ikMethod">--</b></p>
+          <p class="desc" id="ikEnv"></p>
+        </div>
+        <p class="peak-note" id="ikNote"></p>
+        <p><button type="button" class="btn" id="ikCopyBtn">📋 复制结果</button></p>
+      </section>
+    </div>
+
+    <div data-tool-panel="drop" hidden>
+      <section class="param-block" id="tool-drop">
+        <h2>自由跌落试验速查 <span class="badge-iec">IEC 60068-2-31 教学参考</span></h2>
+        <p class="hint">选产品类型/标准族并输入重量，得到教学参考跌落高度与试验要求；正式测试以标准原文为准。</p>
+        <div class="form-grid">
+          <div class="field"><label for="dropType">产品 / 标准</label><select id="dropType">
+            <option value="60068_general">IEC 60068-2-31 · 通用自由跌落</option>
+            <option value="60335_handheld">IEC 60335-1 · 手持式（1.0m）</option>
+            <option value="60335_portable">IEC 60335-1 · 便携式</option>
+            <option value="62368_handheld">IEC 62368-1 · 手持式（1.0m）</option>
+            <option value="62368_portable">IEC 62368-1 · 便携式</option>
+            <option value="60601_handheld">IEC 60601-1 · 手持式（1.0m）</option>
+            <option value="60601_portable">IEC 60601-1 · 便携式</option>
+            <option value="62133_battery">IEC 62133 · 电池（1.0m）</option>
+            <option value="ista_package">ISTA 1A · 包装跌落</option>
+            <option value="ista2a_package">ISTA 2A · 部分模拟运输</option>
+            <option value="ista3a_package">ISTA 3A · 小包裹运输</option>
+            <option value="gb4857_road">GB/T 4857.5 · 公路运输</option>
+            <option value="gb4857_rail">GB/T 4857.5 · 铁路运输</option>
+            <option value="gb4857_air">GB/T 4857.5 · 航空运输</option>
+            <option value="gb2423_drop">GB/T 2423.7 · 自由跌落</option>
+          </select></div>
+          <div class="field"><label for="dropWeight">样品重量 (kg)</label><input type="number" id="dropWeight" value="2" min="0" step="0.1"></div>
+          <div class="field"><label for="dropSurfaceSel">试验表面</label><select id="dropSurfaceSel">
+            <option value="default">按标准默认</option><option value="concrete">混凝土</option>
+            <option value="hardwood">硬木地板</option><option value="steel">钢板</option><option value="marble">大理石</option>
+          </select></div>
+        </div>
+        <div class="result">建议跌落高度 <span class="value" id="dropResult">--</span>
+          <p class="desc" id="dropStdLabel"></p>
+          <p class="desc">表面 <b id="dropSurface">--</b> · 方向 <b id="dropDir">--</b> · 次数 <b id="dropTimes">--</b></p>
+          <p class="desc">判定 <b id="dropJudge">--</b></p>
+        </div>
+        <p class="peak-note" id="dropNote"></p>
+        <p><button type="button" class="btn" id="dropCopyBtn">📋 复制结果</button></p>
       </section>
     </div>
     <div class="callout callout-warn" style="margin-top:22px">
