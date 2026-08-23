@@ -138,7 +138,7 @@ if (searchInput && searchBox) {
 var SEARCH_HISTORY_KEY = "angui-search-history";
 function searchGroup(u) {
   if (u.indexOf("pages/tools.html") !== -1) return "工具";
-  if (u.indexOf("pages/industries.html") !== -1 || u.indexOf("pages/standards") !== -1 || u.indexOf("pages/voltage.html") !== -1 || u.indexOf("pages/certification.html") !== -1 || u.indexOf("pages/materials.html") !== -1 || u.indexOf("pages/glossary.html") !== -1 || u.indexOf("pages/wizard.html") !== -1 || u.indexOf("pages/refs.html") !== -1 || u.indexOf("pages/verification.html") !== -1 || u.indexOf("pages/feedback.html") !== -1 || u.indexOf("pages/data.html") !== -1) return "参考";
+  if (u.indexOf("pages/industries.html") !== -1 || u.indexOf("pages/standards") !== -1 || u.indexOf("pages/voltage.html") !== -1 || u.indexOf("pages/certification.html") !== -1 || u.indexOf("pages/materials.html") !== -1 || u.indexOf("pages/glossary.html") !== -1 || u.indexOf("pages/wizard.html") !== -1 || u.indexOf("pages/refs.html") !== -1 || u.indexOf("pages/verification.html") !== -1 || u.indexOf("pages/feedback.html") !== -1 || u.indexOf("pages/data.html") !== -1 || u.indexOf("pages/erp.html") !== -1 || u.indexOf("pages/export-data.html") !== -1 || u.indexOf("pages/export-compliance.html") !== -1 || u.indexOf("pages/templates.html") !== -1 || u.indexOf("pages/labels.html") !== -1) return "认证 / 参考";
   if (u.indexOf("pages/resources.html") !== -1 || u.indexOf("pages/changelog.html") !== -1) return "资源";
   return "学习";
 }

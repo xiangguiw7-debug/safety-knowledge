@@ -16,7 +16,7 @@ var CORE_ASSETS = [
   "./assets/js/feynman.js",
   "./assets/js/knowledge-detail-data.js",
   "./assets/js/standards-data.js",
-  "./assets/js/reliability-data.js", "./assets/js/hipot-template.js", "./assets/js/dmcm.js", "./assets/js/voltage.js", "./assets/js/certification.js", "./assets/js/search.js", "./assets/js/materials.js", "./assets/js/glossary.js", "./assets/js/wizard.js", "./assets/js/progress.js", "./assets/js/knowledge-group.js",
+  "./assets/js/reliability-data.js", "./assets/js/hipot-template.js", "./assets/js/dmcm.js", "./assets/js/voltage.js", "./assets/js/certification.js", "./assets/js/search.js?v=1.4.2", "./assets/js/materials.js", "./assets/js/glossary.js", "./assets/js/wizard.js", "./assets/js/progress.js", "./assets/js/knowledge-group.js",
   "./assets/js/knowledge-detail-data.js",
   "./assets/js/knowledge-index.js", "./assets/js/knowledge-notes.js", "./assets/js/compare.js", "./assets/js/ux.js", "./assets/js/knowledge-chain.js", "./assets/js/standard-status.js",
   "./assets/js/cases.js", "./assets/js/picker.js", "./assets/js/sitemap.js", "./assets/js/workshop.js", "./assets/js/data-backup.js",

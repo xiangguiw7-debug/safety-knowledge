@@ -61,6 +61,17 @@ if (/更新日志：v\d+\.\d+\.\d+/.test(ch)) {
   console.log("  changelog meta 已更新");
 }
 
+// 5. search.js 版本参数（index.html / learn.html / sw.js CORE_ASSETS）——避免旧 PWA 缓存导致搜索索引不更新
+var searchRefs = [path.join(ROOT, "index.html"), path.join(ROOT, "pages", "learn.html"), swPath];
+searchRefs.forEach(function (f) {
+  var c = fs.readFileSync(f, "utf8");
+  if (/search\.js\?v=\d+\.\d+\.\d+/.test(c)) {
+    c = c.replace(/search\.js\?v=\d+\.\d+\.\d+/g, "search.js?v=" + V);
+    fs.writeFileSync(f, c, "utf8");
+    console.log("  " + path.basename(f) + " search.js?v → " + V);
+  }
+});
+
 console.log("\n完成。请记得：");
 console.log("  1) 在 pages/changelog.html 顶部补 v" + V + " 条目；");
 console.log("  2) node scripts/check-structure.js && node scripts/check-links.js 验证；");
