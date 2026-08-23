@@ -25,11 +25,17 @@
     .knowledge-card .howto { font-size: 13px; background: #f4f2ed; border-left: 3px solid #bbb; padding: 8px 12px; border-radius: 0 8px 8px 0; }
     .knowledge-card .std { font-size: 12px; color: #777; }
     .knowledge-card .rel { font-size: 13px; margin-top: 10px; }
+    @page { margin: 10mm 12mm; }
     @media print {
       .no-print, header, footer, .bottom-nav { display: none !important; }
-      .print-head { padding: 10px 10px 0; }
-      .print-content { padding: 0 10px; max-width: 100%; }
-      .knowledge-card { break-inside: avoid; border-color: #ccc; }
+      .print-head { padding: 6px 0 0; }
+      .print-head h1 { font-size: 22px; }
+      .print-head p { margin-bottom: 6px; }
+      .print-content { padding: 0; max-width: 100%; }
+      .knowledge-card { break-inside: auto; border: none; border-radius: 0; padding: 10px 0 12px; margin: 0 0 12px; border-bottom: 1px solid #e5e5e5; }
+      .knowledge-card h2 { break-after: avoid; page-break-after: avoid; }
+      .knowledge-card h3 { break-after: avoid; page-break-after: avoid; }
+      .knowledge-card tr, .knowledge-card .howto, .knowledge-card img { break-inside: avoid; page-break-inside: avoid; }
       body { background: #fff !important; }
     }
   </style>
