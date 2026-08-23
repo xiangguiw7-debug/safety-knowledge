@@ -39,10 +39,11 @@
     </div>
 
     <section>
-      <h2>🧭 全站地图（搜索直达）</h2>
-      <p class="section-sub">搜索任意模块，点击直达；最近访问记录在本地浏览器。</p>
-      <input type="search" id="siteMapSearch" class="tool-search" placeholder="搜索全站：间隙、案例、EMC、认证…" aria-label="搜索全站">
-      <p class="peak-note">最近访问：<span id="siteRecent"></span></p>
+      <h2>🔍 全站搜索 + 🧭 全站地图</h2>
+      <p class="section-sub">输入关键词搜全站（标题 / 描述 / 关键词即时命中，结果分组高亮）；下方地图按组浏览全部页面，最近访问记录在本地浏览器。</p>
+      <input type="search" id="siteSearch" class="tool-search" placeholder="搜索全站：爬电、ErP、PPWR、RoHS、65W、隔离、出口…" aria-label="搜索全站">
+      <div id="searchResults" class="search-results" hidden></div>
+      <p class="peak-note" style="margin-top:10px">最近访问：<span id="siteRecent"></span></p>
       <div id="siteMap"></div>
     </section>
 
@@ -136,6 +137,7 @@
   <script src="../assets/js/main.js?v=1.4.2"></script>
   <script src="../assets/js/glossary-tip.js"></script>
   <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/search.js?v=1.4.2"></script>
   <script src="../assets/js/sitemap.js"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
