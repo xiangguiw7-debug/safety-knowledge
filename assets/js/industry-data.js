@@ -65,6 +65,7 @@ var INDUSTRIES = [
       { text: "温升与材料耐热耐燃", href: "knowledge.html#temperature" },
       { text: "防尘防水等级（IP）", href: "knowledge.html#ip" },
       { text: "蓝光 / 紫外光生物安全", href: "knowledge.html#optical" },
+      { text: "隔离 vs 非隔离 LED 驱动（灯具电源怎么选）", href: "power-design.html#isolation" },
       { text: "欧盟 ErP 能效与能效标签（灯具实操）", href: "erp.html#lighting-erp" }
     ],
     tests: ["介电强度", "泄漏电流", "温升", "IP 测试", "浪涌", "光生物安全"],
