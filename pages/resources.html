@@ -39,10 +39,9 @@
     </div>
 
     <section>
-      <h2>🔍 全站搜索 + 🧭 全站地图</h2>
-      <p class="section-sub">输入关键词搜全站（标题 / 描述 / 关键词即时命中，结果分组高亮）；下方地图按组浏览全部页面，最近访问记录在本地浏览器。</p>
-      <input type="search" id="siteSearch" class="tool-search" placeholder="搜索全站：爬电、ErP、PPWR、RoHS、65W、隔离、出口…" aria-label="搜索全站">
-      <div id="searchResults" class="search-results" hidden></div>
+      <h2>🔍 本页内容检索 + 🧭 全站地图</h2>
+      <p class="section-sub">输入关键词过滤<b>本页</b>的资源卡片（深度页、专题、工具、合规速查等）；下方地图按组浏览全部页面，最近访问记录在本地浏览器。<span id="rcCount" style="font-weight:600;color:var(--accent)"></span></p>
+      <input type="search" id="siteMapSearch" class="tool-search" placeholder="搜索本页内容：标签、PPWR、隔离、65W、出口…" aria-label="搜索本页内容">
       <p class="peak-note" style="margin-top:10px">最近访问：<span id="siteRecent"></span></p>
       <div id="siteMap"></div>
     </section>
@@ -137,8 +136,30 @@
   <script src="../assets/js/main.js?v=1.4.2"></script>
   <script src="../assets/js/glossary-tip.js"></script>
   <script src="../assets/js/ux.js"></script>
-  <script src="../assets/js/search.js?v=1.4.2"></script>
   <script src="../assets/js/sitemap.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      // 本页内容过滤：按关键词匹配页面上的资源卡片（标题+描述）
+      var box = document.getElementById("siteMapSearch");
+      if (!box) return;
+      var cards = Array.prototype.slice.call(document.querySelectorAll(".grid .card"));
+      var count = document.getElementById("rcCount");
+      function apply() {
+        var q = box.value.trim().toLowerCase();
+        var n = 0;
+        cards.forEach(function (c) {
+          var hit = !q || (c.textContent || "").toLowerCase().indexOf(q) !== -1;
+          c.style.display = hit ? "" : "none";
+          if (hit) n++;
+        });
+        if (count) count.textContent = q ? " 本页匹配 " + n + " / " + cards.length + " 项" : "";
+      }
+      box.addEventListener("input", apply);
+      // 页面初始不显示计数（避免歧义）
+      apply();
+    })();
+  </script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
