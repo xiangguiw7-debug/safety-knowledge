@@ -4,10 +4,12 @@
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/en/glossary.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/en/index.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/index.html</loc></url>
+  <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/case-65w.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/cases.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/cert-map.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/certification.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/changelog.html</loc></url>
+  <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/circuit-checklist.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/clearance.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/components.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/creepage.html</loc></url>
@@ -23,6 +25,7 @@
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/emc-re.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/emc.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/environment-tests.html</loc></url>
+  <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/export-compliance.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/faq.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/feedback.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/glossary.html</loc></url>
@@ -47,6 +50,7 @@
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/mopp-moop.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/pcb-guidelines.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/poster.html</loc></url>
+  <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/power-design.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/product-categories.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/product-classes.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/quiz.html</loc></url>
@@ -123,7 +127,9 @@
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/standards-compare.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/standards-updates.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/standards.html</loc></url>
+  <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/structural-checklist.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/surge.html</loc></url>
+  <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/templates.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/test-equipment.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/testing.html</loc></url>
   <url><loc>https://xiangguiw7-debug.github.io/safety-knowledge/pages/tools.html</loc></url>

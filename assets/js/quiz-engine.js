@@ -3,9 +3,19 @@
 (function () {
   "use strict";
 
-  // 合并精选 + 扩充题库
+  // 合并精选 + 扩充题库 + 面试题库
   var FULL_BANK = (typeof QUIZ_BANK === "undefined" ? [] : QUIZ_BANK)
-    .concat(typeof QUIZ_BANK_EXTRA === "undefined" ? [] : QUIZ_BANK_EXTRA);
+    .concat(typeof QUIZ_BANK_EXTRA === "undefined" ? [] : QUIZ_BANK_EXTRA)
+    .concat(typeof QUIZ_INTERVIEW === "undefined" ? [] : QUIZ_INTERVIEW);
+  // 去重：同一题干只保留一题（避免重复刷题）
+  var seenQ = {};
+  FULL_BANK = FULL_BANK.filter(function (q) {
+    if (!q || !q.q) return false;
+    if (seenQ[q.q]) return false;
+    seenQ[q.q] = 1;
+    return true;
+  });
+  var INTERVIEW_COUNT = FULL_BANK.filter(function (q) { return q.interview; }).length;
 
   var MODULE_LABELS = {
     clearance: "电气间隙", creepage: "爬电距离", surge: "雷击浪涌", hipot: "耐压测试",
@@ -14,12 +24,13 @@
     ip: "IP 防护", ik: "IK 冲击", leakage: "泄漏电流", grounding: "接地", selv: "SELV",
     emc: "EMC", battery: "电池", materials: "材料/CTI", certification: "认证", framework: "标准结构"
   };
-  var TYPE_LABELS = { single: "单选", judge: "判断", multi: "多选", scenario: "情景", calc: "计算", lookup: "查表" };
+  var TYPE_LABELS = { single: "单选", judge: "判断", multi: "多选", scenario: "情景", calc: "计算", lookup: "查表", fill: "填空", write: "写答" };
   var DIFF_LABELS = { 1: "基础", 2: "进阶", 3: "拔高" };
   var STATS_KEY = "angui-quiz-stats-v1";
   var FLAG_KEY = "angui-quiz-flag-v1";
 
   var activeDifficulty = "all"; // "all" | 1 | 2 | 3
+  var activeType = "all"; // "all" | single | judge | multi | fill | write | interview
 
   function answerText(item) {
     if (!item) return "";
@@ -27,6 +38,8 @@
       return (item.answer || []).map(function (i) { return item.options[i]; }).join("、");
     }
     if (item.type === "judge") return item.answer === 0 ? "正确" : "错误";
+    if (item.type === "fill") return (item.accepted || [])[0] || "";
+    if (item.type === "write") return "开放作答（参考答案见解析）";
     return item.options[item.answer];
   }
 
@@ -48,6 +61,13 @@
     if (activeModule === "all") bank = FULL_BANK.slice().concat(AUTO_SAMPLE);
     else if (activeModule === "auto") bank = AUTO_QUESTIONS.slice();
     else bank = FULL_BANK.concat(AUTO_QUESTIONS).filter(function (q) { return q.module === activeModule; });
+
+    // 题型筛选
+    if (activeType === "interview") {
+      bank = bank.filter(function (q) { return q.interview; });
+    } else if (activeType !== "all") {
+      bank = bank.filter(function (q) { return (q.type || "single") === activeType; });
+    }
 
     if (activeDifficulty !== "all") {
       bank = bank.filter(function (q) {
@@ -74,6 +94,7 @@
 
   function buildTags(item) {
     var tags = "";
+    if (item.interview) tags += '<span class="quiz-interview-tag">💼 面试题</span>';
     if (item.auto) tags += '<span class="quiz-auto-tag">⚙ 自动生成</span>';
     var t = item.type || "single";
     if (t !== "single" && TYPE_LABELS[t]) tags += '<span class="quiz-type-tag t-' + t + '">' + TYPE_LABELS[t] + '</span>';
@@ -99,18 +120,50 @@
     if (sc) { sc.innerHTML = item.scenario || ""; sc.hidden = !item.scenario; }
 
     var isMulti = item.type === "multi";
-    var options = isMulti ? item.options : (item.type === "judge" ? ["正确", "错误"] : item.options);
+    var isFill = item.type === "fill";
+    var isWrite = item.type === "write";
 
     var box = $("quizOptions");
     box.innerHTML = "";
-    options.forEach(function (text, i) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "quiz-option" + (isMulti ? " multi" : "");
-      btn.textContent = (isMulti ? "☐ " : "") + text;
-      btn.addEventListener("click", function () { if (isMulti) toggleMulti(i); else choose(i); });
-      box.appendChild(btn);
-    });
+    if (isFill) {
+      box.innerHTML = '<input type="text" id="quizFillInput" class="quiz-fill-input" placeholder="填写答案后回车，或点「检查答案」" autocomplete="off" autocapitalize="off">' +
+        '<p style="margin-top:12px"><button type="button" class="btn btn-primary" id="quizFillBtn">检查答案</button> ' +
+        '<button type="button" class="btn" id="quizFillPeek">看答案（记错题）</button></p>';
+      var fi = document.getElementById("quizFillInput");
+      if (fi) {
+        fi.focus();
+        fi.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); submitFill(); } });
+      }
+      var fb = document.getElementById("quizFillBtn");
+      if (fb) fb.addEventListener("click", submitFill);
+      var fp = document.getElementById("quizFillPeek");
+      if (fp) fp.addEventListener("click", function () {
+        var input = document.getElementById("quizFillInput");
+        if (input) input.value = (item.accepted || [])[0] || "";
+        state.answered = true;
+        finishAnswer(false);
+      });
+    } else if (isWrite) {
+      box.innerHTML = '<textarea id="quizWriteArea" class="quiz-write-area" rows="5" placeholder="用你自己的话回答，把逻辑讲清楚（重在思路，不怕口语化）。写完后可直接对照参考答案，或直接下一题。"></textarea>' +
+        '<p style="margin-top:12px"><button type="button" class="btn btn-primary" id="quizWriteShow">查看参考答案</button> ' +
+        '<button type="button" class="btn" id="quizWriteNext">直接下一题</button></p>';
+      var wa = document.getElementById("quizWriteArea");
+      if (wa) wa.focus();
+      var ws = document.getElementById("quizWriteShow");
+      if (ws) ws.addEventListener("click", function () { showWriteRef(item); });
+      var wn = document.getElementById("quizWriteNext");
+      if (wn) wn.addEventListener("click", function () { state.answered = true; finishAnswer(true); });
+    } else {
+      var options = isMulti ? item.options : (item.type === "judge" ? ["正确", "错误"] : item.options);
+      options.forEach(function (text, i) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "quiz-option" + (isMulti ? " multi" : "");
+        btn.textContent = (isMulti ? "☐ " : "") + text;
+        btn.addEventListener("click", function () { if (isMulti) toggleMulti(i); else choose(i); });
+        box.appendChild(btn);
+      });
+    }
 
     var flagBtn = document.getElementById("quizFlag");
     if (flagBtn) {
@@ -136,8 +189,10 @@
     var item = state.list[state.index];
     if (correct) state.score += 1; else saveWrong(item);
     recordStat(item.module, correct);
+    if (window.SpacedReview) window.SpacedReview.onAnswer(item, correct);
     var explain = $("quizExplain");
-    explain.textContent = (correct ? "回答正确。" : "回答错误。") + (item.explain || "");
+    var hint = (!correct && item.type === "fill") ? "正确答案：" + answerText(item) + "。" : "";
+    explain.textContent = (correct ? "回答正确。" : "回答错误。" + hint) + (item.explain || "");
     explain.hidden = false;
     var next = $("quizNext");
     next.textContent = state.index === state.list.length - 1 ? "查看成绩" : "下一题";
@@ -195,6 +250,51 @@
     finishAnswer(correct);
   }
 
+  /* ===== 填空 ===== */
+  function normAns(s) {
+    return String(s || "").trim().toLowerCase()
+      .replace(/[，。；、：！？\s·\-—\/]+/g, "")
+      .replace(/(?<=\d)(毫米|伏特|千伏|千伏特|伏|微安|毫安|ua|ma|µa|μa|毫克|千克|kg|mg|赫兹|ac|dc|mm|kv|hz|°c|℃|度|米|克|g|安|a|m|v)+/g, "");
+  }
+  function submitFill() {
+    if (state.answered) return;
+    var item = state.list[state.index];
+    if (item.type !== "fill") return;
+    var input = document.getElementById("quizFillInput");
+    var val = input ? input.value : "";
+    var ok = (item.accepted || []).some(function (a) { return normAns(a) === normAns(val); });
+    state.answered = true;
+    if (input) {
+      input.disabled = true;
+      input.style.borderColor = ok ? "#1d7a46" : "#b3261e";
+    }
+    finishAnswer(ok);
+  }
+  function escHtml(t) {
+    var d = document.createElement("div");
+    d.textContent = t == null ? "" : String(t);
+    return d.innerHTML;
+  }
+  /* ===== 写答：查看参考答案（对照自检，不判分、不卡流程） ===== */
+  function showWriteRef(item) {
+    var holder = document.getElementById("quizWriteRefHolder");
+    if (!holder) {
+      holder = document.createElement("div");
+      holder.id = "quizWriteRefHolder";
+      holder.className = "quiz-write-ref";
+      $("quizOptions").appendChild(holder);
+    }
+    holder.innerHTML = '<p class="feyn-label"><b>参考答案（来自站内知识体系，对照自检即可）：</b></p>' +
+      '<div class="feyn-ref">' + escHtml(item.ref || "（暂无参考答案）") + "</div>" +
+      (item.points && item.points.length
+        ? '<p class="feyn-label"><b>考察点：</b></p><div class="feyn-gaps">' +
+          item.points.map(function (p) { return '<span class="feyn-gap">' + escHtml(p) + "</span>"; }).join("") + "</div>"
+        : "") +
+      '<p style="margin-top:12px"><button type="button" class="btn btn-primary" id="quizWriteNext2">下一题</button></p>';
+    var n2 = document.getElementById("quizWriteNext2");
+    if (n2) n2.addEventListener("click", function () { state.answered = true; finishAnswer(true); });
+  }
+
   /* ===== 覆盖：下一题 ===== */
   function nextQuestion() {
     var item = state.list[state.index];
@@ -222,7 +322,7 @@
     if (!el) return;
     var diffTag = activeDifficulty === "all" ? "" : " · " + DIFF_LABELS[activeDifficulty];
     if (activeModule === "all") {
-      el.textContent = "精选 " + FULL_BANK.length + " 题 + 自动生成 " + AUTO_SAMPLE.length + " 题（随机抽样）" + diffTag;
+      el.textContent = "题库 " + FULL_BANK.length + " 题（含面试题 " + INTERVIEW_COUNT + " 题）+ 自动生成 " + AUTO_SAMPLE.length + " 题（随机抽样）" + diffTag;
     } else if (activeModule === "auto") {
       el.textContent = "自动生成题库：" + AUTO_QUESTIONS.length + " 题（由知识卡 / 标准 / 可靠性数据自动生成）";
     } else {
@@ -303,6 +403,23 @@
     });
   }
 
+  /* ===== 题型筛选按钮（单选/判断/多选/填空/写答/面试） ===== */
+  function syncTypeChips() {
+    document.querySelectorAll("[data-qtype]").forEach(function (b) {
+      var on = b.getAttribute("data-qtype") === activeType;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+  document.querySelectorAll("[data-qtype]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      activeType = btn.getAttribute("data-qtype");
+      syncTypeChips();
+      updateQuizCount();
+      startQuiz();
+    });
+  });
+
   /* ===== 题目收藏 / 标记 ===== */
   function flagCurrent() {
     if (!state.list.length || state.index >= state.list.length) return;
@@ -315,7 +432,7 @@
       if (btn) { btn.classList.remove("on"); btn.textContent = "☆ 标记"; }
       if (window.AnGuiUX) window.AnGuiUX.toast("已取消标记");
     } else {
-      flags.push({ q: item.q, module: item.module, options: item.options, answer: item.answer, type: item.type, explain: item.explain, difficulty: item.difficulty, scenario: item.scenario });
+      flags.push(item);
       if (btn) { btn.classList.add("on"); btn.textContent = "★ 已标记"; }
       if (window.AnGuiUX) window.AnGuiUX.toast("已标记，可在下方「标记收藏」重练");
     }
@@ -331,7 +448,7 @@
     if (cnt) cnt.textContent = flags.length;
     box.innerHTML = flags.length
       ? flags.map(function (w, i) {
-          var a = (w.type === "multi") ? (w.answer || []).map(function (x) { return w.options[x]; }).join("、") : (w.type === "judge" ? (w.answer === 0 ? "正确" : "错误") : w.options[w.answer]);
+          var a = w.answerText || answerText(w);
           return '<div class="flag-item"><p><b>' + (i + 1) + '. ' + w.q + '</b></p><p style="color:var(--muted);font-size:13px">正确答案：' + a + "　" + (w.explain || "") + "</p></div>";
         }).join("")
       : '<p style="color:var(--muted)">还没有标记的题目，答题时可点「标记」收藏。</p>';
@@ -345,6 +462,7 @@
     if ($("quizBox") && $("quizBox").hidden) return;
     var item = state.list[state.index];
     if (!item) return;
+    if (item.type === "fill" || item.type === "write") return;
     var isMulti = item.type === "multi";
     var n = isMulti ? item.options.length : (item.type === "judge" ? 2 : item.options.length);
     if (e.key >= "1" && e.key <= "4") {
@@ -398,9 +516,37 @@
   window.updateQuizCount = updateQuizCount;
   window.renderWrongBook = renderWrongBook;
 
+  /* 填空/写答/面试题样式 */
+  (function () {
+    if (document.getElementById("quizNewTypesStyle")) return;
+    var st = document.createElement("style");
+    st.id = "quizNewTypesStyle";
+    st.textContent =
+      ".quiz-fill-input{width:100%;max-width:420px;padding:10px 14px;border:2px solid var(--border);border-radius:10px;background:var(--card);color:var(--fg);font-size:15px;font-family:inherit}" +
+      ".quiz-fill-input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}" +
+      ".quiz-write-area{width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:10px;background:var(--card);color:var(--fg);font-size:14px;line-height:1.7;font-family:inherit;resize:vertical}" +
+      ".quiz-write-area:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}" +
+      ".quiz-write-ref{margin-top:14px;border-top:1px dashed var(--border);padding-top:10px}" +
+      ".quiz-interview-tag{display:inline-block;font-size:11.5px;font-weight:600;color:#6d5a8a;background:rgba(109,90,138,.12);border-radius:999px;padding:2px 9px;margin-right:6px}";
+    document.head.appendChild(st);
+  })();
+
   /* 初始化：刷新题量与界面 */
   updateQuizCount();
   renderWrongBook();
   renderStats();
   renderFlags();
+
+  // 支持 ?module=xxx 直达（场景向导 / 卡片自测入口）
+  (function () {
+    var qs = new URLSearchParams(location.search);
+    var m = qs.get("module");
+    var valid = ["all", "auto", "clearance", "creepage", "surge", "hipot", "shock", "energy", "fire", "thermal", "mechanical", "radiation", "chemical", "reliability", "ip", "ik", "leakage", "grounding", "selv", "emc", "battery", "materials", "certification", "framework"];
+    if (m && valid.indexOf(m) !== -1) {
+      activeModule = m;
+      syncChips();
+      syncDiffChips();
+      updateQuizCount();
+    }
+  })();
 })();

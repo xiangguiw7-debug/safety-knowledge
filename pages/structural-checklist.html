@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <title>结构设计安规检查表 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="结构工程师交设计/评审前的安规自查清单：防触电结构、防火外壳、机械强度、热量、线束布局、装配与标识，逐项可打勾。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+  <style>
+    .sc-progress { display: flex; align-items: center; gap: 12px; margin: 10px 0 18px; flex-wrap: wrap; }
+    .sc-progress .bar { flex: 1; min-width: 160px; height: 8px; border-radius: 999px; background: var(--card-2); overflow: hidden; }
+    .sc-progress .bar span { display: block; height: 100%; background: var(--accent); transition: width .2s; }
+    .sc-group { border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; margin: 14px 0; background: var(--card); }
+    .sc-group h3 { margin: 0 0 10px; }
+    .sc-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-top: 1px dashed var(--hairline); }
+    .sc-item:first-of-type { border-top: 0; }
+    .sc-item input { margin-top: 3px; }
+    .sc-label { font-weight: 600; font-size: 14.5px; }
+    .sc-why { color: var(--muted); font-size: 12.5px; margin-top: 2px; line-height: 1.55; }
+    .sc-ref { margin-top: 4px; font-size: 12px; }
+    .sc-ref a { color: var(--accent); text-decoration: none; margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./learn.html">学习</a> / 结构设计安规检查表</p>
+      <h1>结构设计安规检查表</h1>
+      <p class="lead">结构工程师交设计 / 评审前逐项自查：涉及带电体的部位必须不能徒手打开、不能徒手触及。勾选状态保存在本地浏览器，可导出文本或打印。</p>
+    </div>
+
+    <div class="sc-progress">
+      <b id="scProgress">已完成 0 / 29（0%）</b>
+      <div class="bar"><span id="scBar" style="width:0%"></span></div>
+      <button type="button" class="btn" id="scExport">导出检查结果</button>
+      <button type="button" class="btn" id="scReset">重置</button>
+    </div>
+    <div class="callout callout-ok" id="scAllDone" hidden><strong>全部通过 🎉</strong> 可以进入下一环节；仍建议让另一位工程师交叉评审。</div>
+
+    <div class="sc-group">
+      <h3>⚡ 一、防触电结构（最重要）</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-e1"><div><div class="sc-label">带电部件不可徒手打开</div><div class="sc-why">凡打开后能触及带电部件的盖板/外壳，必须用工具（螺丝刀/专用工具）才能打开；<b>徒手可拆的盖板，拆开后内部仍不得有可触及的带电部件</b>。这是最基础、也最常被审出问题的一条。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=access">可触及性知识卡</a><a href="./knowledge-detail.html?id=protection">防触电逻辑</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-e2"><div><div class="sc-label">工具打开后仍不可触及带电件</div><div class="sc-why">即使用工具打开盖板，内部带电部件仍应有第二层防护（绝缘挡板/隔层/安全距离），或用危险警示 + 明确的服务要求；用户不应在维修场景暴露于危险电压。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=access">可触及性</a><a href="./knowledge-detail.html?id=productclass">产品类别</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-e3"><div><div class="sc-label">所有开孔不穿到带电部件</div><div class="sc-why">散热孔、通风孔、走线孔、按键孔、缝隙，用试验指/试验钩/探针检查：开孔方向、孔径与带电部件距离，不得使标准试具触及带电件。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=access">可触及性</a><a href="./sop-ip.html">IP SOP</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-e4"><div><div class="sc-label">按键/旋钮/指示灯缝隙防穿</div><div class="sc-why">可触及的按键孔、旋钮轴、指示灯孔不得直通带电部件；薄片/探针检查缝隙路径。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=access">可触及性</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-e5"><div><div class="sc-label">内部导线不会移位碰带电件</div><div class="sc-why">内部线束有固定（线夹/扎带/线槽），装配与使用中不得因线扣失效、拉拽而碰触带电部件或可触及金属件。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=mechanical">机械防护</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-e6"><div><div class="sc-label">接地可靠且防松（I 类）</div><div class="sc-why">I 类产品：接地端子/接地片与金属外壳可靠连接，用弹垫/防松胶/耐落防松；接地连续性按标准验证。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=grounding">接地知识卡</a><a href="./sop-grounding.html">接地 SOP</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-e7"><div><div class="sc-label">电源线入口有应力释放</div><div class="sc-why">电源线入口配线扣/应力释放装置，通过拉扭测试；防内部导线被拽松后碰带电件。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=components">安规元件</a><a href="./labels.html">标签与说明书</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-e8"><div><div class="sc-label">可拆卸部件拆除后仍安全</div><div class="sc-why">可拆卸部件（可拆底盖/电池仓盖）拆除后，带电部件仍不可触及，或拆除触发断电/联锁。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=access">可触及性</a><a href="./knowledge-detail.html?id=functional">功能安全</a></div></div></div>
+    </div>
+
+    <div class="sc-group">
+      <h3>🔥 二、防火外壳完整性</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-f1"><div><div class="sc-label">外壳材料阻燃等级与厚度</div><div class="sc-why">防火外壳材料满足阻燃等级（如 V-0/5VA 或灼热丝档位）且厚度符合等级要求；改薄必须重测。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=flame">防火阻燃卡</a><a href="./materials.html">材料库</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-f2"><div><div class="sc-label">通风孔尺寸与形状符合限制</div><div class="sc-why">防火外壳通风孔按标准限制孔径/网孔尺寸，防止外部火焰进入与内部火焰外窜。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=fire-design">防火设计卡</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-f3"><div><div class="sc-label">开孔不是火焰传播路径</div><div class="sc-why">底部开孔注意熔融滴落物；开孔位置避开内部起火源与外壳接缝的火焰通道。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=fire-design">防火设计卡</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-f4"><div><div class="sc-label">内部起火源与外壳保持距离</div><div class="sc-why">变压器、电容、发热元件等潜在起火源与外壳保持最小距离，或加防火挡板/隔板。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=fire-design">防火设计卡</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-f5"><div><div class="sc-label">阻燃与 CTI 同时达标</div><div class="sc-why">外壳材料既满足阻燃（V-0/灼热丝），CTI/材料组也不降级（外壳常兼作爬电表面）；阻燃剂拉低 CTI 是常见冲突。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=cti">CTI 知识卡</a><a href="./materials.html">材料库</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-f6"><div><div class="sc-label">防火挡板/隔板固定可靠</div><div class="sc-why">防火隔板、挡墙不能只是胶带/易脱落结构，材料与固定方式按标准。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=fire-design">防火设计卡</a></div></div></div>
+    </div>
+
+    <div class="sc-group">
+      <h3>⚙️ 三、机械强度与防护</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-m1"><div><div class="sc-label">外壳壁厚与加强筋</div><div class="sc-why">壁厚满足机械强度（抗冲击/跌落），薄弱处（面板、铰链、卡扣根部）设加强筋。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=mechanical">机械防护卡</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-m2"><div><div class="sc-label">跌落/冲击后结构不失效</div><div class="sc-why">按产品标准确定 IK 档位或跌落高度，卡扣/铰链设计保证冲击后不脱落、不露出带电件。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=ik">IK 知识卡</a><a href="./knowledge-detail.html?id=drop">跌落知识卡</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-m3"><div><div class="sc-label">可触及处无锐边毛刺</div><div class="sc-why">可触及边缘、孔口、螺丝孔去毛刺/圆角，防止划伤（也是安规要求之一）。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=mechanical">机械防护卡</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-m4"><div><div class="sc-label">运动部件有防护/联锁</div><div class="sc-why">活动部件（风扇、传动件）有防护罩/开口限制，联锁失效必须安全（断电回安全态、复位不自动重启）。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=mechanical">机械防护</a><a href="./knowledge-detail.html?id=functional">功能安全</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-m5"><div><div class="sc-label">稳定性满足倾斜试验</div><div class="sc-why">立式/桌面产品重心与支撑面满足倾斜（推倒）试验，防止倾倒伤人或损伤。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=mechanical">机械防护</a><a href="./sop-stability.html">稳定性 SOP</a></div></div></div>
+    </div>
+
+    <div class="sc-group">
+      <h3>🌡️ 四、热量与材料耐温</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-h1"><div><div class="sc-label">可触及表面温升达标</div><div class="sc-why">可触及表面（外壳、手柄、按键）温升满足产品标准限值；高温区做隔热处理。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=temperature">温升知识卡</a><a href="./sop-temperature-rise.html">温升 SOP</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-h2"><div><div class="sc-label">材料耐温留余量</div><div class="sc-why">外壳/内部结构材料 RTI/长期耐温 ≥ 实际热点温度 + 余量；发热件附近材料按 RTI 选。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=temperature">温升知识卡</a><a href="./materials.html">材料库</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-h3"><div><div class="sc-label">散热设计不牺牲防火</div><div class="sc-why">风道/散热孔与防火开孔限制兼顾，散热路径不把热风直接引向易燃材料。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=fire-design">防火设计卡</a></div></div></div>
+    </div>
+
+    <div class="sc-group">
+      <h3>🧵 五、线束与内部布局</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-w1"><div><div class="sc-label">线束固定且避开危险区</div><div class="sc-why">内部线束固定（线夹/扎带/线槽），不碰触锐边、活动件、发热件。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=mechanical">机械防护</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-w2"><div><div class="sc-label">线束与带电部件间距</div><div class="sc-why">线束与带电部件保持爬电/间隙距离，需跨接时用绝缘套管/护套覆盖。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=ovc">OVC 知识卡</a><a href="./pcb-guidelines.html">PCB 指南</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-w3"><div><div class="sc-label">装配最不利公差下间距仍够</div><div class="sc-why">按装配公差带的最不利组合复核初次级间距/爬电——"图纸够、实物不够"是高频翻车点。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=ovc">OVC 知识卡</a><a href="./insulation-guide.html">绝缘判定</a></div></div></div>
+    </div>
+
+    <div class="sc-group">
+      <h3>🏷️ 六、装配与标识</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-a1"><div><div class="sc-label">紧固件防松</div><div class="sc-why">螺钉/螺母用弹垫、防松胶、耐落或自锁结构，防止振动松脱后间距改变。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=mechanical">机械防护</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-a2"><div><div class="sc-label">密封与 IP 等级实现</div><div class="sc-why">密封圈压缩量、透气阀、排水孔按目标 IP 等级设计；高 IP 不等于爬电/间隙可放松。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=ip">IP 知识卡</a><a href="./sop-ip.html">IP SOP</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-a3"><div><div class="sc-label">铭牌与警示标志</div><div class="sc-why">铭牌（额定电压/功率/制造商/型号）、危险电压警示、可拆卸盖板警示齐全且位置可见。</div><div class="sc-ref"><a href="./labels.html">标签与说明书</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="sc-a4"><div><div class="sc-label">用户可拆件与服务件分离</div><div class="sc-why">用户可拆卸部件（电池仓、滤网）拆后安全；服务件需工具 + 警示，与用户区隔离。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=access">可触及性</a><a href="./knowledge-detail.html?id=certprocess">认证流程</a></div></div></div>
+    </div>
+
+    <p class="cite-note">本检查表为结构设计自查清单（教学参考），正式判定以对应产品标准的可触及性、防火、机械强度条款为准；逐项通过后建议用计算工具复核间距数值。</p>
+  <p style="margin:10px 0 0"><a class="btn" href="./circuit-checklist.html">🔌 电路设计安规检查表（24 项）</a> <a class="btn" href="./power-design.html">🔋 电源设计安规专题</a> <a class="btn" href="./case-65w.html">🔩 65W 适配器计算案例</a></p>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/structural-checklist.js"></script>
+  <nav class="bottom-nav" aria-label="底部导航">
+    <a href="../index.html">🏠<span>首页</span></a>
+    <a href="./learn.html">📚<span>学习</span></a>
+    <a href="./testing.html">🧪<span>测试</span></a>
+    <a href="./certification.html">📄<span>认证</span></a>
+    <a href="./industries.html">🏭<span>行业</span></a>
+    <a href="./quiz.html">✅<span>测验</span></a>
+  </nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

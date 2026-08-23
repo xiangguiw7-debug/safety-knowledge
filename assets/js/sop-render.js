@@ -33,6 +33,8 @@
     "vibration-sine": "knowledge.html#environment",
     "vibration-random": "knowledge.html#environment",
     "shock": "knowledge.html#environment",
+    "drop": "knowledge-detail.html?id=drop",
+    "battery-drop": "knowledge-detail.html?id=drop",
     "drop": "knowledge.html#environment",
     "salt-mist": "knowledge.html#environment",
     "endurance": "knowledge.html#environment",

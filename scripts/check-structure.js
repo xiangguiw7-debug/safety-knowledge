@@ -52,5 +52,42 @@ try {
   fail("知识卡审计异常: " + e.message);
 }
 
+
+// ---- 3) 版本一致性：页脚版本 == sw.js CACHE_NAME ----
+try {
+  const sw = fs.readFileSync(path.join(ROOT, "sw.js"), "utf8");
+  const cacheV = (sw.match(/safety-reliability-v(\d+\.\d+\.\d+)/) || [])[1];
+  const footerVs = new Set();
+  for (const f of htmlFiles) {
+    const c = fs.readFileSync(f, "utf8");
+    const m = c.match(/版本 v(\d+\.\d+\.\d+)/);
+    if (m) footerVs.add(m[1]);
+  }
+  if (cacheV && footerVs.size === 1 && [...footerVs][0] === cacheV) {
+    console.log("版本一致性: 页脚 v" + cacheV + " == sw.js CACHE_NAME v" + cacheV);
+  } else {
+    fail("版本不一致：页脚 " + JSON.stringify([...footerVs]) + " vs sw.js " + cacheV);
+  }
+} catch (e) { fail("版本一致性检查异常: " + e.message); }
+
+// ---- 4) 知识卡详细度门槛 ----
+try {
+  const kd2 = fs.readFileSync(path.join(ROOT, "assets", "js", "knowledge-detail-data.js"), "utf8");
+  const cardRe2 = /"([a-z0-9\-]+)":\s*\{\s*"title":\s*"([^"]+)",\s*"hazard":\s*"([^"]+)",\s*"html":\s*"([\s\S]*?)"\s*\},?\n/g;
+  let cm2, thin = [];
+  while ((cm2 = cardRe2.exec(kd2)) !== null) {
+    const html = cm2[4].replace(/\\"/g, '"').replace(/\\n/g, "\n");
+    const okShi = /是什么/.test(html);
+    const okStd = /class="std"/.test(html);
+    const okRel = /class="rel"/.test(html);
+    const okHow = /class="howto"/.test(html);
+    if (!(okShi && okStd && okRel && okHow) || html.length < 1200) {
+      thin.push(cm2[1] + "(len=" + html.length + ", 是什么=" + okShi + " 标准=" + okStd + " 关联=" + okRel + " 提醒=" + okHow + ")");
+    }
+  }
+  if (thin.length) fail("知识卡详细度不足: " + thin.join("; "));
+  else console.log("知识卡详细度: 全部达标（共 " + Object.keys(cardRe2).length + " 张）");
+} catch (e) { fail("知识卡详细度检查异常: " + e.message); }
+
 console.log(bad === 0 ? "check-structure: PASS" : "check-structure: " + bad + " 处问题");
 process.exit(bad ? 1 : 0);

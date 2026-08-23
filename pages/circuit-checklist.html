@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <title>电路设计安规检查表 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="电子/电源工程师电路设计自查清单：保护电路、关键件降额、PCB 布局、信号口防护、EMC 器件与验证。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+  <style>
+    .sc-progress { display: flex; align-items: center; gap: 12px; margin: 10px 0 18px; flex-wrap: wrap; }
+    .sc-progress .bar { flex: 1; min-width: 160px; height: 8px; border-radius: 999px; background: var(--card-2); overflow: hidden; }
+    .sc-progress .bar span { display: block; height: 100%; background: var(--accent); transition: width .2s; }
+    .sc-group { border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; margin: 14px 0; background: var(--card); }
+    .sc-group h3 { margin: 0 0 10px; }
+    .sc-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-top: 1px dashed var(--hairline); }
+    .sc-item:first-of-type { border-top: 0; }
+    .sc-item input { margin-top: 3px; }
+    .sc-label { font-weight: 600; font-size: 14.5px; }
+    .sc-why { color: var(--muted); font-size: 12.5px; margin-top: 2px; line-height: 1.55; }
+    .sc-ref { margin-top: 4px; font-size: 12px; }
+    .sc-ref a { color: var(--accent); text-decoration: none; margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./learn.html">学习</a> / 电路设计安规检查表</p>
+      <h1>电路设计安规检查表</h1>
+      <p class="lead">电子 / 电源工程师在原理图与 PCB 阶段的自查清单：保护电路、关键件降额、布局间距、信号口防护、EMC 器件与验证。勾选状态保存在本地。</p>
+    </div>
+
+    <div class="sc-progress">
+      <b id="scProgress">已完成 0 / 24（0%）</b>
+      <div class="bar"><span id="scBar" style="width:0%"></span></div>
+      <button type="button" class="btn" id="scExport">导出检查结果</button>
+      <button type="button" class="btn" id="scReset">重置</button>
+    </div>
+    <div class="callout callout-ok" id="scAllDone" hidden><strong>全部通过 🎉</strong> 建议结合<a href="./structural-checklist.html">结构设计检查表</a>交叉评审。</div>
+
+    <div class="sc-group">
+      <h3>🛡️ 一、保护电路</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-p1"><div><div class="sc-label">保险丝位置正确</div><div class="sc-why">保险丝串在被保护电路之前、覆盖所有故障路径；位置错（如放在保护器件之后）保护就失效。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=components">安规元件</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-p2"><div><div class="sc-label">保险丝参数满足</div><div class="sc-why">额定电流约 1.25–1.5× 稳态；额定电压 ≥ 工作电压；分断能力 ≥ 预期短路电流；I²t 耐开机浪涌。</div><div class="sc-ref"><a href="./tools.html#tool-fuse">保险丝选型工具</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-p3"><div><div class="sc-label">限能/限流设计</div><div class="sc-why">可触及端子在单一故障（短路/堵转）下可用能量受限（ES 分级）；低压大电流同样危险。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=energy">能量危险</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-p4"><div><div class="sc-label">X 电容泄放</div><div class="sc-why">跨 L-N 的 X 电容断电后残余电压需快速泄放（RC 时间常数），验证放电到安全电压的时间。</div><div class="sc-ref"><a href="./tools.html#tool-discharge">RC 放电工具</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-p5"><div><div class="sc-label">热保护</div><div class="sc-why">电机/加热元件配温控器/热熔断体，位置与额定温度正确，故障下能动作。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=temperature">温升知识卡</a></div></div></div>
+    </div>
+
+    <div class="sc-group">
+      <h3>🔻 二、关键件降额</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-d1"><div><div class="sc-label">电容电压降额</div><div class="sc-why">电容额定电压 ≥ 工作电压 × 降额系数（常见 1.5×），含浪涌/纹波叠加。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=components">安规元件</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-d2"><div><div class="sc-label">半导体电流/结温</div><div class="sc-why">MOS/二极管/IC 电流与结温留余量，最坏负载与高温下不超限。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=temperature">温升知识卡</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-d3"><div><div class="sc-label">电阻功率降额</div><div class="sc-why">电阻功率 ≤ 额定 × 降额（常见 50–70%），浪涌瞬时功率单独评估。</div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-d4"><div><div class="sc-label">Y 电容容量与泄漏</div><div class="sc-why">Y 电容容量受泄漏电流限制（I=2πfCV ≤ 产品限值），不能只为了 EMC 加大。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=leakage">泄漏电流</a><a href="./tools.html#tool-leakage">泄漏工具</a></div></div></div>
+    </div>
+
+    <div class="sc-group">
+      <h3>📐 三、PCB 布局</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-b1"><div><div class="sc-label">初次级间距达标</div><div class="sc-why">PCB 实际爬电/间隙 ≥ 计算值（含最不利公差）；阻焊层/涂覆不算爬电距离；开槽/挡墙按标准。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=ovc">OVC 卡</a><a href="./pcb-guidelines.html">PCB 指南</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-b2"><div><div class="sc-label">高压低压分区</div><div class="sc-why">危险电路与安全电路分区布局，避免交叉走线破坏隔离。</div><div class="sc-ref"><a href="./pcb-guidelines.html">PCB 指南</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-b3"><div><div class="sc-label">地线与回流</div><div class="sc-why">接地路径短而粗（EMC 与安全兼顾）；I 类接地焊盘可靠。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=grounding">接地卡</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-b4"><div><div class="sc-label">过孔/换层间距</div><div class="sc-why">高压走线换层处过孔与相邻铜皮间距复查，过孔边缘同样算间距。</div><div class="sc-ref"><a href="./pcb-guidelines.html">PCB 指南</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-b5"><div><div class="sc-label">高压元件位置</div><div class="sc-why">高压电容/整流桥等远离可触及边缘与开孔，减少探针路径。</div></div></div>
+    </div>
+
+    <div class="sc-group">
+      <h3>🔌 四、信号口防护</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-s1"><div><div class="sc-label">网口/USB 口 ESD</div><div class="sc-why">外露信号口（网口/USB/天线/按键）加 ESD/TVS 防护，选型匹配波形。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=emc">EMC 卡</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-s2"><div><div class="sc-label">通信口浪涌</div><div class="sc-why">通信/信号口按 61000-4-5 配 SPD/TVS，注意与电源口防护协调。</div><div class="sc-ref"><a href="./surge.html">雷击浪涌</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-s3"><div><div class="sc-label">隔离设计</div><div class="sc-why">SELV/网络隔离用变压器/光耦/隔离 IC，隔离距离与爬电满足。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=selv">SELV 卡</a></div></div></div>
+    </div>
+
+    <div class="sc-group">
+      <h3>📡 五、EMC 器件与接地</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-e1"><div><div class="sc-label">EMI 滤波位置</div><div class="sc-why">共模扼流圈/X 电容靠近入口，Y 电容位置与泄放平衡。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=dmcm">共模差模</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-e2"><div><div class="sc-label">接地连续性（I 类）</div><div class="sc-why">保护接地焊盘/端子设计可靠，阻抗满足（可用工具估算）。</div><div class="sc-ref"><a href="./tools.html#tool-grounding">接地工具</a></div></div></div>
+    </div>
+
+    <div class="sc-group">
+      <h3>✅ 六、验证</h3>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-v1"><div><div class="sc-label">板级测试清单</div><div class="sc-why">耐压/泄漏/绝缘电阻在板级先行验证，再送整机；湿热后复测。</div><div class="sc-ref"><a href="./sop-hipot.html">耐压 SOP</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-v2"><div><div class="sc-label">关键件证书核对</div><div class="sc-why">保险丝/X/Y 电容/变压器证书在有效期内，与 BOM 一致（CDF）。</div><div class="sc-ref"><a href="./templates.html">CDF 模板</a></div></div></div>
+      <div class="sc-item"><input type="checkbox" data-sc="cc-v3"><div><div class="sc-label">样机与预处理顺序</div><div class="sc-why">样机数量按标准，环境预处理（湿热/温循）后再测安规。</div><div class="sc-ref"><a href="./knowledge-detail.html?id=environment">环境卡</a></div></div></div>
+    </div>
+
+    <p class="cite-note">本检查表为电路设计自查清单（教学参考），正式判定以对应产品标准的条款为准；与<a href="./structural-checklist.html">结构设计检查表</a>配合使用。</p>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/structural-checklist.js"></script>
+  <nav class="bottom-nav" aria-label="底部导航">
+    <a href="../index.html">🏠<span>首页</span></a>
+    <a href="./learn.html">📚<span>学习</span></a>
+    <a href="./testing.html">🧪<span>测试</span></a>
+    <a href="./certification.html">📄<span>认证</span></a>
+    <a href="./industries.html">🏭<span>行业</span></a>
+    <a href="./quiz.html">✅<span>测验</span></a>
+  </nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

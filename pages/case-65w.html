@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <title>65W 适配器完整设计计算案例 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="从输入参数到间距、耐压、保险丝、泄漏、温升、测试与认证的完整安规计算例题（65W USB 适配器）。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html" class="active">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./learn.html">学习</a> / 65W 适配器计算案例</p>
+      <h1>65W USB 适配器 · 完整安规计算案例</h1>
+      <p class="lead">把散的知识串成"从输入规格到认证路径"的整卷例题。所有数值为教学简化值，可在对应计算工具里复现；正式设计以标准原文与实测为准。</p>
+    </div>
+
+    <div class="callout callout-info"><strong>产品定义</strong>：65W USB-C 适配器｜输入 90–264V~ 47–63Hz｜输出 20V/3.25A｜目标市场：全球｜类别：<b>II 类</b>（双重绝缘，不接地）｜污染等级 2｜材料组 IIIa（PC/ABS 典型）</div>
+
+    <h2>① 确定系统电压与过电压类别（间隙链）</h2>
+    <ul style="font-size:14.5px;line-height:1.9">
+      <li>目标市场全球 → 系统电压按 <b>230V</b> 档（宽压按最高档设计）；</li>
+      <li>插头设备（可插拔）→ <b>OVC Ⅱ</b>（<a href="./knowledge-detail.html?id=ovc">OVC 卡</a>）→ 冲击耐受 <b>2500V</b>；</li>
+      <li>电气间隙基准（教学表）：2500V → <b>2.0 mm</b>；加强绝缘 ×2 → <b>4.0 mm</b>；</li>
+      <li>海拔 ≤2000m 系数 1.0（更高需修正）。</li>
+    </ul>
+    <p class="peak-note">去 <a href="./tools.html#tool-spacing">间距工具</a>复现：系统 230V、OVC Ⅱ、加强绝缘 → 间隙 4.0mm。</p>
+
+    <h2>② 确定工作电压与爬电距离（爬电链）</h2>
+    <ul style="font-size:14.5px;line-height:1.9">
+      <li>工作电压按最高输入档 <b>250V</b>（264V 峰值按教学表 250V 档）；</li>
+      <li>污染 2、材料组 IIIa → 爬电基准（教学表）：250V PD2 IIIa → <b>3.2 mm</b>；加强绝缘 ×2 → <b>6.4 mm</b>；</li>
+      <li>初次级之间按加强绝缘：<b>爬电 ≥ 6.4mm，间隙 ≥ 4.0mm</b>（变压器绕组间同样适用，需挡墙/三层绝缘线）；</li>
+      <li>输出侧若为 SELV：输出电路内部豁免，到危险电路侧仍按加强绝缘。</li>
+    </ul>
+    <p class="peak-note">去 <a href="./tools.html#tool-spacing">间距工具</a>复现：250V、污染 2、材料组 IIIa、加强 → 爬电 6.4mm。</p>
+
+    <h2>③ 耐压试验电压</h2>
+    <ul style="font-size:14.5px;line-height:1.9">
+      <li>62368-1 教学值：加强绝缘 <b>3000 V AC</b>（市电 ≤250V）；DC 峰值等效 ≈ <b>4242 V DC</b>（√2×3000）；</li>
+      <li>湿热等环境预处理后再测，判据：无击穿/闪络、泄漏不超限；</li>
+      <li>去 <a href="./tools.html#tool-hipot">耐压速查器</a>：62368 + 加强 + AC → 3000V。</li>
+    </ul>
+
+    <h2>④ 保险丝选型</h2>
+    <ul style="font-size:14.5px;line-height:1.9">
+      <li>输入稳态电流（90V 低压满载、效率 90%、PF 0.9）：65 ÷ (90 × 0.9 × 0.9) ≈ <b>0.9 A</b>；</li>
+      <li>选型：0.9 × 1.25–1.5 ≈ <b>1.1–1.35 A</b> → 取 1.25–1.6A 档；额定电压 ≥ 264V（取 250/300V 档）；</li>
+      <li>分断能力 ≥ 输入侧预期短路电流；<b>I²t 要能扛住开机大电容充电浪涌</b>（否则一插电就烧）；</li>
+      <li>位置：输入最前（L 线，按标准），覆盖整流桥短路等故障；</li>
+      <li>工具：<a href="./tools.html#tool-fuse">保险丝选型速查</a>。</li>
+    </ul>
+
+    <h2>⑤ Y 电容与泄漏电流</h2>
+    <ul style="font-size:14.5px;line-height:1.9">
+      <li>I = 2πfCV：230V/50Hz、4700pF → 2×3.14×50×4.7e-9×230 ≈ <b>0.34 mA</b>；</li>
+      <li>II 类接触电流限值常见 <b>0.25 mA</b> → 4700pF 超标；反算 C ≤ 0.25e-3 ÷ (2π×50×230) ≈ <b>3.5 nF</b> → 取 ≤3.3nF；</li>
+      <li>EMC 想要大、安规想要小——先定泄漏预算再反算容量；</li>
+      <li>工具：<a href="./tools.html#tool-leakage">泄漏电流估算器</a>（正算 + 反算）。</li>
+    </ul>
+
+    <h2>⑥ 温升估算（教学简化）</h2>
+    <ul style="font-size:14.5px;line-height:1.9">
+      <li>损耗：65W ÷ 90% − 65W ≈ <b>7.2 W</b>；</li>
+      <li>自然对流估算 ΔT ≈ P ÷ (h × A)：取有效散热面积 A ≈ 0.008 m²、h ≈ 12 W/m²K → ΔT ≈ 75K（偏高，需铝合金外壳/增大散热面积或加散热片）；</li>
+      <li>对照限值：可触及外壳温升与内部绕组限值按标准（金属/塑料不同）；</li>
+      <li>结论：教学估算提示"结构散热要重点设计"，最终以温升实测为准（<a href="./tools.html#tool-thermal">温升估算工具</a> + <a href="./sop-temperature-rise.html">温升 SOP</a>）。</li>
+    </ul>
+
+    <h2>⑦ 测试清单</h2>
+    <p><b>安全</b>：耐压（湿热后）、泄漏/接触电流、接地（如 I 类）、温升、绝缘电阻、电源线拉扭（如适用）｜<b>EMC</b>：传导/辐射发射、谐波、ESD、浪涌、EFT｜<b>环境</b>：湿热、温循、跌落。</p>
+    <p>完整清单用 <a href="./tools.html#tool-testlist">测试项目清单生成器</a>；逐项 SOP 见 <a href="./sop.html">SOP 中心</a>。</p>
+
+    <h2>⑧ 认证路径</h2>
+    <ul style="font-size:14.5px;line-height:1.9">
+      <li>全球：<b>CB 测试证书 + 各国转证</b>；欧盟 CE（LVD+EMC，含 RED 如无线）；美国 FCC（SDoC）+ UL（渠道）；中国 CCC（目录内）；</li>
+      <li>用 <a href="./wizard.html">认证向导</a>按国家×产品生成清单，<a href="./export-compliance.html">外贸合规速查</a>看周期/费用。</li>
+    </ul>
+
+    <h2>📋 结果汇总</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>项目</th><th>结论（教学值）</th><th>复现工具</th></tr></thead>
+      <tbody>
+        <tr><td>电气间隙（加强）</td><td>≥ 4.0 mm</td><td><a href="./tools.html#tool-spacing">间距工具</a></td></tr>
+        <tr><td>爬电距离（加强）</td><td>≥ 6.4 mm</td><td><a href="./tools.html#tool-spacing">间距工具</a></td></tr>
+        <tr><td>耐压（加强）</td><td>3000 V AC / ≈4242 V DC</td><td><a href="./tools.html#tool-hipot">耐压速查</a></td></tr>
+        <tr><td>保险丝</td><td>1.25–1.6A / 250V 档，I²t 耐浪涌</td><td><a href="./tools.html#tool-fuse">保险丝工具</a></td></tr>
+        <tr><td>Y 电容</td><td>≤ 3.3 nF（泄漏 ≤ 0.25mA）</td><td><a href="./tools.html#tool-leakage">泄漏工具</a></td></tr>
+        <tr><td>系统电压 / OVC / 冲击</td><td>230V / Ⅱ / 2500V</td><td><a href="./knowledge-detail.html?id=ovc">OVC 卡</a></td></tr>
+      </tbody>
+    </table></div>
+
+    <p class="cite-note">本案例所有数值为教学简化值（与本站计算工具一致），正式产品设计、测试与认证请以最新版标准原文和实验室能力为准。</p>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <nav class="bottom-nav" aria-label="底部导航">
+    <a href="../index.html">🏠<span>首页</span></a>
+    <a href="./learn.html">📚<span>学习</span></a>
+    <a href="./testing.html">🧪<span>测试</span></a>
+    <a href="./certification.html">📄<span>认证</span></a>
+    <a href="./industries.html">🏭<span>行业</span></a>
+    <a href="./quiz.html">✅<span>测验</span></a>
+  </nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

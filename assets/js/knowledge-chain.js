@@ -121,7 +121,7 @@
   };
 
   var SOP_LINK = {
-    cti: "sop-spacing.html", leakage: "sop-leakage.html", grounding: "sop-grounding.html",
+    "working-voltage": "sop-spacing.html", cti: "sop-spacing.html", ovc: "sop-spacing.html", leakage: "sop-leakage.html", grounding: "sop-grounding.html",
     temperature: "sop-temperature-rise.html", firetests: "sop-glow-wire.html", flame: "sop-ul94.html",
     battery: "sop-battery-short.html", ip: "sop-ip.html", environment: "sop-temp-cycling.html",
     optical: "sop-photobiological.html", emc: "sop-surge.html", components: "sop-protective-impedance.html",

@@ -52,6 +52,7 @@
 
     <div class="kd-nav">
       <a class="btn" id="kdPrev" href="./knowledge.html">← 上一张</a>
+      <a class="btn" id="kdBack" href="./knowledge.html" hidden style="max-width:100%">← 返回</a>
       <a class="btn btn-primary" href="./knowledge.html">返回知识卡片库</a>
       <a class="btn" id="kdNext" href="./knowledge.html">下一张 →</a>
     </div>
@@ -65,7 +66,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文和实验室能力为准。</p>
     </div>
   </footer>
@@ -77,6 +78,7 @@
   <script src="../assets/js/progress.js"></script>
   <script src="../assets/js/dmcm.js"></script>
   <script src="../assets/js/knowledge-detail-data.js"></script>
+  <script src="../assets/js/card-quiz.js"></script>
   <script src="../assets/js/knowledge-notes.js"></script>
   <script src="../assets/js/knowledge-tools-links.js"></script>
   <script src="../assets/js/standard-status.js"></script>
@@ -103,6 +105,44 @@
       sec.setAttribute("data-hazard", d.hazard);
       sec.innerHTML = d.html;
       box.appendChild(sec);
+
+      // 学完自测（卡片相关 1–2 题）
+      if (window.CARD_QUIZ && CARD_QUIZ[id] && CARD_QUIZ[id].length) {
+        var qz = document.createElement("div");
+        qz.className = "card";
+        qz.style.marginTop = "18px";
+        var qh = "<h3>📝 学完自测（" + CARD_QUIZ[id].length + " 题）</h3><p style=\"color:var(--muted);font-size:13px\">答对即表示掌握本卡核心，结果保存在本地。</p>";
+        CARD_QUIZ[id].forEach(function (qq, qi) {
+          qh += "<div class=\"cq-item\" data-cq=\"" + qi + "\"><p><b>" + (qi + 1) + ". " + qq.q + "</b></p>";
+          qq.o.forEach(function (op, oi) {
+            qh += "<label style=\"display:block;font-size:14px;padding:3px 0\"><input type=\"radio\" name=\"cq" + qi + "\" value=\"" + oi + "\"> " + op + "</label>";
+          });
+          qh += "<p style=\"margin-top:6px\"><button type=\"button\" class=\"btn\" data-cq-check=\"" + qi + "\" data-cq-ans=\"" + qq.a + "\">提交</button> <span class=\"cq-result\"></span></p></div>";
+        });
+        qz.innerHTML = qh;
+        box.appendChild(qz);
+        qz.querySelectorAll("[data-cq-check]").forEach(function (b) {
+          b.addEventListener("click", function () {
+            var qi2 = b.getAttribute("data-cq-check");
+            var ans = parseInt(b.getAttribute("data-cq-ans"), 10);
+            var sel = qz.querySelector('input[name="cq' + qi2 + '"]:checked');
+            var res = b.parentNode.querySelector(".cq-result");
+            if (!sel) { res.textContent = "请先选择答案"; return; }
+            var ok = parseInt(sel.value, 10) === ans;
+            if (ok) {
+              var st = {};
+              try { st = JSON.parse(localStorage.getItem("angui-card-quiz-v1") || "{}"); } catch (e) {}
+              st[id] = st[id] || {};
+              st[id][qi2] = 1;
+              try { localStorage.setItem("angui-card-quiz-v1", JSON.stringify(st)); } catch (e) {}
+              var done = CARD_QUIZ[id].every(function (_, i) { return st[id][i]; });
+              res.textContent = "✅ 正确" + (done ? "（本卡全部通过 🎉）" : "");
+            } else {
+              res.textContent = "❌ 错误：再回看本卡相关小节。";
+            }
+          });
+        });
+      }
       function setNav(el, targetId, prefix) {
         var a = document.getElementById(el);
         if (!a) return;
@@ -126,6 +166,24 @@
   <a href="./quiz.html">✅<span>测验</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>
+  <script>
+    // 来源感知返回：同站来源时显示"← 返回 <来源页>"，直接打开则不显示
+    (function () {
+      try {
+        var ref = document.referrer;
+        if (!ref || ref.indexOf(location.origin) !== 0) return;
+        var prev = new URL(ref);
+        if (prev.pathname === location.pathname) return;
+        var link = document.getElementById("kdBack");
+        if (!link) return;
+        link.href = prev.pathname + prev.search + prev.hash;
+        var file = prev.pathname.split("/").pop() || "index.html";
+        var labels = { "knowledge.html": "知识卡片库", "learn.html": "学习地图", "industries.html": "行业筛选", "product-categories.html": "品类知识库", "clearance.html": "电气间隙", "creepage.html": "爬电距离", "hipot.html": "耐压测试", "surge.html": "雷击浪涌", "tools.html": "计算工具", "quiz.html": "答题测验", "sop.html": "SOP 中心", "testing.html": "测试中心", "certification.html": "全球认证", "refs.html": "参考中心", "map.html": "内容地图" };
+        link.textContent = "← 返回" + (labels[file] ? "：" + labels[file] : "上一页");
+        link.hidden = false;
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <script src="../assets/js/breadcrumb.js"></script>
 </body>
 </html>

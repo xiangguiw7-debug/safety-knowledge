@@ -4,11 +4,11 @@ var DIFF_LABEL = { 1: "入门", 2: "进阶", 3: "拔高" };
 
 // 推荐学习顺序（随主线学习）：框架 → 防电击主线 → 能量/防火/热量 → 机械/辐射/化学 → EMC → 通用/医疗 → 认证
 var RECOMMENDED_ORDER = [
-  "stdguide", "protection", "productclass", "access", "cti", "leakage", "grounding", "selv",
+  "stdguide", "protection", "productclass", "access", "cti", "ovc", "working-voltage", "leakage", "grounding", "selv",
   "energy", "components", "fire-design", "flame", "firetests", "temperature", "battery",
   "mechanical", "functional", "optical", "radhaz", "rohs", "explosion",
   "emc", "dmcm", "harmonic", "transient",
-  "ip", "ik", "environment", "biocompat", "risk", "software", "certprocess"
+  "ip", "ik", "environment", "drop", "biocompat", "risk", "software", "certprocess"
 ];
 
 // 每张卡：难度（1 入门 / 2 进阶 / 3 拔高）、用时（分钟）
@@ -18,6 +18,8 @@ var CARD_META = {
   productclass: { diff: 1, time: 15 },
   access: { diff: 1, time: 10 },
   cti: { diff: 2, time: 15 },
+  ovc: { diff: 2, time: 10 },
+  "working-voltage": { diff: 2, time: 10 },
   leakage: { diff: 2, time: 15 },
   grounding: { diff: 2, time: 10 },
   selv: { diff: 2, time: 10 },
@@ -39,6 +41,7 @@ var CARD_META = {
   ip: { diff: 1, time: 10 },
   ik: { diff: 1, time: 10 },
   environment: { diff: 2, time: 15 },
+  drop: { diff: 2, time: 10 },
   rohs: { diff: 2, time: 10 },
   explosion: { diff: 3, time: 15 },
   biocompat: { diff: 3, time: 10 },

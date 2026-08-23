@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <title>外贸合规速查（业务员版） - 安规与可靠性知识课堂</title>
+  <meta name="description" content="出口合规速查：目标市场需要的认证、典型周期/费用/样机数量、业务常见问题与能效标签要求。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html" class="active">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./certification.html">认证</a> / 外贸合规速查</p>
+      <h1>外贸合规速查（业务员版）</h1>
+      <p class="lead">不懂技术也能用：选目标市场 → 看要办哪些认证、大概多久、多少钱、要几台样机、有哪些坑。具体生成清单用<a href="./wizard.html">认证向导</a>。</p>
+    </div>
+
+    <h2 class="section-title">🌍 目标市场速查</h2>
+    <p class="section-sub">周期/费用为行业常见量级（教学参考，以机构报价为准）。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>市场</th><th>需要的认证</th><th>典型周期</th><th>费用量级</th><th>样机数量</th><th>常见坑</th></tr></thead>
+      <tbody>
+        <tr><td>中国</td><td>CCC（目录内）/ CQC 自愿</td><td>4–8 周（+工厂检查）</td><td>数万级</td><td>3–5</td><td>关键件一致性、工厂检查</td></tr>
+        <tr><td>欧盟</td><td>CE（LVD + EMC + RED 等）</td><td>2–6 周</td><td>数千–数万</td><td>2–4</td><td>自我声明 ≠ 免检；技术文件要齐</td></tr>
+        <tr><td>美国</td><td>FCC（SDoC/认证）+ UL（渠道）</td><td>FCC 2–4 周；UL 4–10 周</td><td>FCC 数千；UL 数万</td><td>2–4</td><td>UL 多为渠道要求；FCC ID 需授权</td></tr>
+        <tr><td>日本</td><td>PSE（菱形/圆形）</td><td>4–8 周</td><td>数万</td><td>3–5</td><td>菱形（特定用品）须注册检验机构</td></tr>
+        <tr><td>韩国</td><td>KC（安全 + EMC）</td><td>4–8 周</td><td>数万</td><td>3</td><td>本地代理（韩）</td></tr>
+        <tr><td>印度</td><td>BIS（目录内）</td><td>8–16 周</td><td>中高</td><td>按标准</td><td>目录判定、工厂检查</td></tr>
+        <tr><td>东南亚（印尼/泰国/越南…）</td><td>SNI / TISI / CR 等</td><td>6–12 周</td><td>中</td><td>3–5</td><td>各国目录差异大</td></tr>
+        <tr><td>中东（沙特等）</td><td>SASO / SABER</td><td>4–8 周</td><td>中</td><td>按标准</td><td>能效/标签要求</td></tr>
+        <tr><td>澳大利亚/新西兰</td><td>RCM（EMC + 安全）</td><td>2–6 周</td><td>数千</td><td>2–3</td><td>需注册供应商</td></tr>
+        <tr><td>巴西</td><td>INMETRO / ANATEL</td><td>8–16 周</td><td>高</td><td>按标准</td><td>本地代理 + 葡萄牙语资料</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 class="section-title">❓ 业务常见问题（FAQ）</h2>
+    <details class="case-card"><summary><b>客户要 UL，但我们只有 CE，能直接出口吗？</b></summary><p>不能直接把 CE 当 UL。CE 是欧盟要求，UL 是美国渠道/保险要求（且 UL 需按 UL 标准测试）。可先确认客户是否接受"FCC + 制造商自证 + 保险"，或走 UL 认证（周期/费用见上表）。</p></details>
+    <details class="case-card"><summary><b>认证要多久？会不会影响交期？</b></summary><p>安全类常见 4–10 周（CE 2–6 周最快，CCC/UL 含工厂环节更久）。建议样机阶段就送测，与量产并行；报价时预留 1–2 个月认证窗口。</p></details>
+    <details class="case-card"><summary><b>报价要不要含认证费？</b></summary><p>建议单列：认证费（测试+证书+工厂检查）+ 整改预留（常见 +20–50%）。否则出现整改费用时容易亏单。</p></details>
+    <details class="case-card"><summary><b>CB 证书是不是各国都能用？</b></summary><p>CB 是国际互认的测试证书，可向多数国家转证，但仍有国家差异（National Differences）和本地要求（如当地工厂检查、电压/插头差异），不能直接当当地认证用。</p></details>
+    <details class="case-card"><summary><b>客户只要样品功能正常，还需要认证吗？</b></summary><p>取决于进口国法规与渠道：强制性目录内产品无认证无法清关；渠道（如美国零售）常要求 UL。建议按目标市场表逐项核对。</p></details>
+    <details class="case-card"><summary><b>能不能先出口再补认证？</b></summary><p>有风险：被海关/监管抽到无认证会退运、罚款甚至影响信用。强标目录产品必须先认证。</p></details>
+    <details class="case-card"><summary><b>一个产品卖多国，怎么省钱？</b></summary><p>做 CB 测试证书 + 各国转证；宽压设计覆盖多市场；共用一份技术文件包（CDF/DoC/报告）。</p></details>
+    <details class="case-card"><summary><b>认证标志要印多大、印在哪？</b></summary><p>按各国/标准要求：位置（铭牌/外壳/说明书）、最小尺寸、颜色对比、不可擦除。详见<a href="./templates.html">技术文件模板</a>。</p></details>
+
+    <h2 class="section-title">⚡ 能效与环保标签（易被忽略）</h2>
+    <div class="grid grid-2">
+      <div class="card"><h3>🌱 能效</h3><p>欧盟 ErP（待机功耗/生态设计）、美国 Energy Star（自愿）、中国能效标签（强制目录）。电源/灯具类最常被问。</p></div>
+      <div class="card"><h3>🧪 环保</h3><p>RoHS（十项有害物质）、REACH（SVHC）、WEEE（回收标志）、电池指令、包装指令——出口欧洲常需整套文件。</p></div>
+    </div>
+
+    <p class="cite-note">周期/费用为常见量级教学参考；正式报价以认证机构为准。生成国家×产品完整清单用<a href="./wizard.html">认证向导</a>，核对标志用<a href="./certification.html">全球认证速查</a>。</p>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <nav class="bottom-nav" aria-label="底部导航">
+    <a href="../index.html">🏠<span>首页</span></a>
+    <a href="./learn.html">📚<span>学习</span></a>
+    <a href="./testing.html">🧪<span>测试</span></a>
+    <a href="./certification.html">📄<span>认证</span></a>
+    <a href="./industries.html">🏭<span>行业</span></a>
+    <a href="./quiz.html">✅<span>测验</span></a>
+  </nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>

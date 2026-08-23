@@ -104,7 +104,10 @@ function renderCases() {
         if (r.std) links.push('<a href="./standards.html#' + r.std + '">标准条款</a>');
         if (r.sop) links.push('<a href="./sop-' + r.sop + '.html">SOP</a>');
         if (r.tool) links.push('<a href="./tools.html#' + r.tool + '">工具</a>');
-        if (r.card) links.push('<a href="./knowledge.html#' + r.card + '">知识卡</a>');
+        if (r.card) links.push('<a href="knowledge-detail.html?id=' + r.card + '">知识卡</a>');
+        // 自测：按危害映射到测验模块（?module= 直达）
+        var quizMod = { shock: "shock", energy: "energy", fire: "fire", thermal: "thermal", mechanical: "mechanical", radiation: "radiation", chemical: "chemical", emc: "emc", battery: "battery" }[c.hazard];
+        if (quizMod) links.push('<a href="./quiz.html?module=' + quizMod + '">自测</a>');
         return links.length ? '<p class="lesson" style="margin-top:8px"><b>闭环学习：</b>' + links.join(" · ") + "</p>" : "";
       })() +
       "</div></details>";

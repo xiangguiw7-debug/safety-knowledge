@@ -74,6 +74,32 @@
       <button type="button" class="btn" id="toolMapToggle">🗺️ 全部工具一览</button>
     </div>
     <div id="toolMapGrid" hidden class="tool-map-grid" style="display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:12px;background:var(--card);border:1px solid var(--hairline);border-radius:6px"></div>
+    <section id="tool-scenario" style="margin:0 0 20px">
+      <h2 class="section-title">🎯 我的产品 → 推荐入口</h2>
+      <p class="section-sub">按产品类型一键得到"该用的计算工具 + 知识卡 + SOP + 自测模块"。</p>
+      <select id="scenSel" aria-label="选择产品类型" style="padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);font-family:inherit;font-size:14px;max-width:360px"></select>
+      <div id="scenOut"></div>
+    </section>
+
+    <section id="tool-decision" style="margin:0 0 20px">
+      <h2 class="section-title">🧭 决策助手（先选参，再查表）</h2>
+      <p class="section-sub">查表前先想清楚条件——两个小向导帮你把参数选对。</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>① 绝缘配合 · 查距参数怎么选</h3>
+          <p style="color:var(--muted);font-size:13px">确定产品类别 / 工作电压 / 污染等级 / 材料组 / 绝缘类型，输出查表路径。</p>
+          <div id="decideins"></div>
+          <div id="decideOutins"></div>
+        </div>
+        <div class="card">
+          <h3>② 认证路径 · 怎么走</h3>
+          <p style="color:var(--muted);font-size:13px">选目标市场 + 产品类型，输出认证路径与产品标准。</p>
+          <div id="decidecert"></div>
+          <div id="decideOutcert"></div>
+        </div>
+      </div>
+    </section>
+
     <div id="toolTabs" role="group" aria-label="工具分类"></div>
 
     <div data-tool-panel="spacing" id="tool-spacing">
@@ -171,7 +197,7 @@
                 <button type="button" class="opt-btn" data-ovc="III">Ⅲ<small>固定安装</small></button>
                 <button type="button" class="opt-btn" data-ovc="IV">Ⅳ<small>进线处</small></button>
               </div>
-              <p class="peak-note"><a href="./voltage.html">查看全球电压与插头速查</a></p>
+              <p class="peak-note">📖 <a href="./knowledge-detail.html?id=ovc">什么是过电压类别（OVC Ⅰ–Ⅳ）？含四个安装位置详解</a> · <a href="./voltage.html">查看全球电压与插头速查</a></p>
             </section>
 
             <section class="param-block" id="tool-pollution">
@@ -316,7 +342,6 @@
               <button type="button" class="btn" onclick="window.print()">打印 / 导出 PDF</button>
               <button type="button" class="btn" id="copyBtn">复制参数链接</button>
             </div>
-            <p style="font-size:12.5px;color:var(--muted);word-break:break-all" id="shareUrl"></p>
           </div>
         </div>
       </div>
@@ -363,6 +388,8 @@
               <option value="60601">IEC 60601-1（医疗）</option>
               <option value="61010">IEC 61010-1（测量控制）</option>
               <option value="60204">IEC 60204-1（机械）</option>
+              <option value="60598">IEC 60598-1（灯具）</option>
+              <option value="61347">IEC 61347-1（灯控制装置）</option>
             </select>
           </div>
           <div class="field">
@@ -1013,6 +1040,7 @@
     <div data-tool-panel="drop" hidden>
       <section class="param-block" id="tool-drop">
         <h2>自由跌落试验速查 <span class="badge-iec">IEC 60068-2-31 教学参考</span></h2>
+          <p class="peak-note">📖 <a href="./knowledge-detail.html?id=drop">自由跌落知识卡（含判据与误区）</a> · <a href="./sop-drop.html">跌落 SOP</a></p>
         <p class="hint">选产品类型/标准族并输入重量，得到教学参考跌落高度与试验要求；正式测试以标准原文为准。</p>
         <div class="form-grid">
           <div class="field"><label for="dropType">产品 / 标准</label><select id="dropType">
@@ -1058,7 +1086,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -1082,6 +1110,7 @@
   <script src="../assets/js/nav.js"></script>
   <script src="../assets/js/breadcrumb.js"></script>
   <script src="../assets/js/tools-knowledge-links.js"></script>
+  <script src="../assets/js/scenario-guide.js"></script>
   <script src="../assets/js/standard-status.js"></script>
 </body>
 </html>

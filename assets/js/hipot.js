@@ -15,6 +15,14 @@ var HIPOT_DATA = {
   "60204": {
     basic: 1500, supplementary: null, reinforced: null,
     label: "IEC 60204-1 教学示例：2×Un + 1000V（230V ≈ 1500V，最低约 1500V）"
+  },
+  "60598": {
+    basic: 1500, supplementary: 1500, reinforced: 3000,
+    label: "IEC 60598-1 / GB 7000.1（灯具，2U+1000 / 4U+2000 教学示例，230V）"
+  },
+  "61347": {
+    basic: 1500, supplementary: 1500, reinforced: 3000,
+    label: "IEC 61347-1 / GB 19510（灯控制装置/驱动，2U+1000 / 4U+2000 教学示例，230V）"
   }
 };
 

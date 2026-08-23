@@ -254,6 +254,8 @@ function exportWrong() {
     var a;
     if (w.type === "multi") a = (w.answer || []).map(function (x) { return w.options[x]; }).join("、");
     else if (w.type === "judge") a = (w.answer === 0 ? "正确" : "错误");
+    else if (w.type === "fill") a = (w.accepted || [])[0] || "";
+    else if (w.type === "write") a = "开放作答，参考答案：" + (w.ref || "");
     else a = w.options[w.answer];
     return (i + 1) + ". " + w.q + "\n正确答案：" + a + "\n解析：" + (w.explain || "");
   }).join("\n\n");

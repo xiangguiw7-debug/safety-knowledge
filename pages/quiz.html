@@ -99,11 +99,20 @@
       <button type="button" data-qmodule="framework" aria-pressed="false">标准结构</button>
       <button type="button" data-qmodule="auto" aria-pressed="false">⚙ 自动生成</button>
     </div>
+    <div class="quiz-chips" role="group" aria-label="按题型筛选题库" style="margin-top:6px">
+      <button type="button" class="active" data-qtype="all" aria-pressed="true">全部题型</button>
+      <button type="button" data-qtype="single" aria-pressed="false">单选</button>
+      <button type="button" data-qtype="judge" aria-pressed="false">判断</button>
+      <button type="button" data-qtype="multi" aria-pressed="false">多选</button>
+      <button type="button" data-qtype="fill" aria-pressed="false">填空</button>
+      <button type="button" data-qtype="write" aria-pressed="false">写答</button>
+      <button type="button" data-qtype="interview" aria-pressed="false">💼 面试</button>
+    </div>
     <p class="quiz-count" id="quizCount"></p>
     <div id="quizApp">
       <div id="quizIntro" class="card">
         <h2>准备开始</h2>
-        <p>题目来自知识卡片库各主题的常见易错点，适合学习后检验是否真的掌握。</p>
+        <p>题目来自知识卡片库各主题的常见易错点 + 安规面试题库（按模块，含考察点），题型含单选 / 判断 / 多选 / 填空 / 写答，适合学习后自测与面试准备。</p>
         <button type="button" class="btn btn-primary" id="quizStart">开始答题</button>
       </div>
 
@@ -152,6 +161,11 @@
         </div>
       </div>
       <div class="card">
+        <h3>🔁 费曼间隔复习</h3>
+        <p class="section-sub">记录保存后第 1 / 3 / 7 / 30 天各提醒复习一次：重读你的讲解，试着再讲一遍，点「完成本次复习」推进进度。</p>
+        <div id="feynReview"></div>
+      </div>
+      <div class="card">
         <h3>📒 费曼记录</h3>
         <p class="section-sub">保存在本地浏览器，可在「数据备份」页一并导出。</p>
         <div class="link-row">
@@ -170,6 +184,11 @@
       <div class="card" id="statsPanel">
         <p style="color:var(--muted);margin:0">还没有答题记录，做完题后这里会显示各模块掌握度与最薄弱环节。</p>
       </div>
+    </section>
+    <section>
+      <h2>🔁 间隔复习（遗忘曲线）</h2>
+      <p class="section-sub">错题按 1→3→7→30 天自动排期，到期进入下方队列；复习答对自动拉长间隔，答错则重新从第 1 天开始。</p>
+      <div class="card" id="reviewPanel"></div>
     </section>
     <section>
       <h2>错题本</h2>
@@ -200,7 +219,7 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.1 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
@@ -216,8 +235,10 @@
   <script src="../assets/js/quiz-auto.js"></script>
   <script src="../assets/js/quiz-v2.js"></script>
   <script src="../assets/js/quiz-extra.js"></script>
+  <script src="../assets/js/quiz-interview.js"></script>
   <script src="../assets/js/quiz-engine.js"></script>
   <script src="../assets/js/feynman.js"></script>
+  <script src="../assets/js/spaced-review.js"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>

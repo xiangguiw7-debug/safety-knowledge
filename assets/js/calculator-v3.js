@@ -361,7 +361,19 @@ function updateStatus() {
   box.textContent = st.text;
 }
 
+function currentShareUrl() {
+  var s = currentState();
+  var q = new URLSearchParams({
+    v: s.v, sys: s.sys, ovc: s.ovc, pd: s.pd, gp: s.gp,
+    ins: s.ins, alt: s.alt, cls: s.cls, mkt: s.mkt
+  });
+  var path = location.pathname + "?" + q.toString() + (location.hash || "");
+  var base = /^https?:/.test(location.protocol) ? location.origin : "";
+  return base + path;
+}
+
 function updateUrl() {
+  // 仅同步地址栏（分享/刷新可还原参数），不再把网址常显到页面
   var s = currentState();
   var q = new URLSearchParams({
     v: s.v, sys: s.sys, ovc: s.ovc, pd: s.pd, gp: s.gp,
@@ -373,12 +385,10 @@ function updateUrl() {
   } catch (e) {
     // file:// 等场景下忽略
   }
-  var base = /^https?:/.test(location.protocol) ? location.origin : "";
-  $("shareUrl").textContent = base + path;
 }
 
 function copyLink() {
-  var text = $("shareUrl").textContent;
+  var text = currentShareUrl();
   function done() {
     var btn = $("copyBtn");
     btn.textContent = "已复制";
