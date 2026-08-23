@@ -19,7 +19,7 @@
     { name: "认证", href: link("pages/certification.html"), active: ["certification.html", "standards", "voltage.html", "wizard.html", "refs.html", "verification.html", "labels.html", "standard-diffs.html", "standard-picker.html", "cert-map.html", "templates.html", "export-compliance.html", "export-data.html", "erp.html"] },
     { name: "行业", href: link("pages/industries.html"), active: ["industries.html", "product-categories.html"] },
     { name: "答题测验", href: link("pages/quiz.html"), active: ["quiz.html"] },
-    { name: "资源", href: link("pages/resources.html"), active: ["resources.html", "map.html", "glossary.html", "materials.html", "cases.html", "roles.html", "designer-guide.html", "poster.html", "faq.html", "feedback.html", "changelog.html", "data.html", "workshop.html", "components.html", "pcb-guidelines.html"] }
+    { name: "资源", href: link("pages/resources.html"), active: ["resources.html", "map.html", "glossary.html", "materials.html", "cases.html", "roles.html", "designer-guide.html", "poster.html", "faq.html", "feedback.html", "changelog.html", "data.html", "workshop.html", "components.html", "pcb-guidelines.html", "search.html"] }
   ];
 
   var active = "资源";

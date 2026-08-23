@@ -62,6 +62,18 @@
   </script>
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "安规与可靠性知识课堂",
+  "alternateName": "Safety & Reliability Knowledge Classroom",
+  "url": "https://xiangguiw7-debug.github.io/safety-knowledge/",
+  "description": "产品安全（LVD/防火/机械）、EMC、能效（ErP/ESPR）、环保合规（RoHS/REACH/WEEE/电池/包装 PPWR）、出口认证与工程设计方法的知识平台：知识卡、计算工具、SOP、题库与外贸速查。",
+  "inLanguage": "zh-CN",
+  "publisher": { "@type": "Organization", "name": "安规与可靠性知识课堂" }
+}
+</script>
 </head>
 <body>
   <header class="site-header">
@@ -92,6 +104,20 @@
         </div>
         <a class="btn btn-primary" href="./pages/learn.html">🎓 开始学习</a>
         <a class="btn" href="./pages/tools.html">🧮 计算与速查工具</a>
+      </div>
+    </section>
+
+    <section class="container" id="dashSec" style="padding:14px 0 0">
+      <div class="card" id="dashCard" hidden style="padding:16px 20px">
+        <h2 style="margin:0 0 12px;font-size:19px">📊 我的学习进度</h2>
+        <div class="grid grid-4" id="dashStats"></div>
+        <div id="dashWeak" style="margin-top:12px;font-size:13.5px;color:var(--muted)"></div>
+        <p style="margin-top:12px">
+          <a class="btn" href="./pages/learn.html">📚 继续学习</a>
+          <a class="btn" href="./pages/quiz.html">✅ 去答题</a>
+          <a class="btn" href="./pages/quiz.html">🧠 费曼复习（测验页切模式）</a>
+          <a class="btn" href="./pages/data.html">💾 数据备份</a>
+        </p>
       </div>
     </section>
 
@@ -253,6 +279,7 @@
   <a href="./pages/certification.html">📄<span>认证</span></a>
   <a href="./pages/industries.html">🏭<span>行业</span></a>
   <a href="./pages/quiz.html">✅<span>测验</span></a>
+    <a href="./pages/search.html">🔍<span>搜索</span></a>
 </nav>
 
   <script src="./assets/js/theme.js"></script>
@@ -260,6 +287,64 @@
   <script src="./assets/js/search.js?v=1.4.2"></script>
   <script src="./assets/js/progress.js"></script>
   <script src="./assets/js/ux.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      function load(k, def) { try { return JSON.parse(localStorage.getItem(k)) || def; } catch (e) { return def; } }
+      var card = document.getElementById("dashCard");
+      var stats = document.getElementById("dashStats");
+      if (!card || !stats) return;
+
+      // 数据源
+      var mainline = load("angui-mainline-read", {});
+      var wrong = load("angui-wrong-v1", []);
+      var review = load("angui-review-v1", {});
+      var milestone = load("angui-milestone-v1", {});
+      var feyn = load("angui-feynman-v1", []);
+      var qstats = load("angui-quiz-stats-v1", {});
+
+      var now = Date.now();
+      var dueCount = Object.keys(review).filter(function (q) { return review[q].next && review[q].next <= now && (review[q].lv || 0) < 4; }).length;
+      var msPass = 0;
+      for (var k in milestone) { if (milestone[k] && milestone[k].passed) msPass++; }
+      var readCards = Object.keys(mainline).length;
+
+      function statCard(icon, num, label, href) {
+        return '<div class="card" style="padding:12px 14px;text-align:center">' +
+          '<div style="font-size:24px">' + icon + '</div>' +
+          '<div style="font-size:22px;font-weight:800;color:var(--accent)">' + num + '</div>' +
+          '<div style="font-size:12.5px;color:var(--muted)">' + label + '</div>' +
+          (href ? '<a href="' + href + '" style="font-size:12px;color:var(--accent)">去查看 →</a>' : '') +
+          '</div>';
+      }
+      stats.innerHTML =
+        statCard("📖", readCards + " / 35", "知识卡已读", "./pages/knowledge.html") +
+        statCard("❌", wrong.length, "错题（可重练）", "./pages/quiz.html") +
+        statCard("🔁", dueCount, "今日待复习", "./pages/quiz.html") +
+        statCard("🏁", msPass + " / 5", "里程碑通过", "./pages/knowledge.html#sec-milestones");
+
+      // 最薄弱模块
+      var weak = null;
+      Object.keys(qstats).forEach(function (mod) {
+        if (mod === "auto") return;
+        var s = qstats[mod];
+        if (s && s.n >= 3) {
+          var pct = s.c / s.n;
+          if (!weak || pct < weak.pct) weak = { mod: mod, pct: pct, n: s.n, c: s.c };
+        }
+      });
+      var weakEl = document.getElementById("dashWeak");
+      if (weakEl) {
+        if (weak) {
+          weakEl.innerHTML = "💪 最薄弱模块：<b>" + weak.mod + "</b>（" + weak.c + "/" + weak.n + "，约 " + Math.round(weak.pct * 100) + "%）——点「去答题」针对性练习。";
+        } else if (feyn.length || readCards || wrong.length || msPass || dueCount) {
+          weakEl.innerHTML = "🧠 费曼记录 " + feyn.length + " 条 · 答题超过 3 题后这里会显示你的薄弱模块。";
+        }
+      }
+      card.hidden = !(readCards || wrong.length || dueCount || msPass || feyn.length);
+    })();
+  </script>
+
   <script src="./assets/js/nav.js"></script>
   <script src="./assets/js/breadcrumb.js"></script>
   <script>

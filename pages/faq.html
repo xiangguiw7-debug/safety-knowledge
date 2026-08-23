@@ -17,6 +17,102 @@
   </style>
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "带电部件为什么必须用工具才能打开？是哪个标准要求的？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "这是产品安全标准的通用防触电要求，不是某一本标准独有：IEC 60335-1（家电）第 8 章、IEC 62368-1（音视频/IT）可触及性条款、IEC 60598-1（灯具）防触电章节、IEC 61010-1（测量/实验室）都有“带电部件不得可触及、拆卸外壳通常需要工具”的规定，总则见 IEC 61140。需要工具才能打开/拆卸的部件，一般不作为可触及部件判定；反过来，如果徒手就能打开并碰到带电部件，就不合格。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PCB 阻焊层能算爬电距离吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不能。普通阻焊层不是绝缘涂层，只有通过 IEC 60664-3 涂层试验的涂覆才能计入爬电距离。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "III 类设备还需要查爬电/间隙吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "III 类设备由 SELV 供电，一般不按市电爬电/间隙约束，但 SELV 本身的隔离（电源、内部电路）仍要满足标准要求。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "直流耐压为什么按交流的 1.414 倍？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1.414 是交流峰值与有效值的比值。直流试验要模拟交流峰值应力；测完必须放电。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "污染等级怎么定？选低一点可以省距离吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "污染等级取决于产品使用环境和结构（密封程度），不是“想选几就选几”。认证工程师会按标准定义评估，选错会导致不合格。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "CE 标志是自己贴就可以吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "多数产品由制造商自我声明并准备技术文件后加贴；但标志比例、最小高度、位置、说明书语言都有要求，特定指令（如医疗 MDR）需公告机构介入。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "加强绝缘就是 2 倍基本绝缘吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "工程上常按 2 倍近似，但标准可能有专门表格与取整规则，正式设计以标准原文为准。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "浪涌和 ESD 有什么区别？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "浪涌能量大（焦耳级）、波形慢（微秒）；ESD 能量小但上升极快（亚纳秒）。防护器件完全不同，别混用。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "先做 EMC 还是先做安规测试？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "建议先做安规（结构、间距、耐压、温升），再做 EMC；EMC 整改常影响安规（如 Y 电容改大会增加泄漏电流），两者要联动。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "环境试验和安规试验什么关系？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "常见流程是环境预处理（湿热、温循）后进行安规测试，模拟产品老化/受潮后的安全状态。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "CB 证书是什么？可以替代各国认证吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CB 是 IECEE 体系下的测试证书，可向成员国转证、减少重复测试，但通常不能直接替代目标国的认证标志（如 CCC、PSE）。"
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
   <header class="site-header">
@@ -85,6 +181,7 @@
   <a href="./certification.html">📄<span>认证</span></a>
   <a href="./industries.html">🏭<span>行业</span></a>
   <a href="./quiz.html">✅<span>测验</span></a>
+    <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
   <script src="../assets/js/nav.js"></script>
   <script src="../assets/js/breadcrumb.js"></script>
