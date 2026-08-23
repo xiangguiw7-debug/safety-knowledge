@@ -135,7 +135,7 @@ while (queue.length) {
 }
 const orphans = htmlFiles.filter(f => f !== "index.html" && !seen.has(f));
 // 瞬态跳转页（meta refresh / location.replace）加载即跳走，无需导航
-const NO_NAV_ALLOW = new Set(["pages/ppwr.html"]); // 独立深色专题页：自带导航与返回键，不套站内 nav
+const NO_NAV_ALLOW = new Set(["pages/ppwr.html", "pages/knowledge-print.html"]); // 独立深色专题页：自带导航与返回键，不套站内 nav
 const noNav = htmlFiles.filter(f => {
   if (NO_NAV_ALLOW.has(f)) return false;
   const c = get(f) || "";

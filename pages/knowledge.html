@@ -194,7 +194,7 @@
       <p class="lead">按安全因素 / 主题浏览（七大危害 + EMC / 医疗 / 认证 / 通用专项），点击知识主题卡片进入单独详情页查看完整规则（含标准依据、常见误区与前后张导航）。<a class="tag" href="./knowledge-detail.html?id=stdguide" style="margin-left:8px">详情页示例 →</a></p>
     </div>
 
-    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><input type="search" id="knowledgeSearch" class="knowledge-search" style="flex:1;min-width:240px;margin:0" placeholder="搜索知识卡片：温升 / IP / CTI / 认证 / SELV…" aria-label="搜索知识卡片"><button type="button" class="btn no-print" id="kcPrintAll" style="white-space:nowrap">🖨 打印全部知识卡</button></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><input type="search" id="knowledgeSearch" class="knowledge-search" style="flex:1;min-width:240px;margin:0" placeholder="搜索知识卡片：温升 / IP / CTI / 认证 / SELV…" aria-label="搜索知识卡片"><a class="btn no-print" href="./knowledge-print.html" style="white-space:nowrap">🖨 打印全部知识卡（完整内容）</a></div>
 
     <section id="sec-mainline-tabs">
       <h2 class="section-title">七大安全因素 · 学习主线</h2>
@@ -2009,22 +2009,7 @@
   <script src="../assets/js/knowledge-detail-data.js"></script>
   <script src="../assets/js/card-quiz.js"></script>
   <script src="../assets/js/milestone-quiz.js"></script>
-  <script>
-    (function () {
-      var b = document.getElementById("kcPrintAll");
-      if (b) b.addEventListener("click", function () {
-        // 打印前清掉搜索/筛选，确保全部卡片可见
-        var box = document.getElementById("knowledgeSearch");
-        if (box) { box.value = ""; box.dispatchEvent(new Event("input")); }
-        var chips = document.querySelector(".hazard-chips button.active");
-        if (chips && chips.getAttribute("data-hgroup") !== "all") {
-          var allBtn = document.querySelector('.hazard-chips button[data-hgroup="all"]');
-          if (allBtn) allBtn.click();
-        }
-        window.print();
-      });
-    })();
-  </script>
+
   <script src="../assets/js/knowledge-index.js"></script>
 </body>
 </html>

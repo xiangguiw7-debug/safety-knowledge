@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <title>知识卡合集 · 打印版 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="35 张知识卡完整内容打印版：标准结构、防触电、能量防火、机械辐射化学、EMC 环境、医疗认证。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    body { background: #fff; }
+    .print-head { max-width: 900px; margin: 0 auto; padding: 24px 24px 0; }
+    .print-head h1 { font-size: 26px; margin: 0 0 6px; }
+    .print-head p { color: #666; font-size: 13.5px; margin: 0 0 12px; }
+    .no-print { margin-bottom: 14px; }
+    .print-content { max-width: 900px; margin: 0 auto; padding: 0 24px 40px; }
+    .knowledge-card { background: #fff; border: 1px solid #d9d9d9; border-radius: 10px; padding: 18px 22px; margin: 0 0 20px; page-break-inside: avoid; }
+    .knowledge-card h2 { font-size: 20px; margin: 0 0 10px; padding-bottom: 8px; border-bottom: 2px solid #9e2b25; }
+    .knowledge-card h3 { font-size: 16px; margin: 16px 0 6px; }
+    .knowledge-card p, .knowledge-card li { font-size: 14px; line-height: 1.8; }
+    .knowledge-card table { font-size: 13px; }
+    .knowledge-card .howto { font-size: 13px; background: #f4f2ed; border-left: 3px solid #bbb; padding: 8px 12px; border-radius: 0 8px 8px 0; }
+    .knowledge-card .std { font-size: 12px; color: #777; }
+    .knowledge-card .rel { font-size: 13px; margin-top: 10px; }
+    @media print {
+      .no-print, header, footer, .bottom-nav { display: none !important; }
+      .print-head { padding: 10px 10px 0; }
+      .print-content { padding: 0 10px; max-width: 100%; }
+      .knowledge-card { break-inside: avoid; border-color: #ccc; }
+      body { background: #fff !important; }
+    }
+  </style>
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+</head>
+<body>
+  <header class="site-header no-print">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <a class="btn" href="./knowledge.html">← 返回知识卡片库</a>
+    </div>
+  </header>
+
+  <main class="print-head">
+    <h1>📚 知识卡合集 · 打印版（35 张）</h1>
+    <p>教学参考：正式设计、测试与认证以最新版标准原文为准。打印时每张卡保持在一页内。</p>
+    <p class="no-print"><button type="button" class="btn btn-primary" id="printBtn">🖨 打印 / 导出 PDF</button> <a class="btn no-print" href="./knowledge.html">返回知识卡片库</a></p>
+  </main>
+
+  <div class="print-content" id="printContent"></div>
+
+  <script src="../assets/js/knowledge-detail-data.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      function esc(t) { var d = document.createElement("div"); d.textContent = t == null ? "" : String(t); return d.innerHTML; }
+      var box = document.getElementById("printContent");
+      if (!box) return;
+      var list = (typeof KNOWLEDGE_ORDER !== "undefined") ? KNOWLEDGE_ORDER : Object.keys(KNOWLEDGE_DETAILS || {});
+      var cards = [];
+      list.forEach(function (id) {
+        var d = KNOWLEDGE_DETAILS && KNOWLEDGE_DETAILS[id];
+        if (!d || !d.html) return;
+        cards.push('<section class="knowledge-card"><h2>' + esc(d.title) + '</h2>' + d.html + '</section>');
+      });
+      box.innerHTML = cards.join("");
+      var n = document.createElement("p");
+      n.className = "no-print";
+      n.style.cssText = "color:#888;font-size:13px";
+      n.textContent = "共 " + cards.length + " 张知识卡，内容完整。";
+      box.insertBefore(n, box.firstChild);
+      var btn = document.getElementById("printBtn");
+      if (btn) btn.addEventListener("click", function () { window.print(); });
+      // 自动触发打印（稍等样式就绪）
+      setTimeout(function () { window.print(); }, 500);
+    })();
+  </script>
+</body>
+</html>
