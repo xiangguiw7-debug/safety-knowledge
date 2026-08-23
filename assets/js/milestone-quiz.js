@@ -64,7 +64,7 @@
             : '<button type="button" class="ms-submit" data-action="grade" data-mi="' + mi + '">提交本段</button>') +
           '<span class="ms-result' + (passed ? ' ok' : '') + '" data-mi="' + mi + '">' + (passed ? '✓ 本段已通过' : '') + '</span></div>';
       }
-      return '<div class="ms-block' + (passed ? ' passed' : '') + (mi === 0 ? ' open' : '') + '" data-mi="' + mi + '">' +
+      return '<div class="ms-block' + (passed ? ' passed' : '') + ' open' + '" data-mi="' + mi + '">' +
         '<div class="ms-head"><span class="ms-name">' + esc(m.name) + '</span>' +
         '<span class="ms-meta">' + qs.length + ' 题 · ' + (m.ids || []).length + ' 张卡</span>' + badge +
         '<span class="ms-toggle">▼</span></div>' +
