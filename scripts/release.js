@@ -61,14 +61,22 @@ if (/更新日志：v\d+\.\d+\.\d+/.test(ch)) {
   console.log("  changelog meta 已更新");
 }
 
-// 5. search.js 版本参数（index.html / learn.html / sw.js CORE_ASSETS）——避免旧 PWA 缓存导致搜索索引不更新
-var searchRefs = [path.join(ROOT, "index.html"), path.join(ROOT, "pages", "learn.html"), swPath];
-searchRefs.forEach(function (f) {
+// 5. 脚本版本参数（main.js / search.js 全站 html + sw.js CORE_ASSETS）——避免旧 PWA 缓存导致新逻辑不生效
+var scriptRefs = [swPath];
+(function walkHtml(dir) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (e.name.startsWith(".")) continue;
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) { if (e.name !== "backup" && e.name !== "node_modules" && e.name !== ".git") walkHtml(full); }
+    else if (e.name.endsWith(".html")) scriptRefs.push(full);
+  }
+})(ROOT);
+scriptRefs.forEach(function (f) {
   var c = fs.readFileSync(f, "utf8");
-  if (/search\.js\?v=\d+\.\d+\.\d+/.test(c)) {
-    c = c.replace(/search\.js\?v=\d+\.\d+\.\d+/g, "search.js?v=" + V);
+  if (/(main|search)\.js\?v=\d+\.\d+\.\d+/.test(c)) {
+    c = c.replace(/(main|search)\.js\?v=\d+\.\d+\.\d+/g, "$1.js?v=" + V);
     fs.writeFileSync(f, c, "utf8");
-    console.log("  " + path.basename(f) + " search.js?v → " + V);
+    console.log("  " + path.basename(f) + " 脚本版本参数 → " + V);
   }
 });
 

@@ -10,7 +10,7 @@ var CORE_ASSETS = [
   "./pages/quiz.html", "./pages/knowledge.html",
   "./pages/knowledge-detail.html", "./pages/insulation-guide.html", "./pages/standard-diffs.html", "./pages/structural-checklist.html", "./pages/circuit-checklist.html", "./pages/templates.html", "./pages/export-compliance.html", "./pages/export-data.html", "./pages/ppwr.html", "./pages/erp.html", "./pages/power-design.html", "./pages/case-65w.html",
   "./assets/css/style.css", "./assets/css/calculator.css", "./assets/css/industries.css", "./assets/css/dmcm.css", "./assets/css/search.css",
-  "./assets/js/theme.js", "./assets/js/glossary-tip.js", "./assets/js/main.js", "./assets/js/calculator-v3.js", "./assets/js/hipot.js", "./assets/js/calculator-extra.js", "./assets/js/industry-data.js", "./assets/js/standards-data.js", "./assets/js/std-quick.js",
+  "./assets/js/theme.js", "./assets/js/glossary-tip.js", "./assets/js/main.js?v=1.4.2", "./assets/js/calculator-v3.js", "./assets/js/hipot.js", "./assets/js/calculator-extra.js", "./assets/js/industry-data.js", "./assets/js/standards-data.js", "./assets/js/std-quick.js",
   "./assets/js/quiz-v2.js",
   "./assets/js/quiz-auto.js",
   "./assets/js/feynman.js",
