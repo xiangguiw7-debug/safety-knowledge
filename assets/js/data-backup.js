@@ -1,4 +1,4 @@
-var DB_KEYS = ["angui-progress-v1", "angui-know-notes-v1", "angui-wrong-v1", "angui-theme", "angui-tool-tab", "angui-tool-recent", "angui-site-recent", "angui-feynman-v1", "angui-feynman-draft-v1", "angui-review-v1", "angui-feynman-review-v1", "angui-milestone-v1", "angui-card-quiz-v1"];
+var DB_KEYS = ["angui-progress-v1", "angui-know-notes-v1", "angui-wrong-v1", "angui-theme", "angui-tool-tab", "angui-tool-recent", "angui-site-recent", "angui-feynman-v1", "angui-feynman-draft-v1", "angui-review-v1", "angui-feynman-review-v1", "angui-milestone-v1", "angui-card-quiz-v1", "angui-cdf-v1", "angui-doc-v1", "angui-label-v1"];
 
 function dbExport() {
   var data = {};

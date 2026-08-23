@@ -5,19 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
   <title>技术文件模板（CDF / DoC / 铭牌） - 安规与可靠性知识课堂</title>
-  <meta name="description" content="认证技术文件模板：CDF 关键元器件清单、CE DoC 符合性声明、铭牌标签、送样清单——可直接填写/复制/打印。">
+  <meta name="description" content="认证技术文件模板：CDF 关键元器件清单（可编辑、可增删行、可导出）、CE DoC 符合性声明、铭牌标签、送样与文件包清单——可填写/保存/复制/打印。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
   <style>
     .tpl { border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin: 16px 0; background: var(--card); }
     .tpl h2 { margin: 0 0 6px; }
-    .tpl .tpl-copy { float: right; margin-top: -30px; }
-    .tpl table { width: 100%; font-size: 13.5px; }
-    .tpl input, .tpl textarea { width: 100%; box-sizing: border-box; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); font-family: inherit; font-size: 13px; }
+    .cdf-table { width: 100%; font-size: 13px; border-collapse: collapse; }
+    .cdf-table th { text-align: left; padding: 6px 6px; border-bottom: 2px solid var(--border); font-size: 12.5px; }
+    .cdf-table td { padding: 3px 4px; border-bottom: 1px solid var(--hairline, var(--border)); }
+    .cdf-table input { width: 100%; box-sizing: border-box; padding: 5px 7px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); font-family: inherit; font-size: 12.5px; }
+    .cdf-table input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+    .cdf-ops { white-space: nowrap; text-align: right; }
+    .cdf-ops .btn { padding: 2px 8px; font-size: 12px; }
+    .tpl input, .tpl textarea { box-sizing: border-box; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); font-family: inherit; font-size: 13px; }
+    .doc-line { margin: 5px 0; }
+    .doc-line input { width: 70%; }
+    .label-preview { border: 2px solid var(--fg); border-radius: 8px; padding: 14px 18px; display: inline-block; font-size: 13px; line-height: 1.75; background: var(--card); }
+    .label-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px 14px; margin: 12px 0; }
+    .label-fields label { display: block; font-size: 12.5px; color: var(--muted); margin-bottom: 2px; }
+    .label-fields input { width: 100%; }
+    .peak-note { font-size: 12.5px; color: var(--muted); margin: 8px 0 0; }
+    @media print {
+      header, .bottom-nav, .tpl-copy, .no-print, footer, .cite-note { display: none !important; }
+      .tpl { border: none; padding: 0; margin: 12px 0; page-break-inside: avoid; }
+      body { background: #fff; }
+      .label-preview { border-color: #000; }
+    }
   </style>
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
 <body>
   <header class="site-header">
@@ -41,69 +59,157 @@
     <div class="page-head">
       <p class="crumb"><a href="../index.html">首页</a> / <a href="./certification.html">认证</a> / 技术文件模板</p>
       <h1>认证技术文件模板</h1>
-      <p class="lead">认证需要交付的技术文件：关键元器件清单（CDF）、CE 符合性声明（DoC）、铭牌/标签、送样清单。以下模板可直接填写、复制或打印；正式提交前请按产品标准与认证机构要求核对。</p>
+      <p class="lead">认证要交付的文件：<b>CDF 关键元器件清单</b>（可编辑、可增删行、可导出）、<b>CE 符合性声明（DoC）</b>、<b>铭牌/标签</b>、送样与技术文件包清单。所有填写内容<b>保存在本地浏览器</b>，不提交任何服务器；正式提交前按产品标准与认证机构要求核对。</p>
+      <p class="no-print" style="margin-top:8px"><button type="button" class="btn" id="tplPrint">🖨 打印本页模板</button> <a class="btn" href="./export-compliance.html">🌍 外贸合规速查</a> <a class="btn" href="./erp.html">🔌 ErP 能效专题</a></p>
     </div>
 
     <div class="tpl">
       <h2>📋 关键元器件清单（CDF）</h2>
-      <p style="color:var(--muted);font-size:13px">CDF 是工厂检查与变更控制的核心文件——元件证书过期、型号与实物不一致是常见不符合项。<button type="button" class="btn tpl-copy" data-copy="cdf">复制模板</button></p>
-      <table id="cdf">
-        <thead><tr><th>序号</th><th>元件</th><th>型号</th><th>制造商</th><th>认证标志</th><th>证书编号</th><th>有效期</th><th>对应标准</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>保险丝</td><td><input placeholder="如 2A 250V"></td><td><input></td><td><input placeholder="UL/IEC/CCC"></td><td><input></td><td><input placeholder="YYYY-MM"></td><td><input placeholder="IEC 60127"></td></tr>
-          <tr><td>2</td><td>X 电容</td><td><input></td><td><input></td><td><input placeholder="IEC 60384-14"></td><td><input></td><td><input></td><td><input placeholder="X2"></td></tr>
-          <tr><td>3</td><td>Y 电容</td><td><input></td><td><input></td><td><input placeholder="Y1/Y2"></td><td><input></td><td><input></td><td><input placeholder="IEC 60384-14"></td></tr>
-          <tr><td>4</td><td>开关电源变压器</td><td><input></td><td><input></td><td><input placeholder="IEC 61558 / 62368"></td><td><input></td><td><input></td><td><input></td></tr>
-          <tr><td>5</td><td>电源线/插头</td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td><td><input placeholder="IEC 60320 / 60884"></td></tr>
-          <tr><td>6</td><td>外壳材料</td><td><input></td><td><input></td><td><input placeholder="UL94 V-0 / CTI"></td><td><input></td><td><input></td><td><input placeholder="UL 黄卡"></td></tr>
-        </tbody>
-      </table>
-      <p class="peak-note">填写示例：保险丝 | F2A250V | Littelfuse 0217002 | cURus | E123456 | 2027-06 | IEC 60127。替换任何一行都要重新评估（认证变更控制）。</p>
+      <p style="color:var(--muted);font-size:13px">CDF 是工厂检查与<b>变更控制</b>的核心文件——元件证书过期、型号与实物不一致是最高频的不符合项。下表<b>全部可编辑</b>：点单元格直接改（含元件名称），点「➕ 添加一行」增加条目，行尾可上移/下移/删除，改动自动保存。</p>
+      <div id="cdfBox"></div>
+      <div class="grid grid-2" style="margin-top:12px">
+        <div class="card" style="padding:12px 14px">
+          <p class="peak-note" style="margin-top:0"><b>每列填什么：</b></p>
+          <ul style="font-size:12.5px;line-height:1.8;margin:4px 0 0">
+            <li><b>元件名称</b>：保险丝、X/Y 电容、变压器、电源线、外壳料、光耦、继电器等安规关键件；</li>
+            <li><b>型号</b>：与实物丝印/物料一致，一个型号一行（不同供应商分开列）；</li>
+            <li><b>制造商</b>：证书上的持证方名称（不是贸易商）；</li>
+            <li><b>认证标志</b>：UL/cURus、ENEC、CCC、CQC、CB 等；</li>
+            <li><b>证书编号</b>：填发证号，附件附证书复印件；</li>
+            <li><b>有效期</b>：证书到期日（工厂检查会查）；</li>
+            <li><b>对应标准</b>：如 IEC 60127（保险丝）、IEC 60384-14（X/Y 电容）。</li>
+          </ul>
+        </div>
+        <div class="card" style="padding:12px 14px">
+          <p class="peak-note" style="margin-top:0"><b>常见错误：</b></p>
+          <ul style="font-size:12.5px;line-height:1.8;margin:4px 0 0">
+            <li>只填型号不填证书号/有效期 → 检查时查不到依据；</li>
+            <li>元件换供应商/型号不更新 CDF → 变更控制违规；</li>
+            <li>用"同容量随便换" → 认证元件必须同型号同参数；</li>
+            <li>自制件（变压器/PCB）无随机测试报告 → 需单独评估。</li>
+          </ul>
+          <p class="peak-note" style="margin:8px 0 0">⚠ 任何关键件变更（换料/换厂/改参数）都要重新走认证变更评估，CDF 是追踪的依据。</p>
+        </div>
+      </div>
     </div>
 
     <div class="tpl">
       <h2>📄 CE 符合性声明（DoC）</h2>
-      <p style="color:var(--muted);font-size:13px">欧盟 CE 自我声明的标准格式；特定指令（如 RED、MD）可能需要公告机构介入。<button type="button" class="btn tpl-copy" data-copy="doc">复制模板</button></p>
-      <div id="doc" style="font-size:13.5px;line-height:1.8">
-        <p><b>EC Declaration of Conformity / 欧盟符合性声明</b></p>
-        <p>产品名称（Product）：<input style="width:60%"></p>
-        <p>型号（Model）：<input style="width:60%"></p>
-        <p>制造商（Manufacturer）：<input style="width:60%"></p>
-        <p>地址（Address）：<input style="width:80%"></p>
-        <p>本声明依据指令发布：Low Voltage Directive 2014/35/EU；EMC Directive 2014/30/EU；RoHS Directive 2011/65/EU；RED 2014/53/EU（如适用）。</p>
-        <p>适用标准（Standards）：<input style="width:90%" placeholder="如 EN IEC 62368-1:2020 + A11、EN 55032、EN 55035"></p>
-        <p>签名（Signed for and on behalf of）：<input style="width:50%">　地点/日期：<input style="width:40%"></p>
+      <p style="color:var(--muted);font-size:13px">欧盟 CE 自我声明的标准格式；字段可直接填写并保存。特定指令（RED、MD 等）可能需要公告机构介入；表格内容以最新指令文本为准。</p>
+      <div id="docBox" style="font-size:13.5px;line-height:1.8">
+        <p style="text-align:center"><b>EC Declaration of Conformity / 欧盟符合性声明</b></p>
+        <p class="doc-line">产品名称（Product）：<input data-doc="product" placeholder="如 LED 电源适配器"></p>
+        <p class="doc-line">型号（Model）：<input data-doc="model" placeholder="如 ADP-65W-XX"></p>
+        <p class="doc-line">制造商（Manufacturer）：<input data-doc="manufacturer" placeholder="公司全称"></p>
+        <p class="doc-line">地址（Address）：<input data-doc="address" placeholder="注册地址（与营业执照一致）"></p>
+        <p>本声明由制造商全权负责发布，声明下述产品符合以下指令与协调标准：</p>
+        <p>Low Voltage Directive <b>2014/35/EU</b>；EMC Directive <b>2014/30/EU</b>；RoHS Directive <b>2011/65/EU</b>；RED <b>2014/53/EU</b>（含无线电功能时适用）；ErP 相关实施法规（如适用，见 <a href="./erp.html">ErP 专题</a>）。</p>
+        <p class="doc-line">适用标准（Standards）：<input data-doc="standards" style="width:90%" placeholder="如 EN IEC 62368-1:2020+A11；EN 55032；EN 55035"></p>
+        <p class="doc-line">签字人（Signed for and on behalf of）：<input data-doc="signer" placeholder="授权签字人姓名/职务">　地点/日期：<input data-doc="place" style="width:36%" placeholder="城市"> <input data-doc="date" style="width:30%" placeholder="YYYY-MM-DD"></p>
+      </div>
+      <div class="grid grid-2" style="margin-top:12px">
+        <div class="card" style="padding:12px 14px">
+          <p class="peak-note" style="margin-top:0"><b>DoC 编写要点：</b></p>
+          <ul style="font-size:12.5px;line-height:1.8;margin:4px 0 0">
+            <li>签字人须为<b>有权代表制造商</b>的人（总经理/授权代表），签字即承担法律责任；</li>
+            <li>适用指令必须覆盖产品全部 CE 范围（漏 RED/RoHS 也会被查）；</li>
+            <li>引用标准版本要与测试报告一致（EN 标准号带年份）；</li>
+            <li>DoC 与技术文件（测试报告/图纸/CDF）一起保存，<b>欧盟要求保留至少 10 年</b>；</li>
+            <li>欧盟境内进口商/授权代表可代签——转口订单要确认责任方。</li>
+          </ul>
+        </div>
+        <div class="card" style="padding:12px 14px">
+          <p class="peak-note" style="margin-top:0"><b>技术文件（Technical File）配套：</b></p>
+          <ul style="font-size:12.5px;line-height:1.8;margin:4px 0 0">
+            <li>产品描述与规格书、电路图、PCB 布局（标间距）；</li>
+            <li>测试报告（安全/EMC/能效）与实验室资质；</li>
+            <li>关键元器件证书复印件（与 CDF 对应）；</li>
+            <li>风险分析（如适用）与使用说明（语言随市场）。</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div class="tpl">
       <h2>🏷️ 铭牌 / 标签模板</h2>
-      <p style="color:var(--muted);font-size:13px">铭牌内容按产品标准要求（额定电压/功率/频率、制造商、型号、认证标志位置）。<button type="button" class="btn tpl-copy" data-copy="label">复制模板</button></p>
-      <div id="label" style="border:2px solid var(--fg);border-radius:8px;padding:12px 16px;display:inline-block;font-size:13px;line-height:1.7">
-        <b>产品名称 / 型号</b><br>
-        额定电压：220–240V~ 50Hz<br>
-        额定功率：≤ 65 W<br>
-        制造商：＿＿＿＿＿＿＿＿<br>
-        型号：＿＿＿＿＿＿＿＿<br>
-        认证标志位：CE / CCC / UL / PSE …<br>
-        ⚠ 危险电压警示（如适用）
+      <p style="color:var(--muted);font-size:13px">铭牌按产品标准要求内容（额定电压/电流/功率/频率、制造商、型号、认证标志位）；填左侧字段，右侧实时预览，保存后刷新不丢。</p>
+      <div id="labelBox" class="grid grid-2">
+        <div>
+          <div class="label-fields">
+            <div><label>产品名称 Product</label><input data-label="pname" placeholder="如 LED 电源适配器"></div>
+            <div><label>型号 Model</label><input data-label="model" placeholder="ADP-65W-XX"></div>
+            <div><label>额定电压 Rated Voltage</label><input data-label="voltage" placeholder="220–240V~"></div>
+            <div><label>频率 Frequency</label><input data-label="freq" placeholder="50/60Hz"></div>
+            <div><label>额定电流 Rated Current</label><input data-label="current" placeholder="0.3A"></div>
+            <div><label>额定功率 Rated Power</label><input data-label="power" placeholder="≤ 65W"></div>
+            <div><label>制造商 Manufacturer</label><input data-label="maker" placeholder="公司全称"></div>
+            <div><label>产地 Made in</label><input data-label="origin" placeholder="China"></div>
+            <div><label>认证标志位</label><input data-label="marks" placeholder="CE / CCC / UL / PSE …"></div>
+            <div><label>警示语（可选）</label><input data-label="warn" placeholder="⚠ 危险电压（如适用）"></div>
+          </div>
+          <p class="peak-note">铭牌常用可擦除油墨/标签纸打印，需耐温、耐磨、不易脱落。</p>
+        </div>
+        <div>
+          <p class="peak-note" style="margin-top:0"><b>预览（实际排版按铭牌尺寸重排）：</b></p>
+          <div class="label-preview" id="labelPreview"></div>
+        </div>
       </div>
-      <p class="peak-note">标签还要注意：字体/颜色对比、不可擦除性、位置可见；多语言警示按目标市场要求。</p>
+      <div class="grid grid-2" style="margin-top:12px">
+        <div class="card" style="padding:12px 14px">
+          <p class="peak-note" style="margin-top:0"><b>铭牌必备要素（按产品标准要求组合）：</b></p>
+          <ul style="font-size:12.5px;line-height:1.8;margin:4px 0 0">
+            <li><b>制造商 / 商标</b>、产品名称与<b>型号</b>；</li>
+            <li><b>额定电压 / 电流 / 功率 / 频率</b>（单位正确：V~ / A / W / Hz）；</li>
+            <li>II 类符号（回字 □）、IP 代码（如 IP44）、CE 等标志位；</li>
+            <li>电源类：输入/输出规格、极性；电池类：Wh/容量；</li>
+            <li>生产日期/批次（可追溯）、产地 Made in；</li>
+            <li>警示语与禁止符号（如需要工具打开、防拆等）。</li>
+          </ul>
+        </div>
+        <div class="card" style="padding:12px 14px">
+          <p class="peak-note" style="margin-top:0"><b>常见错误：</b></p>
+          <ul style="font-size:12.5px;line-height:1.8;margin:4px 0 0">
+            <li>功率单位写成 W 但实际是 VA、电流功率互抄；</li>
+            <li>II 类符号、CE 标志比例/方向不合规（CE 字高 ≥5mm 量级，按指令要求）；</li>
+            <li>油墨可擦、贴纸起翘 → 耐擦性测试不合格；</li>
+            <li>铭牌位置被遮挡或不可见（装在底面的要确认可读）；</li>
+            <li>多语言市场漏当地警示语（如 EU 多语种说明书要求）。</li>
+          </ul>
+          <p class="peak-note" style="margin:8px 0 0">更多细节见 <a href="./labels.html">标签与说明书</a>、<a href="knowledge-detail.html?id=certprocess">认证流程知识卡</a>。</p>
+        </div>
+      </div>
     </div>
 
     <div class="tpl">
       <h2>🧪 送样测试清单（实验室前核对）</h2>
       <ul style="font-size:14px;line-height:1.9">
-        <li>样机数量（按标准：常见 3–5 台，含不同配置）；</li>
-        <li>电路图 + PCB 布局图（注明关键距离）；</li>
-        <li>关键元器件清单（CDF）及证书复印件；</li>
-        <li>产品规格书 / 使用说明书；</li>
-        <li>电源/输入规格确认（电压、频率、插头）；</li>
-        <li>特殊要求：预测试记录、整改历史。</li>
+        <li>样机数量（按标准：常见 3–5 台，含不同配置/功率档）；</li>
+        <li>电路图 + PCB 布局图（标注关键距离与绝缘路径）；</li>
+        <li>关键元器件清单（CDF，与实物一致）+ 证书复印件；</li>
+        <li>产品规格书 / 使用说明书（语言随目标市场）；</li>
+        <li>电源/输入规格确认（电压、频率、插头制式）；</li>
+        <li>铭牌/标签样稿（认证机构会核对内容与位置）；</li>
+        <li>特殊要求：预测试记录、整改历史、风险分析。</li>
       </ul>
     </div>
 
-    <p class="cite-note">模板为教学参考，正式文件以认证机构要求和最新标准为准；模板填写内容保存在本地浏览器（不提交任何服务器）。</p>
+    <div class="tpl">
+      <h2>📁 认证技术文件包（一次备齐）</h2>
+      <p class="section-sub">工厂检查 / 市场监管 / 客户审厂时，这六样缺一不可：</p>
+      <table style="width:100%;font-size:13.5px">
+        <thead><tr><th style="text-align:left">文件</th><th style="text-align:left">要点</th></tr></thead>
+        <tbody>
+          <tr><td>① CDF 关键元器件清单</td><td>与实物/证书一致，证书在有效期内（本页可编辑）</td></tr>
+          <tr><td>② 符合性声明 DoC</td><td>签字人、指令与标准版本、保留 ≥10 年（本页可编辑）</td></tr>
+          <tr><td>③ 测试报告</td><td>安全/EMC/能效，报告与产品配置对应</td></tr>
+          <tr><td>④ 图纸与规格书</td><td>电路图、PCB、结构图、说明书</td></tr>
+          <tr><td>⑤ 元件证书复印件</td><td>与 CDF 逐条对应</td></tr>
+          <tr><td>⑥ 变更与追溯记录</td><td>换料/换厂/改版的评估记录、批次追溯</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="cite-note">模板为教学参考，正式文件以认证机构要求和最新标准/指令为准；填写内容保存在本地浏览器（数据备份页可导出/合并，不提交任何服务器）。</p>
   </main>
 
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
@@ -118,20 +224,7 @@
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/glossary-tip.js"></script>
   <script src="../assets/js/ux.js"></script>
-  <script>
-    // 复制模板文本
-    document.querySelectorAll("[data-copy]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var id = b.getAttribute("data-copy");
-        var el = document.getElementById(id);
-        if (!el) return;
-        var txt = el.innerText || el.textContent;
-        function fin() { if (window.AnGuiUX) window.AnGuiUX.toast("模板已复制"); }
-        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt).then(fin).catch(fin); }
-        else { var ta = document.createElement("textarea"); ta.value = txt; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); fin(); }
-      });
-    });
-  </script>
+  <script src="../assets/js/templates-editor.js"></script>
   <nav class="bottom-nav" aria-label="底部导航">
     <a href="../index.html">🏠<span>首页</span></a>
     <a href="./learn.html">📚<span>学习</span></a>

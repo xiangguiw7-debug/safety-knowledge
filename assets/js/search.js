@@ -112,7 +112,7 @@ var SEARCH_INDEX = [
   { t: "电路设计安规检查表", d: "6 类 24 项电路自查：保险丝/隔离/Y电容/限流/泄放，可打勾导出", u: "pages/circuit-checklist.html", k: "电路 检查表 自查 保险丝 隔离 Y电容 限流 泄放 导出" },
   { t: "电源设计安规专题", d: "初次级隔离链路、变压器/Y 电容、浪涌三级防护、保险丝 I²t、宽压设计与常见坑", u: "pages/power-design.html", k: "电源 设计 隔离 变压器 Y电容 浪涌 三级防护 保险丝 I2t 宽压" },
   { t: "65W 适配器完整计算案例", d: "间隙 4.0 / 爬电 6.4 / 耐压 3000V AC / 保险丝 1.25-1.6A / Y≤3.3nF 八步推导 + 结果汇总", u: "pages/case-65w.html", k: "65W 适配器 计算 案例 间隙 爬电 耐压 保险丝 Y电容 电源" },
-  { t: "技术文件模板（CDF/DoC/铭牌）", d: "关键件清单 CDF、CE 符合性声明 DoC、铭牌排版与送样清单，可复制打印", u: "pages/templates.html", k: "模板 CDF DoC 符合性声明 铭牌 技术文件 送样 清单 打印" }
+  { t: "技术文件模板（CDF/DoC/铭牌）", d: "CDF 关键元器件清单可编辑（增删行/导出 CSV/自动保存）、CE DoC 符合性声明、铭牌实时预览、送样与技术文件包清单，可打印", u: "pages/templates.html", k: "模板 CDF DoC 符合性声明 铭牌 技术文件 送样 清单 打印 关键元器件 编辑" }
 ];
 
 function syncSearchActive() {

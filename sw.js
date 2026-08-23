@@ -28,6 +28,7 @@ var CORE_ASSETS = [
   "./assets/js/spaced-review.js",
   "./assets/js/quiz-interview.js",
   "./assets/js/export-data.js",
+  "./assets/js/templates-editor.js",
   "./assets/js/knowledge-tools-links.js",
   "./assets/icons/icon-192.png", "./assets/icons/icon-512.png",
   "./assets/lib/leaflet/leaflet.js",
