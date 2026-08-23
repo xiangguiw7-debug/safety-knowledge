@@ -105,7 +105,7 @@ var SEARCH_INDEX = [
   { t: "IoT 网络安全", d: "EN 303 645、CRA 与安全设计", u: "pages/cybersecurity.html", k: "IoT 网络安全 EN303645 CRA SBOM 固件" },
   { t: "更新日志", d: "版本记录 v1.0/v1.1/v1.1.2", u: "pages/changelog.html", k: "更新 日志 版本 记录 changelog" },
   { t: "新行业：IoT/机器人/充电桩/无人机/电动车", d: "智能家居、AGV、充电桩、无人机、电动自行车", u: "pages/industries.html", k: "IoT 机器人 AGV 充电桩 无人机 电动车 滑板车" },
-  { t: "欧盟 ErP 能效指令专题", d: "ErP 生态设计：30 秒读懂、CE 三张入场券、按产品速查、待机/空载/平均效率数字、65W 演算、合规路径与 FAQ", u: "pages/erp.html", k: "ErP 能效 生态设计 2009/125 2019/1782 2023/826 待机功耗 空载 平均效率 ESPR 数字产品护照 DPP 外部电源 适配器 能效标签" },
+  { t: "欧盟 ErP 能效指令专题", d: "ErP 生态设计：30 秒读懂、CE 三张入场券、按产品速查、待机/空载/平均效率数字、65W 演算、合规路径与 FAQ", u: "pages/erp.html", k: "ErP 能效 生态设计 2009/125 2019/1782 2023/826 待机功耗 空载 平均效率 ESPR 数字产品护照 DPP 外部电源 适配器 能效标签 灯具 照明 光源 2019/2020 2019/2015 EPREL LED" },
   { t: "外贸合规速查（业务员版）", d: "10 个目标市场准入速查：需要的认证、周期费用、样机数量与常见坑", u: "pages/export-compliance.html", k: "外贸 合规 出口 业务员 市场 认证 周期 费用 样机 CCC CE FCC PSE KC" },
   { t: "结构设计安规检查表", d: "6 类 29 项结构自查：可触及/绝缘/防火/机械/距离，可打勾导出", u: "pages/structural-checklist.html", k: "结构 检查表 自查 可触及 绝缘 防火 机械 间距 导出" },
   { t: "电路设计安规检查表", d: "6 类 24 项电路自查：保险丝/隔离/Y电容/限流/泄放，可打勾导出", u: "pages/circuit-checklist.html", k: "电路 检查表 自查 保险丝 隔离 Y电容 限流 泄放 导出" },

@@ -54,7 +54,8 @@ var INDUSTRIES = [
       "IEC 60598-1 / GB 7000.1（灯具通用安全要求）",
       "IEC 61347 / GB 19510（灯控制装置，含 LED 驱动）",
       "IEC 62471 / GB/T 20145（光生物安全）",
-      "IEC 60529 / GB/T 4208（防护等级 IP）"
+      "IEC 60529 / GB/T 4208（防护等级 IP）",
+      "(EU) 2019/2020 + 2019/2015（欧盟 ErP 能效与能效标签，出口欧盟）"
     ],
     topics: [
       { text: "电气间隙（隔离驱动初次级）", href: "clearance.html" },
@@ -63,7 +64,8 @@ var INDUSTRIES = [
       { text: "户外灯具的雷击浪涌防护", href: "surge.html" },
       { text: "温升与材料耐热耐燃", href: "knowledge.html#temperature" },
       { text: "防尘防水等级（IP）", href: "knowledge.html#ip" },
-      { text: "蓝光 / 紫外光生物安全", href: "knowledge.html#optical" }
+      { text: "蓝光 / 紫外光生物安全", href: "knowledge.html#optical" },
+      { text: "欧盟 ErP 能效与能效标签（灯具实操）", href: "erp.html#lighting-erp" }
     ],
     tests: ["介电强度", "泄漏电流", "温升", "IP 测试", "浪涌", "光生物安全"],
     pitfalls: [
@@ -71,7 +73,7 @@ var INDUSTRIES = [
       "户外灯具没有 SPD，雷击浪涌损坏驱动",
       "儿童灯具忽视蓝光危害与可触及部件温升"
     ],
-    links: [["电气间隙", "clearance.html"], ["爬电距离", "creepage.html"], ["雷击浪涌", "surge.html"], ["耐压测试", "hipot.html"]]
+    links: [["电气间隙", "clearance.html"], ["爬电距离", "creepage.html"], ["雷击浪涌", "surge.html"], ["耐压测试", "hipot.html"], ["ErP 能效专题", "erp.html"]]
   },
   {
     id: "consumer",
