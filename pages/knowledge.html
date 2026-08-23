@@ -1506,6 +1506,29 @@
             <tr><td><b>IP69K</b></td><td>高温高压喷射清洗</td><td>12.5mm 喷嘴，<b>80±5°C</b> 热水、<b>8000–10000 kPa</b>（80–100 bar）、14–16 L/min、距离 100–150mm，0°/30°/60°/90° 四位置各 30s（共 120s），样品台转速约 5 r/min</td><td><b>食品饮料加工、制药、屠宰/畜牧、餐饮设备</b>——需反复高温高压冲洗消毒的行业</td></tr>
           </tbody>
         </table></div>
+
+        <h4>防尘有没有 K 系列？没有——K 只作用于防水第二位</h4>
+        <p>ISO 20653 / DIN 40050-9 的 K 只加在<b>第二位（防水数字）</b>后面：4K / 6K / 9K 三档。第一位防尘仍按 IEC 60529 的 0–6（5 防尘、6 尘密），<b>不存在"防尘 K"</b>。因此车辆/工业部件的典型写法是 <code>IP6K9K</code> = 第一位 6（尘密，无 K）＋ 第二位 9K（高压清洗），K 永远跟在防水数字后；<b>7K / 8K 不存在</b>（浸水数字不叠加 K）。</p>
+        <h4>常见 K 系列组合</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>组合</th><th>拆解</th><th>典型应用</th></tr></thead>
+          <tbody>
+            <tr><td>IPX4K</td><td>第一位未指定 ＋ 4K 加压摆管淋雨</td><td>车辆部件淋雨强化考核</td></tr>
+            <tr><td>IPX6K</td><td>第一位未指定 ＋ 6K 高速水流</td><td>高压水枪清洗（洗车/市政）</td></tr>
+            <tr><td>IP66K</td><td>尘密 ＋ 6K 高速水流</td><td>车规部件、户外机柜</td></tr>
+            <tr><td>IP69K（IPX9K）</td><td>尘密/未指定 ＋ 9K 高温高压清洗</td><td><b>食品饮料、制药、畜牧</b>最常用</td></tr>
+            <tr><td>IP66 ＋ IP69K</td><td>行业惯例双宣称（尘密 ＋ 抗高压冲洗）</td><td>食品机械铭牌常见写法</td></tr>
+          </tbody>
+        </table></div>
+        <h4>K 系列 vs 普通防水的差异（压力 / 温度 / 距离）</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>对比</th><th>普通档位（IEC 60529）</th><th>K 档位（ISO 20653）</th><th>关键差异</th></tr></thead>
+          <tbody>
+            <tr><td>4 vs 4K</td><td>摆管溅水，每孔约 0.07 L/min、常压</td><td>摆管 ＋ <b>400 kPa</b>，每孔约 0.6 L/min</td><td>压力大约 9 倍</td></tr>
+            <tr><td>6 vs 6K</td><td>12.5mm 喷嘴、100 L/min、压力较低</td><td><b>6.3mm 喷嘴、75 L/min、压力更高</b>，2.5–3m</td><td>口径小但单位面积冲击力大</td></tr>
+            <tr><td>7/8 vs 9K</td><td>浸水（1m/30min 或约定更深更久）</td><td><b>80±5°C 热水、8000–10000 kPa</b>、100–150mm 近距离四方位喷射</td><td>浸水 vs 高温高压冲洗，机理完全不同</td></tr>
+          </tbody>
+        </table></div>
         <ul>
           <li><b>IP69K ≠ 数字叠加</b>：不是 6 + 9 的组合，而是一个独立的<b>高温高压冲洗试验</b>；通过 IP69K 不代表通过 IPX8（浸水）或 IP66——试验对象完全不同；</li>
           <li><b>书写</b>：第二位写 K 时形如 IP69K / IPX9K，或与 6 组合成 IP66K 等；依据标准写 ISO 20653，<b>不要与 IEC 60529 的 IPX8 直接比较</b>；</li>
