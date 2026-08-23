@@ -924,7 +924,10 @@ var IP_WATER = {
   5: { n: "喷水", d: "任意方向喷水无有害影响" },
   6: { n: "强力喷水", d: "任意方向强力喷水无有害影响" },
   7: { n: "短时浸水", d: "1m 深浸水 30min 无有害影响" },
-  8: { n: "持续浸水", d: "按约定更深/更久浸水无有害影响" }
+  8: { n: "持续浸水", d: "按约定更深/更久浸水无有害影响" },
+  "4K": { n: "加压摆管淋雨", d: "400 kPa 加压摆管淋雨（ISO 20653），车辆部件强化淋雨" },
+  "6K": { n: "高速水流", d: "6.3mm 喷嘴 75 L/min 高速水流（ISO 20653），高压水枪清洗" },
+  "9K": { n: "高温高压清洗", d: "80±5°C、8000–10000 kPa 高压热水四方位喷射（ISO 20653，即 IP69K），食品/制药行业冲洗消毒" }
 };
 var IP_SCENES = [
   { id: "internal", label: "内部模块", s: 0, w: 0, note: "封装在设备/机柜内部，外壳不直接暴露。" },
@@ -946,7 +949,7 @@ var IP_AUX = { "": "无", A: "A · 手背", B: "B · 手指", C: "C · 工具", 
 var IP_SUPP = { "": "无", H: "H · 高压设备", M: "M · 防水试验时运动", S: "S · 防水试验时静止", W: "W · 特定气候" };
 function updateIp() {
   var s = Number($("ipSolid").value);
-  var w = Number($("ipWater").value);
+  var w = $("ipWater").value; // 字符串：0-8 或 4K/6K/9K
   var aux = $("ipAux") ? $("ipAux").value : "";
   var supp = $("ipSupp") ? $("ipSupp").value : "";
   $("ipResult").textContent = "IP" + s + w + aux + supp;

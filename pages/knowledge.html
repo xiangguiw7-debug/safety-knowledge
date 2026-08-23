@@ -1494,7 +1494,25 @@
             <tr><td>8</td><td>连续浸水</td><td>深度与时间由制造商规定，通常 >1m</td><td>水下设备（必须写明条件）</td></tr>
           </tbody>
         </table></div>
-        <p class="note" style="color:var(--muted);font-size:13px">IEC 60529 本身只定义到 IPX8；高压高温喷水（IPX9 / IP69K）通常按 ISO 20653 / DIN 40050-9 评定，标注时要写明依据标准。</p>
+        <p class="note" style="color:var(--muted);font-size:13px">IEC 60529 本身只定义到 IPX8；下表 K 系列（加压/高速/高温高压）通常按 <b>ISO 20653 / DIN 40050-9</b> 评定，标注时要写明依据标准。</p>
+
+        <h3>K 系列：加压 / 高速 / 高温高压（IPX4K、IPX6K、IP69K）</h3>
+        <p><b>是什么：</b>K 系列是面向<b>道路车辆部件与特殊行业</b>的增强防水试验（ISO 20653 / DIN 40050-9），不是 IEC 60529 的扩展档位，数字加 K 表示试验更严苛。</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>等级</th><th>试验名称</th><th>常见试验条件（教学参考）</th><th>典型场景</th></tr></thead>
+          <tbody>
+            <tr><td><b>IPX4K</b></td><td>加压摆管淋雨</td><td>摆管淋雨 + <b>400 kPa</b> 压力，每孔约 0.6 L/min，喷水 90° 弧段，约 10min</td><td>车辆底盘/部件淋雨强化考核</td></tr>
+            <tr><td><b>IPX6K</b></td><td>高速水流喷射</td><td>6.3mm 喷嘴，<b>75 L/min</b>，距离约 2.5–3m，按表面积每 m² ≥1min</td><td>高压水枪清洗（洗车/市政）</td></tr>
+            <tr><td><b>IP69K</b></td><td>高温高压喷射清洗</td><td>12.5mm 喷嘴，<b>80±5°C</b> 热水、<b>8000–10000 kPa</b>（80–100 bar）、14–16 L/min、距离 100–150mm，0°/30°/60°/90° 四位置各 30s（共 120s），样品台转速约 5 r/min</td><td><b>食品饮料加工、制药、屠宰/畜牧、餐饮设备</b>——需反复高温高压冲洗消毒的行业</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li><b>IP69K ≠ 数字叠加</b>：不是 6 + 9 的组合，而是一个独立的<b>高温高压冲洗试验</b>；通过 IP69K 不代表通过 IPX8（浸水）或 IP66——试验对象完全不同；</li>
+          <li><b>书写</b>：第二位写 K 时形如 IP69K / IPX9K，或与 6 组合成 IP66K 等；依据标准写 ISO 20653，<b>不要与 IEC 60529 的 IPX8 直接比较</b>；</li>
+          <li><b>行业惯例</b>：食品机械常宣称 IP66 + IP69K（尘密 + 抗高压冲洗）；结构上要密封圈、不锈钢/耐温材料、排水设计一起满足；</li>
+          <li><b>别漏测</b>：80–100 bar 下密封圈可能被冲开、泄压阀/透气阀要选防水透气型，样品阶段就要按 IP69K 实测，不能只看图纸。</li>
+        </ul>
+        <p class="howto">怎么查：先确认产品行业（道路车辆按 ISO 20653；食品/制药按客户或行业规范引 ISO 20653），再按对应等级做试验；IP 工具里可选 4K/6K/9K 对照。</p>
 
                 <h3>IP 代码完整结构：字母加在哪里</h3>
         <div class="callout callout-info">
