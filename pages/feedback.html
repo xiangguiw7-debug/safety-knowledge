@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
   <title>纠错反馈 - 安规与可靠性知识课堂</title>
-  <meta name="description" content="发现内容错误或想提建议？填写表单，用邮件客户端发送给我们。">
+  <meta name="description" content="发现内容错误或想提建议？填写表单一键发送到站长邮箱 1647138994@qq.com，也支持复制手动发送。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
@@ -35,7 +35,7 @@
     <div class="page-head">
       <p class="crumb"><a href="../index.html">首页</a> / 纠错反馈</p>
       <h1>纠错反馈</h1>
-      <p class="lead">本站靠教学简化值支撑，最需要你们帮忙发现错误。填完点“生成反馈邮件”会调用你的邮件客户端。</p>
+      <p class="lead">本站靠教学简化值支撑，最需要你们帮忙发现错误。填完点「📮 直接发送」即可投递到站长邮箱 <b>1647138994@qq.com</b>；也支持复制手动发送或邮件客户端。</p>
     </div>
 
     <div class="card">
@@ -58,11 +58,15 @@
         <label for="fbBody">问题描述（尽量具体，最好附上你认为正确的依据）</label>
         <textarea id="fbBody" rows="6" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--fg);font-family:inherit;font-size:14px;resize:vertical" placeholder="例如：间隙速查表中 2500V 的取值与 IEC 60664-1 某版本不一致，应为……"></textarea>
       </div>
-      <p style="margin-top:12px"><button type="button" class="btn btn-primary" id="fbSend">生成反馈邮件</button></p>
-      <p class="peak-note">提交后会在你的邮件客户端打开一封已填好的邮件；如果你配置了默认邮件程序，直接发送即可。</p>
+      <p style="margin-top:12px">
+        <button type="button" class="btn btn-primary" id="fbSend">📮 直接发送到站长邮箱</button>
+        <button type="button" class="btn" id="fbCopy">📋 复制内容，手动发送</button>
+        <button type="button" class="btn" id="fbMail">📧 用邮件客户端打开</button>
+      </p>
+      <p class="peak-note" id="fbStatus" style="font-weight:600"></p>
+      <p class="peak-note">📮 直接发送：走表单转发服务投递到站长邮箱 <b>1647138994@qq.com</b>。<b>首次使用</b>该邮箱会收到一封确认邮件（发件人 formsubmit.co），点一次里面的确认链接激活后，之后的反馈就会自动送达。</p>
     </div>
   </main>
-
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
@@ -72,14 +76,75 @@
   </footer>
 
   <script>
-    document.getElementById("fbSend").addEventListener("click", function () {
-      var page = document.getElementById("fbPage").value || "未填写";
+  (function () {
+    "use strict";
+    var FB_EMAIL = "1647138994@qq.com";
+    function getVals() {
+      var page = document.getElementById("fbPage").value.trim() || "（未填写）";
       var type = document.getElementById("fbType").value;
-      var body = document.getElementById("fbBody").value;
-      var subject = encodeURIComponent("[安规与可靠性知识课堂] " + type + "：" + page);
-      var text = encodeURIComponent("页面：" + page + "\n类型：" + type + "\n\n" + body);
-      location.href = "mailto:angui-feedback@example.com?subject=" + subject + "&body=" + text;
+      var body = document.getElementById("fbBody").value.trim();
+      return { page: page, type: type, body: body };
+    }
+    function status(msg, ok) {
+      var s = document.getElementById("fbStatus");
+      if (!s) return;
+      s.textContent = msg;
+      s.style.color = ok ? "#1d7a46" : "#b3261e";
+    }
+    function toast(m) { if (window.AnGuiUX && window.AnGuiUX.toast) window.AnGuiUX.toast(m); }
+    function copyText(t, msg) {
+      function fin() { toast(msg); }
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(fin).catch(fin); }
+      else { var ta = document.createElement("textarea"); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); fin(); }
+    }
+
+    // ① 直接发送：FormSubmit AJAX 转发到站长邮箱
+    document.getElementById("fbSend").addEventListener("click", function () {
+      var v = getVals();
+      status("发送中…", true);
+      fetch("https://formsubmit.co/ajax/" + FB_EMAIL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: "[安规与可靠性知识课堂] " + v.type + "：" + v.page,
+          _template: "table",
+          _captcha: "false",
+          "所在页面": v.page,
+          "反馈类型": v.type,
+          "问题描述": v.body || "（未填写）"
+        })
+      }).then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data && data.success) {
+            status("✅ 已提交，站长将收到邮件。若这是第一次使用，请到 1647138994@qq.com 收件箱打开确认邮件（发件人 formsubmit.co）并点击激活链接。", true);
+          } else {
+            status("❌ 提交失败，请改用「复制内容，手动发送」或「邮件客户端」通道。", false);
+          }
+        })
+        .catch(function () {
+          status("❌ 网络发送失败（可能无外网），请改用「复制内容，手动发送」或「邮件客户端」通道。", false);
+        });
     });
+
+    // ② 复制内容，手动发送
+    document.getElementById("fbCopy").addEventListener("click", function () {
+      var v = getVals();
+      var text = "安规与可靠性知识课堂 · 纠错反馈\n收件邮箱：" + FB_EMAIL + "\n" +
+        "页面：" + v.page + "\n类型：" + v.type + "\n\n" + v.body +
+        "\n\n（复制本内容，粘贴到任意邮件发送给 " + FB_EMAIL + " 即可）";
+      copyText(text, "反馈内容已复制，粘贴到邮件发送即可");
+      status("已复制。打开任意邮箱（如 QQ 邮箱）新建邮件，收件人 " + FB_EMAIL + "，粘贴后发送。", true);
+    });
+
+    // ③ 邮件客户端（mailto，已填好收件人）
+    document.getElementById("fbMail").addEventListener("click", function () {
+      var v = getVals();
+      var subject = encodeURIComponent("[安规与可靠性知识课堂] " + v.type + "：" + v.page);
+      var text = encodeURIComponent("页面：" + v.page + "\n类型：" + v.type + "\n\n" + v.body);
+      location.href = "mailto:" + FB_EMAIL + "?subject=" + subject + "&body=" + text;
+      status("若已弹出邮件客户端则直接发送；若没反应，说明本机未配置邮件客户端，请用「直接发送」或「复制内容」通道。", false);
+    });
+  })();
   </script>
   <script src="../assets/js/theme.js"></script>
   <script src="../assets/js/main.js"></script>
