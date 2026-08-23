@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <title>欧盟 ErP 能效指令 · 专题 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="ErP 能效指令（2009/125/EC）专题：为什么管、在 CE 版图里的位置、按产品速查表、关键指标数字、合规路径与业务员 FAQ，附 ESPR/数字产品护照前瞻。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .erp-q { font-weight: 650; }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .howto { font-size: 13px; color: var(--muted); background: var(--card-2); border-left: 3px solid var(--border); padding: 8px 12px; border-radius: 0 8px 8px 0; }
+    .ml-flow { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ml-step { display: flex; flex-direction: column; gap: 4px; flex: 1 1 150px; min-width: 130px; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--fg); }
+    .ml-num { font-size: 12px; font-weight: 700; color: var(--accent); }
+    .ml-step h3 { font-size: 14px; margin: 0; }
+    .ml-step p { font-size: 12.5px; color: var(--muted); margin: 0; }
+  </style>
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html" class="active">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./certification.html">认证</a> / ErP 能效指令专题</p>
+      <h1>欧盟 ErP 能效指令 · 30 秒读懂</h1>
+      <p class="lead"><b>ErP（Ecodesign 2009/125/EC）是欧盟对产品「能耗」的生态设计法规。</b>一句话记住：<b>安规是「安全体检」，EMC 是「电磁体检」，ErP 是「能耗体检」——三者并列，都是产品进欧盟的 CE 入场券，缺一张都进不去。</b></p>
+    </div>
+
+    <h2 class="section-title">① ErP 是什么：三个要点</h2>
+    <div class="grid grid-3">
+      <div class="card"><h3>管什么</h3><p>产品在全生命周期里的<b>能耗表现</b>：待机/关机功耗、满载效率、空载功耗、待机功耗上限等。不管安全、不管电磁——那是 LVD 和 EMC 的事。</p></div>
+      <div class="card"><h3>谁要管</h3><p>出口欧盟的<b>用电产品</b>：适配器/充电器、家电、照明、显示器、电机风机、机房设备等，按产品类别适用不同「实施法规」。多数由<b>厂商自评估</b>，不需要公告机构。</p></div>
+      <div class="card"><h3>不合规会怎样</h3><p>海关和市场监督会抽查技术文件；不合规轻则<b>下架、召回、罚款</b>，重则影响整个批次出货。它和安规一样是硬门槛，不是可选项。</p></div>
+    </div>
+
+    <h2 class="section-title">② 为什么欧盟要管（理解了才记得住）</h2>
+    <div class="card">
+      <p>三个原因，按重要程度排：</p>
+      <ul>
+        <li><b>能耗大头在使用阶段</b>：一台家电/电源，原材料和制造只占全生命周期能耗的一小部分，<b>80% 左右都发生在用户插着电使用的几年里</b>。设计阶段定下的效率，决定了它一辈子的耗电。</li>
+        <li><b>欧盟的减排承诺</b>：EU 有明确的碳中和/减排目标，从「产品源头设计」卡能耗，比事后治理便宜得多。</li>
+        <li><b>顺便帮消费者省钱</b>：更低的待机功耗和更高效率，折算成电费是消费者看得见的实惠，也是欧盟推这套法规的民意基础。</li>
+      </ul>
+      <p class="howto">理解角度：ErP 不是「多一张证书」，而是<b>产品设计阶段就要算进去的能效红线</b>——所以它和安规一样，越早规划越省钱，最后才改最贵。</p>
+    </div>
+
+    <h2 class="section-title">③ ErP 在 CE 版图里的位置</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>CE 三大支柱</th><th>管什么</th><th>典型法规/标准</th><th>谁负责判定</th></tr></thead>
+      <tbody>
+        <tr><td><b>LVD 低电压指令</b>（安全）</td><td>防触电、防火、机械等安全</td><td>IEC 60335 / 62368 / 60601 等安全标准</td><td>多为自评估（DoC），高风险需公告机构</td></tr>
+        <tr><td><b>EMC 电磁兼容</b></td><td>不干扰别人、不怕别人干扰</td><td>EN 55032 / 55035、IEC 61000-4-x</td><td>自评估（DoC）</td></tr>
+        <tr><td><b>ErP 能效生态设计</b></td><td>能耗表现（效率/待机/空载）</td><td>(EU) 2019/1782、2023/826 等实施法规</td><td>厂商自评估，通常与 LVD/EMC 一并准备</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout callout-warn">
+      <strong>别和「能效标签」搞混</strong>
+      <p>ErP 是<b>最低门槛</b>：不达标不能卖（类似安规不合格不能上市）。能效标签（Energy Label，EU 2017/1369）是<b>等级展示</b>：A–G 让消费者挑更省电的款式。门槛和标签是两个不同要求，出口家电/照明/显示器时两者常常都要做。</p>
+    </div>
+
+    <h2 class="section-title">④ 按产品速查表（业务员版核心）</h2>
+    <p class="section-sub">先找你的产品在哪一行，再看关键指标和「谁做」。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产品类别</th><th>适用实施法规</th><th>关键指标（一句话）</th><th>谁做</th></tr></thead>
+      <tbody>
+        <tr><td>外部电源 / 适配器 / 充电器</td><td>(EU) 2019/1782</td><td>空载功耗 ≤ 0.1W；四档负载平均效率达标</td><td>厂商自评估（测试报告）</td></tr>
+        <tr><td>待机 / 关机设备（几乎一切用电产品）</td><td>(EU) 2023/826</td><td>待机与关机 ≤ 0.5W；联网待机 ≤ 2W（2025 年起）</td><td>厂商自评估</td></tr>
+        <tr><td>光源 / 灯具</td><td>(EU) 2019/2020 + 能效标签 2019/2015</td><td>光效、待机功耗、显色指数等</td><td>自评估 + 能效标签</td></tr>
+        <tr><td>电子显示器</td><td>(EU) 2019/2021 + 标签 2019/2013</td><td>待机功耗、能效指数（EEI）</td><td>自评估 + 能效标签</td></tr>
+        <tr><td>冰箱 / 洗衣机 / 洗碗机等家电</td><td>(EU) 2019/2019、2019/2014、2019/2017 等</td><td>最低能效（MEPS）+ 能效等级</td><td>自评估 + 能效标签</td></tr>
+        <tr><td>电机 / 风机 / 泵</td><td>(EU) 2019/1781 等</td><td>能效等级（如 IE2/IE3）</td><td>厂商自评估</td></tr>
+      </tbody>
+    </table></div>
+    <p class="cite-note">法规号与指标为教学参考，正式适用性以法规原文及其修订为准；同一产品可能同时适用多个实施法规（如适配器既适用 2019/1782，也适用 2023/826 待机）。</p>
+
+    <h2 class="section-title">⑤ 关键指标「看得懂的数字」（工程师要点）</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>外部电源 (EU) 2019/1782</h3>
+        <ul>
+          <li><b>空载功耗 ≤ 0.1W</b>：插着不充电时的「耗电」，2020 年起执行的收紧值（旧法规是 0.3W）；</li>
+          <li><b>平均效率</b>：10% / 25% / 50% / 75% / 100% 五档负载下实测效率的算术平均，按输出功率分档有下限（具体查法规附件 II 表 1）；</li>
+          <li><b>设计含义</b>：同步整流、低损耗待机电路、合适的开关频率是达标关键——和安规的 Y 电容、变压器设计一起规划。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>待机/关机 (EU) 2023/826</h3>
+        <ul>
+          <li><b>关机模式 ≤ 0.5W</b>：完全关掉的功耗；</li>
+          <li><b>待机模式 ≤ 0.5W</b>：只保留唤醒功能的功耗（2025 年 5 月起适用）；</li>
+          <li><b>联网待机 ≤ 2W</b>：保持网络连接时的功耗上限；</li>
+          <li><b>设计含义</b>：待机功耗大头常来自电源自身的「空载损耗」——低待机 IC、副边反馈、轻载降频都直接相关。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="section-title">⑥ 65W 适配器演算：平均效率怎么算</h2>
+    <div class="card">
+      <p>拿站内 <a href="./case-65w.html">65W 适配器计算案例</a> 的电源举例，ErP 要求测五档负载的效率并取平均。做法（教学演示）：</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>负载点</th><th>输出功率（实测）</th><th>输入功率（实测）</th><th>效率 = 输出/输入</th></tr></thead>
+        <tbody>
+          <tr><td>100%</td><td>65.0 W</td><td>72.2 W</td><td>90.0%</td></tr>
+          <tr><td>75%</td><td>48.8 W</td><td>54.2 W</td><td>90.0%</td></tr>
+          <tr><td>50%</td><td>32.5 W</td><td>36.1 W</td><td>90.0%</td></tr>
+          <tr><td>25%</td><td>16.3 W</td><td>18.5 W</td><td>88.1%</td></tr>
+          <tr><td>10%</td><td>6.5 W</td><td>7.8 W</td><td>83.3%</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>平均效率 = (90.0 + 90.0 + 90.0 + 88.1 + 83.3) / 5 ≈ 88.3%</b>，再把该值对照 (EU) 2019/1782 附件 II 表 1 中对应输出功率档的下限判定。</p>
+      <p class="howto">注意：上表为<b>演示用的近似值</b>，不是实验室实测；正式判定以法规附件限值 + 认证实验室报告为准。指标相关的安规侧设计（初次级隔离、爬电/间隙、Y 电容）见 <a href="./power-design.html">电源设计安规专题</a>。</p>
+    </div>
+
+    <h2 class="section-title">⑦ 合规路径：5 步走完</h2>
+    <div class="ml-flow" style="display:flex;flex-wrap:wrap;gap:8px">
+      <div class="ml-step"><span class="ml-num">1</span><h3>确认适用法规</h3><p>按产品类别查实施法规；不确定就问认证机构或按 CN 代码查。</p></div>
+      <div class="ml-step"><span class="ml-num">2</span><h3>对照指标自评 / 送测</h3><p>多数 ErP 允许厂商自评估；测试通常与 LVD/EMC 同批样机一起做，省时省钱。</p></div>
+      <div class="ml-step"><span class="ml-num">3</span><h3>准备技术文件</h3><p>测试报告 / 效率计算书 / 产品规格与铭牌信息，存进 CE 技术文档。</p></div>
+      <div class="ml-step"><span class="ml-num">4</span><h3>出 DoC 声明</h3><p>把 ErP 法规写进符合性声明（可并入 CE DoC，见 <a href="./templates.html">技术文件模板</a>）。</p></div>
+      <div class="ml-step"><span class="ml-num">5</span><h3>贴 CE / 能效标签</h3><p>贴 CE 标志；涉及能效标签的产品按模板印 A–G 标签（见 <a href="./labels.html">标签与说明书</a>）。</p></div>
+    </div>
+
+    <h2 class="section-title">⑧ 业务员常被问的 8 个问题</h2>
+    <div class="card">
+      <p class="erp-q">1. 客户说「要 ErP 报告」，是啥？</p>
+      <p>ErP 是欧盟能效法规，不是「证书」。客户通常要的是能效测试报告或效率计算书（放进 CE 技术文件）。多数产品厂商自评估即可，找测试机构出报告更快更省心。</p>
+      <p class="erp-q">2. ErP 和能效标签 A–G 是一回事吗？</p>
+      <p>不是。ErP 是<b>最低门槛</b>（不达标不能卖），能效标签是<b>等级展示</b>（A–G 让消费者挑）。家电、照明、显示器两类都要。</p>
+      <p class="erp-q">3. 充电器/适配器出口欧盟要不要做 ErP？</p>
+      <p>要。外部电源适用 (EU) 2019/1782，空载功耗 ≤0.1W、平均效率达标，几乎每次出口认证都会连同检查。</p>
+      <p class="erp-q">4. 和中国能效标识、美国 DOE 有什么区别？</p>
+      <p>都是各自市场的<b>强制能效门槛</b>，互不通用：中国能效标识（目录内产品）、美国 DOE（外部电源 VI 级等）、欧盟 ErP。出口到哪就按哪的法规做。</p>
+      <p class="erp-q">5. 周期和费用大概多少？</p>
+      <p>常随 LVD/EMC 一起测，额外增加几天到两周；费用按功率和项目从几百到数千不等（教学量级，以机构报价为准）。</p>
+      <p class="erp-q">6. 只做 CE 安全+EMC，不做 ErP 行不行？</p>
+      <p>不行。ErP 是 CE 合规的一部分，海关和市场监督会抽查技术文件；缺了它 CE 声明不完整，照样可能被拦。</p>
+      <p class="erp-q">7. 待机功耗 0.5W 是什么意思？</p>
+      <p>设备插着电、但没在工作时的功率上限（如电视待机）。2025 年 5 月起按 (EU) 2023/826 执行，联网待机另有 ≤2W 的要求。</p>
+      <p class="erp-q">8. ESPR 和数字产品护照（DPP）是什么，和我有关吗？</p>
+      <p>2024 年欧盟发布新框架法规 (EU) 2024/1781（ESPR），未来几年逐步取代现行 ErP 指令，并引入<b>数字产品护照（DPP）</b>——产品要带一份可扫码查询的数字化合规档案。现阶段出口仍按现行 ErP 法规执行，但新客户询盘可能开始问 DPP，提前把技术文件做规范就是为它打基础。</p>
+    </div>
+
+    <h2 class="section-title">⑨ 前瞻：ESPR 与数字产品护照（2024 新框架）</h2>
+    <div class="callout callout-info">
+      <strong>一句话：ErP 在升级，方向是「更可持续 + 数字化可追溯」</strong>
+      <ul style="margin:8px 0 0">
+        <li><b>(EU) 2024/1781（ESPR）</b>：2024 年 7 月生效的新生态设计框架，将分阶段取代 2009/125/EC，覆盖范围从「能效」扩展到耐久性、可维修性、可回收性等更广的可持续要求；</li>
+        <li><b>数字产品护照（DPP）</b>：未来部分产品需附带数字化合规档案（二维码扫码查看材料、能耗、维修信息等），从电池等品类开始逐步实施；</li>
+        <li><b>对现在的意义</b>：按现行 ErP 做规范技术文件、记录完整测试数据，未来过渡到 ESPR/DPP 时成本最低。</li>
+      </ul>
+    </div>
+
+    <p class="cite-note">本站 ErP 内容为教学参考：法规号、限值与实施日期以欧盟官方公报最新文本为准（官方入口见 <a href="./standards.html">标准文件入口</a>）；与安全/EMC 的组合要求以目标市场为准。外贸合规整体清单用 <a href="./wizard.html">认证向导</a>，能效标签模板见 <a href="./labels.html">标签与说明书</a>。</p>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <nav class="bottom-nav" aria-label="底部导航">
+    <a href="../index.html">🏠<span>首页</span></a>
+    <a href="./learn.html">📚<span>学习</span></a>
+    <a href="./testing.html">🧪<span>测试</span></a>
+    <a href="./certification.html">📄<span>认证</span></a>
+    <a href="./industries.html">🏭<span>行业</span></a>
+    <a href="./quiz.html">✅<span>测验</span></a>
+  </nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>
