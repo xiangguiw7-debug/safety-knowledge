@@ -78,3 +78,27 @@ if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
     }
   });
 })();
+
+/* ===== 回到顶部浮动按钮（长页面用） ===== */
+(function () {
+  "use strict";
+  if (document.getElementById("backTop")) return;
+  var btn = document.createElement("button");
+  btn.id = "backTop";
+  btn.type = "button";
+  btn.textContent = "↑ 顶部";
+  btn.setAttribute("aria-label", "回到顶部");
+  btn.style.cssText = "position:fixed;right:16px;bottom:66px;z-index:900;display:none;padding:9px 15px;border:none;border-radius:999px;background:var(--accent,#9e2b25);color:#fff;font-size:13px;font-family:inherit;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.25)";
+  document.body.appendChild(btn);
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      btn.style.display = window.scrollY > 500 ? "block" : "none";
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  btn.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+})();

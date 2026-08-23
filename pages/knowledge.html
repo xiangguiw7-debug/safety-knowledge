@@ -194,6 +194,7 @@
       <p class="lead">按安全因素 / 主题浏览（七大危害 + EMC / 医疗 / 认证 / 通用专项），点击知识主题卡片进入单独详情页查看完整规则（含标准依据、常见误区与前后张导航）。<a class="tag" href="./knowledge-detail.html?id=stdguide" style="margin-left:8px">详情页示例 →</a></p>
     </div>
 
+    <div class="kc-jump" style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 14px"><a class="btn" href="#sec-mainline-tabs">① 学习主线</a><a class="btn" href="#sec-mainline">② 随主线学习</a><a class="btn" href="#sec-milestones">③ 里程碑自测</a><a class="btn btn-primary" href="#kc-grid">④ 知识卡库（直达）</a></div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><input type="search" id="knowledgeSearch" class="knowledge-search" style="flex:1;min-width:240px;margin:0" placeholder="搜索知识卡片：温升 / IP / CTI / 认证 / SELV…" aria-label="搜索知识卡片"><a class="btn no-print" href="./knowledge-print.html" style="white-space:nowrap">🖨 打印全部知识卡（完整内容）</a></div>
 
     <section id="sec-mainline-tabs">
@@ -250,7 +251,7 @@
       <a class="tag" href="#certprocess">认证流程</a>
     </p>
 
-    <div class="knowledge-grid">
+    <div class="knowledge-grid" id="kc-grid">
       <section class="card" id="stdguide" data-hazard="framework">
         <h2>标准结构导读：IEC 标准怎么读</h2>
         <p><b>是什么：</b>IEC 安全标准几乎都遵循同一套骨架。学会这个骨架，任何新标准都能快速定位条款。</p>
