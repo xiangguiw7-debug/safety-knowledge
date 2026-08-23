@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPWR 知识库 V5 | 时间线整合版 · 立讯课程深化</title>
+<style>
+:root{
+  --bg:#0b0914; --card:#171329; --ink:#f2effa; --ink2:#b5aed0; --line:rgba(255,255,255,.13);
+  --c-purple:#b26bff; --c-purple-bg:rgba(178,107,255,.16); --c-purple-ink:#ecd9ff;
+  --c-teal:#2dd4bf; --c-teal-bg:rgba(45,212,191,.14); --c-teal-ink:#c6f7ef;
+  --c-coral:#fb7185; --c-coral-bg:rgba(251,113,133,.14); --c-coral-ink:#ffd9df;
+  --c-pink:#f472b6; --c-pink-bg:rgba(244,114,182,.14); --c-pink-ink:#ffd9ef;
+  --c-blue:#60a5fa; --c-blue-bg:rgba(96,165,250,.14); --c-blue-ink:#cfe5ff;
+  --c-green:#a3e635; --c-green-bg:rgba(163,230,53,.13); --c-green-ink:#e9ffc6;
+  --c-amber:#fbbf24; --c-amber-bg:rgba(251,191,36,.14); --c-amber-ink:#ffedb8;
+  --c-red:#fb5f7a; --c-red-bg:rgba(251,95,122,.14); --c-red-ink:#ffd3db;
+  --c-gray:#a39db8; --c-gray-bg:rgba(163,157,184,.14); --c-gray-ink:#e3def0;
+  --shadow:0 10px 30px -12px rgba(0,0,0,.55);
+  --shadow-lg:0 24px 55px -18px rgba(0,0,0,.72);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;overflow-x:hidden}
+.soft-aurora{position:fixed;inset:0;z-index:0;width:100%;height:100%;pointer-events:none;overflow:hidden}
+.soft-aurora canvas{display:block;width:100%;height:100%}
+body>header,body>section,body>footer{position:relative;z-index:1}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(11,9,20,.78);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:4px;height:58px;overflow-x:auto}
+nav .logo{font-weight:700;font-size:15px;margin-right:14px;white-space:nowrap;letter-spacing:.5px}
+nav .logo i{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--c-red);margin-right:7px;animation:spin 4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+nav a.nl{color:var(--ink2);text-decoration:none;font-size:13px;padding:6px 13px;border-radius:99px;white-space:nowrap;transition:.2s}
+nav a.nl:hover{background:#e100ff;color:#fff}
+nav a.nl.active{background:#e100ff;color:#fff}
+nav a.nl.badge-red{background:var(--c-red-bg);color:var(--c-red-ink);font-weight:600}
+nav a.nl.badge-red.active{background:var(--c-red);color:#fff}
+nav a.nl.badge-blue{background:var(--c-blue-bg);color:var(--c-blue-ink);font-weight:600}
+nav a.nl.badge-blue:hover{background:var(--c-blue);color:#fff}
+
+.hero{padding:80px 0 56px;min-height:560px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,rgba(225,0,255,.16) 0%,rgba(11,9,20,0) 60%)}
+.hero .wrap{position:relative;z-index:2}
+.gradient-waves{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden}
+.gradient-waves canvas{display:block;width:100%;height:100%}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;background:var(--c-red-bg);color:var(--c-red-ink);font-size:13px;font-weight:600;padding:6px 18px;border-radius:99px;margin-bottom:20px;animation:bounceIn .8s cubic-bezier(.2,1.4,.4,1)}
+@keyframes bounceIn{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+.hero .tag .dot{width:8px;height:8px;border-radius:50%;background:var(--c-red);animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{font-size:44px;font-weight:800;letter-spacing:1px;background:linear-gradient(120deg,#f7f7f7 0%,#e100ff 45%,#8b5cf6 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:rise .9s ease both}
+.hero p.sub{color:var(--ink2);max-width:700px;margin:16px auto 0;font-size:15px;animation:rise 1s .1s ease both}
+@keyframes rise{0%{opacity:0;transform:translateY(26px)}100%{opacity:1;transform:translateY(0)}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:42px}
+.stat-note{font-size:12px;color:var(--ink2);margin-top:14px;opacity:.85}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 12px;cursor:pointer;transition:.3s;position:relative;overflow:hidden;animation:rise .7s ease both}
+.stat:nth-child(1){animation-delay:.15s}.stat:nth-child(2){animation-delay:.25s}.stat:nth-child(3){animation-delay:.35s}.stat:nth-child(4){animation-delay:.45s}.stat:nth-child(5){animation-delay:.55s}
+.stat::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(225,0,255,.16),transparent 60%)}
+.stat:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:var(--shadow-lg)}
+.stat b{display:block;font-size:26px;font-weight:800}
+.stat span{font-size:12px;color:var(--ink2)}
+.stat.s1 b{color:var(--c-red)}.stat.s2 b{color:var(--c-amber)}.stat.s3 b{color:var(--c-blue)}.stat.s4 b{color:var(--c-teal)}.stat.s5 b{color:var(--c-purple)}
+
+section{padding:60px 0;scroll-margin-top:72px}
+.sec-head{margin-bottom:28px}
+.sec-head .kicker{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px}
+.sec-head h2{font-size:28px;font-weight:800;letter-spacing:.5px}
+.sec-head p{color:var(--ink2);font-size:14px;margin-top:8px;max-width:680px}
+
+.tl{display:flex;gap:12px;overflow-x:auto;padding:14px 0 24px}
+.tl-item{flex:1;min-width:132px;text-align:center;cursor:pointer;position:relative;padding:40px 10px 14px;background:rgba(24,20,43,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);transition:.25s}
+.tl-item::before{content:"";position:absolute;top:28px;left:0;right:0;height:2px;background:var(--line)}
+.tl-item:first-child::before{left:50%}.tl-item:last-child::before{right:50%}
+.tl-item:hover{transform:translateY(-4px);border-color:var(--c-purple);box-shadow:var(--shadow-lg)}
+.tl-item.on{background:rgba(178,107,255,.16);border-color:var(--c-purple)}
+.tl-item.urgent{border-color:var(--c-red)}
+.tl-dot{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--c-blue);z-index:2;transition:.25s}
+.tl-item:hover .tl-dot{transform:translateX(-50%) scale(1.4)}
+.tl-item.on .tl-dot{background:var(--c-red);border-color:var(--c-red);box-shadow:0 0 0 6px var(--c-red-bg)}
+.tl-item.urgent .tl-dot{border-color:var(--c-red);animation:blink 1.6s infinite}
+.tl-date{display:block;font-weight:700;font-size:14px}
+.tl-label{display:block;font-size:12px;color:var(--ink2);padding:0 6px;margin-top:4px}
+.tl-panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 30px;box-shadow:var(--shadow);animation:rise .4s ease both;border-left:5px solid var(--c-red)}
+.tl-panel h3{font-size:18px;margin-bottom:10px}
+.tl-panel ul{padding-left:22px;font-size:14px;color:var(--ink2)}
+.tl-panel li{margin:5px 0}
+.tl-panel .rel{margin-top:16px}
+.tl-mean{margin:0 0 12px;padding:10px 14px;background:var(--c-red-bg);color:var(--ink);border-radius:10px;font-size:14px;line-height:1.65}.tl-sub{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}.tl-sub .cap{font-size:12px;font-weight:700;color:var(--ink2);letter-spacing:1px}.tl-sub ul{font-size:12.5px;color:var(--ink2);padding-left:18px;margin-top:6px}.tl-sub li{margin:3px 0}
+
+/* timeline groups */
+.tg-group{margin-bottom:14px}
+.tg-head{display:flex;align-items:center;gap:12px;margin:38px 0 18px;font-size:16px;font-weight:800}
+.tg-head .tg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tg-head .tg-date{font-size:12px;font-weight:600;color:var(--ink2);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:3px 14px}
+.tg-head .tg-note{font-size:12px;color:var(--ink2);font-weight:400}
+
+.cards-3d{perspective:1400px}
+.grid{position:relative}
+.kcard{background:rgba(24,20,43,.97);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.24);border-radius:18px;padding:20px 24px;scroll-margin-top:90px;position:absolute;isolation:isolate;display:flex;flex-direction:column;opacity:0;transform:translateY(calc(100vh + 200px));filter:blur(10px);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1),filter .8s ease,box-shadow .3s ease,border-color .3s ease;will-change:transform,opacity,filter}
+.kcard.in{opacity:1;transform:translateY(0);filter:blur(0);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1),filter .8s ease,left .6s ease,top .6s ease,width .6s ease,box-shadow .3s ease,border-color .3s ease}
+.kcard:not(.expanded) .c-head h3{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard.expanded .c-head h3{white-space:normal;overflow:visible}
+.kcard.open{z-index:2}
+.kcard.in:hover{transform:scale(.95);box-shadow:var(--shadow-lg);border-color:var(--line);transition-duration:.3s;transition-delay:0s}
+.kcard.expanded.in:hover{transform:scale(.95);box-shadow:var(--shadow-lg);border-color:var(--line);transition-duration:.3s;transition-delay:0s}
+.kcard.in:hover .no{transform:scale(1.12)}
+.kcard .no{transition:transform .22s ease}
+.kcard .top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.kcard .no{font-size:11px;font-weight:800;color:#fff;border-radius:7px;padding:3px 9px;letter-spacing:.5px}
+.kcard h3{font-size:18px;margin-bottom:2px}
+.kcard .when{font-size:12px;font-weight:600;opacity:.75;margin-bottom:12px}
+.kcard .body{font-size:13.5px;color:var(--ink2)}
+.kcard .body b{color:inherit}
+.kcard table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0;background:rgba(255,255,255,.05)}
+.kcard th,.kcard td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+.kcard th{background:rgba(255,255,255,.07)}
+.rel{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px;transform:translateZ(30px)}
+.rel .cap{font-size:12px;color:var(--ink2);margin-right:2px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;border-radius:12px;padding:9px 16px;cursor:pointer;text-decoration:none;border:1px solid var(--line);background:rgba(24,20,43,.72);color:var(--ink);font-weight:600;box-shadow:var(--shadow);transition:.2s}
+.chip::after{content:"→";font-size:11px;opacity:.65}
+.chip:hover{transform:translateY(-2px);border-color:var(--c-purple);color:var(--c-purple-ink);background:rgba(178,107,255,.14);box-shadow:var(--shadow-lg)}
+
+.how-toggle{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;border:1.5px dashed currentColor;border-radius:99px;padding:6px 16px;cursor:pointer;background:transparent;margin-top:16px;transition:.2s;font-family:inherit}
+.how-toggle:hover{transform:translateY(-2px);background:rgba(255,255,255,.08)}
+.how-toggle .arr{display:inline-block;transition:transform .3s}
+.kcard.open .how-toggle .arr{transform:rotate(180deg)}
+.how{max-height:0;overflow:hidden;transition:max-height .45s ease,opacity .35s ease;opacity:0}
+.kcard.open .how{max-height:560px;opacity:1;margin-top:14px}
+.how-in{background:rgba(255,255,255,.05);border-radius:12px;padding:16px 18px;font-size:13px;color:var(--ink2)}
+.how-in h5{font-size:13px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.how-in h5::before{content:"";width:8px;height:8px;border-radius:2px;background:currentColor;display:inline-block}
+.how-in ul{padding-left:18px}
+.how-in li{margin:5px 0}
+.how-in li b{color:var(--ink)}
+
+.cfold .c-head{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;flex-shrink:0}
+.cfold .c-head h3{flex:1;margin:0}
+.cfold .c-head:hover h3{text-decoration:underline;text-underline-offset:4px}
+.cfold .c-arrow{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.08);color:var(--ink2);font-size:13px;transition:transform .35s ease;flex-shrink:0}
+.cfold.open .c-arrow{transform:rotate(180deg)}
+.cfold .c-body{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s ease,opacity .4s ease;transform:translateZ(0)}
+.cfold.open .c-body{max-height:2200px;opacity:1;margin-top:12px;overflow:visible;-webkit-font-smoothing:antialiased}
+
+/* ===== BorderGlow (React Bits 移植) ===== */
+.kcard::before,.kcard > .edge-light{content:"";position:absolute;inset:0;border-radius:inherit;transition:opacity .25s ease-out;pointer-events:none}
+.kcard::before{z-index:-1}
+.kcard:not(:hover):not(.sweep-active)::before,.kcard:not(:hover):not(.sweep-active) > .edge-light{opacity:0;transition:opacity .75s ease-in-out}
+.kcard::before{border:1px solid transparent;
+  background:
+    linear-gradient(var(--card-bg,var(--card)) 0 100%) padding-box,
+    var(--gradient-one,radial-gradient(at 80% 55%,rgba(127,119,221,.95) 0px,transparent 55%)) border-box,
+    var(--gradient-two,radial-gradient(at 69% 34%,rgba(212,83,126,.95) 0px,transparent 55%)) border-box,
+    var(--gradient-three,radial-gradient(at 8% 6%,rgba(55,138,221,.95) 0px,transparent 55%)) border-box,
+    var(--gradient-four,radial-gradient(at 41% 38%,rgba(29,158,117,.95) 0px,transparent 55%)) border-box,
+    var(--gradient-five,radial-gradient(at 86% 85%,rgba(212,83,126,.95) 0px,transparent 55%)) border-box,
+    var(--gradient-six,radial-gradient(at 82% 18%,rgba(186,117,23,.95) 0px,transparent 55%)) border-box,
+    var(--gradient-seven,radial-gradient(at 51% 4%,rgba(226,75,74,.95) 0px,transparent 55%)) border-box,
+    var(--gradient-base,linear-gradient(#b9b0f0 0 100%)) border-box;
+  opacity:calc((var(--edge-proximity,0) - var(--color-sensitivity,38)) / (100 - var(--color-sensitivity,38)));
+  mask-image:conic-gradient(from var(--cursor-angle,45deg) at center,black calc(var(--cone-spread,25) * 1%),transparent calc((var(--cone-spread,25) + 15) * 1%),transparent calc((100 - var(--cone-spread,25) - 15) * 1%),black calc((100 - var(--cone-spread,25)) * 1%));
+  -webkit-mask-image:conic-gradient(from var(--cursor-angle,45deg) at center,black calc(var(--cone-spread,25) * 1%),transparent calc((var(--cone-spread,25) + 15) * 1%),transparent calc((100 - var(--cone-spread,25) - 15) * 1%),black calc((100 - var(--cone-spread,25)) * 1%));
+}
+.kcard > .edge-light{inset:calc(var(--glow-padding,30px) * -1);z-index:1;
+  mask-image:conic-gradient(from var(--cursor-angle,45deg) at center,black 2.5%,transparent 10%,transparent 90%,black 97.5%);
+  -webkit-mask-image:conic-gradient(from var(--cursor-angle,45deg) at center,black 2.5%,transparent 10%,transparent 90%,black 97.5%);
+  opacity:calc((var(--edge-proximity,0) - var(--edge-sensitivity,18)) / (100 - var(--edge-sensitivity,18)));
+  mix-blend-mode:plus-lighter}
+.kcard > .edge-light::before{content:"";position:absolute;inset:var(--glow-padding,30px);border-radius:inherit;
+  box-shadow:
+    inset 0 0 0 1px var(--glow-color,hsl(250 60% 55% / 100%)),
+    inset 0 0 1px 0 var(--glow-color-60,hsl(250 60% 55% / 60%)),
+    inset 0 0 3px 0 var(--glow-color-50,hsl(250 60% 55% / 50%)),
+    inset 0 0 6px 0 var(--glow-color-40,hsl(250 60% 55% / 40%)),
+    inset 0 0 15px 0 var(--glow-color-30,hsl(250 60% 55% / 30%)),
+    inset 0 0 25px 2px var(--glow-color-20,hsl(250 60% 55% / 20%)),
+    inset 0 0 50px 2px var(--glow-color-10,hsl(250 60% 55% / 10%)),
+    0 0 1px 0 var(--glow-color-60,hsl(250 60% 55% / 60%)),
+    0 0 3px 0 var(--glow-color-50,hsl(250 60% 55% / 50%)),
+    0 0 6px 0 var(--glow-color-40,hsl(250 60% 55% / 40%)),
+    0 0 15px 0 var(--glow-color-30,hsl(250 60% 55% / 30%)),
+    0 0 25px 2px var(--glow-color-20,hsl(250 60% 55% / 20%)),
+    0 0 50px 2px var(--glow-color-10,hsl(250 60% 55% / 10%));
+}
+@media print{.kcard::before,.kcard > .edge-light{display:none !important}}
+
+/* ===== SpotlightCard (React Bits 移植 · 原生实现) ===== */
+.kcard.card-spotlight{
+  --mouse-x:50%;
+  --mouse-y:50%;
+  --spotlight-color:rgba(225,0,255,.22);
+}
+.kcard.card-spotlight::after{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  border-radius:inherit;
+  background:radial-gradient(circle at var(--mouse-x) var(--mouse-y),var(--spotlight-color),transparent 80%);
+  opacity:0;
+  transition:opacity .5s ease;
+  pointer-events:none;
+  z-index:2;
+}
+.kcard.card-spotlight:hover::after,
+.kcard.card-spotlight:focus-within::after{opacity:.6}
+@media print{.kcard.card-spotlight::after{display:none !important}}
+
+.kc-purple .no{background:var(--c-purple)}.kc-purple h3,.kc-purple .when{color:var(--c-purple-ink)}.kc-purple{border-top:4px solid var(--c-purple)}.kc-purple .chip,.kc-purple .how-toggle{color:var(--c-purple-ink);background:var(--c-purple-bg)}.kc-purple .chip:hover{background:var(--c-purple);color:#fff}.kc-purple .how h5{color:var(--c-purple-ink)}.kc-purple .c-arrow{color:var(--c-purple-ink)}
+.kc-teal .no{background:var(--c-teal)}.kc-teal h3,.kc-teal .when{color:var(--c-teal-ink)}.kc-teal{border-top:4px solid var(--c-teal)}.kc-teal .chip,.kc-teal .how-toggle{color:var(--c-teal-ink);background:var(--c-teal-bg)}.kc-teal .chip:hover{background:var(--c-teal);color:#fff}.kc-teal .how h5{color:var(--c-teal-ink)}.kc-teal .c-arrow{color:var(--c-teal-ink)}
+.kc-coral .no{background:var(--c-coral)}.kc-coral h3,.kc-coral .when{color:var(--c-coral-ink)}.kc-coral{border-top:4px solid var(--c-coral)}.kc-coral .chip,.kc-coral .how-toggle{color:var(--c-coral-ink);background:var(--c-coral-bg)}.kc-coral .chip:hover{background:var(--c-coral);color:#fff}.kc-coral .how h5{color:var(--c-coral-ink)}.kc-coral .c-arrow{color:var(--c-coral-ink)}
+.kc-pink .no{background:var(--c-pink)}.kc-pink h3,.kc-pink .when{color:var(--c-pink-ink)}.kc-pink{border-top:4px solid var(--c-pink)}.kc-pink .chip,.kc-pink .how-toggle{color:var(--c-pink-ink);background:var(--c-pink-bg)}.kc-pink .chip:hover{background:var(--c-pink);color:#fff}.kc-pink .how h5{color:var(--c-pink-ink)}.kc-pink .c-arrow{color:var(--c-pink-ink)}
+.kc-blue .no{background:var(--c-blue)}.kc-blue h3,.kc-blue .when{color:var(--c-blue-ink)}.kc-blue{border-top:4px solid var(--c-blue)}.kc-blue .chip,.kc-blue .how-toggle{color:var(--c-blue-ink);background:var(--c-blue-bg)}.kc-blue .chip:hover{background:var(--c-blue);color:#fff}.kc-blue .how h5{color:var(--c-blue-ink)}.kc-blue .c-arrow{color:var(--c-blue-ink)}
+.kc-green .no{background:var(--c-green)}.kc-green h3,.kc-green .when{color:var(--c-green-ink)}.kc-green{border-top:4px solid var(--c-green)}.kc-green .chip,.kc-green .how-toggle{color:var(--c-green-ink);background:var(--c-green-bg)}.kc-green .chip:hover{background:var(--c-green);color:#fff}.kc-green .how h5{color:var(--c-green-ink)}.kc-green .c-arrow{color:var(--c-green-ink)}
+.kc-amber .no{background:var(--c-amber)}.kc-amber h3,.kc-amber .when{color:var(--c-amber-ink)}.kc-amber{border-top:4px solid var(--c-amber)}.kc-amber .chip,.kc-amber .how-toggle{color:var(--c-amber-ink);background:var(--c-amber-bg)}.kc-amber .chip:hover{background:var(--c-amber);color:#fff}.kc-amber .how h5{color:var(--c-amber-ink)}.kc-amber .c-arrow{color:var(--c-amber-ink)}
+.kc-red .no{background:var(--c-red)}.kc-red h3,.kc-red .when{color:var(--c-red-ink)}.kc-red{border-top:4px solid var(--c-red)}.kc-red .chip,.kc-red .how-toggle{color:var(--c-red-ink);background:var(--c-red-bg)}.kc-red .chip:hover{background:var(--c-red);color:#fff}.kc-red .how h5{color:var(--c-red-ink)}.kc-red .c-arrow{color:var(--c-red-ink)}
+.kc-gray .no{background:var(--c-gray)}.kc-gray h3,.kc-gray .when{color:var(--c-gray-ink)}.kc-gray{border-top:4px solid var(--c-gray)}.kc-gray .chip,.kc-gray .how-toggle{color:var(--c-gray-ink);background:var(--c-gray-bg)}.kc-gray .chip:hover{background:var(--c-gray);color:#fff}.kc-gray .how h5{color:var(--c-gray-ink)}.kc-gray .c-arrow{color:var(--c-gray-ink)}
+
+.cl-step{display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-bottom:14px;opacity:0;transform:scale(.7)}
+.cl-step.in{opacity:1;transform:scale(1);transition:.25s ease}
+.cl-num{flex-shrink:0;width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff}
+.cl-body h4{font-size:16px;margin-bottom:6px}
+.cl-body p{font-size:13.5px;color:var(--ink2)}
+.cl-body ul{padding-left:18px;margin-top:6px}
+.cl-body li{font-size:13px;color:var(--ink2);margin:4px 0}
+.urgent-note{background:var(--c-red-bg);border:1px solid #f0c8c8;border-radius:14px;padding:16px 20px;margin-bottom:16px;font-size:13.5px;color:var(--c-red-ink)}
+.urgent-note b{font-weight:800}
+
+.fix{border-radius:16px;padding:22px 24px;margin-bottom:16px;display:flex;gap:16px;align-items:flex-start;opacity:0;transform:scale(.7)}
+.fix.in{opacity:1;transform:scale(1);transition:.25s ease}
+.fix.wrong{background:var(--c-red-bg);border:1px solid #f0c8c8}
+.fix.miss{background:var(--c-amber-bg);border:1px solid #ecd9b0}
+.fix .badge{flex-shrink:0;font-size:12px;font-weight:800;color:#fff;border-radius:8px;padding:4px 11px;margin-top:2px}
+.fix.wrong .badge{background:var(--c-red)}.fix.miss .badge{background:var(--c-amber)}
+.fix h4{font-size:15px;margin-bottom:4px}
+.fix p{font-size:13.5px;color:var(--ink2)}
+.fix p b{color:var(--ink)}
+
+.quiz{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px;max-width:780px;margin:0 auto;box-shadow:var(--shadow)}
+.q-ctrl{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;justify-content:center}
+.qf{font-size:12.5px;border:1.5px solid var(--line);background:var(--bg);border-radius:99px;padding:6px 16px;cursor:pointer;transition:.18s;color:var(--ink2);font-weight:600;font-family:inherit}
+.qf:hover{border-color:var(--ink)}
+.qf.on{background:#e100ff;color:#fff;border-color:#e100ff}
+.q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:12.5px;color:var(--ink2)}
+.q-cat{font-weight:700;border-radius:7px;padding:2px 10px}
+.q-bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:22px}
+.q-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c-teal),var(--c-blue));border-radius:99px;transition:width .4s ease}
+.q-q{font-size:18px;font-weight:700;margin-bottom:18px;min-height:52px}
+.q-opt{display:block;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:13px 17px;font-size:14px;margin-bottom:10px;cursor:pointer;transition:.16s;color:var(--ink);font-family:inherit}
+.q-opt:hover{border-color:var(--c-blue);background:var(--c-blue-bg);transform:translateX(4px)}
+.q-opt.correct{border-color:var(--c-teal);background:var(--c-teal-bg);color:var(--c-teal-ink);font-weight:700;animation:pop .4s ease}
+.q-opt.wrong{border-color:var(--c-red);background:var(--c-red-bg);color:var(--c-red-ink);animation:shake .45s ease}
+@keyframes pop{0%{transform:scale(.96)}60%{transform:scale(1.03)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.q-opt:disabled{cursor:default;transform:none}
+.q-exp{display:none;font-size:13px;background:var(--c-blue-bg);border-radius:10px;padding:13px 17px;margin:8px 0 16px;color:var(--c-blue-ink)}
+.q-exp.show{display:block;animation:rise .3s ease}
+.q-next{display:none;background:#e100ff;color:#fff;border:0;border-radius:10px;padding:12px 30px;font-size:14px;cursor:pointer;font-weight:600}
+.q-next.show{display:inline-block}
+.q-result{text-align:center;display:none}
+.q-result .score{font-size:56px;font-weight:800;background:linear-gradient(120deg,var(--c-red),var(--c-amber));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.q-result p{color:var(--ink2);margin:8px 0 6px}
+.q-grade{font-size:15px;font-weight:700;margin-bottom:18px}
+.q-wrong{text-align:left;background:var(--bg);border-radius:12px;padding:16px 20px;margin:16px 0;max-height:260px;overflow-y:auto;display:none}
+.q-wrong.show{display:block}
+.q-wrong h5{font-size:13px;margin-bottom:10px;color:var(--c-red-ink)}
+.q-wrong li{font-size:12.5px;margin:8px 0;color:var(--ink2);list-style:none;border-bottom:1px dashed var(--line);padding-bottom:8px}
+.q-wrong b{color:var(--ink)}
+.q-restart{background:#e100ff;color:#fff;border:0;border-radius:10px;padding:12px 30px;font-size:14px;cursor:pointer;font-weight:600;margin:0 6px}
+.q-restart.alt{background:var(--c-red)}
+
+footer{border-top:1px solid var(--line);padding:30px 0 44px;text-align:center;font-size:12px;color:var(--ink2)}
+#tlPrint{display:none}
+.totop{position:fixed;right:26px;bottom:30px;width:44px;height:44px;border-radius:50%;background:#e100ff;color:#fff;border:0;font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:90}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{transform:translateY(-4px)}
+.countdown{display:inline-flex;align-items:center;gap:8px;margin:14px auto 4px;padding:8px 20px;border-radius:99px;background:var(--c-red-bg);color:var(--c-red-ink);font-weight:700;font-size:14px}
+.countdown.ok{background:var(--c-teal-bg);color:var(--c-teal-ink)}
+.role-bar{background:rgba(24,20,43,.98);border:1px solid rgba(255,255,255,.26);border-radius:16px;padding:16px 18px 14px;margin-bottom:22px;box-shadow:var(--shadow)}
+.role-bar-title{font-size:14px;font-weight:800;margin-bottom:12px;letter-spacing:.5px}
+.role-pick{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-start}
+.role-pick .rp{border:1px solid rgba(255,255,255,.32);background:rgba(24,20,43,1);color:var(--ink);border-radius:10px;padding:10px 18px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.2s}
+.role-pick .rp:hover{border-color:var(--c-purple);transform:translateY(-1px)}
+.role-pick .rp.on{background:#e100ff;border-color:#e100ff;color:#fff;font-weight:800;box-shadow:0 0 0 3px rgba(225,0,255,.28)}
+.role-pick .rp.on::before{content:"✓ "}
+.role-hint{margin:12px 0 0;font-size:13px;color:var(--ink);background:rgba(96,165,250,.14);border:1px solid rgba(96,165,250,.28);border-radius:10px;padding:10px 14px;min-height:auto}
+.kcard.role-dim{opacity:.62;filter:saturate(.55)}
+.kcard.role-on{border-color:#e100ff;box-shadow:0 0 0 1px #e100ff,var(--shadow-lg)}
+.wizard{max-width:720px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 28px;box-shadow:var(--shadow)}
+.wz-step{display:none}.wz-step.on{display:block}
+.wz-q{font-size:16px;font-weight:700;margin-bottom:14px;line-height:1.6}
+.wz-opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:rgba(24,20,43,.72);color:var(--ink);border-radius:10px;padding:12px 16px;font-size:14px;cursor:pointer;margin-bottom:10px;transition:.2s}
+.wz-opt:hover{border-color:var(--c-purple)}
+.wz-opt:disabled{opacity:.55;cursor:default}
+.wz-result{display:none;background:var(--c-teal-bg);border:1px solid rgba(45,212,191,.35);border-radius:12px;padding:16px 18px;font-size:13.5px;line-height:1.9}
+.wz-result.show{display:block}
+.wz-progress{font-size:12px;color:var(--ink2);margin-bottom:10px}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-bottom:8px}
+.tpl-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.tpl-card h4{font-size:15px;margin-bottom:6px}
+.tpl-card p{font-size:12.5px;color:var(--ink2);margin-bottom:12px;line-height:1.65}
+.tpl-btn{display:inline-block;border:1px solid var(--line);background:rgba(24,20,43,.72);color:var(--ink);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;margin-right:6px;transition:.2s}
+.tpl-btn:hover{border-color:var(--c-teal);color:var(--c-teal-ink)}
+.abbr-table{width:100%;border-collapse:collapse;font-size:13px}
+.abbr-table th,.abbr-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.abbr-table th{background:var(--c-purple-bg);font-weight:700}
+.abbr-table td:first-child{font-weight:700;color:var(--c-purple-ink);white-space:nowrap}
+.src-box{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.quiz-mem{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.25);border-radius:12px;padding:10px 16px;margin-bottom:16px;font-size:13px;color:var(--ink2)}
+.quiz-mem .q-restart{padding:7px 16px;font-size:12.5px}
+.mem-empty{opacity:.75}
+#qWrongOnly{display:none}
+.version-log{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:16px 20px;margin-bottom:14px;font-size:12.5px;color:var(--ink2);line-height:1.9}
+.version-log b{color:var(--ink)}
+.law-ref{margin-top:12px;padding:10px 14px;border:1px solid rgba(96,165,250,.28);border-radius:10px;background:rgba(96,165,250,.09);font-size:13.5px;color:var(--ink);line-height:1.9}.law-ref b{color:var(--c-blue-ink);font-weight:800}.law-src{display:inline-block;margin-left:10px;color:var(--c-teal-ink);text-decoration:none;font-weight:700;white-space:nowrap}.law-src:hover{text-decoration:underline}
+#softAurora{opacity:.72}
+#gradientWaves{opacity:.6}
+.search-row{display:flex;align-items:center;gap:10px;margin:12px 0 0}
+.card-search{flex:1;background:rgba(11,9,20,.92);border:1px solid rgba(255,255,255,.32);color:var(--ink);border-radius:10px;padding:10px 14px;font-size:13.5px;outline:none;transition:.2s}
+.card-search:focus{border-color:var(--c-teal);box-shadow:0 0 0 3px rgba(45,212,191,.18)}
+.card-search::placeholder{color:var(--ink2)}
+.search-count{font-size:12px;color:var(--ink2);white-space:nowrap}
+.status-badge{display:inline-block;background:rgba(251,191,36,.16);border:1px solid rgba(251,191,36,.5);color:var(--c-amber-ink);font-size:11px;font-weight:700;border-radius:99px;padding:2px 9px;white-space:nowrap;flex-shrink:0}
+.st{display:inline-block;border-radius:99px;padding:6px 14px;font-size:12.5px;font-weight:600}
+.st.ok{background:rgba(45,212,191,.14);border:1px solid rgba(45,212,191,.4);color:var(--c-teal-ink)}
+.st.wait{background:rgba(251,191,36,.14);border:1px solid rgba(251,191,36,.45);color:var(--c-amber-ink)}
+.myth-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.myth-tabs .mt{border:1px solid rgba(255,255,255,.3);background:rgba(24,20,43,1);color:var(--ink);border-radius:10px;padding:9px 18px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.2s}
+.myth-tabs .mt:hover{border-color:var(--c-amber)}
+.myth-tabs .mt.on{background:var(--c-amber);border-color:var(--c-amber);color:#1a1200;font-weight:800}
+.myth-panel{display:none}
+.myth-panel.on{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.myth{background:rgba(24,20,43,.97);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:14px 16px}
+.myth-q{font-size:13.5px;font-weight:700;color:var(--c-amber-ink);margin-bottom:6px}
+.myth-a{font-size:12.5px;color:var(--ink2);line-height:1.75}
+.myth-a .law-ref{margin-top:8px;padding:6px 10px;font-size:11.5px}
+@media print{.search-row,.status-badge,#myths{display:none !important}}
+@media print{.countdown,.role-bar,.role-pick,.role-hint,#wizard,.tools-grid,.quiz-mem,#qWrongOnly{display:none !important}}
+.flash{box-shadow:0 0 0 4px rgba(96,165,250,.5),var(--shadow-lg) !important}
+@media(max-width:640px){.hero h1{font-size:30px}.quiz{padding:24px 18px}.kcard.open .how{max-height:900px}.kcard table{display:block;overflow-x:auto;white-space:nowrap}}
+
+/* ============ print ============ */
+@media print{
+  @page{size:A4;margin:12mm}
+  html,body{background:#fff !important;font-size:10.5pt;line-height:1.5;color:#000}
+  :root{--bg:#fff;--card:#fff;--ink:#000;--ink2:#333;--line:#bbb}
+  .wrap{max-width:100%;padding:0}
+  nav,.totop,.gradient-waves,.soft-aurora,.tl,#tlPanel,#quiz,.how-toggle,.rel,.q-ctrl{display:none !important}
+  .hero{padding:10px 0 16px;min-height:0}
+  .hero .tag{border:1px solid #999;color:#222;background:#fff !important;animation:none}
+  .hero .tag .dot{display:none}
+  .hero h1{font-size:22pt;-webkit-text-fill-color:#000;background:none;color:#000;animation:none}
+  .hero p.sub{font-size:10pt;margin-top:8px}
+  .stats{grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px}
+  .stat-note{font-size:8.5pt;margin-top:6px}
+  .stat{background:#fff !important;box-shadow:none;border:1px solid #bbb;padding:8px 6px;animation:none;break-inside:avoid}
+  .stat b{font-size:13pt}
+  .stat span{font-size:8.5pt}
+  section{padding:12px 0;break-inside:auto}
+  .sec-head{margin-bottom:10px}
+  .sec-head h2{font-size:15pt}
+  .sec-head p{font-size:9.5pt}
+  .cards-3d{perspective:none}
+  .grid{display:block;max-width:100%;height:auto !important}
+  .kcard,.fix,.cl-step{background:#fff !important;color:#000;opacity:1 !important;transform:none !important;filter:none !important;box-shadow:none !important;transition:none !important;break-inside:avoid;margin-bottom:9px;padding:14px 16px;border:1px solid #bbb}
+  .kcard{position:static !important;left:auto !important;top:auto !important;width:auto !important}
+  .kcard h3,.kcard .when{color:#000 !important}
+  .kcard h3{font-size:13pt}
+  .kcard .when{font-size:9pt}
+  .kcard .body,.kcard .c-body{font-size:9.5pt}
+  .kcard table{font-size:9pt;margin:6px 0}
+  .kcard .how{max-height:none !important;opacity:1 !important;overflow:visible;margin-top:10px}
+  .cfold .c-body{max-height:none !important;opacity:1 !important;overflow:visible;margin-top:12px}
+  .cfold .c-arrow{display:none}
+  .cfold .c-head{cursor:default}
+  .tg-head{margin:20px 0 10px}
+  .how-in{background:#f4f4f4;border:1px solid #ddd;padding:10px 12px;font-size:9.5pt}
+  .how-in ul{padding-left:16px}
+  .how-in li{margin:3px 0}
+  .fix{padding:10px 14px;background:#fff !important;border:1px solid #bbb}
+  .fix .badge{color:#fff !important}
+  .cl-step{padding:10px 14px}
+  .cl-num{width:26px;height:26px;font-size:12pt}
+  .cl-body h4{font-size:11pt}
+  .cl-body p,.cl-body li{font-size:9.5pt}
+  .urgent-note{background:#fff !important;border:2px solid #a32d2d;color:#000;font-size:10pt;padding:10px 14px;break-inside:avoid}
+  #tlPrint{display:block}
+  .tlp-item{break-inside:avoid;border-left:3px solid #555;padding:3px 0 7px 12px;margin-bottom:8px}
+  .tlp-item b{color:#000}
+  .tlp-item ul{padding-left:16px;margin:2px 0 0}
+  .tlp-item li{font-size:9pt}
+  footer{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="soft-aurora" id="softAurora" aria-hidden="true"></div>
+
+<nav><div class="wrap">
+  <div class="logo"><i></i>PPWR·合规实操库</div>
+  <a class="nl" href="#timeline">时间线</a>
+  <a class="nl" href="#cards">知识卡片</a>
+  <a class="nl" href="#checklist">合规行动</a>
+  <a class="nl badge-red" href="#quiz">测验刷题</a>
+  <a class="nl" href="#tools">模板速查</a><a class="nl" href="#wizard">豁免判定</a><a class="nl badge-blue" href="javascript:window.print()">打印本页</a>
+</div></nav>
+
+<div style="position:relative;z-index:101;background:rgba(11,9,20,.92);border-bottom:1px solid var(--line);padding:10px 24px;text-align:center">
+  <a href="./export-compliance.html" style="color:var(--ink2);text-decoration:none;font-size:13px;border:1px solid var(--line);padding:6px 20px;border-radius:99px;display:inline-block;transition:.2s" onmouseover="this.style.borderColor='#e100ff';this.style.color='#fff'" onmouseout="this.style.borderColor='';this.style.color=''">← 返回 外贸合规速查（安规知识课堂）</a>
+  <span style="color:var(--ink2);font-size:12px;margin-left:12px">PPWR 合规实操知识库 · 本页为独立专题页</span>
+</div>
+
+<header class="hero"><div class="wrap">
+  <div class="gradient-waves" id="gradientWaves" aria-hidden="true"></div>
+  <div class="tag"><span class="dot"></span>2026-08-12 起全面适用 · 本月生效 · 已融合立讯检测课程深化</div>
+  <h1>PPWR 合规实操知识库</h1>
+  <div class="stats">
+    <div class="stat s1" data-go="#k1" title="铅/镉/汞/六价铬四项合计 ≤100mg/kg，2026-08-12 起生效"><b>100<small>mg/kg</small></b><span>重金属总量限值 →</span></div>
+    <div class="stat s2" data-go="#k2" title="可回收性分级 C 级门槛：回收比例 ≥70%，2030-01-01 起强制"><b>70%</b><span>2030 最低可回收率 →</span></div>
+    <div class="stat s3" data-go="#k3" title="「其他塑料包装」2030 年再生料最低 35%（一次性饮料瓶 30%、PET 接触敏感 30%）"><b>35%</b><span>再生料最低比例 →</span></div>
+    <div class="stat s4" data-go="#k4" title="组合包装/运输包装/电商包装空隙率 ≤50%，2030-01-01 起"><b>50%</b><span>包装空隙率上限 →</span></div>
+    <div class="stat s5" data-go="#k5" title="运输包装（含电商）2030 年 ≥40% 可重复使用，2040 年努力升至 70%"><b>40%</b><span>运输包装重复利用 →</span></div>
+  </div>
+  <div class="stat-note">* 100mg/kg 为铅/镉/汞/六价铬四项总和；35% 为「其他塑料包装」2030 年再生料档位；50% 空隙率上限适用于组合、运输与电商包装。</div>
+  <div class="countdown" id="countdown"></div>
+  
+</div></header>
+
+<section id="timeline"><div class="wrap">
+  <div class="sec-head"><div class="kicker" style="color:var(--c-red)">Timeline</div><h2>分阶段生效时间线</h2><p>只保留对企业包装上市生效的里程碑，点击节点查看「对你意味着什么」与关联卡片；配套立法、成员国动作与特定行业要求以小字列在面板内，避免和知识卡片重复。</p></div>
+  <div class="tl" id="tl"></div>
+  <div class="tl-panel" id="tlPanel"></div>
+  <div id="tlPrint"></div>
+</div></section>
+
+
+
+<section id="cards"><div class="wrap">
+  <div class="role-bar">
+    <div class="role-bar-title">按角色查看重点卡片</div>
+    <div class="role-pick" id="rolePick">
+      <button class="rp on" data-role="all">显示全部</button>
+      <button class="rp" data-role="lighting">💡 灯具行业重点</button>
+      <button class="rp" data-role="ecom">🛒 电商卖家重点</button>
+      <button class="rp" data-role="supplier">📦 包装供应商重点</button>
+      <button class="rp" data-role="horeca">🍽️ 餐饮重点</button>
+    </div>
+    <div class="search-row">
+      <input class="card-search" id="cardSearch" type="text" placeholder="搜索卡片：如 PFAS / Art 29 / 空隙率 / DoC…" autocomplete="off">
+      <span class="search-count" id="searchCount"></span>
+    </div>
+    <div class="role-hint" id="roleHint"></div>
+  </div>
+  <div class="sec-head"><div class="kicker" style="color:var(--c-blue)">Knowledge · 30 Cards</div><h2>知识卡片 · 按生效时间整理</h2><p>核心要求与延伸概念合并为一张卡片体系，按生效时间分组；每张卡片附「标准规范」实操指引；所有卡片点击标题展开内容；悬停边缘有辉光特效。V5 在保留 V4 全部 19 张卡片的基础上，新增 11 张立讯检测课程深化卡片（编号 20-30），只补充课件中更详细的实操与法条细节，不重复既有内容。</p></div>
+
+  <div class="tg-group">
+    <div class="tg-head"><span class="tg-dot" style="background:var(--c-gray)"></span>基础概念 <span class="tg-date">持续适用</span></div>
+    <div class="cards-3d"><div class="grid">
+
+      <div class="kcard kc-blue cfold" id="c10"><div class="c-head"><span class="no">01</span><h3>包装分级与界定</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">五类包装 · 判定口诀 · 灯具实例</div><div class="body">
+          <b>核心口诀</b>：直接包产品→<b>销售包装</b>；把多个销售单元捆在一起→<b>组合包装</b>；保护物流运输→<b>运输包装</b>；线上卖、外箱直达消费者→<b>电商包装</b>；店里现场装→<b>服务包装</b>。
+          <br><br><table>
+            <tr><th>层级</th><th>定义要点</th><th>典型例子</th><th>判断问句</th></tr>
+            <tr><td>销售包装</td><td>构成销售单元，直接交付终端用户</td><td>灯具彩盒、牙膏管、饮料瓶</td><td>消费者购买时看到的“最外层”是不是它？</td></tr>
+            <tr><td>组合包装</td><td>销售点把若干销售单元组合成一组（不论是否单独出售）</td><td>6 个彩盒外箱、多瓶装收缩膜</td><td>是不是把多个销售单元捆在一起供整组购买/陈列？</td></tr>
+            <tr><td>运输包装</td><td>方便搬运运输、防损坏；不含海/陆/空/铁路集装箱</td><td>托盘+缠绕膜、发货瓦楞箱</td><td>是不是零售前就拆掉、只服务物流？</td></tr>
+            <tr><td>电商包装</td><td>远程销售（线上）交付终端用户的运输包装</td><td>网购灯具发货箱+缓冲</td><td>是不是线上订单、外箱直接到消费者手上？</td></tr>
+            <tr><td>服务包装</td><td>在销售点现场填充的包装</td><td>咖啡杯、外卖袋</td><td>是不是“现场灌装/现场装给你”？</td></tr>
+          </table>
+          <br><br><b>易混点</b>：① 组合 vs 运输——组合包装服务于“整组销售/陈列”（到店仍作为一组商品出现），运输包装只服务物流（零售前拆掉）；② 电商包装是运输包装的特例，但义务更严（空隙率 50%、统一标签不豁免）；③ 服务 vs 销售——现场灌装=服务包装，工厂预装好=销售包装。
+          <br><br><b>为什么必须分清</b>：重复利用目标按层级不同——运输 2030 ≥40%（2040 努力 70%）、组合 ≥10%（努力 25%）、饮料销售 ≥10%（努力 40%）（Art 29）；空隙率 50% 适用于组合/运输/电商包装，销售包装只要求“最低必要”（Art 24）；一般运输包装可豁免统一材质标签，电商包装不豁免（Art 12(1)）；运输/服务/初级生产包装的生产者=空包装制造商，销售/组合包装的生产者=所包产品制造商。
+          <br><br><b>灯具实例</b>：LED 彩盒→销售包装（可回收分级、材质标签、DoC）；6 个彩盒套装+收缩膜→组合包装（10% 重复利用、50% 空隙率）；托盘+缠绕膜→运输包装（40% 重复利用，缠绕膜涉附件 V 禁令）；线上发货箱+泡沫→电商包装（50% 空隙率、标签不豁免）。
+          <br><br><b>特殊界定</b>：茶包/咖啡胶囊等与内容物一起使用的物品官方明确<b>算包装</b>（Art 3(1)(1)(f)(g)）；防尘袋默认算包装；产品标签（含果蔬粘性标签）算包装。<b>不算包装</b>：空售的饮料杯；直接涂覆的油漆、油墨、清漆、胶粘剂；官方指南补充：输液袋、注射器、垃圾袋、狗粪袋。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 2(1)</b> · <b>Art 3(1)(1)(a)-(g)</b> · <b>Art 3(1)(5)-(8)</b> · <b>Art 12(1)</b> · <b>Art 24</b> · <b>Art 29</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>按产品线梳理<b>五类包装台账</b>：每层包装的层级/材质/尺寸/供应商/SKU，线上发货箱单独标「电商包装」</li>
+          <li>判定是否算包装：以「是否用于容纳、保护、搬运、交付或展示产品」为准，且非产品组成部分</li>
+          <li>果蔬标签等易忽略项<b>单独登记</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k4">包装最小化</a><a class="chip" href="#k2">可回收分级</a></div></div></div>
+
+      <div class="kcard kc-amber cfold" id="c11"><div class="c-head"><span class="no">02</span><h3>普通回收 vs 高质量回收</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">材料回收的两种路径</div><div class="body">
+          <b>普通回收</b>：包装材料被重新加工成普通材料，用于要求较低的领域。
+          <br><br><b>高质量回收</b>：包装材料被加工成质量上乘的材料，可再次用于包装或其他需要保持高质量要求的领域。
+          <br><br><b>意义</b>：高质量回收是同时满足「可回收分级」与「再生料含量」要求的关键路径。<br><br><b>成员国回收目标（Art 52，按重量）</b>：2025 年总体 ≥65%（塑料 50%、木材 25%、铁金属 70%、铝 50%、玻璃 70%、纸/纸板 75%）；2030 年总体 ≥70%（塑料 55%、木材 30%、铁金属 80%、铝 60%、玻璃 75%、纸/纸板 85%）。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 3(1)(40)-(41)</b> · <b>Art 52(1)(a)-(d)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>设计即回收</b>：单一材质优先、易分离结构，避免多层复合/难分离</li>
+          <li>与再生料供应商确认<b>回收料质量等级</b>与溯源凭证</li>
+          <li>保留可回收性评估资料（过渡期可参考 EN 13430 / RecyClass / CEFLEX）</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k2">可回收分级</a><a class="chip" href="#k3">再生料含量</a></div></div></div>
+
+      <div class="kcard kc-red cfold" id="c19"><div class="c-head"><span class="no">03</span><h3>指令符合模式</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">污染者付费 · 符合性评估</div><div class="body">
+          <b>核心原则「污染者付费」</b>：生产者必须承担包装废物的处理责任——生产者指作为制造商、进口商或分销商在欧盟境内销售其包装产品的经济主体。
+          <br><br><b>符合性评估</b>：包装投放市场前，制造商须按<b>附件 VII</b> 规定的程序完成符合性评估，并编制<b>欧盟符合性声明（DoC）</b>。
+          <br><br><b>技术文档</b>：包装预期用途描述、包装图纸和材料、测试标准清单、测试报告。
+          <br><br><b>责任归属</b>：自有品牌/贴牌即视为生产者；无欧盟生产者时进口商承担全部义务。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 3(1)(13)</b> · <b>Art 15</b> · <b>Art 38</b> · <b>Annex VII</b> · <b>Art 39</b> · <b>Annex VIII</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>投放前完成<b>附件 VII 符合性评估</b>并出具 DoC（Article 39 + Annex VIII）</li>
+          <li>技术文档四件套归档：<b>一次性包装保留 5 年、可重复使用包装保留 10 年</b></li>
+          <li>明确角色：<b>自有品牌即生产者</b>；无欧盟生产者时进口商担责</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k9">合规责任</a><a class="chip" href="#k2">可回收分级</a><a class="chip" href="#v1">适用范围</a><a class="chip" href="#v2">重复使用定义</a></div></div></div>
+
+      <div class="kcard kc-purple cfold" id="v1"><div class="c-head"><span class="no">20</span><h3>适用范围与核心目标</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">全材料 · 全场景 · 持续适用</div><div class="body">
+          <b>适用范围</b>：涵盖所有投放欧盟市场的包装，无论由何种材料制成（塑料、纸、玻璃、金属、木材等），无论包装是空售、装了产品售卖，还是作为电商包裹的一部分，均在管辖范围内。
+          <br><br><b>核心目标</b>：终结一次性包装，推动循环经济与全生命周期管理；从原材料获取、生产、使用到废弃全程具备环境可持续性；显著减少一次性塑料使用量与最终填埋量；通过源头减量、再利用优先、高质回收让材料在经济中循环而非被丢弃；在欧盟层面建立统一包装规则，消除成员国法律差异，降低企业合规成本。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 1</b> · <b>Art 2(1)</b> · <b>Art 3(1)(1)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>立项时先按「<b>是否投放欧盟市场 + 是否属于包装</b>」划入合规范围，再按材质/层级建档</li>
+          <li>电商包裹、赠品包装、空包装销售等<b>易遗漏场景</b>单独登记</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#c10">包装分级</a><a class="chip" href="#k9">合规责任</a></div></div></div>
+
+      <div class="kcard kc-purple cfold" id="v2"><div class="c-head"><span class="no">21</span><h3>可重复使用包装定义（九项条件）</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">2025-02-11 生效 · 持续适用</div><div class="body">
+          自法规生效日（2025-02-11）起，包装须<b>同时满足以下全部条件</b>才被认定为可重复使用：
+          <br><br>(a) 构思并投放市场的目的是<b>多次重复使用</b>；(b) 设计为在正常可预见的使用条件下完成尽可能多的循环；(c) 满足消费者健康、安全与卫生的适用要求；(d) 可清空或卸载，而不受妨碍其进一步发挥作用和重复使用的损坏；(e) 可清空、卸载、重新填充或重新装载，同时保持包装产品质量与安全（含食品安全）；(f) 可按附件 VI B 部分进行再处理，同时保持执行预期功能的能力；(g) 允许贴标签，提供产品属性与包装本身信息（含安全、充分使用、可追溯性、保质期）；(h) 可清空、卸载、重新填充或重新装载，而不对相关人员健康与安全构成风险；(i) 满足第 6 条可回收包装的具体要求，以便成为废物后仍可回收利用。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 3(1)(27)</b> · <b>Art 11(1)(a)-(i)</b> · <b>Annex VI Part B</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>宣称「可重复使用」前逐条核对九项条件，<b>缺一不可</b></li>
+          <li>将附件 VI B 部分再处理流程、标签方案、可回收设计资料<b>一并归档</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k5">重复使用</a><a class="chip" href="#c13">个别要求</a></div></div></div>
+
+    </div></div>
+  </div>
+
+  <div class="tg-group">
+    <div class="tg-head"><span class="tg-dot" style="background:var(--c-red)"></span>2026-08-12 起 <span class="tg-date">本月生效</span><span class="tg-note">物质要求 · 声明文档 · 体系搭建</span></div>
+    <div class="cards-3d"><div class="grid">
+
+      <div class="kcard kc-red cfold" id="k1"><div class="c-head"><span class="no">04</span><h3>有害物质限制</h3><span class="c-arrow">▾</span></div><div class="c-body"><div class="when">2026-08-12 起 · 本月生效</div>
+        <div class="body">铅、镉、汞、六价铬总浓度 <b>≤100mg/kg</b>；包装制造须使<b>关注物质（substances of concern）</b>的存在与浓度降至最低（Art 5(1)）。食品接触包装 PFAS 限值：单个（非聚合）PFAS ≤25ppb、所有（非聚合）PFAS 总和 ≤250ppb（含前体降解产物）、含聚合物 PFAS 总氟 ≤50ppm。<b>按投放日判断</b>：2026-08-12 后投放市场须合规，此前投放的存量包装无需下架（官方 FAQ）。含危害物质的包装须按欧委会数字标注方法（最迟 2030-01-01 出台）标注名称与浓度。</div>
+        <div class="law-ref">📖 条文锚点：<b>Art 5(1)</b> · <b>Art 5(4)-(6)</b> · <b>Art 12(7) 第 2 段</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>送检四项重金属</b>：委托有资质实验室检测铅/镉/汞/六价铬总量，判定 ≤100mg/kg</li>
+          <li><b>食品接触包装加测 PFAS</b>（分步测试：先测总氟，<50mg/kg 即视为符合）</li>
+          <li><b>合并检测规则</b>：基材+工艺相同仅尺寸不同可合并 1 份报告；油墨/色母不同必须分开测</li>
+          <li><b>寄样规格</b>：切割 ≥50g 切片即可，涂层/油墨/胶带单独取样</li>
+          <li><b>报告有效期 1 年</b>；材质、油墨、供应商变更需重新检测</li>
+          <li>可自愿加测 REACH SVHC、双酚A，满足进口商附加要求</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k7">标签规则</a><a class="chip" href="#k9">合规责任</a><a class="chip" href="#c14">其他法规</a></div></div></div>
+
+      <div class="kcard kc-gray cfold" id="k9"><div class="c-head"><span class="no">05</span><h3>合规责任与技术文档</h3><span class="c-arrow">▾</span></div><div class="c-body"><div class="when">2026-08-12 起</div>
+        <div class="body">制造商按附件 VII 评估并编制<b>欧盟符合性声明（DoC）</b>；技术文档含预期用途、图纸材料、测试标准清单、测试报告。品牌方/贴牌进口分销商为微型企业、且供货方位于欧盟境内时，供货方被视为制造商（Art 15(12)/21）。</div>
+        <div class="law-ref">📖 条文锚点：<b>Art 6(8)</b> · <b>Art 15(1)-(12)</b> · <b>Art 17-18</b> · <b>Art 21</b> · <b>Art 39</b> · <b>Annex VII-VIII</b> · <b>Art 45(4)-(6)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>DoC 由制造商出具</b>（Article 39 + Annex VIII）；进口商须确保 DoC 存在且合规，无欧盟生产者时进口商承担全部义务</li>
+          <li><b>自有品牌/贴牌 = 生产者</b>：贴自己 logo 即承担全部合规义务</li>
+          <li>技术文档归档：物料清单、检测报告、可回收评估、欧代委任文件；<b>一次性包装保留 5 年、可重复使用包装保留 10 年</b>；监管机构要求时 10 日内提供（Art 15(10)）</li>
+          <li><b>EPR 注册</b>：每个销售国注册（如德国 LUCID）并缴费；法规要求<b>按可回收等级实行生态调节</b>（DfR 授权法案与规模化回收实施法案生效后 18 个月起，Art 6(8)）</li>
+          <li>无欧盟公司时<b>委任欧盟授权代表（欧代）</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#c19">符合模式</a><a class="chip" href="#k1">有害物质</a><a class="chip" href="#k7">标签规则</a></div></div></div>
+
+      <div class="kcard kc-gray cfold" id="c14"><div class="c-head"><span class="no">06</span><h3>必须满足的其他法规</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">与 PPWR 并行的义务</div><div class="body">
+          <b>1935/2004 法规</b>：所有可能/已经与食品接触的包装材料（含可生物降解材料）都须符合该食品接触材料法规。
+          <br><br><b>EU 2019/904</b>：一次性塑料指令中饮料瓶再生料含量目标（Art 6(5)(a)-(b)）及成员国报告义务（Art 13(1)(e)）在 2030-01-01（或再生料实施细则生效后 3 年，以较晚者为准）前继续有效（PPWR Art 67(2)(3)）。
+          <br><br><b>微型企业规则（第 15/21 条）</b>：品牌方（含贴牌进口商/分销商）符合微型企业定义、且供货方位于欧盟境内时，该供货方被视为制造商承担合规责任。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 67(2)-(3)</b> · <b>Art 15(12)</b> · <b>Art 21</b> · <b>Reg. (EC) 1935/2004</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>食品接触包装核对 <b>1935/2004 合规</b>（迁移测试、符合性声明）</li>
+          <li>关注 2019/904 塑料瓶<b>再生料含量过渡要求</b>至 2030</li>
+          <li>微型企业情形下确认<b>责任主体</b>（第 15/21 条：欧盟境内供货方担责）</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k9">合规责任</a><a class="chip" href="#k1">有害物质</a></div></div></div>
+
+      <div class="kcard kc-purple cfold" id="k5"><div class="c-head"><span class="no">07</span><h3>可重复使用包装</h3><span class="c-arrow">▾</span></div><div class="c-body"><div class="when">2026-08-12 起建体系 · 2030 起达标</div>
+        <div class="body">运输包装（含电商）<b>≥40%</b>，2040 年努力升至 70%；组合包装 <b>≥10%</b>，2040 年努力升至 25%。同企业/同成员国内运输包装 2030 年起须 <b>100% 可重复使用</b>（缠绕膜、打包带豁免）。最终分销商投放给消费者的饮料销售包装另有 10% 目标（2040 年努力达 40%；牛奶、葡萄酒、烈酒等除外；<b>纸箱全部豁免</b>）。一次性塑料饮料瓶和金属饮料容器（≤3L）须纳入<b>押金返还制度（DRS）</b>：成员国 2029-01-01 前建立，并按重量确保 90% 单独收集（2026 年收集率已达 80% 的成员国可申请豁免）。</div>
+        <div class="law-ref">📖 条文锚点：<b>Art 11</b> · <b>Art 26-27</b> · <b>Art 29(1)-(7)</b> · <b>Art 49-50</b> · <b>Art 12(2)</b> · <b>Annex VI</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>2026-08-12 起</b>：投放可重复使用包装即须建立<b>收集-翻新-再分配系统</b>（含投放点、物流、消费者指引）</li>
+          <li><b>数字标签追踪</b>：2029-02-12 起（或实施细则生效后 30 个月，较晚者）记录流向与使用次数</li>
+          <li>⚠️ 欧委会 2026-02-25 授权决定：<b>缠绕膜、打包带豁免</b>同国运输「100% 可重复使用」要求；<b>托盘</b>仍须纳入重复使用体系</li>
+          <li><b>DRS 押金返还</b>：≤3L 一次性塑料饮料瓶和金属饮料容器须纳入成员国押金返还制度（2029-01-01 前建立，90% 收集目标；2026 年收集率≥80% 且获豁免的成员国除外），包装须带清晰 DRS 标识（统一颜色标识为可选，成员国可要求）；成员国同日设定强制性收集目标（Art 49）</li>
+          <li>池运营者/首次投放空包装者为生产者，承担 DoC 义务</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k7">标签规则</a><a class="chip" href="#c13">个别要求</a></div></div></div>
+
+      <div class="kcard kc-purple cfold" id="c13"><div class="c-head"><span class="no">08</span><h3>重复利用的个别要求</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">体系要求 · 目标豁免 · 追踪</div><div class="body">
+          <b>重复利用目标豁免（Art 29(4)，穷尽列举）</b>：危险品运输包装；大型机械/设备及大宗商品定制包装；直接接触食品/饲料的柔性运输包装；纸箱。<br><br><b>小微企业豁免</b>：销售面积 ≤100㎡ 的零售商豁免饮料重复利用目标（Art 29(10)）；某成员国年投放 ≤1000kg 且符合微型企业定义的经营者豁免全部重复利用目标（Art 29(13)）；孤岛（&lt;2000 人）与低密度地区（&lt;54 人/km²）由成员国决定豁免（Art 29(11)）。
+          <br><br><b>可重复使用体系</b>：纳入 reuse system 的包装可豁免组合/运输/电商包装 50% 空隙率上限（Art 24(5)）；体系须具备收集-翻新-再分配闭环。
+          <br><br><b>责任与追踪</b>：池运营者/首次投放空包装者为生产者；2029-02-12 起须带数字标签（开放循环且无系统运营者的可豁免）。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 12(2)-(3)</b> · <b>Art 24(5)</b> · <b>Art 27</b> · <b>Art 29(4)</b> · <b>Art 29(10)-(13)</b> · <b>Annex VI</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>依据 Art 29(4) 逐项核对豁免情形并留存<b>证明材料</b>（危险品证明、食品接触说明等）</li>
+          <li>课程口径补充：部分<b>易腐产品、危险品及微型企业</b>可豁免重复利用目标，需按具体情形留存依据</li>
+          <li>纳入 reuse system 的包装保留<b>体系认证材料</b>（Article 27）</li>
+          <li>2029-02 前完成<b>数字标签方案</b>（开放循环无运营者除外）</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k5">重复使用</a><a class="chip" href="#k7">标签规则</a></div></div></div>
+
+      <div class="kcard kc-coral cfold" id="k7"><div class="c-head"><span class="no">09</span><h3>标签规则</h3><span class="status-badge">⏳ 待细则</span><span class="c-arrow">▾</span></div><div class="c-body"><div class="when">2026-08-12 / 2028-08-12 分步生效</div>
+        <div class="body"><b>2026-08-12 起</b>：包装须标明经营商识别信息（制造商/进口商名称、注册商标、单一联络邮政地址）。<b>2028-08-12 起</b>（或实施细则生效后 24 个月，较晚者）：统一材质成分图示标签。另有有害物质标注、可堆肥说明、押金返还统一颜色标识、可重复使用包装数字标签（2029-02-12 起或实施细则生效后 30 个月，较晚者）。在标签要求生效前已生产或进口的包装，可在要求生效后 3 年内继续投放（Art 12(12)）。</div>
+        <div class="law-ref">📖 条文锚点：<b>Art 12(1)</b> · <b>Art 12(5)-(6)</b> · <b>Art 12(12)</b> · <b>Art 13(1)</b> · <b>Art 15(6)</b> · <b>Art 70(2)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>追溯码格式自定</b>（型号/批次/SKU/序列号均可），唯一标准是<b>可追溯性</b>——与 DoC、技术文档交叉引用</li>
+          <li><b>多组件包装</b>：主外包装显示识别元素+欧盟法人名称+单一联络人；内件不必重复</li>
+          <li><b>材料编码</b>：2028-08-12 前可徒手分离的组件按 97/129/EC 标注材料编号（届时该决定废止，由统一标签接替）</li>
+          <li><b>文档保留年限</b>：一次性包装自投放起 <b>5 年</b>；可重复使用包装 <b>10 年</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#c15">标签内容</a><a class="chip" href="#k1">有害物质</a><a class="chip" href="#k5">重复使用</a></div></div></div>
+
+      <div class="kcard kc-coral cfold" id="c15"><div class="c-head"><span class="no">10</span><h3>标签内容与特殊标签</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">强制 / 非强制 / 特殊要求</div><div class="body">
+          <b>强制内容</b>：包装材质成分（图示）、制造商名称与地址、注册品牌；进口商名称、注册商号/商标、邮政地址。
+          <br><br><b>非强制内容</b>：回收材料比例、生物基塑料含量。
+          <br><br><b>特殊标签</b>：含有害物质→按欧委会数字标注方法（最迟 2030-01-01 出台）标明名称与浓度；可堆肥材料→注明是否适合家庭堆肥、不可丢弃在自然环境中；押金返还包装→清晰标识（统一颜色标识为可选，成员国可要求）；可重复使用包装（2029-02-12 起或实施细则生效后 30 个月，较晚者）→数字标签追踪。可加二维码标明各部分分类存放位置。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 12(1)-(10)</b> · <b>Art 14</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>2026-08-12 前</b>完成经营商识别信息印刷</li>
+          <li><b>2028-08-12 前</b>完成统一材质标签 + 二维码数据载体方案</li>
+          <li>特殊标签（有害物质/可堆肥/押金/数字）按品类清单<b>逐项核对</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k7">标签规则</a><a class="chip" href="#c16">可堆肥</a><a class="chip" href="#v7">标签深化</a><a class="chip" href="#v8">特殊标签细节</a></div></div></div>
+
+      <div class="kcard kc-gray cfold" id="v3"><div class="c-head"><span class="no">22</span><h3>EPR 注册-报告-缴费三步实操</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">2026-08-12 起 · 平台审核关注</div><div class="body">
+          <b>注册（Registration）</b>：在首次销售带包装产品的每一个欧盟成员国，向当地官方机构或指定的生产者责任组织（PRO）注册，获取唯一的 EPR 注册号。
+          <br><br><b>报告（Reporting）</b>：定期（通常每年）向各国相关机构申报投放该国的包装数据，包括材质、重量、数量等。
+          <br><br><b>缴费（Payment）</b>：根据申报数据支付「生态贡献费」，用于支持当地包装废弃物的收集、分类和回收处理。
+          <br><br>⚠️ <b>平台审核</b>：亚马逊等主流电商平台已开始强制审核卖家的包装法规注册号，未合规产品面临下架风险；在销售国无机构时可能需委任授权代表（AR）履行 EPR 义务。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 44(1)-(14)</b> · <b>Art 45(1)-(6)</b> · <b>Annex IX</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>按销售国建立<b>注册号台账</b>（国家、注册号、PRO、有效期、续费日）</li>
+          <li>把<b>材质/重量/数量</b>数据纳入年度申报日历，与包装台账同源维护</li>
+          <li>开店/续约前先自查 EPR 注册号，避免平台下架</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k9">合规责任</a><a class="chip" href="#v6">生产者判定</a></div></div></div>
+
+      <div class="kcard kc-gray cfold" id="v4"><div class="c-head"><span class="no">23</span><h3>DoC 十项必备内容</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">2026-08-12 起 · 缺签名无效</div><div class="body">
+          一份合规的欧盟符合性声明（DoC）须包含以下十项（Annex VIII）：
+          <br><br>1. <b>唯一识别号</b>：DoC 文件本身的唯一编号，便于内部系统及供应链追溯；2. <b>制造商信息</b>：名称、注册地址（单一联络地址），适用时含欧盟授权代表信息；3. <b>责任声明</b>：明确该 DoC 在制造商完全责任下发布；4. <b>包装唯一标识</b>：包装类型、批次号、序列号或其他可追溯特征（笼统写「所有包装」不满足要求）；5. <b>对象描述</b>：清晰识别并描述 DoC 适用的包装，涵盖材料与关键特性；6. <b>合规声明</b>：确认包装符合欧盟法规 (EU) 2025/40，特别是第 5-12 条要求；7. <b>引用标准</b>：列出用于证明符合性的协调标准、通用规范或内部技术规范（协调标准未齐备时须写明所采用的技术规范）；8. <b>通报机构信息</b>：如适用，填写通报机构名称与编号；常规 Module A 内部生产控制通常不涉及通报机构；9. <b>补充信息</b>：与符合性声明相关的补充说明；10. <b>签署信息</b>：制造商签名、签署地点及日期，否则不具备法律效力。
+          <br><br>⚠️ <b>语言要求</b>：DoC 须以投放市场成员国主管机构易懂的语言提供，多国销售时应备好对应语言版本或可快速翻译。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 39</b> · <b>Annex VIII（十项）</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>用<b>十项清单</b>逐项审核供应商回传的 DoC，缺失即退回</li>
+          <li>DoC 编号与包装追溯码、测试报告编号<b>交叉引用</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k9">合规责任</a><a class="chip" href="#v5">技术文档</a></div></div></div>
+
+      <div class="kcard kc-gray cfold" id="v5"><div class="c-head"><span class="no">24</span><h3>技术文档标准化细节与风险分析</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">2026-08-12 起 · 基础四件套见 05 号卡片</div><div class="body">
+          除既有四件套（用途描述、图纸材料、测试标准清单、测试报告）外，技术文档还须体现：
+          <br><br><b>风险分析</b>：证明包装符合适用要求，并包含对<b>不合规风险的分析与风险控制</b>内容，覆盖包装的设计、生产及使用环节。
+          <br><br><b>标准清单细分</b>：(i) 第 36 条全部或部分采用的协调标准；(ii) 第 37 条采用的通用规范；(iii) 用于检测、计算的其他相关技术规范；(iv) 仅部分采用时注明实际采用的条款章节；(v) 未采用任何协调标准/通用规范时，说明为满足要求所采用的技术方案。
+          <br><br><b>评估方式说明</b>：定性说明第 6、10、11 条（可回收性、最小化、重复使用）评估的开展方式（Annex VII(e)）；再生料（Art 7）、生物基（Art 8）、可堆肥（Art 9）、有害物质（Art 5）的合规证据分别纳入技术文档。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 36-37</b> · <b>Art 38</b> · <b>Annex VII Module A 第 2 点</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>建立<b>标准引用表</b>：每条要求 ↔ 协调标准/通用规范 ↔ 实际条款 ↔ 检测报告</li>
+          <li>风险分析文件随设计变更<b>同步更新</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k9">合规责任</a><a class="chip" href="#v4">DoC 十项</a></div></div></div>
+
+      <div class="kcard kc-gray cfold" id="v6"><div class="c-head"><span class="no">25</span><h3>生产者判定流程与关键术语</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">Article 3(13)-(21) · 责任主体判定</div><div class="body">
+          <b>关键术语（Art 3）</b>：生产者=制造商/进口商/分销商（含远程销售）；供应商=向制造商提供包装或包装材料的自然人或法人；进口商=欧盟内设立、将第三国包装推向市场的主体；分销商=供应链中制造商/进口商以外将包装提供市场的主体；授权代表=获制造商书面授权、代表其履行本条例义务的欧盟主体；最终分销商=供应链中向终端用户交付包装产品（含可重复使用或可补装购买产品）的主体。
+          <br><br><b>判定流程（课件口径）</b>：
+          <br><br>• 在包装成为废弃物的成员国，若完整空包装制造商位于该国 → <b>生产者=制造商</b>；
+          <br>• 运输包装、服务包装、初级生产包装 → <b>生产者=完整空包装的制造商</b>；
+          <br>• 销售包装、组合包装 → <b>生产者=所包产品的制造商</b>；
+          <br>• 由分销商/进口商/拆包者首次投放时，该主体即生产者；向最终用户交付时<b>远程销售者</b>即生产者；
+          <br>• <b>在线平台</b>须核查卖家的 EPR 合规情况。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 3(1)(13)-(21)</b> · <b>Art 15</b> · <b>Art 18</b> · <b>Art 21</b> · <b>Art 45(4)-(6)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>每类包装先回答「<b>空包装制造商在哪国？谁首次投放？是否直供终端？</b>」</li>
+          <li>远程销售与平台渠道单独确认<b>责任归属</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#c19">符合模式</a><a class="chip" href="#v3">EPR 实操</a></div></div></div>
+
+    </div></div>
+  </div>
+
+  <div class="tg-group">
+    <div class="tg-head"><span class="tg-dot" style="background:var(--c-amber)"></span>2028 年 <span class="tg-date">2028-02-12 / 2028-08-12</span><span class="tg-note">可堆肥 · 生物基评估 · 统一标签</span></div>
+    <div class="cards-3d"><div class="grid">
+
+      <div class="kcard kc-green cfold" id="c16"><div class="c-head"><span class="no">11</span><h3>可堆肥包装材料</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">2028-02-12 起强制工业可堆肥</div><div class="body">
+          <b>强制可堆肥</b>：渗透式茶包/咖啡包、软质单次使用单元、果蔬粘性标签——须在工业堆肥设施中分解。
+          <br><br><b>成员国自选</b>：超轻/轻质塑料购物袋及非渗透式咖啡胶囊等，由成员国在具备配套生物废弃物收集处理设施时决定是否要求可堆肥（Art 9(2)）。
+          <br><br><b>与回收的关系</b>：Art 9(1) 强制可堆肥品类豁免 Art 6(1) 一般可回收义务；其余包装（含可生物降解塑料）自 2028-02-12 起仍须按 Art 6 设计为可材料回收（Art 9(3)），且不得影响其他废物流的可回收性。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 3(1)(1)(f)-(g)</b> · <b>Art 9(1)-(6)</b> · <b>Annex III</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>茶包/咖啡包/果蔬标签品类 <b>2028-02 前</b>切换工业可堆肥材料（EN 13432 认证）</li>
+          <li>标签注明<b>堆肥适用性</b>与「不可丢弃于自然环境」</li>
+          <li>其余包装维持<b>可回收设计</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k8">附件V禁令</a><a class="chip" href="#c15">特殊标签</a></div></div></div>
+
+      <div class="kcard kc-blue cfold" id="c17"><div class="c-head"><span class="no">12</span><h3>生物基塑料原料</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">2028-02-12 前完成评估</div><div class="body">
+          <b>Article 8</b>：欧委会须在 2028-02-12 前完成生物基塑料包装的技术与环境性能评估，并视结果提出立法提案（Art 8(2)），可能包含：生物基原料<b>可持续性要求</b>、增加生物基使用的<b>目标</b>、在缺乏合适回收技术时允许用<b>生物基原料替代再生料</b>、修订生物基塑料定义。
+          <br><br>⚠️ 注意：2030 年再生料要求仍以<b>消费后废弃物</b>为准，<b>生物基 ≠ 再生料</b>，两者不可混同。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 3(1)(53)</b> · <b>Art 8(1)-(2)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>跟踪 <b>2028-02 评估结论</b>与可能出台的生物基要求</li>
+          <li><b>生物基≠再生料</b>：2030 再生料仍按消费后废弃物核算</li>
+          <li>考虑生物基替代时先确认<b>可持续性认证体系</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k3">再生料含量</a><a class="chip" href="#v10">再生料深化</a></div></div></div>
+
+      <div class="kcard kc-coral cfold" id="v7"><div class="c-head"><span class="no">26</span><h3>标签深化：语言、环保声明与数字化</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">2026-08-12 / 2028-08-12 · 补充 10 号卡片</div><div class="body">
+          <b>语言要求</b>：标签信息须以成员国确定的<b>一种或多种终端用户易懂语言</b>提供（Art 12(5)，通常为该国官方语言）。
+          <br><br><b>环保声明限制</b>：包装上印制的「可回收」「可生物降解」或循环箭头等环保声明受到严格监管，防止虚假或误导性宣传（绿色声明须可验证）。
+          <br><br><b>数字化载体（课件口径）</b>：2028-08-12 起统一标签配合二维码，消费者扫码可获取全生命周期数据（材料来源、可回收等级、再生料比例等）；官方明确强制的是可重复使用包装的数字标签（2029-02-12 起或实施细则生效后 30 个月，较晚者），一般包装的二维码范围以实施细则为准。
+          <br><br>⚠️ <b>严禁使用实体标签展示 EPR 信息</b>（EPR 注册信息走申报系统/数字载体，不印在包装实体标签上）。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 12(2)</b> · <b>Art 12(5)-(6)</b> · <b>Art 12(9)</b> · <b>Art 14</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>按目标国语言制作<b>标签文案版本</b>，多语言市场提前排期</li>
+          <li>环保声明先做<b>证据链审查</b>（检测报告/认证），不能自我宣称</li>
+          <li>EPR 信息从实体标签设计中<b>剔除</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#c15">标签内容</a><a class="chip" href="#v8">特殊标签细节</a></div></div></div>
+
+      <div class="kcard kc-coral cfold" id="v8"><div class="c-head"><span class="no">27</span><h3>特殊包装标签披露细节</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">DRS 2029 · 重复使用 2029-02 · 可堆肥 2028-02</div><div class="body">
+          <b>押金返还（DRS）包装</b>：标签须额外包含<b>押金金额标识、返还方式指引、返还地点信息</b>，以及与押金系统关联的<b>专属识别码</b>（课程口径，统一标签规格以 Art 12(6) 实施法案为准）。
+          <br><br><b>可重复使用包装</b>：须明确告知用户「可重复使用」状态；通过二维码等数字形式向消费者提供：重复使用周期数量、返还点与回收点位置、重新处理（清洗/维修）要求、报废后的处理说明（数字载体内容细则以 Art 12(6) 实施法案为准）。
+          <br><br><b>可堆肥包装</b>：按 Art 12 官方要求，标签须注明材料<b>可堆肥、不适合家庭堆肥（如适用）、不可丢弃在自然环境中</b>；产品本身须兼容 <b>EN 13432:2000</b> 工业堆肥标准（成员国要求时含家庭堆肥标准），认证文件作为技术文档证据支撑标签声明。⚠️ 防「伪可堆肥」：可堆肥包装须优先设计为可材料回收，不得影响其他废物流的可回收性，避免混入常规塑料回收流造成污染。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 12(1)-(2)</b> · <b>Art 12(6)</b> · <b>Art 12(10)</b> · <b>Art 50</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>DRS 品类按目标国要求设计<b>专属识别码+押金信息区</b></li>
+          <li>可重复使用包装准备<b>二维码内容模板</b>（周期/返还点/清洗/报废）</li>
+          <li>标签文字按官方口径注明「可堆肥/不适合家庭堆肥/不可丢弃自然」，并附 EN 13432 认证文件作证据链</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k5">重复使用</a><a class="chip" href="#c16">可堆肥</a><a class="chip" href="#v7">标签深化</a></div></div></div>
+
+    </div></div>
+  </div>
+
+  <div class="tg-group">
+    <div class="tg-head"><span class="tg-dot" style="background:var(--c-blue)"></span>2030-01-01 起 <span class="tg-date">核心大节点</span><span class="tg-note">分级 · 再生料 · 最小化 · 禁令 · 重复利用</span></div>
+    <div class="cards-3d"><div class="grid">
+
+      <div class="kcard kc-amber cfold" id="k2"><div class="c-head"><span class="no">13</span><h3>可回收性分级</h3><span class="status-badge">⏳ 待细则</span><span class="c-arrow">▾</span></div><div class="c-body"><div class="when">2030-01-01 起强制</div>
+        <div class="body"><table><tr><th>等级</th><th>回收比例</th></tr><tr><td>A 级</td><td>≥95%</td></tr><tr><td>B 级</td><td>≥80%</td></tr><tr><td>C 级</td><td>≥70%</td></tr></table>低于 C 级视为不可回收、2030-01-01 或授权法案生效后 24 个月（较晚者）起禁售；2038-01-01 起仅允许 A/B 级。2035-01-01 或 Art 6(5) 实施法案生效后 5 年（较晚者）起，可回收性还须满足「规模化回收」条件：欧盟层面每年该包装类别回收量达木材 ≥30%、其他材料 ≥55%（Art 3(1)(39) 法定口径，Art 6(2)(b)）。</div>
+        <div class="law-ref">📖 条文锚点：<b>Art 3(1)(39)</b> · <b>Art 6(1)-(5)</b> · <b>Art 6(10)-(12)</b> · <b>Annex II Table 3</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>2030 前完成可回收性评估</b>，确定包装等级（过渡期可参考协调标准 EN 13430:2004）</li>
+          <li><b>设计即回收</b>：避免多层复合、难分离材质；单一材质优先</li>
+          <li>评估资料（等级+计算方法）纳入技术文档归档</li>
+          <li>⚠️ 欧委会 2026-02-25 授权决定：<b>缠绕膜、打包带</b>豁免同国运输 100% 可重复使用要求，但仍需重金属检测、可回收声明与 DoC</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#c12">豁免清单</a><a class="chip" href="#c11">回收的区别</a></div></div></div>
+
+      <div class="kcard kc-blue cfold" id="k3"><div class="c-head"><span class="no">14</span><h3>再生料最低含量</h3><span class="status-badge">⏳ 待细则</span><span class="c-arrow">▾</span></div><div class="c-body"><div class="when">2030 起（或实施法案后 3 年）· 2040 升级</div>
+        <div class="body"><table><tr><th>类型</th><th>2030</th><th>2040</th></tr><tr><td>PET 接触敏感包装</td><td>30%</td><td>50%</td></tr><tr><td>非 PET 接触敏感包装</td><td>10%</td><td>25%</td></tr><tr><td>一次性塑料饮料瓶</td><td>30%</td><td>65%</td></tr><tr><td>其他塑料包装</td><td>35%</td><td>65%</td></tr></table>再生料须来自<b>消费后</b>塑料废弃物，工业废料不算；比例按<b>每个工厂与年度</b>计算平均值（Art 7(1)）。2030 档适用日为 2030-01-01 或 2026-12-31 实施法案生效后 3 年（较晚者，Art 7(1)）；2040 档按 2040-01-01（Art 7(2)）。</div>
+        <div class="law-ref">📖 条文锚点：<b>Art 7(1)-(5)</b> · <b>Art 7(8)-(12)</b> · <b>Annex II Table 1</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>核算 PCR 配比</b>：梳理塑料包装供应链，评估消费后再生料（PCR）采购可行性</li>
+          <li><b>建立溯源凭证</b>：保存再生料的来源证明（供应商声明、批次记录）</li>
+          <li>按年度统计各包装类型再生料比例并申报</li>
+          <li>豁免情形：占总重 <b>&lt;5%</b> 的微量塑料部件；威胁健康的食品接触包装可申请</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#c12">豁免清单</a><a class="chip" href="#c17">生物基</a></div></div></div>
+
+      <div class="kcard kc-teal cfold" id="k4"><div class="c-head"><span class="no">15</span><h3>包装最小化</h3><span class="c-arrow">▾</span></div><div class="c-body"><div class="when">2030 起（空隙率或实施法案后 3 年）</div>
+        <div class="body">以最低重量和体积满足功能需求（Art 10(1)，2030-01-01 起）；组合、运输与电商包装<b>空隙率 ≤50%</b>（2030-01-01 或 Art 24(2) 实施法案生效后 3 年，较晚者）——气泡膜、泡沫、海绵、纸屑等填充物所占空间都计为「空隙」。禁止双层底、多余层数等虚假设计。</div>
+        <div class="law-ref">📖 条文锚点：<b>Art 10</b> · <b>Annex IV</b> · <b>Art 24(1)-(6)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>2030 前自查空隙率</b>：测量包装内部空余空间占比，确保 ≤50%；责任主体是<b>填充包装的经营商</b></li>
+          <li><b>豁免 50% 上限的情形</b>：纳入可重复使用体系的包装；销售包装直接用作电商包装（不加外箱）</li>
+          <li><b>过渡期</b>（2026-08 起）：按旧指令 essential requirements / EN 13428 评估最小化；2030 起（若实施法案延迟则按生效后 3 年）按欧委会新方法</li>
+          <li><b>双向约束</b>：既不能过度包装，也不能过度减重导致保护性能不达标（Annex IV 性能标准）</li>
+          <li><b>灯具缓冲专项</b>：泡沫/气泡膜改可回收纸托、蜂窝纸板等，按跌落测试重新设计</li>
+          <li>豁免：2025-02-11 前注册的外观设计/商标、受欧盟地理标志保护的产品包装</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#c10">包装分级</a><a class="chip" href="#k8">附件V禁令</a></div></div></div>
+
+      <div class="kcard kc-green cfold" id="k8"><div class="c-head"><span class="no">16</span><h3>一次性塑料包装禁令</h3><span class="c-arrow">▾</span></div><div class="c-body"><div class="when">2030-01-01 起 · 附件 V</div>
+        <div class="body">2030-01-01 起禁止：销售点组合包装用收缩膜、&lt;1.5kg 预包装果蔬、餐饮堂食一次性包装、调味品单人份小袋、酒店小包装洗漱用品、<b>&lt;15 微米超轻塑料袋</b>（卫生必要、防止食物浪费的散装食品销售包装除外）。官方澄清：附件 V 第 1-4 点禁令适用于塑料含量按总重 <b>≥5%</b> 的复合材料包装（&lt;5% 的纸基复合材料不适用）。另经修订 SUP 指令，<b>2029-02-12</b> 起新增/扩展一次性塑料禁令（Art 67(5)）：机场/火车站行李收缩膜、运输与搬运中保护货物的塑料填充碎屑（chips）、多包装塑料环，以及 EPS/XPS 食品容器、饮料容器和杯。</div>
+        <div class="law-ref">📖 条文锚点：<b>Art 25(1)-(6)</b> · <b>Annex V</b> · <b>Art 67(5)</b> · <b>Art 71</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>2030 前全面排查</b>：产品线是否涉及附件 V 所列一次性塑料包装形式</li>
+          <li><b>提前替换</b>：收缩膜→可回收纸包装；堂食包装→可重复使用/可回收替代方案</li>
+          <li>超轻塑料袋（&lt;15μm）仅卫生必要、防止食物浪费的散装食品销售包装用途可豁免，需留存必要性证明</li>
+          <li><b>HORECA 义务</b>：2027-02 起须允许顾客自带容器（价格不得高于一次性包装）；2028-02 起须提供可重复使用包装选项（微型企业豁免）；2030 起努力使 10% 产品以可重复包装提供</li>
+          <li><b>5% 红线以下仍需关注 SUPD</b>：塑料占比 &lt;5% 的纸基复合材料虽不受附件 V 禁令直接约束，仍须遵守一次性塑料指令（SUPD）及成员国可能更严格的减量措施</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#c18">塑料袋</a><a class="chip" href="#c16">可堆肥</a><a class="chip" href="#k4">最小化</a></div></div></div>
+
+      <div class="kcard kc-amber cfold" id="c18"><div class="c-head"><span class="no">17</span><h3>塑料袋限制</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">超轻袋 2030 禁售 · 轻质袋成员国自选</div><div class="body">
+          <b>&lt;15 微米超轻袋</b>：极易成为垃圾并造成海洋污染——2030-01-01 起列入附件 V <b>禁售</b>（卫生必要、防止食物浪费的散装食品销售包装除外）；是否强制可堆肥由成员国决定。
+          <br><br><b>15-50 微米轻质袋</b>：成员国在有生物废弃物收集处理设施时，可要求其可堆肥。
+          <br><br><b>企业动作</b>：提前排查塑料袋使用场景（防尘套袋、购物袋等），替换为可回收或可重复方案。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 3(1)(56)-(57)</b> · <b>Art 9(2)</b> · <b>Art 34</b> · <b>Annex V 第 6 点</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>排查 <b>&lt;15μm 超轻袋</b>使用场景，2030 前替换（卫生必要除外并留证）</li>
+          <li>关注目标成员国是否要求<b>轻质袋可堆肥</b></li>
+          <li>采购替代方案（纸袋/可回收袋）并更新<b>技术文档</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k8">附件V禁令</a><a class="chip" href="#c16">可堆肥</a></div></div></div>
+
+      <div class="kcard kc-pink cfold" id="c12"><div class="c-head"><span class="no">18</span><h3>回收豁免材料清单</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">豁免可回收分级要求</div><div class="body">
+          1. <b>药品</b>直接包装；2. <b>医疗器械</b>接触敏感包装（含体外诊断 IVD）；3. <b>药品外包装</b>（为保证药品质的必要情形）；4. <b>婴幼儿食品</b>、特殊医学用途食品接触敏感包装；5. <b>危险品</b>运输包装；6. <b>轻质木材、软木、纺织品、橡胶、陶瓷、瓷、蜡</b>制销售包装。
+          <br><br>⚠️ <b>豁免≠全面豁免</b>：重金属限量、DoC、技术文档、EPR 注册、最小化原则依然适用。
+          <br><br>Art 6(11) 可回收性例外清单将于 <b>2035-01-01 前</b>审查（Art 6(12)），范围可能调整。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 6(11)(a)-(g)</b> · <b>Art 6(12)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>为豁免包装准备<b>证明材料</b>（药品接触证明、材质声明）</li>
+          <li>确认豁免范围（危险品运输包装豁免回收分级/再生料含量/重复利用目标；其余品类多为回收分级），<b>其余义务照常</b></li>
+          <li>2035 审查前<b>持续跟踪</b>清单变化</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k6">豁免条款</a><a class="chip" href="#k2">可回收分级</a></div></div></div>
+
+      <div class="kcard kc-pink cfold" id="k6"><div class="c-head"><span class="no">19</span><h3>豁免条款</h3><span class="c-arrow">▾</span></div><div class="c-body"><div class="when">2035 审查 Art 6(11) 例外 · 2032 评估附件 V</div>
+        <div class="body">药品直接接触包装、医疗器械/婴幼儿食品/特殊医疗食品接触敏感包装豁免回收要求；<b>危险品运输包装</b>豁免可回收分级、再生料含量与重复利用目标；轻质木材、软木、纺织品、橡胶、陶瓷、瓷、蜡制销售包装同样豁免。再生料另豁免：威胁健康的食品接触包装、占总重 <b>&lt;5%</b> 的微量塑料部件。</div>
+        <div class="law-ref">📖 条文锚点：<b>Art 6(11)-(12)</b> · <b>Art 7(4)-(5)</b> · <b>Art 29(4)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li><b>豁免≠全面豁免</b>：重金属限量、DoC、技术文档、EPR 注册、最小化原则依然适用</li>
+          <li>为豁免包装准备<b>豁免证明材料</b>（如药品接触证明、材质声明）</li>
+          <li>持续跟踪：<b>Art 6(11) 可回收性例外清单</b>于 2035-01-01 前审查（Art 6(12)）；附件 V 限制与豁免于 2032-02-12 评估（Art 25(5)）</li>
+          <li>危险品包装（IBC 桶/铁桶）仅豁免可回收分级、再生料含量与重复利用目标，其余义务（重金属限量、DoC、技术文档、标签等）照常</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#c12">豁免清单</a><a class="chip" href="#k2">可回收分级</a><a class="chip" href="#k3">再生料</a><a class="chip" href="#v9">回收内涵</a><a class="chip" href="#v10">再生料深化</a><a class="chip" href="#v11">最小化细节</a></div></div></div>
+
+      <div class="kcard kc-amber cfold" id="v9"><div class="c-head"><span class="no">28</span><h3>可回收性等级内涵与回收设计标准</h3><span class="status-badge">⏳ 待细则</span><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">2030 强制 · 2028 标准制定</div><div class="body">
+          <b>A/B/C 等级内涵</b>（比例见 13 号卡片）：A 级=高可回收性，通常为单一材料或极易分离结构，回收后能产生高品质再生料用于闭环循环；B 级=中等可回收性，当前技术可回收，但可能含少量难分离组件（特定胶水、标签），再生料质量有一定局限；C 级=低可回收性（最低准入门槛），仅能通过特定技术部分回收，通常含不可分离复合材料，再生料多降级使用。
+          <br><br><b>可回收性定义</b>：包装在设计与废物管理及处理相兼容——实现分类收集、分流分类处理、大规模回收利用，并采用再生材料替代一次性原材料。
+          <br><br><b>回收设计标准制定</b>：至 2028-01-01，欧委会参考欧洲标准化组织制定的标准后，依据第 64 条通过授权法案补充回收设计标准与可回收性能等级；经济运营商应在授权法案生效之日起 <b>3 年内</b>遵守新增或更新的回收设计标准。
+          <br><br><b>强制适用日期（官方口径）</b>：包装须达到至少 C 级的时间点为 <b>2030-01-01 或授权法案生效后 24 个月（较晚者）</b>；2038-01-01 起须达至少 B 级。若授权法案在 2028-01-01 按时生效，强制日仍以 2030-01-01 为准；若延迟生效，则按「生效后 24 个月」顺延，企业应以最终法案文本倒排设计计划。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 6(2)-(4)</b> · <b>Annex II Table 3-4</b> · <b>Art 64</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>用等级内涵反向检查设计：<b>单一材质/易分离</b>才能保 A/B，胶水与标签是常见降级点</li>
+          <li>关注 2028-01 授权法案，按「3 年过渡期」与「2030/24 个月强制日」双口径倒排<b>设计变更计划</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k2">可回收分级</a><a class="chip" href="#c11">回收路径</a></div></div></div>
+
+      <div class="kcard kc-blue cfold" id="v10"><div class="c-head"><span class="no">29</span><h3>再生料豁免与实施法案</h3><span class="status-badge">⏳ 待细则</span><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">2026-12-31 立法节点 · 2030 适用</div><div class="body">
+          <b>接触敏感定义</b>：接触敏感类包装通常指直接接触食品、药品等的包装。
+          <br><br><b>额外豁免</b>（14 号卡片的补充）：<b>特殊用途包装</b>——药品（直接包装及为保证药品质的必要外包装）、医疗器械（含体外诊断 IVD）、婴幼儿及儿童食品、特殊医学用途食品的接触敏感包装可豁免；<b>可堆肥塑料包装与危险品运输包装</b>同样列入 Art 7(4) 豁免；<b>技术不可行</b>——针对特定塑料包装/聚合物的再生料豁免需经欧委会 2028-01-01 评估（Art 7(12)）后确定，目前不得默认适用。
+          <br><br><b>实施法案节点</b>：至 2026-12-31，欧委会应通过实施法案，制定从欧盟境内回收并收集的<b>消费后塑料废料中再生材料含量百分比的计算与核实方法论</b>，以及附件 VII 技术文件格式；最迟于 2029-01-01 或实施法案生效之日起 24 个月（以较晚者为准），再生料含量的计算和验证须符合该实施法案规则。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 3(1)(49)</b> · <b>Art 7(1)-(2)</b> · <b>Art 7(4)-(5)</b> · <b>Art 7(8)-(12)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>特殊用途包装准备好<b>用途证明</b>（药品/医疗器械/婴幼儿食品等）</li>
+          <li>技术不可行豁免需跟踪 <b>2028 评估结论</b>，不能默认长期有效</li>
+          <li>按实施法案建立<b>再生料计算与验证记录</b>，为 2029 规则切换做准备</li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k3">再生料含量</a><a class="chip" href="#c12">豁免清单</a></div></div></div>
+
+      <div class="kcard kc-teal cfold" id="v11"><div class="c-head"><span class="no">30</span><h3>包装最小化执行细节与测试豁免</h3><span class="c-arrow">▾</span></div>
+        <div class="c-body"><div class="when">2030-01-01 起 · 15 号卡片补充</div><div class="body">
+          <b>明令禁止的设计（课程口径补充）</b>：
+          <br><br>• <b>假底/隐蔽假底</b>：包装盒底部做双层结构来垫高商品；
+          <br>• <b>大箱装小货</b>：明显超出必要保护范围的 oversized 包装。
+          <br><br><b>特殊豁免</b>：针对易碎品、危险品等特殊商品，如能提供充分的<b>运输安全测试报告</b>，证明必须使用额外缓冲材料或更大的包装，可以申请豁免。
+        </div>
+        <div class="law-ref">📖 条文锚点：<b>Art 10(2)</b> · <b>Annex IV</b> · <b>Art 24(2)</b> · <b>Art 24(4)</b><a class="law-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方原文 ↗</a></div>
+        <button class="how-toggle">标准规范 <span class="arr">▾</span></button>
+        <div class="how"><div class="how-in"><h5>合规实操</h5><ul>
+          <li>设计评审时把<b>假底/大箱小货</b>列入禁止项检查表</li>
+          <li>需申请豁免的易碎/危险品，提前准备<b>第三方运输安全测试报告</b></li>
+        </ul></div></div>
+        <div class="rel"><span class="cap">关联：</span><a class="chip" href="#k4">包装最小化</a><a class="chip" href="#c12">豁免清单</a></div></div></div>
+
+    </div></div>
+  </div>
+
+</div></section>
+
+<section id="checklist"><div class="wrap">
+  <div class="sec-head"><div class="kicker" style="color:var(--c-teal)">Action Plan</div><h2>企业合规五步行动清单</h2><p>依据官方指南与行业实践整理的落地路径，按执行顺序排列。</p></div>
+  <div class="urgent-note">⏰ <b>本月底前（2026-08-12）</b>：无符合性声明（DoC）的货物可能被欧盟海关扣留，请优先完成第 1-4 步。</div>
+  <div class="cl-step"><div class="cl-num" style="background:var(--c-red)">1</div><div class="cl-body">
+    <h4>包装全面自查盘点</h4>
+    <p>建立包装台账：SKU、材质、单件重量、供应商、欧盟年销量、销售国。按销量优先排序（先抓 80% 销量），标记疑似不合规设计（不可回收材质、泡沫填充、超轻袋等）。</p>
+  </div></div>
+  <div class="cl-step"><div class="cl-num" style="background:var(--c-amber)">2</div><div class="cl-body">
+    <h4>有害物质专项检测</h4>
+    <p>委托有资质实验室做四项重金属检测；食品接触包装同步 PFAS 测试。利用合并检测规则降低成本（同基材同油墨可合并；不同油墨分开测）。保存有效期 1 年的报告。</p>
+  </div></div>
+  <div class="cl-step"><div class="cl-num" style="background:var(--c-blue)">3</div><div class="cl-body">
+    <h4>向供应商索取并归档 DoC</h4>
+    <p>要求供应商按 Article 39 / Annex VIII 出具符合性声明（含可回收等级、再生料比例、物质声明、REACH 声明、签名日期）。制定截止日期（如 2026-07-31），逾期升级处理。</p>
+  </div></div>
+  <div class="cl-step"><div class="cl-num" style="background:var(--c-teal)">4</div><div class="cl-body">
+    <h4>搭建技术文档档案</h4>
+    <p>归档：物料清单、第三方检测报告、可回收性评估资料、欧代委任文件。建立追溯码↔DoC↔测试记录交叉引用，<b>一次性包装保留 5 年、可重复使用包装保留 10 年</b>，随时应对市场监管核查。</p>
+  </div></div>
+  <div class="cl-step"><div class="cl-num" style="background:var(--c-purple)">5</div><div class="cl-body">
+    <h4>EPR 注册 + 委任欧盟授权代表</h4>
+    <p>在每个销售国注册 EPR 并申报包装数据、缴费；无欧盟公司的出口企业及时委任欧代（Authorised Representative），搭建欧盟境内合规对接窗口。注意：亚马逊等电商平台已开始核查包装法规注册号，未合规产品面临下架风险。</p>
+  </div></div>
+  <div class="cl-step"><div class="cl-num" style="background:var(--c-pink)">6</div><div class="cl-body">
+    <h4>中远期合规改造规划（2027-2030）</h4>
+    <p>2027：跟踪最小化计算方法、重复使用更换次数；2028：可堆肥设计、标签系统落地；2029：押金返还、数字标签；2030 前：可回收分级达标、再生料采购、空隙率≤50%、附件 V 禁令排查、重复利用目标达成。</p>
+  </div></div>
+</div></section>
+
+<section id="wizard"><div class="wrap">
+  <div class="sec-head"><div class="kicker" style="color:var(--c-pink)">Exemption Check</div><h2>豁免判定小工具</h2><p>按包装场景回答 4 个问题，判断是否落入 Art 6(11) / Art 7(4) 豁免范围。豁免≠全面豁免：重金属限量、DoC、技术文档、EPR 注册、最小化与标签义务仍然适用。</p></div>
+  <div class="wizard" id="wizardBox">
+    <div class="wz-progress" id="wzProgress"></div>
+    <div class="wz-step on" data-s="0">
+      <div class="wz-q">1/4 包装是否直接接触药品、医疗器械（含体外诊断 IVD），或属于为保证药品质所必需的药品外包装？</div>
+      <button class="wz-opt" data-v="med">是</button>
+      <button class="wz-opt" data-v="no">否</button>
+    </div>
+    <div class="wz-step" data-s="1">
+      <div class="wz-q">2/4 是否属于婴幼儿食品、特殊医学用途食品的接触敏感包装，或是可堆肥塑料包装？</div>
+      <button class="wz-opt" data-v="food">是（婴幼儿食品 / 特医食品）</button>
+      <button class="wz-opt" data-v="comp">是（可堆肥塑料包装）</button>
+      <button class="wz-opt" data-v="no">否</button>
+    </div>
+    <div class="wz-step" data-s="2">
+      <div class="wz-q">3/4 是否属于危险品运输包装（Directive 2008/68/EC 范围）？</div>
+      <button class="wz-opt" data-v="dg">是</button>
+      <button class="wz-opt" data-v="no">否</button>
+    </div>
+    <div class="wz-step" data-s="3">
+      <div class="wz-q">4/4 是否属于轻质木材、软木、纺织品、橡胶、陶瓷、瓷或蜡制成的销售包装？</div>
+      <button class="wz-opt" data-v="wood">是</button>
+      <button class="wz-opt" data-v="no">否</button>
+    </div>
+    <div class="wz-result" id="wzResult"></div>
+    <button class="q-restart alt" id="wzReset" style="display:none;margin-top:14px">重新判定</button>
+  </div>
+</div></section>
+
+<section id="tools"><div class="wrap">
+  <div class="sec-head"><div class="kicker" style="color:var(--c-blue)">Toolkit</div><h2>工具与速查</h2><p>可直接下载的模板、常用缩写与官方出处。CSV 带 BOM，下载后可直接用 Excel 打开；TXT 可发给供应商或存档。</p></div>
+
+  <h3 style="margin:8px 0 14px">📄 文档模板下载</h3>
+  <div class="tools-grid">
+    <div class="tpl-card"><h4>包装台账（CSV）</h4><p>SKU / 层级 / 材质 / 单件重量 / 供应商 / 欧盟年销量 / 销售国 / 优先级 / 风险标记，先抓 80% 销量。</p><button class="tpl-btn" data-dl="taizhang">下载 CSV</button><button class="tpl-btn" data-copy="taizhang">复制</button></div>
+    <div class="tpl-card"><h4>DoC 索取函（TXT）</h4><p>发给供应商，要求按 Annex VIII 十项出具符合性声明，并配套 Annex VII 技术文档与语言要求。</p><button class="tpl-btn" data-dl="docletter">下载 TXT</button><button class="tpl-btn" data-copy="docletter">复制</button></div>
+    <div class="tpl-card"><h4>技术文档目录（TXT）</h4><p>对照 Annex VII Module A 的归档清单：用途、图纸、材料、标准、评估说明、测试报告、风险分析。</p><button class="tpl-btn" data-dl="techdoc">下载 TXT</button><button class="tpl-btn" data-copy="techdoc">复制</button></div>
+    <div class="tpl-card"><h4>EPR 注册台账（CSV）</h4><p>国家 / 注册号 / PRO / 状态 / 有效期 / 续费日，覆盖每个销售国，避免平台下架。</p><button class="tpl-btn" data-dl="epr">下载 CSV</button><button class="tpl-btn" data-copy="epr">复制</button></div>
+  </div>
+
+  <h3 style="margin:26px 0 14px">🔤 缩写速查</h3>
+  <div style="overflow-x:auto"><table class="abbr-table">
+    <tr><th>缩写</th><th>全称 / 含义</th></tr>
+    <tr><td>PPWR</td><td>Packaging and Packaging Waste Regulation，包装与包装废弃物法规 (EU) 2025/40</td></tr>
+    <tr><td>DoC</td><td>EU Declaration of Conformity，欧盟符合性声明（Annex VIII 十项）</td></tr>
+    <tr><td>EPR</td><td>Extended Producer Responsibility，生产者责任延伸（注册-报告-缴费）</td></tr>
+    <tr><td>PRO</td><td>Producer Responsibility Organisation，生产者责任组织</td></tr>
+    <tr><td>DRS</td><td>Deposit and Return System，押金返还制度</td></tr>
+    <tr><td>PCR</td><td>Post-Consumer Recycled，消费后再生料</td></tr>
+    <tr><td>SUPD / SUP</td><td>Single-Use Plastics Directive (EU) 2019/904，一次性塑料指令</td></tr>
+    <tr><td>HORECA</td><td>Hotels / Restaurants / Catering，住宿、餐饮与宴会行业</td></tr>
+    <tr><td>IVD</td><td>In Vitro Diagnostic，体外诊断医疗器械</td></tr>
+    <tr><td>FSMP</td><td>Food for Special Medical Purposes，特殊医学用途食品</td></tr>
+    <tr><td>AR / 欧代</td><td>Authorised Representative，欧盟授权代表</td></tr>
+    <tr><td>DfR</td><td>Design for Recycling，回收设计</td></tr>
+    <tr><td>DA / IA</td><td>Delegated Act / Implementing Act，授权法案 / 实施法案</td></tr>
+    <tr><td>EIF</td><td>Entry into Force，生效日</td></tr>
+    <tr><td>FCM</td><td>Food Contact Material，食品接触材料（法规 1935/2004）</td></tr>
+    <tr><td>EPS / XPS</td><td>Expanded / Extruded Polystyrene，发泡 / 挤塑聚苯乙烯</td></tr>
+  </table></div>
+
+  <h3 style="margin:26px 0 14px">📌 官方出处</h3>
+  <div class="src-box">
+    <a class="chip" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" target="_blank" rel="noopener">法规原文（EUR-Lex）</a>
+    <a class="chip" href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500040" target="_blank" rel="noopener">官方公报 PDF</a>
+    <a class="chip" href="https://environment.ec.europa.eu/topics/circular-economy/packaging-waste_en" target="_blank" rel="noopener">欧委会包装废弃物官方页（指南/FAQ 入口）</a>
+  </div>
+    <h3 style="margin:26px 0 14px">🕒 内容时效状态（截至 2026-08-05）</h3>
+  <div class="src-box">
+    <span class="st ok">✅ 法规原文已逐条核对</span>
+    <span class="st ok">✅ 官方指南/FAQ（2026-08-01 第二版）已核对</span>
+    <span class="st wait">⏳ 待出台：回收设计授权法案（Art 6(4)，期限 2028-01-01）</span>
+    <span class="st wait">⏳ 待出台：再生料计算/核实实施法案（Art 7(8)，期限 2026-12-31）</span>
+    <span class="st wait">⏳ 待出台：统一标签/数字标签实施细则（Art 12(6)(7)，期限 2026-08-12）</span>
+    <span class="st wait">⏳ 待出台：规模化回收实施法案（Art 6(5)，期限 2030-01-01）</span>
+  </div><p style="font-size:12px;color:var(--ink2);margin-top:10px;line-height:1.8">核对说明：本站为中文二次整理。核心日期、限值、比例与法条编号已逐条对照 Regulation (EU) 2025/40 官方文本（上方 EUR-Lex / 官方公报 PDF）核实；标注“课程口径”的实操建议（如检测报告有效期 1 年、合并送检、平台审核现状、DRS 标签细节等）未写入法规正文，请以官方原文与最新指南为准；授权/实施法案尚未出台的日期（如回收设计、再生料计算细则）以欧委会后续文本为准。</p>
+</div></section>
+
+<section id="myths"><div class="wrap">
+  <div class="sec-head"><div class="kicker" style="color:var(--c-amber)">Myth Buster</div><h2>常见误区速查 · 按行业</h2><p>最容易踩坑的认知误区与正确理解，每条都带条文锚点，可回溯官方原文。</p></div>
+  <div class="myth-tabs" id="mythTabs">
+    <button class="mt on" data-m="lighting">💡 灯具行业</button>
+    <button class="mt" data-m="ecom">🛒 电商卖家</button>
+    <button class="mt" data-m="supplier">📦 包装供应商</button>
+    <button class="mt" data-m="horeca">🍽️ 餐饮 HORECA</button>
+  </div>
+  <div class="myth-panel on" data-p="lighting">
+    <div class="myth"><div class="myth-q">误区：我只要做了重金属检测就合规了。</div><div class="myth-a">正确：重金属只是 Art 5 其中一项；DoC、技术文档、EPR、标签、最小化、可回收分级同时适用。<div class="law-ref">📖 条文锚点：Art 5-12 · Art 38-39</div></div></div>
+    <div class="myth"><div class="myth-q">误区：泡沫缓冲是填充物，不算包装。</div><div class="myth-a">正确：缓冲/填充物属于包装，空隙率计算时全部计入“空隙”，2030 起组合/运输/电商包装 ≤50%。<div class="law-ref">📖 条文锚点：Art 24(1)(3)</div></div></div>
+    <div class="myth"><div class="myth-q">误区：纸盒是纸做的，不用管塑料要求。</div><div class="myth-a">正确：覆膜/胶带/缓冲的塑料成分需按附件 V 塑料含量 ≥5% 红线判断；&lt;5% 的纸基复合包装仍受 SUPD 约束。<div class="law-ref">📖 条文锚点：Art 25(1) · Annex V</div></div></div>
+    <div class="myth"><div class="myth-q">误区：防尘袋是产品配件，不是包装。</div><div class="myth-a">正确：鞋/服装防尘袋默认算包装（官方指南口径），需纳入台账并承担义务。<div class="law-ref">📖 条文锚点：Art 3(1)(1)</div></div></div>
+    <div class="myth"><div class="myth-q">误区：用了生物基塑料，就不需要再生料了。</div><div class="myth-a">正确：生物基≠再生料；2030 再生料按消费后废弃物核算，生物基替代需等 Art 8(2) 立法提案落地。<div class="law-ref">📖 条文锚点：Art 7(1)(3) · Art 8(2)</div></div></div>
+    <div class="myth"><div class="myth-q">误区：我是贴牌工厂，合规是品牌方的事。</div><div class="myth-a">正确：贴牌/自有品牌即生产者；仅当你是微型企业且供货方位于欧盟境内时才转责给供货方。<div class="law-ref">📖 条文锚点：Art 15(12) · Art 21</div></div></div>
+  </div>
+  <div class="myth-panel" data-p="ecom">
+    <div class="myth"><div class="myth-q">误区：我是卖家，合规是海外买家的事。</div><div class="myth-a">正确：在线平台须核验你的 EPR 注册号与自证，未合规可能被下架。<div class="law-ref">📖 条文锚点：Art 45(4)-(6)</div></div></div>
+    <div class="myth"><div class="myth-q">误区：快递袋/外箱不用标经营商信息。</div><div class="myth-a">正确：电商包装同样适用识别与标签义务。<div class="law-ref">📖 条文锚点：Art 15(6) · Art 12(1)</div></div></div>
+    <div class="myth"><div class="myth-q">误区：空隙率只看商品内盒。</div><div class="myth-a">正确：电商包装 2030 起 ≤50%，气泡膜、泡沫、纸屑等所有填充物都算空隙。<div class="law-ref">📖 条文锚点：Art 24(1)(3)</div></div></div>
+    <div class="myth"><div class="myth-q">误区：DoC 是供应商的事，与我无关。</div><div class="myth-a">正确：进口商须核验 DoC 与技术文档；无欧盟生产者时进口商承担全部义务。<div class="law-ref">📖 条文锚点：Art 18 · Art 21</div></div></div>
+    <div class="myth"><div class="myth-q">误区：跨境小包裹不需要 EPR。</div><div class="myth-a">正确：远程销售同样属于投放市场，须在销售国注册。<div class="law-ref">📖 条文锚点：Art 44(2)</div></div></div>
+  </div>
+  <div class="myth-panel" data-p="supplier">
+    <div class="myth"><div class="myth-q">误区：我只供材料/空包装，责任是品牌方的。</div><div class="myth-a">正确：空包装制造商/首次投放者即生产者，DoC 由你出具。<div class="law-ref">📖 条文锚点：Art 15(1)-(2)</div></div></div>
+    <div class="myth"><div class="myth-q">误区：ISO 9001 或食品接触声明可以代替 PPWR DoC。</div><div class="myth-a">正确：需按 Annex VIII 十项出具 DoC，并配套 Annex VII 技术文档，质量证书不能替代。<div class="law-ref">📖 条文锚点：Art 39 · Annex VII-VIII</div></div></div>
+    <div class="myth"><div class="myth-q">误区：一份 DoC 可以覆盖全部产品。</div><div class="myth-a">正确：每款/每类包装各一份 DoC，包装唯一标识不能笼统写“所有包装”。<div class="law-ref">📖 条文锚点：Annex VIII</div></div></div>
+    <div class="myth"><div class="myth-q">误区：客户说“豁免”就不用做了。</div><div class="myth-a">正确：豁免≠全面豁免，重金属、DoC、EPR、最小化、标签仍适用。<div class="law-ref">📖 条文锚点：Art 6(11) · Art 7(4)</div></div></div>
+  </div>
+  <div class="myth-panel" data-p="horeca">
+    <div class="myth"><div class="myth-q">误区：堂食纸盒不含塑料就没事。</div><div class="myth-a">正确：含塑料涂层的复合包装按塑料含量 ≥5% 判断附件 V 禁令；&lt;5% 仍受 SUPD 约束。<div class="law-ref">📖 条文锚点：Art 25(1) · Annex V</div></div></div>
+    <div class="myth"><div class="myth-q">误区：允许自带容器，但可以按一次性包装价格收费。</div><div class="myth-a">正确：自带容器价格不得高于一次性包装。<div class="law-ref">📖 条文锚点：Art 32(2)</div></div></div>
+    <div class="myth"><div class="myth-q">误区：可堆肥包装可以丢进自然环境。</div><div class="myth-a">正确：标签须注明“不适合家庭堆肥、不可丢弃自然”。<div class="law-ref">📖 条文锚点：Art 12(1)</div></div></div>
+    <div class="myth"><div class="myth-q">误区：可堆肥=可回收。</div><div class="myth-a">正确：仅 Art 9(1) 品类豁免 Art 6(1) 一般可回收义务，其余包装仍须可回收设计。<div class="law-ref">📖 条文锚点：Art 9(1)(3)</div></div></div>
+    <div class="myth"><div class="myth-q">误区：2027/2028 的 HORECA 义务只针对大企业。</div><div class="myth-a">正确：2028-02 可重复使用选项微型企业豁免，但 2027-02 自带容器义务无规模豁免。<div class="law-ref">📖 条文锚点：Art 32 · Art 33(4)</div></div></div>
+  </div>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+  <div class="sec-head" style="text-align:center;margin:0 auto 30px"><div class="kicker" style="color:var(--c-teal)">Quiz · 无限刷题</div><h2>知识测验</h2></div>
+  <div class="quiz">
+    <div class="quiz-mem" id="quizMem"></div>
+    <div class="q-ctrl" id="qCats"></div>
+    <div class="q-ctrl" id="qNums"></div>
+    <div class="q-meta"><span><span class="q-cat" id="qCat"></span></span><span id="qIdx"></span></div>
+    <div class="q-bar"><i id="qBar"></i></div>
+    <div id="qBox">
+      <div class="q-q" id="qText"></div>
+      <div id="qOpts"></div>
+      <div class="q-exp" id="qExp"></div>
+      <button class="q-next" id="qNext">下一题 →</button>
+    </div>
+    <div class="q-result" id="qResult">
+      <div class="score" id="qScore"></div>
+      <p id="qGrade"></p>
+      <p id="qMsg"></p>
+      <div class="q-wrong" id="qWrong"><h5>错题回顾</h5><ol id="qWrongList"></ol></div>
+      <button class="q-restart" id="qRestart">再来一轮</button>
+      <button class="q-restart alt" id="qShuffle">当前题集重测</button>
+      <button class="q-restart" id="qWrongOnly">错题重练</button>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="version-log" id="version">
+    <b>版本记录</b><br>
+    V4（基线）：19 张知识卡片。<br>
+    V5 · 2026-08-05：新增 11 张立讯课程深化卡片（编号 20-30）；DoC 由八项修正为 Annex VIII 十项；时间线压缩为 8 个“对企业生效”里程碑（配套立法移入面板小字）；全量对照官方文本纠正 9 处、补充 6 处知识点；测验 74→77 题；新增角色筛选（灯具行业）、豁免判定小工具、模板下载、缩写速查、测验错题本与官方出处；再新增卡片搜索、常见误区速查（按行业）与内容时效标记。
+  </div>
+  内容来源：微信公众号「每天学点灯具标准」Rose Guo · 立讯检测（LCS Testing Lab）PPWR 培训课件 · 已对照 Regulation (EU) 2025/40、欧委会官方实施指南与 FAQ（2026-08-01 第二版）及合规机构实操指引核实<br>
+  仅供学习参考，具体合规请以法规原文与官方指南为准
+</div></footer>
+
+<button class="totop" id="totop">↑</button>
+
+<script>
+/* ============ timeline ============ */
+const TL=[ {d:"2025-02-11",l:"法规生效",u:0,t:"2025-02-11 · 法规生效",m:"PPWR 正式进入欧盟法律体系；与你直接相关的只有一件事：可重复使用包装的定义从这天起固定。",c:["PPWR 正式生效（2025-01-22 官方公报发布）","2025-02-11 起投放的包装须按 Art 11(1) 九项条件认定「可重复使用」","2026-08-12 起全面适用（18 个月过渡期）"],rel:[["v2","重复使用定义"]]},
+ {d:"2026-08-12",l:"全面适用",u:1,t:"2026-08-12 · 全面适用（本月生效）",m:"现在就要做：重金属/PFAS 检测、DoC 与技术文档、经营商识别信息必须就位，否则货物可能被欧盟海关扣留。",c:["重金属（铅/镉/汞/六价铬）总量 ≤100mg/kg（Art 5(4)）","食品接触包装 PFAS 限值生效（Art 5(5)）","每款包装须完成符合性评估、技术文档与欧盟 DoC（Art 38-39）","包装须标注经营商识别信息（名称/商标/单一联络地址，Art 15(6)）","包装总体须可回收（Art 6(1)）；A/B/C 分级 2030 起强制"],p:["2026-08-12 · 欧委会同日出台统一标签与数字标记实施细则（Art 12(6)(7)/13(2)）"],rel:[["k1","有害物质"],["k9","合规责任"]]},
+ {d:"2028-02-12",l:"可堆肥+统一标签",u:0,t:"2028 年 · 可堆肥（02-12）与统一标签（08-12）",m:"这一年有两件必须换包装的事：茶包/咖啡包等要工业可堆肥，包装要贴统一材质标签（若实施细则延迟则顺延）。",c:["2028-02-12：渗透式茶包/咖啡包、软质单次使用单元、果蔬粘性标签须工业可堆肥（Art 9(1)）","2028-02-12：销售包装空隙率降至最低必要（Art 24(4)）；HORECA 须提供可重复使用选项（Art 33，微型企业豁免）","2028-08-12：统一材质成分图示标签（或实施细则生效后 24 个月，较晚者，Art 12(1)）；废物收集容器标签（或采纳后 30 个月，Art 13(1)）","欧委会 97/129/EC 材料编码决定同日废止"],p:["2027-02-12 · 欧委会规定可重复使用包装最低更换次数（Art 11(2)）、发布附件 V 指南（Art 25(6)）；成员国须制定处罚规则（Art 68）","2027-02-12 · HORECA 餐饮须允许顾客自带容器（Art 32）","2028-01-01 · 回收设计授权法案（Art 6(4)），运营商 3 年内遵守新增/更新标准；同日评估再生料豁免（Art 7(12)）","2028-02-12 · 生物基塑料评估（Art 8）；成员国可自行要求咖啡胶囊、超轻/轻质塑料袋可堆肥（Art 9(2)）"],rel:[["k7","标签规则"],["c16","可堆肥"],["v9","回收设计"]]},
+ {d:"2029-01-01",l:"押金+数字标签",u:0,t:"2029 年 · 押金返还（01-01）与数字标签/新增禁令（02-12）",m:"2029 年初起成员国 DRS 落地、可重复使用包装要能扫码追踪，同时一批新的一次性塑料禁令生效。",c:["2029-01-01：成员国确保 ≤3L 一次性塑料饮料瓶与金属饮料容器 90%（按重量）单独收集，并为此建立押金返还制度（Art 50）","2029-02-12：可重复使用包装数字标签（或实施细则生效后 30 个月，较晚者，Art 12(2)）","2029-02-12：SUP 新增禁令（Art 67(5)）：机场/火车站行李收缩膜、运输与搬运保护用塑料填充碎屑、多包装塑料环；EPS 扩展至 XPS 食品/饮料容器与杯"],p:["2026 年单独收集率≥80% 且 2028-01-01 前通报实施计划的成员国可申请 DRS 豁免（Art 50(5)）"],rel:[["k5","重复使用"],["k8","附件V禁令"],["v8","特殊标签"]]},
+ {d:"2030-01-01",l:"核心大节点",u:1,t:"2030-01-01 · 核心大节点",m:"多数硬性要求落地：可回收分级、再生料、空隙率、重复利用目标和附件 V 禁令全部生效，现在就要按 2030 设计倒排。",c:["可回收分级：须达 C 级以上（≥70%）（2030-01-01 或授权法案生效后 24 个月，较晚者）","塑料再生料最低含量 10%~35%（2030-01-01 或实施法案生效后 3 年，较晚者）","组合/运输/电商包装空隙率 ≤50%（2030-01-01 或 Art 24(2) 实施法案生效后 3 年，较晚者）；包装重量体积降至最低必要（Art 10）","运输包装 ≥40%、组合包装 ≥10%、饮料销售包装 ≥10% 可重复使用（Art 29）","附件 V 一次性塑料包装禁令生效（Art 25(1)）；成员国人均包装废弃物较 2018 年减 5%（Art 43）"],p:["2026-12-31 · 再生料实施法案（Art 7(8)(9)）：最迟 2029-01-01 或法案生效后 24 个月按新规则计算与验证（Art 7(11)）"],rel:[["k2","可回收分级"],["k3","再生料"],["k4","最小化"],["k8","禁令"]]},
+ {d:"2035-01-01",l:"规模化回收",u:0,t:"2035-01-01 · 规模化回收",m:"从 2035 起，包装不能只有 A/B/C 等级，还必须在欧盟层面真正被规模化回收，否则视为不可回收。",c:["可回收性须满足「规模化回收」：该类别年回收量木材 ≥30%、其他材料 ≥55%（Art 3(1)(39)）；2035-01-01 或 Art 6(5) 实施法案生效后 5 年（较晚者）","成员国人均包装废弃物较 2018 年减 10%（Art 43）"],p:["欧委会同日审查 Art 6(11) 可回收性例外清单（Art 6(12)）"],rel:[["k2","可回收分级"],["k6","豁免条款"]]},
+ {d:"2038-01-01",l:"仅 A/B 级",u:0,t:"2038-01-01 · 仅 A/B 级可上市",m:"2038 起 C 级也不够，只有 A/B 级包装能投放市场。",c:["仅允许可回收性能 A 级或 B 级（≥80%）的包装投放市场（Art 6(3)）"],rel:[["k2","可回收分级"]]},
+ {d:"2040-01-01",l:"升级目标",u:0,t:"2040-01-01 · 升级与努力目标",m:"重复利用目标升级为「努力目标」，再生料比例进一步提高。",c:["运输包装努力达 70%、组合包装努力达 25%、饮料包装努力达 40% 可重复使用（Art 29）","塑料再生料含量升至 50%~65%（Art 7(2)）","成员国人均包装废弃物较 2018 年减 15%（Art 43）"],rel:[["k5","重复使用"],["k3","再生料"]]}];
+const tlEl=document.getElementById("tl"),panel=document.getElementById("tlPanel");
+TL.forEach((it,i)=>{
+  const el=document.createElement("div");
+  el.className="tl-item"+(it.u?" urgent":"");
+  el.innerHTML=`<div class="tl-dot"></div><div class="tl-date">${it.d}</div><div class="tl-label">${it.l}</div>`;
+  el.onclick=()=>{document.querySelectorAll(".tl-item").forEach(x=>x.classList.remove("on"));el.classList.add("on");showTL(i)};
+  tlEl.appendChild(el);
+});
+function showTL(i){
+  const it=TL[i];
+  panel.innerHTML=`<h3>${it.t}</h3>
+  ${it.m?`<p class="tl-mean">${it.m}</p>`:""}
+  <ul>${it.c.map(x=>`<li>${x}</li>`).join("")}</ul>
+  ${it.p?`<div class="tl-sub"><span class="cap">配套立法 · 成员国动作 · 特定行业</span><ul>${it.p.map(x=>`<li>${x}</li>`).join("")}</ul></div>`:""}
+  <div class="rel"><span class="cap">关联知识点：</span>${it.rel.map(r=>`<a class="chip" href="#${r[0]}">${r[1]}</a>`).join("")}</div>`;
+}
+document.querySelector(".tl-item").classList.add("on");showTL(0);
+
+document.querySelectorAll(".stat").forEach(s=>s.onclick=()=>location.hash=s.dataset.go);
+
+document.querySelectorAll(".how-toggle").forEach(b=>b.onclick=()=>{
+  const card=b.closest(".kcard");card.classList.toggle("open");
+});
+document.querySelectorAll(".cfold .c-head").forEach(h=>h.onclick=()=>{
+  const card=h.parentElement;
+  const open=card.classList.toggle("open");
+  card.classList.toggle("expanded",open);
+});
+
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);setTimeout(()=>{x.target.style.transitionDelay=""},300)}}),{threshold:.5});
+document.querySelectorAll(".fix,.cl-step").forEach((el,i)=>{el.style.transitionDelay=(i%3)*0.1+"s";io.observe(el)});
+
+/* ============ BorderGlow (React Bits 移植) ============ */
+function parseHSL(s){const m=String(s).match(/([\d.]+)\s*([\d.]+)%?\s*([\d.]+)%?/);return m?{h:+m[1],s:+m[2],l:+m[3]}:{h:250,s:60,l:55}}
+function buildGlowVars(color,intensity){
+  const{h,s,l}=parseHSL(color),base=`${h}deg ${s}% ${l}%`,ops=[100,60,50,40,30,20,10],keys=['','-60','-50','-40','-30','-20','-10'],v={};
+  for(let i=0;i<7;i++)v['--glow-color'+keys[i]]=`hsl(${base} / ${Math.min(ops[i]*intensity,100)}%)`;
+  return v;
+}
+const GP=['80% 55%','69% 34%','8% 6%','41% 38%','86% 85%','82% 18%','51% 4%'];
+const GK=['--gradient-one','--gradient-two','--gradient-three','--gradient-four','--gradient-five','--gradient-six','--gradient-seven'];
+const CM=[0,1,2,0,1,2,1];
+function buildGradientVars(colors){
+  const v={};
+  for(let i=0;i<7;i++){const c=colors[Math.min(CM[i],colors.length-1)];v[GK[i]]=`radial-gradient(at ${GP[i]}, ${c} 0px, transparent 55%)`}
+  v['--gradient-base']=`linear-gradient(${colors[0]} 0 100%)`;
+  return v;
+}
+const GLOW_THEMES={
+  'kc-red':  [['#fb5f7a','#ff9aae','#b22a44'],'350 95 68'],
+  'kc-amber':[['#fbbf24','#ffd98a','#a16207'],'38 96 56'],
+  'kc-blue': [['#60a5fa','#9cc8ff','#2563eb'],'213 94 68'],
+  'kc-teal': [['#2dd4bf','#7ceadc','#0f9b87'],'172 70 50'],
+  'kc-purple':[['#c084fc','#e2b8ff','#9333ea'],'270 95 75'],
+  'kc-pink': [['#f472b6','#ffa8d0','#db2777'],'330 87 71'],
+  'kc-coral':[['#fb7185','#ffabaf','#e11d48'],'352 95 71'],
+  'kc-green':[['#a3e635','#cdf27f','#65a30d'],'84 80 56'],
+  'kc-gray': [['#b9b3cf','#d9d5ea','#6d6880'],'250 20 76']
+};
+document.querySelectorAll('.kcard').forEach(card=>{
+  if(card.querySelector('.edge-light'))return;
+  const el=document.createElement('span');el.className='edge-light';card.appendChild(el);
+  let theme=GLOW_THEMES['kc-purple'];
+  for(const k of Object.keys(GLOW_THEMES)){if(card.classList.contains(k)){theme=GLOW_THEMES[k];break}}
+  const[colors,glow]=theme;
+  Object.assign(card.style,{...buildGlowVars(glow,1),...buildGradientVars(colors),
+    '--card-bg':'rgba(24,20,43,.84)','--edge-sensitivity':'18','--border-radius':'18px','--glow-padding':'30px','--cone-spread':'25'});
+});
+document.querySelectorAll('.cards-3d').forEach(zone=>{
+  zone.addEventListener('pointermove',e=>{
+    const card=e.target.closest('.kcard');if(!card)return;
+    const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+    const cw=r.width/2,ch=r.height/2,dx=x-cw,dy=y-ch;
+    let kx=Infinity,ky=Infinity;if(dx!==0)kx=cw/Math.abs(dx);if(dy!==0)ky=ch/Math.abs(dy);
+    const edge=Math.min(Math.max(1/Math.min(kx,ky),0),1);
+    let ang=0;if(!(dx===0&&dy===0)){ang=Math.atan2(dy,dx)*180/Math.PI+90;if(ang<0)ang+=360}
+    card.style.setProperty('--edge-proximity',(edge*100).toFixed(3));
+    card.style.setProperty('--cursor-angle',ang.toFixed(3)+'deg');
+  });
+});
+
+/* ============ SpotlightCard（React Bits 组件移植 · 原生实现） ============ */
+document.querySelectorAll('.kcard').forEach(card=>card.classList.add('card-spotlight'));
+const SPOTLIGHT_COLOR='rgba(225,0,255,0.22)';
+document.addEventListener('pointermove',e=>{
+  const card=e.target.closest('.card-spotlight');if(!card)return;
+  const r=card.getBoundingClientRect();
+  card.style.setProperty('--mouse-x',(e.clientX-r.left)+'px');
+  card.style.setProperty('--mouse-y',(e.clientY-r.top)+'px');
+  card.style.setProperty('--spotlight-color',SPOTLIGHT_COLOR);
+},{passive:true});
+
+/* ============ GradientWaves（React Bits 组件移植 · 原生 WebGL2，无外部依赖） ============ */
+(function(){
+  const CFG={
+    horizonColor:[0x52/255,0x27/255,0xFF/255],
+    waveColor:[0xFF/255,0x9F/255,0xFC/255],
+    crestColor:[1,1,1],
+    speed:0.4,amplitude:2.5,waveScale:0.6,waveRatio:0.9,
+    swell:35,turbulence:20,tilt:1.11,zoom:0.8,height:7.0,fogDepth:30,
+    steps:70.0,brightness:1.0,opacity:1.0,
+    grain:true,grainIntensity:0.05,
+    mouseInteraction:true,parallaxStrength:0.5
+  };
+  const VERT=`#version 300 es
+in vec2 position;
+void main(){gl_Position=vec4(position,0.0,1.0);}`;
+  const FRAG=`#version 300 es
+precision highp float;
+uniform vec2 iResolution;
+uniform float iTime;
+uniform float uSpeed;
+uniform float uAmplitude;
+uniform float uWaveScale;
+uniform float uWaveRatio;
+uniform float uSwell;
+uniform float uTurbulence;
+uniform float uTilt;
+uniform float uZoom;
+uniform float uHeight;
+uniform float uFogDepth;
+uniform float uSteps;
+uniform float uBrightness;
+uniform float uOpacity;
+uniform float uGrain;
+uniform float uGrainIntensity;
+uniform vec2 uMouse;
+uniform float uParallax;
+uniform bool uEnableMouse;
+uniform vec3 uHorizonColor;
+uniform vec3 uWaveColor;
+uniform vec3 uCrestColor;
+out vec4 fragColor;
+
+const float MAX_DIST=20000.0;
+
+float hash21(vec2 p){
+  vec3 p3=fract(vec3(p.xyx)*0.1031);
+  p3+=dot(p3,p3.yzx+33.33);
+  return fract((p3.x+p3.y)*p3.z);
+}
+
+float plasma(vec3 r,vec2 freq,vec4 tc){
+  float mx=r.x+tc.x;
+  mx+=uSwell*sin((r.y+mx)/20.0+tc.y);
+  float my=r.y-tc.z;
+  my+=uTurbulence*cos(r.x/23.0+tc.w);
+  return r.z-(sin(mx*freq.x)*uAmplitude+sin(my*freq.y)*uAmplitude+uHeight);
+}
+
+float raymarch(vec3 pos,vec3 dir,vec2 freq,vec4 tc){
+  float dist=0.0;
+  for(int i=0;i<128;i++){
+    if(float(i)>=uSteps)break;
+    float dscene=plasma(pos+dist*dir,freq,tc);
+    if(abs(dscene)<0.1)break;
+    dist+=0.9*dscene;
+    if(!(abs(dist)<MAX_DIST))return MAX_DIST;
+  }
+  return dist;
+}
+
+void main(){
+  float T=iTime*uSpeed;
+  vec2 freq=vec2(uWaveScale/7.0,(uWaveScale*uWaveRatio)/3.0);
+  vec4 tc=vec4(T/0.130,T/0.810,T/0.200,T/0.710);
+  float c,s;
+  float vfov=(3.14159/2.3)/max(uZoom,0.05);
+  vec3 cam=vec3(0.0,0.0,30.0);
+  vec2 uv=(gl_FragCoord.xy/iResolution.xy)-0.5;
+  uv.x*=iResolution.x/iResolution.y;
+  uv.y*=-1.0;
+
+  vec3 dir=vec3(0.0,0.0,-1.0);
+  float ulen=length(uv);
+  float xrot=vfov*ulen;
+  c=cos(xrot);s=sin(xrot);
+  dir=mat3(1.0,0.0,0.0,0.0,c,-s,0.0,s,c)*dir;
+  vec2 nuv=ulen>1e-5?uv/ulen:vec2(1.0,0.0);
+  c=nuv.x;s=nuv.y;
+  dir=mat3(c,-s,0.0,s,c,0.0,0.0,0.0,1.0)*dir;
+  c=cos(uTilt);s=sin(uTilt);
+  dir=mat3(c,0.0,s,0.0,1.0,0.0,-s,0.0,c)*dir;
+
+  if(uEnableMouse){
+    float yaw=(uMouse.x-0.5)*uParallax*0.4;
+    float pitch=(uMouse.y-0.5)*uParallax*0.4;
+    c=cos(yaw);s=sin(yaw);
+    dir=mat3(c,0.0,s,0.0,1.0,0.0,-s,0.0,c)*dir;
+    c=cos(pitch);s=sin(pitch);
+    dir=mat3(1.0,0.0,0.0,0.0,c,-s,0.0,s,c)*dir;
+  }
+
+  float dist=raymarch(cam,dir,freq,tc);
+  vec3 pos=cam+dist*dir;
+
+  float t=clamp(uFogDepth/max(dist,0.001),0.0,1.0);
+  vec3 body=mix(uWaveColor,uCrestColor,clamp(pos.z*0.08+0.5,0.0,1.0));
+  vec3 col=mix(uHorizonColor,body,t);
+  col*=uBrightness;
+  col=clamp(col,0.0,1.0);
+
+  float alpha=clamp(t,0.0,1.0)*uOpacity;
+  if(uGrain>0.5){
+    float g=hash21(gl_FragCoord.xy+mod(iTime,64.0)*11.0);
+    alpha+=(g-0.5)*uGrainIntensity;
+  }
+  alpha=clamp(alpha,0.0,1.0);
+  fragColor=vec4(col*alpha,alpha);
+}`;
+  function compileShader(gl,type,src){
+    const s=gl.createShader(type);
+    gl.shaderSource(s,src);
+    gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){
+      console.error('GradientWaves shader error:',gl.getShaderInfoLog(s));
+      return null;
+    }
+    return s;
+  }
+  function makeProgram(gl){
+    const vs=compileShader(gl,gl.VERTEX_SHADER,VERT);
+    const fs=compileShader(gl,gl.FRAGMENT_SHADER,FRAG);
+    if(!vs||!fs)return null;
+    const p=gl.createProgram();
+    gl.attachShader(p,vs);
+    gl.attachShader(p,fs);
+    gl.linkProgram(p);
+    if(!gl.getProgramParameter(p,gl.LINK_STATUS)){
+      console.error('GradientWaves program error:',gl.getProgramInfoLog(p));
+      return null;
+    }
+    return p;
+  }
+  function initWaves(){
+    const container=document.getElementById('gradientWaves');
+    if(!container||!window.WebGL2RenderingContext)return;
+    const canvas=document.createElement('canvas');
+    container.appendChild(canvas);
+    const gl=canvas.getContext('webgl2',{alpha:true,premultipliedAlpha:true,antialias:false});
+    if(!gl){container.style.display='none';return}
+    gl.clearColor(0,0,0,0);
+    const program=makeProgram(gl);
+    if(!program){container.style.display='none';return}
+    gl.useProgram(program);
+    const buf=gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+    const aPos=gl.getAttribLocation(program,'position');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
+    const names=['iResolution','iTime','uSpeed','uAmplitude','uWaveScale','uWaveRatio','uSwell','uTurbulence','uTilt','uZoom','uHeight','uFogDepth','uSteps','uBrightness','uOpacity','uGrain','uGrainIntensity','uMouse','uParallax','uEnableMouse','uHorizonColor','uWaveColor','uCrestColor'];
+    const U={};
+    names.forEach(n=>U[n]=gl.getUniformLocation(program,n));
+    gl.uniform1f(U.iTime,0);
+    gl.uniform2f(U.iResolution,1,1);
+    gl.uniform1f(U.uSpeed,CFG.speed);
+    gl.uniform1f(U.uAmplitude,CFG.amplitude);
+    gl.uniform1f(U.uWaveScale,CFG.waveScale);
+    gl.uniform1f(U.uWaveRatio,CFG.waveRatio);
+    gl.uniform1f(U.uSwell,CFG.swell);
+    gl.uniform1f(U.uTurbulence,CFG.turbulence);
+    gl.uniform1f(U.uTilt,CFG.tilt);
+    gl.uniform1f(U.uZoom,CFG.zoom);
+    gl.uniform1f(U.uHeight,CFG.height);
+    gl.uniform1f(U.uFogDepth,CFG.fogDepth);
+    gl.uniform1f(U.uSteps,CFG.steps);
+    gl.uniform1f(U.uBrightness,CFG.brightness);
+    gl.uniform1f(U.uOpacity,CFG.opacity);
+    gl.uniform1f(U.uGrain,CFG.grain?1:0);
+    gl.uniform1f(U.uGrainIntensity,CFG.grainIntensity);
+    gl.uniform2f(U.uMouse,0.5,0.5);
+    gl.uniform1f(U.uParallax,CFG.parallaxStrength);
+    gl.uniform1i(U.uEnableMouse,CFG.mouseInteraction?1:0);
+    gl.uniform3f(U.uHorizonColor,CFG.horizonColor[0],CFG.horizonColor[1],CFG.horizonColor[2]);
+    gl.uniform3f(U.uWaveColor,CFG.waveColor[0],CFG.waveColor[1],CFG.waveColor[2]);
+    gl.uniform3f(U.uCrestColor,CFG.crestColor[0],CFG.crestColor[1],CFG.crestColor[2]);
+    const render=()=>{gl.viewport(0,0,canvas.width,canvas.height);gl.drawArrays(gl.TRIANGLES,0,3)};
+    const setSize=()=>{
+      const rect=container.getBoundingClientRect();
+      const w=Math.max(1,Math.floor(rect.width)),h=Math.max(1,Math.floor(rect.height));
+      const dpr=Math.min(window.devicePixelRatio||1,2);
+      canvas.width=Math.max(1,Math.floor(w*dpr));
+      canvas.height=Math.max(1,Math.floor(h*dpr));
+      gl.uniform2f(U.iResolution,canvas.width,canvas.height);
+      render();
+    };
+    const ro=new ResizeObserver(setSize);
+    ro.observe(container);
+    setSize();
+    const currentMouse=[0.5,0.5],targetMouse=[0.5,0.5];
+    const onPointerMove=e=>{
+      const rect=canvas.getBoundingClientRect();
+      targetMouse[0]=(e.clientX-rect.left)/rect.width;
+      targetMouse[1]=1-(e.clientY-rect.top)/rect.height;
+    };
+    const onPointerLeave=()=>{targetMouse[0]=0.5;targetMouse[1]=0.5};
+    window.addEventListener('pointermove',onPointerMove);
+    window.addEventListener('pointerleave',onPointerLeave);
+    let raf=0,isVisible=true,isPageVisible=!document.hidden;
+    const t0=performance.now();
+    const loop=t=>{
+      gl.uniform1f(U.iTime,(t-t0)*0.001);
+      const tx=CFG.mouseInteraction?targetMouse[0]:0.5;
+      const ty=CFG.mouseInteraction?targetMouse[1]:0.5;
+      currentMouse[0]+=0.05*(tx-currentMouse[0]);
+      currentMouse[1]+=0.05*(ty-currentMouse[1]);
+      gl.uniform2f(U.uMouse,currentMouse[0],currentMouse[1]);
+      render();
+      raf=requestAnimationFrame(loop);
+    };
+    const tryStart=()=>{if(isVisible&&isPageVisible&&raf===0)raf=requestAnimationFrame(loop)};
+    const tryStop=()=>{if(raf!==0){cancelAnimationFrame(raf);raf=0}};
+    const io=new IntersectionObserver(([entry])=>{isVisible=entry.isIntersecting;isVisible?tryStart():tryStop()},{threshold:0});
+    io.observe(container);
+    const onVisibility=()=>{isPageVisible=!document.hidden;isPageVisible?tryStart():tryStop()};
+    document.addEventListener('visibilitychange',onVisibility);
+    canvas.addEventListener('webglcontextlost',e=>e.preventDefault());
+    tryStart();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initWaves);
+  else initWaves();
+})();
+
+/* ============ Masonry（React Bits 组件移植 · 瀑布流布局 + 入场/悬停） ============ */
+(function(){
+  const GAP=20;
+  const colCount=w=>w>=1100?3:(w>=640?2:1);
+  function layoutGrid(grid){
+    const cards=[...grid.querySelectorAll('.kcard')];
+    if(!cards.length)return;
+    const width=grid.clientWidth;
+    const cols=colCount(width);
+    const colW=(width-GAP*(cols-1))/cols;
+    const heights=new Array(cols).fill(0);
+    cards.forEach(card=>{
+      const col=heights.indexOf(Math.min(...heights));
+      card.style.width=colW+'px';
+      card.style.left=(col*(colW+GAP))+'px';
+      card.style.top=heights[col]+'px';
+      heights[col]+=card.offsetHeight+GAP;
+    });
+    grid.style.height=(Math.max(...heights)-GAP)+'px';
+  }
+  function init(){
+    document.querySelectorAll('#cards .grid').forEach(grid=>{
+      grid.classList.add('masonry');
+      layoutGrid(grid);
+      const cards=[...grid.querySelectorAll('.kcard')];
+      const ro=new ResizeObserver(()=>layoutGrid(grid));
+      ro.observe(grid);
+      cards.forEach(card=>ro.observe(card));
+      const io=new IntersectionObserver(es=>{
+        es.forEach(entry=>{
+          if(!entry.isIntersecting)return;
+          io.disconnect();
+          cards.forEach((card,i)=>{
+            card.style.transitionDelay=(i*0.04)+'s';
+            card.classList.add('in');
+            setTimeout(()=>{card.style.transitionDelay=''},1500);
+          });
+        });
+      },{threshold:.1});
+      io.observe(grid);
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+
+const secs=["timeline","cards","checklist","quiz"];
+const spy=new IntersectionObserver(es=>es.forEach(x=>{
+  if(x.isIntersecting){const a=document.querySelector(`nav a.nl[href="#${x.target.id}"]`);document.querySelectorAll("nav a.nl").forEach(n=>n.classList.remove("active"));if(a)a.classList.add("active")}
+}),{rootMargin:"-40% 0px -55% 0px"});
+secs.forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el)});
+
+document.addEventListener("click",e=>{
+  const c=e.target.closest(".chip");if(!c)return;
+  const t=document.querySelector(c.getAttribute("href"));
+  if(!t)return;e.preventDefault();
+  const isCard=t.classList&&t.classList.contains("kcard");
+  const wasOpen=isCard&&t.classList.contains("open");
+  let wait=0;
+  if(isCard){
+    if(!t.classList.contains("in")){
+      const grid=t.closest(".grid");
+      if(grid)grid.querySelectorAll(".kcard").forEach(x=>{x.style.transitionDelay="";x.classList.add("in")});
+      wait=1600;
+    }
+    t.classList.add("open","expanded");
+    if(!wasOpen)wait=Math.max(wait,1200);
+  }
+  setTimeout(()=>{
+    t.scrollIntoView({behavior:"smooth",block:"start"});
+    t.classList.remove("flash");void t.offsetWidth;t.classList.add("flash");
+    setTimeout(()=>t.classList.remove("flash"),1600);
+  },wait);
+});
+
+const CATS=[
+ {n:"法规基础",c:"#e2b8ff",bg:"rgba(178,107,255,.18)"},
+ {n:"有害物质",c:"#ffa6b4",bg:"rgba(251,95,122,.16)"},
+ {n:"可回收分级",c:"#ffd98a",bg:"rgba(251,191,36,.16)"},
+ {n:"再生料含量",c:"#9cc8ff",bg:"rgba(96,165,250,.16)"},
+ {n:"包装最小化",c:"#7ceadc",bg:"rgba(45,212,191,.15)"},
+ {n:"重复使用/押金",c:"#ffa8d0",bg:"rgba(244,114,182,.16)"},
+ {n:"标签与可堆肥",c:"#ffabaf",bg:"rgba(251,113,133,.15)"},
+ {n:"禁令与豁免",c:"#cdf27f",bg:"rgba(163,230,53,.14)"},
+ {n:"合规责任",c:"#d9d5ea",bg:"rgba(163,157,184,.16)"},
+ {n:"课程深化",c:"#9ff0e5",bg:"rgba(45,212,191,.14)"}
+];
+const Q=[
+{c:0,q:"PPWR 的法规编号与全称是？",o:["Regulation (EU) 2025/40 · 包装与包装废弃物法规","Directive 94/62/EC · 包装指令","Regulation (EU) 2019/904 · 一次性塑料指令","Regulation (EU) 2025/41 · 包装回收法规"],a:0,e:"PPWR = Packaging and Packaging Waste Regulation，编号 (EU) 2025/40。"},
+{c:0,q:"PPWR 属于哪种法律形式？",o:["法规（Regulation），直接适用于所有成员国","指令（Directive），需各成员国转化为国内法","建议性指引","行业自律标准"],a:0,e:"这是 PPWR 与旧包装指令（94/62/EC）的最大区别：法规直接适用，无需各国转化。"},
+{c:0,q:"PPWR 取代了哪个旧法？",o:["包装指令 94/62/EC","食品接触材料法规 1935/2004","一次性塑料指令 2019/904","RoHS 指令 2011/65/EU"],a:0,e:"PPWR 全面取代实施了近 30 年的《包装与包装废弃物指令 94/62/EC》。"},
+{c:0,q:"PPWR 于何时正式生效（进入欧盟法律体系）？",o:["2025-02-11","2026-08-12","2025-01-22","2026-01-01"],a:0,e:"2024-12-19 通过，2025-01-22 官方公报发布，2025-02-11 生效。2026-08-12 是「全面适用」日期。"},
+{c:0,q:"PPWR 从何时起全面适用（企业须开始执行）？",o:["2026-08-12","2025-02-11","2030-01-01","2028-08-12"],a:0,e:"生效后有 18 个月过渡期，2026-08-12 起全面适用——即本月，无合规声明的货物可能被海关扣留。"},
+{c:0,q:"PPWR 从生效到全面适用，过渡期有多长？",o:["18 个月","6 个月","2 年","5 年"],a:0,e:"2025-02-11 生效 → 2026-08-12 全面适用，正好 18 个月。"},
+{c:0,q:"欧委会的 PPWR 官方指南与 FAQ 目前情况是？",o:["2026-03-30 发布首版（18 章 131 问）；2026-08-01 更新第二版（20 章）","仅发布重金属限量标准","仅发布成员国豁免清单","尚无官方配套文件"],a:0,e:"首版 2026-03-30 发布（18 章 131 问）；第二版 2026-08-01 发布（20 章），新增执法（Art 62）、追溯标识等澄清。"},
+{c:0,q:"PPWR 要求成员国实现的包装废弃物减量目标是？",o:["2030 年 5%、2035 年 10%、2040 年 15%（对比 2018 年）","2030 年 10%","2040 年 20%","无目标"],a:0,e:"Art 43：以 2018 年人均包装废弃物为基准，各成员国 2030/2035/2040 分别至少减 5%/10%/15%。"},
+{c:1,q:"包装中重金属的总浓度限值是多少？",o:["铅、镉、汞、六价铬总量 ≤100mg/kg","仅铅 ≤100mg/kg","总量 ≤1000mg/kg","重金属总量 ≤50mg/kg"],a:0,e:"四种重金属合计 ≤100mg/kg，2026-08-12 起生效。"},
+{c:1,q:"重金属限量要求何时生效？",o:["2026-08-12","2030-01-01","2028-08-12","2025-02-11"],a:0,e:"物质要求（Article 5）从全面适用日 2026-08-12 起生效。"},
+{c:1,q:"以下哪一组是被 PPWR 限制总量的重金属？",o:["铅、镉、汞、六价铬","镍、钴、锰、锌","砷、锑、硒、铋","铜、铁、铝、锡"],a:0,e:"限值针对铅（Pb）、镉（Cd）、汞（Hg）和六价铬（Cr VI）。"},
+{c:1,q:"食品接触包装中非聚合 PFAS 的总和限值是多少？",o:["≤250ppb","≤25ppb","≤50ppm","≤500ppb"],a:0,e:"官方限值：单个非聚合 PFAS ≤25ppb；所有非聚合 PFAS 总和 ≤250ppb（含前体降解产物）；含聚合物 PFAS 总氟 ≤50ppm。注意三者分别对应不同口径，答题时看题干问的是哪一项。"},
+{c:1,q:"含聚合物 PFAS 的总氟限值是多少？",o:["50ppm（50mg/kg）","5ppm","500ppm","无明确限值"],a:0,e:"总氟 >50mg/kg 时需提供氟含量证明并纳入技术文档。"},
+{c:1,q:"PFAS 限值按什么时间点判断合规？",o:["按投放市场日：2026-08-12 后投放须合规","按生产日期","按出口报关日期","按销售日期"],a:0,e:"官方 FAQ：限值适用于 2026-08-12 后投放市场的食品接触包装；此前投放的存量包装无需下架。"},
+{c:1,q:"含有害物质的包装必须怎么做？",o:["标明有害物质名称和浓度","使用绿色包装","增加警告条幅","免费回收"],a:0,e:"除限额外，还须以标准化数字标记技术标注有害物质的名称和浓度（欧委会最迟 2030-01-01 出台标注方法）。"},
+{c:2,q:"PPWR 的可回收性分级名称是？",o:["A / B / C 三级","优 / 良 / 合格","1-5 星","红 / 黄 / 绿"],a:0,e:"A（≥95%）、B（≥80%）、C（≥70%）三级。"},
+{c:2,q:"A 级可回收包装要求回收比例达到？",o:["≥95%","≥80%","≥70%","≥60%"],a:0,e:"A 级 ≥95%，是最高等级。"},
+{c:2,q:"B 级可回收包装要求回收比例达到？",o:["≥80%","≥95%","≥70%","≥50%"],a:0,e:"B 级 ≥80%。2038 年起仅允许 A/B 级上市。"},
+{c:2,q:"C 级可回收包装要求回收比例达到？",o:["≥70%","≥80%","≥95%","≥50%"],a:0,e:"C 级 ≥70%，是 2030-01-01 或回收设计授权法案生效后 24 个月（较晚者）起的最低准入线。"},
+{c:2,q:"可回收率低于 70%（低于 C 级）的包装会怎样？",o:["视为技术上不可回收，2030 年起禁止投放市场","仍可销售但需缴纳罚金","2035 年起禁止","无影响"],a:0,e:"DfR <70% = 技术上不可回收，2030-01-01 或授权法案生效后 24 个月（较晚者）起限制投放市场。"},
+{c:2,q:"2038 年起可投放市场的包装须达到？",o:["A 级或 B 级（≥80%）","C 级即可","A 级（≥95%）","任意等级"],a:0,e:"2038-01-01 起仅允许 A/B 级包装投放市场。"},
+{c:2,q:"2035 年的「规模化回收」（recycled at scale）指的是？",o:["包装在欧盟范围内被广泛收集和实际回收（回收率≥55%，木材 30%）","包装须达到 C 级以上","包装须含再生料 35%","塑料包装全部禁用"],a:0,e:"「规模化回收」是 2035 年的独立要求（2035-01-01 或 Art 6(5) 实施法案生效后 5 年，较晚者），衡量欧盟层面的实际回收水平（55%/30% 基准）。注意：C 级可回收从 2030 年起就强制，不是 2035。"},
+{c:3,q:"PPWR 要求的再生料必须来自？",o:["消费后塑料废弃物（工业废料不算）","工业边角料","化学合成原料","任何来源均可"],a:0,e:"再生料须来自消费后（post-consumer）塑料废弃物，工业废料不计入。"},
+{c:3,q:"PET 为主要成分的接触敏感包装，2030 年再生料比例是？",o:["30%","10%","35%","50%"],a:0,e:"PET 接触敏感包装 30%（2040 年升至 50%）。"},
+{c:3,q:"由 PET 以外塑料制成的接触敏感包装，2030 年再生料比例是？",o:["10%","30%","35%","25%"],a:0,e:"非 PET 接触敏感包装 10%（2040 年升至 25%）。注意：这里的 10% 指再生料含量比例，并非税费。"},
+{c:3,q:"一次性塑料饮料瓶 2030 年再生料比例是？",o:["30%","10%","35%","65%"],a:0,e:"一次性塑料饮料瓶 30%（2040 年升至 65%）。"},
+{c:3,q:"「其他塑料包装」2030 年再生料比例是？",o:["35%","10%","30%","20%"],a:0,e:"其他塑料包装 35%，是所有类别中最高的 2030 档位。"},
+{c:3,q:"2040 年「其他塑料包装」与一次性塑料饮料瓶的再生料目标升至？",o:["65%（两者均 65%）","50% 和 65%","35% 和 65%","70% 和 70%"],a:0,e:"其他塑料包装与一次性塑料饮料瓶 2040 年均为 65%。"},
+{c:3,q:"占包装总重量多少的「微量塑料部件」可豁免再生料要求？",o:["少于 5%","少于 1%","少于 10%","无豁免"],a:0,e:"占整个包装单元总重 <5% 的塑料部件可豁免（官方实施指南明确）。"},
+{c:4,q:"包装最小化要求（含空隙率限制）何时生效？",o:["2030-01-01","2026-08-12","2027-02-12","2028-08-12"],a:0,e:"2030-01-01 起包装须以最低重量和体积满足功能需求（Art 10(1)）；空隙率 ≤50% 为 2030-01-01 或 Art 24(2) 实施法案生效后 3 年（较晚者）。"},
+{c:4,q:"包装空隙率的上限是多少？",o:["50%","30%","60%","70%"],a:0,e:"空隙率不得超过 50%，填充材料所占空间均计为「空隙」。"},
+{c:4,q:"以下哪些填充材料会被计入「空隙」？",o:["气泡膜、泡沫、海绵、纸屑等所有填充材料","只有纸质填充算","只有泡沫算","所有包装内空间都不算"],a:0,e:"剪纸、气垫、气泡膜、海绵、泡沫、木棉、聚苯乙烯等填充物产生的空隙全部计入。"},
+{c:4,q:"哪种包装设计会被 PPWR 视为违规？",o:["双层底、多余层数、虚假底部等徒增体积的设计","透明展示窗设计","简单印刷包装","可回收纸盒"],a:0,e:"禁止不必要增加体积的设计，如双层结构、双层底材等。"},
+{c:4,q:"包装最小化的具体计算方法与标准由谁、何时出台？",o:["欧委会于 2027-02-12 前制定","成员国各自制定","2026-08-12 已出台","企业自行定义"],a:0,e:"欧委会 2027-02-12 前要求标准化机构制定最小化测量方法（最大重量、体积、壁厚等）；空隙率计算方法实施细则 2028-02-12 前出台（Art 24(2)）。"},
+{c:5,q:"2030 年运输包装（含电商）可重复使用比例须达到？",o:["≥40%（2040 年努力升至 70%）","≥10%","≥30%","≥50%"],a:0,e:"运输包装（含电商）2030 年 ≥40%，2040 年努力达 ≥70%（努力目标）。注：同企业/同成员国内运输包装要求更高——2030 年起须 100% 可重复（缠绕膜、打包带经 2026-02-25 授权决定豁免该 100% 要求）。"},
+{c:5,q:"2030 年组合包装可重复使用比例须达到？",o:["≥10%（2040 年努力升至 25%）","≥40%","≥15%","≥30%"],a:0,e:"组合包装（二级包装）≥10%，2040 年努力达 25%（努力目标）。"},
+{c:5,q:"哪些包装可豁免重复利用目标？",o:["纸箱包装；牛奶、葡萄酒、部分烈酒饮料","所有玻璃包装","所有金属包装","电商包装"],a:0,e:"纸箱类包装全部豁免重复利用目标；饮料包装目标中排除牛奶、葡萄酒和部分烈酒。"},
+{c:5,q:"同一企业不同站点间、或同一成员国内企业间的运输包装，2030 年起须？",o:["全部使用可重复使用包装","仍可用一次性包装","40% 可重复即可","无要求"],a:0,e:"此类封闭循环的运输包装从 2030 年起须 100% 可重复使用。"},
+{c:5,q:"押金返还制度（DRS）覆盖哪些容器？",o:["≤3L 一次性塑料饮料瓶和金属饮料容器","所有玻璃酒瓶","所有纸盒饮料","仅塑料瓶"],a:0,e:"成员国须对 ≤3L 一次性塑料饮料瓶与金属饮料容器建立 DRS。"},
+{c:5,q:"成员国须于何时前建立押金返还制度（DRS）？",o:["2029 年前（回收率达标可豁免）","2026-08-12 前","2030-01-01 前","无时间要求"],a:0,e:"DRS 是强制性义务，2029-01-01 前建立并实现 90%（按重量）单独收集；2026 年收集率已达 80% 以上且获批豁免的成员国除外。"},
+{c:5,q:"可重复使用包装的数字标签（追踪流向、使用次数）何时强制？",o:["2029-02-12","2028-08-12","2030-01-01","2026-08-12"],a:0,e:"2029-02-12 起（或实施细则生效后 30 个月，较晚者）可重复使用包装须带数字标签，便于追踪与计数。"},
+{c:6,q:"包装统一标签系统何时生效？",o:["2028-08-12","2026-08-12","2030-01-01","2027-02-12"],a:0,e:"包装标签 2028-08-12 起生效（或实施细则生效后 24 个月，较晚者）；废物收集容器标签同日起（或实施细则采纳后 30 个月，较晚者）。"},
+{c:6,q:"标签的强制内容不包括以下哪项？",o:["回收材料的具体供应商名称","包装材质成分图示（2028-08 起）","制造商/进口商名称与地址（2026-08 起）","生产者责任组织（PRO）名称"],a:0,e:"经营商识别信息（制造商/进口商名称或注册商标+单一联络地址）2026-08-12 起强制；材质成分统一图示标签 2028-08-12 起强制；再生料比例、PRO 名称、供应商名称等为非强制内容。"},
+{c:6,q:"以下哪些包装须设计为（工业）可堆肥？",o:["茶包、咖啡包、新鲜果蔬粘性标签","所有塑料包装","所有纸包装","玻璃包装"],a:0,e:"2028-02-12 起，茶包/咖啡包、果蔬粘性标签等不便于分类处理的包装须工业可堆肥。"},
+{c:6,q:"可堆肥包装的标签须注明什么？",o:["是否适合家庭堆肥、不可丢弃在自然环境中","保质期","生产批次","回收等级"],a:0,e:"须注明堆肥适用性（是否适合家庭堆肥）并警示不可丢弃于自然环境。"},
+{c:7,q:"附件 V 一次性塑料包装禁令何时生效？",o:["2030-01-01","2026-08-12","2028-08-12","2029-02-12"],a:0,e:"2030-01-01 起，附件 V 所列一次性塑料包装形式禁止投放市场。"},
+{c:7,q:"2029-02-12 起新增/扩展的一次性塑料禁令包括？",o:["机场/火车站行李收缩膜、运输塑料填充颗粒、多包装塑料环、EPS/XPS 容器与杯","所有纸吸管","玻璃饮料瓶","铝罐"],a:0,e:"Art 67(5) 修订 SUP 指令：新增机场/火车站行李收缩膜、运输与搬运保护用塑料填充碎屑、多包装塑料环，并将 EPS 食品容器/饮料容器/杯的禁令扩展至 XPS。"},
+{c:7,q:"以下哪项属于附件 V 禁止的一次性塑料包装？",o:["组合用收缩膜、调味品单人份小袋、酒店小包装洗漱用品","可回收纸盒","玻璃饮料瓶","金属罐头"],a:0,e:"禁令涵盖：组合收缩膜、<1.5kg 果蔬、餐饮堂食包装、调味品小袋、酒店洗漱用品、<15μm 超轻塑料袋等。"},
+{c:7,q:"哪类包装可豁免回收要求？",o:["药品直接接触包装、婴幼儿食品接触包装、危险品运输包装","所有食品包装","所有电商包装","所有塑料包装"],a:0,e:"豁免：药品/医疗器械/婴幼儿食品接触敏感包装、危险品运输包装（同时豁免再生料含量与重复利用目标），以及轻质木材、软木、纺织品、橡胶、陶瓷、瓷、蜡制销售包装。"},
+{c:7,q:"可回收性例外清单（Art 6(11)）将于何时审查？",o:["2035-01-01 前","2026-12-31","2030-06-30","永不审查"],a:0,e:"Art 6(12)：2035-01-01 前审查 Art 6(11) 可回收性例外清单；附件 V 限制与豁免的评估为 2032-02-12（Art 25(5)），两者不是同一清单。"},
+{c:8,q:"欧盟进口商符合微型企业定义时，合规责任归谁？",o:["欧盟境内向其提供包装的供货方被视为制造商担责","微型企业进口商自己担责","中国出口商担责","双方都免责"],a:0,e:"第 15/21 条：品牌方/贴牌进口分销商为微型企业、供货方位于欧盟境内时，供货方承担制造商合规责任。"},
+{c:8,q:"符合性声明所需技术文档不包括以下哪项？",o:["供应商报价单","包装预期用途描述","包装图纸与材料清单","测试标准清单与测试报告"],a:0,e:"附件 VII 要求：用途描述、图纸材料、测试标准清单、测试报告——报价单不属于技术文档。"},
+{c:8,q:"除符合性声明外，出口欧盟还必须履行的义务是？",o:["在销售国注册 EPR 并申报包装数据、缴纳费用","取得 CE 认证","缴纳增值税","购买保险"],a:0,e:"EPR 生产者责任注册是各销售国的强制义务，文章原文遗漏，是出口企业最易忽略的合规动作。"},
+{c:9,q:"PPWR 的适用范围是？",o:["所有投放欧盟市场的包装，不论材质、空售或装产品、电商包裹","仅塑料包装","仅食品接触包装","仅销售包装"],a:0,e:"涵盖所有材质（塑料、纸、玻璃、金属、木材等）及空售、装产品、电商包裹等所有场景。"},
+{c:9,q:"PPWR 的核心目标不包括以下哪项？",o:["强制所有包装使用生物基材料","终结一次性包装","减少环境污染","统一成员国包装规则"],a:0,e:"核心目标为终结一次性包装、全生命周期管理、减少污染、推动循环经济与统一市场规则；生物基只是原料选项，不是统一强制目标。"},
+{c:9,q:"EPR 三步实操流程是？",o:["注册→报告→缴费","检测→认证→贴标","注册→贴标→出口","报告→缴费→认证"],a:0,e:"注册（获取成员国唯一注册号）→报告（申报材质/重量/数量）→缴费（支付生态贡献费）。"},
+{c:9,q:"关于电商平台与 EPR，以下说法正确的是？",o:["亚马逊等平台已开始核查卖家包装法规注册号，未合规面临下架","平台不参与任何核查","只有德国平台核查","平台核查仅针对食品包装"],a:0,e:"课程课件明确：亚马逊等主流电商平台已开始强制审核卖家包装法规注册号，未合规产品面临下架风险。"},
+{c:9,q:"DoC 必须包含签署信息（签名、地点、日期）吗？",o:["必须，否则不具备法律效力","可选，盖章即可","仅出口时需签名","由进口商代签即可"],a:0,e:"Annex VIII 十项必备内容之一：制造商签名、签署地点及日期，缺失则 DoC 不具法律效力。"},
+{c:9,q:"技术文档中的标准清单，若仅部分采用协调标准，应如何处理？",o:["注明实际采用的条款章节","无需说明","整份标准全部引用","只写标准名称"],a:0,e:"仅部分采用协调标准或通用规范时，须注明实际采用的条款章节。"},
+{c:9,q:"运输包装、服务包装和初级生产包装的生产者通常是谁？",o:["完整空包装的制造商","所包产品的品牌方","终端消费者","物流承运商"],a:0,e:"对运输/服务/初级生产包装，生产者=完整空包装的制造商；销售包装与组合包装则=所包产品的制造商。"},
+{c:9,q:"销售包装和组合包装的生产者通常是？",o:["所包产品的制造商","空包装制造商","电商平台","分销商"],a:0,e:"课程判定流程：销售包装、组合包装的生产者为所包产品的制造商。"},
+{c:9,q:"标签文字的语言要求是？",o:["使用产品销售目的国的官方语言","统一使用英语","使用中文和英文双语","由供应商自选"],a:0,e:"标签文字必须使用销售目的国官方语言。"},
+{c:9,q:"关于包装上的环保声明，正确的是？",o:["「可回收」「可生物降解」「循环箭头」等受严格监管，须可验证","可随意标注","环保声明无需证据","只有「可回收」受限"],a:0,e:"环保声明（可回收/可生物降解/循环箭头等）受严格监管，防止虚假或误导性宣传。"},
+{c:9,q:"参与押金返还系统（DRS）的包装，标签须额外包含？",o:["押金金额标识、返还方式指引、返还地点、押金系统专属识别码","产品成分表","生产日期","回收等级"],a:0,e:"DRS 包装标签须包含押金金额、返还方式、返还地点及与押金系统关联的专属识别码。"},
+{c:9,q:"按官方标签要求，可堆肥包装须注明什么？",o:["材料可堆肥、不适合家庭堆肥（如适用）、不可丢弃在自然环境中","符合 EN 13432:2000 工业堆肥标准","可无限次重复使用","含再生料比例不低于 35%"],a:0,e:"Art 12 要求标签注明可堆肥、不适合家庭堆肥（如适用）及不可丢弃自然；EN 13432 是产品须兼容的工业堆肥标准，认证文件作为技术证据而非标签法定内容。"},
+{c:9,q:"可重复使用包装的九项条件之一是什么？",o:["满足第 6 条可回收包装要求，成为废物后仍可回收","必须由玻璃制成","必须免费","必须使用二维码"],a:0,e:"九项条件包括：满足第 6 条可回收包装的具体要求，以便为废物时可回收利用。"},
+{c:9,q:"回收设计标准授权法案的节点是？",o:["2028-01-01 前制定，运营者 3 年内遵守","2030-01-01 直接执行","2026-08-12 已生效","无授权法案"],a:0,e:"欧委会至 2028-01-01 前依 Art 6(4)/第 64 条通过授权法案；运营者对新增/更新标准须在生效后 3 年内遵守；分级强制适用日为 2030-01-01 或法案生效后 24 个月（较晚者）。"},
+{c:9,q:"以下哪项属于再生料含量要求的额外豁免情形？",o:["药品、医疗器械、婴幼儿及儿童食品、特殊医学用途食品包装","普通工业包装","电商包装","纸箱包装"],a:0,e:"特殊用途包装（药品/医疗器械/婴幼儿及儿童食品/特医食品）可豁免；另有技术不可行（2028 评估）等情形。"},
+{c:9,q:"再生料含量计算与核实方法论的实施法案应于何时前制定？",o:["2026-12-31","2028-08-12","2029-01-01","2030-01-01"],a:0,e:"至 2026-12-31 欧委会应通过实施法案；最迟 2029-01-01 或法案生效后 24 个月（较晚者）按新规则验证。"},
+{c:9,q:"包装最小化明令禁止的设计（课程补充）包括？",o:["假底/隐蔽假底、大箱装小货","透明展示窗","单一材质设计","可折叠纸箱"],a:0,e:"课程明确禁止假底/隐蔽假底（底部双层垫高）与大箱装小货（oversized 包装）。"},
+{c:9,q:"易碎品、危险品想豁免最小化体积/缓冲限制，需要？",o:["提供充分的运输安全测试报告证明必须额外缓冲或更大包装","自行声明即可","缴纳额外费用即可","无需任何材料"],a:0,e:"需提供运输安全测试报告作为申请豁免的依据。"},
+  {c:9,q:"DoC 按 Annex VIII 一共须包含多少项必备内容？",o:["10 项","8 项","6 项","12 项"],a:0,e:"Annex VIII 规定 10 项：除课程常说的 8 项外，还包括通报机构信息（如适用）与补充信息；缺项即无效。"},
+  {c:9,q:"可回收分级（至少 C 级）的强制适用日期是？",o:["2030-01-01 或回收设计授权法案生效后 24 个月（较晚者）","2028-01-01","2035-01-01","2029-02-12"],a:0,e:"Art 6：2030-01-01 或授权法案生效后 24 个月（较晚者）起须达 C 级；2038 起须达 B 级。"},
+  {c:9,q:"DoC 对语言的要求是？",o:["以投放市场成员国主管机构易懂的语言提供","统一使用英语","由供应商自选语言","仅需中文"],a:0,e:"DoC 须以投放市场成员国易懂的语言提供，多国销售应备好相应语言版本或可快速翻译。"},
+  {c:0,q:"PPWR 要求成员国实现的包装废弃物回收目标（按重量）是？",o:["2030 年总体 ≥70%（塑料 55%）","2030 年总体 ≥80%","2030 年总体 ≥65%","无回收目标"],a:0,e:"Art 52：2025 年总体 ≥65%、2030 年总体 ≥70%；2030 分材质：塑料 55%、纸/纸板 85%、玻璃 75%、铁金属 80%、铝 60%、木材 30%。"},
+  {c:6,q:"在统一标签要求生效前已生产或进口的包装，可以继续投放多久？",o:["标签要求生效后 3 年内（Art 12(12)）","1 年内","必须立即下架","6 个月内"],a:0,e:"Art 12(12)：2028-08-12 / 2029-02-12 标签要求生效前已生产或进口的包装，可在要求生效后 3 年内继续投放市场。"},
+  {c:5,q:"哪类经营者可豁免 PPWR 的重复利用目标？",o:["某成员国年投放 ≤1000kg 且属微型企业（Art 29(13)）","所有跨境电商","年销售额超过 1 亿欧元的公司","所有塑料包装使用者"],a:0,e:"Art 29(13)：单成员国年投放 ≤1000kg 且符合微型企业定义者可豁免；另有销售面积 ≤100㎡ 零售商、孤岛/低密度地区等豁免（Art 29(10)(11)）。"}
+];
+
+const MEM_KEY="ppwr_v5_quiz_mem";
+function loadMem(){try{const m=JSON.parse(localStorage.getItem(MEM_KEY)||"null");return m&&typeof m==="object"?m:{wrongs:[],history:[]}}catch(e){return {wrongs:[],history:[]}}}
+function saveMem(m){try{localStorage.setItem(MEM_KEY,JSON.stringify(m))}catch(e){}}
+let mem=loadMem(),wrongMode=false,order=[],qi=0,score=0,wrongs=[],curCat="all",numMode="all";
+const qCats=document.getElementById("qCats"),qNums=document.getElementById("qNums"),qCat=document.getElementById("qCat"),
+qIdx=document.getElementById("qIdx"),qBar=document.getElementById("qBar"),
+qText=document.getElementById("qText"),qOpts=document.getElementById("qOpts"),
+qExp=document.getElementById("qExp"),qNext=document.getElementById("qNext"),
+qBox=document.getElementById("qBox"),qResult=document.getElementById("qResult"),
+qScore=document.getElementById("qScore"),qGrade=document.getElementById("qGrade"),
+qMsg=document.getElementById("qMsg"),qWrong=document.getElementById("qWrong"),
+qWrongList=document.getElementById("qWrongList"),qRestart=document.getElementById("qRestart"),
+qShuffle=document.getElementById("qShuffle");
+function catInfo(i){const c=CATS[i];return `<span style="color:${c.c};background:${c.bg}">${c.n}</span>`}
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+qCats.innerHTML=`<button class="qf on" data-c="all">全部 ${Q.length}</button>`+
+  CATS.map((c,i)=>`<button class="qf" data-c="${i}">${c.n} ${Q.filter(q=>q.c===i).length}</button>`).join("");
+qCats.addEventListener("click",e=>{
+  const b=e.target.closest(".qf");if(!b)return;
+  document.querySelectorAll("#qCats .qf").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+  curCat=b.dataset.c;start();
+});
+qNums.innerHTML=`<button class="qf on" data-n="all">全部 ${Q.length} 题</button><button class="qf" data-n="10">随机 10 题</button><button class="qf" data-n="20">随机 20 题</button>`;
+qNums.addEventListener("click",e=>{
+  const b=e.target.closest(".qf");if(!b)return;
+  document.querySelectorAll("#qNums .qf").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+  numMode=b.dataset.n;start();
+});
+start();
+function poolOf(){return curCat==="all"?Q.map((_,i)=>i):Q.map((_,i)=>i).filter(i=>Q[i].c===+curCat)}
+function wrongPool(){
+  const idx=[];
+  mem.wrongs.forEach(w=>{const i=Q.findIndex(q=>q.q===w.q);if(i>=0&&idx.indexOf(i)<0)idx.push(i)});
+  return idx;
+}
+function start(){
+  const all=wrongMode?wrongPool():poolOf();shuffleArr(all);
+  order=numMode==="all"?all:all.slice(0,+numMode);
+  qi=0;score=0;wrongs=[];
+  qBox.style.display="block";qResult.style.display="none";qExp.className="q-exp";qNext.className="q-next";
+  renderQ();
+}
+function renderQ(){
+  const q=Q[order[qi]];
+  qCat.innerHTML=catInfo(q.c);qIdx.textContent=`${qi+1} / ${order.length}`;
+  qBar.style.width=((qi)/order.length*100)+"%";
+  qText.textContent=q.q;qOpts.innerHTML="";qExp.className="q-exp";qExp.textContent="";qNext.className="q-next";
+  const seq=shuffleArr([0,1,2,3]),correctPos=seq.indexOf(q.a);
+  seq.forEach((i,pos)=>{
+    const b=document.createElement("button");b.className="q-opt";b.textContent=q.o[i];
+    b.onclick=()=>{
+      [...qOpts.children].forEach(x=>x.disabled=true);
+      if(i===q.a){b.classList.add("correct");score++}
+      else{b.classList.add("wrong");qOpts.children[correctPos].classList.add("correct");wrongs.push({q:q.q,o:q.o,a:q.a,e:q.e,c:q.c,chosen:q.o[i]})}
+      qExp.textContent="解析："+q.e;qExp.classList.add("show");qNext.classList.add("show");
+      qNext.textContent=qi===order.length-1?"查看成绩 →":"下一题 →";
+    };
+    qOpts.appendChild(b);
+  });
+}
+qNext.onclick=()=>{qi++;if(qi<order.length)renderQ();else showResult()};
+const CAT_CARDS=[[["v1","适用范围"]],[["k1","有害物质"]],[["k2","可回收分级"]],[["k3","再生料"]],[["k4","最小化"]],[["k5","重复使用"]],[["k7","标签"],["c16","可堆肥"]],[["k8","禁令"],["k6","豁免"]],[["k9","合规责任"]],[["v4","DoC"],["v9","回收设计"]]];
+function showResult(){
+  qBox.style.display="none";qResult.style.display="block";
+  const pct=Math.round(score/order.length*100);
+  qScore.textContent=`${score} / ${order.length}`;
+  qGrade.textContent=`正确率 ${pct}% · `+(pct===100?"满分通关！":pct>=90?"优秀！":pct>=75?"良好":pct>=60?"及格":"继续加油");
+  const weak={};
+  wrongs.forEach(w=>{weak[w.c]=(weak[w.c]||0)+1});
+  let weakCat=-1,max=0;
+  Object.keys(weak).forEach(k=>{if(weak[k]>max){max=weak[k];weakCat=+k}});
+  let review="";
+  if(weakCat>=0&&CAT_CARDS[weakCat])review=`<div class="rel" style="margin-top:10px"><span class="cap">薄弱主题：${catInfo(weakCat)}，建议复习：</span>${CAT_CARDS[weakCat].map(r=>`<a class="chip" href="#${r[0]}">${r[1]}</a>`).join("")}</div>`;
+  qMsg.innerHTML=(pct===100?"你已完整掌握 PPWR 核心要点。":pct>=60?"建议回到知识卡片，重点复习答错的知识点。":"建议先通读知识卡片与合规行动，再回来挑战。")+review;
+  if(wrongs.length){
+    qWrong.classList.add("show");
+    qWrongList.innerHTML=wrongs.map((w,idx)=>`<li><b>${idx+1}. ${w.q}</b><br>你的答案：${w.chosen||"—"}<br>正确答案：${w.o[w.a]}</li>`).join("");
+    const m={wrongs:mem.wrongs.slice(),history:mem.history.slice()};
+    wrongs.forEach(w=>{if(!m.wrongs.some(x=>x.q===w.q))m.wrongs.push(w)});
+    if(m.wrongs.length>100)m.wrongs=m.wrongs.slice(-100);
+    m.history.push({score,total:order.length,pct,ts:Date.now()});
+    if(m.history.length>20)m.history=m.history.slice(-20);
+    mem=m;saveMem(m);
+  }else qWrong.classList.remove("show");
+  qBar.style.width="100%";
+  qWrongOnly.style.display=mem.wrongs.length?"inline-block":"none";
+}
+qRestart.onclick=()=>start();
+qShuffle.onclick=()=>{wrongMode=false;qi=0;score=0;wrongs=[];qBox.style.display="block";qResult.style.display="none";qExp.className="q-exp";qNext.className="q-next";renderQ()};
+const qWrongOnly=document.getElementById("qWrongOnly");
+qWrongOnly.onclick=()=>{wrongMode=true;curCat="all";numMode="all";document.querySelectorAll("#qCats .qf").forEach(x=>x.classList.remove("on"));qCats.querySelector('[data-c="all"]').classList.add("on");document.querySelectorAll("#qNums .qf").forEach(x=>x.classList.remove("on"));qNums.querySelector('[data-n="all"]').classList.add("on");start()};
+function renderMem(){
+  const el=document.getElementById("quizMem");if(!el)return;
+  const n=mem.wrongs.length;
+  el.innerHTML=`<span>📚 错题本：${n} 题${mem.history.length?` · 上次正确率 ${mem.history[mem.history.length-1].pct}%`:""}</span>`+
+    (n?`<button class="q-restart alt" id="memWrongBtn">错题重练（${n}）</button><button class="q-restart" id="memClearBtn">清空错题本</button>`:`<span class="mem-empty">暂无错题记录，测一轮试试</span>`);
+  const bw=document.getElementById("memWrongBtn"),bc=document.getElementById("memClearBtn");
+  if(bw)bw.onclick=()=>qWrongOnly.click();
+  if(bc)bc.onclick=()=>{mem={wrongs:[],history:[]};saveMem(mem);renderMem();qWrongOnly.style.display="none"};
+}
+renderMem();
+
+const totop=document.getElementById("totop");
+addEventListener("scroll",()=>totop.classList.toggle("show",scrollY>600));
+totop.onclick=()=>scrollTo({top:0,behavior:"smooth"});
+
+window.addEventListener("beforeprint",()=>{
+  const p=document.getElementById("tlPrint");
+  if(p)p.innerHTML=TL.map(it=>`<div class="tlp-item"><b>${it.d}</b> · ${it.t}<ul>${it.c.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+});
+/* ============ SoftAurora (React Bits 组件移植 · 原生 WebGL，无外部依赖) ============ */
+(function(){
+  const container=document.getElementById('softAurora');
+  if(!container)return;
+  const canvas=document.createElement('canvas');
+  container.appendChild(canvas);
+  const gl=canvas.getContext('webgl2',{alpha:true,premultipliedAlpha:false,antialias:false})||canvas.getContext('webgl',{alpha:true,premultipliedAlpha:false,antialias:false});
+  if(!gl){container.style.display='none';return}
+  gl.clearColor(0,0,0,0);
+  const CFG={
+    speed:0.6,scale:1.5,brightness:1.0,
+    color1:'#f7f7f7',color2:'#e100ff',
+    noiseFrequency:2.5,noiseAmplitude:1.0,
+    bandHeight:0.5,bandSpread:1.0,
+    octaveDecay:0.1,layerOffset:0,colorSpeed:1.0,
+    enableMouseInteraction:true,mouseInfluence:0.25
+  };
+  function hexToVec3(hex){
+    const h=hex.replace('#','');
+    return [
+      parseInt(h.slice(0,2),16)/255,
+      parseInt(h.slice(2,4),16)/255,
+      parseInt(h.slice(4,6),16)/255
+    ];
+  }
+  const VERT=`attribute vec2 position;
+attribute vec2 uv;
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = vec4(position, 0, 1);
+}`;
+  const FRAG=`precision highp float;
+
+uniform float uTime;
+uniform vec3 uResolution;
+uniform float uSpeed;
+uniform float uScale;
+uniform float uBrightness;
+uniform vec3 uColor1;
+uniform vec3 uColor2;
+uniform float uNoiseFreq;
+uniform float uNoiseAmp;
+uniform float uBandHeight;
+uniform float uBandSpread;
+uniform float uOctaveDecay;
+uniform float uLayerOffset;
+uniform float uColorSpeed;
+uniform vec2 uMouse;
+uniform float uMouseInfluence;
+uniform bool uEnableMouse;
+
+#define TAU 6.28318
+
+vec3 gradientHash(vec3 p) {
+  p = vec3(
+    dot(p, vec3(127.1, 311.7, 234.6)),
+    dot(p, vec3(269.5, 183.3, 198.3)),
+    dot(p, vec3(169.5, 283.3, 156.9))
+  );
+  vec3 h = fract(sin(p) * 43758.5453123);
+  float phi = acos(2.0 * h.x - 1.0);
+  float theta = TAU * h.y;
+  return vec3(cos(theta) * sin(phi), sin(theta) * cos(phi), cos(phi));
+}
+
+float quinticSmooth(float t) {
+  float t2 = t * t;
+  float t3 = t * t2;
+  return 6.0 * t3 * t2 - 15.0 * t2 * t2 + 10.0 * t3;
+}
+
+vec3 cosineGradient(float t, vec3 a, vec3 b, vec3 c, vec3 d) {
+  return a + b * cos(TAU * (c * t + d));
+}
+
+float perlin3D(float amplitude, float frequency, float px, float py, float pz) {
+  float x = px * frequency;
+  float y = py * frequency;
+
+  float fx = floor(x); float fy = floor(y); float fz = floor(pz);
+  float cx = ceil(x);  float cy = ceil(y);  float cz = ceil(pz);
+
+  vec3 g000 = gradientHash(vec3(fx, fy, fz));
+  vec3 g100 = gradientHash(vec3(cx, fy, fz));
+  vec3 g010 = gradientHash(vec3(fx, cy, fz));
+  vec3 g110 = gradientHash(vec3(cx, cy, fz));
+  vec3 g001 = gradientHash(vec3(fx, fy, cz));
+  vec3 g101 = gradientHash(vec3(cx, fy, cz));
+  vec3 g011 = gradientHash(vec3(fx, cy, cz));
+  vec3 g111 = gradientHash(vec3(cx, cy, cz));
+
+  float d000 = dot(g000, vec3(x - fx, y - fy, pz - fz));
+  float d100 = dot(g100, vec3(x - cx, y - fy, pz - fz));
+  float d010 = dot(g010, vec3(x - fx, y - cy, pz - fz));
+  float d110 = dot(g110, vec3(x - cx, y - cy, pz - fz));
+  float d001 = dot(g001, vec3(x - fx, y - fy, pz - cz));
+  float d101 = dot(g101, vec3(x - cx, y - fy, pz - cz));
+  float d011 = dot(g011, vec3(x - fx, y - cy, pz - cz));
+  float d111 = dot(g111, vec3(x - cx, y - cy, pz - cz));
+
+  float sx = quinticSmooth(x - fx);
+  float sy = quinticSmooth(y - fy);
+  float sz = quinticSmooth(pz - fz);
+
+  float lx00 = mix(d000, d100, sx);
+  float lx10 = mix(d010, d110, sx);
+  float lx01 = mix(d001, d101, sx);
+  float lx11 = mix(d011, d111, sx);
+
+  float ly0 = mix(lx00, lx10, sy);
+  float ly1 = mix(lx01, lx11, sy);
+
+  return amplitude * mix(ly0, ly1, sz);
+}
+
+float auroraGlow(float t, vec2 shift) {
+  vec2 uv = gl_FragCoord.xy / uResolution.y;
+  uv += shift;
+
+  float noiseVal = 0.0;
+  float freq = uNoiseFreq;
+  float amp = uNoiseAmp;
+  vec2 samplePos = uv * uScale;
+
+  for (float i = 0.0; i < 3.0; i += 1.0) {
+    noiseVal += perlin3D(amp, freq, samplePos.x, samplePos.y, t);
+    amp *= uOctaveDecay;
+    freq *= 2.0;
+  }
+
+  float yBand = uv.y * 10.0 - uBandHeight * 10.0;
+  return 0.3 * max(exp(uBandSpread * (1.0 - 1.1 * abs(noiseVal + yBand))), 0.0);
+}
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / uResolution.xy;
+  float t = uSpeed * 0.4 * uTime;
+
+  vec2 shift = vec2(0.0);
+  if (uEnableMouse) {
+    shift = (uMouse - 0.5) * uMouseInfluence;
+  }
+
+  vec3 col = vec3(0.0);
+  col += 0.99 * auroraGlow(t, shift) * cosineGradient(uv.x + uTime * uSpeed * 0.2 * uColorSpeed, vec3(0.5), vec3(0.5), vec3(1.0), vec3(0.3, 0.20, 0.20)) * uColor1;
+  col += 0.99 * auroraGlow(t + uLayerOffset, shift) * cosineGradient(uv.x + uTime * uSpeed * 0.1 * uColorSpeed, vec3(0.5), vec3(0.5), vec3(2.0, 1.0, 0.0), vec3(0.5, 0.20, 0.25)) * uColor2;
+
+  col *= uBrightness;
+  float alpha = clamp(length(col), 0.0, 1.0);
+  gl_FragColor = vec4(col, alpha);
+}`;
+  function compileShader(gl,type,src){
+    const s=gl.createShader(type);
+    gl.shaderSource(s,src);
+    gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){
+      console.error('SoftAurora shader error:',gl.getShaderInfoLog(s));
+      return null;
+    }
+    return s;
+  }
+  function makeProgram(gl){
+    const vs=compileShader(gl,gl.VERTEX_SHADER,VERT);
+    const fs=compileShader(gl,gl.FRAGMENT_SHADER,FRAG);
+    if(!vs||!fs)return null;
+    const p=gl.createProgram();
+    gl.attachShader(p,vs);
+    gl.attachShader(p,fs);
+    gl.linkProgram(p);
+    if(!gl.getProgramParameter(p,gl.LINK_STATUS)){
+      console.error('SoftAurora program error:',gl.getProgramInfoLog(p));
+      return null;
+    }
+    return p;
+  }
+  const program=makeProgram(gl);
+  if(!program){container.style.display='none';return}
+  gl.useProgram(program);
+  const buf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,0,0, 3,-1,2,0, -1,3,0,2]),gl.STATIC_DRAW);
+  const aPos=gl.getAttribLocation(program,'position');
+  const aUv=gl.getAttribLocation(program,'uv');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,16,0);
+  gl.enableVertexAttribArray(aUv);
+  gl.vertexAttribPointer(aUv,2,gl.FLOAT,false,16,8);
+  const names=['uTime','uResolution','uSpeed','uScale','uBrightness','uColor1','uColor2','uNoiseFreq','uNoiseAmp','uBandHeight','uBandSpread','uOctaveDecay','uLayerOffset','uColorSpeed','uMouse','uMouseInfluence','uEnableMouse'];
+  const U={};
+  names.forEach(n=>U[n]=gl.getUniformLocation(program,n));
+  gl.uniform1f(U.uTime,0);
+  gl.uniform1f(U.uSpeed,CFG.speed);
+  gl.uniform1f(U.uScale,CFG.scale);
+  gl.uniform1f(U.uBrightness,CFG.brightness);
+  const c1=hexToVec3(CFG.color1),c2=hexToVec3(CFG.color2);
+  gl.uniform3f(U.uColor1,c1[0],c1[1],c1[2]);
+  gl.uniform3f(U.uColor2,c2[0],c2[1],c2[2]);
+  gl.uniform1f(U.uNoiseFreq,CFG.noiseFrequency);
+  gl.uniform1f(U.uNoiseAmp,CFG.noiseAmplitude);
+  gl.uniform1f(U.uBandHeight,CFG.bandHeight);
+  gl.uniform1f(U.uBandSpread,CFG.bandSpread);
+  gl.uniform1f(U.uOctaveDecay,CFG.octaveDecay);
+  gl.uniform1f(U.uLayerOffset,CFG.layerOffset);
+  gl.uniform1f(U.uColorSpeed,CFG.colorSpeed);
+  gl.uniform1f(U.uMouseInfluence,CFG.mouseInfluence);
+  gl.uniform1i(U.uEnableMouse,CFG.enableMouseInteraction?1:0);
+  gl.uniform2f(U.uMouse,0.5,0.5);
+  const render=()=>{gl.viewport(0,0,canvas.width,canvas.height);gl.drawArrays(gl.TRIANGLES,0,3)};
+  const setSize=()=>{
+    const w=Math.max(1,Math.floor(window.innerWidth));
+    const h=Math.max(1,Math.floor(window.innerHeight));
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    canvas.width=Math.max(1,Math.floor(w*dpr));
+    canvas.height=Math.max(1,Math.floor(h*dpr));
+    gl.uniform3f(U.uResolution,canvas.width,canvas.height,canvas.width/canvas.height);
+    render();
+  };
+  window.addEventListener('resize',setSize);
+  setSize();
+  const currentMouse=[0.5,0.5],targetMouse=[0.5,0.5];
+  const onPointerMove=e=>{
+    const rect=canvas.getBoundingClientRect();
+    targetMouse[0]=(e.clientX-rect.left)/Math.max(rect.width,1);
+    targetMouse[1]=1-(e.clientY-rect.top)/Math.max(rect.height,1);
+  };
+  const onPointerLeave=()=>{targetMouse[0]=0.5;targetMouse[1]=0.5};
+  window.addEventListener('pointermove',onPointerMove,{passive:true});
+  window.addEventListener('pointerleave',onPointerLeave);
+  let raf=0,isPageVisible=!document.hidden;
+  const t0=performance.now();
+  const loop=t=>{
+    gl.uniform1f(U.uTime,(t-t0)*0.001);
+    const tx=CFG.enableMouseInteraction?targetMouse[0]:0.5;
+    const ty=CFG.enableMouseInteraction?targetMouse[1]:0.5;
+    currentMouse[0]+=0.05*(tx-currentMouse[0]);
+    currentMouse[1]+=0.05*(ty-currentMouse[1]);
+    gl.uniform2f(U.uMouse,currentMouse[0],currentMouse[1]);
+    render();
+    raf=requestAnimationFrame(loop);
+  };
+  const tryStart=()=>{if(isPageVisible&&raf===0)raf=requestAnimationFrame(loop)};
+  const tryStop=()=>{if(raf!==0){cancelAnimationFrame(raf);raf=0}};
+  const onVisibility=()=>{isPageVisible=!document.hidden;isPageVisible?tryStart():tryStop()};
+  document.addEventListener('visibilitychange',onVisibility);
+  canvas.addEventListener('webglcontextlost',e=>e.preventDefault());
+  tryStart();
+})();
+</script>
+<script>
+/* ===== 实用工具：倒计时 / 角色筛选 / 豁免判定 / 模板下载 ===== */
+(function(){
+  const cd=document.getElementById("countdown");
+  if(cd){
+    const target=new Date("2026-08-12T00:00:00");
+    const days=Math.ceil((target-new Date())/86400000);
+    if(days>0){
+      if(days<=30){cd.textContent=`⏰ 距离 2026-08-12 PPWR 全面适用还有 ${days} 天`;cd.style.background="var(--c-red-bg)"}
+      else{cd.classList.add("ok");cd.textContent=`距离 2026-08-12 PPWR 全面适用还有 ${days} 天`}
+    }else cd.textContent="✅ PPWR 已于 2026-08-12 全面适用";
+  }
+})();
+(function(){
+  const pick=document.getElementById("rolePick"),hint=document.getElementById("roleHint");
+  if(!pick)return;
+  const ROLES={
+    all:{dims:[],txt:"显示全部 30 张卡片。"},
+    lighting:{dims:["c16","c17","c18"],txt:"💡 灯具行业重点：彩盒与缓冲泡沫的最小化、可回收分级、DoC/技术文档、EPR 注册；2026-08-12 前先完成四项重金属检测、PFAS（食品接触时）与 DoC 归档。"},
+    ecom:{dims:["k2","k3","k5","c13","c11","c16","c17","c18","v2","v9","v10","v11","c12","k6","c14","c19"],txt:"🛒 电商卖家重点：EPR 注册、包装标签（2028/2029）、电商包装空隙率 ≤50%、附件 V 禁令、DoC 与经营商识别信息。"},
+    supplier:{dims:["k5","c13","v3","v2","c16","c17","c18","k8","v7","v8"],txt:"📦 包装供应商重点：你是 DoC 与技术文档的第一责任出具方，先看合规责任、可回收分级、再生料、最小化与豁免判断。"},
+    horeca:{dims:["k2","k3","k4","v9","v10","v11","c11","c19"],txt:"🍽️ HORECA 重点：2027-02 自带容器、2028-02 可重复使用选项、可堆肥包装、DRS、附件 V 堂食禁令、食品接触 PFAS。"}
+  };
+  function apply(role){
+    const r=ROLES[role]||ROLES.all;
+    document.querySelectorAll(".kcard").forEach(card=>{
+      const dim=r.dims.indexOf(card.id)>=0;
+      card.classList.toggle("role-dim",dim);
+      card.classList.toggle("role-on",!dim&&role!=="all");
+    });
+    hint.textContent=r.txt+(role!=="all"?"（非重点卡片已减淡，可点「显示全部」恢复）":"");
+    pick.querySelectorAll(".rp").forEach(b=>b.classList.toggle("on",b.dataset.role===role));
+    try{localStorage.setItem("ppwr_v5_role",role)}catch(e){}
+  }
+  pick.addEventListener("click",e=>{const b=e.target.closest(".rp");if(b)apply(b.dataset.role)});
+  let saved="";try{saved=localStorage.getItem("ppwr_v5_role")||""}catch(e){}
+  apply(ROLES[saved]?saved:"all");
+})();
+(function(){
+  const box=document.getElementById("wizardBox");
+  if(!box)return;
+  const steps=[...box.querySelectorAll(".wz-step")],progress=document.getElementById("wzProgress"),result=document.getElementById("wzResult"),reset=document.getElementById("wzReset");
+  let cur=0,flags={};
+  function show(){
+    steps.forEach((s,i)=>s.classList.toggle("on",i===cur));
+    progress.textContent=`问题 ${cur+1} / ${steps.length}`;
+  }
+  box.addEventListener("click",e=>{
+    const b=e.target.closest(".wz-opt");
+    if(!b||b.disabled)return;
+    const v=b.dataset.v;
+    [...b.parentElement.querySelectorAll(".wz-opt")].forEach(x=>{x.disabled=true});
+    b.style.borderColor="var(--c-teal)";
+    if(v==="med")flags.med=true;
+    if(v==="food")flags.food=true;
+    if(v==="comp")flags.comp=true;
+    if(v==="dg")flags.dg=true;
+    if(v==="wood")flags.wood=true;
+    if(cur<steps.length-1){cur++;setTimeout(show,220)}
+    else showResult();
+  });
+  function showResult(){
+    progress.textContent="判定完成";
+    const ex=[];
+    if(flags.med||flags.food)ex.push("可豁免<b>可回收分级</b>（Art 6(11)）与<b>再生料含量</b>（Art 7(4)）");
+    if(flags.comp)ex.push("可豁免<b>再生料含量</b>（Art 7(4)(e)）；Art 9(1) 可堆肥品类另豁免 Art 6(1) 一般可回收义务");
+    if(flags.dg)ex.push("可豁免<b>可回收分级、再生料含量与重复利用目标</b>（Art 6(11)(f) / 7(4)(f) / 29(4)(a)）");
+    if(flags.wood)ex.push("可豁免<b>可回收分级</b>（Art 6(11)(g)）");
+    const still="<b>仍然适用：</b>重金属限量（Art 5）、DoC 与技术文档（Art 38-39）、EPR 注册、包装最小化（Art 10）、标签要求（Art 12）。";
+    result.innerHTML=(ex.length?`<b>判定结果：</b>`+ex.join("；")+`。<br>`:`<b>判定结果：</b>未命中常见豁免，需完整履行 PPWR 义务。<br>`)+still+`<br><span class="cap">详见：</span><a class="chip" href="#c12">豁免清单</a><a class="chip" href="#k6">豁免条款</a><a class="chip" href="#v10">再生料豁免</a>`;
+    result.classList.add("show");
+    reset.style.display="inline-block";
+  }
+  reset.onclick=()=>{
+    cur=0;flags={};
+    steps.forEach(s=>{[...s.querySelectorAll(".wz-opt")].forEach(x=>{x.disabled=false;x.style.borderColor=""})});
+    result.classList.remove("show");result.innerHTML="";reset.style.display="none";show();
+  };
+  show();
+})();
+(function(){
+  const TPL={
+    taizhang:"SKU,包装层级,材质,单件重量(g),供应商,欧盟年销量,销售国,优先级,风险标记\nLT-1001,销售包装,纸板+PE覆膜,58,XX包装厂,120000,DE,高,空隙率风险\nLT-1002,运输包装,瓦楞纸+缠绕膜,320,YY包装厂,120000,DE,高,缠绕膜属附件V禁令\n",
+    docletter:"【PPWR 符合性声明（DoC）索取函】\n\n致：供应商\n\n根据 Regulation (EU) 2025/40（PPWR）第 39 条与附件 VIII，请为以下包装出具欧盟符合性声明（DoC），并配套附件 VII 技术文档：\n\n一、DoC 必备十项：\n1. DoC 唯一识别号；\n2. 制造商信息（名称、注册地址，适用时含欧盟授权代表）；\n3. 制造商完全责任声明；\n4. 包装唯一标识（类型/批次/序列号等）；\n5. 对象描述（材料与关键特性）；\n6. 符合 Regulation (EU) 2025/40 第 5-12 条声明；\n7. 引用标准/通用规范/技术规范（部分采用注明条款）；\n8. 通报机构信息（如适用）；\n9. 补充信息；\n10. 签名、地点、日期。\n\n二、要求：\n1. 每款包装一份 DoC；\n2. 配套 Annex VII 技术文档（用途描述、图纸材料、标准清单、第 6/10/11 条评估说明、测试报告、风险分析）；\n3. 以投放市场成员国主管机构易懂的语言提供；\n4. 一次性包装保留 5 年、可重复使用包装保留 10 年。\n\n请于（日期）前回传，逾期将影响合作订单。\n",
+    techdoc:"【PPWR 技术文档归档目录（Annex VII Module A）】\n□ 1. 包装一般描述与预期用途\n□ 2. 概念设计、制造图纸与组件材料\n□ 3. 图纸理解所需说明（方案与操作）\n□ 4. 标准清单：协调标准（Art 36）/通用规范（Art 37）/其他技术规范；部分采用注明条款；未采用说明方案\n□ 5. 第 6/10/11 条（可回收性/最小化/重复使用）评估的定性说明\n□ 6. 测试报告（有害物质、可回收性、运输安全等）\n□ 7. 不合规风险分析与风险控制\n□ 8. 再生料（Art 7）、生物基（Art 8）、可堆肥（Art 9）合规证据\n□ 9. DoC（Annex VIII）与追溯码交叉引用\n",
+    epr:"国家,EPR注册号,PRO,状态,有效期,续费日\n德国,LUCID-XXXX,双元系统A,已注册,2026-12-31,2026-11-15\n法国,ID-XXXX,生态组织B,待注册,,\n"
+  };
+  const FILES={taizhang:"ppwr_包装台账.csv",docletter:"ppwr_DoC索取函.txt",techdoc:"ppwr_技术文档目录.txt",epr:"ppwr_EPR注册台账.csv"};
+  function dl(name,content,type){
+    const blob=new Blob(["\ufeff"+content],{type:type||"text/plain;charset=utf-8"});
+    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},300);
+  }
+  document.addEventListener("click",e=>{
+    const b=e.target.closest(".tpl-btn");if(!b)return;
+    const key=b.dataset.dl||b.dataset.copy;
+    if(b.dataset.dl){dl(FILES[key],TPL[key],key.endsWith("csv")?"text/csv;charset=utf-8":"text/plain;charset=utf-8")}
+    else{
+      const t=TPL[key];
+      const done=()=>{b.textContent="已复制";setTimeout(()=>{b.textContent="复制"},1500)};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done).catch(()=>{})}
+      else{const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();done()}
+    }
+  });
+})();
+</script>
+<script>
+/* ===== 卡片搜索 + 常见误区页签 ===== */
+(function(){
+  const input=document.getElementById("cardSearch"),count=document.getElementById("searchCount");
+  if(!input||!count)return;
+  const cards=[...document.querySelectorAll(".kcard")];
+  input.addEventListener("input",()=>{
+    const kw=input.value.trim().toLowerCase();
+    let n=0;
+    cards.forEach(card=>{
+      const hit=!kw||(card.textContent||"").toLowerCase().indexOf(kw)>=0;
+      card.style.display=hit?"":"none";
+      if(hit)n++;
+    });
+    count.textContent=kw?`匹配 ${n} 张${n===0?"，试试法条号或关键词":""}`:"";
+  });
+})();
+(function(){
+  const tabs=document.getElementById("mythTabs");
+  if(!tabs)return;
+  const panels=[...document.querySelectorAll(".myth-panel")];
+  tabs.addEventListener("click",e=>{
+    const b=e.target.closest(".mt");if(!b)return;
+    tabs.querySelectorAll(".mt").forEach(x=>x.classList.toggle("on",x===b));
+    panels.forEach(p=>p.classList.toggle("on",p.dataset.p===b.dataset.m));
+  });
+})();
+</script>
+  <a href="./export-compliance.html" title="返回外贸合规速查" style="position:fixed;right:18px;bottom:18px;z-index:300;background:#e100ff;color:#fff;text-decoration:none;padding:10px 18px;border-radius:99px;font-size:13px;font-weight:600;box-shadow:0 8px 22px rgba(225,0,255,.45)">← 返回</a>
+</body>
+</html>

@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const EXCLUDE = new Set(["backup", ".git", "node_modules"]);
+// 根目录用户源文件副本（站内使用 pages/ppwr.html），不参与站点校验
+const FILE_EXCLUDE = new Set(["PPWR法规知识网站v5.html"]);
 const cache = {};
 function get(rel) {
   if (!(rel in cache)) {
@@ -22,7 +24,10 @@ function walk(dir, out) {
     if (e.name.startsWith(".")) continue;
     const full = path.join(dir, e.name);
     if (e.isDirectory()) { if (!EXCLUDE.has(e.name)) walk(full, out); }
-    else if (e.name.endsWith(".html")) out.push(path.relative(ROOT, full).replace(/\\/g, "/"));
+    else if (e.name.endsWith(".html")) {
+      if (FILE_EXCLUDE.has(e.name)) continue;
+      out.push(path.relative(ROOT, full).replace(/\\/g, "/"));
+    }
   }
   return out;
 }
@@ -129,7 +134,9 @@ while (queue.length) {
 }
 const orphans = htmlFiles.filter(f => f !== "index.html" && !seen.has(f));
 // 瞬态跳转页（meta refresh / location.replace）加载即跳走，无需导航
+const NO_NAV_ALLOW = new Set(["pages/ppwr.html"]); // 独立深色专题页：自带导航与返回键，不套站内 nav
 const noNav = htmlFiles.filter(f => {
+  if (NO_NAV_ALLOW.has(f)) return false;
   const c = get(f) || "";
   if (/http-equiv=["']refresh/i.test(c) || /location\.replace/i.test(c)) return false;
   return !/(class="nav"|class="bottom-nav")/.test(c);
