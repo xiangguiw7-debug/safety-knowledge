@@ -96,7 +96,8 @@ for (const jf of jsFiles) {
     const { p, frag } = splitHref(href);
     if (!p) continue;
     let found = null;
-    for (const base of ["pages", "."]) {
+    // 查找基准：pages / 根 / en（nav.js 激活关键词如 core.html 指向 en/core.html）
+    for (const base of ["pages", ".", "en"]) {
       const target = path.posix.normalize(path.posix.join(base, p));
       if (exists(target)) { found = target; break; }
     }
