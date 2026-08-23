@@ -44,26 +44,91 @@
         <table>
           <thead><tr><th>法规/体系</th><th>管什么</th><th>关键动作</th></tr></thead>
           <tbody>
-            <tr><td>RoHS（EU 2011/65/EU）</td><td>10 类有害物质限量</td><td>材料声明 + 检测（ICP-OES/GC-MS）</td></tr>
-            <tr><td>REACH</td><td>化学品注册与 SVHC 管控</td><td>SVHC 清单跟踪 + 超阈值通报/声明</td></tr>
-            <tr><td>WEEE</td><td>电子废弃物回收</td><td>回收标志、登记、注册</td></tr>
+            <tr><td>RoHS（EU 2011/65/EU）</td><td>10 类有害物质限量（均质材料）</td><td>材料拆分测试（ICP-OES/GC-MS）＋ DoC；豁免需在技术文件说明并跟踪到期</td></tr>
+            <tr><td>REACH</td><td>化学品注册与 SVHC 管控</td><td>SVHC ≥0.1%（w/w）通报/供应链声明；关注授权与限制清单</td></tr>
+            <tr><td>WEEE</td><td>电子电气废弃物回收</td><td>生产者登记（EPR）＋ 打叉垃圾桶标志＋ 回收申报</td></tr>
             <tr><td>无卤</td><td>卤素限量（PCB 基材/线缆/塑胶）</td><td>IEC 61249-2-21（Cl/Br 各 ≤900ppm、总和 ≤1500ppm）＋ 供应商报告（测试/声明）</td></tr>
-            <tr><td>电池指令</td><td>电池回收、标签、碳足迹</td><td>EU 2023/1542 分阶段实施</td></tr>
-            <tr><td>加州 65</td><td>消费品有害物质警示</td><td>含量评估 + 警示标签</td></tr>
+            <tr><td>电池指令</td><td>电池回收、标签、碳足迹</td><td>EU 2023/1542 分阶段：EPR、CE、回收符号、电池护照、回收材料（详见<a href="./export-compliance.html#battery-packaging">电池法规详解</a>）</td></tr>
+            <tr><td><a href="./ppwr.html">包装法规 PPWR（EU 2025/40）</a></td><td>包装减量/可回收/重金属限值</td><td>94/62/EC 重金属 ≤100mg/kg → PPWR 2026-08-12 全面适用；EPR 注册＋回收标志（详见<a href="./export-compliance.html#battery-packaging">包装法规详解</a>与<a href="./ppwr.html">PPWR 知识库</a>）</td></tr>
+            <tr><td>加州 65</td><td>消费品有害物质警示</td><td>含量评估（如铅 ≥300ppm 需警示）＋ 警示标签＋ 年度清单跟踪</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section>
+      <h2>1.5 各法规详解（义务 / 文件 / 测试）</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>RoHS（EU 2011/65/EU）</h3>
+          <ul style="font-size:13.5px;line-height:1.8">
+            <li><b>限十项</b>：铅 Pb、汞 Hg、镉 Cd、六价铬 Cr(VI)、PBB、PBDE ＋ 4 种邻苯二甲酸酯（DEHP/DBP/BBP/DIBP）；镉 100mg/kg，其余 1000mg/kg（均质材料）；</li>
+            <li><b>测试</b>：ICP-OES（金属元素）、GC-MS（有机物）、XRF 筛查；</li>
+            <li><b>豁免</b>：豁免条款随指令修订，<b>到期要重新评估</b>，豁免需写进技术文件；</li>
+            <li><b>文件</b>：RoHS DoC ＋ 测试报告 ＋ 供应链声明。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>REACH（EU 1907/2006）</h3>
+          <ul style="font-size:13.5px;line-height:1.8">
+            <li><b>SVHC</b>：候选清单持续更新（现已 240+ 项）；物品中 SVHC ≥ 0.1%（w/w）需<b>通报</b>（年量 ≥1t）或向供应链<b>传递声明</b>；</li>
+            <li><b>授权/限制</b>：附件 XIV 授权清单、附件 XVII 限制清单——比 SVHC 更硬，直接禁售/限售；</li>
+            <li><b>文件</b>：SVHC 声明（≤0.1% 或超标说明）、供应链信息、必要时检测；</li>
+            <li><b>注意</b>：SVHC 清单每年 1 月/6 月更新，<b>声明要跟着更新</b>。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>WEEE（EU 2012/19/EU）</h3>
+          <ul style="font-size:13.5px;line-height:1.8">
+            <li><b>义务</b>：在销售国做<b>生产者登记（EPR）</b>、印<b>打叉垃圾桶</b>回收标志、按重量申报与缴纳回收费；</li>
+            <li><b>适用</b>：电子电气设备（EEE）六类——消费电子、家电、IT 等几乎全覆盖；</li>
+            <li><b>文件</b>：注册号、回收合同、申报记录；</li>
+            <li><b>注意</b>：各国登记独立（德国 stiftung ear、法国等），<b>别只做一个国家</b>。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>电池法规（EU 2023/1542）</h3>
+          <ul style="font-size:13.5px;line-height:1.8">
+            <li><b>范围</b>：便携/工业/电动车/储能电池；取代旧 2006/66/EC；</li>
+            <li><b>现在</b>：EPR 注册、电池 CE、回收符号＋容量标签、化学品符号；</li>
+            <li><b>2027 起</b>：便携电池可拆卸、电池护照（DPP）；</li>
+            <li><b>2028–2031</b>：回收材料比例、更高收集率目标；</li>
+            <li><b>详见</b><a href="./export-compliance.html#battery-packaging">外贸合规速查 · 电池法规详解</a>。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>加州 65（Prop 65）</h3>
+          <ul style="font-size:13.5px;line-height:1.8">
+            <li><b>机制</b>：加州在售产品不得暴露清单内化学物质（铅、镉、邻苯等），否则需<b>警示标签</b>；</li>
+            <li><b>典型阈值</b>：铅 300ppm/天暴露、镉 4.1ppm 量级（看具体物质）；</li>
+            <li><b>注意</b>：美国加州销售即适用，<b>与联邦法不同</b>；清单每年 2 次更新；</li>
+            <li><b>文件</b>：暴露评估 ＋ 警示标签（或含量达标免标）。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>包装法规 PPWR（EU 2025/40）</h3>
+          <ul style="font-size:13.5px;line-height:1.8">
+            <li><b>是什么</b>：包装与包装废弃物法规，2025-02 生效、<b>2026-08-12 废止 94/62/EC 全面适用</b>；</li>
+            <li><b>红线</b>：重金属 Pb+Cd+Hg+Cr6+ 总和 ≤ <b>100 mg/kg</b>；EPR 注册（德国 LUCID 等）；回收标志；</li>
+            <li><b>加码</b>：2030 全包装可回收设计、减量/重复使用目标、食品接触包装 PFAS 限制（2026-08 起）、再生塑料含量；</li>
+            <li><b>覆盖</b>：纸箱/泡棉/胶带等运输包装全部纳入；</li>
+            <li><b>详见</b><a href="./ppwr.html">PPWR 合规实操知识库</a>（时间线/要求/豁免/模板）＋<a href="./export-compliance.html#battery-packaging">包装法规详解</a>。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
       <h2>2. 供应链管理</h2>
       <ul class="check-list">
-        <li>建立《禁用/限用物质清单》并随法规更新；</li>
-        <li>关键物料要求供应商提供 RoHS/REACH 声明 + 检测报告；</li>
-        <li>成分变更（阻燃剂、增塑剂、焊料）要触发重新评估；</li>
-        <li>保留追溯：批次、报告编号、供应商、日期；</li>
-        <li>出口多国时维护一张“法规 × 物料”矩阵。</li>
+        <li>建立《禁用/限用物质清单》并随法规更新（RoHS 豁免、SVHC 每半年、加州 65 每年）；</li>
+        <li>关键物料要求供应商提供 RoHS/REACH 声明 + 检测报告（报告编号、方法、实测值可追溯）；</li>
+        <li>成分变更（阻燃剂、增塑剂、焊料、油墨）要触发重新评估并更新 CDF/文件；</li>
+        <li>保留追溯：批次、报告编号、供应商、日期、变更记录；</li>
+        <li>出口多国时维护一张“法规 × 物料”矩阵，含 EPR 类登记（WEEE/电池/包装）到期时间；</li>
+        <li>供应商年度审核：确认报告仍在有效期、物质清单版本一致、无未申报变更。</li>
       </ul>
+      <p class="howto">供应链合规的抓手是「一份 CDF 式的物料台账 + 每物料一份声明/报告」，和认证的 <a href="./templates.html">CDF 技术文件模板</a> 一起维护。</p>
     </section>
 
     <section>
@@ -88,10 +153,12 @@
     <section>
       <h2>3. 常见坑</h2>
       <ul>
-        <li>“供应商说符合就符合”——要报告编号和检测方法；</li>
-        <li>“RoHS 过了就出口无忧”——REACH SVHC 清单在持续更新；</li>
-        <li>“无卤只是线缆的事”——PCB 基材、塑胶、焊料都可能涉及；</li>
-        <li>“电池回收是品牌方的事”——出口欧盟有生产商责任。</li>
+        <li>“供应商说符合就符合”——要报告编号、检测方法和实测值；</li>
+        <li>“RoHS 过了就出口无忧”——REACH SVHC 清单在持续更新，豁免也会到期；</li>
+        <li>“无卤只是线缆的事”——PCB 基材、塑胶、焊料、油墨都可能涉及；</li>
+        <li>“电池回收是品牌方的事”——出口欧盟有生产商责任（EPR）；</li>
+        <li>“包装不用管”——纸箱/泡棉/胶带都纳入 PPWR，重金属超 100mg/kg 或漏办 EPR 会被拦；</li>
+        <li>“报告年份新就有效”——要核对样品是否代表当前物料，批次不一致报告等于没有。</li>
       </ul>
     </section>
 
@@ -102,6 +169,10 @@
         <a class="tag" href="./materials.html">材料库</a>
         <a class="tag" href="./knowledge.html#biocompat">生物相容性</a>
         <a class="tag" href="./knowledge.html#battery">电池保护</a>
+        <a class="tag" href="./ppwr.html">PPWR 合规实操知识库</a>
+        <a class="tag" href="./export-compliance.html#battery-packaging">电池/包装法规详解</a>
+        <a class="tag" href="./export-compliance.html">外贸合规速查</a>
+        <a class="tag" href="./erp.html">ErP 能效指令</a>
       </p>
     </section>
   </main>
