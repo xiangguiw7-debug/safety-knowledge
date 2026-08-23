@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
-  <title>出口数据速查（品类 × 市场 × 量级） - 安规与可靠性知识课堂</title>
-  <meta name="description" content="按品类查热门出口目的市场与销量/销售额量级，或按市场反查该卖什么：LED 灯具、消费电子、家电、电源、电池等 8 大类。">
+  <title>中国出口数据查询（官方平台 + HS 编码速查） - 安规与可靠性知识课堂</title>
+  <meta name="description" content="直达海关统计数据在线查询平台等官方渠道：按 HS 编码 + 目的国查产品出口数量与金额；附 8 大出口品类 HS 编码速查与三步查询教程。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
@@ -13,10 +13,13 @@
   <link rel="stylesheet" href="../assets/css/industries.css">
   <style>
     .hs { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 2px 10px; margin-left: 8px; vertical-align: middle; }
-    .mkt-chip { display: inline-block; font-size: 12.5px; font-weight: 650; border-radius: 999px; padding: 4px 12px; margin: 3px 4px 3px 0; background: var(--card-2); border: 1px solid var(--border); }
-    .mkt-chip b { color: var(--accent); }
     .exp-count { font-size: 13px; color: var(--muted); margin: 8px 0 12px; }
     .erp-q { font-weight: 650; }
+    .ch-chan { display: flex; gap: 14px; align-items: flex-start; }
+    .ch-chan .ic { font-size: 26px; line-height: 1.2; }
+    .ch-chan h3 { margin: 0 0 4px; font-size: 15.5px; }
+    .ch-tag { font-size: 11px; font-weight: 700; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 1px 8px; margin-left: 6px; vertical-align: middle; }
+    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 14px; margin-right: 8px; }
   </style>
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
@@ -40,12 +43,26 @@
 
   <main class="container page">
     <div class="page-head">
-      <p class="crumb"><a href="../index.html">首页</a> / <a href="./certification.html">认证</a> / 出口数据速查</p>
-      <h1>出口数据速查：哪种产品卖去哪、卖多少</h1>
-      <p class="lead">选品/报价前先看市场：<b>按品类查</b>热门目的市场与销量销售额量级，或<b>按市场反查</b>该卖什么。每个品类附典型合规组合，点卡片里的链接直达对应认证/能效专题。</p>
-      <p style="margin-top:8px"><a class="btn" href="./export-compliance.html">🌍 外贸合规速查（认证版）</a> <a class="btn" href="./wizard.html">🧙 认证向导（生成清单）</a></p>
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./certification.html">认证</a> / 出口数据查询</p>
+      <h1>中国出口数据查询：品类 × 数量 × 金额</h1>
+      <p class="lead">本站不存实时出口数据——<b>直达官方查询平台</b>，按 HS 编码 + 目的国就能查到你那个品类的真实出口数量与金额。本页给你：<b>① 官方查询渠道入口 → ② 三步查询教程 → ③ HS 编码速查表</b>（编码是查数据的钥匙）。</p>
+      <p style="margin-top:8px"><a class="btn" href="./export-compliance.html">🌍 外贸合规速查（认证版）</a> <a class="btn" href="./wizard.html">🧙 认证向导</a></p>
     </div>
 
+    <h2 class="section-title">① 官方数据查询渠道（点链接直达）</h2>
+    <p class="section-sub">想查"某个品类出口了多少、卖去哪"，优先用前两个；国际对比用 ITC / UN；企业自查用单一窗口。</p>
+    <div id="chanList" class="grid grid-2"></div>
+
+    <h2 class="section-title">② 三步查到出口数量</h2>
+    <div class="card">
+      <p><span class="step-num">1</span><b>定位 HS 编码</b>：用下方「③ HS 编码速查表」或海关官网归类查询，找到你产品的前 6–8 位编码（如 LED 灯具 9405，适配器 8504）。<a href="https://stats.customs.gov.cn" target="_blank" rel="noopener">海关归类查询 →</a></p>
+      <p><span class="step-num">2</span><b>打开海关统计数据在线查询平台</b>（<a href="https://stats.customs.gov.cn" target="_blank" rel="noopener">stats.customs.gov.cn</a>）：选择"贸易伙伴"（目的国）、"商品"（输入 HS 编码）、时间范围。</p>
+      <p><span class="step-num">3</span><b>看结果</b>：平台按季度/月度返回该编码商品的出口<b>数量</b>（件/台/千克）与<b>金额</b>（人民币/美元），可导出；目的国可选多个做对比。</p>
+      <p class="howto">提示：HS 编码位数越多越精确——6 位是国际通用层，8 位是中国海关层（最贴近你的具体产品）；不确定归类时问报关行/货代，归类错了数据就查偏了。</p>
+    </div>
+
+    <h2 class="section-title">③ HS 编码速查（8 大出口品类参考）</h2>
+    <p class="section-sub">编码是查数据的钥匙：先在这里定位大类，再去官方平台按编码查实时数量/金额。</p>
     <div class="filter-bar" role="group" aria-label="按品类筛选">
       <button type="button" class="filter-chip active" data-cat="all" aria-pressed="true">全部品类</button>
       <button type="button" class="filter-chip" data-cat="lighting" aria-pressed="false">💡 灯具</button>
@@ -57,34 +74,32 @@
       <button type="button" class="filter-chip" data-cat="camera" aria-pressed="false">📷 安防监控</button>
       <button type="button" class="filter-chip" data-cat="auto" aria-pressed="false">🚗 汽车零部件</button>
     </div>
-    <div class="filter-bar" role="group" aria-label="按目的市场反向筛选" id="mktBar" style="margin-top:6px"></div>
     <p class="exp-count" id="expCount"></p>
-
     <div class="industry-grid" id="expList"></div>
 
-    <h2 class="section-title">怎么看这张表</h2>
+    <h2 class="section-title">怎么看这张 HS 编码表</h2>
     <div class="grid grid-2">
       <div class="card">
-        <h3>先选品类，再看市场</h3>
-        <p>点上方品类标签只看该类；每张卡列出热门目的市场（按近年常见口径排名）、年出口金额量级、典型合规组合与选品提示。合规组合里点链接可直达 <a href="./erp.html">ErP 能效专题</a> / <a href="./export-compliance.html">外贸合规速查</a>。</p>
+        <h3>编码不是终点，是查询入口</h3>
+        <p>拿到大类编码后，去 <a href="https://stats.customs.gov.cn" target="_blank" rel="noopener">海关统计数据在线查询平台</a> 按编码查：<b>出口数量（件/台/千克）</b>、金额、主要目的国、月度趋势——全部是官方真实数据。</p>
       </div>
       <div class="card">
-        <h3>先选市场，反查该卖什么</h3>
-        <p>点中间「目的市场」标签（美国 / 德国 / 荷兰 / 阿联酋…），会只显示进入该市场的品类——适合「我手里有某个渠道」的业务员快速定位能卖什么。</p>
+        <h3>合规联动</h3>
+        <p>查到市场后，看该品类的典型合规组合（卡内列出）：LED 灯具 → <a href="./erp.html#lighting-erp">ErP 能效</a>；适配器 → ErP 外部电源法规；蓝牙产品 → RED；电池 → UN 38.3 + 欧盟电池法规。</p>
       </div>
     </div>
 
     <h2 class="section-title">常见问题</h2>
     <div class="card">
-      <p class="erp-q">1. 这些销量 / 销售额数据准吗？</p>
-      <p>本站为<b>教学参考量级</b>（基于海关公开数据的常见口径与量级），不是精确统计。正式选品、报价请查<b>海关总署</b>或专业关务平台的最新出口数据（按 HS 编码维度可精确到金额/数量/国别）。</p>
-      <p class="erp-q">2. 我怎么知道自己的产品是哪个 HS 编码？</p>
-      <p>用海关 HS 归类查询工具（或问报关行/货代），按产品材质、功能、用途归类；同一产品不同规格可能落在不同子目，归类错了会影响税率与监管要求。</p>
-      <p class="erp-q">3. 数据里的「合规组合」和我实际要做的一致吗？</p>
-      <p>是常见组合的教学提示，具体以目标市场法规 + 产品实际规格为准；用 <a href="./wizard.html">认证向导</a> 生成你产品的完整清单最稳妥。</p>
+      <p class="erp-q">1. 查询收费吗？</p>
+      <p>海关统计数据在线查询平台、ITC Trade Map、UN Comtrade 均可免费查询；单一窗口需企业账号（报关企业通常已有）。</p>
+      <p class="erp-q">2. 怎么精确到"我这一款"产品？</p>
+      <p>HS 编码 8 位最贴近具体商品；同一大类下不同子目数据差别很大（如灯具 9405 下面球泡灯与路灯子目不同），先让报关行确认归类。</p>
+      <p class="erp-q">3. 目的国怎么选？</p>
+      <p>海关平台支持多选贸易伙伴国做对比；不确定市场时先看 ITC Trade Map 的出口分布图，再回海关平台查具体数量金额。</p>
     </div>
 
-    <p class="cite-note">本站出口数据为教学参考量级，非精确海关统计；正式数据以海关总署实时统计为准。合规组合以目标市场法规最新版本为准（见 <a href="./standards.html">标准文件入口</a>）。</p>
+    <p class="cite-note">本站不提供实时出口数据；数量/金额请以上述官方平台查询结果为准。HS 编码与合规组合为教学参考，以海关归类与目标市场法规最新版本为准。</p>
   </main>
 
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
@@ -105,63 +120,40 @@
       "use strict";
       if (typeof EXPORT_DATA === "undefined") return;
       function esc(t) { var d = document.createElement("div"); d.textContent = t == null ? "" : String(t); return d.innerHTML; }
+      // ① 渠道卡片
+      var chanBox = document.getElementById("chanList");
+      if (chanBox) {
+        chanBox.innerHTML = EXPORT_DATA.channels.map(function (c) {
+          return '<div class="card ch-chan"><span class="ic">' + c.icon + "</span>" +
+            "<div><h3><a href='" + c.url + "' target='_blank' rel='noopener'>" + esc(c.name) + "</a><span class='ch-tag'>" + esc(c.tag) + "</span></h3>" +
+            "<p style='font-size:13.5px;color:var(--muted);margin:4px 0 0'>" + esc(c.desc) + "</p></div></div>";
+        }).join("");
+      }
+      // ③ 品类卡片 + 筛选
       var list = document.getElementById("expList");
       if (!list) return;
-      var activeCat = "all", activeMkt = "all";
-
-      // 收集全部市场，生成反向筛选 chips
-      var mktBar = document.getElementById("mktBar");
-      var allMkts = [];
-      EXPORT_DATA.categories.forEach(function (c) { c.markets.forEach(function (x) { if (allMkts.indexOf(x.m) === -1) allMkts.push(x.m); }); });
-      var mktChips = ['<button type="button" class="filter-chip active" data-mkt="all" aria-pressed="true">全部市场</button>'];
-      allMkts.forEach(function (m) {
-        mktChips.push('<button type="button" class="filter-chip" data-mkt="' + esc(m) + '" aria-pressed="false">' + esc(m) + "</button>");
-      });
-      mktBar.innerHTML = mktChips.join("");
-
+      var activeCat = "all";
       function render() {
-        var cats = EXPORT_DATA.categories.filter(function (c) {
-          var okCat = activeCat === "all" || c.id === activeCat;
-          var okMkt = activeMkt === "all" || c.markets.some(function (x) { return x.m === activeMkt; });
-          return okCat && okMkt;
-        });
+        var cats = EXPORT_DATA.categories.filter(function (c) { return activeCat === "all" || c.id === activeCat; });
         var count = document.getElementById("expCount");
         if (count) count.textContent = "当前显示 " + cats.length + " / " + EXPORT_DATA.categories.length + " 个品类";
         list.innerHTML = cats.map(function (c) {
-          var mkts = c.markets.map(function (x) {
-            var hl = activeMkt === "all" || x.m === activeMkt;
-            return '<span class="mkt-chip"' + (hl ? ' style="border-color:var(--accent);background:var(--accent-soft)"' : "") + ">" +
-              "<b>" + esc(x.m) + "</b> " + esc(x.note) + "</span>";
-          }).join(" ");
           var certHref = c.cert || "export-compliance.html";
           return '<article class="industry-card" data-id="' + c.id + '">' +
             "<h3>" + c.icon + " " + esc(c.name) + '<span class="hs">' + esc(c.hs) + "</span></h3>" +
-            '<p class="summary">📈 ' + esc(c.scale) + "</p>" +
-            '<p class="meta">热门目的市场（教学量级排名）</p>' +
-            '<p class="topic-list" style="padding-left:0;list-style:none">' + mkts + "</p>" +
+            '<p class="meta">常见出口目的市场（去官方平台查实时数据）</p>' +
+            '<p style="font-size:13.5px">' + esc(c.markets) + "</p>" +
             '<p class="meta">典型合规组合</p>' +
             '<ul class="std-list"><li>' + esc(c.compliance) + "</li></ul>" +
             '<div class="callout callout-info" style="margin:10px 0"><strong>💡 选品提示：</strong>' + esc(c.tip) + "</div>" +
-            '<p style="margin-top:10px"><a class="btn" href="' + certHref + '">去查这个品类的合规 →</a> <a class="btn" href="workshop.html?ind=all">🏭 去工坊做项目</a></p>' +
+            '<p style="margin-top:10px"><a class="btn" href="' + certHref + '">去查这个品类的合规 →</a> <a class="btn" href="https://stats.customs.gov.cn" target="_blank" rel="noopener">🏛️ 去官方平台查数量/金额</a></p>' +
             "</article>";
         }).join("");
       }
-
       document.querySelectorAll("[data-cat]").forEach(function (b) {
         b.addEventListener("click", function () {
           activeCat = b.getAttribute("data-cat");
           document.querySelectorAll("[data-cat]").forEach(function (x) {
-            var on = x === b;
-            x.classList.toggle("active", on);
-            x.setAttribute("aria-pressed", on ? "true" : "false");
-          });
-          render();
-        });
-      });
-      mktBar.querySelectorAll("[data-mkt]").forEach(function (b) {
-        b.addEventListener("click", function () {
-          activeMkt = b.getAttribute("data-mkt");
-          mktBar.querySelectorAll("[data-mkt]").forEach(function (x) {
             var on = x === b;
             x.classList.toggle("active", on);
             x.setAttribute("aria-pressed", on ? "true" : "false");
