@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <title>CE 六大核心指令（LVD / EMC / RED / MD / RoHS / ErP） - 安规与可靠性知识课堂</title>
+  <meta name="description" content="CE 不只是 LVD：低电压 LVD、电磁兼容 EMC、无线电 RED、机械 MD、有害物质 RoHS、能效 ErP 六大核心指令——范围、适用标准、符合性程序与技术文件全解。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .ce-badge { display: inline-block; font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 2px 9px; margin-left: 6px; vertical-align: middle; }
+    .ce-badge.self { background: var(--accent-soft); color: var(--accent); }
+    .ce-badge.nb { background: rgba(255,149,0,.15); color: #b0651c; }
+    .ce-badge.opt { background: var(--card-2); color: var(--muted); }
+    .jump-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 16px; }
+    .jump-nav a { font-size: 13px; }
+  </style>
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html" class="active">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./certification.html">认证</a> / CE 六大核心指令</p>
+      <h1>CE 六大核心指令：LVD / EMC / RED / MD / RoHS / ErP</h1>
+      <p class="lead">一句话记住：<b>CE 是产品进欧盟的「护照」，但它由多个指令组成，每个指令管一类风险</b>——LVD 管安全、EMC 管电磁、RED 管无线、MD 管机械、RoHS 管有害物质、ErP 管能效。多数产品<b>同时适用多个指令</b>，全部符合才叫 CE 合规。</p>
+      <p class="jump-nav">
+        <a class="btn" href="#overview">① 总览表</a>
+        <a class="btn" href="#lvd">LVD</a>
+        <a class="btn" href="#emc">EMC</a>
+        <a class="btn" href="#red">RED</a>
+        <a class="btn" href="#md">MD</a>
+        <a class="btn" href="#rohs">RoHS</a>
+        <a class="btn" href="#erp">ErP</a>
+        <a class="btn" href="#select">② 我的产品要哪些</a>
+        <a class="btn" href="#files">③ 技术文件</a>
+      </p>
+    </div>
+
+    <h2 class="section-title" id="overview">① 六大指令总览</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>指令</th><th>管什么</th><th>典型适用产品</th><th>主要标准/法规</th><th>谁做</th></tr></thead>
+      <tbody>
+        <tr><td><b>LVD 2014/35/EU</b><br>低电压指令</td><td>电气安全（防触电/防火/机械）</td><td>电压 50–1000V AC / 75–1500V DC 的电器产品</td><td>EN IEC 60335、62368、60598、60601、61010…</td><td><span class="ce-badge self">自我声明</span></td></tr>
+        <tr><td><b>EMC 2014/30/EU</b><br>电磁兼容指令</td><td>不干扰别人、不怕别人干扰</td><td>几乎所有用电设备（含无线的）</td><td>EN 55032/55035、EN 55015、IEC 61000-4-x</td><td><span class="ce-badge self">自我声明</span></td></tr>
+        <tr><td><b>RED 2014/53/EU</b><br>无线电设备指令</td><td>无线发射/接收 + 健康（SAR）+ EMC</td><td>蓝牙/WiFi/蜂窝/遥控等含无线功能产品</td><td>EN 300 328、301 489、301 511、62368-1 等</td><td><span class="ce-badge opt">多数自声明，高风险需公告机构</span></td></tr>
+        <tr><td><b>MD 2006/42/EC</b><br>机械指令</td><td>机械安全（风险评估/防护/急停）</td><td>机床、输送机、工程机械、电动工具（部分）等</td><td>EN ISO 12100、13857、60204-1 等</td><td><span class="ce-badge nb">部分需公告机构</span></td></tr>
+        <tr><td><b>RoHS 2011/65/EU</b><br>有害物质指令</td><td>十项有害物质限量（均质材料）</td><td>EEE 电子电气设备（几乎全覆盖）</td><td>EU 2011/65/EU + 豁免条款</td><td><span class="ce-badge self">自我声明</span></td></tr>
+        <tr><td><b>ErP 2009/125/EC</b><br>能效生态设计指令</td><td>能耗表现（效率/待机/空载）</td><td>外部电源、家电、照明、显示器等（按实施法规）</td><td>(EU) 2019/1782、2023/826、2019/2020…</td><td><span class="ce-badge self">厂商自评估</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout callout-info">
+      <strong>CE 之外还有"非指令"要求</strong>
+      <p>除六大指令，出口欧盟还叠加：<b>REACH</b>（化学品，法规 EC 1907/2006）、<b>WEEE</b>（回收）、<b>电池法规</b>（2023/1542）、<b>包装法规 PPWR</b>（2025/40）、<b>通用产品安全法规 GPSR</b>（2023/988，2024-12 起）等——这些不是"CE 指令"但同属市场准入要求（详见 <a href="./export-compliance.html">外贸合规速查</a>）。</p>
+    </div>
+
+    <h2 class="section-title" id="lvd">LVD 低电压指令（2014/35/EU）——站内最熟的一条线</h2>
+    <div class="card">
+      <ul style="font-size:14.5px;line-height:1.9">
+        <li><b>范围</b>：额定电压 50–1000V AC 或 75–1500V DC 的电气产品（家电、IT、电源、灯具、电动工具等绝大多数都在这）；</li>
+        <li><b>核心</b>：防触电、防火、机械危险、辐射等安全要求——站内 <a href="./knowledge.html#protection">防触电逻辑</a>、<a href="./clearance.html">间距</a>、<a href="./hipot.html">耐压</a>、<a href="./knowledge.html#fire-design">防火</a> 全部属于这一线；</li>
+        <li><b>符合性</b>：多数产品<b>自我声明</b>（DoC）＋ 技术文件即可，不需要公告机构；</li>
+        <li><b>标准</b>：按产品类别引用 EN 标准（IEC 的欧洲版）：家电 EN 60335、IT/AV EN 62368、灯具 EN 60598、医疗 EN 60601、测量 EN 61010…</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title" id="emc">EMC 电磁兼容指令（2014/30/EU）</h2>
+    <div class="card">
+      <ul style="font-size:14.5px;line-height:1.9">
+        <li><b>两部分</b>：<b>发射（EMI）</b>——设备不能干扰别人（传导/辐射限值）；<b>抗扰（EMS）</b>——设备不怕别人的干扰（ESD、EFT、浪涌、射频场等）；</li>
+        <li><b>适用</b>：几乎所有用电设备都适用，含无线产品（无线产品同时受 RED 管，但 EMC 要求并入 RED）；</li>
+        <li><b>标准</b>：IT 类 EN 55032（发射）/ EN 55035（抗扰）、灯具 EN 55015 / EN 61547、通用 IEC 61000-4-2/-3/-4/-5/-6 等；</li>
+        <li><b>文件</b>：EMC 测试报告并入 CE 技术文件，自我声明；</li>
+        <li><b>相关</b>：站内 <a href="./emc.html">EMC 深度页</a>、<a href="knowledge-detail.html?id=emc">EMC 知识卡</a>、<a href="knowledge-detail.html?id=dmcm">共模差模</a>、<a href="./tools.html#tool-emcwave">EMC 波形工具</a>。</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title" id="red">RED 无线电设备指令（2014/53/EU）</h2>
+    <div class="card">
+      <ul style="font-size:14.5px;line-height:1.9">
+        <li><b>适用</b>：任何含<b>无线电发射/接收</b>功能的产品——蓝牙耳机、WiFi 智能家居、遥控器、蜂窝设备、无线充电器（近年纳入）等；</li>
+        <li><b>三合一</b>：RED 覆盖无线电性能（频谱利用）＋ EMC（并入 RED 评估）＋ 健康（SAR，按 RED 要求）；</li>
+        <li><b>标准</b>：短距离设备 EN 300 328（2.4GHz）/ EN 300 220（sub-GHz）、EMC EN 301 489 系列、SAR EN 62209 / 50566 等；</li>
+        <li><b>符合性</b>：多数产品自我声明；但<b>依产品风险，部分需公告机构介入</b>（如蜂窝模组、某些无线电类别）；</li>
+        <li><b>注意</b>：2025-08 起欧盟还要求无线产品满足 <b>CRA 网络安全</b>（见 <a href="./cybersecurity.html">IoT 网络安全</a>）；</li>
+        <li><b>相关</b>：站内 <a href="knowledge-detail.html?id=radhaz">辐射/射频知识卡</a>（SAR）。</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title" id="md">MD 机械指令（2006/42/EC）</h2>
+    <div class="card">
+      <ul style="font-size:14.5px;line-height:1.9">
+        <li><b>适用</b>：机械、可互换设备、安全部件、起重附件等——机床、输送机、工程机械、包装机械、部分电动工具/机器人；</li>
+        <li><b>核心</b>：<b>风险评估（EN ISO 12100）</b>——识别危险、定风险、按「本质安全 → 防护 → 信息」降低风险；安全距离（EN ISO 13857）、急停、联锁、防护罩；</li>
+        <li><b>电气部分</b>：机械里的电气按 EN 60204-1（对应站内 <a href="knowledge-detail.html?id=functional">功能安全</a> 与 <a href="./hazard-mechanical.html">机械危险深度页</a>）；</li>
+        <li><b>符合性</b>：部分机械（附录 IV 清单）<b>必须公告机构</b>参与；其余自我声明；技术文件含风险评估报告；</li>
+        <li><b>注意</b>：MD 与 LVD 的边界——机械本体走 MD，机械内独立电气设备按各自适用；整机可能两个指令都涉及。</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title" id="rohs">RoHS 有害物质指令（2011/65/EU）</h2>
+    <div class="card">
+      <ul style="font-size:14.5px;line-height:1.9">
+        <li><b>限十项</b>：铅、汞、镉、六价铬、PBB、PBDE ＋ 4 种邻苯二甲酸酯（DEHP/DBP/BBP/DIBP），<b>按均质材料</b>判定；镉 100mg/kg，其余 1000mg/kg；</li>
+        <li><b>适用</b>：EEE 电子电气设备几乎全覆盖（含线缆、部件）；</li>
+        <li><b>豁免</b>：豁免条款随指令修订，<b>到期要重新评估</b>，豁免需写进技术文件；</li>
+        <li><b>相关</b>：站内 <a href="./knowledge.html#rohs">RoHS 知识卡</a>（限值表/义务/文件）、<a href="./hazard-chemical.html">化学危险深度页</a>（含 REACH/WEEE/无卤详解）。</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title" id="erp">ErP 能效生态设计指令（2009/125/EC）</h2>
+    <div class="card">
+      <ul style="font-size:14.5px;line-height:1.9">
+        <li><b>定位</b>：CE 的「能耗体检」——外部电源空载 ≤0.1W、待机 ≤0.5W、平均效率、能效标签等；</li>
+        <li><b>适用</b>：按产品实施法规（外部电源 2019/1782、待机 2023/826、灯具 2019/2020、显示器 2019/2021…）；</li>
+        <li><b>配套</b>：能效标签（EU 2017/1369，A–G）＋ EPREL 注册；</li>
+        <li><b>升级</b>：2024 年新框架 ESPR（2024/1781）将逐步取代，引入数字产品护照（DPP）；</li>
+        <li><b>相关</b>：完整内容见 <a href="./erp.html">ErP 能效专题</a>（含灯具实操、65W 演算、ESPR 前瞻）。</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title" id="select">② 我的产品要哪些指令（按类型速查）</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产品类型</th><th>需要覆盖的 CE 指令</th><th>典型额外要求</th></tr></thead>
+      <tbody>
+        <tr><td>家电（电水壶/电饭煲/吸尘器）</td><td>LVD ＋ EMC ＋ RoHS ＋ ErP（待机）</td><td>WEEE 回收</td></tr>
+        <tr><td>电源 / 适配器 / 充电器</td><td>LVD ＋ EMC ＋ RoHS ＋ ErP（2019/1782）</td><td>电池内置件另加电池法规/UN 38.3</td></tr>
+        <tr><td>LED 灯具</td><td>LVD ＋ EMC ＋ RoHS ＋ ErP（2019/2020）＋ 能效标签</td><td>光生物安全、IP</td></tr>
+        <tr><td>蓝牙/WiFi 智能设备（音箱/门锁/网关）</td><td><b>RED</b>（含 EMC/无线/SAR）＋ LVD（非无线部分）＋ RoHS ＋ ErP</td><td>2025 起 CRA 网络安全；REACH</td></tr>
+        <tr><td>手机 / 平板 / 笔记本</td><td>RED ＋ LVD ＋ RoHS ＋ ErP（待机）</td><td>电池法规、SAR 报告</td></tr>
+        <tr><td>机床 / 输送机 / 工程机械</td><td><b>MD</b>（含电气 EN 60204-1）＋ EMC ＋ 部分需公告机构</td><td>风险评估、急停/联锁；整机其他电气按 LVD</td></tr>
+        <tr><td>电动工具（锂电/有绳）</td><td>MD（部分）＋ LVD ＋ EMC ＋ RoHS ＋ ErP</td><td>电池法规、机械安全</td></tr>
+        <tr><td>医疗设备（非 MDR 外设）</td><td>受 <b>MDR 2017/745</b> 管（不是 LVD）＋ EMC/IEC 60601</td><td>MDR 需公告机构</td></tr>
+      </tbody>
+    </table></div>
+    <p class="howto">怎么用：先按产品类型定「需要哪些指令」，再对每个指令选标准、做测试、出 DoC，最后合并进一份 CE 技术文件。拿不准用 <a href="./wizard.html">认证向导</a> 生成清单。</p>
+
+    <h2 class="section-title" id="files">③ 技术文件与 DoC（合并出一份）</h2>
+    <div class="card">
+      <p>多指令不是多份文件：欧盟要求一份<b>合并的 CE 技术文件</b>，包含所有适用指令的符合性证据：</p>
+      <ul style="font-size:14.5px;line-height:1.9">
+        <li><b>DoC</b>：列全部适用指令（LVD + EMC + RED + MD + RoHS + ErP…）与引用标准，授权签字人签署，保留 ≥10 年——模板见 <a href="./templates.html">技术文件模板</a>；</li>
+        <li><b>测试报告</b>：安全（EN 标准）＋ EMC（EN 550xx/61000）＋ RED 无线 + SAR（如适用）＋ RoHS（材料拆分）＋ ErP（能效）；</li>
+        <li><b>图纸与规格</b>：电路图、结构图、说明书（目标市场语言）；</li>
+        <li><b>CDF</b>：关键元器件清单与证书（见 <a href="./templates.html">CDF 可编辑模板</a>）；</li>
+        <li><b>CE 标志</b>：按 <a href="./labels.html">标签与说明书</a> 规范贴（比例、最小高度、位置、说明书）；</li>
+        <li><b>公告机构</b>：MD 附录 IV / RED 部分产品 / MDR 需要时，报告/证书并入文件。</li>
+      </ul>
+    </div>
+
+    <p class="cite-note">本站 CE 内容为教学参考：指令号、版本与实施日期以欧盟官方公报最新文本为准；正式合规以公告机构与实验室确认。外贸整体清单见 <a href="./export-compliance.html">外贸合规速查</a>，标志规范见 <a href="./labels.html">标签与说明书</a>。</p>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js?v=1.4.2"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <nav class="bottom-nav" aria-label="底部导航">
+    <a href="../index.html">🏠<span>首页</span></a>
+    <a href="./learn.html">📚<span>学习</span></a>
+    <a href="./testing.html">🧪<span>测试</span></a>
+    <a href="./certification.html">📄<span>认证</span></a>
+    <a href="./industries.html">🏭<span>行业</span></a>
+    <a href="./quiz.html">✅<span>测验</span></a>
+    <a href="./search.html">🔍<span>搜索</span></a>
+  </nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>
