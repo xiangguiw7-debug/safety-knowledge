@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <title>美标体系（UL / FCC）vs 欧标 CE：指令差异与测试标准对照 - 安规与可靠性知识课堂</title>
+  <meta name="description" content="美国认证体系（FCC 强制 / UL·ETL 市场准入 / DOE 能效）与 CE 的差异：体系哲学、标准对照、120V vs 230V 测试差异、同一产品的欧标/美标测试标准表。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .jump-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 16px; }
+    .jump-nav a { font-size: 13px; }
+  </style>
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html" class="active">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html">资源</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./certification.html">认证</a> / 美标体系 vs CE</p>
+      <h1>美标体系（UL / FCC） vs 欧标 CE：指令差异与测试标准</h1>
+      <p class="lead">CE 是欧盟的「指令群」，美国不是单一体系——它由<b>联邦强制（FCC/DOE）+ 市场准入（UL/ETL·NRTL）+ 州级（加州 65）</b>三块组成。核心区别一句话：<b>CE 多数靠制造商自我声明，美国安全靠第三方实验室（NRTL）发证</b>。</p>
+      <p class="jump-nav">
+        <a class="btn" href="#map">① 美国体系地图</a>
+        <a class="btn" href="#diff">② UL vs CE 核心差异</a>
+        <a class="btn" href="#std">③ 测试标准对照表</a>
+        <a class="btn" href="#others">④ 其他市场</a>
+        <a class="btn" href="#howto">⑤ 实操建议</a>
+      </p>
+    </div>
+
+    <h2 class="section-title" id="map">① 美国认证体系地图（与 CE 的框架对照）</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>层级</th><th>机构 / 标志</th><th>管什么</th><th>性质</th><th>CE 对应</th></tr></thead>
+      <tbody>
+        <tr><td><b>联邦强制</b></td><td><b>FCC</b></td><td>电磁兼容 / 射频（Part 15 非故意+故意辐射体、SAR Part 2）</td><td>法律强制，多数可 SDoC 自我声明（如传导/辐射发射）</td><td>EMC 指令 + RED</td></tr>
+        <tr><td><b>联邦强制</b></td><td><b>DOE</b></td><td>能效（外部电源 DOE VI、家电 MEPS 等）</td><td>法律强制</td><td>ErP 指令 + 能效标签</td></tr>
+        <tr><td><b>联邦强制</b></td><td><b>CPSC</b></td><td>消费品安全（含 CPSIA 儿童产品、铅/邻苯）</td><td>法律强制，儿童产品需第三方测试</td><td>GPSR / 通用安全</td></tr>
+        <tr><td><b>联邦强制</b></td><td><b>FDA</b></td><td>医疗设备、食品接触材料</td><td>法律强制，医疗需 510(k)/PMA</td><td>MDR / 食品接触法规</td></tr>
+        <tr><td><b>市场准入（自愿但必须）</b></td><td><b>UL / ETL（NRTL）</b></td><td>电气安全认证，<b>第三方实验室发证</b></td><td>法律上自愿，但零售/电商/保险/客户普遍要求；NRTL 由 OSHA 认可</td><td>CE（LVD 部分）——但 CE 是自证、UL 是第三方发证</td></tr>
+        <tr><td><b>州级</b></td><td><b>加州 65（Prop 65）</b></td><td>有害物质警示</td><td>州法，在加州销售适用</td><td>REACH / CLP 警示</td></tr>
+        <tr><td><b>自愿加分</b></td><td><b>Energy Star</b></td><td>能效等级标识（比 DOE 更严）</td><td>自愿，但市场认可</td><td>欧盟能效标签 A–G</td></tr>
+      </tbody>
+    </table></div>
+    <p class="howto">理解角度：美国没有一份「CE 式声明」覆盖全部——<b>安全看 UL/ETL（第三方）、EMC 看 FCC、能效看 DOE/Energy Star、环保看州级</b>，各管一段、缺一不可。</p>
+
+    <h2 class="section-title" id="diff">② UL vs CE 核心差异</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>体系哲学不同</h3>
+        <ul style="font-size:13.5px;line-height:1.9">
+          <li><b>CE</b>：制造商<b>自我声明</b>（DoC）＋技术文件，低风险自证、高风险（MD 部分/RED 部分/MDR）才需公告机构；</li>
+          <li><b>美国安全</b>：<b>NRTL 第三方发证</b>（UL/ETL/CSA/TÜV 等），制造商不能自证 UL 标志；</li>
+          <li><b>FCC</b>：多数可自我声明（SDoC），但要有测试报告留档；</li>
+          <li>结论：出口美国，安全认证<b>必须找 NRTL 实验室</b>，不是写份声明就行。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>电网与插头不同 → 测试数值不同</h3>
+        <ul style="font-size:13.5px;line-height:1.9">
+          <li><b>电压/频率</b>：美国 120V / 60Hz，欧盟 230V / 50Hz；</li>
+          <li><b>影响</b>：耐压、电气间隙、爬电、温升、泄漏限值的查表档位不同（120V 系统冲击耐受更低 → 间隙可更小）；</li>
+          <li><b>插头</b>：NEMA（美标两/三脚）vs 欧标（Schuko 等）；</li>
+          <li><b>接线</b>：美国线色、线规（AWG）、接地要求与欧盟不同。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>标准体系：IEC 与 UL 已趋同但保留国家差异</h3>
+        <ul style="font-size:13.5px;line-height:1.9">
+          <li>近年 <b>UL 大量采用 IEC</b>：UL 62368-1 = IEC 62368-1 美版、UL 60335-1 = IEC 60335-1 美版——同一套 IEC 基础，加「美国国家差异」（120V、插头、接地、线规）；</li>
+          <li>灯具仍多走 UL 产品标准（UL 1598/153/8750）；电源适配器走 UL 1310（Class 2）或 UL 62368；</li>
+          <li>防火材料：<b>UL 94</b>（V-0/5VA，全球通用）是美标核心；欧洲更重<b>灼热丝/针焰/球压</b>（EN 60695）——选材要同时满足。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>EMC / 能效 / 环保差异</h3>
+        <ul style="font-size:13.5px;line-height:1.9">
+          <li><b>EMC</b>：美国 FCC Part 15（重点辐射发射，限值单位与 EN 55032 不同）；欧洲 EN 55032 + 抗扰全套；</li>
+          <li><b>能效</b>：外部电源 DOE VI 级（强制）＋ Energy Star（自愿加分）；欧盟 ErP（2019/1782）＋能效标签；</li>
+          <li><b>环保</b>：美国<b>无联邦 RoHS</b>（电子废物归州管），加州 65 是主要有害物质门槛；欧盟 RoHS/REACH 全强制。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="section-title" id="std">③ 同一产品的测试标准对照（欧标 ↔ 美标）</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产品 / 项目</th><th>欧盟（CE）</th><th>美国（UL / FCC / DOE）</th><th>差异要点</th></tr></thead>
+      <tbody>
+        <tr><td><b>IT/AV 设备安全</b></td><td>EN IEC 62368-1</td><td>UL 62368-1（趋同）</td><td>同源标准＋美国差异（120V 档、插头）</td></tr>
+        <tr><td><b>家电安全</b></td><td>EN 60335-1（＋-2-x）</td><td>UL 60335-1（＋UL 产品标准）</td><td>同源＋美国国家差异</td></tr>
+        <tr><td><b>电源适配器</b></td><td>EN 61558 / 62368（＋ErP 能效）</td><td><b>UL 1310（Class 2）</b> / UL 62368 ＋ <b>DOE VI</b></td><td>美国 Class 2 限能概念、DOE 效率等级</td></tr>
+        <tr><td><b>灯具</b></td><td>EN 60598-1（＋ErP 2019/2020）</td><td>UL 1598（固定灯具）/ UL 153（便携）/ UL 8750（LED 驱动）</td><td>美标产品标准体系不同</td></tr>
+        <tr><td><b>EMC（发射）</b></td><td>EN 55032 / 55015</td><td><b>FCC Part 15</b>（辐射限值更严）</td><td>FCC 重点辐射发射；EN 另含传导+谐波</td></tr>
+        <tr><td><b>EMC（抗扰）</b></td><td>EN 55035 / 61000-4-x（全套）</td><td>无联邦抗扰强制（市场可要求）</td><td>欧洲抗扰是 CE 强制，美国 FCC 只管发射</td></tr>
+        <tr><td><b>无线设备</b></td><td>RED（EN 300 328 / 301 489 + SAR）</td><td>FCC Part 15（故意辐射体）+ Part 2（SAR）</td><td>频段/功率限值不同</td></tr>
+        <tr><td><b>能效</b></td><td>ErP（2019/1782 等）+ 能效标签 A–G</td><td>DOE VI / MEPS + Energy Star</td><td>限值口径不同</td></tr>
+        <tr><td><b>有害物质</b></td><td>RoHS（十项）+ REACH</td><td>无联邦 RoHS；加州 65 警示</td><td>欧盟更严、体系不同</td></tr>
+        <tr><td><b>材料防火</b></td><td>灼热丝/针焰/球压（EN 60695）</td><td><b>UL 94</b>（V-0/5VA）</td><td>两套都要满足（UL 94 全球通用）</td></tr>
+      </tbody>
+    </table></div>
+    <p class="howto">趋势：<b>安全标准已高度趋同</b>（UL 采用 IEC），差异主要在「国家差异（电压/插头/接地）+ FCC 发射 + DOE 能效 + 无 RoHS」——设计时按 120V/230V 双电压、插头分型、防火两套同时满足，可一套产品覆盖欧美。</p>
+
+    <h2 class="section-title" id="others">④ 其他主要市场：也与 CE 不同</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>市场</th><th>体系</th><th>与 CE/IEC 的关系</th><th>关键差异</th></tr></thead>
+      <tbody>
+        <tr><td>中国</td><td><b>CCC</b></td><td>GB = IEC 转标（等同/修改）</td><td>CCC 需「型式试验＋工厂检查＋监督」，比 CE 多工厂环节；<a href="./export-compliance.html">详见外贸速查</a></td></tr>
+        <tr><td>日本</td><td><b>PSE</b></td><td>JIS 基于 IEC（＋国家差异）</td><td>菱形 PSE（特定产品强制）＋圆形 PSE（非特定）</td></tr>
+        <tr><td>韩国</td><td><b>KC</b></td><td>KC 基于 IEC（＋安全/EMC 双认证）</td><td>KC 安全＋KC EMC 分开做</td></tr>
+        <tr><td>印度</td><td><b>BIS / CRS</b></td><td>IS 基于 IEC（＋差异）</td><td>部分产品 BIS 注册（电子 CRS 计划）</td></tr>
+        <tr><td>沙特/海湾</td><td><b>SASO / G-Mark</b></td><td>IECEE CB 转证为主</td><td>多数凭 CB + 国家差异转证（SABER 平台）</td></tr>
+        <tr><td>澳大利亚</td><td><b>RCM</b></td><td>AS/NZS 基于 IEC</td><td>安全（电气）+ EMC 双要求，RCM 注册</td></tr>
+      </tbody>
+    </table></div>
+    <p class="howto">共同点：<b>全球安全标准基本都源于 IEC</b>，各国做法是「IEC 转标 + 国家差异 + 本地标志/工厂环节」——所以 <b>CB 报告（IEC 测试）是转证的基础</b>，出口多国先拿 CB 最省事。</p>
+
+    <h2 class="section-title" id="howto">⑤ 出口美国实操建议（教学参考）</h2>
+    <div class="card">
+      <ul style="font-size:14.5px;line-height:1.9">
+        <li><b>先分三件事</b>：安全（找 NRTL 做 UL/ETL）＋ EMC（FCC 测试，多数自声明）＋ 能效（DOE VI，适配器类必查）；</li>
+        <li><b>安全找谁</b>：UL、ETL（Intertek）、CSA、TÜV 等 NRTL——<b>不是自我声明</b>；周期/费用比 CE 自证高；</li>
+        <li><b>电压设计</b>：出口美国按 120V/60Hz 设计（或 100–240V 宽压覆盖），插头按 NEMA；</li>
+        <li><b>防火</b>：外壳材料 UL 94 V-0 是硬要求（美标核心），欧洲灼热丝也一起满足；</li>
+        <li><b>CB 优先</b>：先拿 CB（IEC 测试）→ 转 UL/CCC/PSE/SASO 减少重复测试；</li>
+        <li><b>别漏</b>：加州 65 警示（在加州销售）、Energy Star（客户可能要求）、FCC 标签与说明书。</li>
+      </ul>
+    </div>
+
+    <p class="cite-note">本站内容为教学参考：各国法规、标准版本与实施以官方原文为准；具体认证路径用 <a href="./wizard.html">认证向导</a>，标准文件见 <a href="./standards.html">标准文件入口</a>，差异矩阵见 <a href="./standard-diffs.html">标准差异</a>，CE 体系见 <a href="./ce-directives.html">CE 六大指令</a>。</p>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js?v=1.4.2"></script>
+  <script src="../assets/js/glossary-tip.js"></script>
+  <script src="../assets/js/ux.js"></script>
+  <nav class="bottom-nav" aria-label="底部导航">
+    <a href="../index.html">🏠<span>首页</span></a>
+    <a href="./learn.html">📚<span>学习</span></a>
+    <a href="./testing.html">🧪<span>测试</span></a>
+    <a href="./certification.html">📄<span>认证</span></a>
+    <a href="./industries.html">🏭<span>行业</span></a>
+    <a href="./quiz.html">✅<span>测验</span></a>
+    <a href="./search.html">🔍<span>搜索</span></a>
+  </nav>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/breadcrumb.js"></script>
+</body>
+</html>
