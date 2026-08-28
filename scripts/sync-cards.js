@@ -13,12 +13,13 @@ let m;
 while ((m = cardRe.exec(KD)) !== null) data[m[1]] = { hazard: m[3], html: m[4].replace(/\\"/g, '"').replace(/\\n/g, "\n") };
 const order = [...KD.match(/var KNOWLEDGE_ORDER = \[([\s\S]*?)\];/)[1].matchAll(/"([^"]+)"/g)].map(x => x[1]);
 
-// 定位网格容器（闭合 = </main> 前最后一个 </div>）
-const gridOpen = '<div class="knowledge-grid">';
-const gs = kh.indexOf(gridOpen);
+// 定位网格容器（前缀匹配，兼容 id 属性；闭合 = </main> 前最后一个 </div>）
+const gridMatch = kh.match(/<div class="knowledge-grid"[^>]*>/);
+if (!gridMatch) { console.error("未找到 .knowledge-grid"); process.exit(1); }
+const gridOpen = gridMatch[0];
+const gs = gridMatch.index;
 const mainClose = kh.lastIndexOf('</main>');
 const gridDivClose = kh.lastIndexOf('</div>', mainClose) + 6;
-if (gs < 0) { console.error("未找到 .knowledge-grid"); process.exit(1); }
 if (gridDivClose < 6) { console.error("网格未闭合"); process.exit(1); }
 
 // 按 KNOWLEDGE_ORDER 重建卡片区块
