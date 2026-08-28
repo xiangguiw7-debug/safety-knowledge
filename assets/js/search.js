@@ -114,6 +114,15 @@ var SEARCH_INDEX = [
   { t: "65W 适配器完整计算案例", d: "间隙 4.0 / 爬电 6.4 / 耐压 3000V AC / 保险丝 1.25-1.6A / Y≤3.3nF 八步推导 + 结果汇总", u: "pages/case-65w.html", k: "65W 适配器 计算 案例 间隙 爬电 耐压 保险丝 Y电容 电源" },
   { t: "CE 六大核心指令（LVD/EMC/RED/MD/RoHS/ErP）", d: "CE 不只是 LVD：低电压、电磁兼容、无线电、机械、有害物质、能效六大指令——范围、适用标准、符合性程序、按产品选型与技术文件全解", u: "pages/ce-directives.html", k: "CE 指令 LVD EMC RED MD RoHS ErP 2014/35 2014/30 2014/53 2006/42 2011/65 2009/125 欧盟 自我声明 公告机构 技术文件 DoC" },
   { t: "PPWR 合规实操知识库", d: "欧盟包装与包装废弃物法规（EU 2025/40）完整知识库：生效时间线、要求分类、豁免判定、模板速查与测验刷题", u: "pages/ppwr.html", k: "PPWR 包装 包装法规 2025/40 94/62 可回收 重复使用 重金属 100mg 豁免 时间线 电商" },
+  { t: "可触及性与工具防护（Access）", d: "带电部件不可徒手触及：试指/试具判定、工具打开外壳、用户可拆件与服务件分离", u: "pages/knowledge.html#access", k: "可触及 工具 防护 试指 试具 带电部件 外壳" },
+  { t: "产品类别（I / II / III 类）", d: "防触电结构类别：I 类基本绝缘+接地、II 类双重/加强绝缘、III 类 SELV 供电，判定清单与测试重点", u: "pages/knowledge.html#productclass", k: "产品类别 I类 II类 III类 防触电 接地 双重绝缘 SELV 铭牌 回字" },
+  { t: "过电压类别（OVC Ⅰ–Ⅳ）", d: "按安装位置分 OVC Ⅰ–Ⅳ：进线/固定/插头/SPD 后，决定冲击耐受与电气间隙查表档位", u: "pages/knowledge.html#ovc", k: "过电压类别 OVC 冲击耐受 安装位置 电气间隙 2500V 4000V 6000V" },
+  { t: "额定电压 / 工作电压 / 系统电压", d: "三个电压怎么区分：额定标称、工作电压定爬电、系统电压定间隙，两条查表链别混", u: "pages/knowledge.html#working-voltage", k: "额定电压 工作电压 系统电压 爬电 间隙 电压区分" },
+  { t: "防火设计与选材", d: "从起火链到结构落地：识别起火源、断起火链、选材（阻燃/灼热丝/球压联动）", u: "pages/knowledge.html#fire-design", k: "防火设计 起火链 选材 阻燃 V-0 灼热丝 结构" },
+  { t: "IK 抗冲击等级", d: "IK01–IK10 冲击能量对照：弹簧冲击锤/摆锤试验机、冲击点选择、试验后复测（IEC 62262）", u: "pages/knowledge.html#ik", k: "IK 抗冲击 冲击等级 IK08 IK10 弹簧锤 摆锤 62262 能量" },
+  { t: "环境与可靠性试验", d: "试验总览（低温/高温/温循/湿热/振动/冲击/盐雾/IP）、NSS/ASS/CASS 盐雾三类型、选型与复测规则", u: "pages/knowledge.html#environment", k: "环境试验 可靠性 湿热 温循 振动 盐雾 NSS ASS CASS 跌落 IK 复测" },
+  { t: "自由跌落试验（Drop Test）", d: "高度按重量分档、面/棱/角跌落顺序、判定与复测（IEC 60068-2-31、60335 手持 1.0m、包装 ISTA/GB 4857.5）", u: "pages/knowledge.html#drop", k: "跌落 drop 自由跌落 高度 重量 分档 包装 ISTA 手持" },
+  { t: "IP/IK 判定工具", d: "IP 防尘防水 + IK 抗冲击等级速查与判定（含 K 系列 IP69K）", u: "pages/tools.html#tool-ik", k: "IP IK 防护等级 判定 工具 IP69K" },
   { t: "IP69K 高温高压防护（K 系列防水）", d: "IPX4K/6K/9K：加压摆管、高速水流、80°C 100bar 高温高压清洗（ISO 20653 / DIN 40050-9），食品/制药行业", u: "pages/knowledge.html#ip", k: "IP69K IPX9K IPX6K IPX4K 高温高压 清洗 食品 制药 ISO20653 DIN40050-9 防护等级" },
   { t: "技术文件模板（CDF/DoC/铭牌）", d: "CDF 关键元器件清单可编辑（增删行/导出 CSV/自动保存）、CE DoC 符合性声明、铭牌实时预览、送样与技术文件包清单，可打印", u: "pages/templates.html", k: "模板 CDF DoC 符合性声明 铭牌 技术文件 送样 清单 打印 关键元器件 编辑" }
 ];
