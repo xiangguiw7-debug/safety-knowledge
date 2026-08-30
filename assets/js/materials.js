@@ -13,7 +13,13 @@ var MATERIALS = [
   { family: "PPS", name: "PPS + GF", fr: "V-0", cti: "175–300V", group: "Ⅲa（约）", rti: "200–240", note: "耐高温；CTI 因配方差异大" },
   { family: "LCP", name: "LCP", fr: "V-0", cti: "150–250V", group: "Ⅲb～Ⅲa（约）", rti: "220–260", note: "高温薄壁；CTI 偏低" },
   { family: "陶瓷/云母", name: "陶瓷 / 云母", fr: "不燃", cti: "≥600V", group: "Ⅰ", rti: "高", note: "高压隔离首选；脆、加工难" },
-  { family: "FR-4", name: "FR-4 玻纤环氧（PCB 基材）", fr: "HB/V-0", cti: "175–300V", group: "Ⅲa（约）", rti: "130–140", note: "阻焊层不能计入爬电距离" }
+  { family: "FR-4", name: "FR-4 玻纤环氧（PCB 基材）", fr: "HB/V-0", cti: "175–300V", group: "Ⅲa（约）", rti: "130–140", note: "阻焊层不能计入爬电距离" },
+  { family: "FR-4", name: "无卤 FR-4（磷系阻燃，PCB 基材）", fr: "V-0", cti: "175–400V（部分更高）", group: "Ⅲa～Ⅱ（约）", rti: "130–150", note: "配方差异大，选高 CTI 牌号可达 Ⅱ 组" },
+  { family: "FR-4", name: "高 CTI 覆铜板（如生益 S1000-2M 类）", fr: "V-0", cti: "≥400V（部分 ≥600V）", group: "Ⅱ～Ⅰ", rti: "130–150", note: "高压电源初次级设计首选，成本较高" },
+  { family: "FR-4", name: "CEM-1 / CEM-3（纸/玻纤复合基材）", fr: "V-0", cti: "150–300V", group: "Ⅲa～Ⅲb（约）", rti: "120–140", note: "单面板/低成本应用，爬电裕量小" },
+  { family: "FR-4", name: "PI 聚酰亚胺（FPC 柔性板）", fr: "V-0", cti: "200–400V+", group: "Ⅱ～Ⅲa（约）", rti: "260–300", note: "柔性板按实际牌号查 TDS" },
+  { family: "FR-4", name: "铝基板绝缘层（LED/电源散热基板）", fr: "V-0", cti: "175–400V", group: "Ⅲa（常见）", rti: "140–160", note: "铝是导体，绝缘靠绝缘层；爬电按绝缘层表面算" },
+  { family: "FR-4", name: "阻焊油墨（绿油）", fr: "—", cti: "—", group: "—", rti: "—", note: "不能计入爬电距离（除非 IEC 60664-3 涂层试验）" }
 ];
 
 function $(id) {

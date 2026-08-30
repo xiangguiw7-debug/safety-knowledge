@@ -55,7 +55,7 @@ var SEARCH_INDEX = [
   { t: "全球认证速查", d: "真实地图 + 国家/产品视图：CCC、CE、FCC、UL、PSE、KC、VDE 等", u: "pages/certification.html", k: "认证 CCC CE FCC UL PSE KC VDE EAC 出口 真实地图 地图 标记 离线世界地图" },
   { t: "学习地图", d: "按角色选择学习入口", u: "pages/learn.html", k: "学习 路径 地图 新人 工程师 出口" },
   { t: "参考中心", d: "行业/标准/电压/认证统一入口", u: "pages/refs.html", k: "参考 中心 出口合规 链路" },
-  { t: "CTI 与材料组", d: "漏电起痕指数、PC/ABS/PA66/PBT 典型值、UL 黄卡", u: "pages/knowledge.html#cti", k: "CTI 材料组 漏电起痕 60112 PC ABS PA66 PBT PMMA 黄卡" },
+  { t: "CTI 与材料组", d: "漏电起痕指数、塑料与 PCB 板材（FR-4/无卤/高CTI/CEM/PI/铝基板）典型值、UL 黄卡与 PLC", u: "pages/knowledge.html#cti", k: "CTI 材料组 漏电起痕 60112 PC ABS PA66 PBT PMMA 黄卡 PLC PCB FR-4 无卤 高CTI 覆铜板 CEM 聚酰亚胺 铝基板 阻焊" },
   { t: "材料数据库", d: "CTI/材料组/阻燃/RTI 查询、UL 黄卡指南、供应商清单", u: "pages/materials.html", k: "材料 数据库 CTI 黄卡 阻燃 V0 PC ABS PA66 PBT PMMA 供应商" },
   { t: "术语表", d: "CTI/MOPP/SELV/SPD/RoHS 等 45+ 术语速查", u: "pages/glossary.html", k: "术语 缩写 CTI MOPP SELV SPD RoHS REACH 词典 解释" },
   { t: "认证向导", d: "国家×产品一键生成电压/插头/认证/标准/测试清单", u: "pages/wizard.html", k: "认证 向导 出口 合规 国家 产品 电压 插头 清单" },
