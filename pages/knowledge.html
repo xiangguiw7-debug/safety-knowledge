@@ -465,6 +465,44 @@
           </tbody>
         </table></div>
 
+        
+        <h3>PCB 材料物理特性速查（教学参考，以 TDS 为准）</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>材料</th><th>Tg（玻璃化转变）</th><th>Td（热分解）</th><th>导热系数</th><th>CTE·z 轴</th><th>吸水率</th><th>Dk / Df</th></tr></thead>
+          <tbody>
+            <tr><td><b>标准 FR-4</b></td><td>130–140°C</td><td>约 310–350°C</td><td>约 0.2–0.3 W/m·K（导热很差）</td><td>约 50–70 ppm/°C</td><td>约 0.1–0.25%</td><td>约 4.2–4.7 / 0.015–0.02</td></tr>
+            <tr><td><b>高 Tg FR-4</b></td><td>150–180°C</td><td>约 340–370°C</td><td>同 FR-4</td><td>略低</td><td>略低</td><td>相近</td></tr>
+            <tr><td><b>无卤 FR-4</b>（磷系）</td><td>140–170°C</td><td>约 350–400°C（磷系热稳定好）</td><td>同 FR-4</td><td>相近</td><td>略高</td><td>相近</td></tr>
+            <tr><td><b>高导热 FR-4</b></td><td>130–150°C</td><td>约 320–360°C</td><td><b>1–3 W/m·K</b></td><td>相近</td><td>相近</td><td>相近</td></tr>
+            <tr><td><b>CEM-1 / CEM-3</b></td><td>130–140°C</td><td>约 300–330°C</td><td>约 0.2–0.4 W/m·K</td><td>较高</td><td>较高（CEM-1 纸基更高）</td><td>约 4.5–4.8</td></tr>
+            <tr><td><b>PI 聚酰亚胺</b>（FPC）</td><td><b>260–300°C+</b>（长期耐温 250+）</td><td>很高（500+°C 量级）</td><td>约 0.2–0.3 W/m·K</td><td><b>低，约 20 ppm/°C</b></td><td>低</td><td>约 3.4 / 0.002–0.01（低损耗）</td></tr>
+            <tr><td><b>铝基板绝缘层</b></td><td>视绝缘层</td><td>视绝缘层</td><td><b>1–10+ W/m·K</b>（按档）</td><td>—</td><td>低</td><td>—</td></tr>
+            <tr><td><b>阳极氧化铝</b></td><td>—</td><td>—</td><td><b>很高</b>（金属铝本体）</td><td>—</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li><b>常规 FR-4 导热很差</b>（约 0.25 W/m·K）——高功率走线散热要靠铜厚/铺铜/散热过孔，或换高导热板/铝基板；</li>
+          <li><b>高 Tg 的意义</b>：无铅回流（峰值 ~260°C）下抗分层、z 轴膨胀小，多层板和汽车/工业更稳；</li>
+          <li><b>无卤 Td 常更高</b>（磷系阻燃热稳定性好），但吸水率可能略升、成本更高。</li>
+        </ul>
+
+        <h3>工程应用评估：怎么选板</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>应用场景</th><th>推荐板材</th><th>关键评估点</th></tr></thead>
+          <tbody>
+            <tr><td>消费电子通用（充电器/小家电/玩具）</td><td><b>标准 FR-4</b></td><td>性价比；爬电按 Ⅲa 查表</td></tr>
+            <tr><td>多层板 / 无铅回流 / 汽车电子</td><td><b>高 Tg FR-4</b></td><td>耐热抗分层；温度循环与 CTE 匹配</td></tr>
+            <tr><td>高压电源初次级（适配器/电源板）</td><td><b>高 CTI FR-4</b>（Ⅱ/Ⅰ组）</td><td>爬电距离是红线；配合开槽/挡墙/涂覆</td></tr>
+            <tr><td>整机有 RoHS / 无卤要求</td><td><b>无卤 FR-4</b></td><td>无卤声明 + 高 CTI 牌号兼顾爬电</td></tr>
+            <tr><td>高功率电源 / LED 驱动（散热）</td><td><b>高导热 FR-4</b> 或 <b>铝基板</b></td><td>散热 vs 成本；导热与 CTI 权衡</td></tr>
+            <tr><td>LED 灯具（球泡/面板灯）</td><td><b>铝基板</b>（按功率选绝缘层档）</td><td>功率 → 导热档；可触及判定（铝基板带电）</td></tr>
+            <tr><td>车灯 / 高温高功率</td><td><b>阳极氧化铝</b> / 高导热铝基板</td><td>高温 + 高导热 + CTI；绝缘层耐压与膜厚</td></tr>
+            <tr><td>可弯折 / 柔性应用（穿戴/折叠）</td><td><b>PI（FPC）</b></td><td>弯折半径、动态弯折寿命</td></tr>
+            <tr><td>功率模块 / 车规功率器件</td><td><b>陶瓷基板 DBC / DPC</b></td><td>超高热导与绝缘；热循环可靠性</td></tr>
+          </tbody>
+        </table></div>
+        <p class="howto">选板四问：<b>① 耐温</b>（回流/工作温度→Tg/Td）→ <b>② 爬电</b>（电压/污染/CTI→材料组）→ <b>③ 散热</b>（功率密度→导热/基板）→ <b>④ 成本与法规</b>（无卤/认证→牌号）。四问都答完再定板材，写进 <a href="templates.html">CDF</a>。</p>
+
         <h3>PCB 上的爬电与绝缘要点</h3>
         <ul>
           <li><b>阻焊层不是绝缘</b>：普通绿油不能当爬电/绝缘涂层（只有通过 IEC 60664-3 涂层试验的涂覆才能计入），高压区要裸露走线间距或开槽；</li>
