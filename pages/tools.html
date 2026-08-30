@@ -222,24 +222,6 @@
                 <button type="button" class="opt-btn active" data-gp="IIIa" title="CTI 175–400：PC、ABS 常见" aria-pressed="true">Ⅲa<small>175–400</small></button>
                 <button type="button" class="opt-btn" data-gp="IIIb" title="CTI 100–175：注意使用风险">Ⅲb<small>100–175</small></button>
               </div>
-              <div class="gp-material" style="margin-top:10px">
-                <p class="peak-note" style="margin:0 0 6px">🧩 常用材料速选（点材料自动定组，可再手动改）：</p>
-                <div style="display:flex;flex-wrap:wrap;gap:6px">
-                  <button type="button" class="opt-btn" data-gp-material="IIIa" title="标准 FR-4（CTI 175–300）">标准 FR-4</button>
-                  <button type="button" class="opt-btn" data-gp-material="IIIa" title="高 Tg FR-4（CTI 与普通相当）">高 Tg FR-4</button>
-                  <button type="button" class="opt-btn" data-gp-material="II" title="高 CTI FR-4（CTI ≥400，部分 ≥600）">高 CTI FR-4</button>
-                  <button type="button" class="opt-btn" data-gp-material="IIIa" title="无卤 FR-4（部分牌号可达 II）">无卤 FR-4</button>
-                  <button type="button" class="opt-btn" data-gp-material="IIIa" title="CEM-1/3（CTI 150–300）">CEM-1/3</button>
-                  <button type="button" class="opt-btn" data-gp-material="II" title="PI 聚酰亚胺（FPC，CTI 200–400+）">PI（FPC）</button>
-                  <button type="button" class="opt-btn" data-gp-material="IIIa" title="铝基板绝缘层（CTI 175–400）">铝基板</button>
-                  <button type="button" class="opt-btn" data-gp-material="I" title="阳极氧化铝（Al₂O₃ 抗起痕，CTI 高）">阳极氧化铝</button>
-                  <button type="button" class="opt-btn" data-gp-material="I" title="陶瓷 / 云母（CTI ≥600）">陶瓷/云母</button>
-                  <button type="button" class="opt-btn" data-gp-material="IIIa" title="PC 外壳（常见 Ⅲa）">PC</button>
-                  <button type="button" class="opt-btn" data-gp-material="II" title="ABS（非阻燃偏高，保守取 II）">ABS</button>
-                  <button type="button" class="opt-btn" data-gp-material="II" title="PBT / PA66（400–600）">PBT / PA66</button>
-                </div>
-              </div>
-              </div>
               <p class="peak-note" id="gpNote"></p>
               <details class="mini-help">
                 <summary>材料组（CTI）怎么理解？</summary>
@@ -258,6 +240,14 @@
                   <option value="PBT">PBT → Ⅱ</option>
                   <option value="PBTGF">PBT + GF30 → Ⅱ</option>
                   <option value="CERAMIC">陶瓷 / 云母 → Ⅰ</option>
+                  <option value="FR4">标准 FR-4 → Ⅲa</option>
+                  <option value="FR4HT">高 Tg FR-4 → Ⅲa</option>
+                  <option value="FR4CTI">高 CTI FR-4 → Ⅱ</option>
+                  <option value="FR4HF">无卤 FR-4 → Ⅲa</option>
+                  <option value="CEM">CEM-1/3 → Ⅲa</option>
+                  <option value="PI">PI 聚酰亚胺（FPC）→ Ⅱ</option>
+                  <option value="AL">铝基板绝缘层 → Ⅲa</option>
+                  <option value="ANODIZD">阳极氧化铝 → Ⅰ</option>
                 </select>
               </div>
               <p class="peak-note"><a href="./materials.html">材料数据库 · UL 黄卡指南</a></p>

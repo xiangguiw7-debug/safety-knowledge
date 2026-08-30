@@ -83,7 +83,9 @@ var INSUL_LABEL = {
 
 var MATERIAL_GROUP = {
   PC: "IIIa", ABS: "II", PCABS: "IIIa", PMMA: "II",
-  PA66: "II", PA66GF: "II", PBT: "II", PBTGF: "II", CERAMIC: "I"
+  PA66: "II", PA66GF: "II", PBT: "II", PBTGF: "II", CERAMIC: "I",
+  FR4: "IIIa", FR4HT: "IIIa", FR4CTI: "II", FR4HF: "IIIa",
+  CEM: "IIIa", PI: "II", AL: "IIIa", ANODIZD: "I"
 };
 
 var CLS_INFO = {
@@ -556,12 +558,3 @@ var cmpClear = document.getElementById("compareClearBtn");
 if (cmpClear) cmpClear.addEventListener("click", clearCompare);
 
 initFromUrl();
-
-/* ===== 材料速选：点材料自动定材料组 ===== */
-document.querySelectorAll("[data-gp-material]").forEach(function (btn) {
-  btn.addEventListener("click", function () {
-    var g = btn.getAttribute("data-gp-material");
-    setActive("gpGroup", "data-gp", g);
-    updateAll();
-  });
-});
