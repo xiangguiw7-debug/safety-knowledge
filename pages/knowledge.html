@@ -447,13 +447,17 @@
         <div class="table-wrap"><table>
           <thead><tr><th>PCB 材料</th><th>典型 CTI</th><th>常见材料组</th><th>备注</th></tr></thead>
           <tbody>
-            <tr><td><b>FR-4</b>（标准阻燃环氧玻纤，最常见）</td><td>约 150–300V</td><td>Ⅲa（部分牌号 Ⅲb）</td><td>常规板材按 Ⅲa 查表；阻燃配方常拉低 CTI</td></tr>
-            <tr><td><b>无卤 FR-4</b>（磷系阻燃）</td><td>约 175–400V（部分更高）</td><td>Ⅲa～Ⅱ</td><td>配方差异大，选高 CTI 牌号可达 Ⅱ 组</td></tr>
-            <tr><td><b>高 CTI 覆铜板</b>（如生益 S1000-2M / S7136 类牌号）</td><td>≥ 400V，部分 ≥ 600V</td><td>Ⅱ～Ⅰ</td><td>高压电源初次级设计首选，成本高于常规 FR-4</td></tr>
-            <tr><td><b>CEM-1 / CEM-3</b>（纸/玻纤复合）</td><td>约 150–300V</td><td>Ⅲa～Ⅲb</td><td>单面板/低成本应用，爬电裕量小</td></tr>
-            <tr><td><b>PI 聚酰亚胺</b>（FPC 柔性板）</td><td>约 200–400V+</td><td>Ⅱ～Ⅲa</td><td>柔性板按实际牌号查 TDS</td></tr>
-            <tr><td><b>铝基板</b>（LED / 电源散热基板）</td><td>绝缘层视材料，约 175–400V</td><td>Ⅲa 常见</td><td>铝是导体，绝缘靠绝缘层——爬电按绝缘层表面算</td></tr>
-            <tr><td><b>阻焊油墨（绿油）</b></td><td>—（一般不单独考核）</td><td>—</td><td><b>不能计入爬电距离</b>（除非通过 IEC 60664-3 涂层试验）</td></tr>
+            <tr><td><b>标准 FR-4</b>（溴系阻燃，最常见）</td><td>Tg 130–140°C</td><td>CTI 约 150–300V</td><td>Ⅲa（部分 Ⅲb）</td><td>通用消费电子；阻燃配方常拉低 CTI</td></tr>
+            <tr><td><b>高 Tg FR-4</b>（Tg ≥150–180°C）</td><td>Tg 150–180°C</td><td>CTI 约 175–300V</td><td>Ⅲa</td><td>多层板、无铅回流、汽车/工业——耐热更好，CTI 与普通相当</td></tr>
+            <tr><td><b>高 CTI FR-4</b>（如生益 S1000-2M / S7136 类）</td><td>Tg 130–180°C</td><td>CTI ≥ 400V（部分 ≥ 600V）</td><td>Ⅱ～Ⅰ</td><td>高压电源初次级设计首选，成本高于常规</td></tr>
+            <tr><td><b>无卤 FR-4</b>（磷系阻燃）</td><td>Tg 140–170°C</td><td>CTI 约 175–400V（部分更高）</td><td>Ⅲa～Ⅱ</td><td>满足无卤要求；配方差异大，选高 CTI 牌号可达 Ⅱ 组</td></tr>
+            <tr><td><b>高导热 FR-4</b>（thermal FR-4）</td><td>Tg 130–150°C</td><td>CTI 约 175–300V</td><td>Ⅲa</td><td>高功率电源 / LED 驱动散热；导热与 CTI 常此消彼长</td></tr>
+            <tr><td><b>CEM-1 / CEM-3</b>（纸/玻纤复合）</td><td>—</td><td>CTI 约 150–300V</td><td>Ⅲa～Ⅲb</td><td>单面板/低成本，爬电裕量小</td></tr>
+            <tr><td><b>PI 聚酰亚胺</b>（FPC 柔性板）</td><td>—</td><td>CTI 约 200–400V+</td><td>Ⅱ～Ⅲa</td><td>柔性板按实际牌号查 TDS</td></tr>
+            <tr><td><b>普通铝基板</b>（玻纤布＋环氧绝缘层）</td><td>导热 1–2 W/m·K</td><td>CTI 约 175–400V</td><td>Ⅲa 常见</td><td>LED 球泡、一般散热；铝是导体，绝缘靠绝缘层</td></tr>
+            <tr><td><b>高导热铝基板</b>（陶瓷填料绝缘层）</td><td>导热 3–8 W/m·K</td><td>CTI 约 175–400V（视配方）</td><td>Ⅲa～Ⅱ（视配方）</td><td>大功率 LED、电源模块；填料增多可能影响 CTI/绝缘厚度</td></tr>
+            <tr><td><b>超高导热铝基板</b>（氮化铝等高导热填料）</td><td>导热 10+ W/m·K</td><td>CTI 视绝缘层材料</td><td>视配方</td><td>车灯、高功率——必须看 TDS 的 CTI 与耐压</td></tr>
+            <tr><td><b>阻焊油墨（绿油）</b></td><td>—</td><td>—（一般不单独考核）</td><td>—</td><td><b>不能计入爬电距离</b>（除非通过 IEC 60664-3 涂层试验）</td></tr>
           </tbody>
         </table></div>
 
