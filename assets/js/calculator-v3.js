@@ -556,3 +556,12 @@ var cmpClear = document.getElementById("compareClearBtn");
 if (cmpClear) cmpClear.addEventListener("click", clearCompare);
 
 initFromUrl();
+
+/* ===== 材料速选：点材料自动定材料组 ===== */
+document.querySelectorAll("[data-gp-material]").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var g = btn.getAttribute("data-gp-material");
+    setActive("gpGroup", "data-gp", g);
+    updateAll();
+  });
+});
