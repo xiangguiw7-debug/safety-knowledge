@@ -20,7 +20,13 @@ var MATERIALS = [
   { family: "FR-4", name: "高导热 FR-4（thermal）", fr: "V-0", cti: "175–300V", group: "Ⅲa（约）", rti: "130–150", note: "高功率电源/LED 驱动散热，导热与 CTI 此消彼长" },
   { family: "CEM", name: "CEM-1 / CEM-3（纸/玻纤复合基材）", fr: "V-0", cti: "150–300V", group: "Ⅲa～Ⅲb（约）", rti: "120–140", note: "单面板/低成本应用，爬电裕量小" },
   { family: "PI", name: "PI 聚酰亚胺（FPC 柔性板）", fr: "V-0", cti: "200–400V+", group: "Ⅱ～Ⅲa（约）", rti: "260–300", note: "柔性板按实际牌号查 TDS" },
-  { family: "铝基板", name: "普通铝基板（玻纤布＋环氧绝缘层，LED/电源）", fr: "V-0", cti: "175–400V", group: "Ⅲa（常见）", rti: "140–160", note: "铝是导体，绝缘靠绝缘层；爬电按绝缘层表面算" },
+  { family: "铝基板", name: "玻纤布环氧绝缘层铝基板（传统型）", fr: "V-0", cti: "175–400V", group: "Ⅲa", rti: "140–160", note: "导热 1–2 W/m·K；LED 球泡/一般散热" },
+  { family: "铝基板", name: "陶瓷填料环氧绝缘层铝基板（Al₂O₃）", fr: "V-0", cti: "175–400V", group: "Ⅲa", rti: "140–160", note: "导热 2–4 W/m·K；大功率 LED/电源主流" },
+  { family: "铝基板", name: "高填充绝缘层铝基板（BN/AlN 填料）", fr: "V-0", cti: "视配方（Ⅱ～Ⅲa）", group: "Ⅱ～Ⅲa", rti: "150–170", note: "导热 4–8 W/m·K；车灯/高功率，填料影响 CTI" },
+  { family: "铝基板", name: "超高导热绝缘层铝基板（AlN 高填充）", fr: "V-0", cti: "视配方", group: "视配方", rti: "150–180", note: "导热 8–10+ W/m·K；大功率车灯/激光驱动" },
+  { family: "铝基板", name: "阳极氧化铝基板（铝表面 Al₂O₃ 膜）", fr: "不燃", cti: "较高（Al₂O₃ 抗起痕）", group: "Ⅰ～Ⅱ（视膜层）", rti: "高", note: "导热极高（金属铝本体）；绝缘层薄，耐压看膜厚；车灯/高功率首选" },
+  { family: "铝基板", name: "聚酰亚胺绝缘层铝基板（柔性）", fr: "V-0", cti: "200–400V+", group: "Ⅱ～Ⅲa", rti: "260–300", note: "导热 1–3 W/m·K；可弯折应用" },
+  { family: "铝基板", name: "陶瓷覆铜基板 DBC/DPC（提示区分）", fr: "不燃", cti: "高", group: "Ⅰ", rti: "高", note: "不算铝基板，属陶瓷基板；导热 24–170 W/m·K，功率模块/车规" },
   { family: "阻焊油墨", name: "阻焊油墨（绿油）", fr: "—", cti: "—", group: "—", rti: "—", note: "不能计入爬电距离（除非 IEC 60664-3 涂层试验）" }
 ];
 
