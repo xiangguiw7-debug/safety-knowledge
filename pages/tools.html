@@ -812,9 +812,9 @@
 </section>
 
       <section class="param-block" id="tool-glow-wire">
-        <h2>灼热丝档位向导</h2>
+        <h2>灼热丝档位向导（按部件定档）</h2>
         <div class="form-grid">
-          <div class="field"><label for="gwPos">部件位置</label><select id="gwPos"><option value="inlet" selected>电源入口 / 主回路附近</option><option value="hot">内部高功率发热件附近</option><option value="shell">外壳 / 通风口</option><option value="support">绝缘支撑件 / 线夹</option></select></div>
+          <div class="field"><label for="gwPos">部件位置</label><select id="gwPos"><option value="support" selected>绝缘支撑件（保持带电部件，变压器骨架等）</option><option value="terminal">载流连接点 / 端子</option><option value="pcb">PCB 基材</option><option value="enclosure">外壳 / 通风口（火灾传播路径）</option><option value="wire">电源线固定件 / 内部线材</option><option value="unattended">无人看管器具·高温区</option></select></div>
         </div>
         <div class="result">建议档位 <span class="value" id="gwResult">--</span><p class="desc" id="gwNote"></p></div>
       </section>
