@@ -717,7 +717,7 @@ function updateDischarge() {
   $("dcT60").textContent = v0 > 60 ? tTo(60).toFixed(0) : "--";
   $("dcT30").textContent = v0 > 30 ? tTo(30).toFixed(0) : "--";
   var dcWarn = (v0 > 60 && tTo(60) > 1000) ? " ⚠ 降到 60V 超过 1s，常见插头放电要求可能不满足，正式按标准核对。" : "";
-  $("dcNote").textContent = "τ = " + tau.toFixed(1) + " ms；降到 60V 约 " + (v0 > 60 ? tTo(60).toFixed(0) : "已低于 60V") + " ms，降到 30V 约 " + (v0 > 30 ? tTo(30).toFixed(0) : "已低于 30V") + " ms。教学估算。" + dcWarn;
+  $("dcNote").textContent = "τ = " + tau.toFixed(1) + " ms；降到 60V 约 " + (v0 > 60 ? tTo(60).toFixed(0) : "已低于 60V") + " ms，降到 30V 约 " + (v0 > 30 ? tTo(30).toFixed(0) : "已低于 30V") + " ms。教学估算。家电 60335-1 22.5：断开 1s 后插脚间电压应 ≤ 34V（0.1µF 以上电容）；教学估算仅供参考。" + dcWarn;
 }
 
 function applyDischargePreset(key) {
@@ -1051,8 +1051,8 @@ function applyIkScene(id) {
 // ===== 跌落判定（标准版） =====
 var DROP_RULES = {
   "60068_general": { std: "IEC 60068-2-31", clause: "自由跌落（Ec）", dir: "最不利姿态（姿态/次数/高度由产品标准规定）", times: "通常 1–3 次", surface: "混凝土或硬木地板", weightBased: true, stdId: "60068", judge: "外观/功能正常，带电件不可触及，绝缘与间距不受损" },
-  "60335_handheld": { std: "IEC 60335-1", clause: "第 20 章", dir: "最不利方向", times: "3 次", surface: "硬木地板（≥13mm，铺于水泥地）", weightBased: false, fixedH: "1.0 m", stdId: "60335", judge: "外壳不得破损到可触及带电件，绝缘与间距不得受损" },
-  "60335_portable": { std: "IEC 60335-1", clause: "第 20 章", dir: "正常使用姿态", times: "按标准", surface: "硬木地板", weightBased: true, stdId: "60335", judge: "复测外观、功能与安规" },
+  "60335_handheld": { std: "IEC 60335-1", clause: "通用部分无手持跌落条款；带插脚器具按 21.B.101（IEC 60068-2-31 方法2，500mm，100次/50次）；手持跌落见对应产品特殊标准", dir: "最不利方向", times: "按产品特殊标准", surface: "硬木地板（≥13mm，铺于水泥地）", weightBased: false, fixedH: "按特殊标准（60335-1 通用无 1.0m）", stdId: "60335", judge: "外壳不得破损到可触及带电件，绝缘与间距不得受损" },
+  "60335_portable": { std: "IEC 60335-1", clause: "21.B.101（插脚器具跌落）或产品特殊标准", dir: "正常使用姿态", times: "按标准", surface: "硬木地板", weightBased: true, stdId: "60335", judge: "复测外观、功能与安规" },
   "62368_handheld": { std: "IEC 62368-1", clause: "机械强度", dir: "最不利方向", times: "按标准", surface: "硬木地板", weightBased: false, fixedH: "1.0 m", stdId: "62368", judge: "外壳不得破裂到可触及危险部件" },
   "62368_portable": { std: "IEC 62368-1", clause: "机械强度", dir: "最不利方向", times: "按标准", surface: "硬木地板", weightBased: true, stdId: "62368", judge: "外壳不得破裂到可触及危险部件" },
   "60601_handheld": { std: "IEC 60601-1", clause: "机械强度", dir: "最不利方向", times: "按标准", surface: "硬木地板", weightBased: false, fixedH: "1.0 m", stdId: "60601", judge: "外壳不得破损到可触及危险部件，绝缘与间距不受损" },

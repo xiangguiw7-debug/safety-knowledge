@@ -5,8 +5,8 @@
 var QUIZ_BANK_EXTRA = [
 
   /* ============ 电气间隙 clearance ============ */
-  { module: "clearance", type: "calc", difficulty: 2, q: "230V 系统、插头连接（类别Ⅱ）设备，冲击耐受 2500V，基本绝缘的简化最小间隙是？", scenario: "<b>教学简化表（基本绝缘）：</b>1500V→1.0mm、2500V→2.0mm、4000V→3.0mm、6000V→5.5mm；加强绝缘=2×基本。", options: ["1.0mm", "2.0mm", "4.0mm", "5.5mm"], answer: 1, explain: "230V+类别Ⅱ→冲击耐受 2500V；查表 2500V→基本绝缘 2.0mm。注意 4.0mm 是加强绝缘（2×基本），别选错。" },
-  { module: "clearance", type: "lookup", difficulty: 2, q: "按查表流程：230V 系统、固定安装（类别Ⅲ）设备，基本绝缘最小间隙应取？", scenario: "<b>查表三步：</b>① 230V+类别Ⅲ→冲击耐受 4000V；② 绝缘类型=基本绝缘；③ 查简化表。<br><b>教学简化表（基本绝缘）：</b>1500V→1.0、2500V→2.0、4000V→3.0、6000V→5.5。", options: ["2.0mm", "3.0mm", "5.5mm", "6.0mm"], answer: 1, explain: "230V+类别Ⅲ→4000V→基本绝缘 3.0mm；6.0mm 是加强绝缘（2×）。" },
+  { module: "clearance", type: "calc", difficulty: 2, q: "230V 系统、插头连接（类别Ⅱ）设备，冲击耐受 2500V，基本绝缘的简化最小间隙是？", scenario: "<b>教学简化表（基本绝缘）：</b>1500V→0.5mm、2500V→1.5mm、4000V→3.0mm、6000V→5.5mm（GB/T 4706.1-2024 表16）；加强绝缘按下一档。", options: ["1.0mm", "1.5mm", "3.0mm", "5.5mm"], answer: 1, explain: "230V+类别Ⅱ→冲击耐受 2500V；查表16：2500V→基本绝缘 1.5mm。加强绝缘按下一档 4000V→3.0mm，别选错。" },
+  { module: "clearance", type: "lookup", difficulty: 2, q: "按查表流程：230V 系统、固定安装（类别Ⅲ）设备，基本绝缘最小间隙应取？", scenario: "<b>查表三步：</b>① 230V+类别Ⅲ→冲击耐受 4000V；② 绝缘类型=基本绝缘；③ 查简化表。<br><b>教学简化表（基本绝缘）：</b>1500V→0.5、2500V→1.5、4000V→3.0、6000V→5.5（表16）。", options: ["2.0mm", "3.0mm", "5.5mm", "6.0mm"], answer: 1, explain: "230V+类别Ⅲ→4000V→基本绝缘 3.0mm；6.0mm 是加强绝缘（2×）。" },
   { module: "clearance", type: "calc", difficulty: 3, q: "冲击耐受电压 4000V 时，加强绝缘的简化最小间隙是？", options: ["3.0mm", "5.5mm", "6.0mm", "8.0mm"], answer: 2, explain: "4000V 基本绝缘 3.0mm，加强绝缘=2×=6.0mm。" },
   { module: "clearance", type: "judge", difficulty: 1, q: "PCB 走线之间开槽能有效增大电气间隙。", options: ["正确", "错误"], answer: 1, explain: "错误。间隙量的是空气直线距离，开槽不改变直线路径；开槽只增加爬电路径（沿表面绕过沟槽）。" },
   { module: "clearance", type: "scenario", difficulty: 2, q: "某 PCB 电源板一次侧与二次侧走线电气间隙不足，工程师打算在两走线之间开一道槽。这个措施主要改善哪个参数？", options: ["电气间隙", "爬电距离", "耐压能力", "泄漏电流"], answer: 1, explain: "开槽使表面路径绕过沟槽变长，是增大爬电距离的经典手段；对空气直线距离（间隙）基本无帮助。" },
@@ -14,9 +14,9 @@ var QUIZ_BANK_EXTRA = [
   { module: "clearance", type: "single", difficulty: 1, q: "海拔 2000m 以上使用的设备，电气间隙通常需要怎么处理？", options: ["乘小于 1 的系数（可减小）", "乘大于 1 的系数（要增大）", "保持不变", "改按爬电距离查"], answer: 1, explain: "海拔越高空气越稀薄越易击穿，间隙要乘大于 1 的修正系数（增大）；爬电一般不作海拔修正。" },
 
   /* ============ 爬电距离 creepage ============ */
-  { module: "creepage", type: "calc", difficulty: 2, q: "250V 工作电压、污染等级 2、材料组 Ⅲa，基本绝缘的简化爬电距离是？", scenario: "<b>教学简化表（基本绝缘爬电，250V·污染2）：</b>材料组Ⅰ→2.0mm、Ⅱ→2.5mm、Ⅲa/Ⅲb→3.2mm；加强绝缘=2×。", options: ["2.0mm", "2.5mm", "3.2mm", "6.4mm"], answer: 2, explain: "Ⅲa→基本 3.2mm；6.4mm 是加强绝缘（2×）。材料组越差（Ⅲa/Ⅲb）需要的爬电越大。" },
-  { module: "creepage", type: "lookup", difficulty: 2, q: "查表：250V 工作电压、污染等级 2、材料组 Ⅱ 的基本绝缘爬电距离应取？", scenario: "<b>教学简化表（250V·污染2，基本绝缘）：</b>材料组Ⅰ→2.0、Ⅱ→2.5、Ⅲa/Ⅲb→3.2。", options: ["2.0mm", "2.5mm", "3.2mm", "5.0mm"], answer: 1, explain: "材料组 Ⅱ→基本 2.5mm；Ⅰ 组抗起痕最强可取更短，Ⅲa/Ⅲb 需更长。" },
-  { module: "creepage", type: "calc", difficulty: 3, q: "250V、污染 2、材料组 Ⅲa 的加强绝缘爬电距离是？", options: ["3.2mm", "4.5mm", "6.4mm", "6.0mm"], answer: 2, explain: "基本 3.2mm，加强=2×=6.4mm。" },
+  { module: "creepage", type: "calc", difficulty: 2, q: "250V 工作电压、污染等级 2、材料组 Ⅲa，基本绝缘的简化爬电距离是？", scenario: "<b>教学简化表（基本绝缘爬电，250V·污染2）：</b>材料组Ⅰ→1.25mm、Ⅱ→1.8mm、Ⅲa/Ⅲb→2.5mm；加强绝缘=2×。", options: ["2.0mm", "2.5mm", "3.2mm", "6.4mm"], answer: 1, explain: "Ⅲa/Ⅲb→基本 2.5mm（GB/T 4706.1-2024 表17）；3.2mm/6.4mm 是干扰项，6.4 是旧版 2×3.2 的错误记忆。" },
+  { module: "creepage", type: "lookup", difficulty: 2, q: "查表：250V 工作电压、污染等级 2、材料组 Ⅱ 的基本绝缘爬电距离应取？", scenario: "<b>教学简化表（250V·污染2，基本绝缘）：</b>材料组Ⅰ→1.25、Ⅱ→1.8、Ⅲa/Ⅲb→2.5。", options: ["2.0mm", "2.5mm", "3.2mm", "5.0mm"], answer: 1, explain: "材料组 Ⅱ→基本 2.5mm；Ⅰ 组抗起痕最强可取更短，Ⅲa/Ⅲb 需更长。" },
+  { module: "creepage", type: "calc", difficulty: 3, q: "250V、污染 2、材料组 Ⅲa 的加强绝缘爬电距离是？", options: ["3.2mm", "4.5mm", "5.0mm", "6.0mm"], answer: 2, explain: "基本 2.5mm，加强=2×=5.0mm（按标准表17）。" },
   { module: "creepage", type: "judge", difficulty: 1, q: "普通 PCB 阻焊层（绿油）可以计入爬电距离。", options: ["正确", "错误"], answer: 1, explain: "错误。普通阻焊层不能计入；只有通过 IEC 60664-3 涂层（conformal coating）试验的涂覆才能计入。" },
   { module: "creepage", type: "multi", difficulty: 2, q: "下列哪些参数参与爬电距离查表？（多选）", options: ["工作电压（有效值）", "污染等级", "材料组（CTI）", "冲击耐受电压"], answer: [0, 1, 2], explain: "爬电看持续工作电压、污染等级和材料组；冲击耐受电压影响电气间隙而非爬电。" },
   { module: "creepage", type: "scenario", difficulty: 2, q: "某户外工业设备（污染等级 3、可能有导电粉尘凝结），与同电压的室内设备相比，爬电距离应？", options: ["更小", "相同", "更大", "无需爬电"], answer: 2, explain: "污染等级 3 存在导电污染或潮湿凝结，表面更易起痕，需要的爬电距离更大。" },

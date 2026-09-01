@@ -208,21 +208,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>50 V</td><td class="num">0.6</td><td class="num">0.8</td><td class="num">1.0</td><td class="num">1.2</td><td class="num">1.2</td><td class="num">1.4</td><td class="num">1.6</td></tr>
-            <tr><td>125 V</td><td class="num">0.8</td><td class="num">1.2</td><td class="num">1.5</td><td class="num">2.0</td><td class="num">2.0</td><td class="num">2.5</td><td class="num">3.2</td></tr>
-            <tr><td>250 V</td><td class="num">1.0</td><td class="num">2.0</td><td class="num">2.5</td><td class="num">3.2</td><td class="num">3.2</td><td class="num">4.0</td><td class="num">5.0</td></tr>
-            <tr><td>400 V</td><td class="num">1.4</td><td class="num">3.2</td><td class="num">4.0</td><td class="num">5.0</td><td class="num">5.0</td><td class="num">6.3</td><td class="num">8.0</td></tr>
-            <tr><td>600 V</td><td class="num">2.0</td><td class="num">5.0</td><td class="num">6.0</td><td class="num">8.0</td><td class="num">8.0</td><td class="num">10.0</td><td class="num">12.5</td></tr>
+            <tr><td>50 V</td><td class="num">0.18</td><td class="num">0.6</td><td class="num">0.85</td><td class="num">1.2</td><td class="num">1.5</td><td class="num">1.7</td><td class="num">1.9</td></tr>
+            <tr><td>125 V</td><td class="num">0.28</td><td class="num">0.75</td><td class="num">1.05</td><td class="num">1.5</td><td class="num">1.9</td><td class="num">2.1</td><td class="num">2.4</td></tr>
+            <tr><td>250 V</td><td class="num">0.56</td><td class="num">1.25</td><td class="num">1.8</td><td class="num">2.5</td><td class="num">3.2</td><td class="num">3.6</td><td class="num">4.0</td></tr>
+            <tr><td>400 V</td><td class="num">1.0</td><td class="num">2.0</td><td class="num">2.8</td><td class="num">4.0</td><td class="num">5.0</td><td class="num">5.6</td><td class="num">6.3</td></tr>
+            <tr><td>600 V</td><td class="num">1.8</td><td class="num">3.2</td><td class="num">4.5</td><td class="num">6.3</td><td class="num">8.0</td><td class="num">9.0</td><td class="num">10.0</td></tr>
           </tbody>
         </table>
       </div>
       <div class="callout callout-info">
         <strong>这张表怎么用</strong>
-        <p>先读“基本绝缘”值：电压 250V、污染 2、材料组 Ⅲa → 3.2mm。再按绝缘类型换算：附加 = 3.2，加强 = 6.4，功能绝缘按标准单独确定（本站计算器按 0.8× 简化示意）。</p>
+        <p>先读“基本绝缘”值：电压 250V、污染 2、材料组 Ⅲa → 2.5mm。再按绝缘类型换算：附加 = 2.5，加强 = 5.0，功能绝缘按标准单独确定（本站计算器按 0.8× 简化示意）。</p>
       </div>
       <div class="callout callout-info">
         <strong>220V 家电快速参考（最常用的心算法）</strong>
-        <p>220V 市电、过电压类别 Ⅱ 的产品，额定冲击电压 2500V：<b>基本绝缘的电气间隙 ≥ 2.0mm</b>（空气距离）。爬电距离按“工作电压 250V 档 + 材料组 + 污染等级”查表：污染 2 + Ⅲa 时基本绝缘 ≥ 3.2mm；若按污染 3 + Ⅲa/Ⅲb 保守取值 ≥ 4.0mm。PCB 上强弱电间距不够时，可在中间开槽增加表面路径——打样厂常见要求槽宽 ≥ 0.8mm，本站设计建议 ≥ 1mm。</p>
+        <p>220V 市电、过电压类别 Ⅱ 的产品，额定冲击电压 2500V：<b>基本绝缘的电气间隙 ≥ 1.5mm</b>（GB/T 4706.1-2024 表16）（空气距离）。爬电距离按“工作电压 250V 档 + 材料组 + 污染等级”查表：污染 2 + Ⅲa 时基本绝缘 ≥ 2.5mm；若按污染 3 + Ⅲa/Ⅲb 保守取值 ≥ 4.0mm。PCB 上强弱电间距不够时，可在中间开槽增加表面路径——打样厂常见要求槽宽 ≥ 0.8mm，本站设计建议 ≥ 1mm。</p>
       </div>
     </section>
 
@@ -235,8 +235,8 @@
         <li>污染等级：室内带外壳，按 2；</li>
         <li>材料组：假设 PCB/变压器骨架材料组 Ⅲa（无 CTI 报告时最保守）；</li>
         <li>绝缘类型：初次级隔离为加强绝缘；</li>
-        <li>查表：250V · 污染 2 · Ⅲa → 基本 3.2mm；</li>
-        <li>换算：加强 = 6.4mm → 设计目标 ≥ 6.4mm。</li>
+        <li>查表：250V · 污染 2 · Ⅲa → 基本 2.5mm；</li>
+         <li>换算：加强 = 5.0mm → 设计目标 ≥ 5.0mm。</li>
       </ol>
       <p>如果空间放不下：换材料组 Ⅰ（基本 2.0 → 加强 4.0mm）、开槽增加表面路径、或灌封/涂覆（需通过涂层试验）。</p>
 

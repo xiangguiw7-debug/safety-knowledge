@@ -5,7 +5,7 @@ var HIPOT_DATA = {
   },
   "60335": {
     basic: 1250, supplementary: null, reinforced: 3000,
-    label: "IEC 60335-1 / GB 4706.1（≤250V 教学示例；附加绝缘请查标准表格）"
+    label: "IEC 60335-1 / GB 4706.1（≤250V 教学示例）：16.3 冷态 基本 1250V / 加强 3000V；13.3 工作温度 基本 1000V / 加强 3000V；附加绝缘 1750V（16.3）/1750V（13.3）"
   },
   "60601": {
     basic: 1500, supplementary: 1500, reinforced: 4000,

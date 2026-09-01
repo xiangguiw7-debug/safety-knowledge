@@ -17,7 +17,7 @@ var QUIZ_BANK = [
   { module: "creepage", q: "CTI 为 500 的材料属于哪个材料组？", options: ["Ⅰ", "Ⅱ", "Ⅲa", "Ⅲb"], answer: 1, explain: "材料组 Ⅱ：400 ≤ CTI < 600；Ⅰ 需要 CTI ≥ 600。" },
   { module: "creepage", q: "材料组 Ⅰ 的 CTI 要求是？", options: ["≥ 600", "400–600", "175–400", "100–175"], answer: 0, explain: "Ⅰ 组 CTI ≥ 600，抗漏电起痕能力最强，允许的爬电距离最短。" },
   { module: "creepage", q: "加强绝缘的爬电距离约为基本绝缘的？", options: ["1 倍", "1.5 倍", "2 倍", "3 倍"], answer: 2, explain: "工程上按 2× 基本绝缘；标准有专门表格时以专门表格为准。" },
-  { module: "creepage", q: "250V、污染等级 2、材料组 Ⅲa 的基本绝缘简化值为？", options: ["2.0mm", "2.5mm", "3.2mm", "5.0mm"], answer: 2, explain: "教学简化表：250V · 污染 2 · Ⅲa/Ⅲb → 基本绝缘 3.2mm，加强 6.4mm。" },
+  { module: "creepage", q: "250V、污染等级 2、材料组 Ⅲa 的基本绝缘简化值为？", options: ["2.0mm", "2.5mm", "3.2mm", "5.0mm"], answer: 1, explain: "教学简化表：250V · 污染 2 · Ⅲa/Ⅲb → 基本 2.5mm、加强 5.0mm（按标准表17）。" },
   { module: "creepage", q: "普通 PCB 阻焊层能否计入爬电距离？", options: ["可以", "不能", "只要 1mm 以上就可以", "看颜色"], answer: 1, explain: "普通阻焊层不能计入；只有通过 IEC 60664-3 涂层试验的涂覆才能计入。" },
   { module: "creepage", q: "功能绝缘的主要作用是？", options: ["防触电", "保证设备正常工作", "防雷", "提供接地"], answer: 1, explain: "功能绝缘只保证正常工作，不提供防触电保护，查表规则也不同。" },
   { module: "creepage", q: "PCB 开槽主要改善哪个参数？", options: ["电气间隙", "爬电距离", "耐压", "泄漏电流"], answer: 1, explain: "开槽使表面路径绕过沟槽变长，是增加爬电距离的经典手段。" },

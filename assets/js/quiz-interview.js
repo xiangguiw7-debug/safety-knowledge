@@ -1,6 +1,6 @@
 /* 安规面试题库（并入答题测验，按模块分类）
  * 题型：single 单选 / judge 判断 / fill 填空 / write 写答（含参考答案与考察点）
- * 数值口径与站内知识卡一致（250V PD2 Ⅲa 爬电 3.2mm、OVC Ⅱ 2500V、62368 加强 3000V AC 等）。
+ * 数值口径与站内知识卡一致（250V PD2 Ⅲa 爬电 2.5mm、OVC Ⅱ 2500V、62368 加强 3000V AC 等）。
  */
 var QUIZ_INTERVIEW = [
   /* ---------- framework 标准结构 ---------- */
@@ -18,7 +18,7 @@ var QUIZ_INTERVIEW = [
   /* ---------- creepage 爬电距离 ---------- */
   { module: "creepage", type: "single", difficulty: 1, q: "爬电距离沿什么路径测量？", options: ["空气最短直线", "绝缘体表面", "金属表面", "外壳内壁"], answer: 1, explain: "爬电距离是沿绝缘表面测得的最短路径，用于防表面漏电起痕。" },
   { module: "creepage", type: "single", difficulty: 1, q: "CTI ≥ 600 属于哪个材料组？", options: ["Ⅰ", "Ⅱ", "Ⅲa", "Ⅲb"], answer: 0, explain: "Ⅰ CTI ≥ 600；Ⅱ 400–600；Ⅲa 175–400；Ⅲb 100–175。" },
-  { module: "creepage", type: "single", difficulty: 2, q: "250V、污染等级 2、材料组 Ⅲa 的基本绝缘爬电简化值是？", options: ["2.0mm", "2.5mm", "3.2mm", "6.4mm"], answer: 2, explain: "教学简化表：250V · 污染 2 · Ⅲa/Ⅲb → 基本 3.2mm、加强 6.4mm。" },
+  { module: "creepage", type: "single", difficulty: 2, q: "250V、污染等级 2、材料组 Ⅲa 的基本绝缘爬电简化值是？", options: ["2.0mm", "2.5mm", "3.2mm", "5.0mm"], answer: 1, explain: "教学简化表：250V · 污染 2 · Ⅲa/Ⅲb → 基本 2.5mm、加强 5.0mm（按标准表17）。" },
   { module: "creepage", type: "fill", difficulty: 2, q: "污染等级 2 指一般室内环境：非导电污染，但偶尔因____而导电。", accepted: ["凝露", "凝结", "结露"], explain: "偶尔凝结是污染等级 2 的关键特征，与污染等级 3 的持续导电污染不同。" },
   { module: "creepage", type: "write", difficulty: 3, q: "PCB 上开槽为什么能增加爬电距离却不能增加电气间隙？", ref: "爬电距离沿绝缘表面走，开槽让表面路径绕过沟槽变长；电气间隙量的是两点间空气最短直线距离，开槽不改变直线路径。", points: ["路径定义", "开槽机理"], explain: "参考答案：开槽加长的是表面路径（爬电），直线空气距离（间隙）不变。" },
   /* ---------- hipot 耐压测试 ---------- */
@@ -103,7 +103,7 @@ var QUIZ_INTERVIEW = [
   { module: "surge", type: "single", difficulty: 2, q: "MOV（压敏电阻）最常见的失效模式是？", options: ["短路，可能过热着火", "开路，不影响电路", "电容漂移", "无失效模式"], answer: 0, explain: "MOV 反复受浪涌老化后漏电流增大，最终短路并可能过热，需配过流保护。" },
   { module: "surge", type: "fill", difficulty: 2, q: "浪涌是____级能量，EFT 是毫焦耳级。", accepted: ["焦", "焦耳"], explain: "浪涌焦耳级、EFT 毫焦耳级，防护器件完全不同。" },
   /* ---------- 补充填空题（让填空题型更常见） ---------- */
-  { module: "creepage", type: "fill", difficulty: 2, q: "250V、污染等级 2、材料组 Ⅲa 的加强绝缘爬电简化值为____mm。", accepted: ["6.4", "6.4mm"], explain: "基本 3.2mm，加强按 2× 取 6.4mm。" },
+  { module: "creepage", type: "fill", difficulty: 2, q: "250V、污染等级 2、材料组 Ⅲa 的加强绝缘爬电简化值为____mm。", accepted: ["5", "5.0", "5mm", "5.0mm"], explain: "基本 2.5mm，加强按 2× 取 5.0mm（按标准表17）。" },
   { module: "clearance", type: "fill", difficulty: 2, q: "OVC Ⅱ 设备 230V 系统（冲击耐受 2500V）的加强绝缘简化间隙为____mm。", accepted: ["4", "4.0", "4mm"], explain: "基本 2.0mm，加强 2× 取 4.0mm。" },
   { module: "hipot", type: "fill", difficulty: 1, q: "IEC 62368-1 中加强绝缘常见试验电压为____V AC。", accepted: ["3000", "3000v"], explain: "基本 1500V AC，加强 3000V AC（4242V DC）。" },
   { module: "hipot", type: "fill", difficulty: 2, q: "球压试验判据：5mm 钢球、约 20N、保持 1h，压痕直径不超过____mm。", accepted: ["2", "2mm"], explain: "压痕 ≤ 2mm 为常见判据。" },

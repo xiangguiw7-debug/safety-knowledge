@@ -43,7 +43,7 @@
     <ul style="font-size:14.5px;line-height:1.9">
       <li>目标市场全球 → 系统电压按 <b>230V</b> 档（宽压按最高档设计）；</li>
       <li>插头设备（可插拔）→ <b>OVC Ⅱ</b>（<a href="./knowledge-detail.html?id=ovc">OVC 卡</a>）→ 冲击耐受 <b>2500V</b>；</li>
-      <li>电气间隙基准（教学表）：2500V → <b>2.0 mm</b>；加强绝缘 ×2 → <b>4.0 mm</b>；</li>
+      <li>电气间隙基准（GB/T 4706.1-2024 表16）：2500V → <b>1.5 mm</b>；加强绝缘按下一档 4000V → <b>3.0 mm</b>；</li>
       <li>海拔 ≤2000m 系数 1.0（更高需修正）。</li>
     </ul>
     <p class="peak-note">去 <a href="./tools.html#tool-spacing">间距工具</a>复现：系统 230V、OVC Ⅱ、加强绝缘 → 间隙 4.0mm。</p>
@@ -51,11 +51,11 @@
     <h2>② 确定工作电压与爬电距离（爬电链）</h2>
     <ul style="font-size:14.5px;line-height:1.9">
       <li>工作电压按最高输入档 <b>250V</b>（264V 峰值按教学表 250V 档）；</li>
-      <li>污染 2、材料组 IIIa → 爬电基准（教学表）：250V PD2 IIIa → <b>3.2 mm</b>；加强绝缘 ×2 → <b>6.4 mm</b>；</li>
-      <li>初次级之间按加强绝缘：<b>爬电 ≥ 6.4mm，间隙 ≥ 4.0mm</b>（变压器绕组间同样适用，需挡墙/三层绝缘线）；</li>
+      <li>污染 2、材料组 IIIa → 爬电基准（教学表）：250V PD2 IIIa → <b>2.5 mm</b>（GB/T 4706.1-2024 表17）；加强绝缘 ×2 → <b>5.0 mm</b>；</li>
+      <li>初次级之间按加强绝缘：<b>爬电 ≥ 5.0mm，间隙 ≥ 3.0mm</b>（变压器绕组间同样适用，需挡墙/三层绝缘线）；</li>
       <li>输出侧若为 SELV：输出电路内部豁免，到危险电路侧仍按加强绝缘。</li>
     </ul>
-    <p class="peak-note">去 <a href="./tools.html#tool-spacing">间距工具</a>复现：250V、污染 2、材料组 IIIa、加强 → 爬电 6.4mm。</p>
+    <p class="peak-note">去 <a href="./tools.html#tool-spacing">间距工具</a>复现：250V、污染 2、材料组 IIIa、加强 → 爬电 5.0mm。</p>
 
     <h2>③ 耐压试验电压</h2>
     <ul style="font-size:14.5px;line-height:1.9">
@@ -104,7 +104,7 @@
       <thead><tr><th>项目</th><th>结论（教学值）</th><th>复现工具</th></tr></thead>
       <tbody>
         <tr><td>电气间隙（加强）</td><td>≥ 4.0 mm</td><td><a href="./tools.html#tool-spacing">间距工具</a></td></tr>
-        <tr><td>爬电距离（加强）</td><td>≥ 6.4 mm</td><td><a href="./tools.html#tool-spacing">间距工具</a></td></tr>
+        <tr><td>爬电距离（加强）</td><td>≥ 5.0 mm</td><td><a href="./tools.html#tool-spacing">间距工具</a></td></tr>
         <tr><td>耐压（加强）</td><td>3000 V AC / ≈4242 V DC</td><td><a href="./tools.html#tool-hipot">耐压速查</a></td></tr>
         <tr><td>保险丝</td><td>1.25–1.6A / 250V 档，I²t 耐浪涌</td><td><a href="./tools.html#tool-fuse">保险丝工具</a></td></tr>
         <tr><td>Y 电容</td><td>≤ 3.3 nF（泄漏 ≤ 0.25mA）</td><td><a href="./tools.html#tool-leakage">泄漏工具</a></td></tr>

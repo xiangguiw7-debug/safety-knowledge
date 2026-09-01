@@ -122,7 +122,7 @@ var SEARCH_INDEX = [
   { t: "防火设计与选材", d: "从起火链到结构落地：识别起火源、断起火链、选材（阻燃/灼热丝/球压联动）", u: "pages/knowledge.html#fire-design", k: "防火设计 起火链 选材 阻燃 V-0 灼热丝 结构" },
   { t: "IK 抗冲击等级", d: "IK01–IK10 冲击能量对照：弹簧冲击锤/摆锤试验机、冲击点选择、试验后复测（IEC 62262）", u: "pages/knowledge.html#ik", k: "IK 抗冲击 冲击等级 IK08 IK10 弹簧锤 摆锤 62262 能量" },
   { t: "环境与可靠性试验", d: "试验总览（低温/高温/温循/湿热/振动/冲击/盐雾/IP）、NSS/ASS/CASS 盐雾三类型、选型与复测规则", u: "pages/knowledge.html#environment", k: "环境试验 可靠性 湿热 温循 振动 盐雾 NSS ASS CASS 跌落 IK 复测" },
-  { t: "自由跌落试验（Drop Test）", d: "高度按重量分档、面/棱/角跌落顺序、判定与复测（IEC 60068-2-31、60335 手持 1.0m、包装 ISTA/GB 4857.5）", u: "pages/knowledge.html#drop", k: "跌落 drop 自由跌落 高度 重量 分档 包装 ISTA 手持" },
+  { t: "自由跌落试验（Drop Test）", d: "高度按重量分档、面/棱/角跌落顺序、判定与复测（IEC 60068-2-31、60335 插脚器具 500mm 跌落、包装 ISTA/GB 4857.5）", u: "pages/knowledge.html#drop", k: "跌落 drop 自由跌落 高度 重量 分档 包装 ISTA 手持" },
   { t: "IP/IK 判定工具", d: "IP 防尘防水 + IK 抗冲击等级速查与判定（含 K 系列 IP69K）", u: "pages/tools.html#tool-ik", k: "IP IK 防护等级 判定 工具 IP69K" },
   { t: "IP69K 高温高压防护（K 系列防水）", d: "IPX4K/6K/9K：加压摆管、高速水流、80°C 100bar 高温高压清洗（ISO 20653 / DIN 40050-9），食品/制药行业", u: "pages/knowledge.html#ip", k: "IP69K IPX9K IPX6K IPX4K 高温高压 清洗 食品 制药 ISO20653 DIN40050-9 防护等级" },
   { t: "技术文件模板（CDF/DoC/铭牌）", d: "CDF 关键元器件清单可编辑（增删行/导出 CSV/自动保存）、CE DoC 符合性声明、铭牌实时预览、送样与技术文件包清单，可打印", u: "pages/templates.html", k: "模板 CDF DoC 符合性声明 铭牌 技术文件 送样 清单 打印 关键元器件 编辑" },
