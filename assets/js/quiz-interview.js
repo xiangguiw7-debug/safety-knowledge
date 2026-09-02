@@ -12,7 +12,7 @@ var QUIZ_INTERVIEW = [
   /* ---------- clearance 电气间隙 ---------- */
   { module: "clearance", type: "single", difficulty: 1, q: "电气间隙主要按什么电压查表？", options: ["工作电压有效值", "系统电压推出的冲击耐受电压", "设备额定功率", "泄漏电流"], answer: 1, explain: "空气击穿由瞬时电压峰值决定，按冲击耐受电压（1.2/50μs）查表。" },
   { module: "clearance", type: "single", difficulty: 1, q: "230V 系统、插头连接（OVC Ⅱ）的冲击耐受电压通常是？", options: ["1500V", "2500V", "4000V", "6000V"], answer: 1, explain: "230V 系统 OVC Ⅱ 典型 2500V；120V 系统才是 1500V。" },
-  { module: "clearance", type: "judge", difficulty: 1, q: "加强绝缘的电气间隙约按基本绝缘的 2 倍取值。正确吗？", answer: 0, explain: "工程上约 2 倍，如 2500V 时 2.0 → 4.0mm。" },
+  { module: "clearance", type: "judge", difficulty: 1, q: "加强绝缘的电气间隙按基本绝缘的 2 倍取值（如 2500V 基本 1.5mm → 加强 3.0mm）。正确吗？", answer: 0, explain: "60335-1 表16：加强绝缘用下一档冲击电压取值（2500V→按 4000V 档 3.0mm），爬电距离才是 2×；两者规则不同。" },
   { module: "clearance", type: "fill", difficulty: 2, q: "海拔越高空气越稀薄，电气间隙需要乘____系数。", accepted: ["海拔修正", "修正", "海拔"], explain: "海拔超过 2000m 按标准乘修正系数（如 IEC 60664-1 附录）。" },
   { module: "clearance", type: "write", difficulty: 2, q: "为什么爬电距离看工作电压、电气间隙看系统电压？", ref: "爬电距离防绝缘表面长期漏电起痕，由持续承受的工作电压（RMS）决定；电气间隙防瞬时击穿，由系统电压推得的冲击耐受电压（峰值）决定。物理机制不同，查表参数也不同。", points: ["物理机制", "参数区分"], explain: "参考答案：爬电防表面起痕看工作电压；间隙防瞬时击穿看系统电压推的冲击耐受。" },
   /* ---------- creepage 爬电距离 ---------- */
