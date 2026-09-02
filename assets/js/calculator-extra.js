@@ -434,7 +434,7 @@ function updateGrounding() {
   var r = i > 0 ? v / i : 0;
   $("gndR").textContent = r.toFixed(r < 1 ? 3 : 2);
   var gndWarn = r > 0.1 ? " ⚠ 已超常见 0.1Ω 量级目标，正式按标准条款核对。" : (r > 0.05 ? " ⚠ 接近常见 0.1Ω 限值，建议留余量。" : "");
-  $("gndNote").textContent = "目标电阻 = 允许电压降 / 测试电流 = " + v + "V / " + i + "A = " + r.toFixed(3) + " Ω。常见目标 0.1Ω 量级（教学示例，以标准条款为准）。" + gndWarn;
+  $("gndNote").textContent = "目标电阻 = 允许电压降 / 测试电流 = " + v + "V / " + i + "A = " + r.toFixed(3) + " Ω。常见目标 0.1Ω 量级。电流取值注意：60335-1 27.5 = 1.5×额定电流或 25A 取大；UL/62368 体系常用 10–25A 电流源；教学示例，以产品标准为准。" + gndWarn;
 }
 
 function updateSelv() {

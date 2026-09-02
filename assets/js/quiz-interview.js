@@ -104,7 +104,7 @@ var QUIZ_INTERVIEW = [
   { module: "surge", type: "fill", difficulty: 2, q: "浪涌是____级能量，EFT 是毫焦耳级。", accepted: ["焦", "焦耳"], explain: "浪涌焦耳级、EFT 毫焦耳级，防护器件完全不同。" },
   /* ---------- 补充填空题（让填空题型更常见） ---------- */
   { module: "creepage", type: "fill", difficulty: 2, q: "250V、污染等级 2、材料组 Ⅲa 的加强绝缘爬电简化值为____mm。", accepted: ["5", "5.0", "5mm", "5.0mm"], explain: "基本 2.5mm，加强按 2× 取 5.0mm（按标准表17）。" },
-  { module: "clearance", type: "fill", difficulty: 2, q: "OVC Ⅱ 设备 230V 系统（冲击耐受 2500V）的加强绝缘简化间隙为____mm。", accepted: ["4", "4.0", "4mm"], explain: "基本 2.0mm，加强 2× 取 4.0mm。" },
+  { module: "clearance", type: "fill", difficulty: 2, q: "OVC Ⅱ 设备 230V 系统（冲击耐受 2500V）的加强绝缘简化间隙为____mm。", accepted: ["3", "3.0", "3mm"], explain: "表16：基本 2500V→1.5mm，加强绝缘按下一档 4000V→3.0mm（不是简单 2×）。" },
   { module: "hipot", type: "fill", difficulty: 1, q: "IEC 62368-1 中加强绝缘常见试验电压为____V AC。", accepted: ["3000", "3000v"], explain: "基本 1500V AC，加强 3000V AC（4242V DC）。" },
   { module: "hipot", type: "fill", difficulty: 2, q: "球压试验判据：5mm 钢球、约 20N、保持 1h，压痕直径不超过____mm。", accepted: ["2", "2mm"], explain: "压痕 ≤ 2mm 为常见判据。" },
   { module: "battery", type: "fill", difficulty: 1, q: "电池保护四道防线：过充、过放、过流、____。", accepted: ["过温", "温度"], explain: "过充/过放/过流/过温是基本四防。" },
