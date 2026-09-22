@@ -350,3 +350,19 @@
 .mini-help { margin-top: 10px; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; font-size: 13.5px; }
 .mini-help summary { cursor: pointer; font-weight: 600; }
 .mini-help p { margin: 8px 0 0; color: var(--muted); }
+
+/* ===== 污染等级判定器（PD1–PD4） ===== */
+.pd-scale { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 8px 0 4px; }
+.pd-scale > div { border: 1px solid var(--border); border-left-width: 4px; border-radius: 10px; padding: 9px 11px; font-size: 12px; line-height: 1.5; color: var(--muted); background: var(--card); }
+.pd-scale > div b { display: block; font-size: 15px; color: var(--fg); margin-bottom: 2px; }
+.pd-scale > div.pd1 { border-left-color: var(--ok-fg); }
+.pd-scale > div.pd2 { border-left-color: var(--accent-2); }
+.pd-scale > div.pd3 { border-left-color: var(--warn-fg); }
+.pd-scale > div.pd4 { border-left-color: var(--danger-fg); }
+.pd-scale > div.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); color: var(--fg); }
+.pd-scale > div.on b { color: var(--accent); }
+#pdLiveBar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 0 0 4px; }
+#pdLiveBar .value { font-weight: 700; }
+#pdLiveBar #pdLiveSub { flex-basis: 100%; }
+.preset-btn small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
+@media (max-width: 640px) { .pd-scale { grid-template-columns: repeat(2, 1fr); } }

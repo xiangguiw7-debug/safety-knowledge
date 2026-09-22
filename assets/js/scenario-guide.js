@@ -6,16 +6,16 @@
   "use strict";
   // ---- ⑦ 产品场景 → 推荐 ----
   var SCENARIOS = {
-    power:   { name: "电源 / 充电器", tools: ["tool-spacing","tool-hipot","tool-leakage","tool-discharge","tool-fuse"], cards: ["protection","components","energy","ovc"], sops: ["sop-hipot","sop-leakage","sop-spacing"], quiz: "shock" },
-    lighting:{ name: "LED 灯具 / 照明", tools: ["tool-ip","tool-spacing","tool-hipot","tool-glow-wire"], cards: ["ip","ovc","firetests","optical"], sops: ["sop-ip","sop-glow-wire","sop-photobiological"], quiz: "shock" },
-    appliance:{ name: "家用电器", tools: ["tool-spacing","tool-hipot","tool-thermal","tool-glow-wire","tool-leakage"], cards: ["protection","temperature","flame","leakage"], sops: ["sop-temperature-rise","sop-glow-wire","sop-leakage"], quiz: "shock" },
-    medical: { name: "医疗设备", tools: ["tool-spacing","tool-hipot","tool-leakage"], cards: ["risk","software","biocompat","protection"], sops: ["sop-functional-safety","sop-hipot"], quiz: "medical" },
-    itav:    { name: "IT / 网络 / 音视频", tools: ["tool-spacing","tool-hipot","tool-emcwave"], cards: ["protection","emc","transient"], sops: ["sop-hipot","sop-surge","sop-esd"], quiz: "emc" },
+    power:   { name: "电源 / 充电器", tools: ["tool-pd","tool-spacing","tool-hipot","tool-leakage","tool-discharge","tool-fuse"], cards: ["protection","components","energy","ovc"], sops: ["sop-hipot","sop-leakage","sop-spacing"], quiz: "shock" },
+    lighting:{ name: "LED 灯具 / 照明", tools: ["tool-pd","tool-ip","tool-spacing","tool-hipot","tool-glow-wire"], cards: ["ip","ovc","firetests","optical"], sops: ["sop-ip","sop-glow-wire","sop-photobiological"], quiz: "shock" },
+    appliance:{ name: "家用电器", tools: ["tool-pd","tool-spacing","tool-hipot","tool-thermal","tool-glow-wire","tool-leakage"], cards: ["protection","temperature","flame","leakage"], sops: ["sop-temperature-rise","sop-glow-wire","sop-leakage"], quiz: "shock" },
+    medical: { name: "医疗设备", tools: ["tool-pd","tool-spacing","tool-hipot","tool-leakage"], cards: ["risk","software","biocompat","protection"], sops: ["sop-functional-safety","sop-hipot"], quiz: "medical" },
+    itav:    { name: "IT / 网络 / 音视频", tools: ["tool-pd","tool-spacing","tool-hipot","tool-emcwave"], cards: ["protection","emc","transient"], sops: ["sop-hipot","sop-surge","sop-esd"], quiz: "emc" },
     battery: { name: "电池 / 储能", tools: ["tool-battery","tool-thermal","tool-spacing"], cards: ["battery","energy","transient"], sops: ["sop-battery-short","sop-thermal-runaway","sop-battery-drop"], quiz: "battery" },
-    powertools:{ name: "电动工具", tools: ["tool-spacing","tool-hipot","tool-mech","tool-drop"], cards: ["mechanical","protection","drop"], sops: ["sop-mechanical-strength","sop-drop","sop-hipot"], quiz: "mechanical" },
-    industrial:{ name: "工业 / 机械", tools: ["tool-spacing","tool-hipot","tool-mech"], cards: ["mechanical","functional","ovc"], sops: ["sop-functional-safety","sop-hipot"], quiz: "mechanical" },
-    wireless:{ name: "物联网 / 无线", tools: ["tool-ip","tool-spacing","tool-emcwave"], cards: ["radhaz","emc","ip"], sops: ["sop-sar","sop-esd","sop-radiated-emission"], quiz: "radiation" },
-    automotive:{ name: "汽车电子", tools: ["tool-spacing","tool-hipot","tool-emcwave"], cards: ["transient","temperature","battery"], sops: ["sop-temperature-rise","sop-hipot"], quiz: "emc" }
+    powertools:{ name: "电动工具", tools: ["tool-pd","tool-spacing","tool-hipot","tool-mech","tool-drop"], cards: ["mechanical","protection","drop"], sops: ["sop-mechanical-strength","sop-drop","sop-hipot"], quiz: "mechanical" },
+    industrial:{ name: "工业 / 机械", tools: ["tool-pd","tool-spacing","tool-hipot","tool-mech"], cards: ["mechanical","functional","ovc"], sops: ["sop-functional-safety","sop-hipot"], quiz: "mechanical" },
+    wireless:{ name: "物联网 / 无线", tools: ["tool-pd","tool-ip","tool-spacing","tool-emcwave"], cards: ["radhaz","emc","ip"], sops: ["sop-sar","sop-esd","sop-radiated-emission"], quiz: "radiation" },
+    automotive:{ name: "汽车电子", tools: ["tool-pd","tool-spacing","tool-hipot","tool-emcwave"], cards: ["transient","temperature","battery"], sops: ["sop-temperature-rise","sop-hipot"], quiz: "emc" }
   };
   var CARD_IDS = { protection:1, productclass:1, access:1, cti:1, ovc:1, leakage:1, grounding:1, selv:1, energy:1, components:1, "fire-design":1, flame:1, firetests:1, temperature:1, battery:1, mechanical:1, functional:1, optical:1, radhaz:1, rohs:1, explosion:1, emc:1, dmcm:1, harmonic:1, transient:1, ip:1, ik:1, environment:1, drop:1, biocompat:1, risk:1, software:1, certprocess:1, stdguide:1 };
   function cardTitle(id) {

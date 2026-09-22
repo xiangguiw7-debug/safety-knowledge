@@ -45,6 +45,7 @@ var SITE_MAP = [
   { key: "workshop", name: "项目工坊", url: "pages/workshop.html", group: "资源专题", icon: "🏭", d: "虚拟产品全流程" },
   { key: "feedback", name: "纠错反馈", url: "pages/feedback.html", group: "资源专题", icon: "💬", d: "提交内容错误" },
   { key: "data", name: "数据备份", url: "pages/data.html", group: "资源专题", icon: "💾", d: "进度/笔记/错题导出" },
+  { key: "cache", name: "打开的是旧版本？", url: "pages/cache-help.html", group: "资源专题", icon: "🔄", d: "清缓存与强制刷新" },
   { key: "en", name: "English Overview", url: "en/index.html", group: "资源专题", icon: "🌐", d: "英文核心速览" }
 ];
 var SITE_RECENT_KEY = "angui-site-recent";

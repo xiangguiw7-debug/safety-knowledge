@@ -23,13 +23,16 @@
     "ITU-T K.21": "std-k21", "IEC 62209": "std-62209", "IEC 60479-1": ""
   };
   var TOOL_STD = {
+    "tool-standard": { l: "GB 7000.1 / GB 9706.1", s: "std-60598" },
+    "tool-pd": { l: "IEC 60664-1 / IEC 60664-3", s: "std-60664" },
     "tool-product-class": { l: "IEC 61140", s: "std-61140" },
-    "tool-working-voltage": { l: "IEC 60664-1", s: "std-60664" },
-    "tool-market-voltage": { l: "IEC 60664-1", s: "std-60664" },
-    "tool-pollution": { l: "IEC 60664-1", s: "std-60664" },
-    "tool-cti": { l: "IEC 60112", s: "std-60112" },
-    "tool-insulation": { l: "IEC 61140", s: "std-61140" },
-    "tool-altitude": { l: "IEC 60664-1", s: "std-60664" },
+    "tool-working-voltage": { l: "GB 7000.1 / GB 9706.1", s: "std-60598" },
+    "tool-lum-ip": { l: "GB 7000.1（灯具）", s: "std-60598" },
+    "tool-med-mop": { l: "GB 9706.1（医疗）", s: "std-60601" },
+    "tool-market-voltage": { l: "", s: "" },
+    "tool-cti": { l: "GB 7000.1 / IEC 60112", s: "std-60112" },
+    "tool-insulation": { l: "GB 7000.1（灯具）", s: "std-60598" },
+    "tool-altitude": { l: "GB 9706.1（医疗）", s: "std-60601" },
     "tool-reverse": { l: "IEC 60664-1", s: "std-60664" },
     "tool-hipot": { l: "IEC 62368-1 / 60335-1 / 60601-1 / 60204-1", s: "std-62368" },
     "tool-leakage": { l: "IEC 60990", s: "std-60990" },
@@ -63,7 +66,7 @@
     var p = document.createElement("p");
     p.className = "std-status";
     var href = "standards.html" + (id ? "#" + id : "");
-    p.innerHTML = "📌 教学参考 · 依据 " + label + " · 核对 2026-08 · <a href=\"" + href + "\">标准入口</a>";
+    p.innerHTML = "📌 教学参考 · 依据 " + label + " · 核对 2026-09 · <a href=\"" + href + "\">标准入口</a>";
     return p;
   }
   function findId(text) {

@@ -23,13 +23,124 @@ document.querySelectorAll("[data-year]").forEach(function (el) {
 
 // PWA 离线缓存（file:// 下不注册）
 if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+  var hadController = !!navigator.serviceWorker.controller; // 首次访问没有旧 SW，不要弹提示
   window.addEventListener("load", function () {
     var swPath = location.pathname.indexOf("/pages/") !== -1 || location.pathname.indexOf("/en/") !== -1 ? "../sw.js" : "./sw.js";
-    navigator.serviceWorker.register(swPath, { updateViaCache: "none" }).catch(function () {
+    navigator.serviceWorker.register(swPath, { updateViaCache: "none" }).then(function (reg) {
+      // 每次打开都主动问一次服务器有没有新版本（默认浏览器可能隔 24h 才查）
+      if (reg && reg.update) { try { reg.update(); } catch (e) {} }
+      reg.addEventListener("updatefound", function () {
+        var nw = reg.installing;
+        if (!nw) return;
+        nw.addEventListener("statechange", function () {
+          if (nw.state === "installed" && navigator.serviceWorker.controller) {
+            showUpdateBar("已发布新版本，" + "点此立即更新");
+          }
+        });
+      });
+    }).catch(function () {
       /* 注册失败不影响浏览 */
+    });
+    // 新 Service Worker 接管后（配合 skipWaiting），页面本身还是旧的，提示一次刷新
+    navigator.serviceWorker.addEventListener("controllerchange", function () {
+      if (!hadController || updateBarShown) return;
+      showUpdateBar("缓存已更新，点此刷新页面");
     });
   });
 }
+
+/* ===== “打开的是旧版本？”提示条 ==========================================
+   旧版本问题一般来自四层缓存：浏览器 HTTP 缓存 / Service Worker 缓存 /
+   GitHub Pages 的 CDN（HTML max-age=600）/ 已安装的 PWA 外壳。
+   这里做两件事：① 用 version.json（永远直连网络）比对线上最新版本；
+   ② 给一个“一键清除本站缓存并刷新”的按钮，用户自己就能修好。 */
+var updateBarShown = false;
+function siteVersion() {
+  var m = document.querySelector('meta[name="site-version"]');
+  if (m && m.getAttribute("content")) return m.getAttribute("content");
+  var t = (document.body ? document.body.textContent : "").match(/版本 v(\d+\.\d+\.\d+)/);
+  return t ? t[1] : "";
+}
+function clearSiteCacheThenReload() {
+  var done = 0, total = 2;
+  function finish() {
+    if (++done >= total) {
+      var base = location.href.split("#")[0].split("?")[0];
+      location.replace(base + "?fresh=" + Date.now());
+    }
+  }
+  try {
+    if (window.caches && caches.keys) {
+      caches.keys().then(function (keys) {
+        return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+      }).then(finish, finish);
+    } else { finish(); }
+  } catch (e) { finish(); }
+  try {
+    if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+      navigator.serviceWorker.getRegistrations().then(function (rs) {
+        return Promise.all(rs.map(function (r) { return r.unregister(); }));
+      }).then(finish, finish);
+    } else { finish(); }
+  } catch (e) { finish(); }
+}
+function showUpdateBar(text) {
+  if (updateBarShown || document.getElementById("updateBar")) return;
+  updateBarShown = true;
+  var bar = document.createElement("div");
+  bar.id = "updateBar";
+  bar.style.cssText = "position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:9998;max-width:min(94vw,560px);" +
+    "display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;border-radius:14px;" +
+    "background:var(--card,#fff);color:var(--fg,#1c1a17);border:1px solid var(--border,#e2ddd3);" +
+    "box-shadow:0 12px 34px rgba(0,0,0,.18);font-size:13.5px;line-height:1.5";
+  var msg = document.createElement("span");
+  msg.textContent = "🔄 " + (text || "有新版本可用");
+  var go = document.createElement("button");
+  go.textContent = "清除缓存并更新";
+  go.style.cssText = "margin-left:auto;padding:7px 14px;border-radius:999px;border:1px solid transparent;cursor:pointer;" +
+    "background:var(--accent,#9e2b25);color:#fff;font-family:inherit;font-size:13px;font-weight:600";
+  go.addEventListener("click", function () {
+    go.textContent = "正在更新…";
+    clearSiteCacheThenReload();
+  });
+  var more = document.createElement("a");
+  more.textContent = "还是旧的？";
+  more.href = location.pathname.indexOf("/pages/") !== -1
+    ? "cache-help.html"
+    : (location.pathname.indexOf("/en/") !== -1 ? "../pages/cache-help.html" : "pages/cache-help.html");
+  more.style.cssText = "color:var(--muted,#6b6558);font-size:12.5px";
+  var close = document.createElement("button");
+  close.textContent = "✕";
+  close.setAttribute("aria-label", "关闭提示");
+  close.style.cssText = "background:none;border:0;color:var(--muted,#6b6558);cursor:pointer;font-size:14px;font-family:inherit";
+  close.addEventListener("click", function () { bar.remove(); });
+  bar.appendChild(msg); bar.appendChild(go); bar.appendChild(more); bar.appendChild(close);
+  document.body.appendChild(bar);
+}
+// 探针：version.json 不缓存，拿到的是线上最新版本；和本页版本不一致就提示
+(function () {
+  if (!/^https?:$/.test(location.protocol)) return;
+  var mine = siteVersion();
+  if (!mine) return;
+  var url = (location.pathname.indexOf("/pages/") !== -1 || location.pathname.indexOf("/en/") !== -1 ? "../" : "./") + "version.json";
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      fetch(url + "?t=" + Date.now(), { cache: "no-store" })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (!d || !d.version || d.version === mine) return;
+          var newer = d.version.split(".").map(Number), cur = mine.split(".").map(Number);
+          var isNewer = false;
+          for (var i = 0; i < 3; i++) {
+            if ((newer[i] || 0) > (cur[i] || 0)) { isNewer = true; break; }
+            if ((newer[i] || 0) < (cur[i] || 0)) break;
+          }
+          if (isNewer) showUpdateBar("线上已更新到 v" + d.version + "，你打开的是 v" + mine);
+        })
+        .catch(function () { /* 离线或探针不可用就静默跳过 */ });
+    }, 1500);
+  });
+})();
 
 /* ===== 点击头像放大（灯箱，不再跳首页——导航栏已有首页入口） ===== */
 (function () {

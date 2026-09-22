@@ -3,7 +3,7 @@ var TOOL_TAB_KEY = "angui-tool-tab";
 var RECENT_KEY = "angui-tool-recent";
 
 var TOOL_GROUPS = [
-  { id: "shock", label: "⚡ 防电击与绝缘", tools: ["spacing", "hipot", "selv", "grounding", "ovc", "altcorr", "pesize"] },
+  { id: "shock", label: "⚡ 防电击与绝缘", tools: ["spacing", "pd", "hipot", "selv", "grounding", "ovc", "altcorr", "pesize"] },
   { id: "energy", label: "🔥 能量 · 热量 · 防火", tools: ["discharge", "thermal", "fuse", "glowwire", "battery"] },
   { id: "emc", label: "📡 EMC · 环保 · 认证", tools: ["leakage", "compare", "testlist"] },
   { id: "enclosure", label: "🛡️ 外壳防护", tools: ["ip", "ik"] },
@@ -12,7 +12,8 @@ var TOOL_GROUPS = [
 ];
 
 var TOOL_META = {
-  spacing: { name: "爬电 / 间隙", d: "正向、反查与双曲线图表" },
+  spacing: { name: "爬电 / 间隙", d: "灯具 / 医疗两套标准查表 + 通用反查" },
+  pd: { name: "污染等级判定", d: "PD1–PD4 微观环境判定 + 联动间距工具" },
   hipot: { name: "耐压速查", d: "多标准试验电压" },
   selv: { name: "SELV / 绝缘", d: "限值判定与层数清单" },
   grounding: { name: "接地连续性", d: "R=V/I 目标电阻" },
@@ -167,7 +168,7 @@ function applyToolSearch() {
 
 // ===== 可信度三档（落实到每个工具结果） =====
 var TOOL_CRED = {
-  spacing: "g", hipot: "y", selv: "g", grounding: "g",
+  spacing: "y", pd: "g", hipot: "y", selv: "g", grounding: "g",
   discharge: "g", thermal: "y", fuse: "g", glowwire: "g", battery: "g",
   leakage: "g", compare: "y", testlist: "g",
   ip: "g", ik: "g", mech: "g", es: "y", drop: "y", envparams: "g",
@@ -882,16 +883,27 @@ function renderEs() {
   $("esNote").textContent = note + " 输入：电压 " + u + " V · 电流 " + i + " A · 电容 " + c + " µF（教学判定，正式以标准表格为准）。";
 }
 // ===== 导出计算报告 =====
+function spacingConditionText(s) {
+  if (SPACING_STD === "medical") {
+    var m = MED_MOP[s.mop] || MED_MOP["2MOPP"];
+    return "适用标准 " + STD_INFO.medical.code + "（" + STD_INFO.medical.clause + "）· " + m.label + " · 工作电压 " + s.v + "V · 海拔 " + s.alt + "m · 污染等级 2 · 材料组 Ⅲb";
+  }
+  var t = LUM_TABLE[lumTableKey(s)];
+  return "适用标准 " + STD_INFO.luminaire.code + "（" + STD_INFO.luminaire.clause + "）· " + t.name + " " + t.scene +
+    " · 选表方式 " + (s.lumMode === "manual" ? "高级：按污染等级 PD" + (s.lumPd || "2") + " 手动选表（偏离标准选表规则）" : "按灯具分类 = " + (lumTableKey(s) === "ipx1" ? "IPX1 及以上" : "一般灯具")) +
+    " · 工作电压 " + s.v + "V · " + (INS_LUM_LABEL[s.ins] || s.ins) + " · " + (s.gp === "I" ? "PTI ≥ 600" : "PTI < 600");
+}
+
 function exportReport() {
   var s = currentState();
   var actual = $("actualInput") ? $("actualInput").value : "";
   var html = "<!doctype html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><title>安规计算报告</title><style>body{font-family:-apple-system,'PingFang SC',sans-serif;padding:36px;color:#1d1d1f}h1{font-size:22px}.muted{color:#86868b}table{border-collapse:collapse;width:100%;margin-top:12px}td,th{border:1px solid #d9d9d9;padding:8px 10px;text-align:left;font-size:14px}</style></head><body>" +
     "<h1>安规计算报告（教学参考）</h1>" +
-    "<p class=\"muted\">生成时间：" + new Date().toLocaleString() + " · 安规知识课堂 v1.4.2</p>" +
-    "<table><tr><th>条件</th><td>工作电压 " + s.v + "V · 污染 " + s.pd + " · 材料组 " + s.gp + " · 绝缘 " + s.ins + " · 系统 " + s.sys + "V · OVC " + s.ovc + " · 海拔 " + s.alt + "m</td></tr>" +
+    "<p class=\"muted\">生成时间：" + new Date().toLocaleString() + " · 安规知识课堂 v1.4.5</p>" +
+    "<table><tr><th>条件</th><td>" + spacingConditionText(s) + "</td></tr>" +
     "<tr><th>爬电距离</th><td>≥ " + $("crValue").textContent + " mm</td></tr>" +
     "<tr><th>电气间隙</th><td>≥ " + $("clValue").textContent + " mm</td></tr>" +
-    "<tr><th>冲击耐受</th><td>" + $("clImpulse").textContent + " V</td></tr>" +
+    "<tr><th>查表依据</th><td>" + $("crNote").textContent + "<br>" + $("clNote").textContent + "</td></tr>" +
     (actual ? "<tr><th>实际间距</th><td>" + actual + " mm（" + $("statusBox").textContent + "）</td></tr>" : "") +
     "</table><p class=\"muted\">免责声明：本报告为教学估算，不能替代标准原文或作为认证依据。</p></body></html>";
   var w = window.open("", "_blank");
@@ -903,15 +915,17 @@ function exportReport() {
 // ===== 复制 / 重置 =====
 function copySummary() {
   var s = currentState();
-  var text = "安规计算摘要（教学参考）\n爬电距离 ≥ " + $("crValue").textContent + " mm；电气间隙 ≥ " + $("clValue").textContent + " mm\n条件：工作电压 " + s.v + "V · 污染 " + s.pd + " · 材料组 " + s.gp + " · 绝缘 " + s.ins + " · 系统 " + s.sys + "V · OVC " + s.ovc + " · 海拔 " + s.alt + "m";
+  var text = "安规计算摘要（教学参考）\n" + spacingConditionText(s) +
+    "\n爬电距离 ≥ " + $("crValue").textContent + " mm；电气间隙 ≥ " + $("clValue").textContent + " mm" +
+    "\n" + $("crNote").textContent + "\n" + $("clNote").textContent;
   function done() { if (window.AnGuiUX) window.AnGuiUX.toast("结果已复制"); }
   if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done).catch(done); }
   else { var ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done(); }
 }
 
 function resetSpacing() {
-  applyState({ v: 250, sys: 230, ovc: "II", pd: 2, gp: "IIIa", ins: "basic", alt: 2000, cls: "I", mkt: "custom" });
-  if (window.AnGuiUX) window.AnGuiUX.toast("参数已重置");
+  applyPreset("luminaire");
+  if (window.AnGuiUX) window.AnGuiUX.toast("参数已重置为灯具标准");
 }
 
 // ===== IP 等级判定（完整版） =====

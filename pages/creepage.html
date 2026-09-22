@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
+  <meta name="site-version" content="1.4.5">
   <title>爬电距离（Creepage）详解 - 安规与可靠性知识课堂</title>
   <meta name="description" content="爬电距离完整教程：表面放电机理、四大决定因素、查表全流程、多个完整示例、PCB 设计技巧与标准条款指引。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
@@ -218,7 +219,7 @@
       </div>
       <div class="callout callout-info">
         <strong>这张表怎么用</strong>
-        <p>先读“基本绝缘”值：电压 250V、污染 2、材料组 Ⅲa → 2.5mm。再按绝缘类型换算：附加 = 2.5，加强 = 5.0，功能绝缘按标准单独确定（本站计算器按 0.8× 简化示意）。</p>
+        <p>先读“基本绝缘”值：电压 250V、污染 2、材料组 Ⅲa → 2.5mm。再按绝缘类型换算：附加 = 2.5，加强 = 5.0，功能绝缘按所属产品标准单独确定。注意这是 <b>IEC 60664-1 / GB/T 16935.1</b> 通用绝缘配合表；<b>灯具</b>（GB 7000.1 表11.1 / 表11.2）与<b>医疗</b>（GB 9706.1 表11 / 表12）的产品标准另给表格，数值与换算规则都不同，不能套用本表。</p>
       </div>
       <div class="callout callout-info">
         <strong>220V 家电快速参考（最常用的心算法）</strong>
@@ -257,7 +258,7 @@
         <li>绝缘类型：基本绝缘；</li>
         <li>查表：400V · 污染 3 · Ⅲa → 6.3mm（表17）；若为加强绝缘 → 12.6mm。</li>
       </ol>
-      <p class="lead">三个例子都能在<a href="./tools.html#tool-spacing">计算工具</a>里复现：示例 A 用“230V 电源初次级”预设，示例 C 用“工业现场 400V”预设。</p>
+      <p class="lead">这三个例子按 GB/T 16935.1（IEC 60664-1）通用表复核。本站<a href="./tools.html#tool-spacing">计算工具</a>的正向模式只做<b>灯具</b>（GB 7000.1 表11.1 / 表11.2）与<b>医疗</b>（GB 9706.1 表11 / 表12）两套产品标准的查表；“反查”模式仍按 IEC 60664-1 通用表由间距反推电压。</p>
     </section>
 
     <section>
@@ -326,16 +327,16 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
-  <script src="../assets/js/theme.js"></script>
-  <script src="../assets/js/main.js?v=1.4.2"></script>
-  <script src="../assets/js/glossary-tip.js"></script>
-  <script src="../assets/js/ux.js"></script>
-  <script src="../assets/js/progress.js"></script>
+  <script src="../assets/js/theme.js?v=1.4.5"></script>
+  <script src="../assets/js/main.js?v=1.4.5"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
+  <script src="../assets/js/ux.js?v=1.4.5"></script>
+  <script src="../assets/js/progress.js?v=1.4.5"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -345,8 +346,8 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/nav.js"></script>
-  <script src="../assets/js/breadcrumb.js"></script>
-  <script src="../assets/js/knowledge-chain.js"></script>
+  <script src="../assets/js/nav.js?v=1.4.5"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
+  <script src="../assets/js/knowledge-chain.js?v=1.4.5"></script>
 </body>
 </html>

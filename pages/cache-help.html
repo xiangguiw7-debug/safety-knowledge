@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9e2b25">
+  <meta name="site-version" content="1.4.5">
+  <title>打开的是旧版本？ - 安规与可靠性知识课堂</title>
+  <meta name="description" content="站点已更新但浏览器还显示旧版本？讲清 HTTP 缓存 / Service Worker / CDN / PWA 外壳四层缓存，并提供一键清除缓存与各平台强制刷新方法。">
+  <link rel="apple-touch-icon" href="../assets/icons/logo.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
+
+  <style>
+    .ch-layer { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 8px; }
+    .ch-layer th, .ch-layer td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+    .ch-layer th { background: var(--card-2); font-weight: 600; white-space: nowrap; }
+    .ch-status { font-size: 13px; color: var(--muted); margin: 10px 0 0; min-height: 20px; }
+    .ch-fix { font-size: 15px; padding: 11px 22px; }
+    .ch-steps { font-size: 14px; line-height: 1.9; padding-left: 22px; margin: 6px 0; }
+    .ch-kv { font-size: 13.5px; line-height: 1.85; }
+    .ch-kv b { color: var(--accent); }
+  </style>
+
+  <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html"><img class="logo-img" src="../assets/icons/logo.png" alt="安规与可靠性知识课堂">安规与可靠性知识课堂</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌓</button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开菜单">☰</button>
+      <nav class="nav" id="nav">
+        <a href="../index.html">首页</a>
+        <a href="./learn.html">学习</a>
+        <a href="./testing.html">测试</a>
+        <a href="./certification.html">认证</a>
+        <a href="./industries.html">行业</a>
+        <a href="./quiz.html">答题测验</a>
+        <a href="./resources.html" class="active">资源</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 旧版本问题</p>
+      <h1>打开的是旧版本？</h1>
+      <p class="lead">本站文件已经更新，但浏览器可能在用缓存里的旧副本。下面先点一次一键修复；如果还不行，再按你的平台手动清一次。</p>
+    </div>
+
+    <div class="card">
+      <h3>🧹 一键修复（先试这个）</h3>
+      <p class="ch-kv">按钮会做三件事：<b>删掉本站的 Service Worker 缓存</b> → <b>注销 Service Worker</b> → <b>带上时间戳重新打开当前页</b>。它只清缓存，<b>不会动</b>你的学习进度、笔记与错题本（那些存在 localStorage，和缓存是两套东西）。</p>
+      <p style="margin:14px 0 6px"><button type="button" class="btn btn-primary ch-fix" id="chFix">清除缓存并重新加载</button></p>
+      <p class="ch-status" id="chStatus">当前页面版本：<b id="chMine">读取中…</b></p>
+    </div>
+
+    <div class="card">
+      <h3>🔍 为什么会出现「上传了新版，打开还是旧的」</h3>
+      <p class="ch-kv">从服务器到你的屏幕之间，一共可能有 <b>四层缓存</b>在起作用。任何一层留着旧副本，你就会看到旧版本——所以「文件传上去了」和「你看到新版」不是同一件事。</p>
+      <table class="ch-layer">
+        <tr><th>层级</th><th>它缓存什么</th><th>能保持多久</th><th>本站的应对</th></tr>
+        <tr>
+          <td><b>1. 浏览器 HTTP 缓存</b></td>
+          <td>CSS、JS、图片等静态文件</td>
+          <td>按服务器响应头；GitHub Pages 给静态资源的策略是 <b>10 分钟</b>，但已缓存的 URL 会被反复复用</td>
+          <td>所有本地 CSS / JS 引用统一带 <code>?v=版本号</code>，版本一升级就是新 URL，直接绕过旧缓存</td>
+        </tr>
+        <tr>
+          <td><b>2. Service Worker 缓存（PWA）</b></td>
+          <td>整站页面与脚本（离线可用的那套）</td>
+          <td>直到缓存版本号变化；旧 Worker 还可能继续接管页面</td>
+          <td>缓存名带版本、新 Worker 立即接管（skipWaiting），导航请求直连网络不再走缓存</td>
+        </tr>
+        <tr>
+          <td><b>3. GitHub Pages 的 CDN</b></td>
+          <td>HTML 与静态资源</td>
+          <td>约 <b>10 分钟</b>（该平台不允许自定义响应头）</td>
+          <td>页面导航请求绕过 HTTP 缓存直连；极端情况下最多晚 10 分钟</td>
+        </tr>
+        <tr>
+          <td><b>4. PWA 外壳 / 微信等内置浏览器</b></td>
+          <td>整个应用的独立副本 / 内核自己的缓存</td>
+          <td>可能很久，应用不彻底关闭就一直用旧副本</td>
+          <td>页面上出现「发现新版本」提示条；实在不行按下面的手动步骤</td>
+        </tr>
+      </table>
+      <p class="ch-kv" style="margin-top:10px">另外还有一种情况：<b>缓存没问题，但你没看到变化</b>——如果这次更新只是改了文字或微调数值，页面看起来确实和上一版一样。想确认版本，看页脚「版本 v…」那一行，或本站 <a href="./changelog.html">更新日志</a>。</p>
+    </div>
+
+    <div class="card">
+      <h3>🛠 各平台手动强制刷新</h3>
+      <p class="ch-kv"><b>电脑（Windows / Linux）</b></p>
+      <ol class="ch-steps">
+        <li><code>Ctrl</code> + <code>F5</code>，或 <code>Ctrl</code> + <code>Shift</code> + <code>R</code>（强制重新下载）；</li>
+        <li>还不行：按 <code>F12</code> 打开开发者工具 → Network 面板 → 勾选 <b>Disable cache</b> → 保持面板打开再刷新一次；</li>
+        <li>再不行：站点设置（地址栏左侧图标）→ 清除 Cookie 和网站数据 → 刷新。</li>
+      </ol>
+      <p class="ch-kv" style="margin-top:12px"><b>电脑（macOS）</b>：<code>Cmd</code> + <code>Shift</code> + <code>R</code>；Safari 需先在「设置 → 高级」里打开开发菜单，再用 <code>Option</code> + <code>Cmd</code> + <code>E</code> 清空缓存。</p>
+      <p class="ch-kv" style="margin-top:12px"><b>Android（Chrome / Edge）</b>：⋮ 菜单 → 历史记录 → 清除浏览数据 → 勾「缓存的图片和文件」；或长按地址栏域名 → 站点设置 → <b>清除并重置</b>。只想针对本站清，用后者更安全。</p>
+      <p class="ch-kv" style="margin-top:12px"><b>iPhone / iPad（Safari）</b>：设置 → Safari → 高级 → 网站数据 → 找到本站 → 删除；或设置 → Safari → 清除历史记录与网站数据（会清所有站点，先确认别处没有要保留的登录态）。</p>
+      <p class="ch-kv" style="margin-top:12px"><b>已安装的 PWA（添加到主屏幕的应用）</b>：先<b>彻底关闭</b>应用（多任务界面划掉，不是切到后台）再打开；仍不行就卸载图标，重新用浏览器打开本站后「添加到主屏幕」。Android 还可在 应用信息 → 存储 → <b>清除缓存</b>。</p>
+      <p class="ch-kv" style="margin-top:12px"><b>微信 / QQ 等内置浏览器</b>：右上角 ⋯ → 刷新；顽固的话在「我 → 设置 → 通用 → 存储空间 → 清理缓存」，或点右上角 ⋯ → 在浏览器中打开。</p>
+      <p class="ch-kv" style="margin-top:12px"><b>快速判断是不是缓存问题</b>：用无痕窗口（<code>Ctrl</code> / <code>Cmd</code> + <code>Shift</code> + <code>N</code>）打开本站。无痕里是新版、普通窗口是旧版 → 100% 是缓存，按本页一键修复即可。</p>
+    </div>
+
+    <div class="card">
+      <h3>📌 常见问题</h3>
+      <details>
+        <summary>清除缓存会不会把我的学习进度、笔记清掉？</summary>
+        <p>本页的一键修复<b>不会</b>。学习进度、知识卡笔记、错题本、主题设置保存在 localStorage，与缓存是两套存储。但浏览器里「清除浏览数据 / 清除网站数据」这类操作会连 localStorage 一起清掉——所以建议先到 <a href="./data.html">数据备份</a> 页导出一次，或复制同步文本存一份。</p>
+      </details>
+      <details>
+        <summary>页面上为什么没有出现「发现新版本」提示条？</summary>
+        <p>三种可能：① 你已经是最新版；② 离线或网络拦截了版本探针（<code>version.json</code>）请求，此时会静默跳过，不影响浏览；③ 你打开的是很旧的缓存页面，那时还没有这个机制——手动强刷一次之后，以后就会自动提示了。</p>
+      </details>
+      <details>
+        <summary>提示条出现了，点了「清除缓存并更新」还是旧的？</summary>
+        <p>说明卡住的是更外层的缓存（PWA 外壳或内置浏览器内核）。彻底关闭应用再打开，或按上面的平台步骤处理；这种情况下版本探针会在你每次打开时再提示一次，不会静默变旧。</p>
+      </details>
+      <details>
+        <summary>推送更新后，别人多久能看到新版？</summary>
+        <p>正常情况：<b>刷新一次</b>即可（资源带版本号、页面导航直连网络）。最坏情况：受 GitHub Pages 的 10 分钟 CDN 缓存影响，可能晚约 10 分钟；已安装 PWA 的用户需要重新打开应用，届时会看到更新提示条。</p>
+      </details>
+      <details>
+        <summary>怎么一眼确认自己看的是哪一版？</summary>
+        <p>每个页面页脚都有「版本 vX.Y.Z · 内容核对 YYYY-MM」，本页顶部也会显示当前页面版本与线上最新版本。对不上就按上面清一次缓存。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h3>⚙️ 维护者：本站已经做了哪些加固</h3>
+      <ul class="ch-kv">
+        <li><b>全量资源版本化</b>：142 个页面的所有本地 CSS / JS 引用都带 <code>?v=版本号</code>，发布脚本会自动刷新；sw.js 的预缓存清单同步写同一个参数，避免「HTML 是新的、脚本还是旧的」。</li>
+        <li><b>Service Worker 策略</b>：页面导航请求 <code>no-store</code> 直连网络；缓存名带版本号，新版本装上即接管（skipWaiting + clients.claim），旧缓存自动删除。</li>
+        <li><b>版本探针</b>：<code>version.json</code> 永不缓存，配合每页 head 里的 <code>site-version</code> 标记比对，发现线上更新就弹提示条，并提供一键清除缓存。</li>
+        <li><b>回归闸门</b>：<code>node scripts/check-structure.js</code> 会拦住版本 / 日期 / 资源参数不一致（页脚、sw.js、HTML 三方比对）。</li>
+        <li><b>服务端限制</b>：GitHub Pages 不允许自定义响应头（HTML 固定约 10 分钟缓存）。若要秒级生效，需要换 Cloudflare Pages / Netlify / Vercel，或在前面临时加一层可控 CDN。</li>
+      </ul>
+    </div>
+  </main>
+
+  <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
+    </div>
+  </footer>
+
+  <script>
+  /* 本页按钮用内联脚本：内联代码随 HTML 一起更新，即使旧脚本被缓存也照样能用 */
+  (function () {
+    function route(p) {
+      var i = location.pathname.indexOf(p);
+      return i !== -1;
+    }
+    var mine = document.querySelector('meta[name="site-version"]');
+    document.getElementById("chMine").textContent = mine ? "v" + mine.getAttribute("content") : "未知";
+    function status(msg) { document.getElementById("chStatus").innerHTML = msg; }
+    function bust() {
+      var n = 0, need = 2;
+      function done() {
+        if (++n < need) return;
+        status("缓存已清除，正在重新加载…");
+        var base = location.href.split("#")[0].split("?")[0];
+        location.replace(base + "?fresh=" + Date.now());
+      }
+      if (window.caches && caches.keys) {
+        caches.keys().then(function (ks) {
+          return Promise.all(ks.map(function (k) { return caches.delete(k); }));
+        }).then(function () { status("已删除 " + "缓存存储…"); done(); }, done);
+      } else { done(); }
+      if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+        navigator.serviceWorker.getRegistrations().then(function (rs) {
+          return Promise.all(rs.map(function (r) { return r.unregister(); }));
+        }).then(function () { status("已注销 Service Worker…"); done(); }, done);
+      } else { done(); }
+    }
+    document.getElementById("chFix").addEventListener("click", function () {
+      this.disabled = true;
+      this.textContent = "正在清除…";
+      status("正在清除本站缓存…");
+      bust();
+    });
+    // 顺带显示线上最新版本，方便对比
+    var url = (route("/pages/") || route("/en/") ? "../" : "./") + "version.json";
+    fetch(url + "?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.version) return;
+        status('当前页面版本：<b>v' + (mine ? mine.getAttribute("content") : "?") + '</b> · 线上最新版本：<b>v' + d.version + '</b>' +
+          (mine && mine.getAttribute("content") === d.version ? ' <span style="color:var(--accent)">（已是最新）</span>' : ' <span style="color:var(--danger-fg,#b3261e)">（不是最新，请点上面的按钮）</span>'));
+      })
+      .catch(function () { status('当前页面版本：<b>v' + (mine ? mine.getAttribute("content") : "?") + '</b> · 线上版本探测失败（离线或被拦截），不影响浏览'); });
+  })();
+  </script>
+  <script src="../assets/js/theme.js?v=1.4.5"></script>
+  <script src="../assets/js/main.js?v=1.4.5"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
+  <script src="../assets/js/ux.js?v=1.4.5"></script>
+<nav class="bottom-nav" aria-label="底部导航">
+  <a href="../index.html">🏠<span>首页</span></a>
+  <a href="./learn.html">📚<span>学习</span></a>
+  <a href="./testing.html">🧪<span>测试</span></a>
+  <a href="./certification.html">📄<span>认证</span></a>
+  <a href="./industries.html">🏭<span>行业</span></a>
+  <a href="./quiz.html">✅<span>测验</span></a>
+    <a href="./search.html">🔍<span>搜索</span></a>
+</nav>
+  <script src="../assets/js/nav.js?v=1.4.5"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
+</body>
+</html>

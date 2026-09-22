@@ -1,10 +1,13 @@
 (function () {
   "use strict";
   var MAP = [
+    { match: "适用标准", href: "standards-compare.html", depth: "standards.html" },
+    { match: "污染等级判定器", href: "creepage.html", depth: "insulation-coordination.html" },
     { match: "产品类别", href: "knowledge.html#productclass", depth: "insulation-coordination.html" },
     { match: "工作电压", href: "voltage.html", depth: "insulation-coordination.html" },
-    { match: "目标市场与系统电压", href: "voltage.html", depth: "insulation-coordination.html" },
-    { match: "污染等级", href: "knowledge.html#cti", depth: "insulation-coordination.html" },
+    { match: "灯具 IP 分类", href: "knowledge.html#ip", depth: "sop-ip.html" },
+    { match: "防护方式", href: "mopp-moop.html", depth: "hipot.html" },
+    { match: "目标市场", href: "voltage.html", depth: "insulation-coordination.html" },
     { match: "材料组（CTI）", href: "knowledge.html#cti", depth: "insulation-coordination.html" },
     { match: "绝缘类型", href: "double-insulation.html", depth: "insulation-coordination.html" },
     { match: "使用海拔", href: "clearance.html", depth: "insulation-coordination.html" },

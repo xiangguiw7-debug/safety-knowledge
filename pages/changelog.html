@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
+  <meta name="site-version" content="1.4.5">
   <title>更新日志 - 安规与可靠性知识课堂</title>
-  <meta name="description" content="安规与可靠性知识课堂更新日志：v1.4.2 导航重构、费曼学习法与全站体验优化。">
+  <meta name="description" content="安规与可靠性知识课堂更新日志：v1.4.5（2026-09-23）缓存链路加固——全量资源版本化、Service Worker 直连更新、版本探针提示条与「打开的是旧版本？」自助页。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
@@ -35,6 +36,52 @@
     <div class="page-head">
       <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 更新日志</p>
       <h1>更新日志</h1>
+    </div>
+
+    <div class="card">
+      <h2>v1.4.5（2026-09-23 · 修复：上传了新版、浏览器却还是旧版本）</h2>
+      <p class="section-sub">缓存链路加固：全量资源版本化 + Service Worker 直连更新 + 版本探针提示 + 「打开的是旧版本？」自助页</p>
+      <ul>
+        <li><b>🧊 全量资源版本化（治本）</b>：此前只有 7 个脚本带 <code>?v=</code>，全站 1199 处本地资源引用里 <b>只有 151 处</b>带版本参数——<code>style.css</code>（142 页）、<code>theme.js</code>、<code>ux.js</code>、<code>nav.js</code>、<code>breadcrumb.js</code>、<code>sop-data.js</code> 等全都不带。于是浏览器 HTTP 缓存和 Service Worker 的 cache-first 会把旧 CSS / 旧脚本留着，出现「HTML 是新的、样式脚本还是旧的」。现在 <b>所有本地 CSS / JS 引用都带 <code>?v=版本号</code></b>，版本一升级就是新 URL，直接绕过旧缓存；sw.js 预缓存清单同步写同一参数，避免离线时 URL 对不上。</li>
+        <li><b>📡 Service Worker 更新策略加固</b>：① 页面导航请求改为 <code>no-store</code> 直连网络——GitHub Pages 给 HTML 的 <code>max-age=600</code> 会让刚上传的新页面最多晚 10 分钟才出现；② 每次打开页面都主动调一次 <code>registration.update()</code>（浏览器默认可能隔 24 小时才查新版本）；③ 新 Worker 装上即接管（skipWaiting + clients.claim），旧缓存自动删除；④ 新增 <code>SKIP_WAITING</code> 消息通道。</li>
+        <li><b>🔔 版本探针 + 更新提示条</b>：新增 <code>version.json</code>（<b>永不缓存</b>，由发布脚本生成）与每页 head 的 <code>&lt;meta name="site-version"&gt;</code> 标记。页面打开时会比对「本页版本 vs 线上最新版本」，不一致就在底部弹出提示条：<b>「线上已更新到 vX.Y.Z，你打开的是 vY.Y.Y —— 点此立即更新」</b>，按钮会清除本站缓存、注销旧 Service Worker 并带时间戳重新加载；提示条里还有「还是旧的？」入口。</li>
+        <li><b>🆕 新增自助页「打开的是旧版本？」</b>（<a href="./cache-help.html">cache-help.html</a>）：① 一键清除缓存并重新加载（内联脚本实现，即使旧脚本被缓存也照样能用，且不会动学习进度 / 笔记）；② 讲清四层缓存——浏览器 HTTP 缓存 / Service Worker 缓存 / GitHub Pages CDN（HTML 约 10 分钟）/ 已安装 PWA 外壳与微信内置浏览器；③ 各平台强制刷新步骤（Windows / macOS / Android / iOS / PWA / 微信）；④ 五个常见问题（含「清缓存会不会丢笔记」「为何没弹提示条」「推送后多久生效」）；⑤ 维护者视角列出本站已做的加固与 GitHub Pages 无法自定义响应头这一平台限制。</li>
+        <li><b>🛠 发布与校验流程升级</b>：<code>scripts/release.js</code> 现在一次到位——中英文页脚版本、页脚「内容核对 YYYY-MM」、head 的 <code>site-version</code> 标记、<code>sw.js</code> 缓存名、导出文本版本、changelog meta 版本号、<b>全站所有 assets/**/*.css|js 的 <code>?v=</code>（HTML 与 sw.js 双向同步）</b>、<code>version.json</code>。<code>scripts/check-structure.js</code> 对应加上缓存一致性闸门：任何资源漏 <code>?v=</code>、参数不是当前版本、带了参数却没进 sw.js 预缓存清单、缺 <code>site-version</code> 标记、<code>version.json</code> 与版本 / 月份不一致，都会 <b>FAIL</b> 拦下来。</li>
+        <li><b>🧩 顺带补齐</b>：<code>pages/wizard.html</code> 的 <code>certification.js</code> 补上 <code>?v=</code>；把 <code>knowledge-meta.js</code>、<code>quiz-engine.js</code>、<code>quiz-extra.js</code> 三个「页面用到但没进预缓存清单」的脚本补进 sw.js，离线更完整。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>v1.4.4（2026-09-17 · 修复：选择国家后条件字段不显示 · 插脚图标重绘 · 脚本缓存版本化）</h2>
+      <p class="section-sub">全球市电合规数据库：字段联动、图标可辨识度与脚本缓存三处修复</p>
+      <ul>
+        <li><b>🐞 修复：选择国家后，电压 / 频率 / 建议方案 / 典型认证等字段不再“空着”</b>：现在选中国家会自动把该国的<b>电压、频率、建议方案、典型认证</b>带入其余条件字段（该国只有一种插脚时也带入插脚），并在筛选栏下方写明这一行为；把国家改回“全部国家 / 地区”时，自动带入的值会一并撤掉，不会残留过滤条件。手动改过的条件不受影响。</li>
+        <li><b>🎨 插脚图标重绘（提高小尺寸可辨识度）</b>：接地脚 / 接地孔 / 接地夹统一改为<b>空心描边</b>，与实心的带电脚形成对比；并拉开易混图标的差异——A（两实心扁脚）↔ B（多一个空心接地圆）、C（两大圆脚）↔ K（两小圆脚 + 空心扁接地）、D（大圆脚 + 大空心接地）↔ M（更大）↔ N（更小）、F（两侧空心接地夹）、G / H / I（扁脚 + 空心接地条）、J / L（空心脚表示接地）；表格里的图标由 15px 放大到 16px，详情卡的插脚芯片改为自动换行排列。</li>
+        <li><b>🧊 脚本缓存版本化（避免旧脚本 + 新页面混用）</b>：<code>voltage.js</code>、<code>certification.js</code>、<code>calculator-v3.js</code>、<code>calculator-extra.js</code>、<code>pollution-degree.js</code> 的引用加上版本参数，Service Worker 缓存升级到 v1.4.4；发布脚本 <code>scripts/release.js</code> 同步支持这几个文件的版本号自动更新。此前浏览器若命中旧脚本缓存，会出现“筛选栏下拉为空 / 结果区整块不显示”的现象。</li>
+        <li><b>🧾 补齐缺失的认证条目（香港等 6 个市场 + 澳大利亚映射修复）</b>：全球市电合规数据库里“典型认证”为空，是因为这 7 个市场在原认证数据库里没有对应条目（不是页面丢了数据）。现已在认证库补齐 <b>香港</b>（《电气产品（安全）规例》符合安全规格证明书 · EMSD）、<b>蒙古</b>（MNS 认证 · MASM）、<b>缅甸</b>（PTD 型式认可 + 进口许可）、<b>柬埔寨</b>（ISC 认证）、<b>尼泊尔</b>（NS 标志 · NBSM）、<b>委内瑞拉</b>（COVENIN 符合性 · SENCAMER）六条，并修正 <b>澳大利亚</b> 因认证库合并条目（“澳大利亚 / 新西兰”）而匹配不到 RCM 的问题；电压库的映射表同步补齐，并在表格与详情卡里把认证标志做成<b>指向认证库详情的链接</b>（<code>certification.html?c=国家</code>）。同时修正香港原有的错误备注“无强制安全认证体系”。</li>
+        <li><b>🧭 认证模块再优化（数据体检 + 查询体验）</b>：① <b>修掉 2 个失效 / 非 https 链接</b>——欧亚经济联盟原指向已停用的 eurasiancommission.org，改为欧亚经济委员会官网 <code>eec.eaeunion.org</code>；尼泊尔 NBSM 改为 https；② 地区 / 产品分类下拉<b>带数量</b>；③ 选中产品分类后，结果表「覆盖品类」列自动切换为「<b>该品类标志</b>」（悬停显示该条目的说明），未选中时该列显示覆盖品类数并悬停列出品类名；④ 详情卡新增<b>「该市场的市电条件（电压 / 频率 / 插脚）」互链</b>，电压数据库同步支持 <code>?c=国家</code> 深链（选中该国并联动字段）；⑤ <b>筛选条件写入地址栏</b>（<code>?c=&amp;mark=&amp;r=&amp;p=&amp;q=&amp;view=map</code>），可分享、刷新可还原；⑥ <b>地图标记随筛选联动</b>：命中的标记放大、其余变淡；⑦ 移动端自动隐藏「监管机构」列，减少横向滚动；⑧ 数据体检：96 条条目字段完整、无重名、无非 https 链接。</li>
+        <li><b>🏷️ 新增「认证性质」筛选器（强制 / 渠道自愿 / 两者并存）</b>：给认证库 <b>96 条条目逐条写入 <code>force</code> 字段</b>（并附 <code>forceNote</code> 说明口径），三类语义为：<b>强制（监管）</b>＝没做进不了关 / 不能卖（79 条，如 CCC、CE、UKCA、PSE、KC、RCM、SASO、INMETRO…）；<b>渠道 / 自愿</b>＝法律不强制但零售、电商、采购常要求（15 条，如 VDE/GS、NF、KEMA-Keur、N 标志、ENEC，并注明"该国另有强制 CE"）；<b>强制 + 渠道</b>＝两者并存（2 条：美国 FCC 强制 + UL 渠道、加拿大 ISED 强制 + cUL 渠道）。界面侧：查询栏新增 Requirement / 认证性质 下拉（带数量）、结果表新增「认证性质」彩色标签列（悬停显示口径说明）、详情卡显示"认证性质 + 说明"、可与国家 / 标志 / 地区 / 产品分类 / 关键词叠加、写入地址栏 <code>?f=</code>；当筛选条件不包含当前打开的市场时，详情卡顶部给出提示而不是静默消失。所有标注均以各国法规目录为准（教学判断）。</li>
+        <li><b>🗺️ 认证模块改版 + 地图 404 修复（全球认证合规数据库）</b>：页面按“全球市电合规数据库”的布局重做——英文主标题 + 中文副标题、<b>查询条件栏</b>（Country or Region / 国家或地区带“重置”、Certification / 认证标志、Region / 地区、Product Category / 产品分类、Keyword / 关键词）、<b>“等待选择…”占位态</b>与“显示全部”、结果区（匹配数量 + 条件摘要 + <b>市场详情卡</b> + 结果表：国家 / 地区 · 地区 · 认证标志 · 认证体系 · 监管机构 · 覆盖品类 · 详情），选中国家即出详情卡，选产品分类会追加“该品类在各国 / 地区的标志与说明”表；列表 / 地图用同一套条件切换。<b>地图不再依赖 OpenStreetMap 图块</b>：改用站点内置的世界边界矢量底图（离线、零外部请求，并切开跨 180° 经线的多边形，避免横贯地图的色带），OpenStreetMap 在线底图改为按钮按需叠加，图块加载失败时给出提示并保持矢量底图可用——这解决了此前控制台里成片的 404 图块与灰底。<b>新增 ENEC 条目</b>（欧洲电工认证协议，自愿第三方认证 · ISO/IEC 17067 第 5 类 · CCA 签约机构发证）与 <b>ENEC 和 CE 的关系说明</b>（CE 是法规强制底线，ENEC 依据同一批 EN 协调标准、可作 LVD 符合性推定的证据但不能替代 CE；另有 LED 用的 ENEC+）；地图坐标补齐香港、蒙古、缅甸、柬埔寨、尼泊尔、委内瑞拉。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>v1.4.3（2026-09-16 · 修复：间距工具改为「灯具 / 医疗」两套产品标准）</h2>
+      <p class="section-sub">爬电 / 间隙计算不再混用 IEC 60664-1 通用表，改为按 GB 7000.1 与 GB 9706.1 各自的产品标准表格查表</p>
+      <ul>
+        <li><b>❌ 修复的核心错误</b>：原工具用一套 IEC 60664-1 通用表 + “加强绝缘 = 2× 基本”的换算套到所有产品上。这与产品标准的实际表格不符：<b>医疗</b>按 60664-1 算 250V 加强绝缘只有 2.5mm，而 GB 9706.1 表12 对 2 MOPP 要求 <b>8.0mm 爬电 / 5.0mm 间隙</b>（含患者防护），差 3 倍以上，属危险的低估；<b>灯具</b>的基本 / 附加 / 加强绝缘是分开列值的（表11.1、250V、PTI&lt;600 → 2.5 / 3.6 / 6.5mm），也不是 2 倍关系。</li>
+        <li><b>🧭 预设精简</b>：去掉「230V 电源初次级 / 户外路灯 / 工业现场 400V / 车规 48V」等 5 个场景预设，改为先选<b>适用标准</b>（💡 灯具 GB 7000.1 / IEC 60598-1 ↔ 🏥 医疗 GB 9706.1 / IEC 60601-1），只保留两个预设按钮；与标准无关的参数（污染等级、系统电压、过电压类别）不再让用户选，避免“选错就查错表”。</li>
+        <li><b>💡 灯具模式</b>：按 GB 7000.1 第 11 章查表 —— 一般灯具查表11.1（污染等级 2）、IPX1 及以上查表11.2（污染等级 3），参数为工作电压 + 绝缘类型（基本 / 附加 / 加强）+ 材料 PTI（≥600 / &lt;600），并提示表11.3 用于脉冲电压、表11.4（附录 M）用于绝缘类型判定；灯具表不做海拔修正。</li>
+        <li><b>🏥 医疗模式</b>：按 GB 9706.1 8.7.3 查表 —— 参数为防护方式（1 / 2 MOPP、1 / 2 MOOP）+ 工作电压，间隙查表11、爬电查表12；按污染等级 2、材料组 Ⅲb（最不利）、海拔 ≤2000m、≤250V 档取值，工作电压 &gt;250V 时给出续档提示；海拔修正只作用于电气间隙。</li>
+        <li><b>➕ 配套调整</b>：同屏对比表按标准切换（灯具：三种绝缘；医疗：四档 MOPP / MOOP）；结果卡片标注实际表格来源；“复制结果 / 导出报告”改为输出适用标准与查表依据；标准标注徽标、工具知识链接同步更新。</li>
+        <li><b>📄 关联页面</b>：爬电 / 间隙页、65W 适配器案例改为指向 GB/T 16935.1（IEC 60664-1）通用表与“反查”模式（反查仍按通用绝缘配合）；MOPP / MOOP 页补上 250V 条件下的 1 / 2 MOPP、1 / 2 MOOP 爬电与间隙数值。</li>
+        <li><b>⚠️ 口径</b>：工具可信度标签调整为 🟡 需核对——表格数值按标准公开条目整理，工作电压超出档位，或材料组 / 污染等级不同（尤其医疗 &gt;250V、材料组 Ⅰ/Ⅱ/Ⅲa）时，必须回到标准原文表格核对。</li>
+        <li><b>➕ 新增工具「污染等级判定器（PD1–PD4）」</b>：按 IEC 60664-1 的微观环境定义判定污染等级，页面结构参考主流 PD 选择器写法——顶部<b>实时判定条</b>（PD 编号 + 一句话结论，随选择即时更新）→ <b>快速开始</b>四个典型场景（洁净内部腔体 / 室内办公室实验室 / 工业柜 / 户外潮湿暴露）→ <b>三组判定问题</b>（什么能到达绝缘表面 · 会不会出现潮气凝露 · 有哪些已验证的防护，每组带提示语）→ <b>判定详情卡</b>（结论 + 判定依据 + 怎么用 + 防护措施说明）→ <b>四等级刻度条</b>与速览表 → <b>分类实例</b>、判绝缘处而不是判房间、PD2 与 PD3 的实务分界、涂覆灌封只在合格时才算 → <b>判定结果怎么影响爬电设计</b>（含一键联动）→ 工程师在哪里用到 → <b>常见问题 FAQ（8 条）</b> → 相关工具与标准 → 判定方法与依据；判定结果同时写入本机并<b>联动间距工具</b>（灯具一般灯具 / IPX1 及以上 / 医疗 / 通用反查自动带入 PD），间距工具回显环境判定与所用表格是否匹配、不匹配时给出整改方向。</li>
+        <li><b>❓ 为什么灯具默认不能自己选污染等级</b>：GB 7000.1 第 11 章把污染等级写进了表格的适用条件——表11.1 基于污染等级 2、表11.2 基于污染等级 3（适用于分类为 IPX1 及以上的灯具）。在灯具标准里两者是<b>一一对应</b>的关系：PD2 ⇔ 一般灯具（表11.1）、PD3 ⇔ IPX1 及以上（表11.2），而 PD1 与 PD4 表格都没有对应列；所以默认让你选<b>灯具分类（外壳做到哪一级）</b>。参数块已改名为「灯具分类 / 使用环境」，下面直接回显环境判定结果与该选哪张表，并可一键按判定改用表11.1 / 表11.2；医疗模式同样回显环境判定与表11 / 表12 取值条件是否一致。</li>
+        <li><b>🔧 新增「高级：手动指定污染等级」开关（默认关闭）</b>：需要按污染等级直接选表时，在灯具分类参数块里展开「高级」并切换到<b>按污染等级</b>：PD1 / PD2 → 表11.1，PD3 / PD4 → 表11.2；同时停用「灯具分类」按钮（避免两个冲突输入）、在界面上常显 🔴 提示（偏离 GB 7000.1 的选表规则，认证须回到标准做法并在技术文件说明依据），并对 PD1 / PD4（表中无此列）给出专门风险提示；若与环境判定结果不一致，会提示按更严者取值。该模式会写入分享链接（<code>lm=manual&amp;lpd=3</code>）与复制/导出文本。</li>
+        <li><b>🗺️ 全球市电合规数据库改版（完全参考主流“市电合规数据库”布局）</b>：页头改为<b>英文主标题 + 中文副标题</b>结构（Global Power Standards &amp; Compliance / 全球市电合规数据库 + 覆盖面副标题）；下方是<b>查询条件栏</b>——Country or Region / 国家或地区（带“重置”按钮）、Voltage / 电压（单位 V）、Frequency / 频率（单位 Hz）、Recommend Power / 建议方案、Certification / 典型认证、Plug Type / 插脚型号（IEC Standard）六个字段，外加 Keyword 关键词与“我的产品输入（宽压 / 窄压）”一行；插脚 A–N 对照收进可折叠区。结果区改为<b>“等待选择…”占位态</b>：选中任一条件（或点“显示全部 N 个市场”）才显示结果，结果为“匹配数量 + 条件摘要 + 市场详情卡（选中单个国家时：电压 / 频率 / 插脚 / 典型认证四要点 + 建议方案 + 该国工程提示）+ 结果表（含建议方案、典型认证、可覆盖列）”。底部为 <b>🚩 EMC &amp; 安全风险提示（Engineering Risk）</b>，按参考站的 Notes / 注释 结构给出：电源设计（Wide 地区电网波动大 → Hold-up time 与输入范围）、测试提示（60Hz 地区磁性元件饱和与温升差异）、极性差异（阿根廷等插头极性与常规相反 → 浪涌 L/N 耦合路径失效），并补充间距档位与“认证 ≠ 插头”两条。另外把插脚符号从纯文字升级为<b>矢量示意图标</b>：14 个内联 SVG 符号（A 美式两扁 / B 美式三扁 / C 欧式两圆 / D 印式三圆 / E 法式（带接地孔）/ F 德式（侧接地）/ G 英式三方 / H 以色列三扁 / I 澳式三扁 / J 瑞士三圆 / K 丹麦 / L 意大利 / M 南非大圆 / N 巴西），表格与图例均显示“图标 + 字母”，图标跟随主题色、无外部请求（离线可用），并标注为“布局示意（非等比、非精确外形）”。</li>
+        <li><b>🐞 修复：24 个页面的脚本标签损坏</b>：这些页面末尾出现了两行畸形标记——ux.js 的引用被错误地塞进另一个脚本标签的 src 属性里，紧接着一行只剩 nav.js 的路径与闭合标签。结果是这些页面 <b>ux.js 与 nav.js 都没有加载</b>（移动端菜单、返回按钮、全局交互失效），页面上还会渲染出残留文本“../assets/js/nav.js”。现已全部修正为两条正常的脚本引用（涉及 en/ 的 3 个页面，以及 pages/ 的 emc 系列、glossary、grounding、industries、insulation-*、leakage、learn、refs、selv、standards*、wizard、certification 等 21 个页面）。</li>
+      </ul>
     </div>
 
     <div class="card">
@@ -161,15 +208,15 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
-  <script src="../assets/js/theme.js"></script>
-  <script src="../assets/js/main.js?v=1.4.2"></script>
-  <script src="../assets/js/glossary-tip.js"></script>
-  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/theme.js?v=1.4.5"></script>
+  <script src="../assets/js/main.js?v=1.4.5"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
+  <script src="../assets/js/ux.js?v=1.4.5"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -179,7 +226,7 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/nav.js"></script>
-  <script src="../assets/js/breadcrumb.js"></script>
+  <script src="../assets/js/nav.js?v=1.4.5"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
 </body>
 </html>

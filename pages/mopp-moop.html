@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
+  <meta name="site-version" content="1.4.5">
   <title>MOPP / MOOP 深度页 - 安规与可靠性知识课堂</title>
   <meta name="description" content="医疗设备 MOPP/MOOP：怎么数防护方式、1 vs 2 MOPP、耐压与漏电流教学对照。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
@@ -66,11 +67,12 @@
           <tbody>
             <tr><td>结构</td><td>基本绝缘 + 保护接地（教学）</td><td>双重绝缘或加强绝缘（教学）</td></tr>
             <tr><td>耐压示例（市电端口）</td><td>1500 V AC</td><td>4000 V AC</td></tr>
-            <tr><td>爬电/间隙</td><td>按 60601-1 表格</td><td>按 60601-1 表格（更严）</td></tr>
+            <tr><td>爬电 / 间隙（工作电压 ≤250V）</td><td>爬电 4.0 mm / 间隙 2.5 mm</td><td>爬电 8.0 mm / 间隙 5.0 mm</td></tr>
             <tr><td>漏电流</td><td>按应用部分类型限值</td><td>同样限值，但防护冗余更高</td></tr>
           </tbody>
         </table>
       </div>
+      <p class="note" style="color:var(--muted);font-size:13px">上表爬电 / 间隙按 GB 9706.1-2020 / IEC 60601-1 表11（电气间隙）与表12（爬电距离）取值条件：工作电压 ≤250V、污染等级 2、材料组 Ⅲb、海拔 ≤2000m。同条件下操作者防护为 1 MOOP 爬电 2.5 / 间隙 2.0 mm、2 MOOP 爬电 5.0 / 间隙 4.0 mm。工作电压更高或材料组更好时数值不同，须按标准表格续档查表；可用<a href="./tools.html#tool-spacing">间距工具</a>（选“医疗”标准）快速查。</p>
       <p class="lead">应用部分类型：B（体表）、BF（体表浮地）、CF（心脏直接接触）——CF 限值最严。</p>
     </section>
 
@@ -97,17 +99,17 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.2 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-08 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
-  <script src="../assets/js/theme.js"></script>
-  <script src="../assets/js/theme.js"></script>
-  <script src="../assets/js/main.js?v=1.4.2"></script>
-  <script src="../assets/js/glossary-tip.js"></script>
-  <script src="../assets/js/glossary-tip.js"></script>
-  <script src="../assets/js/ux.js"></script>
+  <script src="../assets/js/theme.js?v=1.4.5"></script>
+  <script src="../assets/js/theme.js?v=1.4.5"></script>
+  <script src="../assets/js/main.js?v=1.4.5"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
+  <script src="../assets/js/ux.js?v=1.4.5"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -117,7 +119,7 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/nav.js"></script>
-  <script src="../assets/js/breadcrumb.js"></script>
+  <script src="../assets/js/nav.js?v=1.4.5"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
 </body>
 </html>
