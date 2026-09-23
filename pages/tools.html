@@ -4,14 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
-  <meta name="site-version" content="1.4.5">
+  <meta name="site-version" content="1.4.6">
   <title>计算与速查工具 - 安规与可靠性知识课堂</title>
   <meta name="description" content="计算与速查工具：爬电/间隙（灯具·医疗，含反查）、污染等级判定、耐压速查、泄漏电流、放电时间、标准对照、接地、IP/IK、跌落、EMC 波形等 21 个工具。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
-  <link rel="stylesheet" href="../assets/css/calculator.css?v=1.4.5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.6">
+  <link rel="stylesheet" href="../assets/css/diagrams.css?v=1.4.6">
+  <link rel="stylesheet" href="../assets/css/calculator.css?v=1.4.6">
   <style>
     .tool-search-top { width: 100%; max-width: 460px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--card); color: var(--fg); font-size: 14px; margin: 0 0 12px; }
     .tool-search-top:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
@@ -64,7 +65,7 @@
 
     <div class="callout callout-info">
       <strong>IEC 依据与可信度</strong>
-      <p>爬电/间隙按产品标准分别查表：<b>灯具 GB 7000.1 / IEC 60598-1 第 11 章（表11.1 / 表11.2 / 表11.3）</b>、<b>医疗 GB 9706.1 / IEC 60601-1 8.7.3（表11 间隙 / 表12 爬电，按 MOPP / MOOP）</b>；IEC 60664-1 通用绝缘配合仅用于“反查”模式与绝缘配合知识页。耐压按 <b>IEC 62368-1 / 60335-1 / 60601-1 / 60204-1</b> 常见值；泄漏电流按 <b>I = 2πfCV</b> 估算。🟢 教学参考值 / 🟡 示例值需核对版本 / 🔴 正式设计与认证必须查标准原文。</p>
+      <p>爬电/间隙有<b>两套依据</b>：基础标准 <b>IEC 60664-1 / GB/T 16935.1 绝缘配合</b>（爬电按污染等级 PD + 材料组 CTI，间隙按额定冲击电压，海拔 &gt;2000 m 修正），以及<b>产品标准表</b>（<b>灯具产品标准第 11 章</b>、<b>医疗 GB 9706.1 / IEC 60601-1 8.7.3（表11 间隙 / 表12 爬电，按 MOPP / MOOP）</b>）；IEC 60664-1 通用绝缘配合仅用于“反查”模式与绝缘配合知识页。耐压按 <b>IEC 62368-1 / 60335-1 / 60601-1 / 60204-1</b> 常见值；泄漏电流按 <b>I = 2πfCV</b> 估算。🟢 教学参考值 / 🟡 示例值需核对版本 / 🔴 正式设计与认证必须查标准原文。</p>
     </div>
 
     <div role="search">
@@ -93,9 +94,12 @@
       <div id="forwardPanel">
         <section class="param-block" id="tool-standard">
           <h2>适用标准（先定标准，再填参数）</h2>
-          <p class="hint">灯具与医疗是两套不同的产品标准：间距表格、参数和判定逻辑都不同，不能互相套用。</p>
+          <figure class="dgm" data-dgm="spacing-flow">
+            <figcaption>图 1 · 查表流程：先定标准 → 再定绝缘类型 → 最后校核条件</figcaption>
+          </figure>
+          <p class="hint">先选产品族（灯具 / 医疗）；灯具还可以选<b>查表依据</b>——基础标准 IEC 60664-1 绝缘配合，或灯具产品标准第 11 章。</p>
           <div class="opt-group" id="stdGroup" role="group" aria-label="适用标准">
-            <button type="button" class="opt-btn active" data-std="luminaire" aria-pressed="true">💡 灯具<small>GB 7000.1 / IEC 60598-1</small></button>
+            <button type="button" class="opt-btn active" data-std="luminaire" aria-pressed="true">💡 灯具<small>依据见下一块</small></button>
             <button type="button" class="opt-btn" data-std="medical" aria-pressed="false">🏥 医疗<small>GB 9706.1 / IEC 60601-1</small></button>
           </div>
           <p class="peak-note" id="stdNote"></p>
@@ -142,41 +146,76 @@
               <p class="peak-note" id="vInfo"></p>
               <details class="mini-help">
                 <summary>工作电压怎么取？</summary>
-                <p>取绝缘两端实际承受的最高持续电压（交流有效值；医疗标准也允许按直流值查表）。灯具按正弦有效值查表 11.1 / 11.2；医疗按表 11 / 表 12 查表。本工具会在表格档位之间“取不小于工作电压的最小档”，比插值更保守。全球电压与插头见<a href="./voltage.html">全球电压速查</a>。</p>
+                <p>取绝缘两端实际承受的最高持续电压（交流有效值；医疗标准也允许按直流值查表）。<b>爬电距离</b>按该电压查表（IEC 60664-1 按污染等级 + 材料组；产品标准表按各自分栏）；<b>电气间隙</b>在 IEC 60664-1 依据下按额定冲击电压查表。本工具会在表格档位之间“取不小于工作电压的最小档”，比插值更保守。全球电压与插头见<a href="./voltage.html">全球电压速查</a>。</p>
               </details>
             </section>
 
+            <section class="param-block" id="tool-lum-basis">
+              <h2>查表依据（决定用哪套表）</h2>
+              <p class="hint"><b>IEC 60664-1 绝缘配合</b>是基础标准：爬电距离按<b>污染等级（PD1–PD4）+ 材料组（CTI）</b>查表，电气间隙按<b>额定冲击电压</b>（由系统电压 + 过电压类别得到）查表，海拔 &gt;2000 m 只放大间隙。<b>产品标准表</b>（灯具第 11 章 / 医疗 8.7.3）给的是各自产品口径的简化表，认证 / 型式试验按产品标准；设计与通用核算建议按 IEC 60664-1。</p>
+              <div class="opt-group" id="lumBasisGroup" role="group" aria-label="查表依据">
+                <button type="button" class="opt-btn active" data-lumbasis="iec60664" aria-pressed="true">IEC 60664-1<small>绝缘配合 · 可按 PD / CTI / OVC</small></button>
+                <button type="button" class="opt-btn" data-lumbasis="product" aria-pressed="false">产品标准表<small>灯具第 11 章</small></button>
+              </div>
+            </section>
+
+            <section class="param-block" id="tool-lum-60664">
+              <h2>IEC 60664-1 参数</h2>
+              <p class="hint">爬电距离看工作电压 + 污染等级 + 材料组；电气间隙看额定冲击电压（系统电压 + 过电压类别）+ 海拔。加强绝缘的间隙按<b>下一档冲击电压</b>取值，爬电按基本绝缘的 2 倍。</p>
+              <p class="lab">污染等级（PD）</p>
+              <div class="opt-group" id="c66PdGroup" role="group" aria-label="污染等级">
+                <button type="button" class="opt-btn" data-pd="1">PD1<small>洁净密封</small></button>
+                <button type="button" class="opt-btn active" data-pd="2" aria-pressed="true">PD2<small>一般室内</small></button>
+                <button type="button" class="opt-btn" data-pd="3">PD3<small>凝露/导电粉尘</small></button>
+                <button type="button" class="opt-btn" data-pd="4">PD4<small>持续导电污染</small></button>
+              </div>
+              <p class="lab">系统电压（用于查额定冲击电压）</p>
+              <div class="opt-group" id="c66SysGroup" role="group" aria-label="系统电压">
+                <button type="button" class="opt-btn" data-sys="120">120 V</button>
+                <button type="button" class="opt-btn active" data-sys="230" aria-pressed="true">230 V</button>
+                <button type="button" class="opt-btn" data-sys="400">400 V</button>
+              </div>
+              <p class="lab">过电压类别（OVC）</p>
+              <div class="opt-group" id="c66OvcGroup" role="group" aria-label="过电压类别">
+                <button type="button" class="opt-btn" data-ovc="I">Ⅰ</button>
+                <button type="button" class="opt-btn active" data-ovc="II" aria-pressed="true">Ⅱ<small>家用电器</small></button>
+                <button type="button" class="opt-btn" data-ovc="III">Ⅲ<small>固定装置</small></button>
+                <button type="button" class="opt-btn" data-ovc="IV">Ⅳ<small>进线端</small></button>
+              </div>
+              <p class="peak-note" id="c66Note"></p>
+            </section>
+
             <section class="param-block" id="tool-lum-ip">
-              <h2>灯具分类 / 使用环境（决定查哪张表）</h2>
-              <p class="hint">GB 7000.1 第 11 章用<b>灯具分类</b>作为选表依据，污染等级由标准固定在表里：表11.1 = 污染等级 2（一般灯具），表11.2 = 污染等级 3（IPX1 及以上）。所以这里选的是“外壳做到哪一级”，不是自由挑污染等级。</p>
-              <div class="opt-group" id="ipGroup" role="group" aria-label="灯具分类">
-                <button type="button" class="opt-btn active" data-ip="general" aria-pressed="true">一般灯具<small>表11.1 · 污染等级 2</small></button>
-                <button type="button" class="opt-btn" data-ip="ipx1" aria-pressed="false">IPX1 及以上<small>表11.2 · 污染等级 3</small></button>
+              <h2>产品标准：过电压类别（决定查哪张表）</h2>
+              <p class="hint">GB 7000.1 第 11 章的两张距离表<b>都以污染等级 2、海拔 ≤2000 m 为基准</b>，区别在过电压类别：<b>表11.1</b> 对应过电压类别 Ⅱ，<b>附录 U 表 U.1</b> 对应过电压类别 Ⅲ。标准里没有“IPX1 及以上 = 污染等级 3”的单独表格——户外 / 凝露 / 导电粉尘（PD3）请切到上面的 <b>IEC 60664-1</b> 依据。</p>
+              <div class="opt-group" id="ipGroup" role="group" aria-label="过电压类别">
+                <button type="button" class="opt-btn active" data-ip="ovc2" aria-pressed="true">过电压类别 Ⅱ<small>表11.1 · 家用 / 类似用途</small></button>
+                <button type="button" class="opt-btn" data-ip="ovc3" aria-pressed="false">过电压类别 Ⅲ<small>附录 U 表 U.1 · 固定装置</small></button>
               </div>
               <p class="peak-note" id="ipMatchNote"></p>
               <p class="peak-note" id="lumModeNote"></p>
               <p class="peak-note" id="lumIpNote"></p>
               <details class="mini-help" id="lumAdvanced">
                 <summary>高级：手动指定污染等级（偏离标准的选表规则）</summary>
-                <p style="margin-top:8px">标准要求按<b>灯具分类</b>选表（一般灯具 → 表11.1，IPX1 及以上 → 表11.2）。这里可以改成按<b>污染等级</b>直接映射选表，用于方案比较或早期估算；<b>认证时仍须回到「按灯具分类」，并在技术文件里写清依据</b>。</p>
+                <p style="margin-top:8px">标准要求按<b>过电压类别</b>选表（过电压类别 Ⅱ → 表11.1；过电压类别 Ⅲ → 附录 U 表 U.1）。这里可以改成按<b>污染等级</b>直接选表，用于方案比较或早期估算；<b>认证时仍须回到「按过电压类别」，并在技术文件里写清依据</b>。</p>
                 <div class="opt-group" id="lumModeGroup" role="group" aria-label="选表方式">
-                  <button type="button" class="opt-btn active" data-lummode="std" aria-pressed="true">按灯具分类<small>标准做法</small></button>
+                  <button type="button" class="opt-btn active" data-lummode="std" aria-pressed="true">按过电压类别<small>标准做法</small></button>
                   <button type="button" class="opt-btn" data-lummode="manual" aria-pressed="false">按污染等级<small>🔴 自担风险</small></button>
                 </div>
                 <div id="lumManualWrap" style="display:none">
                   <div class="opt-group" id="lumPdGroup" role="group" aria-label="手动指定污染等级">
                     <button type="button" class="opt-btn" data-lumpd="1">PD1<small>表中无此列</small></button>
-                    <button type="button" class="opt-btn active" data-lumpd="2" aria-pressed="true">PD2<small>→ 表11.1</small></button>
-                    <button type="button" class="opt-btn" data-lumpd="3">PD3<small>→ 表11.2</small></button>
+                    <button type="button" class="opt-btn active" data-lumpd="2" aria-pressed="true">PD2<small>表11.1 的基准条件</small></button>
+                    <button type="button" class="opt-btn" data-lumpd="3">PD3<small>须改用 60664-1</small></button>
                     <button type="button" class="opt-btn" data-lumpd="4">PD4<small>表中无此列</small></button>
                   </div>
                   <p class="peak-note" id="lumPdNote"></p>
                 </div>
-                <p class="peak-note">映射关系：PD1 / PD2 → 表11.1（污染等级 2）；PD3 / PD4 → 表11.2（污染等级 3）。表11.1 与表11.2 <b>都没有 PD1 与 PD4 列</b>，选这两项时工具会按更保守的表取值并给出 🔴 风险提示。</p>
+                <p class="peak-note">灯具标准的两张距离表都以<b>污染等级 2</b>为基准，<b>没有 PD1 / PD3 / PD4 列</b>：PD2 就按表11.1 / 表 U.1 取值；PD3（户外淋雨、凝露、导电粉尘）要用 IEC 60664-1 的 PD3 列，或先按 IEC 60664-3 用密封 / 涂覆 / 灌封把绝缘处微环境降下来。</p>
               </details>
               <details class="mini-help">
-                <summary>为什么默认按 IP 分类，而不是自己选污染等级？</summary>
-                <p>因为标准就是这么定的：第 11 章把污染等级写进了表格的适用条件——<b>表11.1</b>（一般灯具）的最小距离基于<b>污染等级 2</b>；<b>表11.2</b>（分类为 IPX1 或更高的灯具）基于<b>污染等级 3</b>。污染等级是标准给定的条件，设计师能控制的是<b>外壳 / 密封（IP 分类）</b>与<b>材料（PTI）</b>。使用环境到底属于几级污染，用<a href="./tools.html#tool-pd" data-goto-tool="pd">污染等级判定器</a>判定——判定结果会在这里回显，并直接告诉你该选哪张表。路灯、投光灯、庭院灯等户外灯具通常标 IPX3 以上，应查表 11.2；表 11.3 另给“正弦或非正弦脉冲电压”下的最小电气间隙。</p>
+                <summary>灯具标准里，爬电距离和电气间隙分别查什么？</summary>
+                <p>同一张表里两列是<b>不同量</b>：<b>爬电距离</b>按材料 PTI（≥600 / &lt;600）分栏、并区分基本 / 附加 / 加强绝缘；<b>电气间隙</b>只按绝缘类型分栏，与 PTI 无关——所以同一条件下两者数值通常不同（例如 250 V、PTI &lt; 600、基本绝缘：爬电 2.5 mm，间隙 1.5 mm）。此外表11.2 用<b>额定脉冲电压</b>再校核一次电气间隙，且要求爬电距离不小于该间隙。使用环境属于几级污染，用<a href="./tools.html#tool-pd" data-goto-tool="pd">污染等级判定器</a>判定，判定结果会在这里回显并与表格的基准条件（PD2）交叉核对。</p>
               </details>
             </section>
 
@@ -223,7 +262,7 @@
               </div>
               <p class="peak-note" id="mktNote"></p>
               <p class="peak-note" id="sysNote"></p>
-              <p class="peak-note">📖 污染等级 / 材料组 / 系统电压这些 IEC 60664-1 通用参数不在本工具里选：灯具由表格固定（表11.1 按污染等级 2、表11.2 按污染等级 3），医疗按表 11 / 表 12 的条件（污染等级 2，材料组按最不利 Ⅲb 取值，结果偏保守）。通用绝缘配合查表见 <a href="./insulation-coordination.html">绝缘配合页</a>，反查用本工具的“反查”模式。</p>
+              <p class="peak-note">📖 目标市场只用来快速带入工作电压。污染等级 / 材料组 / 系统电压 / 过电压类别这些参数，在<b>灯具 → 依据 IEC 60664-1</b> 时可自由选择（爬电按 PD + 材料组，间隙按冲击电压）；切到<b>产品标准表</b>时它们不参与查表，医疗则按各自表的固定条件（污染等级 2、材料组按最不利 Ⅲb 取值，结果偏保守）。通用绝缘配合查表见 <a href="./insulation-coordination.html">绝缘配合页</a>，反查用本工具的“反查”模式。</p>
             </section>
 
             <section class="param-block" id="tool-cti">
@@ -267,7 +306,7 @@
 
             <section class="param-block" id="tool-insulation">
               <h2>绝缘类型</h2>
-              <p class="hint">灯具表把基本 / 附加 / 加强绝缘<b>分开列值</b>，不是简单的 2 倍关系（例：表11.1、250V、PTI&lt;600 → 基本 2.5 / 附加 3.6 / 加强 6.5 mm）。</p>
+              <p class="hint"><b>爬电距离与电气间隙是两个不同的量</b>：爬电看材料组（CTI / PTI）与污染等级，间隙看绝缘类型或额定冲击电压——所以同一条件下两者数值通常不同，不能互相套用。加强绝缘：IEC 60664-1 按“爬电 = 基本 ×2、间隙取下一档冲击电压”。</p>
               <div class="opt-group" id="insGroup" role="group" aria-label="绝缘类型">
                 <button type="button" class="opt-btn" data-ins="functional">功能<small>教学简化</small></button>
                 <button type="button" class="opt-btn active" data-ins="basic" aria-pressed="true">基本</button>
@@ -276,7 +315,7 @@
               <p class="peak-note" id="insNote"></p>
               <details class="mini-help">
                 <summary>四种绝缘类型怎么区分？</summary>
-                <p>功能绝缘只管正常工作（灯具表 11.1 / 11.2 未单列功能绝缘，工程上按基本绝缘从严核对）；基本绝缘是第一道防触电；附加绝缘是第二道；加强绝缘一道顶两道。GB 7000.1 第 11 章对三种绝缘分别给出数值，必须按表查，不要用“×2 基本”估算。判定细节见<a href="./double-insulation.html">双重绝缘判定</a>与<a href="./mopp-moop.html">MOPP / MOOP</a>。</p>
+                <p>功能绝缘只管正常工作（工程上多按基本绝缘从严核对）；基本绝缘是第一道防触电；附加绝缘是第二道；加强绝缘一道顶两道。取值按所选依据查表：IEC 60664-1 里附加绝缘与基本绝缘同值、加强绝缘爬电为基本绝缘 2 倍、间隙取下一档冲击电压；产品标准表可能另有专列，必须按表查、不要用“×2 基本”估算。判定细节见<a href="./double-insulation.html">双重绝缘判定</a>与<a href="./mopp-moop.html">MOPP / MOOP</a>。</p>
               </details>
               </div>
             </section>
@@ -287,19 +326,19 @@
                 <input type="range" id="altSlider" min="2000" max="10000" step="1000" value="2000" aria-label="使用海拔">
                 <span class="val" id="altValue">2000 m</span>
               </div>
-              <p class="peak-note" id="altNote">仅医疗使用：GB 9706.1 表 11 的间隙值按海拔 ≤2000m 给出，超过 2000m 需乘高度修正系数（爬电距离不随海拔修正）。灯具表 11.1 / 11.2 未按海拔修正，本工具在灯具模式下忽略该项。</p>
+              <p class="peak-note" id="altNote">海拔修正只作用于<b>电气间隙</b>，爬电距离不随海拔修正。IEC 60664-1 依据下：间隙按额定冲击电压查表后乘高度修正系数（2000 m 以上）；医疗按各自表的基准海拔处理；产品标准表按表内固定条件给出。</p>
             </section>
           </div>
 
           <div>
             <div class="result-grid">
               <div class="result-card">
-                <h3>爬电距离 <span class="badge-iec" id="crBadge">GB 7000.1 表11.1</span></h3>
+                <h3>爬电距离 <span class="badge-iec" id="crBadge">IEC 60664-1</span></h3>
                 <span class="value" id="crValue">--</span><span class="unit">mm</span> <span class="unit" id="crMil"></span>
                 <p class="note" id="crNote"></p>
               </div>
               <div class="result-card">
-                <h3>电气间隙 <span class="badge-iec" id="clBadge">GB 7000.1 表11.1</span></h3>
+                <h3>电气间隙 <span class="badge-iec" id="clBadge">IEC 60664-1</span></h3>
                 <span class="value" id="clValue">--</span><span class="unit">mm</span> <span class="unit" id="clMil"></span>
                 <p class="note" id="clNote"></p>
               </div>
@@ -394,6 +433,9 @@
     <div data-tool-panel="pd" hidden>
       <section class="param-block" id="tool-pd">
         <h2>污染等级判定器（PD1–PD4） <span class="badge-iec">IEC 60664-1 / GB/T 16935.1</span></h2>
+        <figure class="dgm" data-dgm="pollution-degree">
+          <figcaption>图 2 · PD1–PD4：判的是绝缘表面的微观环境</figcaption>
+        </figure>
         <p class="hint">选择“正常使用时能到达绝缘表面”的条件。结果随选择实时更新，给出一个偏保守的 IEC 60664-1 起点，用于爬电 / 间隙设计。</p>
 
         <div class="callout callout-info" id="pdLiveBar">
@@ -480,7 +522,7 @@
           <li><b>IP 等级 ≠ 污染等级</b>：外壳能限制进入，但不能直接换算成某个污染等级；还要看凝露、导电沉积、开孔、维护方式；</li>
           <li><b>只有合格的涂覆 / 灌封才算</b>：IEC 60664-3 对涂层/灌封有材料、覆盖、工艺与试验要求；普通三防漆或“随便封一下”不能当作 PD1；</li>
           <li><b>按正常使用中最不利的可信条件</b>：把温度循环、停机时段、清洗液、工艺导电粉尘都算进去；</li>
-          <li><b>产品标准优先</b>：产品标准规定了污染等级或外壳条件时，以产品标准为准——灯具（GB 7000.1 第 11 章）就是直接用表格固定了污染等级 2 / 3；</li>
+          <li><b>产品标准优先</b>：产品标准规定了污染等级或外壳条件时，以产品标准为准——灯具产品标准第 11 章的距离表以污染等级 2 为基准（没有 PD3 / PD4 列），医疗表 11 / 表 12 同样按污染等级 2 给出；</li>
           <li><b>PD4 不能直接查表</b>：标准表只给到 PD3；PD4 环境应通过外壳 / 密封 / 涂覆降低微观环境等级后再查表。</li>
         </ul>
         <h3 style="margin-top:22px">分类实例</h3>
@@ -513,15 +555,15 @@
             <tbody>
               <tr><td><b>PD1</b></td><td>灯具表只按污染等级 2 / 3 给值，没有 PD1 列；密封腔体能放宽到多少需按标准条款评估</td><td>表11 / 表12 按污染等级 2 给出，能否按 PD1 放宽须核对标准相应条款</td><td>可按 PD1 列查爬电表</td></tr>
               <tr><td><b>PD2</b></td><td>一般灯具 → 表11.1（污染等级 2）</td><td>表11 / 表12 的常规取值条件</td><td>按 PD2 列查表</td></tr>
-              <tr><td><b>PD3</b></td><td>需灯具分类 IPX1 及以上 → 表11.2（污染等级 3）</td><td>标准表按 PD2 给出 → 需先用外壳 / 密封把微观环境降到 2 级或按标准特殊评估</td><td>按 PD3 列查表（数值最大）</td></tr>
+              <tr><td><b>PD3</b></td><td>灯具标准无 PD3 表格 → 改用 IEC 60664-1 的 PD3 列，或按 IEC 60664-3 用密封 / 涂覆把微环境降到 PD2</td><td>标准表按 PD2 给出 → 需先用外壳 / 密封把微观环境降到 2 级或按标准特殊评估</td><td>按 PD3 列查表（数值最大）</td></tr>
               <tr><td><b>PD4</b></td><td colspan="3">持久导电污染（导电尘埃、雨雪）：标准爬电 / 间隙表<b>不提供</b> PD4 数值，必须先靠外壳、密封、涂覆等把微观环境降到 PD3 及以下，或按产品标准的专门规定评估</td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="link-row" style="margin-top:12px">
-          <button type="button" class="btn" id="pdToLumGeneral">💡 带到灯具：一般灯具（表11.1）</button>
-          <button type="button" class="btn" id="pdToLumIpx1">💡 带到灯具：IPX1 及以上（表11.2）</button>
+          <button type="button" class="btn" id="pdToLumGeneral">💡 带到灯具间距工具（按 IEC 60664-1 重算）</button>
+          <button type="button" class="btn" id="pdToLumIpx1">💡 带到灯具间距工具（按 IEC 60664-1，取更严的 PD）</button>
           <button type="button" class="btn" id="pdToMedical">🏥 带到医疗：表11 / 表12</button>
           <button type="button" class="btn" id="pdToReverse">🔁 带到通用反查（IEC 60664-1）</button>
         </div>
@@ -531,7 +573,7 @@
         <ul>
           <li><b>PCB 爬电设计</b>：在查市电、直流母线或隔离电路的爬电表之前，先把污染等级定下来；</li>
           <li><b>工业控制柜</b>：检查粉尘、切削液雾以及不加热停机时段是否把环境从 PD2 推到 PD3；</li>
-          <li><b>户外设备</b>：把“外壳外的天气”和“绝缘路径处的实际条件”分开判——IP65 灯具内部可能比外部干净，但灯具标准对 IPX1 及以上仍按污染等级 3 给表；</li>
+          <li><b>户外设备</b>：把“外壳外的天气”和“绝缘路径处的实际条件”分开判——IP65 灯具内部可能比外部干净，而灯具标准的距离表以污染等级 2 为基准，PD3 要改用 IEC 60664-1 的 PD3 列或按 IEC 60664-3 降低绝缘处微环境；</li>
           <li><b>涂覆 / 灌封组件</b>：确认保护是按 IEC 60664-3 验证过的，而不是“涂了就按干净算”。</li>
         </ul>
 
@@ -542,8 +584,8 @@
         <details class="mini-help"><summary>有 IP 等级就能定污染等级吗？</summary><p>不能直接换算。外壳能限制粉尘和水的进入，但污染等级还取决于凝露、导电沉积、开孔、维护方式，以及适用产品标准的规定。</p></details>
         <details class="mini-help"><summary>涂了三防漆就能按 PD1 算吗？</summary><p>不能一概而论。IEC 60664-3 对涂覆 / 灌封的型式、覆盖与试验有要求；只有满足相应保护类型与证据时，受保护区域才可按更清洁的等级取值，未覆盖处仍按环境判定。</p></details>
         <details class="mini-help"><summary>PD4 能直接查爬电表吗？</summary><p>标准表通常只给到 PD3。PD4 一般要先通过外壳、密封、灌封、排水、除湿等把绝缘处的污染降下来；或按产品标准规定的专门结构与方法评估。</p></details>
-        <details class="mini-help"><summary>产品标准已经规定了污染等级，怎么办？</summary><p>以产品标准为准。本判定器只能帮你检查环境假设是否合理，不能覆盖产品标准规定的污染等级、外壳条件或试验要求——比如灯具 GB 7000.1 第 11 章就按灯具分类直接固定了污染等级 2 / 3。</p></details>
-        <details class="mini-help"><summary>判定结果怎么用？</summary><p>用上面的“带到间距工具”按钮：PD2 → 灯具一般灯具（表11.1）；PD3 → 灯具 IPX1 及以上（表11.2）；医疗按表11 / 表12（污染等级 2）；通用绝缘配合可按 PD1 / PD2 / PD3 三列查表。</p></details>
+        <details class="mini-help"><summary>产品标准已经规定了污染等级，怎么办？</summary><p>以产品标准为准。本判定器只能帮你检查环境假设是否合理，不能覆盖产品标准规定的污染等级、外壳条件或试验要求——比如灯具产品标准第 11 章的距离表就固定以污染等级 2 为基准。</p></details>
+        <details class="mini-help"><summary>判定结果怎么用？</summary><p>用上面的“带到间距工具”按钮：灯具会切到 <b>IEC 60664-1 绝缘配合</b> 依据并把污染等级设为你判定的 PD（爬电按该列、间隙按额定冲击电压）；医疗按表11 / 表12（污染等级 2）；通用绝缘配合可按 PD1 / PD2 / PD3 三列查表。</p></details>
 
         <h3 style="margin-top:22px">相关工具与标准</h3>
         <p style="font-size:14px;line-height:1.9">
@@ -1278,20 +1320,21 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.6 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
-  <script src="../assets/js/theme.js?v=1.4.5"></script>
-  <script src="../assets/js/main.js?v=1.4.5"></script>
-  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
-  <script src="../assets/js/calculator-v3.js?v=1.4.5"></script>
-  <script src="../assets/js/hipot.js?v=1.4.5"></script>
-  <script src="../assets/js/calculator-extra.js?v=1.4.5"></script>
-  <script src="../assets/js/pollution-degree.js?v=1.4.5"></script>
-  <script src="../assets/js/ux.js?v=1.4.5"></script>
-  <script src="../assets/js/progress.js?v=1.4.5"></script>
+  <script src="../assets/js/theme.js?v=1.4.6"></script>
+  <script src="../assets/js/main.js?v=1.4.6"></script>
+  <script src="../assets/js/diagrams.js?v=1.4.6"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.6"></script>
+  <script src="../assets/js/calculator-v3.js?v=1.4.6"></script>
+  <script src="../assets/js/hipot.js?v=1.4.6"></script>
+  <script src="../assets/js/calculator-extra.js?v=1.4.6"></script>
+  <script src="../assets/js/pollution-degree.js?v=1.4.6"></script>
+  <script src="../assets/js/ux.js?v=1.4.6"></script>
+  <script src="../assets/js/progress.js?v=1.4.6"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -1301,10 +1344,10 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/nav.js?v=1.4.5"></script>
-  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
-  <script src="../assets/js/tools-knowledge-links.js?v=1.4.5"></script>
-  <script src="../assets/js/scenario-guide.js?v=1.4.5"></script>
-  <script src="../assets/js/standard-status.js?v=1.4.5"></script>
+  <script src="../assets/js/nav.js?v=1.4.6"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.6"></script>
+  <script src="../assets/js/tools-knowledge-links.js?v=1.4.6"></script>
+  <script src="../assets/js/scenario-guide.js?v=1.4.6"></script>
+  <script src="../assets/js/standard-status.js?v=1.4.6"></script>
 </body>
 </html>

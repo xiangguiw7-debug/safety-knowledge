@@ -114,5 +114,5 @@ console.log("  version.json → " + JSON.stringify(vj));
 console.log("\n完成。请记得：");
 console.log("  1) 在 pages/changelog.html 顶部补 v" + V + " 条目（标题格式：<h2>v" + V + "（" + MONTH + "-XX ...）</h2>）；");
 console.log("  2) 更新 pages/changelog.html 的 meta description（要写本版实际内容，别只改版本号）；");
-console.log("  3) node scripts/check-structure.js && node scripts/check-links.js 验证；");
+console.log("  3) node scripts/check-structure.js && node scripts/check-links.js && node scripts/check-spacing-tables.js 验证；");
 console.log("  4) git add -A && git commit && git push（推送后浏览器最多 10 分钟、通常刷新一次即可看到新版）。");

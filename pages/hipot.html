@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
-  <meta name="site-version" content="1.4.5">
+  <meta name="site-version" content="1.4.6">
   <title>耐压测试（Withstand Voltage）详解 - 安规与可靠性知识课堂</title>
   <meta name="description" content="耐压测试完整教程：绝缘体系、试验电压确定逻辑、5 步法、AC/DC 对比、完整示例、测试流程与失败排查。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.6">
+  <link rel="stylesheet" href="../assets/css/diagrams.css?v=1.4.6">
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
@@ -44,32 +45,13 @@
 
     <section>
       <h2>1. 耐压测试到底在测什么</h2>
-      <p>耐压测试（介电强度试验）是在绝缘两端施加<b>远高于正常工作电压</b>的试验电压，观察是否发生击穿或闪络。它有三个作用：</p>
+            <p>耐压测试（介电强度试验）是在绝缘两端施加<b>远高于正常工作电压</b>的试验电压，观察是否发生击穿或闪络。它有三个作用：</p>
       <ul>
         <li><b>验证设计余量</b>：确认按标准设计的绝缘距离、材料厚度在实际装配后仍成立；</li>
         <li><b>发现工艺缺陷</b>：焊渣、金属屑、螺钉过孔、绝缘层破损、装配错位等，都会在耐压下暴露；</li>
         <li><b>批量一致性</b>：产线抽检或全检，防止批量工艺漂移。</li>
       </ul>
-      <div class="diagram">
-        <svg viewBox="0 0 640 240" role="img" aria-label="耐压测试原理示意图">
-          <rect x="55" y="70" width="150" height="100" rx="12" class="accent-fill"></rect>
-          <text x="130" y="128" text-anchor="middle">带电部件</text>
-          <rect x="205" y="70" width="110" height="100" fill="url(#hatch)"></rect>
-          <rect x="205" y="70" width="110" height="100" fill="none" stroke="var(--accent)" stroke-width="1.5"></rect>
-          <text x="260" y="128" text-anchor="middle">绝缘层</text>
-          <text x="260" y="148" text-anchor="middle" class="label">试验电压 U</text>
-          <rect x="315" y="70" width="150" height="100" rx="12" class="accent-fill"></rect>
-          <text x="390" y="128" text-anchor="middle">可触及金属</text>
-          <line x1="130" y1="45" x2="130" y2="170" stroke="var(--accent)" stroke-width="2"></line>
-          <line x1="390" y1="45" x2="390" y2="170" stroke="var(--accent)" stroke-width="2"></line>
-          <text x="260" y="35" text-anchor="middle" class="label">耐压测试仪</text>
-          <defs>
-            <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-              <line x1="0" y1="0" x2="0" y2="10" stroke="var(--border)" stroke-width="2"></line>
-            </pattern>
-          </defs>
-        </svg>
-      </div>
+      
       <p>注意：耐压测的是“绝缘是否够强”，不是“爬电距离是否够长”。距离不足通常会在耐压下表现为表面闪络，但距离足够也不代表材料本身耐压合格——两者互相补充。</p>
     </section>
 
@@ -247,6 +229,9 @@
 
     <section>
       <h2>7. 测试流程与产线差异</h2>
+      <figure class="dgm" data-dgm="hipot-setup">
+        <figcaption>接线与判定</figcaption>
+      </figure>
       <h3>7.1 测试流程步骤条（交互演示）</h3>
       <div class="quiz-progress"><span id="hipotStepBar" style="width:16%"></span></div>
       <div class="card">
@@ -337,17 +322,18 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.6 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
-  <script src="../assets/js/theme.js?v=1.4.5"></script>
-  <script src="../assets/js/main.js?v=1.4.5"></script>
-  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
-  <script src="../assets/js/ux.js?v=1.4.5"></script>
-  <script src="../assets/js/progress.js?v=1.4.5"></script>
-  <script src="../assets/js/hipot-template.js?v=1.4.5"></script>
+  <script src="../assets/js/theme.js?v=1.4.6"></script>
+  <script src="../assets/js/main.js?v=1.4.6"></script>
+  <script src="../assets/js/diagrams.js?v=1.4.6"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.6"></script>
+  <script src="../assets/js/ux.js?v=1.4.6"></script>
+  <script src="../assets/js/progress.js?v=1.4.6"></script>
+  <script src="../assets/js/hipot-template.js?v=1.4.6"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -357,8 +343,8 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/nav.js?v=1.4.5"></script>
-  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
-  <script src="../assets/js/knowledge-chain.js?v=1.4.5"></script>
+  <script src="../assets/js/nav.js?v=1.4.6"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.6"></script>
+  <script src="../assets/js/knowledge-chain.js?v=1.4.6"></script>
 </body>
 </html>

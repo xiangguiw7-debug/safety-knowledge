@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
-  <meta name="site-version" content="1.4.5">
+  <meta name="site-version" content="1.4.6">
   <title>知识卡片库 - 安规与可靠性知识课堂</title>
   <meta name="description" content="标准结构导读、防触电逻辑、泄漏电流、接地、温升、防火、电池、IP、光生物安全等安规补充知识。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
-  <link rel="stylesheet" href="../assets/css/dmcm.css?v=1.4.5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.6">
+  <link rel="stylesheet" href="../assets/css/diagrams.css?v=1.4.6">
   <style>
     a.tag { text-decoration: none; }
     a.tag:hover { color: var(--accent-2); }
@@ -1412,38 +1412,9 @@
           <button type="button" class="active" data-mode="dm" aria-pressed="true">差模</button>
           <button type="button" data-mode="cm" aria-pressed="false">共模</button>
         </div>
-        <div class="dmcm-visual dm" id="dmcmVisual">
-          <svg viewBox="0 0 520 215" role="img" aria-label="共模差模电流走向示意图">
-            <line x1="46" y1="50" x2="480" y2="50" class="line"></line>
-            <text x="24" y="55" class="wire-label">L</text>
-            <line x1="46" y1="110" x2="480" y2="110" class="line"></line>
-            <text x="24" y="115" class="wire-label">N</text>
-            <g class="dm-only">
-              <polygon points="150,50 166,43 166,57" class="arrow"></polygon>
-              <polygon points="260,50 276,43 276,57" class="arrow"></polygon>
-              <polygon points="370,50 386,43 386,57" class="arrow"></polygon>
-              <polygon points="150,110 134,103 134,117" class="arrow"></polygon>
-              <polygon points="260,110 244,103 244,117" class="arrow"></polygon>
-              <polygon points="370,110 354,103 354,117" class="arrow"></polygon>
-              <text x="260" y="192" text-anchor="middle" class="label">差模：一来一回，干扰在 L-N 之间</text>
-            </g>
-            <g class="cm-only">
-              <polygon points="150,50 166,43 166,57" class="arrow"></polygon>
-              <polygon points="260,50 276,43 276,57" class="arrow"></polygon>
-              <polygon points="370,50 386,43 386,57" class="arrow"></polygon>
-              <polygon points="150,110 166,103 166,117" class="arrow"></polygon>
-              <polygon points="260,110 276,103 276,117" class="arrow"></polygon>
-              <polygon points="370,110 386,103 386,117" class="arrow"></polygon>
-              <line x1="260" y1="110" x2="260" y2="160" class="ground-line"></line>
-              <line x1="260" y1="160" x2="228" y2="160" class="ground-line"></line>
-              <line x1="260" y1="160" x2="292" y2="160" class="ground-line"></line>
-              <polygon points="260,134 253,150 267,150" class="arrow"></polygon>
-              <text x="302" y="165" class="label">地 / PE</text>
-              <text x="260" y="192" text-anchor="middle" class="label">共模：同方向，经地回流</text>
-            </g>
-          </svg>
-        </div>
-        <p class="dmcm-caption" id="dmcmCaption">差模：电流在 L-N 之间一来一回，干扰源在两根线之间；主要用 X 电容（跨 L-N）、差模电感抑制。</p>
+        <figure class="dgm dm dmcm-visual" id="dmcmVisual" data-dgm="dmcm">
+<figcaption class="dmcm-caption" id="dmcmCaption">差模：电流在 L-N 之间一来一回，干扰源在两根线之间；主要用 X 电容（跨 L-N）、差模电感抑制。</figcaption>
+</figure>
         <h3>共模 / 差模怎么区分（教学速查）</h3>
         <div class="table-wrap"><table>
           <thead><tr><th>项目</th><th>差模 DM</th><th>共模 CM</th></tr></thead>
@@ -2141,18 +2112,19 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.6 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
-  <script src="../assets/js/theme.js?v=1.4.5"></script>
-  <script src="../assets/js/main.js?v=1.4.5"></script>
-  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
-  <script src="../assets/js/ux.js?v=1.4.5"></script>
-  <script src="../assets/js/progress.js?v=1.4.5"></script>
-  <script src="../assets/js/dmcm.js?v=1.4.5"></script>
-  <script src="../assets/js/knowledge-group.js?v=1.4.5"></script>
+  <script src="../assets/js/theme.js?v=1.4.6"></script>
+  <script src="../assets/js/main.js?v=1.4.6"></script>
+  <script src="../assets/js/diagrams.js?v=1.4.6"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.6"></script>
+  <script src="../assets/js/ux.js?v=1.4.6"></script>
+  <script src="../assets/js/progress.js?v=1.4.6"></script>
+  <script src="../assets/js/dmcm.js?v=1.4.6"></script>
+  <script src="../assets/js/knowledge-group.js?v=1.4.6"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -2162,14 +2134,14 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/nav.js?v=1.4.5"></script>
-  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
-  <script src="../assets/js/knowledge-tools-links.js?v=1.4.5"></script>
-  <script src="../assets/js/knowledge-meta.js?v=1.4.5"></script>
-  <script src="../assets/js/knowledge-detail-data.js?v=1.4.5"></script>
-  <script src="../assets/js/card-quiz.js?v=1.4.5"></script>
-  <script src="../assets/js/milestone-quiz.js?v=1.4.5"></script>
+  <script src="../assets/js/nav.js?v=1.4.6"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.6"></script>
+  <script src="../assets/js/knowledge-tools-links.js?v=1.4.6"></script>
+  <script src="../assets/js/knowledge-meta.js?v=1.4.6"></script>
+  <script src="../assets/js/knowledge-detail-data.js?v=1.4.6"></script>
+  <script src="../assets/js/card-quiz.js?v=1.4.6"></script>
+  <script src="../assets/js/milestone-quiz.js?v=1.4.6"></script>
 
-  <script src="../assets/js/knowledge-index.js?v=1.4.5"></script>
+  <script src="../assets/js/knowledge-index.js?v=1.4.6"></script>
 </body>
 </html>

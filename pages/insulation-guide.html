@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
-  <meta name="site-version" content="1.4.5">
+  <meta name="site-version" content="1.4.6">
   <title>产品绝缘判定与设计 - 安规与可靠性知识课堂</title>
   <meta name="description" content="把一个产品的防电击拆成五个动作：判断类别 → 逐处定绝缘 → 查距离 → 定耐压 → 测泄漏。逆向分析和正向设计同一套逻辑。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.6">
+  <link rel="stylesheet" href="../assets/css/diagrams.css?v=1.4.6">
   <style>
     .step-row { display: grid; grid-template-columns: 54px 1fr; gap: 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--hairline); }
     .step-row:last-child { border-bottom: none; }
@@ -64,6 +65,9 @@
 
     <section>
       <h2>2. 第 1 步：判断产品类别</h2>
+      <figure class="dgm" data-dgm="insulation-classes">
+        <figcaption>图 1 · I / II / III 类设备的结构与防护手段差异</figcaption>
+      </figure>
       <div class="table-wrap"><table>
         <thead><tr><th>类别</th><th>防护思路</th><th>典型判定</th></tr></thead>
         <tbody>
@@ -77,6 +81,9 @@
 
     <section>
       <h2>3. 第 2 步：逐处定绝缘</h2>
+      <figure class="dgm" data-dgm="double-insulation">
+        <figcaption>图 2 · 基本 + 附加 = 双重绝缘；加强绝缘为单层等效</figcaption>
+      </figure>
       <p>对每一处"带电体 → 可触及件"的路径，判定它需要承担几道防护：</p>
       <div class="table-wrap"><table>
         <thead><tr><th>层级</th><th>保护作用</th><th>典型理解</th></tr></thead>
@@ -136,13 +143,14 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.6 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
-  <script src="../assets/js/theme.js?v=1.4.5"></script>
-  <script src="../assets/js/main.js?v=1.4.5"></script>
-  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
+  <script src="../assets/js/theme.js?v=1.4.6"></script>
+  <script src="../assets/js/main.js?v=1.4.6"></script>
+  <script src="../assets/js/diagrams.js?v=1.4.6"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.6"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -152,8 +160,8 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/ux.js?v=1.4.5"></script>
-  <script src="../assets/js/nav.js?v=1.4.5"></script>
-  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
+  <script src="../assets/js/ux.js?v=1.4.6"></script>
+  <script src="../assets/js/nav.js?v=1.4.6"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.6"></script>
 </body>
 </html>

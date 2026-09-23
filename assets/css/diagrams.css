@@ -1,0 +1,106 @@
+/* ============================================================================
+   安规示意图样式（配合 assets/js/diagrams.js）
+   颜色全部取站点 CSS 变量，深浅主题自动适配；SVG 为内联矢量，离线可用、可打印。
+   ========================================================================= */
+
+.dgm {
+  margin: 20px 0;
+  padding: 16px 18px 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.dgm > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 760px;
+  margin: 0 auto;
+  overflow: visible;
+}
+.dgm > figcaption {
+  margin: 10px auto 0;
+  max-width: 760px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--muted);
+  text-align: center;
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+}
+/* 小尺寸变体：并排在两列内容里用 */
+.dgm.dgm-sm > svg { max-width: 520px; }
+
+/* ---------- SVG 内部元素 ---------- */
+.dgm svg text {
+  font-family: inherit;
+  font-size: 12.5px;
+  fill: var(--fg);
+}
+.dgm svg .d-t { font-size: 12.5px; fill: var(--fg); }
+.dgm svg .d-tm { font-size: 11.5px; fill: var(--muted); }
+.dgm svg .d-tb { font-size: 12.5px; font-weight: 700; fill: var(--fg); }
+.dgm svg .d-ta { font-size: 12.5px; font-weight: 600; fill: var(--accent); }
+.dgm svg .d-tw { font-size: 12.5px; font-weight: 600; fill: var(--warn-fg); }
+.dgm svg .d-eq { font-size: 30px; font-weight: 700; fill: var(--muted); }
+
+.dgm svg .d-line { stroke: var(--fg); stroke-width: 1.4; fill: none; stroke-linecap: round; }
+.dgm svg .d-div { stroke: var(--border); stroke-width: 1.4; fill: none; }
+.dgm svg .d-dash { stroke-dasharray: 6 4; }
+.dgm svg .d-box { fill: var(--card-2); stroke: var(--border); stroke-width: 1.2; }
+.dgm svg .d-cond { fill: var(--accent); fill-opacity: 0.18; stroke: var(--accent); stroke-width: 1.4; }
+.dgm svg .d-sub { fill: var(--card-2); stroke: var(--border); stroke-width: 1.2; }
+.dgm svg .d-notch { fill: var(--card); stroke: none; }
+.dgm svg .d-air { fill: var(--accent-soft); stroke: var(--border); stroke-width: 1; stroke-dasharray: 4 4; }
+
+.dgm svg .d-box-ok { fill: var(--ok-bg); stroke: var(--ok-border); stroke-width: 1.3; }
+.dgm svg .d-box-warn { fill: var(--warn-bg); stroke: var(--warn-border); stroke-width: 1.3; }
+.dgm svg .d-box-danger { fill: var(--danger-bg); stroke: var(--danger-border); stroke-width: 1.3; }
+.dgm svg .d-zone-ok { fill: var(--ok-bg); stroke: var(--ok-border); stroke-width: 1.2; }
+.dgm svg .d-zone-ok-soft { fill: var(--ok-bg); stroke: var(--ok-border); stroke-width: 1; stroke-dasharray: 5 4; opacity: 0.55; }
+.dgm svg .d-zone-mid { fill: var(--warn-bg); stroke: var(--warn-border); stroke-width: 1.2; }
+.dgm svg .d-zone-bad { fill: var(--danger-bg); stroke: var(--danger-border); stroke-width: 1.2; }
+.dgm svg .d-zone-bad-soft { fill: var(--danger-bg); stroke: var(--danger-border); stroke-width: 1; opacity: 0.7; }
+
+.dgm svg .d-ins-basic { fill: var(--card-2); stroke: var(--border); stroke-width: 1.3; }
+.dgm svg .d-ins-supp { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
+.dgm svg .d-ins-reinf { fill: var(--danger-bg); stroke: var(--danger-border); stroke-width: 1.6; }
+
+.dgm svg .d-arr { stroke: var(--muted); stroke-width: 1.6; fill: var(--muted); }
+.dgm svg .d-arr-clear { stroke: var(--fg); stroke-width: 1.6; fill: var(--fg); }
+.dgm svg .d-acc-line { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; }
+.dgm svg .d-creep { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; }
+.dgm svg .d-clear { stroke: var(--fg); stroke-width: 1.8; fill: none; }
+.dgm svg .d-wave { stroke: var(--accent); stroke-width: 2; fill: none; }
+.dgm svg .d-water { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+.dgm svg .d-dust { fill: var(--muted); }
+/* 模式高亮框（共模 / 差模切换时标出该模式的关键元件） */
+.dgm svg .d-hl { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 5 4; }
+
+/* ---------- 可切换图（共模 / 差模）：外层 .dgm 上的 dm / cm 类决定显示哪一组 ---------- */
+.dgm .dm-only, .dgm .cm-only { display: none; }
+.dgm.dm .dm-only, .dgm.cm .cm-only { display: block; }
+/* 模式按钮（配合 assets/js/dmcm.js 的 .dmcm-mode 约定） */
+.dmcm-mode { display: flex; gap: 8px; margin: 12px 0 0; }
+.dmcm-mode button {
+  padding: 6px 16px; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--card); color: var(--fg); font-family: inherit; font-size: 13px; cursor: pointer;
+}
+.dmcm-mode button:hover { border-color: var(--accent); color: var(--accent); }
+.dmcm-mode button.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+
+/* 深色主题下线条略亮一点，避免糊在一起 */
+html[data-theme="dark"] .dgm svg .d-box { fill: rgba(255, 255, 255, 0.06); }
+html[data-theme="dark"] .dgm svg .d-ins-basic { fill: rgba(255, 255, 255, 0.08); }
+
+@media (max-width: 720px) {
+  .dgm { padding: 12px 10px 10px; }
+  .dgm svg text { font-size: 13.5px; }
+  .dgm > figcaption { font-size: 12px; }
+}
+@media print {
+  .dgm { border: 1px solid #ccc; box-shadow: none; }
+}

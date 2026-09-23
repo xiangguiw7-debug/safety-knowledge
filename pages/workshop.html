@@ -4,13 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
-  <meta name="site-version" content="1.4.5">
+  <meta name="site-version" content="1.4.6">
   <title>项目式学习工坊 - 安规与可靠性知识课堂</title>
   <meta name="description" content="虚拟产品安规项目工坊：选产品与市场，走完标准、间距、耐压、测试、认证全流程并生成项目报告。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.6">
+
+  <style>
+    /* 工坊打印：只打印最后一步生成的「项目报告」，其余步骤与设置区都不打印 */
+    @media print {
+      #wsContent > *:not(#wsReport) { display: none !important; }
+      #wsReport { display: block !important; border: 0 !important; padding: 0 !important; margin: 0 !important; }
+      #wsReport h3 { font-size: 15pt; }
+      #wsReport table { font-size: 10.5pt; }
+      #wsReport th { width: 22%; background: #f4f4f4 !important; }
+      .page-head .lead { display: none !important; }
+    }
+  </style>
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
@@ -39,7 +51,7 @@
       <p class="lead">把全站知识串成一次虚拟项目：从选产品到出报告，走完一遍你就知道安规在真实项目中长什么样。</p>
     </div>
 
-    <div class="card">
+    <div class="card no-print">
       <div class="form-grid">
         <div class="field"><label for="wsIndustry">行业（可选，自动带入虚拟产品）</label><select id="wsIndustry"><option value="">不指定行业</option></select></div>
         <div class="field"><label for="wsProduct">虚拟产品</label><select id="wsProduct">
@@ -60,7 +72,7 @@
       </div>
     </div>
 
-    <div class="card" style="margin-top:14px">
+    <div class="card no-print" style="margin-top:14px">
       <label class="insul-item" style="cursor:pointer"><input type="checkbox" id="wsCustom"> 使用自定义产品参数（自己填电压/污染/材料/绝缘）</label>
       <div id="wsCustomFields" hidden>
         <div class="form-grid" style="margin-top:12px">
@@ -75,10 +87,10 @@
         <p class="peak-note">间距按教学简化表自动计算；耐压和标准需按<a href="./standard-picker.html">标准选择器</a>与<a href="./hipot.html">5 步法</a>确定。</p>
       </div>
     </div>
-    <div class="quiz-progress"><span id="wsBar" style="width:14%"></span></div>
-    <p class="quiz-count" id="wsStepLabel"></p>
+    <div class="quiz-progress no-print"><span id="wsBar" style="width:14%"></span></div>
+    <p class="quiz-count no-print" id="wsStepLabel"></p>
     <div id="wsContent"></div>
-    <div class="link-row">
+    <div class="link-row no-print">
       <button type="button" class="btn" id="wsPrev">← 上一步</button>
       <button type="button" class="btn btn-primary" id="wsNext">下一步 →</button>
     </div>
@@ -87,17 +99,17 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.6 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
-  <script src="../assets/js/theme.js?v=1.4.5"></script>
-  <script src="../assets/js/main.js?v=1.4.5"></script>
-  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
-  <script src="../assets/js/ux.js?v=1.4.5"></script>
-  <script src="../assets/js/industry-data.js?v=1.4.5"></script>
-  <script src="../assets/js/workshop.js?v=1.4.5"></script>
+  <script src="../assets/js/theme.js?v=1.4.6"></script>
+  <script src="../assets/js/main.js?v=1.4.6"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.6"></script>
+  <script src="../assets/js/ux.js?v=1.4.6"></script>
+  <script src="../assets/js/industry-data.js?v=1.4.6"></script>
+  <script src="../assets/js/workshop.js?v=1.4.6"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -107,7 +119,7 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/nav.js?v=1.4.5"></script>
-  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
+  <script src="../assets/js/nav.js?v=1.4.6"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.6"></script>
 </body>
 </html>

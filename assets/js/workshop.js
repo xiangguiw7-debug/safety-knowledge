@@ -16,24 +16,17 @@ var WS_MARKETS = {
 
 // 自定义产品教学查表（与计算工具一致）
 var CUSTOM_CREEP = {
-  50: { 1: { ALL: 0.6 }, 2: { I: 0.8, II: 1.0, IIIa: 1.2, IIIb: 1.2 }, 3: { I: 1.2, II: 1.4, IIIa: 1.6, IIIb: 1.6 } },
-  125: { 1: { ALL: 0.8 }, 2: { I: 1.2, II: 1.5, IIIa: 2.0, IIIb: 2.0 }, 3: { I: 2.0, II: 2.5, IIIa: 3.2, IIIb: 3.2 } },
-  250: { 1: { ALL: 1.0 }, 2: { I: 2.0, II: 2.5, IIIa: 3.2, IIIb: 3.2 }, 3: { I: 3.2, II: 4.0, IIIa: 5.0, IIIb: 5.0 } },
-  400: { 1: { ALL: 1.4 }, 2: { I: 3.2, II: 4.0, IIIa: 5.0, IIIb: 5.0 }, 3: { I: 5.0, II: 6.3, IIIa: 8.0, IIIb: 8.0 } },
-  600: { 1: { ALL: 2.0 }, 2: { I: 5.0, II: 6.0, IIIa: 8.0, IIIb: 8.0 }, 3: { I: 8.0, II: 10.0, IIIa: 12.5, IIIb: 12.5 } }
+  50: { 1: { ALL: 0.18 }, 2: { I: 0.6, II: 0.85, IIIa: 1.2, IIIb: 1.2 }, 3: { I: 1.5, II: 1.7, IIIa: 1.9, IIIb: 1.9 } },
+  125: { 1: { ALL: 0.28 }, 2: { I: 0.75, II: 1.05, IIIa: 1.5, IIIb: 1.5 }, 3: { I: 1.9, II: 2.1, IIIa: 2.4, IIIb: 2.4 } },
+  250: { 1: { ALL: 0.56 }, 2: { I: 1.25, II: 1.8, IIIa: 2.5, IIIb: 2.5 }, 3: { I: 3.2, II: 3.6, IIIa: 4.0, IIIb: 4.0 } },
+  400: { 1: { ALL: 1.0 }, 2: { I: 2.0, II: 2.8, IIIa: 4.0, IIIb: 4.0 }, 3: { I: 5.0, II: 5.6, IIIa: 6.3, IIIb: 6.3 } },
+  600: { 1: { ALL: 1.8 }, 2: { I: 3.2, II: 4.5, IIIa: 6.3, IIIb: 6.3 }, 3: { I: 8.0, II: 9.0, IIIa: 10.0, IIIb: 10.0 } }
 };
 var CUSTOM_VOLTS = [50, 125, 250, 400, 600];
-var CUSTOM_CLEAR = { 500: 0.2, 800: 0.5, 1000: 0.8, 1500: 1.0, 2000: 1.5, 2500: 2.0, 3000: 2.5, 4000: 3.0, 5000: 4.0, 6000: 5.5, 8000: 8.0, 10000: 11.0, 12000: 14.0 };
-var CUSTOM_IMPULSE = { 120: { I: 800, II: 1500, III: 2500, IV: 4000 }, 230: { I: 1500, II: 2500, III: 4000, IV: 6000 }, 400: { I: 2500, II: 4000, III: 6000, IV: 8000 } };
-var CUSTOM_MULT = { functional: 0.8, basic: 1, supplementary: 1, reinforced: 2 };
-
-var INDUSTRY_TO_WS = {
-  power: "charger", powerbank: "charger", "portable-power": "charger",
-  lighting: "lamp",
-  consumer: "speaker", iot: "speaker", wearable: "speaker", server: "speaker", ict: "speaker", drone: "speaker", toy: "speaker",
-  cleaning: "cleaning", security: "security",
-  medical: "bpm",
-  charging: "evcc", solar: "evcc", machinery: "evcc", automation: "evcc", robotics: "evcc", "low-voltage": "evcc", escooter: "evcc", battery: "evcc"
+var CUSTOM_CLEAR = {
+  330: 0.01, 400: 0.02, 500: 0.04, 600: 0.06, 800: 0.13, 1000: 0.26, 1200: 0.42,
+  1500: 0.5, 2000: 1.0, 2500: 1.5, 3000: 2.0, 4000: 3.0, 5000: 4.0,
+  6000: 5.5, 8000: 8.0, 10000: 11.0, 12000: 14.0
 };
 
 function $(id) { return document.getElementById(id); }

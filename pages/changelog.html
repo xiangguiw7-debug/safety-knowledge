@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
-  <meta name="site-version" content="1.4.5">
+  <meta name="site-version" content="1.4.6">
   <title>更新日志 - 安规与可靠性知识课堂</title>
-  <meta name="description" content="安规与可靠性知识课堂更新日志：v1.4.5（2026-09-23）缓存链路加固——全量资源版本化、Service Worker 直连更新、版本探针提示条与「打开的是旧版本？」自助页。">
+  <meta name="description" content="安规与可靠性知识课堂更新日志：v1.4.6（2026-09-23）新增 15 张离线 SVG 核心概念示意图（爬电/间隙、污染等级、MOPP、隔离链路、耐压接线等），另有缓存链路加固与间距工具双标准改版。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.6">
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
@@ -36,6 +36,34 @@
     <div class="page-head">
       <p class="crumb"><a href="../index.html">首页</a> / <a href="./resources.html">资源</a> / 更新日志</p>
       <h1>更新日志</h1>
+    </div>
+
+    <div class="card">
+      <h2>v1.4.6（2026-09-23 · 新增：核心概念示意图库，站点不再“全是字”）</h2>
+      <p class="section-sub">图解系统 + 存量图示审计 + 打印修复：31 张离线 SVG 示意图（新增 13 张 / 重做 3 张 / 删除 4 张旧图），全站打印不再乱层</p>
+      <ul>
+        <li><b>➕ 灯具间距新增「查表依据」：可按 IEC 60664-1 绝缘配合计算（现为默认）</b>：灯具模式原来只能用 GB 7000.1 / IEC 60598-1 第 11 章的产品标准简化表（以污染等级 2 为基准、不区分 PD、且不少格子爬电与间隙本来就同值）。现在多了依据开关：<b>依据 A · IEC 60664-1 / GB/T 16935.1 绝缘配合（默认）</b>——爬电距离按<b>污染等级 PD1–PD4 + 材料组（CTI）</b>查表；电气间隙按<b>额定冲击电压</b>（系统电压 120/230/400 V × 过电压类别 Ⅰ–Ⅳ）查表，海拔 &gt;2000 m 只放大间隙；加强绝缘的间隙按<b>下一档额定冲击电压</b>（2500 V → 4000 V 档）取值、爬电按基本绝缘 2 倍；功能绝缘 0.8×。<b>依据 B · GB 7000.1 第 11 章</b>保留（认证 / 型式试验口径）。参数与依据写入分享链接（<code>lb=iec60664|product&amp;pd=&amp;sys=&amp;ovc=</code>），复制 / 导出文本同步标注。</li>
+        <li><b>🧹 选了 IEC 60664-1 就只显示绝缘配合口径</b>：以前切换依据后，结果与提示里仍会冒出 GB 7000.1 / 表11.1 / 表11.2 的措辞（参数块徽标、工作电压与海拔说明、绝缘类型说明、同屏对比表）。现在按依据整套分流——依据 = IEC 60664-1 时，页面可见文本里<b>不再出现 GB 7000.1 / IEC 60598-1 / 表11.x</b>（同屏对比表改为「绝缘类型 × 基本绝缘倍数 / 下一档冲击电压」并标注 PD、材料组、系统电压、OVC、海拔条件；徽标统一为 IEC 60664-1 表 F.4 / 表 F.2）；切回产品标准表时，对应的标准号与表号才出现。污染等级判定器的「带到灯具」按钮也改为带入 PD 并自动切到 IEC 60664-1 依据。</li>
+
+        <li><b>📌 同一条条件两套口径的对照（工具里已写明）</b>：250 V、材料组 Ⅲa、基本绝缘 —— IEC 60664-1（PD2）→ 爬电 2.5 / 间隙 1.5 mm；GB 7000.1 表11.1 → 2.5 / 1.5 mm（一致）；切到 <b>PD3</b> 时 60664-1 给爬电 <b>4.0 mm</b>（产品标准表没有 PD3 列）；OVC Ⅲ + 海拔 5000 m 时间隙放大到 <b>4.44 mm</b>。另明确提示：<b>PD4 列本工具未逐格核对收录</b>——选 PD4 时显示的是 PD3 数值并标红「不可直接使用」，必须按标准原表取值或先降污。</li>
+        <li><b>🐞 修复：灯具间距表数值错误（爬电距离与电气间隙显示成一样）</b>：核对标准原文后确认是<b>表格数据错误</b>——表11.1 的爬电列被填成了间隙列的副本（附加 / 加强绝缘两列完全相同，基本绝缘的 PTI ≥ 600 列在 150 V 以上也相同）。现已按 <b>IEC 60598-1:2014 第 11 章原文表格逐格复核重填</b>：爬电距离按 PTI ≥ 600 / &lt; 600 与基本 / 附加 / 加强绝缘分栏（例：250 V、PTI &lt; 600 → 基本 2.5 / 附加 2.5 / 加强 5.0 mm），电气间隙只按绝缘类型分栏（250 V → 基本 1.5 / 附加 1.5 / 加强 3.0 mm）。默认预设（250 V、材料组 Ⅲa、基本绝缘）现在的正确结果是<b>爬电 2.5 mm / 间隙 1.5 mm</b>，此前是 1.7 / 1.7。</li>
+        <li><b>🐞 修复：「表11.2 = IPX1 及以上 = 污染等级 3」这个错误前提</b>：核对原文后确认——IEC 60598-1 <b>表11.2 是「正弦 / 非正弦脉冲电压 → 最小电气间隙」表</b>（取自 IEC 60664-1 表2 情形 A，2.0 kV→1 mm … 100 kV→170 mm），并要求爬电距离不小于该间隙；标准中<b>没有</b>“IPX1 及以上 = 污染等级 3”的灯具距离表。因此：① 选表依据由「灯具分类（IP 等级）」改为<b>过电压类别</b>——<b>过电压类别 Ⅱ → 表11.1</b>、<b>过电压类别 Ⅲ → 附录 U 表 U.1</b>（两张表都以污染等级 2、海拔 ≤2000 m 为基准，数值同样按原文复核）；② 结果里新增<b>表11.2 脉冲电压校核提示</b>；③ 环境判定为 <b>PD3</b>（户外淋雨 / 凝露 / 导电粉尘）时明确提示「灯具标准无 PD3 表格 → 改用 IEC 60664-1 的 PD3 列，或按 IEC 60664-3 用密封 / 涂覆把绝缘处微环境降到 PD2」，不再误导为「查表11.2」。相关文案已同步到工具、污染等级判定器、知识卡、IP 示意图与数值核对表。</li>
+        <li><b>🧪 新增数据自检脚本 <code>scripts/check-spacing-tables.js</code></b>：把工具里的间距表与标准原文数值<b>逐格比对</b>（表11.1 / 附录 U 表 U.1 / 表11.2 / 医疗表11·表12），并额外体检「爬电列是否被抄成间隙列的副本」——正是本次缺陷的类型。以后改数据只要跑一次就能发现抄错，已写入发布流程提醒。</li>
+        <li><b>🐞 修复：项目工坊的自定义间距表与工具不一致</b>：工坊「自定义产品参数」用的是另一套数值（250 V / PD2 / Ⅲa 给 3.2 mm，而工具按 IEC 60664-1 给 2.5 mm；2500 V 间隙 2.0 vs 标准 1.5 mm）。现已统一为工具里已核对的 IEC 60664-1 / GB/T 16935.1 数值，避免同一站两套答案。</li>
+        <li><b>🖨️ 修复打印乱层（全站）</b>：<code>style.css</code> 里原本<b>没有任何 <code>@media print</code> 规则</b>，而站点的页头是 sticky、底部导航与返回 / 回顶按钮是 fixed——打印时这些固定层会连同设置表单、步骤进度条、按钮一起印出来并与正文重叠（项目工坊出报告后打印最明显）。现在补上全局打印样式：<b>固定层、按钮、表单控件、进度条、标签页、Toast、版本提示条一律不打印</b>；强制浅色（深色主题不会印成黑底）；卡片与图不跨页断开；表头跨页重复；<code>details</code> 折叠的 FAQ 内容也会展开打印。项目工坊另有专用规则：<b>只打印最后一步生成的「项目报告」</b>（其余步骤与设置区隐藏）。已逐页排查 <code>knowledge-print / poster / templates / structural-checklist / tools / sop-* / certification / knowledge / workshop</code> 共 9 类页面，固定层全部为 <code>display:none</code>，无遗漏。</li>
+        <li><b>🌡️ 新增「绝缘耐热等级」图</b>（<code>heat-class</code>）：Y/A/E/B/F/H/C 七档的温度轴 + 表格（极限温度、常见绝缘材料、绕组温升教学值），并讲清三件事——等级是材料/绝缘系统的<b>极限温度</b>而不是允许温升、电阻法测的是平均温升（热点要乘系数）、升级材料要同时满足 UL 黄卡与整机温升。放在<a href="./materials.html">材料数据库</a>与<a href="./sop-temperature-rise.html">温升 SOP</a> 两处。</li>
+        <li><b>🏗️ 产品类别结构图重做</b>（<code>class-i</code> / <code>class-ii</code> / <code>class-iii</code>）：旧的三张简图（只有几个方框加斜线填充）替换为统一的三段式结构图——<b>结构</b>（市电输入 → 绝缘层 → 电路 → 可触及外壳，I 类画出保护接地与 PE 回路、II 类画出基本+附加绝缘与回字符号、III 类画出 SELV 适配器与加强隔离）、<b>故障路径</b>（该类的危险是怎么被挡住的）、<b>对应测试</b>（耐压 / 泄漏 / 接地连续性，逐项标 ✓ 或“不适用”），三类并排对照时差异一目了然。</li>
+        <li><b>🧹 存量图示审计（先查有没有、再决定留还是重做）</b>：动手前把全站 146 个页面扫了一遍，找出<b>已有内联 SVG 的 8 个页面</b>并逐张评估。处置：<b>删除 4 张</b>——爬电页与间隙页的旧原理图（信息量已被新图覆盖）、浪涌页我新增的重复图（该页原有「多级浪涌防护图」更贴合上下文，保留原有）、产品类别页我新增的简化图（该页原有图已按要求重做，见上条）。<b>重做 3 张</b>：耐压页旧「原理图」升级为图库版 <code>hipot-principle</code>；知识卡「共模与差模」旧图信息量不足，重做为图库版 <code>dmcm</code>（含 X 电容与共模电感）；产品类别三张结构图重做。<b>保留 5 张</b>：1.2/50 µs 波形图、多级浪涌防护图、距离-电压曲线与 EMC 波形两块脚本图表。</li>
+        <li><b>🔁 共模 / 差模图重做（可切换）</b>：保留原来的「差模 ⇄ 共模」按钮交互，重画为<b>带 L / N / PE 三条母线，以及 X 电容、Y 电容、差模电感、共模电感</b>的完整拓扑——切到差模时高亮 <b>X 电容 + 差模电感</b>并画出 L→N 的一来一回；切到共模时高亮 <b>Y 电容 + 共模电感</b>并画出 L / N 同向、经 PE 回流的路径。图下补三条要点（抑制元件分工、先判断“谁在回流”、Y 电容与泄漏电流的取舍）。</li>
+        <li><b>➕ 新增 5 张示意图</b>：① <b>共模 / 差模</b>（可切换）② <b>耐压原理</b>（绝缘被加压，含 AC / DC 区别）③ <b>EMC 项目矩阵</b>（传导 / 辐射发射、谐波、闪烁 + ESD / EFT / 浪涌 / 传导抗扰 / 辐射抗扰 / 电压跌落，含标准号与典型试验条件）④ <b>变压器绝缘结构</b>（绕组、绝缘胶带、挡墙、磁芯，以及“爬电沿表面绕行 / 间隙穿胶带”的画法）⑤ <b>IP 代码解读</b>（两位数字含义 + 0–6 / 0–8 全档位，并写明与灯具污染等级、IPX5/6/7 时长的关系）。</li>
+        <li><b>🗑 样式统一</b>：退休老图专用的 <code>assets/css/dmcm.css</code>（按钮与共模差模样式已并入 <code>diagrams.css</code>），全站只剩一套图解样式；<code>diagrams.js</code> 增加 <b>MutationObserver</b>，知识卡详情页等「内容由脚本注入」的页面也能自动出图。</li>
+        <li><b>➕ 第二批 7 张（工程 / 试验类，均先确认目标页原本没有图示）</b>：⑥ <b>温升限值与测点</b>（温升曲线与稳态判据、热电偶 / 电阻法测点、绕组 A–H 级与外壳 / 手柄的限值口径）⑦ <b>灼热丝 / 针焰 / UL94 分工</b>（三列对照：温度档位、施加时间、判据、各管哪类部件）⑧ <b>泄漏电流三条路径</b>（容性 / 阻性 / 表面污染 → 汇到可触及部件，再接 60990 网络）⑨ <b>三种“地”与 TN / TT / IT</b>（保护地 / 功能地 / 信号地 + 四种供电系统对 PE 的处理）⑩ <b>环境试验顺序</b>（温循 → 湿热 → 振动 → 盐雾 → 环境后安规复测 → 拆解，每步暴露什么失效）⑪ <b>PCB 间距落地四招</b>（开槽 / 加筋 / 加挡墙 / 涂覆灌封，各自对爬电与间隙的影响）⑫ <b>七大类危害速查</b>（电击 / 能量 / 火 / 热 / 机械 / 辐射 / 化学：看什么、测什么），放在学习页作为视觉入口，配色沿用站点既有的危害色系。</li>
+        <li><b>🖼️ 新增图解系统</b>：<code>assets/js/diagrams.js</code>（27 张图库 + 渲染器）与 <code>assets/css/diagrams.css</code>（样式）。页面里只写一个占位标记就会出图——<code>&lt;figure class="dgm" data-dgm="图名"&gt;&lt;figcaption&gt;图注&lt;/figcaption&gt;&lt;/figure&gt;</code>，也可以用 <code>window.AnguiDiagram.get("图名")</code> 在脚本里取用。</li>
+        <li><b>🎨 完全离线、跟随主题</b>：全部为内联矢量 SVG，零外部请求、可离线、可打印（打印时避免跨页断图）；颜色统一取站点 CSS 变量，<b>深浅色主题自动适配</b>；每张图带 <code>aria-label</code> 无障碍描述，图注居中显示。</li>
+        <li><b>📐 15 张示意图</b>：① 爬电距离 vs 电气间隙（沿表面 / 穿空气两条路径）② 绝缘配合参数链（工作电压 → OVC → Uimp → PD → 材料组 → 海拔 → 查表）③ 污染等级 PD1–PD4 场景对照 ④ 双重绝缘与加强绝缘层数关系 ⑤ MOPP / MOOP 层数与数值对照 ⑥ I / II / III 类设备结构 ⑦ SELV / PELV 电压分区与成立三条件 ⑧ 耐压试验接线与判定 ⑨ 泄漏电流测量网络（IEC 60990 教学简化）⑩ 电源初次级隔离链路与被考核 4 处 ⑪ CTI 分档与材料组 ⑫ 浪涌三级防护（GDT / MOV / TVS）与波形 ⑬ 海拔修正 ⑭ 间距查表决策流程 ⑮ 保护接地路径与连续性试验。</li>
+        <li><b>📄 插入位置（15 页 / 22 处）</b>：爬电距离、电气间隙、绝缘配合总览、绝缘判定指南、双重绝缘、MOPP / MOOP、SELV、耐压、泄漏电流、接地、电源设计、产品类别结构、材料、浪涌、计算与速查工具（查表流程 + 污染等级判定器面板）。每张图都放在对应章节标题下、正文之前，先看图再看文字。</li>
+        <li><b>🧩 维护方式</b>：新增一张图只需在 <code>diagrams.js</code> 的 <code>DIAGRAMS</code> 里加一条，页面填 <code>data-dgm</code> 即可复用（同一张图已在多个页面共用）；版本参数由发布脚本自动维护。</li>
+      </ul>
     </div>
 
     <div class="card">
@@ -208,15 +236,15 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.6 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
-  <script src="../assets/js/theme.js?v=1.4.5"></script>
-  <script src="../assets/js/main.js?v=1.4.5"></script>
-  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
-  <script src="../assets/js/ux.js?v=1.4.5"></script>
+  <script src="../assets/js/theme.js?v=1.4.6"></script>
+  <script src="../assets/js/main.js?v=1.4.6"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.6"></script>
+  <script src="../assets/js/ux.js?v=1.4.6"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -226,7 +254,7 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/nav.js?v=1.4.5"></script>
-  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
+  <script src="../assets/js/nav.js?v=1.4.6"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.6"></script>
 </body>
 </html>

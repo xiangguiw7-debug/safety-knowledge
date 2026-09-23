@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
-  <meta name="site-version" content="1.4.5">
+  <meta name="site-version" content="1.4.6">
   <title>泄漏电流与接触电流深度页 - 安规与可靠性知识课堂</title>
   <meta name="description" content="泄漏电流、接触电流、患者漏电流的测量网络、人体反应与产品限值。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.6">
+  <link rel="stylesheet" href="../assets/css/diagrams.css?v=1.4.6">
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
@@ -39,6 +40,9 @@
     </div>
 <section>
   <h2>1. 三个概念先分清</h2>
+  <figure class="dgm" data-dgm="leakage-paths">
+    <figcaption>图 1 · 泄漏电流的三条路径：容性、阻性、表面污染</figcaption>
+  </figure>
   <div class="table-wrap"><table>
     <thead><tr><th>术语</th><th>定义（教学表述）</th><th>典型测量路径</th></tr></thead>
     <tbody>
@@ -51,6 +55,9 @@
 </section>
 <section>
   <h2>2. 为什么不能用普通电流表</h2>
+  <figure class="dgm" data-dgm="leakage-network">
+    <figcaption>图 1 · IEC 60990 测量网络（教学简化）与换算关系</figcaption>
+  </figure>
   <p>人体阻抗随频率、接触面积和皮肤状态变化，普通电流表的内阻和频响都不能代表人体。IEC 60990 定义了几种测量网络，用 R/C 组合模拟人体阻抗，结果才有可比性。</p>
   <div class="table-wrap"><table>
     <thead><tr><th>网络（教学概括）</th><th>用途</th><th>特点</th></tr></thead>
@@ -113,14 +120,15 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.6 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
-  <script src="../assets/js/theme.js?v=1.4.5"></script>
-  <script src="../assets/js/main.js?v=1.4.5"></script>
-  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
-  <script src="../assets/js/standard-status.js?v=1.4.5"></script>
+  <script src="../assets/js/theme.js?v=1.4.6"></script>
+  <script src="../assets/js/main.js?v=1.4.6"></script>
+  <script src="../assets/js/diagrams.js?v=1.4.6"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.6"></script>
+  <script src="../assets/js/standard-status.js?v=1.4.6"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -130,8 +138,8 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/ux.js?v=1.4.5"></script>
-  <script src="../assets/js/nav.js?v=1.4.5"></script>
-  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
+  <script src="../assets/js/ux.js?v=1.4.6"></script>
+  <script src="../assets/js/nav.js?v=1.4.6"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.6"></script>
 </body>
 </html>

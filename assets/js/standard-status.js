@@ -23,16 +23,21 @@
     "ITU-T K.21": "std-k21", "IEC 62209": "std-62209", "IEC 60479-1": ""
   };
   var TOOL_STD = {
-    "tool-standard": { l: "GB 7000.1 / GB 9706.1", s: "std-60598" },
+    // 注意：badge 文本是「该参数块依据的标准」。带 GB 编号的只在产品标准专属参数块里写，
+    // 两条依据都会用到的参数块（材料组 / 绝缘类型 / 海拔 / 工作电压）用中性或 IEC 60664-1 口径，
+    // 避免选了「IEC 60664-1」依据后页面上还冒出 GB 7000.1。
+    "tool-standard": { l: "灯具 / 医疗 / 绝缘配合", s: "" },
+    "tool-lum-basis": { l: "查表依据：IEC 60664-1 或产品标准", s: "" },
+    "tool-lum-60664": { l: "IEC 60664-1 / GB/T 16935.1", s: "std-60664" },
     "tool-pd": { l: "IEC 60664-1 / IEC 60664-3", s: "std-60664" },
     "tool-product-class": { l: "IEC 61140", s: "std-61140" },
-    "tool-working-voltage": { l: "GB 7000.1 / GB 9706.1", s: "std-60598" },
+    "tool-working-voltage": { l: "按交流有效值（各标准口径一致）", s: "" },
     "tool-lum-ip": { l: "GB 7000.1（灯具）", s: "std-60598" },
     "tool-med-mop": { l: "GB 9706.1（医疗）", s: "std-60601" },
     "tool-market-voltage": { l: "", s: "" },
-    "tool-cti": { l: "GB 7000.1 / IEC 60112", s: "std-60112" },
-    "tool-insulation": { l: "GB 7000.1（灯具）", s: "std-60598" },
-    "tool-altitude": { l: "GB 9706.1（医疗）", s: "std-60601" },
+    "tool-cti": { l: "IEC 60112（材料组 / CTI）", s: "std-60112" },
+    "tool-insulation": { l: "IEC 60664-1（绝缘类型）", s: "std-60664" },
+    "tool-altitude": { l: "IEC 60664-1（海拔修正）", s: "std-60664" },
     "tool-reverse": { l: "IEC 60664-1", s: "std-60664" },
     "tool-hipot": { l: "IEC 62368-1 / 60335-1 / 60601-1 / 60204-1", s: "std-62368" },
     "tool-leakage": { l: "IEC 60990", s: "std-60990" },

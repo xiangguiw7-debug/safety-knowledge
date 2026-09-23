@@ -1264,3 +1264,66 @@ html[data-theme="dark"] tbody tr:hover { background: rgba(192,83,76,0.12); }
 @media (max-width: 760px) {
   .backbtn { bottom: 78px; left: 14px; width: 40px; height: 40px; }
 }
+
+/* ===== 打印（全站通用）=====================================================
+   站点的页头是 sticky、底部导航与返回/回顶按钮是 fixed，表单和按钮也只对屏幕有意义。
+   以前 style.css 里没有任何 @media print，打印时会把这些固定层一起印出来，
+   出现“内容与固定层重叠、按钮压在正文上”的乱层现象。这里统一收口：
+   - 固定层 / 按钮 / 表单 / 进度条 / 标签页一律不打印
+   - 强制浅色（避免深色主题把整页印成黑底）
+   - 卡片与图不跨页断开，表头跨页重复
+   ========================================================================= */
+@media print {
+  @page { margin: 12mm 10mm; }
+
+  /* 深色主题在打印时回到浅色 */
+  html[data-theme="dark"] {
+    --bg: #fff; --fg: #000; --card: #fff; --card-2: #f4f4f4; --border: #bbb;
+    --muted: #555; --accent: #8a1f1a; --accent-2: #8a1f1a; --accent-ink: #fff;
+    --accent-soft: #f3e7e6; --shadow: none; --shadow-lg: none;
+    --warn-bg: #fdf3e3; --warn-border: #cc9; --warn-fg: #7a4a10;
+    --danger-bg: #fbeceb; --danger-border: #caa; --danger-fg: #8a1f1a;
+    --ok-bg: #eef6f0; --ok-border: #aca; --ok-fg: #245c38;
+  }
+  html, body { background: #fff !important; color: #000 !important; }
+  body { padding: 0 !important; }
+
+  /* 屏幕专用的固定层与交互元素 */
+  .site-header, .bottom-nav, .backbtn, .backtop, .toast, .nav-toggle, .theme-toggle,
+  #updateBar, .no-print, .calc-tabs, .tool-tabs, .tabs, .tabbar, .dmcm-mode,
+  .quiz-progress, .link-row, .filter-bar, .toolbar, .search-bar, .hazard-chips,
+  .pager, .pagination, .kc-toggle, .cert-clear, .dgm .dgm-tools { display: none !important; }
+
+  /* 容器铺满纸张 */
+  .container, .page, main { max-width: 100% !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+
+  /* 卡片 / 图 / 表格：去阴影、加细边框、避免跨页断开 */
+  .card, .dgm, figure, .param-block, .cert-card, .cert-detail, .ms-block, .std-block,
+  .tool-card, details, .grid > * { box-shadow: none !important; break-inside: avoid; page-break-inside: avoid; }
+  .card, .param-block, .cert-card, .ms-block { border: 1px solid #ccc !important; background: #fff !important; }
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  h1 { font-size: 20pt; }
+  h2 { font-size: 15pt; }
+
+  /* 链接：去掉颜色，外部链接补出地址 */
+  a { color: #000 !important; text-decoration: none !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #555; }
+
+  /* 表格：表头跨页重复、单元格不裂 */
+  table { border-collapse: collapse !important; width: 100% !important; font-size: 10.5pt; }
+  th, td { border: 1px solid #bbb !important; padding: 4px 6px !important; }
+  thead { display: table-header-group; }
+  tr, img, svg { break-inside: avoid; page-break-inside: avoid; }
+
+  /* 打印时展开折叠内容（FAQ 之类） */
+  details > summary { font-weight: 700; }
+  details:not([open]) > *:not(summary) { display: revert !important; }
+
+  /* 表单不打印控件外形，但保留已填数值（报告里已含参数） */
+  input, select, textarea { border: 1px solid #bbb !important; background: #fff !important; color: #000 !important; }
+  input[type="file"], button, .btn { display: none !important; }
+
+  /* 图注与注释文字保持可读 */
+  .dgm > svg, .dgm > figcaption { max-width: 100% !important; }
+  .section-sub, .hint, .cite-note, .disclaimer, .peak-note { color: #444 !important; }
+}

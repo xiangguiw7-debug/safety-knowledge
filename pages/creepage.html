@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
-  <meta name="site-version" content="1.4.5">
+  <meta name="site-version" content="1.4.6">
   <title>爬电距离（Creepage）详解 - 安规与可靠性知识课堂</title>
   <meta name="description" content="爬电距离完整教程：表面放电机理、四大决定因素、查表全流程、多个完整示例、PCB 设计技巧与标准条款指引。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.6">
+  <link rel="stylesheet" href="../assets/css/diagrams.css?v=1.4.6">
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
@@ -44,21 +45,11 @@
 
     <section>
       <h2>1. 定义：爬电距离到底是什么</h2>
+      <figure class="dgm" data-dgm="creepage-clearance">
+        <figcaption>图 1 · 爬电距离沿绝缘表面走，电气间隙穿空气走</figcaption>
+      </figure>
       <p>爬电距离（creepage distance）是<b>两个导电部件之间，沿绝缘体表面测得的最短距离</b>。它和电气间隙的根本区别在于路径介质：间隙走“空气直线”，爬电走“绝缘表面”。</p>
-      <div class="diagram">
-        <svg viewBox="0 0 640 250" role="img" aria-label="PCB 表面爬电路径示意图">
-          <rect x="70" y="55" width="150" height="90" rx="10" class="accent-fill"></rect>
-          <text x="145" y="107" text-anchor="middle">焊盘 A</text>
-          <rect x="430" y="55" width="150" height="90" rx="10" class="accent-fill"></rect>
-          <text x="505" y="107" text-anchor="middle">焊盘 B</text>
-          <rect x="70" y="145" width="510" height="18" fill="var(--card-2)" stroke="var(--border)" stroke-width="1.5"></rect>
-          <text x="145" y="160" text-anchor="middle" class="label">PCB 表面</text>
-          <path d="M220 100 H300 Q320 100 320 120 V145 Q320 165 340 165 H380 Q400 165 400 145 V120 Q400 100 420 100 H430" class="dashed"></path>
-          <polygon points="220,100 236,94 236,106" fill="var(--accent)"></polygon>
-          <polygon points="430,100 414,94 414,106" fill="var(--accent)"></polygon>
-          <text x="320" y="220" text-anchor="middle" class="label">爬电路径 L：沿绝缘表面，绕过开槽后更长</text>
-        </svg>
-      </div>
+      
       <p>注意：路径必须沿<b>实际绝缘表面</b>走，包括 PCB 板面、外壳内壁、灌封材料表面；跨越沟槽时按槽壁、槽底的最短连续路径计算，不能“抄近路”走直线。</p>
       <p>安全距离实际有三类：<b>电气间隙</b>（空气最短距离）、<b>爬电距离</b>（绝缘表面最短距离）、<b>绝缘穿透距离</b>（穿过固体绝缘的厚度，由耐压试验验证）。变压器初次级之间、双重绝缘中的固体层，都要单独确认“穿透距离”是否满足耐压与厚度要求，不能只用表面距离替代。</p>
     </section>
@@ -105,6 +96,9 @@
 
     <section>
       <h2>4. 四大决定因素详解</h2>
+      <figure class="dgm" data-dgm="cti-groups">
+        <figcaption>图 2 · CTI 决定材料组，材料组决定爬电距离查表列</figcaption>
+      </figure>
 
       <h3>4.1 工作电压（查表用 RMS 有效值）</h3>
       <p>查爬电表用的是<b>持续工作电压的有效值</b>，不是系统标称电压的整数。规则：</p>
@@ -184,6 +178,9 @@
 
     <section>
       <h2>5. 查表完整流程（六步）</h2>
+      <figure class="dgm" data-dgm="spacing-flow">
+        <figcaption>图 3 · 查表流程：先定标准 → 再定绝缘类型 → 最后校核条件</figcaption>
+      </figure>
       <ol>
         <li><b>定工作电压</b>：取最不利持续 RMS 电压（宽压按 250V）；</li>
         <li><b>定污染等级</b>：按产品使用环境与外壳结构通常选 1/2/3。标准定义有第 4 级（持久导电污染），但爬电距离表只提供 1–3 级数值；遇到 4 级环境应先用外壳/密封/IP 防护降低微观环境，或按产品标准特殊评估，不能直接按 4 级查表。</li>
@@ -327,16 +324,17 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.6 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
-  <script src="../assets/js/theme.js?v=1.4.5"></script>
-  <script src="../assets/js/main.js?v=1.4.5"></script>
-  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
-  <script src="../assets/js/ux.js?v=1.4.5"></script>
-  <script src="../assets/js/progress.js?v=1.4.5"></script>
+  <script src="../assets/js/theme.js?v=1.4.6"></script>
+  <script src="../assets/js/main.js?v=1.4.6"></script>
+  <script src="../assets/js/diagrams.js?v=1.4.6"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.6"></script>
+  <script src="../assets/js/ux.js?v=1.4.6"></script>
+  <script src="../assets/js/progress.js?v=1.4.6"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -346,8 +344,8 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/nav.js?v=1.4.5"></script>
-  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
-  <script src="../assets/js/knowledge-chain.js?v=1.4.5"></script>
+  <script src="../assets/js/nav.js?v=1.4.6"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.6"></script>
+  <script src="../assets/js/knowledge-chain.js?v=1.4.6"></script>
 </body>
 </html>

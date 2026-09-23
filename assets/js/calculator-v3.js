@@ -128,7 +128,15 @@ var STD_INFO = {
     name: "灯具",
     code: "GB 7000.1-2015 / IEC 60598-1",
     clause: "第 11 章 爬电距离和电气间隙",
-    note: "灯具走产品标准自己的表：工作电压 + 绝缘类型（基本 / 附加 / 加强）+ 材料 PTI（≥600 / <600）+ 灯具 IP 分类 → 查表11.1（一般灯具，污染等级 2）或表11.2（IPX1 及以上，污染等级 3）。灯具表不按系统电压 / 过电压类别推算间隙，也不做海拔修正；表11.3 另给“正弦或非正弦脉冲电压”下的最小电气间隙。"
+    note: "灯具走产品标准自己的表：工作电压 + 绝缘类型（基本 / 附加 / 加强）+ 材料 PTI（≥600 / <600）+ 过电压类别 → 查表11.1（过电压类别 II）或附录 U 表 U.1（过电压类别 III）。两张表的基准条件都是污染等级 2、海拔 ≤2000 m，灯具表不按系统电压推算间隙，也不做海拔修正；表11.2 另给“正弦或非正弦脉冲电压 → 最小电气间隙”，并要求爬电距离不小于该间隙。"
+  },
+  // 灯具「查表依据 = IEC 60664-1」时使用：只讲绝缘配合，不引用产品标准表
+  iec60664: {
+    key: "iec60664",
+    name: "绝缘配合",
+    code: "IEC 60664-1 / GB/T 16935.1",
+    clause: "第 4 章 绝缘配合（爬电距离与电气间隙的尺寸确定）",
+    note: "按绝缘配合基础标准计算：<b>爬电距离</b>由工作电压 + 污染等级（PD1–PD3，本工具收录范围）+ 材料组（CTI 分组 Ⅰ/Ⅱ/Ⅲa/Ⅲb）查表得到；<b>电气间隙</b>由额定冲击电压（系统电压 + 过电压类别）查表得到，海拔 >2000 m 时乘修正系数（只作用于间隙）。加强绝缘：爬电按基本绝缘的 2 倍，间隙按下一档额定冲击电压；功能绝缘按 0.8 倍。"
   },
   medical: {
     key: "medical",
@@ -142,24 +150,40 @@ var STD_INFO = {
 // 灯具：GB 7000.1 第 11 章（等同 IEC 60598-1）
 // high = PTI ≥ 600（材料组 Ⅰ）；low = PTI < 600（175 ≤ PTI < 600）
 var LUM_VOLT = [50, 150, 250, 500, 750, 1000];
+// 灯具：IEC 60598-1:2014 / GB 7000.1 第 11 章（数据核对自标准原文表格）
+//   表11.1        —— 正弦交流电压下的最小距离；基准条件：海拔 ≤2000 m、污染等级 2、过电压类别 II
+//   附录 U 表 U.1 —— 同一结构，用于过电压类别 III
+//   表11.2        —— 额定脉冲电压 → 最小电气间隙（取自 IEC 60664-1 表2 情形 A），并要求爬电 ≥ 间隙
+// 说明：附加绝缘的爬电列与基本绝缘相同；加强绝缘为单独一列（标准注 d 允许 PTI ≥ 600 的材料取更小值，
+//       本工具按表值取值，即更保守，放宽须在技术文件中论证）。
 var LUM_TABLE = {
   general: {
-    name: "表11.1", scene: "一般灯具（污染等级 2）",
+    name: "表11.1", scene: "一般灯具（污染等级 2 · 过电压类别 II）",
     creep: {
-      high: { basic: [0.6, 1.4, 1.7, 3, 4, 5.5], supp: [null, 3.2, 3.6, 4.8, 6, 8], rein: [null, 5.5, 6.5, 9, 12, 14] },
-      low: { basic: [1.2, 1.6, 2.5, 5, 8, 10], supp: [null, 3.2, 3.6, 5, 8, 10], rein: [null, 5.5, 6.5, 9, 12, 14] }
+      high: { basic: [0.6, 0.8, 1.5, 3, 4, 5.5], supp: [null, 0.8, 1.5, 3, 4, 5.5], rein: [null, 3.2, 5, 6, 8, 11] },
+      low: { basic: [1.2, 1.6, 2.5, 5, 8, 10], supp: [null, 1.6, 2.5, 5, 8, 10], rein: [null, 3.2, 5, 6, 8, 11] }
     },
-    clear: { basic: [0.2, 1.4, 1.7, 3, 4, 5.5], supp: [null, 3.2, 3.6, 4.8, 6, 8], rein: [null, 5.5, 6.5, 9, 12, 14] }
+    clear: { basic: [0.2, 0.8, 1.5, 3, 4, 5.5], supp: [null, 0.8, 1.5, 3, 4, 5.5], rein: [null, 1.6, 3, 6, 8, 11] }
   },
-  ipx1: {
-    name: "表11.2", scene: "IPX1 及以上灯具（污染等级 3）",
+  ovc3: {
+    name: "附录 U 表 U.1", scene: "过电压类别 III（污染等级 2 · 海拔 ≤2000 m）",
     creep: {
-      high: { basic: [1.5, 2, 3.2, 6.3, 10, 12.5], supp: [null, 3.2, 4, 8, 12.5, 16], rein: [null, 5.5, 6.5, 9, 12.5, 16] },
-      low: { basic: [1.9, 2.5, 4, 8, 12.5, 16], supp: [null, 3.2, 4, 8, 12.5, 16], rein: [null, 5.5, 6.5, 9, 12.5, 16] }
+      high: { basic: [0.6, 1.5, 3, 4, 5.5, 8], supp: [null, 1.5, 3, 4, 5.5, 8], rein: [null, 3.2, 6, 8, 11, 16] },
+      low: { basic: [1.2, 1.6, 3, 5, 8, 10], supp: [null, 1.6, 3, 5, 8, 10], rein: [null, 3.2, 6, 8, 11, 16] }
     },
-    clear: { basic: [0.8, 1.5, 3, 4, 5.5, 8], supp: [null, 3.2, 3.6, 4.8, 6, 8], rein: [null, 5.5, 6.5, 9, 12, 14] }
+    clear: { basic: [0.2, 1.5, 3, 4, 5.5, 8], supp: [null, 1.5, 3, 4, 5.5, 8], rein: [null, 3, 6, 8, 11, 16] }
   }
 };
+// 表11.2：额定脉冲电压（kV）→ 最小电气间隙（mm）
+var LUM_IMPULSE = {
+  kv: [2, 2.5, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 40, 50, 60, 80, 100],
+  mm: [1, 1.5, 2, 3, 4, 5.5, 8, 11, 14, 18, 25, 33, 40, 60, 75, 90, 130, 170]
+};
+function lumImpulseNote() {
+  var parts = [];
+  for (var i = 0; i < 8; i++) parts.push(LUM_IMPULSE.kv[i] + " kV→" + LUM_IMPULSE.mm[i] + " mm");
+  return "另需按表11.2 用额定脉冲电压校核电气间隙（" + parts.join("、") + " …），且爬电距离不小于该间隙。";
+}
 var INS_LUM_LABEL = {
   functional: "功能绝缘（按基本绝缘从严）",
   basic: "基本绝缘",
@@ -181,7 +205,7 @@ var MED_CREEP_REF = [3.4, 4.0, 6.0, 8.0, 16.0, 21.0];
 var MED_CREEP_REF_V = [12, 30, 125, 250, 500, 660];
 
 var PRESETS = {
-  luminaire: { std: "luminaire", v: 250, ip: "general", gp: "IIIa", ins: "basic", alt: 2000, cls: "I", mkt: "custom" },
+  luminaire: { std: "luminaire", v: 250, ip: "ovc2", gp: "IIIa", ins: "basic", alt: 2000, cls: "I", mkt: "custom" },
   medical: { std: "medical", v: 250, mop: "2MOPP", gp: "IIIb", ins: "reinforced", alt: 2000, cls: "I", mkt: "custom" }
 };
 
@@ -243,9 +267,13 @@ function creepageValue(voltage, pollution, group) {
 function currentState() {
   return {
     std: getActive("stdGroup", "data-std") || "luminaire",
-    ip: getActive("ipGroup", "data-ip") || "general",
+    lumBasis: getActive("lumBasisGroup", "data-lumbasis") || "iec60664",
+    ip: getActive("ipGroup", "data-ip") || "ovc2",
     lumMode: getActive("lumModeGroup", "data-lummode") || "std",
     lumPd: getActive("lumPdGroup", "data-lumpd") || "2",
+    pd: getActive("c66PdGroup", "data-pd") || (getActive("lumPdGroup", "data-lumpd") || "2"),
+    sys: getActive("c66SysGroup", "data-sys") || "230",
+    ovc: getActive("c66OvcGroup", "data-ovc") || "II",
     mop: getActive("mopGroup", "data-mop") || "2MOPP",
     v: Number($("vSlider").value),
     gp: optVal("gpGroup", "data-gp", "IIIa"),
@@ -258,9 +286,13 @@ function currentState() {
 
 function applyState(s) {
   if (s.std) setActive("stdGroup", "data-std", s.std);
-  if (s.ip) setActive("ipGroup", "data-ip", s.ip);
+  if (s.lumBasis) setActive("lumBasisGroup", "data-lumbasis", s.lumBasis);
+  if (s.ip) setActive("ipGroup", "data-ip", normIpValue(s.ip));
   setActive("lumModeGroup", "data-lummode", s.lumMode || "std");
   setActive("lumPdGroup", "data-lumpd", s.lumPd || "2");
+  if (s.pd) setActive("c66PdGroup", "data-pd", String(s.pd));
+  if (s.sys) setActive("c66SysGroup", "data-sys", String(s.sys));
+  if (s.ovc) setActive("c66OvcGroup", "data-ovc", s.ovc);
   if (s.mop) setActive("mopGroup", "data-mop", s.mop);
   if (s.gp) setActive("gpGroup", "data-gp", s.gp);
   if (s.ins) setActive("insGroup", "data-ins", s.ins);
@@ -271,6 +303,60 @@ function applyState(s) {
   var mq = $("materialQuick"); if (mq) mq.value = "";
   applyStdUI();
   updateAll();
+}
+
+// ===== 灯具查表：两条依据 =====
+//   依据 A（默认）IEC 60664-1 / GB/T 16935.1 绝缘配合：污染等级 PD1–PD4 + 材料组（CTI）+ 过电压类别 + 海拔
+//   依据 B  灯具产品标准 GB 7000.1 / IEC 60598-1 第 11 章（表11.1 / 附录 U 表 U.1）
+// 注：产品标准的两张距离表以污染等级 2 为基准且不区分 PD；要做 PD3 / PD4 或按冲击电压核算，就用依据 A。
+// IEC 60664-1 的额定冲击电压标准序列（OVC Ⅰ–Ⅳ 对应的档位都取自这一列）
+var IMPULSE_STEPS = [330, 500, 800, 1500, 2500, 4000, 6000, 8000, 12000];
+// 加强绝缘的电气间隙：按“下一档额定冲击电压”取值
+// （IEC 60664-1 / IEC 60335-1 表16 的通行做法：2500V 基本 → 加强按 4000V 档；与本项目 65W 案例、题库口径一致）
+function nextImpulseStep(imp) {
+  for (var i = 0; i < IMPULSE_STEPS.length; i++) { if (IMPULSE_STEPS[i] > imp) return IMPULSE_STEPS[i]; }
+  return IMPULSE_STEPS[IMPULSE_STEPS.length - 1];
+}
+function insLabelOf(ins) {
+  return ins === "reinforced" ? "加强绝缘" : ins === "supplementary" ? "附加绝缘" : ins === "functional" ? "功能绝缘" : "基本绝缘";
+}
+function calcIEC60664(s) {
+  var pd = Number(s.pd || 2);
+  var gp = s.gp || "IIIa";
+  var ins = s.ins || "basic";
+  var sys = String(s.sys || 230);
+  var ovc = s.ovc || "II";
+  var impulse = (IMPULSE_DATA[sys] && IMPULSE_DATA[sys][ovc]) || 2500;
+  var impulseUsed = ins === "reinforced" ? nextImpulseStep(impulse) : impulse;
+  var altFactor = ALTITUDE_DATA[s.alt] || 1;
+  var creepMult = ins === "reinforced" ? 2 : (ins === "functional" ? 0.8 : 1);
+  var clearMult = ins === "functional" ? 0.8 : 1;
+  // 本工具收录的是 PD1 / PD2 / PD3 三列；PD4 列未逐格核对，选 PD4 时按 PD3 显示并明确标注“不可直接使用”
+  var pdUsed = pd >= 4 ? 3 : pd;
+  var creep = creepageValue(s.v, pdUsed, gp) * creepMult;
+  var clear = CLEARANCE_DATA[impulseUsed] * clearMult * altFactor;
+  var warn = "";
+  if (pd >= 4) warn = "🔴 污染等级 PD4：IEC 60664-1 的爬电距离表有 PD4 列，但本工具只逐格核对收录了 PD1 / PD2 / PD3，" +
+    "因此上面显示的是 <b>PD3 的数值（不是 PD4 要求）</b>——PD4 必须按标准原表取值，或先用密封 / 灌封 / 排液把绝缘处降到 PD3 及以下。";
+  if (s.v > 600) warn += (warn ? " " : "") + "工作电压超过 600V，超出本工具 IEC 60664-1 简化表的档位（50–600V），需按标准原表逐档取值。";
+  if (s.alt > 2000) warn += (warn ? " " : "") + "海拔 " + s.alt + " m：电气间隙已乘修正系数 " + altFactor + "（爬电距离不修正）。";
+  return {
+    std: "luminaire",
+    basis: "iec60664",
+    cr: creep,
+    cl: clear,
+    crBadge: pd >= 4 ? "IEC 60664-1（PD3 值，非 PD4）" : "IEC 60664-1 表F.4",
+    clBadge: "IEC 60664-1 表F.2",
+    crNote: "查表：IEC 60664-1 / GB/T 16935.1 爬电距离 · 工作电压 " + s.v + "V · 污染等级 PD" + pd +
+      (pd >= 4 ? "（⚠ 按 PD3 列显示）" : "") + " · 材料组 " + gp + (pdUsed === 1 ? "（PD1 各材料组同值）" : "") +
+      " → 表值 " + fmt(creepageValue(s.v, pdUsed, gp)) + " mm" +
+      (creepMult !== 1 ? " × " + creepMult + "（" + insLabelOf(ins) + "）" : "（" + insLabelOf(ins) + "）") + " = " + fmt(creep) + " mm。",
+    clNote: "查表：IEC 60664-1 / GB/T 16935.1 电气间隙 · 系统电压 " + sys + "V · 过电压类别 " + ovc + " → 额定冲击电压 " +
+      impulse + "V" + (impulseUsed !== impulse ? "，加强绝缘按下一档 " + impulseUsed + "V" : "") + " → 表值 " + fmt(CLEARANCE_DATA[impulseUsed]) + " mm" +
+      (altFactor !== 1 ? " × 海拔修正 " + altFactor : "") + (clearMult !== 1 ? " × " + clearMult + "（功能绝缘）" : "") + " = " + fmt(clear) + " mm。",
+    warn: warn,
+    iec: { pd: pd, pdUsed: pdUsed, gp: gp, ins: ins, sys: sys, ovc: ovc, impulse: impulse, impulseUsed: impulseUsed, altFactor: altFactor }
+  };
 }
 
 // ===== 灯具查表（GB 7000.1 第 11 章）=====
@@ -292,11 +378,16 @@ function lumPick(series, i) {
 
 // 选表：标准做法按灯具分类；高级模式按手动指定的污染等级映射
 function lumTableKey(s) {
-  if (s.lumMode === "manual") return (s.lumPd === "3" || s.lumPd === "4") ? "ipx1" : "general";
-  return s.ip === "ipx1" ? "ipx1" : "general";
+  // 灯具标准的两张距离表都不区分污染等级：表11.1（OVC II）与附录 U 表 U.1（OVC III）
+  // 手动污染等级模式仍走表11.1，但会给出“标准表是 PD2 基准”的强提示
+  if (s.lumMode === "manual") return "general";
+  return (s.ip === "ovc3" || s.ip === "ipx1") ? "ovc3" : "general";
 }
 
 function calcLuminaire(s) {
+  // 依据 A：IEC 60664-1 绝缘配合（默认，可按 PD / 材料组 / 过电压类别 / 海拔取值）
+  if (s.lumBasis === "iec60664") return calcIEC60664(s);
+  // 依据 B：灯具产品标准 GB 7000.1 / IEC 60598-1 第 11 章
   var tableKey = lumTableKey(s);
   var t = LUM_TABLE[tableKey];
   var pti = s.gp === "I" ? "high" : "low";
@@ -307,15 +398,16 @@ function calcLuminaire(s) {
   var cl = lumPick(t.clear[insKey], col);
   var basis = s.lumMode === "manual"
     ? "选表方式：高级 · 按污染等级手动指定 PD" + (s.lumPd || "2") + " → " + t.name
-    : "选表方式：按灯具分类 = " + (tableKey === "ipx1" ? "IPX1 及以上" : "一般灯具") + " → " + t.name;
+    : "选表方式：按过电压类别 = " + (tableKey === "ovc3" ? "Ⅲ（附录 U 表 U.1）" : "Ⅱ（表11.1）") + " → " + t.name;
   var warn = "";
-  if (s.v > 1000) warn = "工作电压超过 1000V，超出表11.1 / 表11.2 范围，需按标准特殊评估。";
+  if (s.v > 1000) warn = "工作电压超过 1000V，超出表11.1 / 表 U.1 范围，需按标准特殊评估。";
   if (s.gp === "IIIb") warn = "材料组 Ⅲb（100 ≤ CTI < 175）：多数灯具标准要求支撑带电部件的绝缘件通过第 13.4 条耐起痕试验（175V），该材料可能不满足，选材前请先核对。" + (warn ? " " + warn : "");
   if (s.lumMode === "manual") {
     var pdm = s.lumPd || "2";
-    var modeWarn = "🔴 当前为「按污染等级」手动选表（PD" + pdm + " → " + t.name + "）：GB 7000.1 第 11 章要求按灯具分类选表（一般灯具 → 表11.1，IPX1 及以上 → 表11.2），手动方式属自行判断，认证时须回到标准做法并在技术文件中说明依据。";
-    if (pdm === "1") modeWarn += " 表11.1 / 表11.2 都没有 PD1 列，此处仍按表11.1 取值，不能作为按 PD1 放宽的依据。";
-    if (pdm === "4") modeWarn += " 表11.1 / 表11.2 都没有 PD4 列，此处按表11.2 取值仍不足以覆盖持久导电污染，必须先降低绝缘处的污染。";
+    var modeWarn = "🔴 当前为「按污染等级」手动选表（PD" + pdm + "）：GB 7000.1 第 11 章的表格不按污染等级分列——表11.1 / 附录 U 表 U.1 的基准条件是污染等级 2、过电压类别 II / III。手动方式属自行判断，认证时须回到标准做法并在技术文件中说明依据。";
+    if (pdm === "1") modeWarn += " 表11.1 / 表 U.1 都没有 PD1 列，此处仍按表11.1 取值，不能作为按 PD1 放宽的依据。";
+    if (pdm === "3") modeWarn += " 环境为 PD3（户外 / 凝露 / 导电粉尘）时，灯具标准没有单独的 PD3 表格：要么用密封、涂覆、灌封把绝缘处的微观环境降到 PD2（IEC 60664-3），要么按 IEC 60664-1 的 PD3 列取值（本工具「通用反查」模式）。";
+    if (pdm === "4") modeWarn += " PD4（持续导电污染）超出灯具标准表格范围，必须先降低绝缘处的污染。";
     warn = modeWarn + (warn ? " " + warn : "");
   }
   return {
@@ -325,7 +417,7 @@ function calcLuminaire(s) {
     crBadge: "GB 7000.1 " + t.name,
     clBadge: "GB 7000.1 " + t.name,
     crNote: "查表：GB 7000.1 / IEC 60598-1 " + t.name + "（" + t.scene + "）· " + basis + " · 爬电距离 · " + INS_LUM_LABEL[s.ins] + " · " + ptiLabel + " · 工作电压 " + s.v + "V → 取 " + cr.v + "V 档 = " + fmt(cr.val) + " mm。",
-    clNote: "查表：GB 7000.1 / IEC 60598-1 " + t.name + " · " + basis + " · 电气间隙 · " + INS_LUM_LABEL[s.ins] + " · 工作电压 " + s.v + "V → 取 " + cl.v + "V 档 = " + fmt(cl.val) + " mm（灯具表按表格固定条件，不做海拔修正）。",
+    clNote: "查表：GB 7000.1 / IEC 60598-1 " + t.name + " · " + basis + " · 电气间隙 · " + INS_LUM_LABEL[s.ins] + " · 工作电压 " + s.v + "V → 取 " + cl.v + "V 档 = " + fmt(cl.val) + " mm。" + lumImpulseNote() + "（灯具表已含固定条件：海拔 ≤2000 m、污染等级 2，不再另做海拔修正。）",
     warn: warn
   };
 }
@@ -375,13 +467,14 @@ function envMatchText(env, isMed, s) {
     if (env.pd <= 2) return "与医疗表（污染等级 2）匹配 ✓";
     return "⚠ 高于医疗表的取值条件（污染等级 2）";
   }
-  var key = lumTableKey(s);
-  if (key === "ipx1") {
-    if (env.pd <= 3) return "与表11.2（污染等级 3）匹配 ✓";
-    return "⚠ PD4 超出表格范围";
+  if (s && s.lumBasis === "iec60664") {
+    if (env.pd <= 2) return "与当前依据（IEC 60664-1，取 PD" + env.pd + " 列）匹配 ✓";
+    if (env.pd === 3) return "与当前依据匹配 ✓（IEC 60664-1 有 PD3 列，请把上面的污染等级切到 PD3）";
+    return "⚠ PD4：本工具未收录 IEC 60664-1 的 PD4 列，必须先降污或按标准原表取值";
   }
-  if (env.pd <= 2) return "与表11.1（污染等级 2）匹配 ✓";
-  return "⚠ 与表11.1（污染等级 2）不匹配，应改查表11.2";
+  if (env.pd <= 2) return "与环境条件匹配 ✓（灯具表的基准条件是污染等级 2）";
+  if (env.pd === 3) return "⚠ 环境为 PD3：灯具标准没有 PD3 表格，需按 IEC 60664-1 的 PD3 列取值，或把绝缘处的微观环境降到 PD2";
+  return "⚠ PD4 超出灯具表格的适用条件，必须先降低绝缘处的污染";
 }
 
 function envWarnText(env, isMed, s) {
@@ -391,11 +484,13 @@ function envWarnText(env, isMed, s) {
     if (env.pd === 1) return "环境判定为 PD1：GB 9706.1 表11 / 表12 按污染等级 2 给出，能否按 PD1 放宽须核对标准相应条款；本工具仍按 PD2 取值（偏保守）。";
     return "";
   }
-  if (lumTableKey(s) === "general") {
-    if (env.pd >= 3) return "环境判定为 PD" + env.pd + "：该环境应把灯具分类做到 IPX1 及以上并查表11.2（污染等级 3）；结构做不到时，需用密封 / 涂覆等把绝缘处的微观环境降下来（IEC 60664-3）。";
+  if (s && s.lumBasis === "iec60664") {
+    if (env.pd >= 4) return "环境判定为 PD4：本工具只收录了 IEC 60664-1 的 PD1 / PD2 / PD3 列，PD4 必须按标准原表取值，或先降污；当前显示的是 PD3 数值（不可直接使用）。";
+    if (env.pd >= 3) return "环境判定为 PD" + env.pd + "：请把上面的污染等级切到 PD" + env.pd + "，结果会按 IEC 60664-1 的对应列重算。";
     return "";
   }
-  if (env.pd >= 4) return "环境判定为 PD4（持久导电污染）：灯具表不提供 PD4 数值，必须先降低绝缘处的污染再查表。";
+  if (env.pd === 3) return "环境判定为 PD" + env.pd + "（户外 / 凝露 / 导电粉尘）：GB 7000.1 第 11 章的表格以污染等级 2 为基准，没有单独的 PD3 表格——应优先用密封 / 涂覆 / 灌封把绝缘处的微观环境降到 PD2（IEC 60664-3），或按 IEC 60664-1 的 PD3 列取值（把上面的「查表依据」切到 IEC 60664-1）。";
+  if (env.pd >= 4) return "环境判定为 PD4（持久导电污染）：超出灯具标准表格的适用条件，必须先降低绝缘处的污染再查表。";
   return "";
 }
 
@@ -426,27 +521,24 @@ function ipMatchHtml(env, s) {
     var key = lumTableKey(s);
     var base = "🔴 已启用高级模式：按污染等级 PD" + (s.lumPd || "2") + " 手动选表 → " + LUM_TABLE[key].name + "（灯具分类按钮已停用）。";
     if (env) {
-      var envKey = env.pd >= 3 ? "ipx1" : "general";
-      base += envKey === key
-        ? " 与环境判定 PD" + env.pd + " 一致。"
-        : " ⚠ 但环境判定为 PD" + env.pd + "（对应 " + LUM_TABLE[envKey].name + "），与手动选择不一致，建议按更严者取值。";
+      base += env.pd <= 2
+        ? " 与环境判定 PD" + env.pd + " 一致（表11.1 / 表 U.1 的基准条件就是 PD2）。"
+        : " ⚠ 但环境判定为 PD" + env.pd + "：灯具表格以 PD2 为基准，环境更严时不能只靠查表——需先把绝缘处微环境降下来，或按 IEC 60664-1 的对应污染等级列取值。";
     } else {
       base += " 建议先做环境判定，便于交叉核对。";
     }
     return base;
   }
   if (!env) {
-    return "🔍 还没做环境判定：<a href=\"./tools.html#tool-pd\" data-goto-tool=\"pd\">先判污染等级 →</a>，判定结果会建议该按表11.1 还是表11.2。";
+    return "🔍 还没做环境判定：<a href=\"./tools.html#tool-pd\" data-goto-tool=\"pd\">先判污染等级 →</a>，判定结果会与表格的适用条件（PD2）交叉核对。";
   }
   if (env.pd >= 4) {
-    return "🔍 环境判定 <b>PD4</b>：超出表11.1 / 表11.2 的范围（标准只给到污染等级 3）——必须先用密封腔、灌封、排水、除湿等把绝缘处的污染降到 PD3 及以下，再查表。";
+    return "🔍 环境判定 <b>PD4</b>：超出灯具表格的适用条件（PD2）——必须先用密封腔、灌封、排水、除湿等把绝缘处的污染降下来，再查表。";
   }
   if (env.pd === 3) {
-    if (s.ip === "ipx1") return "🔍 环境判定 <b>PD3</b> → 与表11.2（污染等级 3）一致 ✓";
-    return "🔍 环境判定 <b>PD3</b> → 应查表11.2（污染等级 3）：需把灯具分类做到 IPX1 及以上。<a href=\"#\" data-pd-apply-ip=\"ipx1\">按判定改用表11.2 →</a>";
+    return "🔍 环境判定 <b>PD3</b>：灯具标准没有 PD3 表格，需按 IEC 60664-1 的 PD3 列取值，或把绝缘处微环境降到 PD2（密封 / 涂覆 / 灌封）。<a href=\"#tool-spacing\" data-goto-tool=\"spacing\">切到「通用反查」模式 →</a>";
   }
-  if (s.ip === "general") return "🔍 环境判定 <b>PD" + env.pd + "</b> → 与表11.1（污染等级 2）一致 ✓";
-  return "🔍 环境判定 <b>PD" + env.pd + "</b> → 表11.1（污染等级 2）已足够；当前用的是表11.2（更保守）。<a href=\"#\" data-pd-apply-ip=\"general\">按判定改用表11.1 →</a>";
+  return "🔍 环境判定 <b>PD" + env.pd + "</b> → 与灯具表格的基准条件（污染等级 2）一致 ✓";
 }
 
 function mopMatchHtml(env, s) {
@@ -458,16 +550,20 @@ function mopMatchHtml(env, s) {
 
 // 按标准显示 / 隐藏只对某一标准有意义的参数
 function applyStdUI() {
-  var med = currentState().std === "medical";
+  var s = currentState();
+  var med = s.std === "medical";
+  var iec = !med && s.lumBasis === "iec60664";
   function show(id, on) {
     var el = document.getElementById(id);
     if (el) el.style.display = on ? "" : "none";
   }
-  show("tool-lum-ip", !med);
+  show("tool-lum-ip", !med && !iec);       // 产品标准：过电压类别 Ⅱ / Ⅲ 选表
+  show("tool-lum-60664", iec);             // IEC 60664-1：PD / 系统电压 / 过电压类别
   show("tool-med-mop", med);
-  show("tool-cti", !med);
+  show("tool-cti", !med);                  // 材料组（PTI / CTI）两条路都要用
   show("tool-insulation", !med);
-  show("tool-altitude", med);
+  show("tool-altitude", med || iec);       // 60664-1 与医疗都要海拔修正
+  syncLumModeUI();
 }
 
 // 高级模式（按污染等级手动选表）的界面联动
@@ -492,7 +588,7 @@ function syncLumModeUI() {
   var pdNoteEl = document.getElementById("lumPdNote");
   if (pdNoteEl) {
     var env = envPd();
-    pdNoteEl.textContent = "映射：PD1 / PD2 → 表11.1（污染等级 2）；PD3 / PD4 → 表11.2（污染等级 3）。表里没有 PD1 与 PD4 列，选这两项会按更保守的表取值并给出风险提示。" +
+    pdNoteEl.textContent = "手动污染等级仅用于自行判断：灯具表格（表11.1 / 附录 U 表 U.1）都以污染等级 2 为基准，没有 PD1 / PD3 / PD4 列。PD3 应改用 IEC 60664-1 的 PD3 列（「通用反查」模式），或先用密封 / 涂覆把绝缘处微环境降到 PD2。" +
       (env ? " 当前环境判定：PD" + env.pd + "。" : "");
   }
 }
@@ -501,7 +597,9 @@ function updateAll() {
   var s = currentState();
   SPACING_STD = s.std === "medical" ? "medical" : "luminaire";
   var isMed = SPACING_STD === "medical";
-  var info = STD_INFO[SPACING_STD];
+  var iec = !isMed && s.lumBasis === "iec60664";
+  // 选了 IEC 60664-1 就整套按绝缘配合口径走，不再出现 GB 7000.1 / 表11.x
+  var info = isMed ? STD_INFO.medical : (iec ? STD_INFO.iec60664 : STD_INFO.luminaire);
   var res = isMed ? calcMedical(s) : calcLuminaire(s);
   currentCalc = res;
 
@@ -518,30 +616,40 @@ function updateAll() {
   var vInputEl = $("vInput"); if (vInputEl) vInputEl.value = s.v;
   $("vPeak").textContent = isMed
     ? "医疗表11 / 表12 按工作电压（交流有效值或直流值）查表；不按峰值换算。"
-    : "峰值 ≈ " + Math.round(s.v * Math.SQRT2) + " V；表11.1 / 表11.2 按正弦有效值查表，峰值不直接参与（脉冲电压另见表11.3）。";
+    : iec
+      ? "峰值 ≈ " + Math.round(s.v * Math.SQRT2) + " V；IEC 60664-1 的爬电距离按正弦有效值查表，电气间隙按额定冲击电压（" +
+        ((IMPULSE_DATA[s.sys] && IMPULSE_DATA[s.sys][s.ovc]) || "—") + " V，由系统电压 " + s.sys + " V × 过电压类别 " + s.ovc + "）查表。"
+      : "峰值 ≈ " + Math.round(s.v * Math.SQRT2) + " V；表11.1 / 表 U.1 按正弦有效值查表，峰值不直接参与；脉冲电压另按表11.2 校核电气间隙。";
   $("altValue").textContent = s.alt + " m";
   var altInputEl = $("altInput"); if (altInputEl) altInputEl.value = s.alt;
   var vInfoEl = $("vInfo");
   if (vInfoEl) vInfoEl.textContent = isMed
     ? "医疗：按 GB 9706.1 8.7.3 查表11（电气间隙）/ 表12（爬电距离），表值按工作电压与 MOPP / MOOP 数量分档。"
-    : "灯具：按 GB 7000.1 第 11 章查表11.1 / 表11.2，表值按工作电压、绝缘类型与材料 PTI 分栏。";
+    : iec
+      ? "IEC 60664-1 绝缘配合：爬电距离按工作电压 + 污染等级 + 材料组（CTI）查表；电气间隙按额定冲击电压查表，海拔 >2000 m 乘修正系数。"
+      : "灯具：按 GB 7000.1 第 11 章查表11.1（过电压类别 II）或附录 U 表 U.1（过电压类别 III），表值按工作电压、绝缘类型与材料 PTI 分栏；脉冲电压另按表11.2 校核间隙。";
 
   $("clsNote").textContent = CLS_INFO[s.cls] ? CLS_INFO[s.cls].note : "";
 
   var gpNoteEl = $("gpNote");
   if (gpNoteEl) {
-    gpNoteEl.textContent = s.gp === "I"
-      ? "材料组 Ⅰ（CTI ≥ 600）→ 灯具表按 PTI ≥ 600 一栏取值。"
-      : "材料组 " + s.gp + " → 灯具表按 PTI < 600 一栏取值（灯具表只有 PTI ≥ 600 与 PTI < 600 两栏）。";
+    gpNoteEl.textContent = (s.lumBasis === "iec60664" && !isMed)
+      ? (s.gp === "I" ? "材料组 Ⅰ（CTI ≥ 600）→ 爬电列按 Ⅰ 取值。" :
+         s.gp === "II" ? "材料组 Ⅱ（400 ≤ CTI < 600）→ 爬电列按 Ⅱ 取值。" :
+         s.gp === "IIIa" ? "材料组 Ⅲa（175 ≤ CTI < 400）→ 爬电列按 Ⅲa 取值。" :
+         "材料组 Ⅲb（100 ≤ CTI < 175）→ 爬电列按 Ⅲb 取值；注意支撑带电件的绝缘件通常还要过 175 V 耐起痕试验。")
+      : (s.gp === "I"
+        ? "材料组 Ⅰ（CTI ≥ 600）→ 灯具表按 PTI ≥ 600 一栏取值。"
+        : "材料组 " + s.gp + " → 灯具表按 PTI < 600 一栏取值（灯具表只有 PTI ≥ 600 与 PTI < 600 两栏）。");
   }
   var insNoteEl = $("insNote");
   if (insNoteEl) insNoteEl.textContent = INSUL_INFO[s.ins] || "";
 
   var ipNoteEl = $("lumIpNote");
   if (ipNoteEl) {
-    ipNoteEl.textContent = s.ip === "ipx1"
-      ? "按 IPX1 及以上灯具查表11.2：污染等级 3，所有绝缘按过电压类别 Ⅱ。"
-      : "按一般灯具查表11.1：污染等级 2，基本绝缘按过电压类别 Ⅰ，附加 / 加强按 Ⅱ。";
+    ipNoteEl.textContent = (s.ip === "ovc3" || s.ip === "ipx1")
+      ? "按过电压类别 Ⅲ 查附录 U 表 U.1：基准条件为污染等级 2、海拔 ≤2000 m，三列分别是基本 / 附加 / 加强绝缘。"
+      : "按过电压类别 Ⅱ 查表11.1：基准条件为污染等级 2、海拔 ≤2000 m，三列分别是基本 / 附加 / 加强绝缘；脉冲电压另按表11.2 校核间隙。";
   }
   var mopNoteEl = $("mopNote");
   if (mopNoteEl) {
@@ -549,6 +657,16 @@ function updateAll() {
     mopNoteEl.textContent = m.label + "：工作电压 ≤250V 时爬电 " + fmt(m.creep) + " mm / 间隙 " + fmt(m.clear) + " mm；对应绝缘耐压 " + m.iso + "。";
   }
   var sysNoteEl = $("sysNote"); if (sysNoteEl) sysNoteEl.textContent = "";
+
+  // IEC 60664-1 依据：回显当前条件链（工作电压 → PD → 材料组；系统电压 → OVC → 冲击电压 → 海拔）
+  var c66NoteEl = $("c66Note");
+  if (c66NoteEl) {
+    var imp = (IMPULSE_DATA[s.sys] && IMPULSE_DATA[s.sys][s.ovc]) || null;
+    var impUse = s.ins === "reinforced" && imp ? nextImpulseStep(imp) : imp;
+    c66NoteEl.textContent = "当前条件：工作电压 " + s.v + "V · 污染等级 PD" + s.pd + " · 材料组 " + s.gp +
+      " · 系统电压 " + s.sys + "V · 过电压类别 " + s.ovc + "（额定冲击电压 " + imp + "V" +
+      (impUse !== imp ? "，加强绝缘按下一档 " + impUse + "V" : "") + "）· 海拔 " + s.alt + " m（间隙系数 " + (ALTITUDE_DATA[s.alt] || 1) + "）";
+  }
 
   var market = MARKET_DATA[s.mkt];
   if (market && s.mkt !== "custom") {
@@ -602,6 +720,32 @@ function renderCompareTable(s, res) {
     if (noteEl) noteEl.textContent = "医疗同屏对比按 GB 9706.1 / IEC 60601-1 表11 / 表12（工作电压 ≤250V、污染等级 2、材料组 Ⅲb）；实际工作电压与材料组不同时以标准原文表格为准。";
     return;
   }
+  // 依据 A：IEC 60664-1 绝缘配合 → 对比表按“绝缘类型 × 基本绝缘倍数 / 冲击电压档”给出，不引用产品标准表
+  if (s.lumBasis === "iec60664") {
+    var imp = (IMPULSE_DATA[s.sys] && IMPULSE_DATA[s.sys][s.ovc]) || 2500;
+    var impUse = nextImpulseStep(imp);
+    var altF = ALTITUDE_DATA[s.alt] || 1;
+    head.innerHTML = "<tr><th>绝缘类型</th><th>爬电距离</th><th>电气间隙</th><th>依据</th></tr>";
+    var baseCreep = creepageValue(s.v, Number(s.pd || 2), s.gp);
+    var rowsIec = [
+      { k: "functional", label: "功能绝缘", mult: 0.8, imp: imp, d: "0.8 × 基本（教学简化）" },
+      { k: "basic", label: "基本绝缘", mult: 1, imp: imp, d: "查表值：PD" + (s.pd || 2) + " + 材料组 " + s.gp },
+      { k: "supplementary", label: "附加绝缘", mult: 1, imp: imp, d: "与基本绝缘同值" },
+      { k: "reinforced", label: "加强绝缘", mult: 2, imp: impUse, d: "爬电 ×2；间隙按下一档 " + impUse + "V" }
+    ];
+    body.innerHTML = rowsIec.map(function (r) {
+      var on = s.ins === r.k;
+      var crv = baseCreep * r.mult;
+      var clv = CLEARANCE_DATA[r.imp] * altF * (r.k === "functional" ? 0.8 : 1);
+      return "<tr" + (on ? ' style="font-weight:700"' : "") + "><td>" + (on ? "▶ " : "") + "<b>" + r.label + "</b></td><td>" +
+        fmt(crv) + " mm</td><td>" + fmt(clv) + " mm</td><td>" + r.d + "</td></tr>";
+    }).join("");
+    if (noteEl) noteEl.textContent = "同屏对比按 IEC 60664-1 / GB/T 16935.1：条件 工作电压 " + s.v + "V · 污染等级 PD" + (s.pd || 2) +
+      " · 材料组 " + s.gp + " · 系统电压 " + s.sys + "V · 过电压类别 " + s.ovc + "（额定冲击电压 " + imp + "V）· 海拔 " + s.alt +
+      " m（间隙系数 " + altF + "）；数值取标准表格档位值，正式设计以标准原文为准。";
+    return;
+  }
+  // 依据 B：产品标准表
   head.innerHTML = "<tr><th>绝缘类型</th><th>爬电距离</th><th>电气间隙</th><th>说明</th></tr>";
   var t = LUM_TABLE[lumTableKey(s)];
   var pti = s.gp === "I" ? "high" : "low";
@@ -751,7 +895,11 @@ function initFromUrl() {
   var q = new URLSearchParams(location.search);
   var state = currentState();
   if (q.has("std") && STD_INFO[q.get("std")]) state.std = q.get("std");
-  if (q.has("ip") && LUM_TABLE[q.get("ip")]) state.ip = q.get("ip");
+  if (q.has("lb") && ["iec60664", "product"].indexOf(q.get("lb")) !== -1) state.lumBasis = q.get("lb");
+  if (q.has("pd") && ["1", "2", "3", "4"].indexOf(q.get("pd")) !== -1) state.pd = q.get("pd");
+  if (q.has("sys") && IMPULSE_DATA[q.get("sys")]) state.sys = q.get("sys");
+  if (q.has("ovc") && ["I", "II", "III", "IV"].indexOf(q.get("ovc")) !== -1) state.ovc = q.get("ovc");
+  if (q.has("ip")) state.ip = normIpValue(q.get("ip"));
   if (q.has("lm") && ["std", "manual"].indexOf(q.get("lm")) !== -1) state.lumMode = q.get("lm");
   if (q.has("lpd") && ["1", "2", "3", "4"].indexOf(q.get("lpd")) !== -1) state.lumPd = q.get("lpd");
   if (q.has("mop") && MED_MOP[q.get("mop")]) state.mop = q.get("mop");
@@ -797,6 +945,10 @@ document.querySelectorAll("[data-v]").forEach(function (btn) {
 bindGroup("gpGroup", "data-gp");
 bindGroup("insGroup", "data-ins");
 bindGroup("ipGroup", "data-ip");
+bindGroup("lumBasisGroup", "data-lumbasis");
+bindGroup("c66PdGroup", "data-pd");
+bindGroup("c66SysGroup", "data-sys");
+bindGroup("c66OvcGroup", "data-ovc");
 bindGroup("mopGroup", "data-mop");
 bindGroup("lumPdGroup", "data-lumpd");
 
@@ -820,11 +972,18 @@ document.addEventListener("click", function (e) {
   var apply = e.target.closest("[data-pd-apply-ip]");
   if (apply) {
     e.preventDefault();
-    setActive("ipGroup", "data-ip", apply.getAttribute("data-pd-apply-ip"));
+    setActive("ipGroup", "data-ip", normIpValue(apply.getAttribute("data-pd-apply-ip")));
     applyStdUI();
     updateAll();
   }
 });
+
+// 兼容历史链接 / 旧状态里的选表值：general → ovc2（表11.1）、ipx1 → ovc3（附录 U 表 U.1）
+function normIpValue(v) {
+  if (v === "ipx1") return "ovc3";
+  if (v === "general") return "ovc2";
+  return v === "ovc3" ? "ovc3" : "ovc2";
+}
 
 // 切换适用标准：显示 / 隐藏只对某一标准有意义的参数
 document.querySelectorAll("#stdGroup .opt-btn").forEach(function (btn) {
@@ -878,7 +1037,7 @@ var HELP = {
   "tool-standard": "灯具与医疗是两套不同的产品标准：表格与判定逻辑都不同，先选标准再填参数",
   "tool-product-class": "I 类：接地 + 基本绝缘；II 类：双重/加强绝缘；III 类：SELV 供电",
   "tool-working-voltage": "绝缘实际承受的最高持续电压（交流有效值；医疗也允许按直流值查表）",
-  "tool-lum-ip": "一般灯具查表11.1（污染等级 2）；IPX1 及以上查表11.2（污染等级 3）",
+  "tool-lum-ip": "过电压类别 II 查表11.1；过电压类别 III 查附录 U 表 U.1（两张表都以污染等级 2、海拔 ≤2000 m 为基准；脉冲电压另按表11.2 校核间隙）",
   "tool-med-mop": "医疗按 MOPP / MOOP 数量查表11（电气间隙）与表12（爬电距离）",
   "tool-market-voltage": "目标市场只用来快速带入工作电压；系统电压 / 过电压类别不参与本工具",
   "tool-cti": "灯具表只有 PTI ≥ 600 与 PTI < 600 两栏：材料组 Ⅰ → ≥600，其余 → <600",

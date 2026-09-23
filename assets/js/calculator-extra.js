@@ -888,9 +888,17 @@ function spacingConditionText(s) {
     var m = MED_MOP[s.mop] || MED_MOP["2MOPP"];
     return "适用标准 " + STD_INFO.medical.code + "（" + STD_INFO.medical.clause + "）· " + m.label + " · 工作电压 " + s.v + "V · 海拔 " + s.alt + "m · 污染等级 2 · 材料组 Ⅲb";
   }
+  if (s.lumBasis === "iec60664") {
+    var imp = (IMPULSE_DATA[s.sys] && IMPULSE_DATA[s.sys][s.ovc]) || null;
+    var impUse = s.ins === "reinforced" && imp ? nextImpulseStep(imp) : imp;
+    return "适用标准 IEC 60664-1 / GB/T 16935.1（绝缘配合）· 爬电距离表（按污染等级与材料组）· 电气间隙表（按额定冲击电压）" +
+      " · 工作电压 " + s.v + "V · 污染等级 PD" + s.pd + " · 材料组 " + s.gp + " · 系统电压 " + s.sys + "V · 过电压类别 " + s.ovc +
+      "（额定冲击电压 " + imp + "V" + (impUse !== imp ? "，加强绝缘按下一档 " + impUse + "V" : "") + "）· 海拔 " + s.alt + " m（间隙系数 " +
+      (ALTITUDE_DATA[s.alt] || 1) + "）· " + (INS_LUM_LABEL[s.ins] || s.ins);
+  }
   var t = LUM_TABLE[lumTableKey(s)];
   return "适用标准 " + STD_INFO.luminaire.code + "（" + STD_INFO.luminaire.clause + "）· " + t.name + " " + t.scene +
-    " · 选表方式 " + (s.lumMode === "manual" ? "高级：按污染等级 PD" + (s.lumPd || "2") + " 手动选表（偏离标准选表规则）" : "按灯具分类 = " + (lumTableKey(s) === "ipx1" ? "IPX1 及以上" : "一般灯具")) +
+    " · 选表方式 " + (s.lumMode === "manual" ? "高级：按污染等级 PD" + (s.lumPd || "2") + " 手动选表（偏离标准选表规则）" : "按过电压类别 = " + (lumTableKey(s) === "ovc3" ? "Ⅲ（附录 U 表 U.1）" : "Ⅱ（表11.1）")) +
     " · 工作电压 " + s.v + "V · " + (INS_LUM_LABEL[s.ins] || s.ins) + " · " + (s.gp === "I" ? "PTI ≥ 600" : "PTI < 600");
 }
 
@@ -899,7 +907,7 @@ function exportReport() {
   var actual = $("actualInput") ? $("actualInput").value : "";
   var html = "<!doctype html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><title>安规计算报告</title><style>body{font-family:-apple-system,'PingFang SC',sans-serif;padding:36px;color:#1d1d1f}h1{font-size:22px}.muted{color:#86868b}table{border-collapse:collapse;width:100%;margin-top:12px}td,th{border:1px solid #d9d9d9;padding:8px 10px;text-align:left;font-size:14px}</style></head><body>" +
     "<h1>安规计算报告（教学参考）</h1>" +
-    "<p class=\"muted\">生成时间：" + new Date().toLocaleString() + " · 安规知识课堂 v1.4.5</p>" +
+    "<p class=\"muted\">生成时间：" + new Date().toLocaleString() + " · 安规知识课堂 v1.4.6</p>" +
     "<table><tr><th>条件</th><td>" + spacingConditionText(s) + "</td></tr>" +
     "<tr><th>爬电距离</th><td>≥ " + $("crValue").textContent + " mm</td></tr>" +
     "<tr><th>电气间隙</th><td>≥ " + $("clValue").textContent + " mm</td></tr>" +

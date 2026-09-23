@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#9e2b25">
-  <meta name="site-version" content="1.4.5">
+  <meta name="site-version" content="1.4.6">
   <title>产品类别结构图（I/II/III 类） - 安规与可靠性知识课堂</title>
   <meta name="description" content="I 类、II 类、III 类设备的防触电结构剖面图与对应测试要点。">
   <link rel="apple-touch-icon" href="../assets/icons/logo.png">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="icon" href="../assets/icons/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.5">
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.4.6">
+  <link rel="stylesheet" href="../assets/css/diagrams.css?v=1.4.6">
 
   <script>try{var t=localStorage.getItem("angui-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}</script>
 </head>
@@ -41,90 +42,23 @@
 
     <section>
       <h2>I 类设备：保护接地 + 基本绝缘</h2>
-      <div class="diagram">
-        <svg viewBox="0 0 760 370" role="img" aria-label="I 类设备结构示意图（含故障路径与测试点）">
-          <defs><pattern id="insI" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--border)" stroke-width="2"></line></pattern></defs>
-          <rect x="30" y="70" width="130" height="100" rx="10" class="accent-fill"></rect>
-          <text x="95" y="115" text-anchor="middle">L / N</text>
-          <text x="95" y="135" text-anchor="middle" class="label">危险电压</text>
-          <rect x="160" y="90" width="70" height="60" rx="8" fill="var(--card-2)" stroke="var(--border)"></rect>
-          <text x="195" y="120" text-anchor="middle">保险丝</text>
-          <text x="195" y="137" text-anchor="middle" class="label">/ 保护</text>
-          <rect x="230" y="70" width="80" height="100" fill="url(#insI)"></rect>
-          <text x="270" y="115" text-anchor="middle">基本绝缘</text>
-          <rect x="310" y="70" width="160" height="100" rx="10" fill="var(--card-2)" stroke="var(--border)"></rect>
-          <text x="390" y="115" text-anchor="middle">金属外壳</text>
-          <text x="390" y="135" text-anchor="middle" class="label">可触及表面</text>
-          <text x="440" y="105" text-anchor="middle" class="label">PE</text>
-          <path d="M 180 120 H 310 V 170" class="dashed"></path>
-          <text x="245" y="45" text-anchor="middle" class="label">故障电流路径</text>
-          <line x1="390" y1="170" x2="390" y2="280" stroke="var(--accent)" stroke-width="2.5"></line>
-          <line x1="390" y1="280" x2="350" y2="280" stroke="var(--accent)" stroke-width="2.5"></line>
-          <line x1="390" y1="280" x2="430" y2="280" stroke="var(--accent)" stroke-width="2.5"></line>
-          <text x="475" y="285" class="label">PE 保护接地</text>
-          <text x="80" y="320" class="label">① 接地连续性：PE → 外壳低阻</text>
-          <text x="300" y="320" class="label">② 泄漏电流：外壳对地</text>
-          <text x="520" y="320" class="label">③ 基本绝缘耐压</text>
-          <text x="390" y="350" text-anchor="middle" class="label">单一故障：基本绝缘失效 → 故障电流经 PE 回流触发保护；PE 断开则危险</text>
-        </svg>
-      </div>
+                        <figure class="dgm" data-dgm="class-i">
+              <figcaption>图 1 · I 类：结构 / 故障路径 / 对应测试</figcaption>
+            </figure>
     </section>
 
     <section>
       <h2>II 类设备：基本 + 附加（或加强）绝缘，无接地</h2>
-      <div class="diagram">
-        <svg viewBox="0 0 760 370" role="img" aria-label="II 类设备结构示意图（含双重绝缘与故障路径）">
-          <defs>
-            <pattern id="insIIa" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--accent)" stroke-width="2"></line></pattern>
-            <pattern id="insIIb" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="8" stroke="var(--accent-2)" stroke-width="2"></line></pattern>
-          </defs>
-          <rect x="30" y="70" width="130" height="100" rx="10" class="accent-fill"></rect>
-          <text x="95" y="115" text-anchor="middle">L / N</text>
-          <text x="95" y="135" text-anchor="middle" class="label">危险电压</text>
-          <rect x="160" y="70" width="70" height="100" fill="url(#insIIa)"></rect>
-          <text x="195" y="115" text-anchor="middle">基本绝缘</text>
-          <rect x="230" y="70" width="70" height="100" fill="url(#insIIb)"></rect>
-          <text x="265" y="115" text-anchor="middle">附加绝缘</text>
-          <rect x="300" y="70" width="170" height="100" rx="10" fill="var(--card-2)" stroke="var(--border)"></rect>
-          <text x="385" y="115" text-anchor="middle">塑料外壳</text>
-          <text x="385" y="135" text-anchor="middle" class="label">可触及表面</text>
-          <rect x="430" y="80" width="28" height="28" fill="none" stroke="var(--accent)" stroke-width="2"></rect>
-          <rect x="436" y="86" width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2"></rect>
-          <text x="470" y="100" class="label">回形符号</text>
-          <path d="M 180 120 H 230" class="dashed"></path>
-          <text x="205" y="45" text-anchor="middle" class="label">第一道失效 → 第二道兜底</text>
-          <text x="80" y="320" class="label">① 双重绝缘耐压：基本 + 附加</text>
-          <text x="300" y="320" class="label">② 泄漏电流：可触及表面</text>
-          <text x="520" y="320" class="label">③ 加强绝缘：一道承担两道</text>
-          <text x="385" y="350" text-anchor="middle" class="label">无保护接地：两层绝缘必须各自成立，不能只靠“塑料外壳”</text>
-        </svg>
-      </div>
+            <figure class="dgm" data-dgm="class-ii">
+        <figcaption>图 2 · II 类：结构 / 故障路径 / 对应测试</figcaption>
+      </figure>
     </section>
 
     <section>
       <h2>III 类设备：SELV 供电，不按市电距离约束</h2>
-      <div class="diagram">
-        <svg viewBox="0 0 760 370" role="img" aria-label="III 类设备结构示意图（含 SELV 隔离与测试点）">
-          <defs><pattern id="insIII" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--border)" stroke-width="2"></line></pattern></defs>
-          <rect x="30" y="100" width="140" height="100" rx="10" class="accent-fill"></rect>
-          <text x="100" y="145" text-anchor="middle">市电适配器</text>
-          <text x="100" y="165" text-anchor="middle" class="label">危险电压侧</text>
-          <rect x="170" y="100" width="80" height="100" fill="url(#insIII)"></rect>
-          <text x="210" y="145" text-anchor="middle">加强隔离</text>
-          <line x1="250" y1="150" x2="340" y2="150" stroke="var(--accent)" stroke-width="2.5"></line>
-          <text x="295" y="138" text-anchor="middle" class="label">SELV 输出</text>
-          <text x="295" y="172" text-anchor="middle" class="label">限压 + 隔离</text>
-          <rect x="340" y="100" width="170" height="100" rx="10" fill="var(--card-2)" stroke="var(--border)"></rect>
-          <text x="425" y="145" text-anchor="middle">III 类设备</text>
-          <text x="425" y="165" text-anchor="middle" class="label">低压可触及</text>
-          <path d="M 210 100 V 60 H 425" class="dashed"></path>
-          <text x="320" y="48" text-anchor="middle" class="label">隔离失效 → SELV 仍必须限压</text>
-          <text x="80" y="320" class="label">① 适配器隔离耐压</text>
-          <text x="300" y="320" class="label">② SELV 限压验证（正常 + 单一故障）</text>
-          <text x="560" y="320" class="label">③ 设备本体低压间距/发热/防火</text>
-          <text x="425" y="350" text-anchor="middle" class="label">“低压”不等于“随便设计”；SELV 源必须满足隔离与限压</text>
-        </svg>
-      </div>
+            <figure class="dgm" data-dgm="class-iii">
+        <figcaption>图 3 · III 类：结构 / 故障路径 / 对应测试</figcaption>
+      </figure>
     </section>
 
     <section>
@@ -272,15 +206,16 @@
   <p class="cite-note">本站教学值依据 IEC 标准体系整理，引用与核对状态见<a href="./verification.html">数值核对表</a>；发现错误欢迎<a href="./feedback.html">反馈</a>。</p>
   <footer class="site-footer">
     <div class="container">
-      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.5 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
+      <p>安规与可靠性知识课堂 · 教学演示站点 · 版本 v1.4.6 · <a href="./changelog.html">更新日志</a> · 内容核对 2026-09 · <span data-year>2026</span> · <a href="./feedback.html">纠错反馈</a> · <a href="./data.html">数据备份</a> · <a href="../en/index.html">EN</a></p>
       <p class="disclaimer">本站所有数值与表格均为简化教学参考，正式产品设计、测试与认证请以最新版标准原文为准。</p>
     </div>
   </footer>
 
-  <script src="../assets/js/theme.js?v=1.4.5"></script>
-  <script src="../assets/js/main.js?v=1.4.5"></script>
-  <script src="../assets/js/glossary-tip.js?v=1.4.5"></script>
-  <script src="../assets/js/ux.js?v=1.4.5"></script>
+  <script src="../assets/js/theme.js?v=1.4.6"></script>
+  <script src="../assets/js/main.js?v=1.4.6"></script>
+  <script src="../assets/js/diagrams.js?v=1.4.6"></script>
+  <script src="../assets/js/glossary-tip.js?v=1.4.6"></script>
+  <script src="../assets/js/ux.js?v=1.4.6"></script>
 <nav class="bottom-nav" aria-label="底部导航">
   <a href="../index.html">🏠<span>首页</span></a>
   <a href="./learn.html">📚<span>学习</span></a>
@@ -290,7 +225,7 @@
   <a href="./quiz.html">✅<span>测验</span></a>
     <a href="./search.html">🔍<span>搜索</span></a>
 </nav>
-  <script src="../assets/js/nav.js?v=1.4.5"></script>
-  <script src="../assets/js/breadcrumb.js?v=1.4.5"></script>
+  <script src="../assets/js/nav.js?v=1.4.6"></script>
+  <script src="../assets/js/breadcrumb.js?v=1.4.6"></script>
 </body>
 </html>
