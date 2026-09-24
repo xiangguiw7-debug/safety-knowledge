@@ -34,17 +34,18 @@ if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
         if (!nw) return;
         nw.addEventListener("statechange", function () {
           if (nw.state === "installed" && navigator.serviceWorker.controller) {
-            showUpdateBar("已发布新版本，" + "点此立即更新");
+            // 新 SW 已装好并会立即接管（skipWaiting）：页面刚打开就自动刷一次，否则给提示条
+            if (!autoReloadOnce("sw")) showUpdateBar("已发布新版本，点此立即更新");
           }
         });
       });
     }).catch(function () {
       /* 注册失败不影响浏览 */
     });
-    // 新 Service Worker 接管后（配合 skipWaiting），页面本身还是旧的，提示一次刷新
+    // 新 Service Worker 接管后（配合 skipWaiting），页面本身还是旧的：自动刷一次或提示
     navigator.serviceWorker.addEventListener("controllerchange", function () {
       if (!hadController || updateBarShown) return;
-      showUpdateBar("缓存已更新，点此刷新页面");
+      if (!autoReloadOnce("sw")) showUpdateBar("缓存已更新，点此刷新页面");
     });
   });
 }
@@ -55,6 +56,20 @@ if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
    这里做两件事：① 用 version.json（永远直连网络）比对线上最新版本；
    ② 给一个“一键清除本站缓存并刷新”的按钮，用户自己就能修好。 */
 var updateBarShown = false;
+// 自动更新：页面刚打开、用户还没操作时，静默清一次本站缓存并重载；
+// 每个原因在同一会话里只自动做一次（sessionStorage 记标记），避免来回刷新。
+function autoReloadOnce(reason) {
+  var key = "angui-auto-updated:" + reason;
+  var early = true, quiet = true;
+  try { early = !sessionStorage.getItem(key); } catch (e) {}
+  if (!early) return false;
+  if (window.__anguiInteracted) quiet = false;          // 用户已经开始操作 → 不打扰
+  if (window.performance && performance.now && performance.now() > 10000) quiet = false; // 打开超过 10 秒
+  if (!quiet) return false;
+  try { sessionStorage.setItem(key, "1"); } catch (e) {}
+  clearSiteCacheThenReload();
+  return true;
+}
 function siteVersion() {
   var m = document.querySelector('meta[name="site-version"]');
   if (m && m.getAttribute("content")) return m.getAttribute("content");
@@ -62,13 +77,16 @@ function siteVersion() {
   return t ? t[1] : "";
 }
 function clearSiteCacheThenReload() {
-  var done = 0, total = 2;
+  var finished = false;
   function finish() {
-    if (++done >= total) {
-      var base = location.href.split("#")[0].split("?")[0];
-      location.replace(base + "?fresh=" + Date.now());
-    }
+    if (finished) return;
+    finished = true;
+    var base = location.href.split("#")[0].split("?")[0];
+    location.replace(base + "?fresh=" + Date.now());
   }
+  // 兜底：清缓存 API 在个别情况下会慢或挂住（例如 SW 正在安装、Cache Storage 被占用），
+  // 1.2 秒内无论如何都要重载，避免“点了没反应”。
+  setTimeout(finish, 1200);
   try {
     if (window.caches && caches.keys) {
       caches.keys().then(function (keys) {
@@ -117,12 +135,19 @@ function showUpdateBar(text) {
   bar.appendChild(msg); bar.appendChild(go); bar.appendChild(more); bar.appendChild(close);
   document.body.appendChild(bar);
 }
-// 探针：version.json 不缓存，拿到的是线上最新版本；和本页版本不一致就提示
+// 探针：version.json 不缓存，拿到的是线上最新版本；和本页版本不一致就自动更新或提示
 (function () {
   if (!/^https?:$/.test(location.protocol)) return;
   var mine = siteVersion();
   if (!mine) return;
   var url = (location.pathname.indexOf("/pages/") !== -1 || location.pathname.indexOf("/en/") !== -1 ? "../" : "./") + "version.json";
+
+  // 用户是否已经和页面交互过（滚动、点击、按键…）：交互过就不自动刷新，避免打断阅读
+  var interacted = false;
+  ["pointerdown", "keydown", "wheel", "touchstart", "scroll"].forEach(function (ev) {
+    window.addEventListener(ev, function () { interacted = true; window.__anguiInteracted = true; }, { passive: true, once: true });
+  });
+
   window.addEventListener("load", function () {
     setTimeout(function () {
       fetch(url + "?t=" + Date.now(), { cache: "no-store" })
@@ -135,10 +160,15 @@ function showUpdateBar(text) {
             if ((newer[i] || 0) > (cur[i] || 0)) { isNewer = true; break; }
             if ((newer[i] || 0) < (cur[i] || 0)) break;
           }
-          if (isNewer) showUpdateBar("线上已更新到 v" + d.version + "，你打开的是 v" + mine);
+          if (!isNewer) return;
+          window.__anguiInteracted = interacted;
+          // ① 页面刚打开、用户还没开始操作 → 静默自愈（清一次本站缓存并重载，每会话一次）
+          if (autoReloadOnce("version-" + d.version)) return;
+          // ② 否则给出提示条，一键更新
+          showUpdateBar("线上已更新到 v" + d.version + "，你打开的是 v" + mine);
         })
         .catch(function () { /* 离线或探针不可用就静默跳过 */ });
-    }, 1500);
+    }, 700);
   });
 })();
 
